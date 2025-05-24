@@ -1,0 +1,41 @@
+# https://kysely.dev/docs/migrations
+name: Run Kysely migrations
+
+on:
+  workflow_call:
+    secrets:
+      DB_CONN_STRING:
+        description: Database connection string.
+        required: true
+
+jobs:
+  migrate-db:
+    runs-on: ubuntu-latest
+
+    # Use /api of the monorepo
+    defaults:
+      run:
+        working-directory: ./api
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Can only start the shell and run this command after cloning repo due to
+      # default working directory being inside the repo itself.
+      - name: "Migrating using '${{ github.ref }}' branch"
+        run: exit 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          # Using node 20 to match engine version specified in /api/package.json
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply migrations to the database
+        run: npm run db:migrate -- --ci all
+        env:
+          DB_CONN_STRING: ${{ secrets.DB_CONN_STRING }}

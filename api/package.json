@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "serve": "npx tsx watch ./src/index.ts",
+    "typecheck": "npx tsc --noEmit",
+    "db:migrate": "npx tsx ./src/kysely/migration-cli/kyselyMigrationCli.ts"
+  },
+  "dependencies": {
+    "convert-unknown-catch-to-error": "^1.0.3",
+    "cors": "^2.8.5",
+    "datetime-ts": "^1.0.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nice-types": "^1.0.1",
+    "picocolors": "^1.1.1",
+    "safety-number-one": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/pg": "^8.15.2",
+    "kysely": "^0.28.2",
+    "kysely-codegen": "^0.18.5",
+    "pg": "^8.16.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

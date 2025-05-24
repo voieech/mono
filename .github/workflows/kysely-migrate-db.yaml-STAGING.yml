@@ -1,0 +1,16 @@
+name: STAGING DB migrations
+run-name: ${{ github.actor }} is running DB migrations in STAGING env 🚀
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "api/src/kysely/migrations**"
+
+jobs:
+  migrate:
+    uses: ./.github/workflows/kysely-migrate-db.yaml
+    secrets:
+      DB_CONN_STRING: ${{ secrets.DB_CONN_STRING_STAGING }}
