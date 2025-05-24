@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "npx tsx ./src/index.ts",
     "serve": "npx tsx watch ./src/index.ts",
     "typecheck": "npx tsc --noEmit",
+    "start-new": "node ./dist/index.js",
+    "delete-build-cache": "npx rimraf tsconfig.tsbuildinfo dist",
+    "build:server": "npx tsc",
+    "build": "npm run delete-build-cache && npm run build:server",
     "db:migrate": "npx tsx ./src/kysely/migration-cli/kyselyMigrationCli.ts"
   },
   "dependencies": {
@@ -24,6 +29,7 @@
     "kysely": "^0.28.2",
     "kysely-codegen": "^0.18.5",
     "pg": "^8.16.0",
+    "rimraf": "^6.0.1",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   }

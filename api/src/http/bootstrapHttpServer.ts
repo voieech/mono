@@ -11,6 +11,10 @@ export function bootstrapHttpServer() {
   express()
     .use(cors())
 
+    .get("/", (_, res) => {
+      res.status(200).end("ok");
+    })
+
     .get("/v1/landing/featured-episodes", async function (req, res) {
       const requestedLanguage = req.query["lang"]?.toString() ?? "en";
 

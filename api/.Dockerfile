@@ -36,8 +36,9 @@ RUN npm clean-install --include=dev --include=optional --include=peer --force
 COPY ./tsconfig.json ./tsconfig.json
 COPY ./src/ ./src/
 
+# @todo Temporarily not building and instead using tsx to run
 # Build
-RUN npm run build
+# RUN npm run build
 
 # Define exposed ports, acting only as documentation. Docker run STILL need to
 # map the ports with -p option.
