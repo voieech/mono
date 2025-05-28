@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
@@ -8,6 +9,8 @@ import { ThemedView } from "@/components/ThemedView";
 import { AudioPlayerWithRNTP } from "@/components/AudioPlayerWithRNTP";
 
 export default function HomeScreen() {
+  const router = useRouter();
+
   const apiBaseUrl = "https://api.voieech.com";
   const vanityID = "test";
   const i18n = { locale: { value: "en" } };
@@ -26,10 +29,7 @@ export default function HomeScreen() {
 
       if (!res.ok) {
         if (res.status === 404) {
-          // router.push({
-          //   path: "/404",
-          // });
-          console.log("@todo on 404");
+          router.replace("/+not-found");
         }
 
         const defaultErrorMessage = `Failed to load episode: ${vanityID}`;
