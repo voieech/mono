@@ -24,6 +24,21 @@ export async function setupReactNativeTrackPlayer() {
           TrackPlayer.stop();
         });
 
+        TrackPlayer.addEventListener(Event.RemoteJumpForward, (e) => {
+          console.log("RNTP Event.RemoteJumpForward");
+          TrackPlayer.seekBy(e.interval);
+        });
+
+        TrackPlayer.addEventListener(Event.RemoteJumpBackward, (e) => {
+          console.log("RNTP Event.RemoteJumpBackward");
+          TrackPlayer.seekBy(-e.interval);
+        });
+
+        TrackPlayer.addEventListener(Event.RemoteSeek, (e) => {
+          console.log("RNTP Event.RemoteSeek");
+          TrackPlayer.seekTo(e.position);
+        });
+
         TrackPlayer.addEventListener(Event.RemotePrevious, () => {
           console.log("RNTP Event.RemotePrevious");
           // Conditionally execute either one of this based on current playback
@@ -53,9 +68,11 @@ export async function setupReactNativeTrackPlayer() {
     capabilities: [
       Capability.Play,
       Capability.Pause,
-      Capability.SkipToNext,
-      Capability.SkipToPrevious,
       Capability.Stop,
+
+      // @todo Add setting for user to configure which do they prefer
+      // ...[Capability.SkipToNext, Capability.SkipToPrevious],
+      ...[Capability.JumpForward, Capability.JumpBackward, Capability.SeekTo],
     ],
 
     // Android only: Capabilities shown when notification is in compact form
