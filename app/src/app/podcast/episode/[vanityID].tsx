@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
@@ -8,11 +8,11 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { AudioPlayerWithRNTP } from "@/components/AudioPlayerWithRNTP";
 
-export default function HomeScreen() {
+export default function Episode() {
   const router = useRouter();
 
   const apiBaseUrl = "https://api.voieech.com";
-  const vanityID = "test";
+  const vanityID = useLocalSearchParams<{ vanityID: string }>().vanityID;
   const i18n = { locale: { value: "en" } };
 
   const {

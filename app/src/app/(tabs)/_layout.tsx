@@ -25,17 +25,6 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="app"
-        options={{
-          // @todo Podcast, etc...
-          // @todo Maybe "Featured" should be a section in Explore and For You?
-          title: "Featured",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="index"
         options={{
           title: "Explore",
