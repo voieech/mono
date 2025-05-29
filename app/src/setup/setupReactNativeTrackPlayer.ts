@@ -19,6 +19,11 @@ export async function setupReactNativeTrackPlayer() {
           TrackPlayer.pause();
         });
 
+        TrackPlayer.addEventListener(Event.RemoteStop, () => {
+          console.log("RNTP Event.RemoteStop");
+          TrackPlayer.stop();
+        });
+
         TrackPlayer.addEventListener(Event.RemotePrevious, () => {
           console.log("RNTP Event.RemotePrevious");
           // Conditionally execute either one of this based on current playback
