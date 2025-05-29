@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
@@ -81,6 +81,8 @@ export default function Episode() {
         />
       }
     >
+      <Stack.Screen options={{ title: "Podcast Episode" }} />
+
       <ThemedView>
         <ThemedView style={styles.stepContainer}>
           <ThemedText type="subtitle">{episode.title}</ThemedText>
