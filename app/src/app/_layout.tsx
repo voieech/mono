@@ -29,7 +29,16 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <StatusBar style="auto" />
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              headerShown: false,
+
+              // Set to home so when the podcast episode page is opened via a
+              // deep link, the back button says "Home"
+              title: "Home",
+            }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
       </QueryClientProvider>
