@@ -4,7 +4,7 @@
 // root layout (app/_layout.tsx)
 
 /******************* Import side effects first and services *******************/
-import { setupReactNativeTrackPlayer } from "./src/setup/setupReactNativeTrackPlayer";
+import { setupReactNativeTrackPlayer } from "./setup/setupReactNativeTrackPlayer";
 
 /**************************** Initialize services *****************************/
 // Cant do top level await yet unforunately
