@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "main": "src/index.tsx",
+  "main": "src/index.ts",
   "version": "1.0.0",
   "scripts": {
     "start": "npx expo start",
