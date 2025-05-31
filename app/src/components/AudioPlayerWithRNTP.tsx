@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Pressable } from "react-native";
-import { Image } from "expo-image";
+import { View, Pressable } from "react-native";
+import { Image, ImageSource } from "expo-image";
 import TrackPlayer, {
   State,
   usePlaybackState,
@@ -52,6 +52,22 @@ export function AudioPlayerWithRNTP(props: {
   const currentPos = convertSecondsToMSS(positionAsInt);
   const remainingTime = convertSecondsToMSS(durationAsInt - positionAsInt);
 
+  function jump(jumpInterval: number) {
+    const newPosition = positionAsInt + jumpInterval;
+
+    if (newPosition < 0) {
+      TrackPlayer.seekTo(0);
+      return;
+    }
+
+    if (newPosition > props.audioLength) {
+      TrackPlayer.seekTo(props.audioLength);
+      return;
+    }
+
+    TrackPlayer.seekTo(newPosition);
+  }
+
   return (
     <ThemedView>
       <ThemedText>{props.title}</ThemedText>
@@ -90,10 +106,17 @@ export function AudioPlayerWithRNTP(props: {
       <ThemedView
         style={{
           flex: 1,
+          flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-around",
+          paddingHorizontal: 30,
         }}
       >
+        <JumpButton
+          onPress={() => jump(-10)}
+          imageSource={require("@/assets/images/player/light/jumpBackward.png")}
+        />
+
         <ThemedView
           style={{
             width: 70,
@@ -134,6 +157,11 @@ export function AudioPlayerWithRNTP(props: {
             </Pressable>
           )}
         </ThemedView>
+
+        <JumpButton
+          onPress={() => jump(10)}
+          imageSource={require("@/assets/images/player/light/jumpForward.png")}
+        />
       </ThemedView>
 
       {/* @todo Move this out and hide it behind feature flag / env var for devs only */}
@@ -142,5 +170,27 @@ export function AudioPlayerWithRNTP(props: {
         {durationAsInt} total
       </ThemedText>
     </ThemedView>
+  );
+}
+
+function JumpButton(props: { onPress: () => void; imageSource: ImageSource }) {
+  return (
+    <View
+      style={{
+        width: 40,
+        height: 40,
+      }}
+    >
+      <Pressable onPress={props.onPress}>
+        <Image
+          source={props.imageSource}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+          contentFit="contain"
+        />
+      </Pressable>
+    </View>
   );
 }
