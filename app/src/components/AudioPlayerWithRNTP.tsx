@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Button } from "react-native";
+import { Pressable } from "react-native";
+import { Image } from "expo-image";
 import TrackPlayer, {
   State,
   usePlaybackState,
@@ -8,6 +9,7 @@ import TrackPlayer, {
 import Slider from "@react-native-community/slider";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
+import { useTheme } from "@/hooks/useTheme";
 
 function convertSecondsToMSS(totalSeconds: number): string {
   const minutes = Math.floor(totalSeconds / 60);
@@ -37,6 +39,8 @@ export function AudioPlayerWithRNTP(props: {
     }
     clearTracksAndAddNewTrack();
   }, [props.artist, props.url, props.title, props.audioLength]);
+
+  const theme = useTheme();
 
   const playerState = usePlaybackState().state;
   const progress = useProgress();
@@ -83,13 +87,54 @@ export function AudioPlayerWithRNTP(props: {
         <ThemedText>-{remainingTime}</ThemedText>
       </ThemedView>
 
-      {playerState === State.Loading ? (
-        <Button title="Loading" disabled />
-      ) : playerState === State.Playing ? (
-        <Button title="Stop" onPress={() => TrackPlayer.pause()} />
-      ) : (
-        <Button title="Play" onPress={() => TrackPlayer.play()} />
-      )}
+      <ThemedView
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <ThemedView
+          style={{
+            width: 70,
+            height: 70,
+          }}
+        >
+          {playerState === State.Loading ? (
+            <ThemedText>loading</ThemedText>
+          ) : playerState === State.Playing ? (
+            <Pressable onPress={() => TrackPlayer.pause()}>
+              <Image
+                source={
+                  theme === "light"
+                    ? require("@/assets/images/player/light/pause.png")
+                    : require("@/assets/images/player/dark/pause.png")
+                }
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                contentFit="contain"
+              />
+            </Pressable>
+          ) : (
+            <Pressable onPress={() => TrackPlayer.play()}>
+              <Image
+                source={
+                  theme === "light"
+                    ? require("@/assets/images/player/light/play.png")
+                    : require("@/assets/images/player/dark/play.png")
+                }
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                contentFit="contain"
+              />
+            </Pressable>
+          )}
+        </ThemedView>
+      </ThemedView>
 
       {/* @todo Move this out and hide it behind feature flag / env var for devs only */}
       <ThemedText>
