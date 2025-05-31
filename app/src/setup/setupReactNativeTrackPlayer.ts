@@ -29,8 +29,15 @@ export async function setupReactNativeTrackPlayer() {
           TrackPlayer.seekBy(e.interval);
         });
 
-        TrackPlayer.addEventListener(Event.RemoteJumpBackward, (e) => {
+        TrackPlayer.addEventListener(Event.RemoteJumpBackward, async (e) => {
           console.log("RNTP Event.RemoteJumpBackward");
+
+          const progress = await TrackPlayer.getProgress();
+          if (progress.position < e.interval) {
+            TrackPlayer.seekTo(0);
+            return;
+          }
+
           TrackPlayer.seekBy(-e.interval);
         });
 
