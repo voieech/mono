@@ -72,26 +72,7 @@ export function AudioPlayerWithRNTP(props: {
     <ThemedView>
       <ThemedText>{props.title}</ThemedText>
 
-      <Slider
-        value={positionAsInt}
-        minimumValue={0}
-        maximumValue={durationAsInt}
-        // @todo Might not use this, or maybe make this smaller to make the
-        // transition animation smooth
-        step={1}
-        // This is the same as "onValueChange", just that it is not called
-        // continously and only called once user lifts their finger
-        onSlidingComplete={(value) => TrackPlayer.seekTo(value)}
-        // IOS only: Permits tapping on the slider track to set the position.
-        tapToSeek
-
-        // @todo Use a smaller image
-        // thumbImage={require("../assets/images/small-thumb.png")}
-
-        // This should be dynamic based on theme
-        // minimumTrackTintColor="#FFFFFF" // Sets left track color
-        // maximumTrackTintColor="#000000" // Optional: Sets right track color
-      />
+      <AudioProgressSlider duration={durationAsInt} />
 
       <ThemedView
         style={{
@@ -183,6 +164,31 @@ export function AudioPlayerWithRNTP(props: {
         {durationAsInt} total
       </ThemedText>
     </ThemedView>
+  );
+}
+
+function AudioProgressSlider(props: { duration: number }) {
+  // Increase polling frequency so that the slider animation is smoother
+  const progress = useProgress(100);
+
+  return (
+    <Slider
+      value={progress.position}
+      minimumValue={0}
+      maximumValue={props.duration}
+      // This is the same as "onValueChange", just that it is not called
+      // continously and only called once user lifts their finger
+      onSlidingComplete={(value) => TrackPlayer.seekTo(value)}
+      // IOS only: Permits tapping on the slider track to set the position.
+      tapToSeek
+
+      // @todo Use a smaller image
+      // thumbImage={require("../assets/images/small-thumb.png")}
+
+      // This should be dynamic based on theme
+      // minimumTrackTintColor="#FFFFFF" // Sets left track color
+      // maximumTrackTintColor="#000000" // Optional: Sets right track color
+    />
   );
 }
 
