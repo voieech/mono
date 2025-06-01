@@ -124,7 +124,20 @@ export function AudioPlayerWithRNTP(props: {
           }}
         >
           {playerState === State.Loading ? (
-            <ThemedText>loading</ThemedText>
+            // @todo Use a loading state gif
+            <Image
+              source={
+                // @todo Use different theme variants
+                theme === "light"
+                  ? require("@/assets/images/player/light/loading.png")
+                  : require("@/assets/images/player/light/loading.png")
+              }
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+              contentFit="contain"
+            />
           ) : playerState === State.Playing ? (
             <Pressable onPress={() => TrackPlayer.pause()}>
               <Image
