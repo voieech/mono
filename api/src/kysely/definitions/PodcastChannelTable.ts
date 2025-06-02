@@ -25,6 +25,12 @@ export interface PodcastChannelTable {
   name: string;
 
   /**
+   * PodcastChannel description, and can be in whatever language is specified in
+   * the `language` column.
+   */
+  description: string;
+
+  /**
    * What is the language for this entire PodcastChannel?
    */
   language: $LanguageCode;

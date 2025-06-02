@@ -54,6 +54,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("id", "text", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("name", "text", (col) => col.notNull())
+    .addColumn("description", "text", (col) => col.notNull())
     .addColumn("language", "text", (col) => col.notNull())
     .addColumn("url", "text", (col) => col.notNull())
     .addColumn("podcast_platform", "text", (col) => col.notNull())
