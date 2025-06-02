@@ -4,7 +4,6 @@ import type {
   NonUpdatableIdColumnType,
   NonUpdatableDateTimeColumnType,
 } from "./types/index.js";
-import { PodcastPlatform } from "./types/PodcastPlatform.js";
 
 /**
  * Generic `PodcastChannel` that is for broad audience (not personalised for
@@ -39,16 +38,6 @@ export interface PodcastChannelTable {
    * Home/main page of the channel on a particular podcast platform
    */
   url: string;
-
-  /**
-   * Name of the Podcast Platform where this channel is hosted on.
-   *
-   * Using strings instead of foreign key / ID joins in DB since the only thing
-   * that will be in the other table is just the name which wont change that
-   * often if at all, and this will also make it easier to migrate this table to
-   * NoSQL DBs in the future.
-   */
-  podcast_platform: PodcastPlatform;
 }
 
 export type PodcastChannel = Selectable<PodcastChannelTable>;
