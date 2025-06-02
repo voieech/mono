@@ -10,7 +10,8 @@
     "delete-build-cache": "npx rimraf tsconfig.tsbuildinfo dist",
     "build:server": "npx tsc",
     "build": "npm run delete-build-cache && npm run build:server",
-    "db:migrate": "npx tsx ./src/kysely/migration-cli/kyselyMigrationCli.ts"
+    "db:migrate": "npx tsx ./src/kysely/migration-cli/kyselyMigrationCli.ts",
+    "reverse-proxy": "npx ngrok http 3000"
   },
   "dependencies": {
     "convert-unknown-catch-to-error": "^1.0.3",
