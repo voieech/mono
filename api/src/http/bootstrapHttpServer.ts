@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import rss from "rss";
 
 import { createDB } from "../kysely/createDB.js";
 
@@ -128,5 +129,66 @@ export function bootstrapHttpServer() {
         externallyHostedLinks,
       });
     })
+
+    .get("/v1/rss/:channelID", async function (req, res) {
+      const channelID = req.params.channelID;
+
+      const channel = await apiDB
+        .selectFrom("podcast_channel")
+        .selectAll()
+        .where("podcast_channel.id", "=", channelID)
+        .executeTakeFirst();
+
+      if (channel === undefined) {
+        res.status(404).end(`Invalid Channel ID: ${channelID}`);
+        return;
+      }
+
+      const episodes = await apiDB
+        .selectFrom("podcast_episode")
+        .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
+        .selectAll("podcast_episode")
+        .select([
+          "audio.public_url as audio_public_url",
+          "audio.length as audio_length",
+        ])
+        .where("channel_id", "=", channelID)
+        .limit(20)
+        .execute();
+
+      const feed = new rss({
+        site_url: channel.url,
+        language: channel.language,
+        title: channel.name,
+        description: channel.description,
+
+        // @todo Generate link to self
+        feed_url: `https://www.voieech.com`,
+
+        // @todo
+        // categories: [],
+        // image_url: "",
+        // ttl: 60 // in minutes
+        // copyright: "",
+
+        // Override library defaults
+        generator: "voieech",
+      });
+
+      for (const episode of episodes) {
+        feed.item({
+          guid: episode.id,
+          // @todo Use a URL builder
+          url: `https://www.voieech.com/e/${episode.vanity_id}?lang=${episode.language}`,
+          date: episode.created_at,
+          title: episode.title,
+          description: episode.description,
+          categories: [],
+        });
+      }
+
+      res.status(200).end(feed.xml());
+    })
+
     .listen(process.env["PORT"] ?? 3000);
 }
