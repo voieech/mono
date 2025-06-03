@@ -153,6 +153,7 @@ export function bootstrapHttpServer() {
           "audio.length as audio_length",
         ])
         .where("channel_id", "=", channelID)
+        .orderBy("podcast_episode.created_at", "desc")
         .limit(20)
         .execute();
 
