@@ -8,8 +8,6 @@ export type Episode = {
   audioPublicUrl: string;
   audioLength: number;
   language: string;
-  isRequestedLanguageAvailable: string;
-  supportedLanguages: Array<string>;
   title: string;
   description: string;
   externallyHostedLinks: Array<{

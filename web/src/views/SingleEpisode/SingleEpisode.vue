@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuery } from "@tanstack/vue-query";
-import { useI18n } from "vue-i18n";
 import { apiBaseUrl } from "../../api";
 import PlatformCard from "./PlatformCard.vue";
 import WebPlayer from "./WebPlayer.vue";
@@ -11,7 +10,6 @@ import LoadingSpinner from "../components/LoadingSpinner.vue";
 import { HomeRoute } from "../../router";
 import type { Episode } from "../../types/Episode";
 
-const i18n = useI18n({ useScope: "global" });
 const router = useRouter();
 const route = useRoute();
 const vanityID = route.params.vanityID.toString();
@@ -24,11 +22,9 @@ const {
   data: episode,
   error,
 } = useQuery({
-  queryKey: ["episode", vanityID, i18n.locale],
+  queryKey: ["episode", vanityID],
   async queryFn() {
-    const res = await fetch(
-      `${apiBaseUrl}/v1/episode/${vanityID}?lang=${i18n.locale.value}`,
-    );
+    const res = await fetch(`${apiBaseUrl}/v1/episode/${vanityID}`);
 
     if (!res.ok) {
       if (res.status === 404) {
