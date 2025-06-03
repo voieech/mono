@@ -14,7 +14,7 @@ export default {
     episodeNumber: "第{episodeNumber}集",
     mins: "分钟",
     PodcastPlatforms: "播客平台",
-    ReadMore: "跟多",
+    ReadMore: "更多",
     Hide: "隐藏",
 
     WebPlayer: {
