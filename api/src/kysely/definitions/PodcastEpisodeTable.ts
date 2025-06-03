@@ -8,8 +8,6 @@ import type {
 /**
  * Podcast Episode metadata, where each Podcast Episode is part of a
  * `PodcastChannel` like "Voieech DailyTech".
- *
- * `[vanity_id, language]` is used to form a unique composite key.
  */
 export interface PodcastEpisodeTable {
   /**
@@ -21,14 +19,13 @@ export interface PodcastEpisodeTable {
 
   /**
    * A short ID for vanity (nice looking URL's that are short) that is globally
-   * unique per podcast episode but will be the same ID across different
-   * languages. So `[vanity_id, language]` form a unique composite key.
+   * unique per podcast episode.
    */
   vanity_id: NonUpdatableIdColumnType;
 
   /**
-   * What language is this episode. This is used as part of
-   * `[vanity_id, language]` to form a unique composite key.
+   * What language is this episode in. This should be the same as the
+   * `PodcastChannel['language']`.
    */
   language: $LanguageCode;
 
