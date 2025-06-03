@@ -60,32 +60,6 @@ export function bootstrapHttpServer() {
 
     .get("/v1/episode/:vanityID", async function (req, res) {
       const vanityID = req.params.vanityID;
-      const requestedLanguage = req.query["lang"]?.toString() ?? "en";
-
-      // @todo
-      // Check if language is a valid option first before even attempting to
-      // querying DB, instead of relying on the DB query to check if language is
-      // valid. Use $LanguageCode.makeStrongAndThrowOnError
-
-      const supportedLanguages = await apiDB
-        .selectFrom("podcast_episode")
-        .select(["language"])
-        .where("podcast_episode.vanity_id", "=", vanityID)
-        .execute()
-        .then((values) => values.map(({ language }) => language));
-
-      if (supportedLanguages.length === 0) {
-        res.status(404).json({
-          error: `Cannot find episode with VanityID: ${vanityID}`,
-        });
-        return;
-      }
-
-      // Fallback to en if requested language does not exist
-      const isRequestedLanguageAvailable =
-        supportedLanguages.includes(requestedLanguage);
-
-      const language = isRequestedLanguageAvailable ? requestedLanguage : "en";
 
       const episode = await apiDB
         .selectFrom("podcast_episode")
@@ -96,11 +70,8 @@ export function bootstrapHttpServer() {
           "audio.length as audio_length",
         ])
         .where("podcast_episode.vanity_id", "=", vanityID)
-        .where("podcast_episode.language", "=", language)
         .executeTakeFirst();
 
-      // Will not happen unless 'en' doesnt exist, or the episode gets deleted
-      // in race condition between language check and episode query
       if (episode === undefined) {
         res.status(404).json({
           error: `Cannot find episode with VanityID: ${vanityID}`,
@@ -122,8 +93,6 @@ export function bootstrapHttpServer() {
         audioPublicUrl: episode.audio_public_url,
         audioLength: episode.audio_length,
         language: episode.language,
-        isRequestedLanguageAvailable,
-        supportedLanguages,
         title: episode.title,
         description: episode.description,
         externallyHostedLinks,
