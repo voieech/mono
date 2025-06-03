@@ -7,7 +7,10 @@ import type {
 
 /**
  * Generic `PodcastChannel` that is for broad audience (not personalised for
- * users) e.g. "Voieech DailyTech" / "Voieech DailyTechZH"
+ * users) e.g. "Voieech DailyTech" / "Voieech DailyTechZH".
+ *
+ * Note that this is platform independent, since the same PodcastChannel's
+ * content can be hosted on multiple platforms.
  */
 export interface PodcastChannelTable {
   id: NonUpdatableIdColumnType;
@@ -33,11 +36,6 @@ export interface PodcastChannelTable {
    * What is the language for this entire PodcastChannel?
    */
   language: $LanguageCode;
-
-  /**
-   * Home/main page of the channel on a particular podcast platform
-   */
-  url: string;
 }
 
 export type PodcastChannel = Selectable<PodcastChannelTable>;

@@ -157,7 +157,8 @@ export function bootstrapHttpServer() {
         .execute();
 
       const feed = new rss({
-        site_url: channel.url,
+        // @todo Generate link to self
+        site_url: `https://www.voieech.com`,
         language: channel.language,
         title: channel.name,
         description: channel.description,
