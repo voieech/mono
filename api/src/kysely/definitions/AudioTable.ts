@@ -10,6 +10,9 @@ import type {
  * by users or needed for future use / backup / caching.
  */
 export interface AudioTable {
+  /**
+   * UUID
+   */
   id: NonUpdatableIdColumnType;
 
   /**

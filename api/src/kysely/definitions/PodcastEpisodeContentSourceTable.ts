@@ -13,8 +13,14 @@ import type {
  * episodes.
  */
 export interface PodcastEpisodeContentSourceTable {
+  /**
+   * UUID
+   */
   id: NonUpdatableIdColumnType;
 
+  /**
+   * Time of data creation, cannot be updated.
+   */
   created_at: NonUpdatableDateTimeColumnType;
 
   /**

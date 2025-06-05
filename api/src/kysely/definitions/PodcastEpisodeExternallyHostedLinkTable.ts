@@ -12,8 +12,14 @@ import { PodcastPlatform } from "./types/PodcastPlatform.js";
  * different places where each podcast is externally hosted on.
  */
 export interface PodcastEpisodeExternallyHostedLinkTable {
+  /**
+   * UUID
+   */
   id: NonUpdatableIdColumnType;
 
+  /**
+   * Time of data creation, cannot be updated.
+   */
   created_at: NonUpdatableDateTimeColumnType;
 
   /**

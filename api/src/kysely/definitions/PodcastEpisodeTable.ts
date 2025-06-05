@@ -15,6 +15,9 @@ export interface PodcastEpisodeTable {
    */
   id: NonUpdatableIdColumnType;
 
+  /**
+   * When is the episode created.
+   */
   created_at: NonUpdatableDateTimeColumnType;
 
   /**

@@ -10,6 +10,9 @@ import type {
  * Actual content from the various news sources
  */
 export interface ContentTable {
+  /**
+   * UUID
+   */
   id: NonUpdatableIdColumnType;
 
   /**

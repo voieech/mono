@@ -13,6 +13,9 @@ import type {
  * for tag filtering.
  */
 export interface ContentTagTable {
+  /**
+   * UUID
+   */
   id: NonUpdatableIdColumnType;
 
   /**

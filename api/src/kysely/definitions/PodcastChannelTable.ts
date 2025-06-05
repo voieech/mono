@@ -13,6 +13,9 @@ import type {
  * content can be hosted on multiple platforms.
  */
 export interface PodcastChannelTable {
+  /**
+   * UUID
+   */
   id: NonUpdatableIdColumnType;
 
   /**
