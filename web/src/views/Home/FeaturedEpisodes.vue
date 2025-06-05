@@ -42,7 +42,7 @@ const {
 </script>
 
 <template>
-  <template v-if="!isPending && !isError">
+  <template v-if="!isPending && !isError && featuredEpisodes?.length !== 0">
     <div class="mx-auto max-w-6xl px-10 md:px-12 lg:px-16 xl:px-24">
       <p class="pb-4 text-2xl text-zinc-800">Featured Episodes</p>
 
