@@ -4,7 +4,7 @@ import SingleEpisode from "../views/SingleEpisode/SingleEpisode.vue";
 import { i18n, setLocale } from "../i18n";
 
 export const SingleEpisodeRoute = <const>{
-  path: "/e/:vanityID/",
+  path: "/podcast/episode/:vanityID",
   name: "single-episode",
   props: (route: RouteLocationNormalized) => route.query,
   component: SingleEpisode,
