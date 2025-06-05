@@ -61,6 +61,13 @@ export interface PodcastEpisodeTable {
    * Which channel is this Podcast Episode listed under?
    */
   channel_id: NonUpdatableIdColumnType;
+
+  /**
+   * Optional URL of the episode image.
+   *
+   * If `null`, should fall back to `PodcastChannel['img_url']`
+   */
+  img_url: $Nullable<string>;
 }
 
 export type PodcastEpisode = Selectable<PodcastEpisodeTable>;

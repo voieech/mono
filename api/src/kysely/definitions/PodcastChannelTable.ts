@@ -39,6 +39,11 @@ export interface PodcastChannelTable {
    * What is the language for this entire PodcastChannel?
    */
   language: $LanguageCode;
+
+  /**
+   * URL of the channel image.
+   */
+  img_url: string;
 }
 
 export type PodcastChannel = Selectable<PodcastChannelTable>;
