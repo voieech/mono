@@ -82,6 +82,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("vanity_id", "text", (col) => col.notNull())
     .addColumn("language", "text", (col) => col.notNull())
+    .addColumn("season_number", "integer")
     .addColumn("episode_number", "integer")
     .addColumn("title", "text", (col) => col.notNull())
     .addColumn("description", "text", (col) => col.notNull())

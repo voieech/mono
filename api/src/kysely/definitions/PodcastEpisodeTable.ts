@@ -33,6 +33,11 @@ export interface PodcastEpisodeTable {
   language: $LanguageCode;
 
   /**
+   * Human readable Season unique identifier for that specific Channel
+   */
+  season_number: $Nullable<number>;
+
+  /**
    * Human readable Episode unique identifier for that specific Channel
    */
   episode_number: $Nullable<number>;
