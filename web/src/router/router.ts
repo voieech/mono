@@ -1,13 +1,12 @@
 import type { RouteLocationNormalized } from "vue-router";
 import { createRouter, createWebHistory } from "vue-router";
-import SingleEpisode from "../views/SingleEpisode/SingleEpisode.vue";
 import { i18n, setLocale } from "../i18n";
 
-export const SingleEpisodeRoute = <const>{
+export const PodcastEpisodeRoute = <const>{
   path: "/podcast/episode/:vanityID",
-  name: "single-episode",
+  name: "podcast-episode",
   props: (route: RouteLocationNormalized) => route.query,
-  component: SingleEpisode,
+  component: () => import("../views/PodcastEpisode/PodcastEpisode.vue"),
 };
 
 export const HomeRoute = <const>{
@@ -54,7 +53,7 @@ const router = createRouter({
     savedPosition !== null ? savedPosition : { top: 0 },
 
   routes: [
-    SingleEpisodeRoute,
+    PodcastEpisodeRoute,
     HomeRoute,
     AboutRoute,
     ContactRoute,

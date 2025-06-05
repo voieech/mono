@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useQuery } from "@tanstack/vue-query";
 import { apiBaseUrl } from "../../api";
-import { SingleEpisodeRoute } from "../../router";
+import { PodcastEpisodeRoute } from "../../router";
 
 const i18n = useI18n({ useScope: "global" });
 
@@ -50,7 +50,7 @@ const {
         <template v-for="episode of featuredEpisodes" :key="episode.vanityID">
           <RouterLink
             :to="{
-              name: SingleEpisodeRoute.name,
+              name: PodcastEpisodeRoute.name,
               params: {
                 vanityID: episode.vanityID,
               },
