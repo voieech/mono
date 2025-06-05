@@ -2,14 +2,16 @@
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuery } from "@tanstack/vue-query";
+import { useI18n } from "vue-i18n";
 import { apiBaseUrl } from "../../api";
 import PlatformCard from "./PlatformCard.vue";
 import WebPlayer from "./WebPlayer.vue";
 import LanguageSelector from "../components/LanguageSelector.vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
-import { HomeRoute } from "../../router";
+import { HomeRoute, updateLangQueryParam } from "../../router";
 import type { Episode } from "../../types/Episode";
 
+const i18n = useI18n({ useScope: "global" });
 const router = useRouter();
 const route = useRoute();
 const vanityID = route.params.vanityID.toString();
@@ -45,6 +47,9 @@ const {
 
     // @todo Use a package that supports SSR to set this?
     document.title = `voieech AI podcast - ${episode.title}`;
+
+    i18n.locale.value = episode.language;
+    updateLangQueryParam(i18n.locale.value);
 
     return episode;
   },
