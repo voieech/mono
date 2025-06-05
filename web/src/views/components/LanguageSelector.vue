@@ -1,22 +1,13 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
+import { updateLangQueryParam } from "../../router";
 
 const i18n = useI18n({ useScope: "global" });
-const router = useRouter();
 
 const languageCodeToDisplayMapping: Record<string, string> = {
   en: "English",
   zh: "中文",
 };
-
-function updateLangQueryParam(lang: string) {
-  router.push({
-    query: {
-      lang,
-    },
-  });
-}
 </script>
 
 <template>
