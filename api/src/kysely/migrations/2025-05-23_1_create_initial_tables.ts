@@ -59,6 +59,8 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("description", "text", (col) => col.notNull())
     .addColumn("language", "text", (col) => col.notNull())
     .addColumn("img_url", "text", (col) => col.notNull())
+    .addColumn("category", "text", (col) => col.notNull())
+    .addColumn("subcategory", "text")
     .execute();
 
   await db.schema

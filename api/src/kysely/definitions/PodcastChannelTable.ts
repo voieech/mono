@@ -44,6 +44,16 @@ export interface PodcastChannelTable {
    * URL of the channel image.
    */
   img_url: string;
+
+  /**
+   * Category, e.g. "Technology"
+   */
+  category: string;
+
+  /**
+   * Optional subcategory, e.g. "Daily News"
+   */
+  subcategory: $Nullable<string>;
 }
 
 export type PodcastChannel = Selectable<PodcastChannelTable>;

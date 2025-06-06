@@ -154,8 +154,12 @@ export function bootstrapHttpServer() {
 
         image_url: channel.img_url,
 
+        categories: [
+          channel.category,
+          ...(channel.subcategory !== null ? [channel.subcategory] : []),
+        ],
+
         // @todo
-        // categories: [],
         // ttl: 60 // in minutes
 
         // @todo voieech.com should be the same as the owner of the podcast
@@ -209,10 +213,15 @@ export function bootstrapHttpServer() {
           //   </itunes:category>
           {
             "itunes:category": [
-              { _attr: { text: "Technology" } },
+              { _attr: { text: channel.category } },
 
-              // Subcategory
-              { "itunes:category": { _attr: { text: "Gadgets" } } },
+              // When no subcategory, set empty object so that the XML tag will
+              // be self closing.
+              channel.subcategory !== null
+                ? {
+                    "itunes:category": { _attr: { text: channel.subcategory } },
+                  }
+                : {},
             ],
           },
 
@@ -256,9 +265,6 @@ export function bootstrapHttpServer() {
           //   <a href="http://www.apple.com">Apple</a>
           // ]]>
           description: episode.description,
-
-          // @todo
-          categories: [],
 
           enclosure: {
             url: episode.audio_public_url,
