@@ -94,37 +94,26 @@ const {
 
         <div class="py-2"></div>
 
-        <div class="">
-          <p
-            class="text-sm leading-relaxed font-light"
-            :class="{
-              'line-clamp-3 text-zinc-800': !isDescriptionExpanded,
-            }"
+        <p
+          class="text-sm leading-relaxed font-light"
+          :class="{
+            'line-clamp-3 text-zinc-800': !isDescriptionExpanded,
+          }"
+        >
+          {{ episode.description }}
+        </p>
+
+        <div class="text-right">
+          <button
+            class="cursor-pointer text-sm text-blue-400 outline-none"
+            :onclick="() => (isDescriptionExpanded = !isDescriptionExpanded)"
           >
-            {{ episode.description }}
-          </p>
-          <div class="text-right">
-            <button
-              :onclick="() => (isDescriptionExpanded = true)"
-              :class="{
-                hidden: isDescriptionExpanded,
-              }"
-              class="cursor-pointer text-sm text-blue-400 outline-none"
-            >
-              {{ $t("SingleEpisode.ReadMore") }}
-            </button>
-          </div>
-          <div class="text-right">
-            <button
-              class="cursor-pointer text-sm text-blue-400 outline-none"
-              :class="{
-                hidden: !isDescriptionExpanded,
-              }"
-              :onclick="() => (isDescriptionExpanded = false)"
-            >
-              {{ $t("SingleEpisode.Hide") }}
-            </button>
-          </div>
+            {{
+              isDescriptionExpanded
+                ? $t("SingleEpisode.Hide")
+                : $t("SingleEpisode.ReadMore")
+            }}
+          </button>
         </div>
       </div>
 
