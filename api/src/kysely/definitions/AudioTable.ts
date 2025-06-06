@@ -26,6 +26,21 @@ export interface AudioTable {
   public_url: string;
 
   /**
+   * Supported types
+   * 1. audio/x-m4a
+   * 1. audio/mpeg
+   * 1. video/mp4
+   * 1. video/x-m4v
+   * 1. video/quicktime
+   */
+  mime_type: string;
+
+  /**
+   * Size of the file in bytes
+   */
+  size: number;
+
+  /**
    * What language is used for this audio file
    */
   language: $LanguageCode;
