@@ -24,7 +24,7 @@ export default function Episode() {
     queryKey: ["episode", vanityID, i18n.locale],
     async queryFn() {
       const res = await fetch(
-        `${apiBaseUrl}/v1/episode/${vanityID}?lang=${i18n.locale.value}`
+        `${apiBaseUrl}/v1/podcast/episode/${vanityID}?lang=${i18n.locale.value}`
       );
 
       if (!res.ok) {

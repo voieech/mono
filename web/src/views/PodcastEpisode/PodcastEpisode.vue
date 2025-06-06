@@ -26,7 +26,7 @@ const {
 } = useQuery({
   queryKey: ["episode", vanityID],
   async queryFn() {
-    const res = await fetch(`${apiBaseUrl}/v1/episode/${vanityID}`);
+    const res = await fetch(`${apiBaseUrl}/v1/podcast/episode/${vanityID}`);
 
     if (!res.ok) {
       if (res.status === 404) {

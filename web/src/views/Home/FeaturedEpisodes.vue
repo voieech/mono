@@ -15,7 +15,7 @@ const {
   queryKey: ["featured-episodes"],
   async queryFn() {
     const res = await fetch(
-      `${apiBaseUrl}/v1/landing/featured-episodes/?lang=${i18n.locale.value}`,
+      `${apiBaseUrl}/v1/landing-page/featured-episodes/?lang=${i18n.locale.value}`,
     );
 
     if (!res.ok) {

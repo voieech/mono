@@ -16,7 +16,7 @@ export function bootstrapHttpServer() {
       res.status(200).end("ok");
     })
 
-    .get("/v1/landing/featured-episodes", async function (req, res) {
+    .get("/v1/landing-page/featured-episodes", async function (req, res) {
       const requestedLanguage = req.query["lang"]?.toString() ?? "en";
 
       // @todo
@@ -58,7 +58,7 @@ export function bootstrapHttpServer() {
       res.status(200).json(featuredEpisodes);
     })
 
-    .get("/v1/episode/:vanityID", async function (req, res) {
+    .get("/v1/podcast/episode/:vanityID", async function (req, res) {
       const vanityID = req.params.vanityID;
 
       const episode = await apiDB
@@ -99,7 +99,7 @@ export function bootstrapHttpServer() {
       });
     })
 
-    .get("/v1/rss/:channelID", async function (req, res) {
+    .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {
       const channelID = req.params.channelID;
 
       const channel = await apiDB
@@ -150,7 +150,7 @@ export function bootstrapHttpServer() {
         description: channel.description,
 
         // @todo Use URL builder
-        feed_url: `https://api.voieech.com/v1/rss/${channelID}`,
+        feed_url: `https://api.voieech.com/v1/podcast/channel/rss/${channelID}`,
 
         image_url: channel.img_url,
 
