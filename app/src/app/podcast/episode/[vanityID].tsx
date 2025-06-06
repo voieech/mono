@@ -13,7 +13,6 @@ export default function Episode() {
 
   const apiBaseUrl = "https://api.voieech.com";
   const vanityID = useLocalSearchParams<{ vanityID: string }>().vanityID;
-  const i18n = { locale: { value: "en" } };
 
   const {
     isPending,
@@ -21,11 +20,9 @@ export default function Episode() {
     data: episode,
     error,
   } = useQuery({
-    queryKey: ["episode", vanityID, i18n.locale],
+    queryKey: ["episode", vanityID],
     async queryFn() {
-      const res = await fetch(
-        `${apiBaseUrl}/v1/podcast/episode/${vanityID}?lang=${i18n.locale.value}`
-      );
+      const res = await fetch(`${apiBaseUrl}/v1/podcast/episode/${vanityID}`);
 
       if (!res.ok) {
         if (res.status === 404) {
