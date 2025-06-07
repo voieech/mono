@@ -76,19 +76,19 @@ const {
     <div v-else-if="episode !== undefined">
       <div class="pb-4">
         <p class="text-sm font-thin">
-          <template v-if="episode.episodeNumber !== null">
+          <template v-if="episode.episode_number !== null">
             {{
               $t("SingleEpisode.episodeNumber", {
-                episodeNumber: episode.episodeNumber,
+                episodeNumber: episode.episode_number,
               })
             }},
           </template>
-          {{ episode.createdAt.split("T")[0] }}
+          {{ episode.created_at.split("T")[0] }}
         </p>
         <p class="pb-2 text-2xl text-zinc-800">{{ episode.title }}</p>
 
         <p>
-          {{ Math.trunc(episode.audioLength / 60) }}
+          {{ Math.trunc(episode.audio_length / 60) }}
           {{ $t("SingleEpisode.mins") }}
         </p>
 
@@ -122,7 +122,7 @@ const {
           {{ $t("SingleEpisode.PodcastPlatforms") }}
         </p>
 
-        <WebPlayer class="pb-4" :url="episode.audioPublicUrl" />
+        <WebPlayer class="pb-4" :url="episode.audio_public_url" />
 
         <PlatformCard
           class="pb-4"

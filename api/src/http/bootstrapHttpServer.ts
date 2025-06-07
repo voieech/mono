@@ -40,16 +40,7 @@ export function bootstrapHttpServer() {
         .where("podcast_episode.language", "=", language)
         .orderBy("podcast_episode.created_at", "desc")
         .limit(4)
-        .execute()
-        .then((episodes) =>
-          episodes.map((episode) => ({
-            vanityID: episode.vanity_id,
-            createdAt: episode.created_at,
-            title: episode.title,
-            language: episode.language,
-            audioLength: episode.audio_length,
-          })),
-        );
+        .execute();
 
       // @todo
       // Cache featuredEpisodes so that not every landing page load causes a DB
@@ -86,15 +77,7 @@ export function bootstrapHttpServer() {
         .execute();
 
       res.status(200).json({
-        id: episode.id,
-        createdAt: episode.created_at,
-        vanityID: episode.vanity_id,
-        episodeNumber: episode.episode_number,
-        audioPublicUrl: episode.audio_public_url,
-        audioLength: episode.audio_length,
-        language: episode.language,
-        title: episode.title,
-        description: episode.description,
+        ...episode,
         externallyHostedLinks,
       });
     })

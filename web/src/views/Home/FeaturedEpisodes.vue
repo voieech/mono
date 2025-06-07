@@ -29,11 +29,11 @@ const {
 
     return res.json() as Promise<
       Array<{
-        vanityID: string;
-        createdAt: string;
+        vanity_id: string;
+        created_at: string;
         title: string;
         language: string;
-        audioLength: number;
+        audio_length: number;
       }>
     >;
   },
@@ -52,7 +52,7 @@ const {
             :to="{
               name: PodcastEpisodeRoute.name,
               params: {
-                vanityID: episode.vanityID,
+                vanityID: episode.vanity_id,
               },
               query: {
                 lang: episode.language,
@@ -74,11 +74,11 @@ const {
                 </div>
                 <div>
                   <p class="text-sm text-zinc-600">
-                    {{ episode.createdAt.split("T")[0] }}
+                    {{ episode.created_at.split("T")[0] }}
                   </p>
                   <!-- @todo Move this logic to somewhere standardised and move the $t call there -->
                   <p class="text-sm text-zinc-600">
-                    {{ Math.trunc(episode.audioLength / 60) }}
+                    {{ Math.trunc(episode.audio_length / 60) }}
                     {{ $t("SingleEpisode.mins") }}
                   </p>
                 </div>

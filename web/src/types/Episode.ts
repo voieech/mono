@@ -2,11 +2,12 @@ import type { Platform } from "./platform";
 
 export type Episode = {
   id: string;
-  createdAt: string;
-  vanityID: string;
-  episodeNumber: number | null;
-  audioPublicUrl: string;
-  audioLength: number;
+  created_at: string;
+  vanity_id: string;
+  season_number: number | null;
+  episode_number: number | null;
+  audio_public_url: string;
+  audio_length: number;
   language: string;
   title: string;
   description: string;
