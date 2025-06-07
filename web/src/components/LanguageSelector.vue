@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-import { updateLangQueryParam } from "../../router";
+import { updateLangQueryParam } from "@/router";
 
 const i18n = useI18n({ useScope: "global" });
 

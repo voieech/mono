@@ -3,13 +3,13 @@ import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuery } from "@tanstack/vue-query";
 import { useI18n } from "vue-i18n";
-import { apiBaseUrl } from "../../api";
+import { apiBaseUrl } from "@/api";
 import PlatformCard from "./PlatformCard.vue";
 import WebPlayer from "./WebPlayer.vue";
-import LanguageSelector from "../components/LanguageSelector.vue";
-import LoadingSpinner from "../components/LoadingSpinner.vue";
-import { HomeRoute, updateLangQueryParam } from "../../router";
-import type { Episode } from "../../types/Episode";
+import LanguageSelector from "@/components/LanguageSelector.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import { HomeRoute, updateLangQueryParam } from "@/router";
+import type { Episode } from "@/types/Episode";
 
 const i18n = useI18n({ useScope: "global" });
 const router = useRouter();

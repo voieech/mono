@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ContactRoute, AboutRoute, HomeRoute } from "../../router";
+import { ContactRoute, AboutRoute, HomeRoute } from "@/router";
 </script>
 
 <template>
