@@ -4,9 +4,9 @@ const props = defineProps<{ message?: string }>();
 const imageLink = new URL(
   // Generate 0-2 to randomly pick one of the gifs
   [
-    `../../assets/loading/1.webp`,
-    `../../assets/loading/2.gif`,
-    `../../assets/loading/3.gif`,
+    `../assets/loading/1.webp`,
+    `../assets/loading/2.gif`,
+    `../assets/loading/3.gif`,
   ][Math.trunc(Math.random() * 3)],
   import.meta.url,
 ).href;
