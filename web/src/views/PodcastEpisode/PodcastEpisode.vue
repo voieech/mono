@@ -1,62 +1,20 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useQuery } from "@tanstack/vue-query";
 import { useI18n } from "vue-i18n";
-import { apiBaseUrl } from "@/api";
 import PlatformCard from "./PlatformCard.vue";
 import WebPlayer from "./WebPlayer.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
-import { HomeRoute, updateLangQueryParam } from "@/router";
-import type { Episode } from "@/types/Episode";
+import { usePodcastEpisode } from "@/composables/usePodcastEpisode";
+import { HomeRoute } from "@/router";
 
 const i18n = useI18n({ useScope: "global" });
 const router = useRouter();
 const route = useRoute();
 const vanityID = route.params.vanityID.toString();
-
 const isDescriptionExpanded = ref(false);
-
-const {
-  isPending,
-  isError,
-  data: episode,
-  error,
-} = useQuery({
-  queryKey: ["episode", vanityID],
-  async queryFn() {
-    const res = await fetch(`${apiBaseUrl}/v1/podcast/episode/${vanityID}`);
-
-    if (!res.ok) {
-      if (res.status === 404) {
-        router.push({
-          path: "/404",
-        });
-      }
-
-      const defaultErrorMessage = `Failed to load episode: ${vanityID}`;
-      const errorMessage = await res
-        .json()
-        .then((data) => data.error ?? defaultErrorMessage)
-        .catch(() => defaultErrorMessage);
-      throw new Error(errorMessage);
-    }
-
-    const episode = (await res.json()) as Episode;
-
-    // @todo Use a package that supports SSR to set this?
-    document.title = `voieech AI podcast - ${episode.title}`;
-
-    i18n.locale.value = episode.language;
-    updateLangQueryParam(i18n.locale.value);
-
-    return episode;
-  },
-  retry: false,
-});
-
-// @todo Order platforms dynamically based on what user used to press? Like if last time they press spotify
+const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
 </script>
 
 <template>
@@ -69,34 +27,44 @@ const {
     </div>
 
     <LoadingSpinner
-      v-if="isPending"
+      v-if="podcastEpisodeQuery.isPending.value"
       :message="$t('SingleEpisode.loadingEpisode')"
     />
-    <div v-else-if="isError">Error: {{ error?.message }}</div>
-    <div v-else-if="episode !== undefined">
+    <div v-else-if="podcastEpisodeQuery.isError.value">
+      Error: {{ podcastEpisodeQuery.error.value?.message }}
+    </div>
+    <div v-else-if="podcastEpisodeQuery.data.value !== undefined">
       <div class="pb-4">
         <p class="text-sm font-thin">
-          <span class="pr-2">{{ episode.created_at.split("T")[0] }}</span>
+          <span class="pr-2">{{
+            podcastEpisodeQuery.data.value.created_at.split("T")[0]
+          }}</span>
 
-          <template v-if="episode.season_number !== null">
+          <template
+            v-if="podcastEpisodeQuery.data.value.season_number !== null"
+          >
             {{
               $t("SingleEpisode.seasonNumber", {
-                seasonNumber: episode.season_number,
+                seasonNumber: podcastEpisodeQuery.data.value.season_number,
               })
             }},
           </template>
-          <template v-if="episode.episode_number !== null">
+          <template
+            v-if="podcastEpisodeQuery.data.value.episode_number !== null"
+          >
             {{
               $t("SingleEpisode.episodeNumber", {
-                episodeNumber: episode.episode_number,
+                episodeNumber: podcastEpisodeQuery.data.value.episode_number,
               })
             }}
           </template>
         </p>
-        <p class="pb-2 text-2xl text-zinc-800">{{ episode.title }}</p>
+        <p class="pb-2 text-2xl text-zinc-800">
+          {{ podcastEpisodeQuery.data.value.title }}
+        </p>
 
         <p>
-          {{ Math.trunc(episode.audio_length / 60) }}
+          {{ Math.trunc(podcastEpisodeQuery.data.value.audio_length / 60) }}
           {{ $t("SingleEpisode.mins") }}
         </p>
 
@@ -108,7 +76,7 @@ const {
             'line-clamp-3 text-zinc-800': !isDescriptionExpanded,
           }"
         >
-          {{ episode.description }}
+          {{ podcastEpisodeQuery.data.value.description }}
         </p>
 
         <div class="text-right">
@@ -130,11 +98,15 @@ const {
           {{ $t("SingleEpisode.PodcastPlatforms") }}
         </p>
 
-        <WebPlayer class="pb-4" :url="episode.audio_public_url" />
+        <WebPlayer
+          class="pb-4"
+          :url="podcastEpisodeQuery.data.value.audio_public_url"
+        />
 
         <PlatformCard
           class="pb-4"
-          v-for="platform in episode.externallyHostedLinks"
+          v-for="platform in podcastEpisodeQuery.data.value
+            .externallyHostedLinks"
           :key="platform.podcast_platform"
           :platform="platform"
         />
