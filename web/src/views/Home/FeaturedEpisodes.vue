@@ -79,7 +79,7 @@ const {
                   <!-- @todo Move this logic to somewhere standardised and move the $t call there -->
                   <p class="text-sm text-zinc-600">
                     {{ Math.trunc(episode.audio_length / 60) }}
-                    {{ $t("PodcastEpisode.mins") }}
+                    {{ $t("common.mins") }}
                   </p>
                 </div>
               </div>

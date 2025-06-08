@@ -44,7 +44,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
             v-if="podcastEpisodeQuery.data.value.season_number !== null"
           >
             {{
-              $t("PodcastEpisode.seasonNumber", {
+              $t("common.SeasonNumber", {
                 seasonNumber: podcastEpisodeQuery.data.value.season_number,
               })
             }},
@@ -53,7 +53,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
             v-if="podcastEpisodeQuery.data.value.episode_number !== null"
           >
             {{
-              $t("PodcastEpisode.episodeNumber", {
+              $t("common.EpisodeNumber", {
                 episodeNumber: podcastEpisodeQuery.data.value.episode_number,
               })
             }}
@@ -65,7 +65,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
 
         <p>
           {{ Math.trunc(podcastEpisodeQuery.data.value.audio_length / 60) }}
-          {{ $t("PodcastEpisode.mins") }}
+          {{ $t("common.mins") }}
         </p>
 
         <div class="py-2"></div>
@@ -95,7 +95,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
 
       <div>
         <p class="pb-2 pl-4 text-sm font-light text-zinc-400 italic">
-          {{ $t("PodcastEpisode.PodcastPlatforms") }}
+          {{ $t("common.PodcastPlatforms") }}
         </p>
 
         <WebPlayer

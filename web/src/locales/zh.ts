@@ -3,6 +3,10 @@ import type { MessageSchema } from "./MessageSchema";
 export default {
   common: {
     loading: "加载中",
+    SeasonNumber: "第{seasonNumber}季",
+    EpisodeNumber: "第{episodeNumber}集",
+    mins: "分钟",
+    PodcastPlatforms: "播客平台",
   },
 
   PlatformName: {
@@ -11,10 +15,6 @@ export default {
 
   PodcastEpisode: {
     loadingEpisode: "加载播客中",
-    seasonNumber: "第{seasonNumber}季",
-    episodeNumber: "第{episodeNumber}集",
-    mins: "分钟",
-    PodcastPlatforms: "播客平台",
     ReadMore: "更多",
     Hide: "隐藏",
 

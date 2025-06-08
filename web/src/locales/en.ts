@@ -3,6 +3,10 @@ import type { Platform } from "../types/platform";
 export default {
   common: {
     loading: "loading",
+    SeasonNumber: "Season {seasonNumber}",
+    EpisodeNumber: "Episode {episodeNumber}",
+    mins: "mins",
+    PodcastPlatforms: "Podcast Platforms",
   },
 
   PlatformName: {
@@ -25,10 +29,6 @@ export default {
 
   PodcastEpisode: {
     loadingEpisode: "loading episode",
-    seasonNumber: "Season {seasonNumber}",
-    episodeNumber: "Episode {episodeNumber}",
-    mins: "mins",
-    PodcastPlatforms: "Podcast Platforms",
     ReadMore: "Read More",
     Hide: "Hide",
 
