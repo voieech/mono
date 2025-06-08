@@ -28,7 +28,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
 
     <LoadingSpinner
       v-if="podcastEpisodeQuery.isPending.value"
-      :message="$t('SingleEpisode.loadingEpisode')"
+      :message="$t('PodcastEpisode.loadingEpisode')"
     />
     <div v-else-if="podcastEpisodeQuery.isError.value">
       Error: {{ podcastEpisodeQuery.error.value?.message }}
@@ -44,7 +44,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
             v-if="podcastEpisodeQuery.data.value.season_number !== null"
           >
             {{
-              $t("SingleEpisode.seasonNumber", {
+              $t("PodcastEpisode.seasonNumber", {
                 seasonNumber: podcastEpisodeQuery.data.value.season_number,
               })
             }},
@@ -53,7 +53,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
             v-if="podcastEpisodeQuery.data.value.episode_number !== null"
           >
             {{
-              $t("SingleEpisode.episodeNumber", {
+              $t("PodcastEpisode.episodeNumber", {
                 episodeNumber: podcastEpisodeQuery.data.value.episode_number,
               })
             }}
@@ -65,7 +65,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
 
         <p>
           {{ Math.trunc(podcastEpisodeQuery.data.value.audio_length / 60) }}
-          {{ $t("SingleEpisode.mins") }}
+          {{ $t("PodcastEpisode.mins") }}
         </p>
 
         <div class="py-2"></div>
@@ -86,8 +86,8 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
           >
             {{
               isDescriptionExpanded
-                ? $t("SingleEpisode.Hide")
-                : $t("SingleEpisode.ReadMore")
+                ? $t("PodcastEpisode.Hide")
+                : $t("PodcastEpisode.ReadMore")
             }}
           </button>
         </div>
@@ -95,7 +95,7 @@ const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
 
       <div>
         <p class="pb-2 pl-4 text-sm font-light text-zinc-400 italic">
-          {{ $t("SingleEpisode.PodcastPlatforms") }}
+          {{ $t("PodcastEpisode.PodcastPlatforms") }}
         </p>
 
         <WebPlayer

@@ -109,9 +109,9 @@ const onNativePlaybackRateChange = onAudioPlayerLoaded(async (audioPlayer) => {
           />
           <div class="flex w-full flex-row items-center justify-between">
             <p>
-              {{ $t("SingleEpisode.WebPlayer.name") }}
+              {{ $t("PodcastEpisode.WebPlayer.name") }}
               <span class="pl-1 text-xs font-light text-zinc-400">
-                ({{ $t("SingleEpisode.WebPlayer.preferred") }})
+                ({{ $t("PodcastEpisode.WebPlayer.preferred") }})
               </span>
             </p>
             <svg
@@ -150,21 +150,21 @@ const onNativePlaybackRateChange = onAudioPlayerLoaded(async (audioPlayer) => {
 
           <div class="flex flex-row items-center justify-between pb-8">
             <p class="text-2xl font-extralight text-zinc-600">
-              {{ $t("SingleEpisode.WebPlayer.Control") }}
+              {{ $t("PodcastEpisode.WebPlayer.Control") }}
             </p>
             <div class="flex flex-row justify-center gap-4">
               <button class="h-7 w-7" :onclick="skipBackward">
                 <img
                   class="w-full"
                   src="../../assets/skipBackward.png"
-                  :alt="$t('SingleEpisode.WebPlayer.SkipBackward')"
+                  :alt="$t('PodcastEpisode.WebPlayer.SkipBackward')"
                 />
               </button>
               <button class="h-7 w-7" :onclick="skipForward">
                 <img
                   class="w-full"
                   src="../../assets/skipForward.png"
-                  :alt="$t('SingleEpisode.WebPlayer.SkipForward')"
+                  :alt="$t('PodcastEpisode.WebPlayer.SkipForward')"
                 />
               </button>
             </div>
@@ -175,7 +175,7 @@ const onNativePlaybackRateChange = onAudioPlayerLoaded(async (audioPlayer) => {
           <div class="flex flex-row items-center justify-between pb-4">
             <div class="flex flex-row items-center gap-2">
               <p class="text-2xl font-extralight text-zinc-600">
-                {{ $t("SingleEpisode.WebPlayer.Speed") }}
+                {{ $t("PodcastEpisode.WebPlayer.Speed") }}
               </p>
               <p class="text-2xl font-thin text-zinc-600">
                 {{ playbackRateOptions[playbackRateOptionIndex] }}
@@ -187,21 +187,21 @@ const onNativePlaybackRateChange = onAudioPlayerLoaded(async (audioPlayer) => {
                 <img
                   class="w-full opacity-40"
                   src="../../assets/reset.png"
-                  :alt="$t('SingleEpisode.WebPlayer.Reset')"
+                  :alt="$t('PodcastEpisode.WebPlayer.Reset')"
                 />
               </button>
               <button class="h-8 w-8" :onclick="() => updateSpeed('-')">
                 <img
                   class="w-full"
                   src="../../assets/down.svg"
-                  :alt="$t('SingleEpisode.WebPlayer.SpeedUp')"
+                  :alt="$t('PodcastEpisode.WebPlayer.SpeedUp')"
                 />
               </button>
               <button class="h-8 w-8" :onclick="() => updateSpeed('+')">
                 <img
                   class="w-full"
                   src="../../assets/up.svg"
-                  :alt="$t('SingleEpisode.WebPlayer.SlowDown')"
+                  :alt="$t('PodcastEpisode.WebPlayer.SlowDown')"
                 />
               </button>
             </div>

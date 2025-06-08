@@ -23,7 +23,7 @@ export default {
     himalaya: "Himalaya",
   } satisfies Record<Platform, string>,
 
-  SingleEpisode: {
+  PodcastEpisode: {
     loadingEpisode: "loading episode",
     seasonNumber: "Season {seasonNumber}",
     episodeNumber: "Episode {episodeNumber}",

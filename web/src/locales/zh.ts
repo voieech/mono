@@ -9,7 +9,7 @@ export default {
     himalaya: "喜马拉雅",
   },
 
-  SingleEpisode: {
+  PodcastEpisode: {
     loadingEpisode: "加载播客中",
     seasonNumber: "第{seasonNumber}季",
     episodeNumber: "第{episodeNumber}集",
