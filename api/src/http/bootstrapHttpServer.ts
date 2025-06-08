@@ -99,6 +99,36 @@ export function bootstrapHttpServer() {
       res.status(200).json(channel);
     })
 
+    .get("/v1/podcast/channel/episodes/:channelID", async function (req, res) {
+      const channelID = req.params.channelID;
+
+      const channel = await apiDB
+        .selectFrom("podcast_channel")
+        .select("id")
+        .where("podcast_channel.id", "=", channelID)
+        .executeTakeFirst();
+
+      if (channel === undefined) {
+        res.status(404).end(`Invalid Channel ID: ${channelID}`);
+        return;
+      }
+
+      const episodes = await apiDB
+        .selectFrom("podcast_episode")
+        .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
+        .selectAll("podcast_episode")
+        .select([
+          "audio.public_url as audio_public_url",
+          "audio.length as audio_length",
+        ])
+        .where("podcast_episode.channel_id", "=", channelID)
+        .orderBy("podcast_episode.created_at", "desc")
+        .limit(20)
+        .execute();
+
+      res.status(200).json(episodes);
+    })
+
     .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {
       const channelID = req.params.channelID;
 
