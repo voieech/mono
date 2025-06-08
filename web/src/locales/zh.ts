@@ -7,10 +7,24 @@ export default {
     EpisodeNumber: "第{episodeNumber}集",
     mins: "分钟",
     PodcastPlatforms: "播客平台",
+    ExternalPodcastPlatforms: "其他播客平台",
+    Featured: "精选",
+    Episodes: "剧集",
   },
 
   PlatformName: {
     himalaya: "喜马拉雅",
+  },
+
+  PodcastChannel: {
+    loading_channel: "加载播客频道中",
+    ChannelImage: "频道图片",
+    see_all_episodes: "查看所有剧集",
+  },
+
+  PodcastChannelEpisodes: {
+    loading_episodes: "加载播客剧集中",
+    latest_first: "最新优先",
   },
 
   PodcastEpisode: {

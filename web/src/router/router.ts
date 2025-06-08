@@ -9,6 +9,21 @@ export const PodcastEpisodeRoute = <const>{
   component: () => import("../views/PodcastEpisode/PodcastEpisode.vue"),
 };
 
+export const PodcastChannelRoute = <const>{
+  path: "/podcast/channel/:channelID",
+  name: "podcast-channel",
+  props: (route: RouteLocationNormalized) => route.query,
+  component: () => import("../views/PodcastChannel/PodcastChannel.vue"),
+};
+
+export const PodcastChannelEpisodesRoute = <const>{
+  path: "/podcast/channel/episodes/:channelID",
+  name: "podcast-channel-episodes",
+  props: (route: RouteLocationNormalized) => route.query,
+  component: () =>
+    import("../views/PodcastChannelEpisodes/PodcastChannelEpisodes.vue"),
+};
+
 export const HomeRoute = <const>{
   path: "/",
   name: "home",
@@ -54,6 +69,8 @@ const router = createRouter({
 
   routes: [
     PodcastEpisodeRoute,
+    PodcastChannelRoute,
+    PodcastChannelEpisodesRoute,
     HomeRoute,
     AboutRoute,
     ContactRoute,

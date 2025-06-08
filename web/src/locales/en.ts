@@ -7,6 +7,9 @@ export default {
     EpisodeNumber: "Episode {episodeNumber}",
     mins: "mins",
     PodcastPlatforms: "Podcast Platforms",
+    ExternalPodcastPlatforms: "External Podcast Platforms",
+    Featured: "Featured",
+    Episodes: "Episodes",
   },
 
   PlatformName: {
@@ -26,6 +29,17 @@ export default {
     soundon: "SoundOn",
     himalaya: "Himalaya",
   } satisfies Record<Platform, string>,
+
+  PodcastChannel: {
+    loading_channel: "loading channel",
+    ChannelImage: "Channel Image",
+    see_all_episodes: "see all episodes",
+  },
+
+  PodcastChannelEpisodes: {
+    loading_episodes: "loading episodes",
+    latest_first: "latest first",
+  },
 
   PodcastEpisode: {
     loadingEpisode: "loading episode",
