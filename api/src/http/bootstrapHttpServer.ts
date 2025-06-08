@@ -82,6 +82,23 @@ export function bootstrapHttpServer() {
       });
     })
 
+    .get("/v1/podcast/channel/:channelID", async function (req, res) {
+      const channelID = req.params.channelID;
+
+      const channel = await apiDB
+        .selectFrom("podcast_channel")
+        .selectAll()
+        .where("podcast_channel.id", "=", channelID)
+        .executeTakeFirst();
+
+      if (channel === undefined) {
+        res.status(404).end(`Invalid Channel ID: ${channelID}`);
+        return;
+      }
+
+      res.status(200).json(channel);
+    })
+
     .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {
       const channelID = req.params.channelID;
 
