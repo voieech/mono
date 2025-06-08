@@ -25,6 +25,7 @@ export default {
 
   SingleEpisode: {
     loadingEpisode: "loading episode",
+    seasonNumber: "Season {seasonNumber}",
     episodeNumber: "Episode {episodeNumber}",
     mins: "mins",
     PodcastPlatforms: "Podcast Platforms",

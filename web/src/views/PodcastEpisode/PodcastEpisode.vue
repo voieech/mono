@@ -76,14 +76,22 @@ const {
     <div v-else-if="episode !== undefined">
       <div class="pb-4">
         <p class="text-sm font-thin">
+          <span class="pr-2">{{ episode.created_at.split("T")[0] }}</span>
+
+          <template v-if="episode.season_number !== null">
+            {{
+              $t("SingleEpisode.seasonNumber", {
+                seasonNumber: episode.season_number,
+              })
+            }},
+          </template>
           <template v-if="episode.episode_number !== null">
             {{
               $t("SingleEpisode.episodeNumber", {
                 episodeNumber: episode.episode_number,
               })
-            }},
+            }}
           </template>
-          {{ episode.created_at.split("T")[0] }}
         </p>
         <p class="pb-2 text-2xl text-zinc-800">{{ episode.title }}</p>
 

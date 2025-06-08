@@ -11,6 +11,7 @@ export default {
 
   SingleEpisode: {
     loadingEpisode: "加载播客中",
+    seasonNumber: "第{seasonNumber}季",
     episodeNumber: "第{episodeNumber}集",
     mins: "分钟",
     PodcastPlatforms: "播客平台",
