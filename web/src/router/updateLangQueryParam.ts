@@ -1,7 +1,10 @@
 import { router } from "./router";
 
+/**
+ * Updates the lang query param
+ */
 export function updateLangQueryParam(lang: string) {
-  router.push({
+  router.replace({
     query: {
       lang,
     },
