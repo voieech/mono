@@ -54,9 +54,6 @@ export function usePodcastEpisode(
 
       const episode = (await res.json()) as Episode;
 
-      // @todo Use a package that supports SSR to set this?
-      document.title = `voieech AI podcast - ${episode.title}`;
-
       // @todo Only set this if the user didnt explicitly set the language control before
       if (optionals?.i18n !== undefined) {
         optionals.i18n.locale.value = episode.language;

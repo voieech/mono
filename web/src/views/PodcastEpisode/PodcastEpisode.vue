@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { useHead } from "@unhead/vue";
 import PlatformCard from "./PlatformCard.vue";
 import WebPlayer from "./WebPlayer.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
@@ -15,6 +16,14 @@ const route = useRoute();
 const vanityID = route.params.vanityID.toString();
 const isDescriptionExpanded = ref(false);
 const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
+
+useHead({
+  title: computed(() =>
+    podcastEpisodeQuery.data.value === undefined
+      ? document.title
+      : `voieech AI podcast - ${podcastEpisodeQuery.data.value.title}`,
+  ),
+});
 </script>
 
 <template>

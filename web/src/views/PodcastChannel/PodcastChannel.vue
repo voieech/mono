@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useHead } from "@unhead/vue";
 import { useRoute, useRouter, RouterLink } from "vue-router";
 import PlatformCard from "./PlatformCard.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
@@ -18,6 +20,14 @@ const channelID = route.params.channelID.toString();
 const podcastChannelQuery = usePodcastChannel(channelID, { router });
 const podcastChannelEpisodesQuery = usePodcastChannelEpisodes(channelID, {
   router,
+});
+
+useHead({
+  title: computed(() =>
+    podcastChannelQuery.data.value === undefined
+      ? document.title
+      : `voieech AI podcast - ${podcastChannelQuery.data.value.name}`,
+  ),
 });
 </script>
 

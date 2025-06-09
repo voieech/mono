@@ -12,6 +12,7 @@
     "typecheck": "vue-tsc --build"
   },
   "dependencies": {
+    "@unhead/vue": "^2.0.10",
     "simpler-fetch": "^12.0.0-rc1",
     "tailwind-merge": "^3.3.0",
     "vue": "^3.5.13",
