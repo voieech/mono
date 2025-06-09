@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { useQuery } from "@tanstack/vue-query";
+import { useQueryClient, useQuery } from "@tanstack/vue-query";
 import { apiBaseUrl } from "@/api";
 import { PodcastEpisodeRoute } from "@/router";
 import type { Episode } from "@/types/Episode";
 
 const i18n = useI18n({ useScope: "global" });
+const queryClient = useQueryClient();
 
 const {
   isPending,
@@ -28,7 +29,17 @@ const {
       throw new Error(errorMessage);
     }
 
-    return res.json() as Promise<Array<Episode>>;
+    const episodes = (await res.json()) as Array<Episode>;
+
+    // Cache data so these dont need to be re queried again on navigate
+    for (const episode of episodes) {
+      queryClient.setQueryData(
+        ["podcast-episode", "vanityID", episode.vanity_id],
+        episode,
+      );
+    }
+
+    return episodes;
   },
 });
 </script>

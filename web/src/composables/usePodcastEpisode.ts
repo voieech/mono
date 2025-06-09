@@ -26,7 +26,7 @@ export function usePodcastEpisode(
 
   const queryKey = [
     "podcast-episode",
-    options.episodeID === undefined ? "episodeID" : "vanityID",
+    options.episodeID !== undefined ? "episodeID" : "vanityID",
     queryID,
   ];
 
