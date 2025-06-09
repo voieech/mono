@@ -65,7 +65,5 @@ export function usePodcastEpisode(
 
       return episode;
     },
-    retry: false,
-    refetchOnWindowFocus: false,
   });
 }

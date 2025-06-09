@@ -36,7 +36,5 @@ export function usePodcastChannelEpisodes(
 
       return (await res.json()) as Array<Episode>;
     },
-    retry: false,
-    refetchOnWindowFocus: false,
   });
 }

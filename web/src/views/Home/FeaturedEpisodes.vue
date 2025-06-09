@@ -30,8 +30,6 @@ const {
 
     return res.json() as Promise<Array<Episode>>;
   },
-  retry: false,
-  refetchOnWindowFocus: false,
 });
 </script>
 
