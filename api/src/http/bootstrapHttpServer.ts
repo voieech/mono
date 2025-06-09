@@ -16,6 +16,32 @@ export function bootstrapHttpServer() {
       res.status(200).end("ok");
     })
 
+    .get("/v1/landing-page/featured-channels", async function (req, res) {
+      const requestedLanguage = req.query["lang"]?.toString() ?? "en";
+
+      // @todo
+      // Check if language is a valid option first before even attempting to
+      // querying DB, instead of relying on the DB query to check if language is
+      // valid. Use $LanguageCode.makeStrongSafely, and fall back to en if none
+      const isRequestedLanguageAvailable = true;
+
+      const language = isRequestedLanguageAvailable ? requestedLanguage : "en";
+
+      const featuredChannels = await apiDB
+        .selectFrom("podcast_channel")
+        .selectAll()
+        .where("language", "like", `${language}%`)
+        // @todo Ordery by popularity
+        .limit(4)
+        .execute();
+
+      // @todo
+      // Cache data so that not every landing page load causes a DB query. Cache
+      // in upstash or something with a builtin TTL...
+
+      res.status(200).json(featuredChannels);
+    })
+
     .get("/v1/landing-page/featured-episodes", async function (req, res) {
       const requestedLanguage = req.query["lang"]?.toString() ?? "en";
 
