@@ -30,14 +30,9 @@ export function bootstrapHttpServer() {
       const featuredEpisodes = await apiDB
         .selectFrom("podcast_episode")
         .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
-        .select([
-          "podcast_episode.vanity_id",
-          "podcast_episode.created_at",
-          "podcast_episode.title",
-          "podcast_episode.language",
-          "audio.length as audio_length",
-        ])
-        .where("podcast_episode.language", "=", language)
+        .selectAll("podcast_episode")
+        .select(["audio.length as audio_length"])
+        .where("podcast_episode.language", "like", `${language}%`)
         .orderBy("podcast_episode.created_at", "desc")
         .limit(4)
         .execute();
