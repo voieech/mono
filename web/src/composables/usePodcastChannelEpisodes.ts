@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/vue-query";
+import { useQueryClient, useQuery } from "@tanstack/vue-query";
 import { apiBaseUrl } from "@/api";
 import type { Router } from "vue-router";
 import type { Episode } from "@/types/Episode";
@@ -12,6 +12,8 @@ export function usePodcastChannelEpisodes(
     router?: Router;
   },
 ) {
+  const queryClient = useQueryClient();
+
   return useQuery({
     queryKey: ["podcast-channel-episodes", channelID],
     async queryFn() {
@@ -34,7 +36,17 @@ export function usePodcastChannelEpisodes(
         throw new Error(errorMessage);
       }
 
-      return (await res.json()) as Array<Episode>;
+      const episodes = (await res.json()) as Array<Episode>;
+
+      // Cache data so these dont need to be re queried again on navigate
+      for (const episode of episodes) {
+        queryClient.setQueryData(
+          ["podcast-episode", "vanityID", episode.vanity_id],
+          episode,
+        );
+      }
+
+      return episodes;
     },
   });
 }
