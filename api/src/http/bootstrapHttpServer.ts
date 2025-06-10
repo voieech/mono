@@ -57,8 +57,12 @@ export function bootstrapHttpServer() {
         .selectFrom("podcast_episode")
         .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
         .selectAll("podcast_episode")
-        .select(["audio.length as audio_length"])
+        .select([
+          "audio.public_url as audio_public_url",
+          "audio.length as audio_length",
+        ])
         .where("podcast_episode.language", "like", `${language}%`)
+        // @todo Ordery by popularity
         .orderBy("podcast_episode.created_at", "desc")
         .limit(4)
         .execute();
