@@ -103,9 +103,8 @@ router.beforeEach((to) => {
     (availableLocale) => langQueryParam.startsWith(availableLocale),
   );
   if (availableSameLanguage !== undefined) {
-    to.query.lang = availableSameLanguage;
-    setLocale(availableSameLanguage);
-    return to;
+    setLocale(langQueryParam);
+    return;
   }
 
   // If it is not a supported locale and language, fallback to en
