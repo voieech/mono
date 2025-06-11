@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 const props = defineProps<{ url: string }>();
 
-const showPlayer = ref(false);
+const showPlayer = ref(true);
 const audioPlayerRef = useTemplateRef("audio-player");
 
 const playbackRateOptions = [
@@ -93,13 +93,13 @@ const onNativePlaybackRateChange = onAudioPlayerLoaded(async (audioPlayer) => {
       <div
         :class="
           twMerge(
-            'w-full cursor-pointer rounded-full border border-zinc-200 bg-zinc-50 p-4 shadow-md select-none',
+            'w-full rounded-full border border-zinc-200 bg-zinc-50 p-4 shadow-md select-none',
             showPlayer && 'rounded-2xl shadow-2xl',
           )
         "
       >
         <div
-          class="flex w-full flex-row items-center gap-4"
+          class="flex w-full cursor-pointer flex-row items-center gap-4"
           @click="showPlayer = !showPlayer"
         >
           <img
@@ -153,14 +153,14 @@ const onNativePlaybackRateChange = onAudioPlayerLoaded(async (audioPlayer) => {
               {{ $t("PodcastEpisode.WebPlayer.Control") }}
             </p>
             <div class="flex flex-row justify-center gap-4">
-              <button class="h-7 w-7" :onclick="skipBackward">
+              <button class="h-7 w-7 cursor-pointer" :onclick="skipBackward">
                 <img
                   class="w-full"
                   src="../../assets/skipBackward.png"
                   :alt="$t('PodcastEpisode.WebPlayer.SkipBackward')"
                 />
               </button>
-              <button class="h-7 w-7" :onclick="skipForward">
+              <button class="h-7 w-7 cursor-pointer" :onclick="skipForward">
                 <img
                   class="w-full"
                   src="../../assets/skipForward.png"
@@ -183,21 +183,30 @@ const onNativePlaybackRateChange = onAudioPlayerLoaded(async (audioPlayer) => {
             </div>
 
             <div class="flex flex-row items-center gap-3">
-              <button class="h-7 w-7" :onclick="() => updateSpeed('reset')">
+              <button
+                class="h-7 w-7 cursor-pointer"
+                :onclick="() => updateSpeed('reset')"
+              >
                 <img
                   class="w-full opacity-40"
                   src="../../assets/reset.png"
                   :alt="$t('PodcastEpisode.WebPlayer.Reset')"
                 />
               </button>
-              <button class="h-8 w-8" :onclick="() => updateSpeed('-')">
+              <button
+                class="h-8 w-8 cursor-pointer"
+                :onclick="() => updateSpeed('-')"
+              >
                 <img
                   class="w-full"
                   src="../../assets/down.svg"
                   :alt="$t('PodcastEpisode.WebPlayer.SpeedUp')"
                 />
               </button>
-              <button class="h-8 w-8" :onclick="() => updateSpeed('+')">
+              <button
+                class="h-8 w-8 cursor-pointer"
+                :onclick="() => updateSpeed('+')"
+              >
                 <img
                   class="w-full"
                   src="../../assets/up.svg"

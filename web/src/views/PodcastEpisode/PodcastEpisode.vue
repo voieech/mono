@@ -43,8 +43,23 @@ useHead({
       Error: {{ podcastEpisodeQuery.error.value?.message }}
     </div>
     <div v-else-if="podcastEpisodeQuery.data.value !== undefined">
+      <div
+        v-if="podcastEpisodeQuery.data.value.img_url !== null"
+        class="flow-row flex justify-center p-4"
+      >
+        <img
+          class="w-32 rounded-2xl object-cover sm:w-48"
+          :src="podcastEpisodeQuery.data.value.img_url"
+          alt="podcast episode image"
+        />
+      </div>
+
       <div class="pb-4">
-        <p class="text-sm font-thin">
+        <p class="pb-2 text-zinc-800 sm:text-xl">
+          {{ podcastEpisodeQuery.data.value.title }}
+        </p>
+
+        <p class="pb-2 text-xs font-thin">
           <span class="pr-2">{{
             podcastEpisodeQuery.data.value.created_at.split("T")[0]
           }}</span>
@@ -68,11 +83,8 @@ useHead({
             }}
           </template>
         </p>
-        <p class="pb-2 text-2xl text-zinc-800">
-          {{ podcastEpisodeQuery.data.value.title }}
-        </p>
 
-        <p>
+        <p class="text-sm">
           {{ Math.trunc(podcastEpisodeQuery.data.value.audio_length / 60) }}
           {{ $t("common.mins") }}
         </p>
