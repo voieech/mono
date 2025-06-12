@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { View, Pressable } from "react-native";
 import { Image, ImageSource } from "expo-image";
 import TrackPlayer, {
-  State,
+  State as PlayerState,
   usePlaybackState,
   useProgress,
 } from "react-native-track-player";
-import Slider from "@react-native-community/slider";
+import { Slider } from "@react-native-assets/slider";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import { useTheme } from "@/hooks/useTheme";
@@ -104,7 +104,7 @@ export function AudioPlayerWithRNTP(props: {
             height: 70,
           }}
         >
-          {playerState === State.Loading ? (
+          {playerState === PlayerState.Loading ? (
             // @todo Use a loading state gif
             <Image
               source={
@@ -119,7 +119,7 @@ export function AudioPlayerWithRNTP(props: {
               }}
               contentFit="contain"
             />
-          ) : playerState === State.Playing ? (
+          ) : playerState === PlayerState.Playing ? (
             <Pressable onPress={() => TrackPlayer.pause()}>
               <Image
                 source={
@@ -167,27 +167,101 @@ export function AudioPlayerWithRNTP(props: {
   );
 }
 
+// Can pass in default position, based on last listen
+// Setting high polling frequency so that the slider animation is smoother
+const updateInterval = 100;
+
 function AudioProgressSlider(props: { duration: number }) {
-  // Increase polling frequency so that the slider animation is smoother
-  const progress = useProgress(100);
+  const [touching, setTouching] = useState(false);
+  const [position, setPosition] = useState(0);
+  const [positionUpdateIntervalID, setPositionUpdateIntervalID] = useState<
+    null | number
+  >(null);
+
+  const startUpdating = useCallback(() => {
+    if (positionUpdateIntervalID !== null) {
+      return;
+    }
+
+    const intervalID = setInterval(() => {
+      TrackPlayer.getProgress()
+        .then(({ position }) => setPosition(position))
+        // This only throw if you haven't yet setup RNTP, ignore failure
+        .catch(() => {});
+    }, updateInterval);
+
+    setPositionUpdateIntervalID(intervalID);
+  }, [positionUpdateIntervalID, setPositionUpdateIntervalID, setPosition]);
+
+  const onSlidingComplete = useCallback(
+    async (value: number) => {
+      // Update the UI first, so that when user lifts their finger up, there
+      // wont be a reset to the old position that hasnt been updated yet
+      setPosition(value);
+
+      await TrackPlayer.seekTo(value);
+
+      // Only after track player has seeked to that position then do we resume
+      // updating, and using setTimeout for a next tick effect
+      setTimeout(startUpdating, 10);
+    },
+    [setPosition, startUpdating]
+  );
+
+  const cleanUpTimer = useCallback(() => {
+    console.log("running clean up!");
+    if (positionUpdateIntervalID !== null) {
+      clearInterval(positionUpdateIntervalID);
+      setPositionUpdateIntervalID(null);
+      console.log("timers is now clean!");
+    }
+  }, [positionUpdateIntervalID, setPositionUpdateIntervalID]);
+
+  const isPlaying = usePlaybackState().state === PlayerState.Playing;
+
+  useEffect(() => {
+    console.log("main effect to start updating is called");
+
+    if (isPlaying && !touching) {
+      startUpdating();
+    } else {
+      cleanUpTimer();
+    }
+
+    return cleanUpTimer;
+  }, [
+    isPlaying,
+    touching,
+    startUpdating,
+    positionUpdateIntervalID,
+    setPositionUpdateIntervalID,
+    cleanUpTimer,
+  ]);
 
   return (
     <Slider
-      value={progress.position}
       minimumValue={0}
       maximumValue={props.duration}
+      //
+      value={position}
+      //
+      // Stop updating position when user start touching it
+      // Position will be auto updated again after user stop touching it
+      onTouchStart={() => {
+        console.log("touch STARTED");
+        setTouching(true);
+        cleanUpTimer();
+      }}
+      onTouchEnd={() => setTouching(false)}
+      onTouchCancel={() => setTouching(false)}
+      //
       // This is the same as "onValueChange", just that it is not called
       // continously and only called once user lifts their finger
-      onSlidingComplete={(value) => TrackPlayer.seekTo(value)}
-      // IOS only: Permits tapping on the slider track to set the position.
-      tapToSeek
-
-      // @todo Use a smaller image
-      // thumbImage={require("../assets/images/small-thumb.png")}
-
-      // This should be dynamic based on theme
-      // minimumTrackTintColor="#FFFFFF" // Sets left track color
+      onSlidingComplete={onSlidingComplete}
+      thumbTintColor="white"
+      minimumTrackTintColor="#FFFFFF" // Sets left track color
       // maximumTrackTintColor="#000000" // Optional: Sets right track color
+      // @todo This should be dynamic based on theme
     />
   );
 }
