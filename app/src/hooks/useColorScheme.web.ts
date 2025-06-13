@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useColorScheme as useRNColorScheme } from "react-native";
+import { isThemeFixed, DefaultTheme } from "@/constants/FixedTheme";
 
 /**
  * To support static rendering, this value needs to be re-calculated on the
@@ -14,9 +15,13 @@ export function useColorScheme() {
 
   const colorScheme = useRNColorScheme();
 
+  if (isThemeFixed) {
+    return DefaultTheme;
+  }
+
   if (hasHydrated) {
     return colorScheme;
   }
 
-  return "light";
+  return DefaultTheme;
 }

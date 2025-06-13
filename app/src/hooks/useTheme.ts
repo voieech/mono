@@ -4,7 +4,14 @@
  */
 
 import { useColorScheme } from "react-native";
+import { isThemeFixed, DefaultTheme } from "@/constants/FixedTheme";
 
 export function useTheme() {
-  return useColorScheme() ?? "light";
+  const colorScheme = useColorScheme() ?? DefaultTheme;
+
+  if (isThemeFixed) {
+    return DefaultTheme;
+  }
+
+  return colorScheme;
 }
