@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { AudioPlayerWithRNTP } from "@/components/AudioPlayerWithRNTP";
+import { AudioPlayer } from "@/components/AudioPlayer/AudioPlayer";
 
 export default function Episode() {
   const router = useRouter();
@@ -87,7 +87,7 @@ export default function Episode() {
         </ThemedView>
 
         <ThemedView style={styles.stepContainer}>
-          <AudioPlayerWithRNTP
+          <AudioPlayer
             url={episode.audio_public_url}
             title={
               episode.episodeNumber

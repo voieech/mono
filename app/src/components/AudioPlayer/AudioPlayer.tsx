@@ -1,24 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
-import { View, Pressable } from "react-native";
-import { Image, ImageSource } from "expo-image";
+import { useEffect, useState } from "react";
+import { Pressable } from "react-native";
+import { Image } from "expo-image";
 import TrackPlayer, {
   State as PlayerState,
   usePlaybackState,
   useProgress,
 } from "react-native-track-player";
 import { Slider } from "@react-native-assets/slider";
-import { ThemedText } from "./ThemedText";
-import { ThemedView } from "./ThemedView";
+import { ThemedText } from "../ThemedText";
+import { ThemedView } from "../ThemedView";
 import { useTheme } from "@/hooks/useTheme";
+import { convertSecondsToMSS } from "./convertSecondsToMSS";
+import { JumpButton } from "./JumpButton";
 
-function convertSecondsToMSS(totalSeconds: number): string {
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  const paddedSeconds = String(seconds).padStart(2, "0");
-  return `${minutes}:${paddedSeconds}`;
-}
-
-export function AudioPlayerWithRNTP(props: {
+export function AudioPlayer(props: {
   url: string;
   title: string;
   audioLength: number;
@@ -69,10 +64,22 @@ export function AudioPlayerWithRNTP(props: {
   }
 
   return (
-    <ThemedView>
-      <ThemedText>{props.title}</ThemedText>
-
-      <AudioProgressSlider duration={durationAsInt} />
+    <ThemedView
+      style={{
+        marginVertical: 16,
+        padding: 16,
+        borderWidth: 1,
+        borderRadius: 16,
+        borderColor: "#e6e2e1",
+      }}
+    >
+      <AudioProgressSlider
+        // @todo Can pass in custom default starting position based on last use
+        defaultTrackPosition={0}
+        // Setting high polling frequency so that the slider animation is smooth
+        updateInterval={100}
+        duration={durationAsInt}
+      />
 
       <ThemedView
         style={{
@@ -80,8 +87,8 @@ export function AudioPlayerWithRNTP(props: {
           justifyContent: "space-between",
         }}
       >
-        <ThemedText>{currentPos}</ThemedText>
-        <ThemedText>-{remainingTime}</ThemedText>
+        <ThemedText style={{ fontSize: 12 }}>{currentPos}</ThemedText>
+        <ThemedText style={{ fontSize: 12 }}>-{remainingTime}</ThemedText>
       </ThemedView>
 
       <ThemedView
@@ -167,76 +174,30 @@ export function AudioPlayerWithRNTP(props: {
   );
 }
 
-// Can pass in default position, based on last listen
-// Setting high polling frequency so that the slider animation is smoother
-const updateInterval = 100;
+function AudioProgressSlider(props: {
+  defaultTrackPosition: number;
+  updateInterval: number;
+  duration: number;
+}) {
+  const [position, setPosition] = useState(props.defaultTrackPosition);
 
-function AudioProgressSlider(props: { duration: number }) {
-  const [touching, setTouching] = useState(false);
-  const [position, setPosition] = useState(0);
-  const [positionUpdateIntervalID, setPositionUpdateIntervalID] = useState<
-    null | number
-  >(null);
-
-  const startUpdating = useCallback(() => {
-    if (positionUpdateIntervalID !== null) {
-      return;
-    }
-
+  useEffect(() => {
     const intervalID = setInterval(() => {
       TrackPlayer.getProgress()
         .then(({ position }) => setPosition(position))
         // This only throw if you haven't yet setup RNTP, ignore failure
         .catch(() => {});
-    }, updateInterval);
+    }, props.updateInterval);
 
-    setPositionUpdateIntervalID(intervalID);
-  }, [positionUpdateIntervalID, setPositionUpdateIntervalID, setPosition]);
+    return () => clearInterval(intervalID);
+  }, [props.updateInterval, setPosition]);
 
-  const onSlidingComplete = useCallback(
-    async (value: number) => {
-      // Update the UI first, so that when user lifts their finger up, there
-      // wont be a reset to the old position that hasnt been updated yet
-      setPosition(value);
+  async function onSlidingComplete(newPosition: number) {
+    setPosition(newPosition);
 
-      await TrackPlayer.seekTo(value);
-
-      // Only after track player has seeked to that position then do we resume
-      // updating, and using setTimeout for a next tick effect
-      setTimeout(startUpdating, 10);
-    },
-    [setPosition, startUpdating]
-  );
-
-  const cleanUpTimer = useCallback(() => {
-    console.log("running clean up!");
-    if (positionUpdateIntervalID !== null) {
-      clearInterval(positionUpdateIntervalID);
-      setPositionUpdateIntervalID(null);
-      console.log("timers is now clean!");
-    }
-  }, [positionUpdateIntervalID, setPositionUpdateIntervalID]);
-
-  const isPlaying = usePlaybackState().state === PlayerState.Playing;
-
-  useEffect(() => {
-    console.log("main effect to start updating is called");
-
-    if (isPlaying && !touching) {
-      startUpdating();
-    } else {
-      cleanUpTimer();
-    }
-
-    return cleanUpTimer;
-  }, [
-    isPlaying,
-    touching,
-    startUpdating,
-    positionUpdateIntervalID,
-    setPositionUpdateIntervalID,
-    cleanUpTimer,
-  ]);
+    await TrackPlayer.seekTo(newPosition);
+    await TrackPlayer.play();
+  }
 
   return (
     <Slider
@@ -248,12 +209,10 @@ function AudioProgressSlider(props: { duration: number }) {
       // Stop updating position when user start touching it
       // Position will be auto updated again after user stop touching it
       onTouchStart={() => {
-        console.log("touch STARTED");
-        setTouching(true);
-        cleanUpTimer();
+        TrackPlayer.pause();
       }}
-      onTouchEnd={() => setTouching(false)}
-      onTouchCancel={() => setTouching(false)}
+      // onTouchEnd={() => TrackPlayer.play()}
+      // onTouchCancel={() => TrackPlayer.play()}
       //
       // This is the same as "onValueChange", just that it is not called
       // continously and only called once user lifts their finger
@@ -263,27 +222,5 @@ function AudioProgressSlider(props: { duration: number }) {
       // maximumTrackTintColor="#000000" // Optional: Sets right track color
       // @todo This should be dynamic based on theme
     />
-  );
-}
-
-function JumpButton(props: { onPress: () => void; imageSource: ImageSource }) {
-  return (
-    <View
-      style={{
-        width: 40,
-        height: 40,
-      }}
-    >
-      <Pressable onPress={props.onPress}>
-        <Image
-          source={props.imageSource}
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          contentFit="contain"
-        />
-      </Pressable>
-    </View>
   );
 }
