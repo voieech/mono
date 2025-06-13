@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
@@ -6,10 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { FullScreenLoader } from "@/components/FullScreenLoader";
 import { AudioPlayer } from "@/components/AudioPlayer/AudioPlayer";
 import { apiBaseUrl } from "@/constants/Api";
 
-export default function Episode() {
+export default function PodcastEpisode() {
   const router = useRouter();
   const vanityID = useLocalSearchParams<{ vanityID: string }>().vanityID;
 
@@ -43,16 +43,7 @@ export default function Episode() {
   });
 
   if (isPending) {
-    return (
-      <ThemedView style={styles.container}>
-        <Image
-          source={loadingImageSource}
-          style={styles.loadingImage}
-          alt="Loading Image"
-        />
-        <ThemedText type="title">...loading...</ThemedText>
-      </ThemedView>
-    );
+    return <FullScreenLoader />;
   }
 
   if (isError || episode === undefined) {
@@ -68,24 +59,38 @@ export default function Episode() {
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
         // @todo
-        // 1. Replace this with the episode image?
-        // 2. And only include this if the episode have an image, else just show
-        // the text stuff...
+        // Replace this with the episode image if available
         <Image
           source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
+          style={{
+            height: 178,
+            width: 290,
+            bottom: 0,
+            left: 0,
+            position: "absolute",
+          }}
         />
       }
     >
       <Stack.Screen options={{ title: "Podcast Episode" }} />
 
       <ThemedView>
-        <ThemedView style={styles.stepContainer}>
+        <ThemedView
+          style={{
+            gap: 8,
+            marginBottom: 8,
+          }}
+        >
           <ThemedText type="subtitle">{episode.title}</ThemedText>
           <ThemedText>{episode.description}</ThemedText>
         </ThemedView>
 
-        <ThemedView style={styles.stepContainer}>
+        <ThemedView
+          style={{
+            gap: 8,
+            marginBottom: 8,
+          }}
+        >
           <AudioPlayer
             url={episode.audio_public_url}
             title={
@@ -102,31 +107,3 @@ export default function Episode() {
     </ParallaxScrollView>
   );
 }
-
-// Generate 0-2 to randomly pick one of the gifs
-const loadingImageSource = [
-  require("@/assets/images/loading/1.webp"),
-  require("@/assets/images/loading/2.gif"),
-  require("@/assets/images/loading/3.gif"),
-][Math.trunc(Math.random() * 3)];
-
-const styles = StyleSheet.create({
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-  container: {
-    padding: "10%",
-  },
-  loadingImage: {
-    height: "100%",
-    resizeMode: "contain",
-  },
-});
