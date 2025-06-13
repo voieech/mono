@@ -1,12 +1,105 @@
 import { Image } from "expo-image";
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Link } from "expo-router";
+import { useQuery } from "@tanstack/react-query";
 
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { apiBaseUrl } from "@/constants/Api";
+
+type Channel = {
+  id: string;
+  created_at: string;
+  language: string;
+  description: string;
+  img_url: string;
+  name: string;
+  category: string;
+  subcategory: string | null;
+};
+
+type Episode = {
+  id: string;
+  created_at: string;
+  vanity_id: string;
+  season_number: number | null;
+  episode_number: number | null;
+  audio_public_url: string;
+  audio_length: number;
+  language: string;
+  title: string;
+  description: string;
+  img_url: string | null;
+  externallyHostedLinks: Array<{
+    podcast_platform: string;
+    url: string;
+  }>;
+};
 
 export default function HomeScreen() {
+  const featuredChannelsQuery = useQuery({
+    queryKey: ["podcast", "featured-channels"],
+    async queryFn() {
+      // ?lang=${i18n.locale.value}
+      const res = await fetch(
+        `${apiBaseUrl}/v1/landing-page/featured-channels/`
+      );
+
+      if (!res.ok) {
+        const defaultErrorMessage = "Failed to load featured channels";
+        const errorMessage = await res
+          .json()
+          .then((data) => data.error ?? defaultErrorMessage)
+          .catch(() => defaultErrorMessage);
+        throw new Error(errorMessage);
+      }
+
+      const channels = (await res.json()) as Array<Channel>;
+
+      // Cache data so these dont need to be re queried again on navigate
+      for (const channel of channels) {
+        // queryClient.setQueryData(["podcast-channel", channel.id], channel);
+      }
+
+      return channels;
+    },
+    retry: false,
+  });
+
+  const featuredEpisodesQuery = useQuery({
+    queryKey: ["podcast", "featured-episodes"],
+    async queryFn() {
+      // ?lang=${i18n.locale.value}
+      const res = await fetch(
+        `${apiBaseUrl}/v1/landing-page/featured-episodes/`
+      );
+
+      if (!res.ok) {
+        const defaultErrorMessage = "Failed to load featured episodes";
+        const errorMessage = await res
+          .json()
+          .then((data) => data.error ?? defaultErrorMessage)
+          .catch(() => defaultErrorMessage);
+        throw new Error(errorMessage);
+      }
+
+      const episodes = (await res.json()) as Array<Episode>;
+
+      // Cache data so these dont need to be re queried again on navigate
+      for (const episode of episodes) {
+        // queryClient.setQueryData(
+        //   ["podcast-episode", "vanityID", episode.vanity_id],
+        //   episode
+        // );
+      }
+
+      return episodes;
+    },
+    retry: false,
+  });
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -21,41 +114,124 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Test</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">
-            npm run reset-project
-          </ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
+      {featuredChannelsQuery.data !== undefined && (
+        <ThemedView style={styles.stepContainer}>
+          <ThemedText type="subtitle">Featured Channels</ThemedText>
+          {featuredChannelsQuery.data.map((channel) => (
+            <ThemedView
+              key={channel.id}
+              style={{
+                backgroundColor: "#3f3f46",
+                borderRadius: 16,
+                flex: 1,
+                flexDirection: "row",
+              }}
+            >
+              <Image
+                source={channel.img_url}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  maxWidth: 128,
+                  borderTopLeftRadius: 16,
+                  borderBottomLeftRadius: 16,
+                }}
+                contentFit="contain"
+              />
+              <ThemedView
+                style={{
+                  padding: 16,
+                  backgroundColor: "inherit",
+                }}
+              >
+                <ThemedText
+                  style={{
+                    paddingBottom: 2,
+                    fontSize: 24,
+                  }}
+                >
+                  {channel.name}
+                </ThemedText>
+                <ThemedText
+                  style={{
+                    paddingBottom: 4,
+                    fontSize: 12,
+                  }}
+                >
+                  {channel.description}
+                </ThemedText>
+                <ThemedText
+                  style={{
+                    fontSize: 12,
+                  }}
+                >
+                  {channel.category}, {channel.subcategory}
+                </ThemedText>
+              </ThemedView>
+            </ThemedView>
+          ))}
+        </ThemedView>
+      )}
+      {featuredEpisodesQuery.data !== undefined && (
+        <ThemedView style={styles.stepContainer}>
+          <ThemedText type="subtitle">Featured Episodes</ThemedText>
+          {featuredEpisodesQuery.data.map((episode) => (
+            <Link
+              key={episode.id}
+              href={`/podcast/episode/${episode.vanity_id}`}
+            >
+              <ThemedView
+                style={{
+                  backgroundColor: "#3f3f46",
+                  borderRadius: 16,
+                  flex: 1,
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+                {episode.img_url !== null && (
+                  <Image
+                    source={episode.img_url}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      maxWidth: 128,
+                      borderTopLeftRadius: 16,
+                      borderBottomLeftRadius: 16,
+                    }}
+                    contentFit="contain"
+                  />
+                )}
+
+                <ThemedView
+                  style={{
+                    padding: 16,
+                    backgroundColor: "inherit",
+                  }}
+                >
+                  <ThemedText
+                    style={{
+                      paddingBottom: 2,
+                    }}
+                    numberOfLines={2}
+                  >
+                    {episode.title}
+                  </ThemedText>
+                  <ThemedText
+                    style={{
+                      fontSize: 12,
+                    }}
+                  >
+                    {episode.created_at.split("T")[0]}
+                    {"\n"}
+                    {Math.trunc(episode.audio_length / 60)} mins
+                  </ThemedText>
+                </ThemedView>
+              </ThemedView>
+            </Link>
+          ))}
+        </ThemedView>
+      )}
     </ParallaxScrollView>
   );
 }
