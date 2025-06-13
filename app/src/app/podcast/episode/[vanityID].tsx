@@ -87,15 +87,14 @@ export default function Episode() {
         </ThemedView>
 
         <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Player</ThemedText>
           <AudioPlayerWithRNTP
-            url={episode.audioPublicUrl}
+            url={episode.audio_public_url}
             title={
               episode.episodeNumber
-                ? `EP ${episode.episodeNumber}: ${episode.title}`
+                ? `EP ${episode.episode_number}: ${episode.title}`
                 : episode.title
             }
-            audioLength={episode.audioLength}
+            audioLength={episode.audio_length}
             // @todo Only set this if it is a custom made track by someone else
             // artist={}
           />
