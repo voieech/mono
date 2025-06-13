@@ -1,5 +1,4 @@
 import { Image } from "expo-image";
-import { StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
@@ -106,20 +105,36 @@ export default function HomeScreen() {
       headerImage={
         <Image
           source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
+          style={{
+            height: 178,
+            width: 290,
+            bottom: 0,
+            left: 0,
+            position: "absolute",
+          }}
         />
       }
     >
-      <ThemedView style={styles.titleContainer}>
+      <ThemedView
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 8,
+        }}
+      >
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
       {featuredChannelsQuery.data !== undefined && (
-        <ThemedView style={styles.stepContainer}>
+        <ThemedView
+          style={{
+            gap: 8,
+            marginBottom: 8,
+          }}
+        >
           <ThemedText type="subtitle">Featured Channels</ThemedText>
           {featuredChannelsQuery.data.map((channel) => (
             <ThemedView
-              key={channel.id}
               style={{
                 backgroundColor: "#3f3f46",
                 borderRadius: 16,
@@ -173,7 +188,12 @@ export default function HomeScreen() {
         </ThemedView>
       )}
       {featuredEpisodesQuery.data !== undefined && (
-        <ThemedView style={styles.stepContainer}>
+        <ThemedView
+          style={{
+            gap: 8,
+            marginBottom: 8,
+          }}
+        >
           <ThemedText type="subtitle">Featured Episodes</ThemedText>
           {featuredEpisodesQuery.data.map((episode) => (
             <Link
@@ -235,22 +255,3 @@ export default function HomeScreen() {
     </ParallaxScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-});
