@@ -1,0 +1,16 @@
+export type Platform =
+  | "voieech-audio-link"
+  | "spotify"
+  | "apple-podcast"
+  | "youtube"
+  | "audible"
+  | "amazon-music"
+  | "iheartradio"
+  | "overcast"
+  | "pocketcasts"
+  | "nprone"
+  | "tunein"
+  | "kkbox"
+  | "firststory"
+  | "soundon"
+  | "himalaya";

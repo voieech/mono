@@ -4,7 +4,7 @@ import { useI18n } from "vue-i18n";
 import { useQueryClient, useQuery } from "@tanstack/vue-query";
 import { apiBaseUrl } from "@/api";
 import { PodcastEpisodeRoute } from "@/router";
-import type { Episode } from "@/types/Episode";
+import type { Episode } from "dto";
 
 const i18n = useI18n({ useScope: "global" });
 const queryClient = useQueryClient();

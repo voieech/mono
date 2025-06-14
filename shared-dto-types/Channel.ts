@@ -6,5 +6,6 @@ export type Channel = {
   img_url: string;
   name: string;
   category: string;
+  // subcategory: $Nullable<string>;
   subcategory: string | null;
 };

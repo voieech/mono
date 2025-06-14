@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Episode } from "../../types/Episode";
+import type { Episode } from "dto";
 
 const props = defineProps<{
   platform: Episode["externallyHostedLinks"][number];

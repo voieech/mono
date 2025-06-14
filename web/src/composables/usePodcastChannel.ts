@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/vue-query";
 import { apiBaseUrl } from "@/api";
 import type { Router } from "vue-router";
-import type { Channel } from "@/types/Channel";
+import type { Channel } from "dto";
 
 export function usePodcastChannel(
   channelID: string,

@@ -3,7 +3,7 @@ import { apiBaseUrl } from "@/api";
 import { updateLangQueryParam } from "@/router";
 import type { Router } from "vue-router";
 import type { Composer } from "vue-i18n";
-import type { Episode } from "@/types/Episode";
+import type { Episode } from "dto";
 
 export function usePodcastEpisode(
   options: {
