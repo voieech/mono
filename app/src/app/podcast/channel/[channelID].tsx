@@ -2,7 +2,7 @@ import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Stack, Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
-import { ParallaxScrollView } from "@/components/ParallaxScrollView";
+import { ParallaxScrollViewContainer } from "@/components/PageContainer";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { FullScreenLoader } from "@/components/FullScreenLoader";
@@ -84,7 +84,7 @@ export default function PodcastChannel() {
   }
 
   return (
-    <ParallaxScrollView
+    <ParallaxScrollViewContainer
       headerHeightUseWidth={true}
       headerImage={
         <ThemedView
@@ -151,6 +151,6 @@ export default function PodcastChannel() {
             ))}
           </>
         )}
-    </ParallaxScrollView>
+    </ParallaxScrollViewContainer>
   );
 }

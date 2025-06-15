@@ -1,9 +1,9 @@
+import { View } from "react-native";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
-import { HelloWave } from "@/components/HelloWave";
-import { ParallaxScrollView } from "@/components/ParallaxScrollView";
+import { SafeScrollViewContainer } from "@/components/PageContainer";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { apiBaseUrl } from "@/constants/Api";
@@ -72,30 +72,7 @@ export default function HomeScreen() {
   });
 
   return (
-    <ParallaxScrollView
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={{
-            height: 178,
-            width: 290,
-            bottom: 0,
-            left: 0,
-            position: "absolute",
-          }}
-        />
-      }
-    >
-      <ThemedView
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
+    <SafeScrollViewContainer>
       {featuredChannelsQuery.data !== undefined && (
         <ThemedView
           style={{
@@ -159,6 +136,11 @@ export default function HomeScreen() {
           ))}
         </ThemedView>
       )}
+      <View
+        style={{
+          paddingVertical: 8,
+        }}
+      />
       {featuredEpisodesQuery.data !== undefined && (
         <ThemedView
           style={{
@@ -224,6 +206,6 @@ export default function HomeScreen() {
           ))}
         </ThemedView>
       )}
-    </ParallaxScrollView>
+    </SafeScrollViewContainer>
   );
 }

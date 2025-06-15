@@ -11,7 +11,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { useBottomTabOverflow } from "@/components/ui/TabBarBackground";
 import { useTheme } from "@/hooks/useTheme";
 
-export function ParallaxScrollView(
+export function ParallaxScrollViewContainer(
   props: PropsWithChildren<{
     headerImage: ReactElement;
     headerBackgroundColor?: { dark?: string; light?: string };

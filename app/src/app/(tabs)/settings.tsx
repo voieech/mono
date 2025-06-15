@@ -1,11 +1,11 @@
 import { Collapsible } from "@/components/Collapsible";
-import { ParallaxScrollView } from "@/components/ParallaxScrollView";
+import { ParallaxScrollViewContainer } from "@/components/PageContainer";
 import { ThemedText } from "@/components/ThemedText";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 
 export default function TabTwoScreen() {
   return (
-    <ParallaxScrollView
+    <ParallaxScrollViewContainer
       headerImage={
         <IconSymbol
           size={360}
@@ -27,6 +27,6 @@ export default function TabTwoScreen() {
       <Collapsible title="Audio Playback">
         <ThemedText>Default audio playback speed: {1}</ThemedText>
       </Collapsible>
-    </ParallaxScrollView>
+    </ParallaxScrollViewContainer>
   );
 }
