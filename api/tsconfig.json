@@ -2,6 +2,10 @@
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
+    "paths": {
+      "dto": ["./src/dto-types/index.ts"]
+    },
+
     /* Projects */
     "incremental": true,
     // "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */

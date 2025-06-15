@@ -4,6 +4,6 @@
  ************************* ONLY EXPORT TYPE SYMBOLS ****************************
  */
 
-export type * from "./Channel";
-export type * from "./Episode";
-export type * from "./Platform";
+export type * from "./Channel.js";
+export type * from "./Episode.js";
+export type * from "./Platform.js";

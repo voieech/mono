@@ -7,7 +7,7 @@
 
     "paths": {
       "@/*": ["./src/*"],
-      "dto": ["../shared-dto-types/index.ts"]
+      "dto": ["../api/src/dto-types/index.ts"]
     }
   }
 }
