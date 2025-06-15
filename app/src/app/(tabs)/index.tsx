@@ -36,7 +36,6 @@ export default function HomeScreen() {
 
       return channels;
     },
-    retry: false,
   });
 
   const featuredEpisodesQuery = useQuery({
@@ -68,7 +67,6 @@ export default function HomeScreen() {
 
       return episodes;
     },
-    retry: false,
   });
 
   return (

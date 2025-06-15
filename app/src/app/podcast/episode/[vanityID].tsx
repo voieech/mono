@@ -39,7 +39,6 @@ export default function PodcastEpisode() {
 
       return (await res.json()) as Episode;
     },
-    retry: false,
   });
 
   if (isPending) {

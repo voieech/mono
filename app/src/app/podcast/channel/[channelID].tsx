@@ -33,7 +33,6 @@ export default function PodcastChannel() {
 
       return (await res.json()) as Channel;
     },
-    retry: false,
   });
 
   const podcastChannelEpisodesQuery = useQuery({
@@ -68,7 +67,6 @@ export default function PodcastChannel() {
 
       return episodes;
     },
-    retry: false,
   });
 
   if (podcastChannelQuery.isPending) {
