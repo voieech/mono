@@ -6,10 +6,8 @@ import {
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-import { useColorScheme } from "react-native";
+import { useTheme } from "@/hooks/useTheme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,21 +28,26 @@ const queryClient = new QueryClient({
 });
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
+  const theme = useTheme();
+  const [isFontLoaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
+  // Wait for font to load. This should not run in production as async font
+  // loading only occurs in development.
+  if (!isFontLoaded) {
     return null;
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
       <QueryClientProvider client={queryClient}>
         <StatusBar style="auto" />
-        <Stack>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen
             name="(tabs)"
             options={{
