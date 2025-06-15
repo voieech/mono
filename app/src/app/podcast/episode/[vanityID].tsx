@@ -56,7 +56,6 @@ export default function PodcastEpisode() {
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
         // @todo
         // Replace this with the episode image if available
