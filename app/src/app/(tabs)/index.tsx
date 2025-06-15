@@ -105,56 +105,57 @@ export default function HomeScreen() {
         >
           <ThemedText type="subtitle">Featured Channels</ThemedText>
           {featuredChannelsQuery.data.map((channel) => (
-            <ThemedView
-              style={{
-                backgroundColor: "#3f3f46",
-                borderRadius: 16,
-                flex: 1,
-                flexDirection: "row",
-              }}
-            >
-              <Image
-                source={channel.img_url}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  maxWidth: 128,
-                  borderTopLeftRadius: 16,
-                  borderBottomLeftRadius: 16,
-                }}
-                contentFit="contain"
-              />
+            <Link key={channel.id} href={`/podcast/channel/${channel.id}`}>
               <ThemedView
                 style={{
-                  padding: 16,
-                  backgroundColor: "inherit",
+                  borderRadius: 16,
+                  flex: 1,
+                  flexDirection: "row",
                 }}
               >
-                <ThemedText
+                <Image
+                  source={channel.img_url}
                   style={{
-                    paddingBottom: 2,
-                    fontSize: 24,
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: 128,
+                    borderTopLeftRadius: 16,
+                    borderBottomLeftRadius: 16,
+                  }}
+                  contentFit="contain"
+                />
+                <ThemedView
+                  style={{
+                    padding: 16,
+                    backgroundColor: "#3f3f46",
                   }}
                 >
-                  {channel.name}
-                </ThemedText>
-                <ThemedText
-                  style={{
-                    paddingBottom: 4,
-                    fontSize: 12,
-                  }}
-                >
-                  {channel.description}
-                </ThemedText>
-                <ThemedText
-                  style={{
-                    fontSize: 12,
-                  }}
-                >
-                  {channel.category}, {channel.subcategory}
-                </ThemedText>
+                  <ThemedText
+                    style={{
+                      paddingBottom: 2,
+                      fontSize: 24,
+                    }}
+                  >
+                    {channel.name}
+                  </ThemedText>
+                  <ThemedText
+                    style={{
+                      paddingBottom: 4,
+                      fontSize: 12,
+                    }}
+                  >
+                    {channel.description}
+                  </ThemedText>
+                  <ThemedText
+                    style={{
+                      fontSize: 12,
+                    }}
+                  >
+                    {channel.category}, {channel.subcategory}
+                  </ThemedText>
+                </ThemedView>
               </ThemedView>
-            </ThemedView>
+            </Link>
           ))}
         </ThemedView>
       )}
