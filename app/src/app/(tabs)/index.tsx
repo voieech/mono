@@ -7,35 +7,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { apiBaseUrl } from "@/constants/Api";
-
-type Channel = {
-  id: string;
-  created_at: string;
-  language: string;
-  description: string;
-  img_url: string;
-  name: string;
-  category: string;
-  subcategory: string | null;
-};
-
-type Episode = {
-  id: string;
-  created_at: string;
-  vanity_id: string;
-  season_number: number | null;
-  episode_number: number | null;
-  audio_public_url: string;
-  audio_length: number;
-  language: string;
-  title: string;
-  description: string;
-  img_url: string | null;
-  externallyHostedLinks: Array<{
-    podcast_platform: string;
-    url: string;
-  }>;
-};
+import { Channel, Episode } from "dto";
 
 export default function HomeScreen() {
   const featuredChannelsQuery = useQuery({

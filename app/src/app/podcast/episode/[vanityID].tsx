@@ -8,6 +8,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { FullScreenLoader } from "@/components/FullScreenLoader";
 import { AudioPlayer } from "@/components/AudioPlayer/AudioPlayer";
 import { apiBaseUrl } from "@/constants/Api";
+import { Episode } from "dto";
 
 export default function PodcastEpisode() {
   const router = useRouter();
@@ -36,8 +37,7 @@ export default function PodcastEpisode() {
         throw new Error(errorMessage);
       }
 
-      // return (await res.json()) as Episode;
-      return await res.json();
+      return (await res.json()) as Episode;
     },
     retry: false,
   });
@@ -94,7 +94,7 @@ export default function PodcastEpisode() {
           <AudioPlayer
             url={episode.audio_public_url}
             title={
-              episode.episodeNumber
+              episode.episode_number
                 ? `EP ${episode.episode_number}: ${episode.title}`
                 : episode.title
             }
