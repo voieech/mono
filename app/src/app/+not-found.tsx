@@ -1,27 +1,45 @@
 import { Image } from "expo-image";
 import { Link, Stack } from "expo-router";
-
-import { ThemedText } from "@/components/ThemedText";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedView } from "@/components/ThemedView";
+import { ThemedText } from "@/components/ThemedText";
 
 export default function NotFoundScreen() {
   return (
-    <>
-      <Stack.Screen options={{ title: "OOPS!" }} />
-      <ThemedView
+    <ThemedView
+      style={{
+        flex: 1,
+      }}
+    >
+      <SafeAreaView
         style={{
           flex: 1,
-          alignItems: "center",
+          padding: 32,
           justifyContent: "center",
-          padding: 20,
         }}
       >
-        <ThemedText type="subtitle">Oops sorry this does not exist!</ThemedText>
-        <Image
-          source={require("@/assets/images/404.svg")}
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+        />
+        <ThemedText
+          type="title"
           style={{
-            height: "50%",
-            resizeMode: "contain",
+            paddingBottom: 16,
+          }}
+        >
+          Oops Sorry!
+        </ThemedText>
+        <ThemedText>
+          We can't find what you want, here's is a drawing of us being very
+          sorry and sad...
+        </ThemedText>
+        <Image
+          source={require("@/assets/images/404.png")}
+          style={{
+            width: "100%",
+            aspectRatio: 1,
           }}
           alt="Not Found Image"
         />
@@ -33,9 +51,11 @@ export default function NotFoundScreen() {
           }}
           replace
         >
-          <ThemedText type="link">Go back home</ThemedText>
+          <ThemedText type="link" style={{ fontSize: 24 }}>
+            Go back Home
+          </ThemedText>
         </Link>
-      </ThemedView>
-    </>
+      </SafeAreaView>
+    </ThemedView>
   );
 }
