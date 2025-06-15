@@ -55,19 +55,29 @@ export default function PodcastEpisode() {
 
   return (
     <ParallaxScrollViewContainer
+      headerHeightUseWidth={true}
       headerImage={
-        // @todo
-        // Replace this with the episode image if available
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={{
-            height: 178,
-            width: 290,
-            bottom: 0,
-            left: 0,
-            position: "absolute",
-          }}
-        />
+        episode.img_url !== null && (
+          <ThemedView
+            style={{
+              // Set a width that is as wide as most devices, then let maxWidth
+              // constrain it to the "screen - horizontal padding"
+              width: 500,
+              maxWidth: "100%",
+              alignSelf: "center",
+
+              paddingBottom: 16,
+            }}
+          >
+            <Image
+              source={episode.img_url}
+              style={{
+                aspectRatio: 1,
+              }}
+              contentFit="contain"
+            />
+          </ThemedView>
+        )
       }
     >
       <Stack.Screen options={{ title: "Podcast Episode" }} />

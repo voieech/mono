@@ -13,7 +13,11 @@ import { useTheme } from "@/hooks/useTheme";
 
 export function ParallaxScrollViewContainer(
   props: PropsWithChildren<{
-    headerImage: ReactElement;
+    /**
+     * If no `headerImage` is available, this will behave like `ScrollView`.
+     */
+    headerImage?: ReactElement | null | false;
+
     headerBackgroundColor?: { dark?: string; light?: string };
 
     /**
@@ -81,18 +85,20 @@ export function ParallaxScrollViewContainer(
         scrollIndicatorInsets={{ bottom }}
         contentContainerStyle={{ paddingBottom: bottom }}
       >
-        <Animated.View
-          style={[
-            {
-              height: headerHeight,
-              backgroundColor: headerImageBackgroundColor,
-              overflow: "hidden",
-            },
-            headerAnimatedStyle,
-          ]}
-        >
-          {props.headerImage}
-        </Animated.View>
+        {props.headerImage != null && props.headerImage !== false && (
+          <Animated.View
+            style={[
+              {
+                height: headerHeight,
+                backgroundColor: headerImageBackgroundColor,
+                overflow: "hidden",
+              },
+              headerAnimatedStyle,
+            ]}
+          >
+            {props.headerImage}
+          </Animated.View>
+        )}
 
         {/* Wrapped for default background color and allow users to set style */}
         <ThemedView
