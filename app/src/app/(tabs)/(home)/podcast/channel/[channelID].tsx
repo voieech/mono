@@ -133,22 +133,56 @@ export default function PodcastChannel() {
                   },
                 }}
                 style={{
-                  marginBottom: 16,
+                  marginBottom: 8,
                 }}
               >
                 <ThemedView
                   style={{
-                    padding: 16,
+                    flex: 1,
+                    flexDirection: "row",
                     borderRadius: 16,
-                    backgroundColor: "#3f3f46",
                   }}
                 >
-                  {/* @todo Add episode image */}
-                  <ThemedText>{episode.created_at.split("T")[0]}</ThemedText>
-                  <ThemedText numberOfLines={3}>{episode.title}</ThemedText>
-                  <ThemedText>
-                    {Math.trunc(episode.audio_length / 60)} mins
-                  </ThemedText>
+                  {episode.img_url !== null && (
+                    <Image
+                      source={episode.img_url}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        maxWidth: 128,
+                        borderTopLeftRadius: 16,
+                        borderBottomLeftRadius: 16,
+                      }}
+                      contentFit="cover"
+                    />
+                  )}
+                  <ThemedView
+                    style={{
+                      flex: 1,
+                      borderTopRightRadius: 16,
+                      borderBottomRightRadius: 16,
+                      padding: 16,
+                      backgroundColor: "#3f3f46",
+                    }}
+                  >
+                    <ThemedText
+                      style={{
+                        paddingBottom: 2,
+                      }}
+                      numberOfLines={2}
+                    >
+                      {episode.title}
+                    </ThemedText>
+                    <ThemedText
+                      style={{
+                        fontSize: 12,
+                      }}
+                    >
+                      {episode.created_at.split("T")[0]}
+                      {"\n"}
+                      {Math.trunc(episode.audio_length / 60)} mins
+                    </ThemedText>
+                  </ThemedView>
                 </ThemedView>
               </Link>
             ))}
