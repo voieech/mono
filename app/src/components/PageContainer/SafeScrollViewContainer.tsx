@@ -1,15 +1,14 @@
 import type { PropsWithChildren } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native";
-import { useBottomTabOverflow } from "@/components/ui/TabBarBackground";
-import { useThemeColor } from "@/hooks/useThemeColor";
+import { useBottomTabOverflow, useThemeColor } from "@/hooks";
 
 /**
  * Use this as a top level page wrapper component. Do not wrap this as a child.
  */
 export function SafeScrollViewContainer(props: PropsWithChildren) {
   const bottomOverflow = useBottomTabOverflow();
-  const backgroundColor = useThemeColor({}, "background");
+  const backgroundColor = useThemeColor("background");
   const padding = 16;
   const paddingBottom = bottomOverflow > padding ? bottomOverflow : padding;
 

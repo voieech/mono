@@ -1,5 +1,4 @@
-import { SafeScrollViewContainer } from "@/components/PageContainer";
-import { ThemedText } from "@/components/ThemedText";
+import { SafeScrollViewContainer, ThemedText } from "@/components";
 
 export default function TabTwoScreen() {
   return (

@@ -7,9 +7,9 @@ import TrackPlayer, {
   useProgress,
 } from "react-native-track-player";
 import { Slider } from "@react-native-assets/slider";
-import { ThemedText } from "../ThemedText";
-import { ThemedView } from "../ThemedView";
-import { useTheme } from "@/hooks/useTheme";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { useTheme } from "@/hooks";
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
 import { JumpButton } from "./JumpButton";
 

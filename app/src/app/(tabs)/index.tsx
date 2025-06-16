@@ -2,11 +2,8 @@ import { View } from "react-native";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-
-import { SafeScrollViewContainer } from "@/components/PageContainer";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { apiBaseUrl } from "@/constants/Api";
+import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
+import { apiBaseUrl } from "@/constants";
 import { Channel, Episode } from "dto";
 
 export default function HomeScreen() {
@@ -80,7 +77,15 @@ export default function HomeScreen() {
         >
           <ThemedText type="subtitle">Featured Channels</ThemedText>
           {featuredChannelsQuery.data.map((channel) => (
-            <Link key={channel.id} href={`/podcast/channel/${channel.id}`}>
+            <Link
+              key={channel.id}
+              href={{
+                pathname: "/podcast/channel/[channelID]",
+                params: {
+                  channelID: channel.id,
+                },
+              }}
+            >
               <ThemedView
                 style={{
                   borderRadius: 16,
@@ -150,7 +155,12 @@ export default function HomeScreen() {
           {featuredEpisodesQuery.data.map((episode) => (
             <Link
               key={episode.id}
-              href={`/podcast/episode/${episode.vanity_id}`}
+              href={{
+                pathname: "/podcast/episode/[vanityID]",
+                params: {
+                  vanityID: episode.vanity_id,
+                },
+              }}
             >
               <ThemedView
                 style={{

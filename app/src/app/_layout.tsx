@@ -7,7 +7,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useTheme } from "@/hooks/useTheme";
+import { useTheme } from "@/hooks";
 
 const queryClient = new QueryClient({
   defaultOptions: {

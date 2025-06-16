@@ -1,9 +1,8 @@
 import { Tabs } from "expo-router";
 import { Platform } from "react-native";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
-import { useTheme } from "@/hooks/useTheme";
-import { Colors } from "@/constants/Colors";
+import { IconSymbol, TabBarBackground } from "@/components";
+import { useTheme } from "@/hooks";
+import { Colors } from "@/constants";
 
 export default function TabLayout() {
   const theme = useTheme();
@@ -26,17 +25,20 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Explore",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="magnifyingglass" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="magnifyingglass" color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="personalisation"
         options={{
+          // @todo Temporarily hide this until this is available
+          href: null,
+
           title: "For You",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="person" color={color} />
           ),
         }}
       />
@@ -44,8 +46,8 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: "Settings",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="gear" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="gear" color={color} />
           ),
         }}
       />

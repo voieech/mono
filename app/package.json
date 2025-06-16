@@ -9,6 +9,8 @@
     "ios:device": "npx expo run:ios --device",
     "ios:open-xcode": "open ios/app.xcworkspace",
     "web": "npx expo start --web",
+    "debug": "npx react-devtools",
+    "sitemap": "npx expo-router-sitemap",
     "lint": "npx expo lint"
   },
   "dependencies": {
@@ -50,6 +52,7 @@
     "@types/react": "~19.0.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
+    "react-devtools": "^6.1.2",
     "typescript": "~5.8.3"
   },
   "private": true

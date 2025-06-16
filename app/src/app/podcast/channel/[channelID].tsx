@@ -1,12 +1,13 @@
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Stack, Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-
-import { ParallaxScrollViewContainer } from "@/components/PageContainer";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { FullScreenLoader } from "@/components/FullScreenLoader";
-import { apiBaseUrl } from "@/constants/Api";
+import {
+  ParallaxScrollViewContainer,
+  FullScreenLoader,
+  ThemedView,
+  ThemedText,
+} from "@/components";
+import { apiBaseUrl } from "@/constants";
 import type { Channel, Episode } from "dto";
 
 export default function PodcastChannel() {
@@ -126,7 +127,12 @@ export default function PodcastChannel() {
             {podcastChannelEpisodesQuery.data.map((episode) => (
               <Link
                 key={episode.id}
-                href={`/podcast/episode/${episode.vanity_id}`}
+                href={{
+                  pathname: "/podcast/episode/[vanityID]",
+                  params: {
+                    vanityID: episode.vanity_id,
+                  },
+                }}
                 style={{
                   marginBottom: 16,
                 }}

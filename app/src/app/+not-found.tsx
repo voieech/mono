@@ -1,8 +1,7 @@
 import { Image } from "expo-image";
 import { Link, Stack } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ThemedView } from "@/components/ThemedView";
-import { ThemedText } from "@/components/ThemedText";
+import { ThemedView, ThemedText } from "@/components";
 
 export default function NotFoundScreen() {
   return (

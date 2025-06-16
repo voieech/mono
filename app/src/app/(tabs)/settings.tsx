@@ -1,9 +1,11 @@
-import { Collapsible } from "@/components/Collapsible";
-import { ParallaxScrollViewContainer } from "@/components/PageContainer";
-import { ThemedText } from "@/components/ThemedText";
-import { IconSymbol } from "@/components/ui/IconSymbol";
+import {
+  ParallaxScrollViewContainer,
+  ThemedText,
+  IconSymbol,
+  Collapsible,
+} from "@/components";
 
-export default function TabTwoScreen() {
+export default function Settings() {
   return (
     <ParallaxScrollViewContainer
       headerImage={

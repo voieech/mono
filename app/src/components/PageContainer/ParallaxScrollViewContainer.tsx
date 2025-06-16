@@ -6,10 +6,8 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from "react-native-reanimated";
-
 import { ThemedView } from "@/components/ThemedView";
-import { useBottomTabOverflow } from "@/components/ui/TabBarBackground";
-import { useTheme } from "@/hooks/useTheme";
+import { useTheme, useBottomTabOverflow } from "@/hooks";
 
 export function ParallaxScrollViewContainer(
   props: PropsWithChildren<{
