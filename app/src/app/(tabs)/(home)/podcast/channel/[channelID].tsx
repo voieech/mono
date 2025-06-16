@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { useRouter, useLocalSearchParams, Stack, Link } from "expo-router";
+import { useRouter, useLocalSearchParams, Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import {
   ParallaxScrollViewContainer,
@@ -107,7 +107,6 @@ export default function PodcastChannel() {
         </ThemedView>
       }
     >
-      <Stack.Screen options={{ title: "Podcast Channel" }} />
       <ThemedText type="title">{podcastChannelQuery.data.name}</ThemedText>
       <ThemedText>{podcastChannelQuery.data.description}</ThemedText>
       {!podcastChannelEpisodesQuery.isLoading &&
