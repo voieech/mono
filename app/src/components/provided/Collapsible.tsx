@@ -9,8 +9,12 @@ import { useColorScheme } from "react-native";
 export function Collapsible({
   children,
   title,
-}: PropsWithChildren & { title: string }) {
-  const [isOpen, setIsOpen] = useState(false);
+  openByDefault,
+}: PropsWithChildren & {
+  title: string;
+  openByDefault?: boolean;
+}) {
+  const [isOpen, setIsOpen] = useState(openByDefault ?? false);
   const theme = useColorScheme() ?? "light";
 
   return (

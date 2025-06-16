@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import {
   ParallaxScrollViewContainer,
   ThemedText,
@@ -29,6 +30,17 @@ export default function Settings() {
       <Collapsible title="Audio Playback">
         <ThemedText>Default audio playback speed: {1}</ThemedText>
       </Collapsible>
+      {__DEV__ && (
+        <Collapsible title="Internal" openByDefault>
+          <Link
+            href={{
+              pathname: "/_sitemap",
+            }}
+          >
+            <ThemedText type="link">Sitemap</ThemedText>
+          </Link>
+        </Collapsible>
+      )}
     </ParallaxScrollViewContainer>
   );
 }
