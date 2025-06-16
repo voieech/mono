@@ -88,9 +88,9 @@ export default function HomeScreen() {
             >
               <ThemedView
                 style={{
-                  borderRadius: 16,
                   flex: 1,
                   flexDirection: "row",
+                  borderRadius: 16,
                 }}
               >
                 <Image
@@ -102,10 +102,13 @@ export default function HomeScreen() {
                     borderTopLeftRadius: 16,
                     borderBottomLeftRadius: 16,
                   }}
-                  contentFit="contain"
+                  contentFit="cover"
                 />
                 <ThemedView
                   style={{
+                    flex: 1,
+                    borderTopRightRadius: 16,
+                    borderBottomRightRadius: 16,
                     padding: 16,
                     backgroundColor: "#3f3f46",
                   }}
@@ -164,11 +167,9 @@ export default function HomeScreen() {
             >
               <ThemedView
                 style={{
-                  backgroundColor: "#3f3f46",
-                  borderRadius: 16,
                   flex: 1,
                   flexDirection: "row",
-                  display: "flex",
+                  borderRadius: 16,
                 }}
               >
                 {episode.img_url !== null && (
@@ -181,14 +182,16 @@ export default function HomeScreen() {
                       borderTopLeftRadius: 16,
                       borderBottomLeftRadius: 16,
                     }}
-                    contentFit="contain"
+                    contentFit="cover"
                   />
                 )}
-
                 <ThemedView
                   style={{
+                    flex: 1,
+                    borderTopRightRadius: 16,
+                    borderBottomRightRadius: 16,
                     padding: 16,
-                    backgroundColor: "inherit",
+                    backgroundColor: "#3f3f46",
                   }}
                 >
                   <ThemedText
