@@ -1,9 +1,9 @@
+import { Slider } from "@react-native-assets/slider";
 import { useCallback, useEffect, useState } from "react";
 import TrackPlayer, {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
-import { Slider } from "@react-native-assets/slider";
 
 /**
  * Audio progress slider that is live, meaning it allows for the audio to keep

@@ -1,6 +1,9 @@
+import type { Channel, Episode } from "dto";
+
+import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
+
 import {
   ParallaxScrollViewContainer,
   FullScreenLoader,
@@ -8,7 +11,6 @@ import {
   ThemedText,
 } from "@/components";
 import { apiBaseUrl } from "@/constants";
-import type { Channel, Episode } from "dto";
 
 export default function PodcastChannel() {
   const router = useRouter();
@@ -59,7 +61,7 @@ export default function PodcastChannel() {
       const episodes = (await res.json()) as Array<Episode>;
 
       // Cache data so these dont need to be re queried again on navigate
-      for (const episode of episodes) {
+      for (const _episode of episodes) {
         // queryClient.setQueryData(
         //   ["podcast-episode", "vanityID", episode.vanity_id],
         //   episode,

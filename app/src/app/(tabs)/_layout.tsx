@@ -1,8 +1,9 @@
 import { Tabs } from "expo-router";
 import { Platform } from "react-native";
+
 import { IconSymbol, TabBarBackground } from "@/components";
-import { useTheme } from "@/hooks";
 import { Colors } from "@/constants";
+import { useTheme } from "@/hooks";
 
 export default function TabLayout() {
   const theme = useTheme();

@@ -1,5 +1,7 @@
 import { createI18n } from "vue-i18n";
+
 import type { MessageSchema } from "./locales/MessageSchema";
+
 import en from "./locales/en";
 import zh from "./locales/zh";
 

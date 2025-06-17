@@ -1,6 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import { Episode } from "dto";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
+
 import {
   ParallaxScrollViewContainer,
   FullScreenLoader,
@@ -9,7 +11,6 @@ import {
   AudioPlayer,
 } from "@/components";
 import { apiBaseUrl } from "@/constants";
-import { Episode } from "dto";
 
 export default function PodcastEpisode() {
   const router = useRouter();

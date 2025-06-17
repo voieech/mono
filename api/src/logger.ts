@@ -29,6 +29,7 @@ class Logger {
       args.flat().join(" ");
 
     // Ignore eslint rule since this is used to implement logger itself
+    // eslint-disable-next-line no-console
     console.log(colorizeByLogLevel(level, formattedLogOutput));
   }
 

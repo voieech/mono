@@ -1,4 +1,5 @@
 import { SimplerFetch } from "simpler-fetch";
+
 import { apiBaseUrl } from "./api";
 
 export const sf = new SimplerFetch({

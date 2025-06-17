@@ -1,5 +1,7 @@
 import type { RouteLocationNormalized } from "vue-router";
+
 import { createRouter, createWebHistory } from "vue-router";
+
 import { i18n, setLocale } from "../i18n";
 
 export const PodcastEpisodeRoute = <const>{

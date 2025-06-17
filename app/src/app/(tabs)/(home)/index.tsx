@@ -1,10 +1,12 @@
-import { View } from "react-native";
+import type { Channel, Episode } from "dto";
+
+import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
+import { View } from "react-native";
+
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { apiBaseUrl } from "@/constants";
-import { Channel, Episode } from "dto";
 
 export default function HomeScreen() {
   const featuredChannelsQuery = useQuery({
@@ -27,7 +29,7 @@ export default function HomeScreen() {
       const channels = (await res.json()) as Array<Channel>;
 
       // Cache data so these dont need to be re queried again on navigate
-      for (const channel of channels) {
+      for (const _channel of channels) {
         // queryClient.setQueryData(["podcast-channel", channel.id], channel);
       }
 
@@ -55,7 +57,7 @@ export default function HomeScreen() {
       const episodes = (await res.json()) as Array<Episode>;
 
       // Cache data so these dont need to be re queried again on navigate
-      for (const episode of episodes) {
+      for (const _episode of episodes) {
         // queryClient.setQueryData(
         //   ["podcast-episode", "vanityID", episode.vanity_id],
         //   episode

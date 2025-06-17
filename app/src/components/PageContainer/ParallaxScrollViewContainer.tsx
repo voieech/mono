@@ -1,4 +1,5 @@
 import type { PropsWithChildren, ReactElement } from "react";
+
 import { useWindowDimensions, type ViewProps } from "react-native";
 import Animated, {
   interpolate,
@@ -6,6 +7,7 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from "react-native-reanimated";
+
 import { ThemedView } from "@/components/ThemedView";
 import { useTheme, useBottomTabOverflow } from "@/hooks";
 

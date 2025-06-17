@@ -4,6 +4,7 @@
  */
 
 import { useColorScheme } from "react-native";
+
 import { isThemeFixed, DefaultTheme } from "@/constants/FixedTheme";
 
 export function useTheme() {

@@ -1,6 +1,8 @@
 import type { PropsWithChildren } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useBottomTabOverflow, useThemeColor } from "@/hooks";
 
 /**

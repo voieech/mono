@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Navbar from "./NavBar.vue";
-import HomeHero from "./HomeHero.vue";
 import FeaturedChannels from "./FeaturedChannels.vue";
 import FeaturedEpisodes from "./FeaturedEpisodes.vue";
+import HomeHero from "./HomeHero.vue";
+import Navbar from "./NavBar.vue";
 // import Benefits from "./Benefits.vue";
 // import Example from "./Example.vue";
 // import How from "./How.vue";

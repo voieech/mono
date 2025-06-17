@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
-import { useI18n } from "vue-i18n";
+import type { Episode } from "dto";
+
 import { useQueryClient, useQuery } from "@tanstack/vue-query";
+import { useI18n } from "vue-i18n";
+import { RouterLink } from "vue-router";
+
 import { apiBaseUrl } from "@/api";
 import { PodcastEpisodeRoute } from "@/router";
-import type { Episode } from "dto";
 
 const i18n = useI18n({ useScope: "global" });
 const queryClient = useQueryClient();

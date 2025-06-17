@@ -13,12 +13,14 @@ export async function printAllMigrations() {
         ? pc.red("uncompleted")
         : pc.green("completed");
 
+    /* eslint-disable no-console */
     console.log(`\nMigration ${migrationIndex + 1}: ${migrationStatus}`);
     console.log(`Name: ${migration.name}`);
     if (migration.executedAt !== undefined) {
       console.log(`Executed on: ${migration.executedAt}`);
     }
     console.log();
+    /* eslint-enable no-console */
   }
 
   db.destroy();

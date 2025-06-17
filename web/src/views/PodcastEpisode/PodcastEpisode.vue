@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
-import PlatformCard from "./PlatformCard.vue";
-import WebPlayer from "./WebPlayer.vue";
+import { ref, computed } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRoute, useRouter } from "vue-router";
+
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { usePodcastEpisode } from "@/composables/usePodcastEpisode";
 import { HomeRoute } from "@/router";
+
+import PlatformCard from "./PlatformCard.vue";
+import WebPlayer from "./WebPlayer.vue";
 
 const i18n = useI18n({ useScope: "global" });
 const router = useRouter();

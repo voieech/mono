@@ -1,12 +1,13 @@
 import "./main.css";
 
-import { createApp } from "vue";
-import { createHead } from "@unhead/vue/client";
 import { VueQueryPlugin } from "@tanstack/vue-query";
-import { queryClient } from "./vueQuery";
+import { createHead } from "@unhead/vue/client";
+import { createApp } from "vue";
+
 import App from "./App.vue";
-import { router } from "./router";
 import { i18n } from "./i18n";
+import { router } from "./router";
+import { queryClient } from "./vueQuery";
 
 createApp(App)
   .use(createHead())

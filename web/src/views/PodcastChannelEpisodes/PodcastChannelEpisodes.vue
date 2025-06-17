@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useRoute, useRouter, RouterLink } from "vue-router";
+
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { usePodcastChannel } from "@/composables/usePodcastChannel";
 import { usePodcastChannelEpisodes } from "@/composables/usePodcastChannelEpisodes";
+
 import { HomeRoute, PodcastEpisodeRoute } from "../../router";
 
 const router = useRouter();

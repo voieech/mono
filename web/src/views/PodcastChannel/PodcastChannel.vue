@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { useHead } from "@unhead/vue";
+import { computed } from "vue";
 import { useRoute, useRouter, RouterLink } from "vue-router";
-import PlatformCard from "./PlatformCard.vue";
+
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { usePodcastChannel } from "@/composables/usePodcastChannel";
@@ -12,6 +12,8 @@ import {
   PodcastEpisodeRoute,
   PodcastChannelEpisodesRoute,
 } from "@/router";
+
+import PlatformCard from "./PlatformCard.vue";
 
 const router = useRouter();
 const route = useRoute();

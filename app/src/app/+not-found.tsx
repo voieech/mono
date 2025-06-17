@@ -1,6 +1,7 @@
 import { Image } from "expo-image";
 import { Link, Stack } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import { ThemedView, ThemedText } from "@/components";
 
 export default function NotFoundScreen() {
@@ -31,8 +32,8 @@ export default function NotFoundScreen() {
           Oops Sorry!
         </ThemedText>
         <ThemedText>
-          We can't find what you want, here's is a drawing of us being very
-          sorry and sad...
+          We can&apos;t find what you want, here&apos;s is a drawing of us being
+          very sorry and sad...
         </ThemedText>
         <Image
           source={require("@/assets/images/404.png")}

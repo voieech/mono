@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, useTemplateRef } from "vue";
 import { twMerge } from "tailwind-merge";
+import { ref, useTemplateRef } from "vue";
 
 const props = defineProps<{ url: string }>();
 

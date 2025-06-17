@@ -1,6 +1,7 @@
 import pc from "picocolors";
 
 export function printMigrationCliHelp() {
+  /* eslint-disable no-console */
   console.log("See help menu");
   console.log(pc.green("npm run db:migrate"));
   console.log(pc.green("npm run db:migrate help"));
@@ -19,4 +20,5 @@ export function printMigrationCliHelp() {
   console.log();
   console.log(`For more details, see implementation: ${import.meta.dirname}`);
   console.log();
+  /* eslint-enable no-console */
 }

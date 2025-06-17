@@ -1,7 +1,9 @@
-import { useQueryClient, useQuery } from "@tanstack/vue-query";
-import { apiBaseUrl } from "@/api";
-import type { Router } from "vue-router";
 import type { Episode } from "dto";
+import type { Router } from "vue-router";
+
+import { useQueryClient, useQuery } from "@tanstack/vue-query";
+
+import { apiBaseUrl } from "@/api";
 
 export function usePodcastChannelEpisodes(
   channelID: string,

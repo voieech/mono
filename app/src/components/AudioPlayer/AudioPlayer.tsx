@@ -1,15 +1,17 @@
+import { Slider } from "@react-native-assets/slider";
+import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
-import { Image } from "expo-image";
 import TrackPlayer, {
   State as PlayerState,
   usePlaybackState,
   useProgress,
 } from "react-native-track-player";
-import { Slider } from "@react-native-assets/slider";
+
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useTheme } from "@/hooks";
+
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
 import { JumpButton } from "./JumpButton";
 

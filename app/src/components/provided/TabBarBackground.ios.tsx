@@ -1,5 +1,6 @@
 import { BlurView, type BlurTint } from "expo-blur";
 import { StyleSheet } from "react-native";
+
 import { isThemeFixed, DefaultTheme } from "@/constants";
 
 const blurTint: BlurTint = isThemeFixed
