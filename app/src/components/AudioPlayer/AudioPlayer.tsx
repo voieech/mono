@@ -33,6 +33,10 @@ export function AudioPlayer(props: {
       ]);
     }
     clearTracksAndAddNewTrack();
+
+    return () => {
+      TrackPlayer.reset();
+    };
   }, [props.artist, props.url, props.title, props.audioLength]);
 
   const theme = useTheme();
@@ -165,11 +169,12 @@ export function AudioPlayer(props: {
         />
       </ThemedView>
 
-      {/* @todo Move this out and hide it behind feature flag / env var for devs only */}
-      <ThemedText>
-        Buffered progress: {bufferedAsInt} seconds buffered out of{" "}
-        {durationAsInt} total
-      </ThemedText>
+      {__DEV__ && (
+        <ThemedText>
+          Buffered: {bufferedAsInt}s{"\n"}
+          Total: {durationAsInt}s
+        </ThemedText>
+      )}
     </ThemedView>
   );
 }
