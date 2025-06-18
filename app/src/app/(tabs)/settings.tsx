@@ -40,6 +40,14 @@ export default function Settings() {
           >
             <ThemedText type="link">Sitemap</ThemedText>
           </Link>
+          <Link
+            href={{
+              pathname: "/+not-found",
+              params: {},
+            }}
+          >
+            <ThemedText type="link">Not Found</ThemedText>
+          </Link>
         </Collapsible>
       )}
     </ParallaxScrollViewContainer>
