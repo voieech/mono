@@ -1,11 +1,10 @@
+import type { PodcastPlatform } from "dto";
 import type { Insertable, Selectable, Updateable } from "kysely";
 
 import type {
   NonUpdatableIdColumnType,
   NonUpdatableDateTimeColumnType,
 } from "./types/index.js";
-
-import { PodcastPlatform } from "./types/PodcastPlatform.js";
 
 /**
  * As each Episode can be externally hosted / published to many different

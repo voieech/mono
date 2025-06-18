@@ -1,4 +1,4 @@
-export type Platform =
+export type PodcastPlatform =
   | "voieech-audio-link"
   | "spotify"
   | "apple-podcast"

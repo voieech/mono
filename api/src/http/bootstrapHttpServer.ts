@@ -1,5 +1,8 @@
+import type { PodcastPlatform } from "dto";
+
 import cors from "cors";
 import express from "express";
+import * as kyselyPostgresHelpers from "kysely/helpers/postgres";
 import rss from "rss";
 
 import { createDB } from "../kysely/createDB.js";
@@ -56,11 +59,39 @@ export function bootstrapHttpServer() {
       const featuredEpisodes = await apiDB
         .selectFrom("podcast_episode")
         .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
+        .leftJoin(
+          "podcast_episode_externally_hosted_link",
+          "podcast_episode.id",
+          "podcast_episode_externally_hosted_link.podcast_episode_id",
+        )
         .selectAll("podcast_episode")
         .select([
           "audio.public_url as audio_public_url",
           "audio.length as audio_length",
         ])
+        .select((eb) =>
+          kyselyPostgresHelpers
+            .jsonArrayFrom(
+              eb
+                .selectFrom("podcast_episode_externally_hosted_link")
+                .select([
+                  "podcast_episode_externally_hosted_link.url",
+                  "podcast_episode_externally_hosted_link.podcast_platform",
+                ])
+                .$castTo<{
+                  podcast_platform: PodcastPlatform;
+                  url: string;
+                }>()
+                .whereRef(
+                  "podcast_episode_externally_hosted_link.podcast_episode_id",
+                  "=",
+                  eb.ref("podcast_episode.id"),
+                ),
+            )
+            .$notNull()
+            .as("externally_hosted_links"),
+        )
+        .groupBy(["podcast_episode.id", "audio.public_url", "audio.length"])
         .where("podcast_episode.language", "like", `${language}%`)
         // @todo Ordery by popularity
         .orderBy("podcast_episode.created_at", "desc")
@@ -80,11 +111,33 @@ export function bootstrapHttpServer() {
       const episode = await apiDB
         .selectFrom("podcast_episode")
         .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
+        .innerJoin(
+          "podcast_episode_externally_hosted_link",
+          "podcast_episode.id",
+          "podcast_episode_externally_hosted_link.podcast_episode_id",
+        )
         .selectAll("podcast_episode")
         .select([
           "audio.public_url as audio_public_url",
           "audio.length as audio_length",
         ])
+        .select((eb) =>
+          kyselyPostgresHelpers
+            .jsonArrayFrom(
+              eb
+                .selectFrom("podcast_episode_externally_hosted_link")
+                .select([
+                  "podcast_episode_externally_hosted_link.podcast_platform",
+                  "podcast_episode_externally_hosted_link.url",
+                ])
+                .whereRef(
+                  "podcast_episode_externally_hosted_link.podcast_episode_id",
+                  "=",
+                  eb.ref("podcast_episode.id"),
+                ),
+            )
+            .as("externally_hosted_links"),
+        )
         .where("podcast_episode.vanity_id", "=", vanityID)
         .executeTakeFirst();
 
@@ -95,16 +148,7 @@ export function bootstrapHttpServer() {
         return;
       }
 
-      const externallyHostedLinks = await apiDB
-        .selectFrom("podcast_episode_externally_hosted_link")
-        .select(["podcast_platform", "url"])
-        .where("podcast_episode_id", "=", episode.id)
-        .execute();
-
-      res.status(200).json({
-        ...episode,
-        externallyHostedLinks,
-      });
+      res.status(200).json(episode satisfies Episode);
     })
 
     .get("/v1/podcast/channel/:channelID", async function (req, res) {
@@ -141,11 +185,38 @@ export function bootstrapHttpServer() {
       const episodes = await apiDB
         .selectFrom("podcast_episode")
         .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
+        .leftJoin(
+          "podcast_episode_externally_hosted_link",
+          "podcast_episode.id",
+          "podcast_episode_externally_hosted_link.podcast_episode_id",
+        )
         .selectAll("podcast_episode")
         .select([
           "audio.public_url as audio_public_url",
           "audio.length as audio_length",
         ])
+        .select((eb) =>
+          kyselyPostgresHelpers
+            .jsonArrayFrom(
+              eb
+                .selectFrom("podcast_episode_externally_hosted_link")
+                .select([
+                  "podcast_episode_externally_hosted_link.podcast_platform",
+                  "podcast_episode_externally_hosted_link.url",
+                ])
+                .$castTo<{
+                  podcast_platform: PodcastPlatform;
+                  url: string;
+                }>()
+                .whereRef(
+                  "podcast_episode_externally_hosted_link.podcast_episode_id",
+                  "=",
+                  eb.ref("podcast_episode.id"),
+                ),
+            )
+            .as("externally_hosted_links"),
+        )
+        .groupBy(["podcast_episode.id", "audio.public_url", "audio.length"])
         .where("podcast_episode.channel_id", "=", channelID)
         .orderBy("podcast_episode.created_at", "desc")
         .limit(20)

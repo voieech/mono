@@ -6,4 +6,4 @@
 
 export type * from "./Channel.js";
 export type * from "./Episode.js";
-export type * from "./Platform.js";
+export type * from "./PodcastPlatform.js";

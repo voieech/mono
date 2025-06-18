@@ -129,7 +129,7 @@ useHead({
         <PlatformCard
           class="pb-4"
           v-for="platform in podcastEpisodeQuery.data.value
-            .externallyHostedLinks"
+            .externally_hosted_links"
           :key="platform.podcast_platform"
           :platform="platform"
         />

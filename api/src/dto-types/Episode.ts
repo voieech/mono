@@ -1,4 +1,4 @@
-import type { Platform } from "./Platform.js";
+import type { PodcastPlatform } from "./PodcastPlatform.js";
 
 export type Episode = {
   id: string;
@@ -13,8 +13,8 @@ export type Episode = {
   description: string;
   // @todo $Nullable<string>
   img_url: string | null;
-  externallyHostedLinks: Array<{
-    podcast_platform: Platform;
+  externally_hosted_links: Array<{
+    podcast_platform: PodcastPlatform;
     url: string;
   }>;
 };

@@ -1,4 +1,4 @@
-import type { Platform } from "dto";
+import type { PodcastPlatform } from "dto";
 
 export default {
   common: {
@@ -28,7 +28,7 @@ export default {
     firststory: "Firstory",
     soundon: "SoundOn",
     himalaya: "Himalaya",
-  } satisfies Record<Platform, string>,
+  } satisfies Record<PodcastPlatform, string>,
 
   PodcastChannel: {
     loading_channel: "loading channel",
