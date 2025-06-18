@@ -1,4 +1,4 @@
-import type { PodcastPlatform } from "dto";
+import type { Episode, Channel, PodcastPlatform } from "dto";
 
 import cors from "cors";
 import express from "express";
@@ -42,7 +42,7 @@ export function bootstrapHttpServer() {
       // Cache data so that not every landing page load causes a DB query. Cache
       // in upstash or something with a builtin TTL...
 
-      res.status(200).json(featuredChannels);
+      res.status(200).json(featuredChannels satisfies Array<Channel>);
     })
 
     .get("/v1/landing-page/featured-episodes", async function (req, res) {
@@ -102,7 +102,7 @@ export function bootstrapHttpServer() {
       // Cache featuredEpisodes so that not every landing page load causes a DB
       // query. Cache in upstash or something with a builtin TTL...
 
-      res.status(200).json(featuredEpisodes);
+      res.status(200).json(featuredEpisodes satisfies Array<Episode>);
     })
 
     .get("/v1/podcast/episode/:vanityID", async function (req, res) {
@@ -165,7 +165,7 @@ export function bootstrapHttpServer() {
         return;
       }
 
-      res.status(200).json(channel);
+      res.status(200).json(channel satisfies Channel);
     })
 
     .get("/v1/podcast/channel/episodes/:channelID", async function (req, res) {
@@ -222,7 +222,7 @@ export function bootstrapHttpServer() {
         .limit(20)
         .execute();
 
-      res.status(200).json(episodes);
+      res.status(200).json(episodes satisfies Array<Episode>);
     })
 
     .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {
