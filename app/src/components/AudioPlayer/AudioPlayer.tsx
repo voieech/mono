@@ -9,6 +9,7 @@ import TrackPlayer, {
   useProgress,
 } from "react-native-track-player";
 
+import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
 import { IconSymbol } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -172,6 +173,16 @@ export function AudioPlayer() {
           imageSource={require("@/assets/images/player/light/jumpForward.png")}
         />
       </ThemedView>
+
+      {/* @todo Add features like repeat/share/etc... */}
+      {/* <IconSymbol name="arrow.2.circlepath" color="white" /> */}
+
+      <AppDebuggingSurface>
+        <ThemedText>
+          Buffered: {bufferedAsInt}s{"\n"}
+          Total: {durationAsInt}s
+        </ThemedText>
+      </AppDebuggingSurface>
     </ThemedView>
   );
 }

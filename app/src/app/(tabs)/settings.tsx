@@ -1,13 +1,17 @@
 import { Link } from "expo-router";
+import { Switch } from "react-native";
 
 import {
   ParallaxScrollViewContainer,
   ThemedText,
   IconSymbol,
   Collapsible,
+  ThemedView,
 } from "@/components";
+import { useAppDebuggingSurfaceContext } from "@/context";
 
 export default function Settings() {
+  const appDebuggingSurfaceContext = useAppDebuggingSurfaceContext();
   return (
     <ParallaxScrollViewContainer
       headerImage={
@@ -48,6 +52,28 @@ export default function Settings() {
           >
             <ThemedText type="link">Not Found</ThemedText>
           </Link>
+          <ThemedView
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignContent: "center",
+            }}
+          >
+            <ThemedText>Show Debugging Surfaces</ThemedText>
+            <ThemedView>
+              <Switch
+                value={appDebuggingSurfaceContext.showDebuggingSurfaces}
+                onValueChange={
+                  appDebuggingSurfaceContext.setShowDebuggingSurfaces
+                }
+                thumbColor="#f4f3f4"
+                trackColor={{
+                  false: "#ccc",
+                  true: "#16a34a",
+                }}
+              />
+            </ThemedView>
+          </ThemedView>
         </Collapsible>
       )}
     </ParallaxScrollViewContainer>

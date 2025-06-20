@@ -2,6 +2,7 @@
  * Barrel file.
  */
 
+export * from "./AppDebuggingSurface";
 export * from "./AudioPlayer";
 export * from "./FullScreenLoader";
 export * from "./PageContainer";
