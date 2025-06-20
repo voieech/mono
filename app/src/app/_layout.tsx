@@ -59,6 +59,17 @@ export default function RootLayout() {
               title: "Home",
             }}
           />
+          <Stack.Screen
+            name="audio-player-modal"
+            options={{
+              presentation: "modal",
+
+              // @todo
+              // Try this to experiment with full screen mode, but need to
+              // support swipe down to close.
+              // presentation: "containedModal",
+            }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
       </QueryClientProvider>

@@ -1,84 +1,97 @@
 import { Slider } from "@react-native-assets/slider";
 import { Image } from "expo-image";
-import { useEffect, useState } from "react";
-import { Pressable } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { Pressable, View } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
+  useActiveTrack,
   usePlaybackState,
   useProgress,
 } from "react-native-track-player";
 
+import { IconSymbol } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { useTheme } from "@/hooks";
+import { Colors } from "@/constants";
 
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
 import { JumpButton } from "./JumpButton";
 
-export function AudioPlayer(props: {
-  url: string;
-  title: string;
-  audioLength: number;
-  artist?: string;
-}) {
-  useEffect(() => {
-    async function clearTracksAndAddNewTrack() {
-      await TrackPlayer.reset();
-      TrackPlayer.add([
-        {
-          artist: props.artist ?? "voieech",
-          url: props.url,
-          title: props.title,
-          duration: props.audioLength,
-          artwork: require("@/assets/images/logo.png"),
-        },
-      ]);
-    }
-    clearTracksAndAddNewTrack();
-
-    return () => {
-      TrackPlayer.reset();
-    };
-  }, [props.artist, props.url, props.title, props.audioLength]);
-
-  const theme = useTheme();
-
+export function AudioPlayer() {
+  const activeTrack = useActiveTrack();
   const playerState = usePlaybackState().state;
   const progress = useProgress();
 
+  const audioLength = activeTrack?.duration;
   const positionAsInt = Math.trunc(progress.position);
   const durationAsInt = Math.trunc(progress.duration);
   const bufferedAsInt = Math.trunc(progress.buffered);
-
   const currentPos = convertSecondsToMSS(positionAsInt);
   const remainingTime = convertSecondsToMSS(durationAsInt - positionAsInt);
 
-  function jump(jumpInterval: number) {
-    const newPosition = positionAsInt + jumpInterval;
+  const jump = useCallback(
+    function (jumpInterval: number) {
+      if (audioLength === undefined) {
+        return;
+      }
 
-    if (newPosition < 0) {
-      TrackPlayer.seekTo(0);
-      return;
-    }
+      const newPosition = positionAsInt + jumpInterval;
+      if (newPosition < 0) {
+        TrackPlayer.seekTo(0);
+        return;
+      }
+      if (newPosition > audioLength) {
+        TrackPlayer.seekTo(audioLength);
+        return;
+      }
+      TrackPlayer.seekTo(newPosition);
+    },
+    [positionAsInt, audioLength]
+  );
 
-    if (newPosition > props.audioLength) {
-      TrackPlayer.seekTo(props.audioLength);
-      return;
-    }
-
-    TrackPlayer.seekTo(newPosition);
+  if (activeTrack === undefined) {
+    return null;
   }
 
   return (
     <ThemedView
       style={{
-        marginVertical: 16,
-        padding: 16,
-        borderWidth: 1,
-        borderRadius: 16,
-        borderColor: "#e6e2e1",
+        padding: 8,
       }}
     >
+      <ThemedView
+        style={{
+          paddingVertical: 16,
+        }}
+      >
+        <Image
+          source={activeTrack.artwork}
+          style={{
+            width: "100%",
+            aspectRatio: 1,
+            borderRadius: 8,
+          }}
+          contentFit="contain"
+        />
+      </ThemedView>
+      <ThemedView
+        style={{
+          paddingVertical: 16,
+        }}
+      >
+        <ThemedText type="subtitle" numberOfLines={1}>
+          {activeTrack.title}
+        </ThemedText>
+        <ThemedText
+          style={{
+            color: "#a1a1aa",
+          }}
+          numberOfLines={1}
+        >
+          {activeTrack.artist}
+        </ThemedText>
+      </ThemedView>
+
       <AudioProgressSlider
         // @todo Can pass in custom default starting position based on last use
         defaultTrackPosition={0}
@@ -111,72 +124,54 @@ export function AudioPlayer(props: {
           imageSource={require("@/assets/images/player/light/jumpBackward.png")}
         />
 
-        <ThemedView
-          style={{
-            width: 70,
-            height: 70,
-          }}
-        >
-          {playerState === PlayerState.Loading ? (
-            // @todo Use a loading state gif
-            <Image
-              source={
-                // @todo Use different theme variants
-                theme === "light"
-                  ? require("@/assets/images/player/light/loading.png")
-                  : require("@/assets/images/player/light/loading.png")
-              }
+        {/*
+          Even if player is not paused, i.e. it is loading or whatever show the
+          play symbol to prevent fast flashing when changing from loading (or
+          any other) state to paused state.
+        */}
+        {playerState === PlayerState.Playing ? (
+          <Pressable onPress={TrackPlayer.pause}>
+            <View
               style={{
-                width: "100%",
-                height: "100%",
+                justifyContent: "center",
               }}
-              contentFit="contain"
-            />
-          ) : playerState === PlayerState.Playing ? (
-            <Pressable onPress={() => TrackPlayer.pause()}>
-              <Image
-                source={
-                  theme === "light"
-                    ? require("@/assets/images/player/light/pause.png")
-                    : require("@/assets/images/player/dark/pause.png")
-                }
+            >
+              <View
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  padding: 20,
+                  backgroundColor: Colors.dark.text,
+                  borderRadius: "50%",
                 }}
-                contentFit="contain"
-              />
-            </Pressable>
-          ) : (
-            <Pressable onPress={() => TrackPlayer.play()}>
-              <Image
-                source={
-                  theme === "light"
-                    ? require("@/assets/images/player/light/play.png")
-                    : require("@/assets/images/player/dark/play.png")
-                }
+              >
+                <IconSymbol name="pause.fill" color="black" size={32} />
+              </View>
+            </View>
+          </Pressable>
+        ) : (
+          <Pressable onPress={TrackPlayer.play}>
+            <View
+              style={{
+                justifyContent: "center",
+              }}
+            >
+              <View
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  padding: 20,
+                  backgroundColor: Colors.dark.text,
+                  borderRadius: "50%",
                 }}
-                contentFit="contain"
-              />
-            </Pressable>
-          )}
-        </ThemedView>
+              >
+                <IconSymbol name="play.fill" color="black" size={32} />
+              </View>
+            </View>
+          </Pressable>
+        )}
 
         <JumpButton
           onPress={() => jump(10)}
           imageSource={require("@/assets/images/player/light/jumpForward.png")}
         />
       </ThemedView>
-
-      {__DEV__ && (
-        <ThemedText>
-          Buffered: {bufferedAsInt}s{"\n"}
-          Total: {durationAsInt}s
-        </ThemedText>
-      )}
     </ThemedView>
   );
 }

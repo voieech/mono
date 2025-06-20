@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { View, Text, Pressable, useWindowDimensions } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
@@ -12,6 +13,7 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
   const { width } = useWindowDimensions();
   const track = useActiveTrack();
   const playerState = usePlaybackState().state;
+  const router = useRouter();
 
   // Only if there is no active track do we disable the overlay
   if (track === undefined) {
@@ -19,112 +21,117 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
   }
 
   return (
-    // @todo open full player on pressing
-    <View
-      style={{
-        flex: 1,
-        padding: 8,
-
-        // Hover over the bottom nav tab bar
-        position: "absolute",
-        bottom: props.tabBarHeight,
-        left: 0,
-        width,
+    <Pressable
+      onPress={() => {
+        router.push("/audio-player-modal");
       }}
     >
       <View
         style={{
           flex: 1,
-          paddingHorizontal: 8,
-          backgroundColor: "#3f3f46",
-          borderRadius: 8,
+          padding: 8,
+
+          // Hover over the bottom nav tab bar
+          position: "absolute",
+          bottom: props.tabBarHeight,
+          left: 0,
+          width,
         }}
       >
         <View
           style={{
             flex: 1,
-            paddingVertical: 10,
-            borderTopLeftRadius: 8,
-            borderTopRightRadius: 8,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignContent: "center",
+            paddingHorizontal: 8,
+            backgroundColor: "#3f3f46",
+            borderRadius: 8,
           }}
         >
           <View
             style={{
-              // Only allow words section to be at most 75% of device width
-              maxWidth: width - width * 0.25,
+              flex: 1,
+              paddingVertical: 10,
+              borderTopLeftRadius: 8,
+              borderTopRightRadius: 8,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignContent: "center",
             }}
           >
-            <Text
+            <View
               style={{
-                color: "white",
+                // Only allow words section to be at most 75% of device width
+                maxWidth: width - width * 0.25,
               }}
-              numberOfLines={1}
             >
-              {track.title}
-            </Text>
-            <Text
+              <Text
+                style={{
+                  color: "white",
+                }}
+                numberOfLines={1}
+              >
+                {track.title}
+              </Text>
+              <Text
+                style={{
+                  color: "white",
+                }}
+                numberOfLines={1}
+              >
+                {track.artist}
+              </Text>
+            </View>
+            <View
               style={{
-                color: "white",
+                paddingRight: 8,
               }}
-              numberOfLines={1}
             >
-              {track.artist}
-            </Text>
+              <Pressable
+                onPress={async () => {
+                  if (playerState === PlayerState.Playing) {
+                    await TrackPlayer.pause();
+                    return;
+                  }
+                  if (playerState === PlayerState.Paused) {
+                    await TrackPlayer.play();
+                    return;
+                  }
+                }}
+              >
+                {playerState === PlayerState.Playing ? (
+                  <IconSymbol
+                    name="pause.fill"
+                    color="white"
+                    style={{
+                      height: "100%",
+                    }}
+                  />
+                ) : (
+                  // Even if player is not paused, i.e. it is loading or whatever
+                  // show the play symbol to prevent fast flashing when changing
+                  // from loading (or any other) state to paused state.
+                  <IconSymbol
+                    name="play.fill"
+                    color="white"
+                    style={{
+                      height: "100%",
+                    }}
+                  />
+                )}
+              </Pressable>
+            </View>
           </View>
           <View
             style={{
-              paddingRight: 8,
+              height: 2,
+              backgroundColor: "#71717b",
+              width: "100%",
             }}
           >
-            <Pressable
-              onPress={async () => {
-                if (playerState === PlayerState.Playing) {
-                  await TrackPlayer.pause();
-                  return;
-                }
-                if (playerState === PlayerState.Paused) {
-                  await TrackPlayer.play();
-                  return;
-                }
-              }}
-            >
-              {playerState === PlayerState.Playing ? (
-                <IconSymbol
-                  name="pause.fill"
-                  color="white"
-                  style={{
-                    height: "100%",
-                  }}
-                />
-              ) : (
-                // Even if player is not paused, i.e. it is loading or whatever
-                // show the play symbol to prevent fast flashing when changing
-                // from loading (or any other) state to paused state.
-                <IconSymbol
-                  name="play.fill"
-                  color="white"
-                  style={{
-                    height: "100%",
-                  }}
-                />
-              )}
-            </Pressable>
+            <MiniProgessBar />
           </View>
-        </View>
-        <View
-          style={{
-            height: 2,
-            backgroundColor: "#71717b",
-            width: "100%",
-          }}
-        >
-          <MiniProgessBar />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
