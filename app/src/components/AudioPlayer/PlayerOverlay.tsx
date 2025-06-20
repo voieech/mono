@@ -99,17 +99,12 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
                     height: "100%",
                   }}
                 />
-              ) : playerState === PlayerState.Paused ? (
+              ) : (
+                // Even if player is not paused, i.e. it is loading or whatever
+                // show the play symbol to prevent fast flashing when changing
+                // from loading (or any other) state to paused state.
                 <IconSymbol
                   name="play.fill"
-                  color="white"
-                  style={{
-                    height: "100%",
-                  }}
-                />
-              ) : (
-                <IconSymbol
-                  name="circle.dotted.circle"
                   color="white"
                   style={{
                     height: "100%",
