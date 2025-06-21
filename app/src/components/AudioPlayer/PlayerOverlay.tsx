@@ -7,7 +7,8 @@ import TrackPlayer, {
   useActiveTrack,
 } from "react-native-track-player";
 
-import { IconSymbol } from "@/components/provided";
+import { PauseButton } from "./PauseButton";
+import { PlayButton } from "./PlayButton";
 
 export function PlayerOverlay(props: { tabBarHeight: number }) {
   const { width } = useWindowDimensions();
@@ -85,39 +86,16 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
                 paddingRight: 8,
               }}
             >
-              <Pressable
-                onPress={async () => {
-                  if (playerState === PlayerState.Playing) {
-                    await TrackPlayer.pause();
-                    return;
-                  }
-                  if (playerState === PlayerState.Paused) {
-                    await TrackPlayer.play();
-                    return;
-                  }
-                }}
-              >
-                {playerState === PlayerState.Playing ? (
-                  <IconSymbol
-                    name="pause.fill"
-                    color="white"
-                    style={{
-                      height: "100%",
-                    }}
-                  />
-                ) : (
-                  // Even if player is not paused, i.e. it is loading or whatever
-                  // show the play symbol to prevent fast flashing when changing
-                  // from loading (or any other) state to paused state.
-                  <IconSymbol
-                    name="play.fill"
-                    color="white"
-                    style={{
-                      height: "100%",
-                    }}
-                  />
-                )}
-              </Pressable>
+              {/*
+                Even if player is not paused, i.e. it is loading or whatever show the
+                play symbol to prevent fast flashing when changing from loading (or
+                any other) state to paused state.
+              */}
+              {playerState === PlayerState.Playing ? (
+                <PauseButton onPress={TrackPlayer.pause} size={24} />
+              ) : (
+                <PlayButton onPress={TrackPlayer.play} size={24} />
+              )}
             </View>
           </View>
           <View
