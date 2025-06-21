@@ -3,3 +3,4 @@
  */
 
 export * from "./ExperimentalSurfaceName";
+export * from "./TrackWithMetadata";

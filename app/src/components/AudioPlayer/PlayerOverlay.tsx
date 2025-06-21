@@ -4,20 +4,21 @@ import TrackPlayer, {
   State as PlayerState,
   usePlaybackState,
   useProgress,
-  useActiveTrack,
 } from "react-native-track-player";
+
+import { useActiveTrackWithMetadata } from "@/hooks";
 
 import { PauseButton } from "./PauseButton";
 import { PlayButton } from "./PlayButton";
 
 export function PlayerOverlay(props: { tabBarHeight: number }) {
   const { width } = useWindowDimensions();
-  const track = useActiveTrack();
+  const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const router = useRouter();
 
   // Only if there is no active track do we disable the overlay
-  if (track === undefined) {
+  if (activeTrack === undefined) {
     return null;
   }
 
@@ -70,7 +71,7 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
                 }}
                 numberOfLines={1}
               >
-                {track.title}
+                {activeTrack.title}
               </Text>
               <Text
                 style={{
@@ -78,7 +79,7 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
                 }}
                 numberOfLines={1}
               >
-                {track.artist}
+                {activeTrack.artist}
               </Text>
             </View>
             <View

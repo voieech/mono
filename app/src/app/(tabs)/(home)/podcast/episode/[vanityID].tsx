@@ -7,7 +7,6 @@ import { useCallback } from "react";
 import { View } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
-  useActiveTrack,
   usePlaybackState,
 } from "react-native-track-player";
 
@@ -20,6 +19,8 @@ import {
   CircularPauseButton,
 } from "@/components";
 import { apiBaseUrl } from "@/constants";
+import { useActiveTrackWithMetadata } from "@/hooks";
+import { createTrackWithMetadata } from "@/utils";
 
 export default function PodcastEpisode() {
   const router = useRouter();
@@ -52,13 +53,13 @@ export default function PodcastEpisode() {
     },
   });
 
-  const activeTrack = useActiveTrack();
+  const activeTrack = useActiveTrackWithMetadata();
 
   // Making the assumption that titles are unique
   const isCurrentEpisodeTheActiveTrack =
-    activeTrack !== undefined &&
     episode !== undefined &&
-    activeTrack.title === episode.title;
+    activeTrack !== undefined &&
+    episode.id === activeTrack.id;
 
   const playEpisode = useCallback(
     async function () {
@@ -75,16 +76,22 @@ export default function PodcastEpisode() {
 
       // If there is a track queue already, replace the current track with this,
       // else, create a new queue and add this as the new current active track.
-      await TrackPlayer.load({
-        // Artist is always voieech for pre-generated podcasts, will be
-        // different if it is user generated content in the future.
-        artist: "voieech.com",
-        url: episode.audio_public_url,
-        title: episode.title,
-        duration: episode.audio_length,
-        // @todo Remove backup once img_url is not nullable
-        artwork: episode.img_url ?? require("@/assets/images/logo.png"),
-      });
+      await TrackPlayer.load(
+        createTrackWithMetadata({
+          trackType: "podcast_episode",
+          id: episode.id,
+          episode,
+
+          // Artist is always voieech for pre-generated podcasts, will be
+          // different if it is user generated content in the future.
+          artist: "voieech.com",
+          url: episode.audio_public_url,
+          title: episode.title,
+          duration: episode.audio_length,
+          // @todo Remove backup once img_url is not nullable
+          artwork: episode.img_url ?? require("@/assets/images/logo.png"),
+        })
+      );
 
       await TrackPlayer.play();
     },

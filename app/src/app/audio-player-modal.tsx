@@ -1,6 +1,5 @@
 import { router } from "expo-router";
 import { Pressable, useWindowDimensions } from "react-native";
-import { useActiveTrack } from "react-native-track-player";
 
 import {
   SafeScrollViewContainer,
@@ -9,10 +8,11 @@ import {
   Icon,
   AudioPlayer,
 } from "@/components";
+import { useActiveTrackWithMetadata } from "@/hooks";
 
 export default function AudioPlayerModal() {
   const windowDimensions = useWindowDimensions();
-  const activeTrack = useActiveTrack();
+  const activeTrack = useActiveTrackWithMetadata();
   return (
     <SafeScrollViewContainer>
       <ThemedView

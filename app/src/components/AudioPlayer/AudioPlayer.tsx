@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
-  useActiveTrack,
   usePlaybackState,
   useProgress,
 } from "react-native-track-player";
@@ -15,6 +14,7 @@ import { Icon } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useExperimentalSurfaceContext } from "@/context";
+import { useActiveTrackWithMetadata } from "@/hooks";
 
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
@@ -26,7 +26,7 @@ export function AudioPlayer() {
       "audio-player-skip-next-and-previous"
     );
 
-  const activeTrack = useActiveTrack();
+  const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const progress = useProgress();
 
