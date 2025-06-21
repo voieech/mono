@@ -10,7 +10,7 @@ export const ExperimentalSurfaceContext = createContext<{
    */
   experimentalSurfaces: Partial<Record<ExperimentalSurfaceName, boolean>>;
   /**
-   * Getter that will always default to false if not set, so that the
+   * Getter that will always default to __DEV__ if not set, so that the
    * return type will always be a clean boolean without undefined.
    */
   getShowExperimentalSurface: (

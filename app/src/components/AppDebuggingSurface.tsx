@@ -19,7 +19,7 @@ export function AppDebuggingSurface(props: PropsWithChildren) {
 }
 
 export function AppDebuggingSurfaceProvider(props: PropsWithChildren) {
-  const [showDebuggingSurfaces, setShowDebuggingSurfaces] = useState(false);
+  const [showDebuggingSurfaces, setShowDebuggingSurfaces] = useState(__DEV__);
   return (
     <AppDebuggingSurfaceContext
       value={{

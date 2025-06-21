@@ -21,7 +21,9 @@ import {
 export const ExperimentalSurface = (
   props: PropsWithChildren<{ name?: ExperimentalSurfaceName }>
 ) =>
-  useExperimentalSurfaceContext().experimentalSurfaces[props.name ?? "default"]
+  useExperimentalSurfaceContext().getShowExperimentalSurface(
+    props.name ?? "default"
+  )
     ? props.children
     : null;
 
@@ -34,7 +36,7 @@ export function ExperimentalSurfaceProvider(props: PropsWithChildren) {
       value={{
         experimentalSurfaces,
         getShowExperimentalSurface(experimentalSurfaceName) {
-          return experimentalSurfaces[experimentalSurfaceName] ?? false;
+          return experimentalSurfaces[experimentalSurfaceName] ?? __DEV__;
         },
         setShowExperimentalSurface(
           experimentalSurfaceName,
