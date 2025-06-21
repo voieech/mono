@@ -3,7 +3,7 @@ import { Tabs } from "expo-router";
 import { Platform, View } from "react-native";
 
 import {
-  IconSymbol,
+  Icon,
   TabBarBackground,
   ThemedView,
   PlayerOverlay,
@@ -86,7 +86,7 @@ export default function TabLayout() {
           options={{
             title: "Explore",
             tabBarIcon: ({ color, size }) => (
-              <IconSymbol size={size} name="magnifyingglass" color={color} />
+              <Icon size={size} name="magnifyingglass" color={color} />
             ),
           }}
         />
@@ -98,7 +98,7 @@ export default function TabLayout() {
 
             title: "For You",
             tabBarIcon: ({ color, size }) => (
-              <IconSymbol size={size} name="person" color={color} />
+              <Icon size={size} name="person" color={color} />
             ),
           }}
         />
@@ -107,7 +107,7 @@ export default function TabLayout() {
           options={{
             title: "Settings",
             tabBarIcon: ({ color, size }) => (
-              <IconSymbol size={size} name="gear" color={color} />
+              <Icon size={size} name="gear" color={color} />
             ),
           }}
         />

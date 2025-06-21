@@ -6,7 +6,7 @@ import {
   SafeScrollViewContainer,
   ThemedView,
   ThemedText,
-  IconSymbol,
+  Icon,
   AudioPlayer,
 } from "@/components";
 
@@ -28,7 +28,7 @@ export default function AudioPlayerModal() {
             }
           }}
         >
-          <IconSymbol name="arrow.down" color="white" />
+          <Icon name="chevron.down" color="white" />
         </Pressable>
         <ThemedText
           style={{
@@ -39,7 +39,7 @@ export default function AudioPlayerModal() {
         >
           {activeTrack?.artist}
         </ThemedText>
-        <IconSymbol name="dot.square" color="white" />
+        <Icon name="ellipsis" color="white" />
       </ThemedView>
       <AudioPlayer />
     </SafeScrollViewContainer>

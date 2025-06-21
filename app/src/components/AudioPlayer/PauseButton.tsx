@@ -1,11 +1,11 @@
 import { Pressable } from "react-native";
 
-import { IconSymbol } from "@/components/provided";
+import { Icon } from "@/components/provided";
 
 export function PauseButton(props: { size: number; onPress: () => unknown }) {
   return (
     <Pressable onPress={props.onPress}>
-      <IconSymbol
+      <Icon
         name="pause.fill"
         color="white"
         size={props.size}

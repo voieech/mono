@@ -10,7 +10,7 @@ import TrackPlayer, {
 } from "react-native-track-player";
 
 import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
-import { IconSymbol } from "@/components/provided";
+import { Icon } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
@@ -120,7 +120,7 @@ export function AudioPlayer() {
         }}
       >
         <Pressable onPress={() => jump(-10)}>
-          <IconSymbol name="gobackward.10" color="white" size={48} />
+          <Icon name="gobackward.10" color="white" size={48} />
         </Pressable>
         {/*
           Even if player is not paused, i.e. it is loading or whatever show the
@@ -141,7 +141,7 @@ export function AudioPlayer() {
           />
         )}
         <Pressable onPress={() => jump(10)}>
-          <IconSymbol name="goforward.10" color="white" size={48} />
+          <Icon name="goforward.10" color="white" size={48} />
         </Pressable>
       </ThemedView>
 

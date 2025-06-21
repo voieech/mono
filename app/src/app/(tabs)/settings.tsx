@@ -4,7 +4,7 @@ import { Switch } from "react-native";
 import {
   ParallaxScrollViewContainer,
   ThemedText,
-  IconSymbol,
+  Icon,
   Collapsible,
   ThemedView,
 } from "@/components";
@@ -15,7 +15,7 @@ export default function Settings() {
   return (
     <ParallaxScrollViewContainer
       headerImage={
-        <IconSymbol
+        <Icon
           size={360}
           color="#D0D0D0"
           name="gear"

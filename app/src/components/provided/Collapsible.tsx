@@ -1,11 +1,11 @@
 import { PropsWithChildren, useState } from "react";
-import { TouchableOpacity , useColorScheme } from "react-native";
+import { TouchableOpacity, useColorScheme } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants";
 
-import { IconSymbol } from "./IconSymbol";
+import { Icon } from "./Icon";
 
 export function Collapsible({
   children,
@@ -29,7 +29,7 @@ export function Collapsible({
         onPress={() => setIsOpen((value) => !value)}
         activeOpacity={0.8}
       >
-        <IconSymbol
+        <Icon
           name="chevron.right"
           size={18}
           weight="medium"

@@ -5,32 +5,43 @@ import { SymbolWeight, SymbolViewProps } from "expo-symbols";
 import { ComponentProps } from "react";
 import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 
-type IconMapping = Record<
-  SymbolViewProps["name"],
-  ComponentProps<typeof MaterialIcons>["name"]
->;
-type IconSymbolName = keyof typeof MAPPING;
-
 /**
  * Add your SF Symbols to Material Icons mappings here.
  * - see Material Icons in the [Icons Directory](https://icons.expo.fyi).
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
-const MAPPING = {
+const SfSymbolsToMaterialIconsMapping = {
+  magnifyingglass: "search",
+  person: "person",
+  gear: "settings",
+  "pause.fill": "pause",
+  "play.fill": "play-arrow",
   "house.fill": "home",
   "paperplane.fill": "send",
   "chevron.left.forwardslash.chevron.right": "code",
   "chevron.right": "chevron-right",
+  "chevron.down": "keyboard-arrow-down",
+  ellipsis: "more-horiz",
   "goforward.10": "forward-10",
   "gobackward.10": "replay-10",
-} as IconMapping;
+  "forward.end.fill": "skip-next",
+  "backward.end.fill": "skip-previous",
+
+  // Using satisfies and partial to ensure that users can only use icons after
+  // they added the SF->MI mapping here.
+} satisfies Partial<
+  Record<SymbolViewProps["name"], ComponentProps<typeof MaterialIcons>["name"]>
+>;
+
+type IconSymbolName = keyof typeof SfSymbolsToMaterialIconsMapping;
 
 /**
- * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
- * This ensures a consistent look across platforms, and optimal resource usage.
- * Icon `name`s are based on SF Symbols and require manual mapping to Material Icons.
+ * An icon component that uses native SF Symbols on iOS, and Material Icons on
+ * Android and web. This ensures a consistent look across platforms, and optimal
+ * resource usage. Icon `name`s are based on SF Symbols and require manual
+ * mapping to Material Icons defined above.
  */
-export function IconSymbol({
+export function Icon({
   name,
   size = 24,
   color,
@@ -46,7 +57,7 @@ export function IconSymbol({
     <MaterialIcons
       color={color}
       size={size}
-      name={MAPPING[name]}
+      name={SfSymbolsToMaterialIconsMapping[name]}
       style={style}
     />
   );

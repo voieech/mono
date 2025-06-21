@@ -1,6 +1,6 @@
 import { Pressable, View } from "react-native";
 
-import { IconSymbol } from "@/components/provided";
+import { Icon } from "@/components/provided";
 import { Colors } from "@/constants";
 
 export function CircularPauseButton(props: {
@@ -22,11 +22,7 @@ export function CircularPauseButton(props: {
             borderRadius: "50%",
           }}
         >
-          <IconSymbol
-            name="pause.fill"
-            color="black"
-            size={props.innerIconSize}
-          />
+          <Icon name="pause.fill" color="black" size={props.innerIconSize} />
         </View>
       </View>
     </Pressable>
