@@ -1,7 +1,6 @@
 import { Slider } from "@react-native-assets/slider";
 import { Image } from "expo-image";
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, View } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
   useActiveTrack,
@@ -10,11 +9,11 @@ import TrackPlayer, {
 } from "react-native-track-player";
 
 import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
-import { IconSymbol } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Colors } from "@/constants";
 
+import { CircularPauseButton } from "./CircularPauseButton";
+import { CircularPlayButton } from "./CircularPlayButton";
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
 import { JumpButton } from "./JumpButton";
 
@@ -124,50 +123,24 @@ export function AudioPlayer() {
           onPress={() => jump(-10)}
           imageSource={require("@/assets/images/player/light/jumpBackward.png")}
         />
-
         {/*
           Even if player is not paused, i.e. it is loading or whatever show the
           play symbol to prevent fast flashing when changing from loading (or
           any other) state to paused state.
         */}
         {playerState === PlayerState.Playing ? (
-          <Pressable onPress={TrackPlayer.pause}>
-            <View
-              style={{
-                justifyContent: "center",
-              }}
-            >
-              <View
-                style={{
-                  padding: 20,
-                  backgroundColor: Colors.dark.text,
-                  borderRadius: "50%",
-                }}
-              >
-                <IconSymbol name="pause.fill" color="black" size={32} />
-              </View>
-            </View>
-          </Pressable>
+          <CircularPauseButton
+            onPress={TrackPlayer.pause}
+            innerIconSize={32}
+            outerBackgroundSize={20}
+          />
         ) : (
-          <Pressable onPress={TrackPlayer.play}>
-            <View
-              style={{
-                justifyContent: "center",
-              }}
-            >
-              <View
-                style={{
-                  padding: 20,
-                  backgroundColor: Colors.dark.text,
-                  borderRadius: "50%",
-                }}
-              >
-                <IconSymbol name="play.fill" color="black" size={32} />
-              </View>
-            </View>
-          </Pressable>
+          <CircularPlayButton
+            onPress={TrackPlayer.play}
+            innerIconSize={32}
+            outerBackgroundSize={20}
+          />
         )}
-
         <JumpButton
           onPress={() => jump(10)}
           imageSource={require("@/assets/images/player/light/jumpForward.png")}

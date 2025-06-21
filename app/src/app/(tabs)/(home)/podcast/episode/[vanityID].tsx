@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useCallback } from "react";
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
   useActiveTrack,
@@ -12,13 +12,14 @@ import TrackPlayer, {
 } from "react-native-track-player";
 
 import {
-  IconSymbol,
   ParallaxScrollViewContainer,
   FullScreenLoader,
   ThemedView,
   ThemedText,
+  CircularPlayButton,
+  CircularPauseButton,
 } from "@/components";
-import { apiBaseUrl, Colors } from "@/constants";
+import { apiBaseUrl } from "@/constants";
 
 export default function PodcastEpisode() {
   const router = useRouter();
@@ -153,30 +154,25 @@ export default function PodcastEpisode() {
           {"\n"}
           {Math.trunc(episode.audio_length / 60)} mins
         </ThemedText>
-        <View
-          style={{
-            justifyContent: "center",
-          }}
-        >
-          <View
-            style={{
-              padding: 8,
-              backgroundColor: Colors.dark.text,
-              borderRadius: "50%",
-            }}
-          >
-            {isCurrentEpisodeTheActiveTrack &&
-            playerState === PlayerState.Playing ? (
-              <Pressable onPress={TrackPlayer.pause}>
-                <IconSymbol name="pause.fill" color="black" />
-              </Pressable>
-            ) : (
-              <Pressable onPress={playEpisode}>
-                <IconSymbol name="play.fill" color="black" />
-              </Pressable>
-            )}
-          </View>
-        </View>
+        {/*
+          Even if player is not paused, i.e. it is loading or whatever show the
+          play symbol to prevent fast flashing when changing from loading (or
+          any other) state to paused state.
+        */}
+        {isCurrentEpisodeTheActiveTrack &&
+        playerState === PlayerState.Playing ? (
+          <CircularPauseButton
+            onPress={TrackPlayer.pause}
+            innerIconSize={24}
+            outerBackgroundSize={8}
+          />
+        ) : (
+          <CircularPlayButton
+            onPress={playEpisode}
+            innerIconSize={24}
+            outerBackgroundSize={8}
+          />
+        )}
       </ThemedView>
       <View
         style={{
