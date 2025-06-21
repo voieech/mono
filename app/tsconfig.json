@@ -9,6 +9,8 @@
     },
 
     // Prevent auto code deletion in editors
-    "allowUnreachableCode": true
+    "allowUnreachableCode": true,
+
+    "noUncheckedIndexedAccess": true
   }
 }

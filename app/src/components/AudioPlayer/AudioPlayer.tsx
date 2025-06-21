@@ -10,15 +10,22 @@ import TrackPlayer, {
 } from "react-native-track-player";
 
 import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
+import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { Icon } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { useExperimentalSurfaceContext } from "@/context";
 
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
 
 export function AudioPlayer() {
+  const showAudioPlayerSkipNextAndPrevious =
+    useExperimentalSurfaceContext().getShowExperimentalSurface(
+      "audio-player-skip-next-and-previous"
+    );
+
   const activeTrack = useActiveTrack();
   const playerState = usePlaybackState().state;
   const progress = useProgress();
@@ -116,9 +123,16 @@ export function AudioPlayer() {
           flex: 1,
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-around",
+          justifyContent: showAudioPlayerSkipNextAndPrevious
+            ? "space-between"
+            : "space-around",
         }}
       >
+        <ExperimentalSurface name="audio-player-skip-next-and-previous">
+          <Pressable onPress={() => TrackPlayer.skipToPrevious()}>
+            <Icon name="backward.end.fill" color="white" />
+          </Pressable>
+        </ExperimentalSurface>
         <Pressable onPress={() => jump(-10)}>
           <Icon name="gobackward.10" color="white" size={48} />
         </Pressable>
@@ -143,6 +157,11 @@ export function AudioPlayer() {
         <Pressable onPress={() => jump(10)}>
           <Icon name="goforward.10" color="white" size={48} />
         </Pressable>
+        <ExperimentalSurface name="audio-player-skip-next-and-previous">
+          <Pressable onPress={() => TrackPlayer.skipToNext()}>
+            <Icon name="forward.end.fill" color="white" />
+          </Pressable>
+        </ExperimentalSurface>
       </ThemedView>
 
       {/* @todo Add features like repeat/share/etc... */}

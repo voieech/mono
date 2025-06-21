@@ -4,6 +4,7 @@
 
 export * from "./AppDebuggingSurface";
 export * from "./AudioPlayer";
+export * from "./ExperimentalSurface";
 export * from "./FullScreenLoader";
 export * from "./PageContainer";
 export * from "./provided";
