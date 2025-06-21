@@ -1,6 +1,7 @@
 import { Slider } from "@react-native-assets/slider";
 import { Image } from "expo-image";
 import { useCallback, useEffect, useState } from "react";
+import { Pressable } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
   useActiveTrack,
@@ -9,13 +10,13 @@ import TrackPlayer, {
 } from "react-native-track-player";
 
 import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
+import { IconSymbol } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
-import { JumpButton } from "./JumpButton";
 
 export function AudioPlayer() {
   const activeTrack = useActiveTrack();
@@ -116,13 +117,11 @@ export function AudioPlayer() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-around",
-          paddingHorizontal: 30,
         }}
       >
-        <JumpButton
-          onPress={() => jump(-10)}
-          imageSource={require("@/assets/images/player/light/jumpBackward.png")}
-        />
+        <Pressable onPress={() => jump(-10)}>
+          <IconSymbol name="gobackward.10" color="white" size={48} />
+        </Pressable>
         {/*
           Even if player is not paused, i.e. it is loading or whatever show the
           play symbol to prevent fast flashing when changing from loading (or
@@ -141,10 +140,9 @@ export function AudioPlayer() {
             outerBackgroundSize={20}
           />
         )}
-        <JumpButton
-          onPress={() => jump(10)}
-          imageSource={require("@/assets/images/player/light/jumpForward.png")}
-        />
+        <Pressable onPress={() => jump(10)}>
+          <IconSymbol name="goforward.10" color="white" size={48} />
+        </Pressable>
       </ThemedView>
 
       {/* @todo Add features like repeat/share/etc... */}
