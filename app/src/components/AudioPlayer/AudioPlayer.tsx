@@ -19,6 +19,7 @@ import { useActiveTrackWithMetadata } from "@/hooks";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
+import { ShareCurrentTrackIcon } from "./ShareCurrentTrackIcon";
 
 export function AudioPlayer() {
   const showAudioPlayerSkipNextAndPrevious =
@@ -100,6 +101,17 @@ export function AudioPlayer() {
         </ThemedText>
       </ThemedView>
 
+      <ThemedView
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignContent: "center",
+          paddingBottom: 32,
+        }}
+      >
+        <ShareCurrentTrackIcon activeTrack={activeTrack} />
+      </ThemedView>
+
       <AudioProgressSlider
         // @todo Can pass in custom default starting position based on last use
         defaultTrackPosition={0}
@@ -163,9 +175,6 @@ export function AudioPlayer() {
           </Pressable>
         </ExperimentalSurface>
       </ThemedView>
-
-      {/* @todo Add features like repeat/share/etc... */}
-      {/* <IconSymbol name="arrow.2.circlepath" color="white" /> */}
 
       <AppDebuggingSurface>
         <ThemedText>

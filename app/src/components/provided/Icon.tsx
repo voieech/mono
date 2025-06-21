@@ -9,6 +9,7 @@ import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
  * Add your SF Symbols to Material Icons mappings here.
  * - see Material Icons in the [Icons Directory](https://icons.expo.fyi).
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
+ * - Use this <https://hotpot.ai/free-icons> to find matching icons between them
  */
 const SfSymbolsToMaterialIconsMapping = {
   magnifyingglass: "search",
@@ -26,6 +27,7 @@ const SfSymbolsToMaterialIconsMapping = {
   "gobackward.10": "replay-10",
   "forward.end.fill": "skip-next",
   "backward.end.fill": "skip-previous",
+  "square.and.arrow.up": "share",
 
   // Using satisfies and partial to ensure that users can only use icons after
   // they added the SF->MI mapping here.
