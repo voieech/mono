@@ -19,6 +19,7 @@ import { useActiveTrackWithMetadata } from "@/hooks";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
 import { convertSecondsToMSS } from "./convertSecondsToMSS";
+import { RepeatIcon } from "./RepeatIcon";
 import { ShareCurrentTrackIcon } from "./ShareCurrentTrackIcon";
 
 export function AudioPlayer() {
@@ -109,6 +110,25 @@ export function AudioPlayer() {
           paddingBottom: 32,
         }}
       >
+        <ThemedView
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignContent: "center",
+            columnGap: 16,
+          }}
+        >
+          <ExperimentalSurface>
+            <Pressable
+              onPress={() => {
+                //
+              }}
+            >
+              <Icon name="shuffle" color="white" size={32} />
+            </Pressable>
+          </ExperimentalSurface>
+          <RepeatIcon />
+        </ThemedView>
         <ShareCurrentTrackIcon activeTrack={activeTrack} />
       </ThemedView>
 
