@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import {
   AppDebuggingSurfaceProvider,
@@ -47,39 +48,45 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
       <QueryClientProvider client={queryClient}>
-        <AppDebuggingSurfaceProvider>
-          <ExperimentalSurfaceProvider>
-            <StatusBar style="auto" />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-              }}
-            >
-              <Stack.Screen
-                name="(tabs)"
-                options={{
+        <GestureHandlerRootView
+          style={{
+            flex: 1,
+          }}
+        >
+          <AppDebuggingSurfaceProvider>
+            <ExperimentalSurfaceProvider>
+              <StatusBar style="auto" />
+              <Stack
+                screenOptions={{
                   headerShown: false,
-
-                  // Set to home so when the podcast episode page is opened via a
-                  // deep link, the back button says "Home"
-                  title: "Home",
                 }}
-              />
-              <Stack.Screen
-                name="audio-player-modal"
-                options={{
-                  presentation: "modal",
+              >
+                <Stack.Screen
+                  name="(tabs)"
+                  options={{
+                    headerShown: false,
 
-                  // @todo
-                  // Try this to experiment with full screen mode, but need to
-                  // support swipe down to close.
-                  // presentation: "containedModal",
-                }}
-              />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-          </ExperimentalSurfaceProvider>
-        </AppDebuggingSurfaceProvider>
+                    // Set to home so when the podcast episode page is opened via a
+                    // deep link, the back button says "Home"
+                    title: "Home",
+                  }}
+                />
+                <Stack.Screen
+                  name="audio-player-modal"
+                  options={{
+                    presentation: "modal",
+
+                    // @todo
+                    // Try this to experiment with full screen mode, but need to
+                    // support swipe down to close.
+                    // presentation: "containedModal",
+                  }}
+                />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+            </ExperimentalSurfaceProvider>
+          </AppDebuggingSurfaceProvider>
+        </GestureHandlerRootView>
       </QueryClientProvider>
     </ThemeProvider>
   );

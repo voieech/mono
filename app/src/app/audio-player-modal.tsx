@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { Pressable, useWindowDimensions } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import {
   SafeScrollViewContainer,
@@ -15,33 +16,51 @@ export default function AudioPlayerModal() {
   const activeTrack = useActiveTrackWithMetadata();
   return (
     <SafeScrollViewContainer>
-      <ThemedView
+      {/*
+        Need to wrap again even though root layout wraps it because on android
+        modal's it doesnt inherit from root layout and acts as an independent
+        component tree, so it needs this extra wrapping. It is also ok to have
+        duplicate wrappings as it will just be ignored on IOS/etc...
+      */}
+      <GestureHandlerRootView
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
+          flex: 1,
         }}
       >
-        <Pressable
-          onPress={() => {
-            if (router.canGoBack()) {
-              router.dismissTo("..");
-            }
-          }}
-        >
-          <Icon name="chevron.down" color="white" />
-        </Pressable>
-        <ThemedText
+        <ThemedView
           style={{
-            textAlign: "center",
-            width: windowDimensions.width * 0.6,
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
-          numberOfLines={1}
         >
-          {activeTrack?.artist}
-        </ThemedText>
-        <Icon name="ellipsis" color="white" />
-      </ThemedView>
-      <AudioPlayer />
+          <Pressable
+            onPress={() => {
+              if (router.canGoBack()) {
+                router.dismissTo("..");
+              }
+            }}
+          >
+            <Icon name="chevron.down" color="white" />
+          </Pressable>
+          <ThemedText
+            style={{
+              textAlign: "center",
+              width: windowDimensions.width * 0.6,
+            }}
+            numberOfLines={1}
+          >
+            {activeTrack?.artist}
+          </ThemedText>
+          <Pressable
+            onPress={() => {
+              //
+            }}
+          >
+            <Icon name="ellipsis" color="white" />
+          </Pressable>
+        </ThemedView>
+        <AudioPlayer />
+      </GestureHandlerRootView>
     </SafeScrollViewContainer>
   );
 }

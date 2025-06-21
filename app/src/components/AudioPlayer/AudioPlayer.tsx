@@ -10,6 +10,7 @@ import TrackPlayer, {
 
 import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
 import { ExperimentalSurface } from "@/components/ExperimentalSurface";
+import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -89,17 +90,19 @@ export function AudioPlayer() {
           paddingVertical: 16,
         }}
       >
-        <ThemedText type="subtitle" numberOfLines={1}>
-          {activeTrack.title}
-        </ThemedText>
-        <ThemedText
-          style={{
+        <MarqueeText
+          key={activeTrack.title}
+          text={activeTrack.title}
+          delayInMsBeforeScrollStart={1500}
+        />
+        <MarqueeText
+          key={activeTrack.artist}
+          text={activeTrack.artist}
+          delayInMsBeforeScrollStart={1500}
+          textStyle={{
             color: "#a1a1aa",
           }}
-          numberOfLines={1}
-        >
-          {activeTrack.artist}
-        </ThemedText>
+        />
       </ThemedView>
 
       <ThemedView

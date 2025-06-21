@@ -15,6 +15,7 @@
     "lint:fix": "npx expo lint --fix"
   },
   "dependencies": {
+    "@animatereactnative/marquee": "^0.5.2",
     "@expo/vector-icons": "^14.1.0",
     "@react-native-assets/slider": "^11.0.8",
     "@react-navigation/bottom-tabs": "^7.3.10",
