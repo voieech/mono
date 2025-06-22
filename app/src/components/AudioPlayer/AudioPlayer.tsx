@@ -14,7 +14,6 @@ import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
 import { CircularPauseButton } from "./CircularPauseButton";
@@ -24,11 +23,6 @@ import { RepeatIcon } from "./RepeatIcon";
 import { ShareCurrentTrackIcon } from "./ShareCurrentTrackIcon";
 
 export function AudioPlayer() {
-  const showAudioPlayerSkipNextAndPrevious =
-    useExperimentalSurfaceContext().getShowExperimentalSurface(
-      "audio-player-skip-next-and-previous"
-    );
-
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const progress = useProgress();
@@ -158,16 +152,19 @@ export function AudioPlayer() {
           flex: 1,
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: showAudioPlayerSkipNextAndPrevious
-            ? "space-between"
-            : "space-around",
+          justifyContent: "space-between",
         }}
       >
-        <ExperimentalSurface name="audio-player-skip-next-and-previous">
-          <Pressable onPress={() => TrackPlayer.skipToPrevious()}>
-            <Icon name="backward.end.fill" color="white" />
-          </Pressable>
-        </ExperimentalSurface>
+        <Pressable
+          // @todo Make this a configurable setting
+          onPress={() =>
+            positionAsInt > 3
+              ? TrackPlayer.seekTo(0)
+              : TrackPlayer.skipToPrevious()
+          }
+        >
+          <Icon name="backward.end.fill" color="white" />
+        </Pressable>
         <Pressable onPress={() => jump(-10)}>
           <Icon name="gobackward.10" color="white" size={48} />
         </Pressable>
@@ -192,11 +189,9 @@ export function AudioPlayer() {
         <Pressable onPress={() => jump(10)}>
           <Icon name="goforward.10" color="white" size={48} />
         </Pressable>
-        <ExperimentalSurface name="audio-player-skip-next-and-previous">
-          <Pressable onPress={() => TrackPlayer.skipToNext()}>
-            <Icon name="forward.end.fill" color="white" />
-          </Pressable>
-        </ExperimentalSurface>
+        <Pressable onPress={() => TrackPlayer.skipToNext()}>
+          <Icon name="forward.end.fill" color="white" />
+        </Pressable>
       </ThemedView>
 
       <AppDebuggingSurface>

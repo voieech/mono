@@ -71,10 +71,6 @@ export default function Settings() {
               }
             />
             <ExperimentalSurfaceSettingRow
-              settingTitle="Show Audio Player skip next/previous buttons"
-              experimentalSurfaceName="audio-player-skip-next-and-previous"
-            />
-            <ExperimentalSurfaceSettingRow
               settingTitle="Show all other generic experimental surfaces"
               experimentalSurfaceName="default"
             />
