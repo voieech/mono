@@ -15,7 +15,7 @@ export default {
   PlatformName: {
     "voieech-audio-link": "Web Player",
     spotify: "Spotify",
-    "apple-podcast": "Apple Podcast",
+    apple: "Apple Podcast",
     youtube: "YouTube",
     audible: "Audible",
     "amazon-music": "Amazon Music",

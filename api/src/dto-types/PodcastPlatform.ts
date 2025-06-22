@@ -1,7 +1,7 @@
 export type PodcastPlatform =
   | "voieech-audio-link"
   | "spotify"
-  | "apple-podcast"
+  | "apple"
   | "youtube"
   | "audible"
   | "amazon-music"

@@ -2,7 +2,7 @@
 import type { Episode } from "dto";
 
 const props = defineProps<{
-  platform: Episode["externallyHostedLinks"][number];
+  platform: Episode["externally_hosted_links"][number];
 }>();
 
 const imageLink = new URL(
