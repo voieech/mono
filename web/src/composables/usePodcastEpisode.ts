@@ -41,7 +41,7 @@ export function usePodcastEpisode(
 
       if (!res.ok) {
         if (res.status === 404) {
-          optionals?.router?.push({
+          optionals?.router?.replace({
             path: "/404",
           });
         }
