@@ -1,5 +1,29 @@
 <script setup lang="ts">
-const props = defineProps<{ message?: string }>();
+import { ref, onUnmounted } from "vue";
+
+const props = defineProps<{
+  /**
+   * Allow users to set a delay in ms before loader is shown to improve
+   * UX and perceived performance, by not flashing the loader momentarily
+   * especially if the loader is only displayed for a short period of time, for
+   * e.g. if your API call is very fast.
+   *
+   * Defaults to 500ms if not set.
+   */
+  delayInMsBeforeShowingLoader?: number;
+
+  /**
+   * Custom loading message to override the default loading message
+   */
+  message?: string;
+}>();
+
+const showLoader = ref(false);
+const timer = setTimeout(
+  () => (showLoader.value = true),
+  props.delayInMsBeforeShowingLoader ?? 500,
+);
+onUnmounted(() => clearTimeout(timer));
 
 const imageLink = new URL(
   // Generate 0-2 to randomly pick one of the gifs
@@ -14,6 +38,7 @@ const imageLink = new URL(
 
 <template>
   <div
+    v-if="showLoader"
     class="bg-opacity-40 fixed top-0 left-0 z-40 flex h-screen w-screen items-center justify-center backdrop-blur-xs select-none"
   >
     <div
