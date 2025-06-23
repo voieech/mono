@@ -3,7 +3,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -14,24 +14,7 @@ import {
   ExperimentalSurfaceProvider,
 } from "@/components";
 import { useTheme } from "@/hooks";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      // Set these options to ensure that once data is loaded and cached it will
-      // never be refetched again automatically.
-      staleTime: Infinity,
-      gcTime: Infinity,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-
-      // Dont retry on failure, this assumes that things wont be automatically
-      // fixed after just waiting a few seconds
-      retry: false,
-    },
-  },
-});
+import { queryClient } from "@/utils";
 
 export default function RootLayout() {
   const theme = useTheme();
