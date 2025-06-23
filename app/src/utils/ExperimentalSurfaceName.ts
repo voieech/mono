@@ -7,4 +7,4 @@ export type ExperimentalSurfaceName =
   | "default"
 
   // Add your ExperimentalSurfaceName here
-  | "audio-player-skip-next-and-previous";
+  | "use-card-player-instead-of-modal";

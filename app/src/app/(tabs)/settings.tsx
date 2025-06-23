@@ -71,6 +71,10 @@ export default function Settings() {
               }
             />
             <ExperimentalSurfaceSettingRow
+              settingTitle="Use 'card' player instead of 'modal'"
+              experimentalSurfaceName="use-card-player-instead-of-modal"
+            />
+            <ExperimentalSurfaceSettingRow
               settingTitle="Show all other generic experimental surfaces"
               experimentalSurfaceName="default"
             />

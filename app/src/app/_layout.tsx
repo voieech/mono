@@ -1,8 +1,14 @@
 import { Stack } from "expo-router";
 
 import { AppRoot } from "@/AppRoot";
+import { useExperimentalSurfaceContext } from "@/context";
 
 function RootLayout() {
+  const useCardPlayerInsteadOfModal =
+    useExperimentalSurfaceContext().getShowExperimentalSurface(
+      "use-card-player-instead-of-modal"
+    );
+
   return (
     <Stack
       screenOptions={{
@@ -22,7 +28,7 @@ function RootLayout() {
       <Stack.Screen
         name="audio-player-modal"
         options={{
-          presentation: "modal",
+          presentation: useCardPlayerInsteadOfModal ? "card" : "modal",
 
           // @todo
           // Try this to experiment with full screen mode, but need to
