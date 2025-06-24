@@ -34,11 +34,7 @@ export default function AudioPlayerModal() {
           }}
         >
           <Pressable
-            onPress={() => {
-              if (router.canGoBack()) {
-                router.dismissTo("..");
-              }
-            }}
+            onPress={() => router.dismissTo(router.canGoBack() ? ".." : "/")}
           >
             <Icon name="chevron.down" color="white" />
           </Pressable>
