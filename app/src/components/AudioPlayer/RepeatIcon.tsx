@@ -54,7 +54,7 @@ export function RepeatIcon() {
           onPress={() => setRepeatMode(PlayerRepeatMode.Off)}
           disabled={isPressDisabled}
         >
-          <Icon name="repeat.1" color="white" size={32} />
+          <Icon name="repeat.1" color="#16a34a" size={32} />
         </Pressable>
       );
     }
