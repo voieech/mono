@@ -1,5 +1,6 @@
 import { Slider } from "@react-native-assets/slider";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import TrackPlayer, {
@@ -23,6 +24,7 @@ import { RepeatIcon } from "./RepeatIcon";
 import { ShareCurrentTrackIcon } from "./ShareCurrentTrackIcon";
 
 export function AudioPlayer() {
+  const router = useRouter();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const progress = useProgress();
@@ -89,14 +91,34 @@ export function AudioPlayer() {
           text={activeTrack.title}
           delayInMsBeforeScrollStart={1500}
         />
-        <MarqueeText
-          key={activeTrack.artist}
-          text={activeTrack.artist}
-          delayInMsBeforeScrollStart={1500}
-          textStyle={{
-            color: "#a1a1aa",
+        <Pressable
+          onPress={() => {
+            switch (activeTrack.trackType) {
+              case "podcast_episode": {
+                router.dismiss();
+                return router.push({
+                  pathname: "/podcast/channel/[channelID]",
+                  params: {
+                    channelID: activeTrack.episode.channel_id,
+                  },
+                });
+              }
+              default:
+                throw new Error(
+                  `Unimplemented track type: ${activeTrack.trackType}`
+                );
+            }
           }}
-        />
+        >
+          <MarqueeText
+            key={activeTrack.artist}
+            text={activeTrack.artist}
+            delayInMsBeforeScrollStart={1500}
+            textStyle={{
+              color: "#a1a1aa",
+            }}
+          />
+        </Pressable>
       </ThemedView>
 
       <ThemedView
