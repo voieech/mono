@@ -1,4 +1,5 @@
 import { useRouter } from "expo-router";
+import { useRef } from "react";
 import { View, Text, Pressable, useWindowDimensions } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
@@ -12,6 +13,7 @@ import { PauseButton } from "./PauseButton";
 import { PlayButton } from "./PlayButton";
 
 export function PlayerOverlay(props: { tabBarHeight: number }) {
+  const startY = useRef(0);
   const { width } = useWindowDimensions();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
@@ -26,6 +28,18 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
     <Pressable
       onPress={() => {
         router.push("/audio-player-modal");
+      }}
+      // Use these to implement open modal on swipe up
+      onPressIn={(evt) => (startY.current = evt.nativeEvent.pageY)}
+      onPressOut={(evt) => {
+        // Small threshold since the overlay is small, so we can detect any
+        // swipe ups as a swipe up motion
+        const swipeUpPixelTriggerThreshold = 1;
+        const endY = evt.nativeEvent.pageY;
+        const swipePixelDelta = startY.current - endY;
+        if (swipePixelDelta > swipeUpPixelTriggerThreshold) {
+          router.push("/audio-player-modal");
+        }
       }}
     >
       <View
