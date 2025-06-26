@@ -70,7 +70,6 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
               borderTopRightRadius: 8,
               flexDirection: "row",
               justifyContent: "space-between",
-              alignContent: "center",
             }}
           >
             <View

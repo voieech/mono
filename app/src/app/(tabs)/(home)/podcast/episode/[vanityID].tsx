@@ -143,7 +143,7 @@ export default function PodcastEpisode() {
           paddingVertical: 20,
           flexDirection: "row",
           justifyContent: "space-between",
-          alignContent: "center",
+          alignItems: "center",
         }}
       >
         <ThemedText

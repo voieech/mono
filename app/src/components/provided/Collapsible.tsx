@@ -42,8 +42,8 @@ export function Collapsible({
       {isOpen && (
         <ThemedView
           style={{
-            marginTop: 6,
-            marginLeft: 24,
+            paddingTop: 6,
+            paddingLeft: 24,
           }}
         >
           {children}
