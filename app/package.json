@@ -11,6 +11,7 @@
     "web": "npx expo start --web",
     "debug": "npx react-devtools",
     "sitemap": "npx expo-router-sitemap",
+    "typecheck": "npx tsc",
     "lint": "npx expo lint",
     "lint:fix": "npx expo lint --fix"
   },
