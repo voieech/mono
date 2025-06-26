@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { Switch, useWindowDimensions } from "react-native";
+import { Switch, useWindowDimensions, View } from "react-native";
 
 import type { ExperimentalSurfaceName } from "@/utils";
 
@@ -42,7 +42,7 @@ export default function Settings() {
       </Collapsible>
       {/* @todo Show if featureFlag is on for current user OR __DEV__ */}
       {__DEV__ && (
-        <Collapsible title="Internal" openByDefault>
+        <Collapsible title="Internal" openByDefault={__DEV__}>
           <ThemedView
             style={{
               rowGap: 8,
@@ -65,6 +65,7 @@ export default function Settings() {
             </Link>
             <SwitchSettingRow
               settingTitle="Show Debugging Surfaces"
+              description="Show internal visual debugging surfaces"
               switchValue={appDebuggingSurfaceContext.showDebuggingSurfaces}
               onValueChange={
                 appDebuggingSurfaceContext.setShowDebuggingSurfaces
@@ -72,10 +73,12 @@ export default function Settings() {
             />
             <ExperimentalSurfaceSettingRow
               settingTitle="Use 'card' player instead of 'modal'"
+              description="There is a bug on IOS where modal route gets warped with stack route in home page when switching between audio player modal and a route quickly"
               experimentalSurfaceName="use-card-player-instead-of-modal"
             />
             <ExperimentalSurfaceSettingRow
               settingTitle="Show all other generic experimental surfaces"
+              description="For every surface that didnt specify a custom experiment name"
               experimentalSurfaceName="default"
             />
           </ThemedView>
@@ -87,12 +90,16 @@ export default function Settings() {
 
 function ExperimentalSurfaceSettingRow(props: {
   settingTitle: string;
+  description?: string;
+  showDescriptionInsideRow?: boolean;
   experimentalSurfaceName: ExperimentalSurfaceName;
 }) {
   const experimentalSurfaceContext = useExperimentalSurfaceContext();
   return (
     <SwitchSettingRow
       settingTitle={props.settingTitle}
+      description={props.description}
+      showDescriptionInsideRow={props.showDescriptionInsideRow}
       switchValue={experimentalSurfaceContext.getShowExperimentalSurface(
         props.experimentalSurfaceName
       )}
@@ -108,36 +115,77 @@ function ExperimentalSurfaceSettingRow(props: {
 
 function SwitchSettingRow(props: {
   settingTitle: string;
+  description?: string;
+  showDescriptionInsideRow?: boolean;
   switchValue: boolean;
   onValueChange: (newValue: boolean) => any;
 }) {
   const windowDimensions = useWindowDimensions();
   return (
-    <ThemedView
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignContent: "center",
-      }}
-    >
-      <ThemedText
+    <>
+      <View
         style={{
-          width: windowDimensions.width * 0.6,
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignContent: "space-between",
+          alignItems: "center",
+          columnGap: 16,
+
+          paddingVertical: 8,
+          paddingHorizontal: 16,
+          backgroundColor: "black",
+          borderRadius: 16,
         }}
       >
-        {props.settingTitle}
-      </ThemedText>
-      <ThemedView>
-        <Switch
-          value={props.switchValue}
-          onValueChange={props.onValueChange}
-          thumbColor="#f4f3f4"
-          trackColor={{
-            false: "#ccc",
-            true: "#16a34a",
+        <View
+          style={{
+            flexBasis: windowDimensions.width * 0.5,
+            flexGrow: 1,
           }}
-        />
-      </ThemedView>
-    </ThemedView>
+        >
+          <ThemedText>{props.settingTitle}</ThemedText>
+          {props.description !== undefined &&
+            props.showDescriptionInsideRow && (
+              <ThemedText
+                style={{
+                  fontSize: 12,
+                  color: "#999",
+                }}
+              >
+                {props.description}
+              </ThemedText>
+            )}
+        </View>
+        <View
+          style={{
+            flexBasis: windowDimensions.width * 0.2,
+          }}
+        >
+          <Switch
+            value={props.switchValue}
+            onValueChange={props.onValueChange}
+            thumbColor="#f4f3f4"
+            trackColor={{
+              false: "#ccc",
+              true: "#16a34a",
+            }}
+          />
+        </View>
+      </View>
+      {props.description !== undefined && !props.showDescriptionInsideRow && (
+        <ThemedText
+          style={{
+            paddingHorizontal: 16,
+            marginTop: -4,
+            paddingBottom: 16,
+            fontSize: 14,
+            color: "#999",
+          }}
+        >
+          {props.description}
+        </ThemedText>
+      )}
+    </>
   );
 }
