@@ -188,11 +188,6 @@ export default function PodcastChannel() {
             ))}
           </>
         )}
-      <ThemedView
-        style={{
-          paddingBottom: 64,
-        }}
-      />
     </ParallaxScrollViewContainer>
   );
 }

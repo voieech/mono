@@ -186,11 +186,6 @@ export default function PodcastEpisode() {
         }}
       />
       <ThemedText>{episode.description}</ThemedText>
-      <ThemedView
-        style={{
-          paddingBottom: 64,
-        }}
-      />
     </ParallaxScrollViewContainer>
   );
 }

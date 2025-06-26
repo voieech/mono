@@ -77,6 +77,9 @@ export function ParallaxScrollViewContainer(
     <ThemedView
       style={{
         flex: 1,
+
+        // Add padding to push above the global overlay audio player.
+        paddingBottom: 64,
       }}
     >
       <Animated.ScrollView
