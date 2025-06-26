@@ -174,19 +174,17 @@ export default function HomeScreen() {
                   borderRadius: 16,
                 }}
               >
-                {episode.img_url !== null && (
-                  <Image
-                    source={episode.img_url}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      maxWidth: 128,
-                      borderTopLeftRadius: 16,
-                      borderBottomLeftRadius: 16,
-                    }}
-                    contentFit="cover"
-                  />
-                )}
+                <Image
+                  source={episode.img_url}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: 128,
+                    borderTopLeftRadius: 16,
+                    borderBottomLeftRadius: 16,
+                  }}
+                  contentFit="cover"
+                />
                 <ThemedView
                   style={{
                     flex: 1,

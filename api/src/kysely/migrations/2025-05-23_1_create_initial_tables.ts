@@ -92,7 +92,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("description", "text", (col) => col.notNull())
     .addColumn("audio_id", "text", (col) => col.notNull())
     .addColumn("channel_id", "text", (col) => col.notNull())
-    .addColumn("img_url", "text")
+    .addColumn("img_url", "text", (col) => col.notNull())
     .execute();
 }
 

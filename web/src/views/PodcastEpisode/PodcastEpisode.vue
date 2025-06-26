@@ -45,10 +45,7 @@ useHead({
       Error: {{ podcastEpisodeQuery.error.value?.message }}
     </div>
     <div v-else-if="podcastEpisodeQuery.data.value !== undefined">
-      <div
-        v-if="podcastEpisodeQuery.data.value.img_url !== null"
-        class="flow-row flex justify-center p-4"
-      >
+      <div class="flow-row flex justify-center p-4">
         <img
           class="w-32 rounded-2xl object-cover sm:w-48"
           :src="podcastEpisodeQuery.data.value.img_url"

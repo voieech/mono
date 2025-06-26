@@ -88,8 +88,7 @@ export default function PodcastEpisode() {
           url: episode.audio_public_url,
           title: episode.title,
           duration: episode.audio_length,
-          // @todo Remove backup once img_url is not nullable
-          artwork: episode.img_url ?? require("@/assets/images/logo.png"),
+          artwork: episode.img_url,
         })
       );
 
@@ -116,27 +115,25 @@ export default function PodcastEpisode() {
     <ParallaxScrollViewContainer
       headerHeightUseWidth={true}
       headerImage={
-        episode.img_url !== null && (
-          <ThemedView
-            style={{
-              // Set a width that is as wide as most devices, then let maxWidth
-              // constrain it to the "screen - horizontal padding"
-              width: 500,
-              maxWidth: "100%",
-              alignSelf: "center",
+        <ThemedView
+          style={{
+            // Set a width that is as wide as most devices, then let maxWidth
+            // constrain it to the "screen - horizontal padding"
+            width: 500,
+            maxWidth: "100%",
+            alignSelf: "center",
 
-              paddingBottom: 16,
+            paddingBottom: 16,
+          }}
+        >
+          <Image
+            source={episode.img_url}
+            style={{
+              aspectRatio: 1,
             }}
-          >
-            <Image
-              source={episode.img_url}
-              style={{
-                aspectRatio: 1,
-              }}
-              contentFit="contain"
-            />
-          </ThemedView>
-        )
+            contentFit="contain"
+          />
+        </ThemedView>
       }
     >
       <ThemedText type="subtitle">{episode.title}</ThemedText>

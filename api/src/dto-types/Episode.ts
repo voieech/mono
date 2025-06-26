@@ -11,8 +11,7 @@ export type Episode = {
   language: string;
   title: string;
   description: string;
-  // @todo $Nullable<string>
-  img_url: string | null;
+  img_url: string;
   channel_id: string;
   externally_hosted_links: Array<{
     podcast_platform: PodcastPlatform;

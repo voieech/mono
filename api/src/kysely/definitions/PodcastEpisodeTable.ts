@@ -21,8 +21,7 @@ export interface PodcastEpisodeTable {
   created_at: NonUpdatableDateTimeColumnType;
 
   /**
-   * A short ID for vanity (nice looking URL's that are short) that is globally
-   * unique per podcast episode.
+   * Globally unique short ID for vanity (nice looking URL's that are short)
    */
   vanity_id: NonUpdatableIdColumnType;
 
@@ -68,11 +67,12 @@ export interface PodcastEpisodeTable {
   channel_id: NonUpdatableIdColumnType;
 
   /**
-   * Optional URL of the episode image.
+   * URL of the episode image.
    *
-   * If `null`, should fall back to `PodcastChannel['img_url']`
+   * Set this to the same as `PodcastChannel['img_url']` if no new custom image
+   * is available for this episode.
    */
-  img_url: $Nullable<string>;
+  img_url: string;
 }
 
 export type PodcastEpisode = Selectable<PodcastEpisodeTable>;

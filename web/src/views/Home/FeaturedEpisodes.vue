@@ -70,7 +70,6 @@ const {
             class="flex h-full flex-row rounded-2xl border border-zinc-200 shadow-sm hover:shadow-2xl"
           >
             <img
-              v-if="episode.img_url !== null"
               class="w-32 rounded-l-2xl object-cover sm:w-40"
               :src="episode.img_url"
               alt="podcast episode image"
