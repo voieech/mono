@@ -14,6 +14,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   AppDebuggingSurfaceProvider,
   ExperimentalSurfaceProvider,
+  SettingsProvider,
 } from "@/components";
 import { useTheme } from "@/hooks";
 import { queryClient, posthog } from "@/utils";
@@ -61,8 +62,10 @@ export function AppRoot(props: PropsWithChildren) {
           >
             <AppDebuggingSurfaceProvider>
               <ExperimentalSurfaceProvider>
-                <StatusBar style="auto" />
-                {props.children}
+                <SettingsProvider>
+                  <StatusBar style="auto" />
+                  {props.children}
+                </SettingsProvider>
               </ExperimentalSurfaceProvider>
             </AppDebuggingSurfaceProvider>
           </GestureHandlerRootView>
