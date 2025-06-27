@@ -11,7 +11,6 @@ export function SettingsProvider(props: PropsWithChildren) {
     <SettingContext
       value={{
         settings,
-        settingState,
         getSetting(setting) {
           return settingState[setting];
         },

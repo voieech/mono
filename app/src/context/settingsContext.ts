@@ -57,7 +57,6 @@ export type SettingState = {
 
 export const SettingContext = createContext<{
   settings: typeof settings;
-  settingState: Partial<SettingState>;
   getSetting: <T extends SettingNames>(setting: T) => SettingState[T];
   updateSetting: <T extends SettingNames>(
     setting: T,
@@ -65,7 +64,6 @@ export const SettingContext = createContext<{
   ) => void;
 }>({
   settings,
-  settingState: {},
   getSetting: (_setting) => {
     throw new Error(
       "Cannot call SettingContext.getSetting outside of provider"
