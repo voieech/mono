@@ -1,24 +1,26 @@
 import { createContext, useContext } from "react";
 
-type DropdownSetting = {
-  type: "dropdown";
+export interface BaseSetting<T> {
+  type: string;
   name: string;
   description: string;
+  defaultValue: T;
+  onChange?: (oldValue: T, newValue: T) => unknown;
+}
+
+export interface DropdownSetting extends BaseSetting<string> {
+  type: "dropdown";
   options: Array<{
     value: string;
     name: string;
   }>;
-  defaultValue: string;
-};
+}
 
-type NumberSetting = {
+export interface NumericStringSetting extends BaseSetting<string> {
   type: "numeric-string";
-  name: string;
-  description: string;
-  defaultValue: string;
-};
+}
 
-type SettingUnion = DropdownSetting | NumberSetting;
+type SettingUnion = DropdownSetting | NumericStringSetting;
 
 export const settings = {
   externalMediaControls: {
