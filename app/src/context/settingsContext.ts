@@ -18,6 +18,8 @@ type NumberSetting = {
   defaultValue: string;
 };
 
+type SettingUnion = DropdownSetting | NumberSetting;
+
 export const settings = {
   externalMediaControls: {
     type: "dropdown",
@@ -41,7 +43,7 @@ export const settings = {
     description: "",
     defaultValue: "1",
   },
-} as const satisfies Record<string, DropdownSetting | NumberSetting>;
+} as const satisfies Record<string, SettingUnion>;
 
 export type SettingNames = keyof typeof settings;
 
