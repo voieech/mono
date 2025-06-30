@@ -20,29 +20,33 @@ export interface NumericStringSetting extends BaseSetting<string> {
 
 type SettingUnion = DropdownSetting | NumericStringSetting;
 
+export const externalMediaControls: DropdownSetting = {
+  type: "dropdown",
+  name: "",
+  description: "",
+  options: [
+    {
+      value: "jump-time",
+      name: "Show controls for jumping back and forth in 15 seconds intervals",
+    },
+    {
+      value: "skip-track",
+      name: "Show controls for skipping tracks to next/previous",
+    },
+  ],
+  defaultValue: "jump-time",
+};
+
+export const defaultPlaybackSpeed: NumericStringSetting = {
+  type: "numeric-string",
+  name: "",
+  description: "",
+  defaultValue: "1",
+};
+
 export const settings = {
-  externalMediaControls: {
-    type: "dropdown",
-    name: "",
-    description: "",
-    options: [
-      {
-        value: "jump-time",
-        name: "Show controls for jumping back and forth in 15 seconds intervals",
-      },
-      {
-        value: "skip-track",
-        name: "Show controls for skipping tracks to next/previous",
-      },
-    ],
-    defaultValue: "jump-time",
-  },
-  defaultPlaybackSpeed: {
-    type: "numeric-string",
-    name: "",
-    description: "",
-    defaultValue: "1",
-  },
+  externalMediaControls,
+  defaultPlaybackSpeed,
 } as const satisfies Record<string, SettingUnion>;
 
 export type SettingNames = keyof typeof settings;
