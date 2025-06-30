@@ -5,6 +5,8 @@ import TrackPlayer, {
   AppKilledPlaybackBehavior,
 } from "react-native-track-player";
 
+import { capabilitiesWithJump } from "@/utils/ReactNativeTrackPlayerCapabilitiesOptions";
+
 export async function setupReactNativeTrackPlayer() {
   TrackPlayer.registerPlaybackService(
     () =>
@@ -69,18 +71,9 @@ export async function setupReactNativeTrackPlayer() {
     iosCategory: IOSCategory.Playback,
   });
 
-  // @todo see all the options here
   TrackPlayer.updateOptions({
-    // Media controls capabilities
-    capabilities: [
-      Capability.Play,
-      Capability.Pause,
-      Capability.Stop,
-
-      // @todo Add setting for user to configure which do they prefer
-      // ...[Capability.SkipToNext, Capability.SkipToPrevious],
-      ...[Capability.JumpForward, Capability.JumpBackward, Capability.SeekTo],
-    ],
+    // @todo Read past settings instead of always setting to default value
+    capabilities: capabilitiesWithJump,
 
     // Android only: Capabilities shown when notification is in compact form
     compactCapabilities: [Capability.Play, Capability.Pause],
