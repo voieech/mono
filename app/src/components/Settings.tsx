@@ -1,6 +1,7 @@
 import { useState, type PropsWithChildren } from "react";
 
-import { settings, SettingContext, type SettingState } from "@/context";
+import { SettingContext } from "@/context";
+import { settings, type SettingState } from "@/utils";
 
 export function SettingsProvider(props: PropsWithChildren) {
   const [settingState, setSettingState] = useState<SettingState>({
