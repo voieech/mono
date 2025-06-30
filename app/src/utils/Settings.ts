@@ -3,7 +3,7 @@ export interface BaseSetting<T> {
   name: string;
   description: string;
   defaultValue: T;
-  onChange?: (oldValue: T, newValue: T) => unknown;
+  onChange?: (newValue: T, oldValue: T) => unknown;
 }
 
 export interface DropdownSetting extends BaseSetting<string> {
