@@ -6,10 +6,10 @@ export interface BaseSetting<T> {
   onChange?: (newValue: T, oldValue: T) => unknown;
 }
 
-export interface DropdownSetting extends BaseSetting<string> {
+export interface DropdownSetting<T = string> extends BaseSetting<T> {
   type: "dropdown";
   options: Array<{
-    value: string;
+    value: T;
     name: string;
   }>;
 }
@@ -18,9 +18,11 @@ export interface NumericStringSetting extends BaseSetting<string> {
   type: "numeric-string";
 }
 
-type SettingUnion = DropdownSetting | NumericStringSetting;
+type SettingUnion = DropdownSetting<any> | NumericStringSetting;
 
-export const externalMediaControls: DropdownSetting = {
+export const externalMediaControls: DropdownSetting<
+  "jump-time" | "skip-track"
+> = {
   type: "dropdown",
   name: "",
   description: "",
