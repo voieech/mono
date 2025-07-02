@@ -20,6 +20,14 @@ export function SettingsProvider(props: PropsWithChildren) {
             ...state,
             [setting]: value,
           }));
+
+          // Call the onChange callback, the types are widened to be `any` here
+          // since the types can be generic on the extended Setting interfaces
+          // e.g. a string literal type is used
+          settings[setting]?.onChange?.(
+            settingState[setting] as any,
+            value as any
+          );
         },
       }}
     >
