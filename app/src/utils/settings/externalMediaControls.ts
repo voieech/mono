@@ -1,4 +1,4 @@
-import TrackPlayer from "react-native-track-player/lib/src/trackPlayer";
+import TrackPlayer from "react-native-track-player";
 
 import type { DropdownSetting } from "./types/DropdownSetting";
 
