@@ -6,12 +6,6 @@ import { isThemeFixed, DefaultTheme } from "@/constants/FixedTheme";
  * Wrapper over native `useColorScheme` to always give a value back, defaulting
  * to light theme if unable to load a color scheme.
  */
-export function useTheme() {
-  const colorScheme = useColorScheme() ?? DefaultTheme;
-
-  if (isThemeFixed) {
-    return DefaultTheme;
-  }
-
-  return colorScheme;
-}
+export const useTheme = isThemeFixed
+  ? () => DefaultTheme
+  : () => useColorScheme() ?? DefaultTheme;
