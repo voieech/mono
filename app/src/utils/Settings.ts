@@ -1,3 +1,7 @@
+import TrackPlayer from "react-native-track-player";
+
+import { capabilitiesWithJump, capabilitiesWithSkip } from "@/utils";
+
 export interface BaseSetting<T> {
   /**
    * String literal value type used to differentiate between the different
@@ -48,6 +52,20 @@ export const externalMediaControls: DropdownSetting<
     },
   ],
   defaultValue: "jump-time",
+  onChange(newValue) {
+    const capabilities =
+      newValue === "jump-time"
+        ? capabilitiesWithJump
+        : newValue === "skip-track"
+        ? capabilitiesWithSkip
+        : null;
+
+    if (capabilities === null) {
+      throw new Error(`Invalid Settings Value found: ${newValue}`);
+    }
+
+    TrackPlayer.updateOptions({ capabilities });
+  },
 };
 
 export const defaultPlaybackSpeed: NumericStringSetting = {
