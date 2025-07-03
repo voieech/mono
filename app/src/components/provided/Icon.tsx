@@ -31,6 +31,7 @@ const SfSymbolsToMaterialIconsMapping = {
   shuffle: "shuffle",
   repeat: "repeat",
   "repeat.1": "repeat-one",
+  checkmark: "check",
 
   // Using satisfies and partial to ensure that users can only use icons after
   // they added the SF->MI mapping here.

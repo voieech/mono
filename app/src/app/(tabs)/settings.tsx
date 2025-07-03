@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { Switch, useWindowDimensions, View } from "react-native";
+import { Pressable, Switch, useWindowDimensions, View } from "react-native";
 
 import type { ExperimentalSurfaceName } from "@/utils";
 
@@ -11,11 +11,13 @@ import {
   ThemedView,
 } from "@/components";
 import {
+  useSettingContext,
   useAppDebuggingSurfaceContext,
   useExperimentalSurfaceContext,
 } from "@/context";
 
 export default function Settings() {
+  const settingContext = useSettingContext();
   const appDebuggingSurfaceContext = useAppDebuggingSurfaceContext();
   return (
     <ParallaxScrollViewContainer
@@ -37,8 +39,50 @@ export default function Settings() {
       }}
     >
       <ThemedText type="title">Settings</ThemedText>
-      <Collapsible title="Audio Playback">
+      <Collapsible title="Audio Playback" openByDefault>
         <ThemedText>Default audio playback speed: {1}</ThemedText>
+        <View>
+          <ThemedText>External Audio controls</ThemedText>
+          {settingContext.settings.externalMediaControls.options.map(
+            (option) => (
+              <Pressable
+                key={option.value}
+                onPress={() => {
+                  settingContext.updateSetting(
+                    "externalMediaControls",
+                    option.value,
+                  );
+                }}
+              >
+                <View
+                  style={{
+                    paddingRight: 24,
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <ThemedText
+                      style={{
+                        paddingRight: 16,
+                      }}
+                    >
+                      {option.name}
+                    </ThemedText>
+                    {option.value ===
+                      settingContext.getSetting("externalMediaControls") && (
+                      <Icon name="checkmark" color="#16a34a" />
+                    )}
+                  </View>
+                </View>
+              </Pressable>
+            ),
+          )}
+        </View>
       </Collapsible>
       {/* @todo Show if featureFlag is on for current user OR __DEV__ */}
       {__DEV__ && (
