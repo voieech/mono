@@ -39,7 +39,14 @@ export default function Settings() {
       }}
     >
       <ThemedText type="title">Settings</ThemedText>
-      <Collapsible title="Audio Playback" openByDefault>
+      <Collapsible
+        title="Audio Playback"
+        openByDefault
+        expandedViewStyle={{
+          rowGap: 16,
+          paddingBottom: 32,
+        }}
+      >
         <ThemedText>Default audio playback speed: {1}</ThemedText>
         <View>
           <ThemedText>External Audio controls</ThemedText>

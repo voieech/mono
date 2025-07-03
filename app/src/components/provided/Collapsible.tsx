@@ -1,5 +1,5 @@
 import { PropsWithChildren, useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, type ViewStyle } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -12,6 +12,7 @@ export function Collapsible(
   props: PropsWithChildren<{
     title: string;
     openByDefault?: boolean;
+    expandedViewStyle?: ViewStyle;
   }>,
 ) {
   const [isOpen, setIsOpen] = useState(props.openByDefault ?? false);
@@ -40,10 +41,13 @@ export function Collapsible(
       </TouchableOpacity>
       {isOpen && (
         <ThemedView
-          style={{
-            paddingTop: 6,
-            paddingLeft: 24,
-          }}
+          style={[
+            {
+              paddingTop: 6,
+              paddingLeft: 24,
+            },
+            props.expandedViewStyle,
+          ]}
         >
           {props.children}
         </ThemedView>
