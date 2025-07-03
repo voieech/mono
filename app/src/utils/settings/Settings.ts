@@ -18,7 +18,7 @@ export type SettingNames = keyof typeof settings;
  * the 'type' string literal type field in each Settings interface.
  */
 export type SettingState = {
-  -readonly [K in SettingNames]: (typeof settings)[K] extends {
+  [K in SettingNames]: (typeof settings)[K] extends {
     type: "dropdown";
   }
     ? string
