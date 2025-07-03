@@ -11,6 +11,19 @@ export const settings = {
   defaultPlaybackSpeed,
 } as const satisfies Record<string, SettingUnion>;
 
+/**
+ * Default setting state using values from the `settings` objects' `defaulValue`
+ * properties.
+ */
+export const defaultSettingState = Object.entries(settings).reduce(
+  (partialSettingState, settingEntry) => {
+    const [settingName, setting] = settingEntry as [SettingNames, SettingUnion];
+    partialSettingState[settingName] = setting.defaultValue;
+    return partialSettingState;
+  },
+  {} as Partial<SettingState>
+) as SettingState;
+
 export type SettingNames = keyof typeof settings;
 
 /**

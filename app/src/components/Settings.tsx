@@ -1,13 +1,11 @@
 import { useState, type PropsWithChildren } from "react";
 
 import { SettingContext } from "@/context";
-import { settings, type SettingState } from "@/utils";
+import { settings, defaultSettingState, type SettingState } from "@/utils";
 
 export function SettingsProvider(props: PropsWithChildren) {
-  const [settingState, setSettingState] = useState<SettingState>({
-    externalMediaControls: "jump-time",
-    defaultPlaybackSpeed: "1",
-  });
+  const [settingState, setSettingState] =
+    useState<SettingState>(defaultSettingState);
   return (
     <SettingContext
       value={{
