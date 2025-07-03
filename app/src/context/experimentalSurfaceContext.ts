@@ -14,25 +14,25 @@ export const ExperimentalSurfaceContext = createContext<{
    * return type will always be a clean boolean without undefined.
    */
   getShowExperimentalSurface: (
-    experimentalSurfaceName: ExperimentalSurfaceName
+    experimentalSurfaceName: ExperimentalSurfaceName,
   ) => boolean;
   /**
    * Setter for a specific experimental surface
    */
   setShowExperimentalSurface: (
     experimentalSurfaceName: ExperimentalSurfaceName,
-    showExperimentalSurface: boolean
+    showExperimentalSurface: boolean,
   ) => void;
 }>({
   experimentalSurfaces: {},
   getShowExperimentalSurface: () => {
     throw new Error(
-      "Cannot call ExperimentalSurfaceContext.getShowExperimentalSurface outside of provider"
+      "Cannot call ExperimentalSurfaceContext.getShowExperimentalSurface outside of provider",
     );
   },
   setShowExperimentalSurface: () => {
     throw new Error(
-      "Cannot call ExperimentalSurfaceContext.setShowExperimentalSurfaces outside of provider"
+      "Cannot call ExperimentalSurfaceContext.setShowExperimentalSurfaces outside of provider",
     );
   },
 });

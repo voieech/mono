@@ -60,7 +60,7 @@ export function LiveAudioProgressSlider__DEPRECATED(props: {
       // updating, and using setTimeout for a next tick effect
       setTimeout(startUpdating, 10);
     },
-    [setPosition, startUpdating]
+    [setPosition, startUpdating],
   );
 
   const cleanUpTimer = useCallback(() => {

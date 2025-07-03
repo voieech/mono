@@ -53,7 +53,7 @@ export function AudioPlayer() {
       }
       TrackPlayer.seekTo(newPosition);
     },
-    [positionAsInt, audioLength]
+    [positionAsInt, audioLength],
   );
 
   if (activeTrack === undefined) {
@@ -105,7 +105,7 @@ export function AudioPlayer() {
               }
               default:
                 throw new Error(
-                  `Unimplemented track type: ${activeTrack.trackType}`
+                  `Unimplemented track type: ${activeTrack.trackType}`,
                 );
             }
           }}

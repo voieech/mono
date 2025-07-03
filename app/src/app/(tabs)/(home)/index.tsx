@@ -14,7 +14,7 @@ export default function HomeScreen() {
     async queryFn() {
       // ?lang=${i18n.locale.value}
       const res = await fetch(
-        `${apiBaseUrl}/v1/landing-page/featured-channels/`
+        `${apiBaseUrl}/v1/landing-page/featured-channels/`,
       );
 
       if (!res.ok) {
@@ -42,7 +42,7 @@ export default function HomeScreen() {
     async queryFn() {
       // ?lang=${i18n.locale.value}
       const res = await fetch(
-        `${apiBaseUrl}/v1/landing-page/featured-episodes/`
+        `${apiBaseUrl}/v1/landing-page/featured-episodes/`,
       );
 
       if (!res.ok) {

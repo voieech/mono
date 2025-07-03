@@ -27,7 +27,7 @@ export function FullScreenLoader(props: {
   useEffect(() => {
     const timer = setTimeout(
       () => setShowLoader(true),
-      props.delayInMsBeforeShowingLoader ?? 500
+      props.delayInMsBeforeShowingLoader ?? 500,
     );
     return () => clearTimeout(timer);
   }, [props.delayInMsBeforeShowingLoader]);

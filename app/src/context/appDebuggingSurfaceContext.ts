@@ -10,7 +10,7 @@ export const AppDebuggingSurfaceContext = createContext<{
    */
   setShowDebuggingSurfaces: () => {
     throw new Error(
-      "Cannot call AppDebuggingSurfaceContext.setShowDebuggingSurfaces outside of provider"
+      "Cannot call AppDebuggingSurfaceContext.setShowDebuggingSurfaces outside of provider",
     );
   },
 });

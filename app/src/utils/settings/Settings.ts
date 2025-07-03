@@ -21,7 +21,7 @@ export const defaultSettingState = Object.entries(settings).reduce(
     partialSettingState[settingName] = setting.defaultValue;
     return partialSettingState;
   },
-  {} as Partial<SettingState>
+  {} as Partial<SettingState>,
 ) as SettingState;
 
 export type SettingNames = keyof typeof settings;
@@ -36,6 +36,6 @@ export type SettingState = {
   }
     ? string
     : (typeof settings)[K] extends { type: "numeric-string" }
-    ? string
-    : never;
+      ? string
+      : never;
 };

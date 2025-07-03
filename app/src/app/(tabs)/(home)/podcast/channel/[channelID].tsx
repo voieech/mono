@@ -42,7 +42,7 @@ export default function PodcastChannel() {
     queryKey: ["podcast", "channel-episodes", channelID],
     async queryFn() {
       const res = await fetch(
-        `${apiBaseUrl}/v1/podcast/channel/episodes/${channelID}`
+        `${apiBaseUrl}/v1/podcast/channel/episodes/${channelID}`,
       );
 
       if (!res.ok) {

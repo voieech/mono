@@ -29,8 +29,8 @@ export const externalMediaControls: DropdownSetting<
       newValue === "jump-time"
         ? capabilitiesWithJump
         : newValue === "skip-track"
-        ? capabilitiesWithSkip
-        : null;
+          ? capabilitiesWithSkip
+          : null;
 
     if (capabilities === null) {
       throw new Error(`Invalid Settings Value found: ${newValue}`);

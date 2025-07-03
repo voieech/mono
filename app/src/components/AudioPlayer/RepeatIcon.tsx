@@ -8,7 +8,7 @@ import { Icon } from "@/components/provided";
 
 export function RepeatIcon() {
   const [repeatMode, setRepeatModeState] = useState<PlayerRepeatMode>(
-    PlayerRepeatMode.Off
+    PlayerRepeatMode.Off,
   );
   const [isPressDisabled, setIsPressDisabled] = useState(false);
 
@@ -24,7 +24,7 @@ export function RepeatIcon() {
         setIsPressDisabled(false);
       });
     },
-    [setIsPressDisabled, setRepeatModeState]
+    [setIsPressDisabled, setRepeatModeState],
   );
 
   switch (repeatMode) {

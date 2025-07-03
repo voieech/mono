@@ -89,12 +89,12 @@ export default function PodcastEpisode() {
           title: episode.title,
           duration: episode.audio_length,
           artwork: episode.img_url,
-        })
+        }),
       );
 
       await TrackPlayer.play();
     },
-    [episode, isCurrentEpisodeTheActiveTrack]
+    [episode, isCurrentEpisodeTheActiveTrack],
   );
 
   const playerState = usePlaybackState().state;

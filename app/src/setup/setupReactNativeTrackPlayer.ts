@@ -63,7 +63,7 @@ export async function setupReactNativeTrackPlayer() {
         });
 
         console.log("RNTP PlaybackService registered");
-      }
+      },
   );
 
   // @todo see all the options here

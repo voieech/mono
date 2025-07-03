@@ -39,7 +39,7 @@ export function ParallaxScrollViewContainer(
      * can apply styles.
      */
     innerContentStyle?: ViewProps["style"];
-  }>
+  }>,
 ) {
   const colorScheme = useTheme();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -48,7 +48,7 @@ export function ParallaxScrollViewContainer(
   const { width } = useWindowDimensions();
   const headerHeight = props.headerHeightUseWidth
     ? width
-    : props.headerHeight ?? 250;
+    : (props.headerHeight ?? 250);
   const headerAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -56,14 +56,14 @@ export function ParallaxScrollViewContainer(
           translateY: interpolate(
             scrollOffset.value,
             [-headerHeight, 0, headerHeight],
-            [-headerHeight / 2, 0, headerHeight * 0.75]
+            [-headerHeight / 2, 0, headerHeight * 0.75],
           ),
         },
         {
           scale: interpolate(
             scrollOffset.value,
             [-headerHeight, 0, headerHeight],
-            [2, 1, 1]
+            [2, 1, 1],
           ),
         },
       ],

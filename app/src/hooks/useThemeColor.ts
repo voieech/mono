@@ -9,7 +9,7 @@ import { useTheme } from "./useTheme";
 
 export function useThemeColor(
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark,
-  customColors?: { light?: string; dark?: string }
+  customColors?: { light?: string; dark?: string },
 ) {
   const theme = useTheme();
   const customColor = customColors?.[theme];

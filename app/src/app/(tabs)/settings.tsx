@@ -101,12 +101,12 @@ function ExperimentalSurfaceSettingRow(props: {
       description={props.description}
       showDescriptionInsideRow={props.showDescriptionInsideRow}
       switchValue={experimentalSurfaceContext.getShowExperimentalSurface(
-        props.experimentalSurfaceName
+        props.experimentalSurfaceName,
       )}
       onValueChange={(value) =>
         experimentalSurfaceContext.setShowExperimentalSurface(
           props.experimentalSurfaceName,
-          value
+          value,
         )
       }
     />

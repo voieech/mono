@@ -20,18 +20,18 @@ export const SettingContext = createContext<{
    */
   updateSetting: <T extends SettingNames>(
     setting: T,
-    value: SettingState[T]
+    value: SettingState[T],
   ) => void;
 }>({
   settings,
   getSetting: (_setting) => {
     throw new Error(
-      "Cannot call SettingContext.getSetting outside of provider"
+      "Cannot call SettingContext.getSetting outside of provider",
     );
   },
   updateSetting(_setting, _value) {
     throw new Error(
-      "Cannot call SettingContext.updateSetting outside of provider"
+      "Cannot call SettingContext.updateSetting outside of provider",
     );
   },
 });

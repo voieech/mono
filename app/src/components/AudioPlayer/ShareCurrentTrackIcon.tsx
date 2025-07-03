@@ -10,7 +10,7 @@ export function ShareCurrentTrackIcon(props: {
   async function onShare() {
     try {
       const result = await Share.share(
-        generateShareSheetObjectForTrack(props.activeTrack)
+        generateShareSheetObjectForTrack(props.activeTrack),
       );
 
       // @todo Log to analytics
@@ -47,7 +47,7 @@ function generateShareSheetObjectForTrack(track: TrackWithMetadata) {
     }
     default:
       throw new Error(
-        `Unimplemented share sheet generation for trackType: ${track.trackType}`
+        `Unimplemented share sheet generation for trackType: ${track.trackType}`,
       );
   }
 }

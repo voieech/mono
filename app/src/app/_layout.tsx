@@ -6,7 +6,7 @@ import { useExperimentalSurfaceContext } from "@/context";
 function RootLayout() {
   const useCardPlayerInsteadOfModal =
     useExperimentalSurfaceContext().getShowExperimentalSurface(
-      "use-card-player-instead-of-modal"
+      "use-card-player-instead-of-modal",
     );
 
   return (

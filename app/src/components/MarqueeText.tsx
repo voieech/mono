@@ -52,7 +52,7 @@ export function MarqueeText(
      * Set styles for the inner `ThemedText` component as needed
      */
     textStyle?: TextStyle;
-  }>
+  }>,
 ) {
   const [parentWidth, setParentWidth] = useState<null | number>(null);
   const [shouldScroll, setShouldScroll] = useState(false);
@@ -107,7 +107,7 @@ export function MarqueeText(
                   // Using scroll speed to implement delay before scroll start
                   setTimeout(
                     () => setScrollSpeed(props.scrollSpeed ?? 0.2),
-                    props.delayInMsBeforeScrollStart
+                    props.delayInMsBeforeScrollStart,
                   );
 
                   // This technically works but causes UI flash/jank when the

@@ -29,7 +29,7 @@ export interface TrackWithPodcastEpisode extends ExtendedTrack {
 export type TrackWithMetadata = TrackWithPodcastEpisode;
 
 export function createTrackWithMetadata<const T extends TrackWithMetadata>(
-  track: T
+  track: T,
 ) {
   return track as TrackWithMetadata;
 }
