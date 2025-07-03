@@ -7,15 +7,13 @@ import { Colors } from "@/constants";
 
 import { Icon } from "./Icon";
 
-export function Collapsible({
-  children,
-  title,
-  openByDefault,
-}: PropsWithChildren & {
-  title: string;
-  openByDefault?: boolean;
-}) {
-  const [isOpen, setIsOpen] = useState(openByDefault ?? false);
+export function Collapsible(
+  props: PropsWithChildren<{
+    title: string;
+    openByDefault?: boolean;
+  }>,
+) {
+  const [isOpen, setIsOpen] = useState(props.openByDefault ?? false);
   const theme = useColorScheme() ?? "light";
 
   return (
@@ -37,7 +35,7 @@ export function Collapsible({
           style={{ transform: [{ rotate: isOpen ? "90deg" : "0deg" }] }}
         />
 
-        <ThemedText type="defaultSemiBold">{title}</ThemedText>
+        <ThemedText type="defaultSemiBold">{props.title}</ThemedText>
       </TouchableOpacity>
       {isOpen && (
         <ThemedView
@@ -46,7 +44,7 @@ export function Collapsible({
             paddingLeft: 24,
           }}
         >
-          {children}
+          {props.children}
         </ThemedView>
       )}
     </ThemedView>
