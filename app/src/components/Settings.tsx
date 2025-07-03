@@ -25,8 +25,8 @@ export function SettingsProvider(props: PropsWithChildren) {
           // since the types can be generic on the extended Setting interfaces
           // e.g. a string literal type is used
           settings[setting]?.onChange?.(
+            value as any,
             settingState[setting] as any,
-            value as any
           );
         },
       }}
