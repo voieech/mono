@@ -47,11 +47,21 @@ export interface PodcastChannelTable {
 
   /**
    * Category, e.g. "Technology"
+   *
+   * This will always be in english, and users will see the localised string in
+   * app when we return / display in the UI according to the `language` column
+   * (also because Apple Podcast only allow a list of fixed categories in
+   * english).
    */
   category: string;
 
   /**
    * Optional subcategory, e.g. "Daily News"
+   *
+   * This will always be in english, and users will see the localised string in
+   * app when we return / display in the UI according to the `language` column
+   * (also because Apple Podcast only allow a list of fixed categories in
+   * english).
    */
   subcategory: $Nullable<string>;
 }
