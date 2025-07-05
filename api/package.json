@@ -11,6 +11,7 @@
     "build:server": "npx tsc",
     "build": "npm run delete-build-cache && npm run build:server",
     "db:migrate": "npx tsx ./src/kysely/migration-cli/kyselyMigrationCli.ts",
+    "db:seed": "npx tsx ./src/kysely/seed/runSeed.ts",
     "lint": "npx eslint",
     "lint:fix": "npx eslint --fix",
     "reverse-proxy": "npx ngrok http 3000"
