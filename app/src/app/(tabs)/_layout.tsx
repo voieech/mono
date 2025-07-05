@@ -61,10 +61,20 @@ export default function TabLayout() {
           }),
         }}
         tabBar={(props) => {
-          // @todo 49 and 32 are the hardcoded values
-          // 40 is the midpoint between the 2
-          // const tabBarHeight = 49 + props.insets.bottom;
-          // const tabBarHeight = 32 + props.insets.bottom;
+          // The player overlay needs to float on top of the tab bar, which
+          // means it needs to know the height of the tab bar to do that.
+          // The height of the tab bar is dynamically set internally if it is
+          // not supplied depending on things like device type, rotation, etc...
+          // The recommended way of getting the actual tab bar height is to use
+          // the provided hook, but since the hook cannot be used outside of the
+          // context provider, this does not work, since we need to get the
+          // height of the tab bar before the tab bar is created.
+          // So looking through the tab bar implementation, it seems like there
+          // is 2 hardcoded height values, 49 and 32. So the easiest solution is
+          // to just find the midpoint between the 2 hardcoded values (40) and
+          // use this as the hardcoded height value for both the tab bar and the
+          // player overlay's buffer, and do away with relying on the dynamic
+          // tab bar height that is only available after component creation.
           const tabBarHeight = 40 + props.insets.bottom;
 
           return (
