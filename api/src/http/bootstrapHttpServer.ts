@@ -111,7 +111,7 @@ export function bootstrapHttpServer() {
       const episode = await apiDB
         .selectFrom("podcast_episode")
         .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
-        .innerJoin(
+        .leftJoin(
           "podcast_episode_externally_hosted_link",
           "podcast_episode.id",
           "podcast_episode_externally_hosted_link.podcast_episode_id",
