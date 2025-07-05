@@ -78,7 +78,13 @@ useHead({
         </div>
       </div>
 
-      <div v-if="!podcastChannelEpisodesQuery.isError.value" class="pb-8">
+      <div
+        v-if="
+          !podcastChannelEpisodesQuery.isError.value &&
+          podcastChannelEpisodesQuery.data.value?.length !== 0
+        "
+        class="pb-8"
+      >
         <p class="pb-2 text-lg font-medium text-zinc-800">
           {{ $t("common.Featured") }}
         </p>
