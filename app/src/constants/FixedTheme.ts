@@ -7,4 +7,4 @@ export const isThemeFixed = true;
 /**
  * For now, temporarily only support dark mode.
  */
-export const DefaultTheme = "dark";
+export const DefaultTheme = "dark" as const;
