@@ -20,7 +20,7 @@ export const SettingContext = createContext<{
    */
   updateSetting: <T extends SettingNames>(
     setting: T,
-    value: SettingState[T],
+    newValue: SettingState[T],
   ) => void;
 }>({
   settings,
@@ -29,7 +29,7 @@ export const SettingContext = createContext<{
       "Cannot call SettingContext.getSetting outside of provider",
     );
   },
-  updateSetting(_setting, _value) {
+  updateSetting(_setting, _newValue) {
     throw new Error(
       "Cannot call SettingContext.updateSetting outside of provider",
     );

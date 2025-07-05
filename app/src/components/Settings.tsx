@@ -13,17 +13,17 @@ export function SettingsProvider(props: PropsWithChildren) {
         getSetting(setting) {
           return settingState[setting];
         },
-        updateSetting(setting, value) {
+        updateSetting(setting, newValue) {
           setSettingState((state) => ({
             ...state,
-            [setting]: value,
+            [setting]: newValue,
           }));
 
           // Call the onChange callback, the types are widened to be `any` here
           // since the types can be generic on the extended Setting interfaces
           // e.g. a string literal type is used
           settings[setting]?.onChange?.(
-            value as any,
+            newValue as any,
             settingState[setting] as any,
           );
         },
