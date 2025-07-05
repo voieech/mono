@@ -12,18 +12,8 @@ export const settings = {
 } as const satisfies Record<string, SettingUnion>;
 
 /**
- * Default setting state using values from the `settings` objects' `defaulValue`
- * properties.
+ * Union type of all the setting name string literals
  */
-export const defaultSettingState = Object.entries(settings).reduce(
-  (partialSettingState, settingEntry) => {
-    const [settingName, setting] = settingEntry as [SettingNames, SettingUnion];
-    partialSettingState[settingName] = setting.defaultValue;
-    return partialSettingState;
-  },
-  {} as Partial<SettingState>,
-) as SettingState;
-
 export type SettingNames = keyof typeof settings;
 
 /**
@@ -39,3 +29,16 @@ export type SettingState = {
       ? string
       : never;
 };
+
+/**
+ * Default setting state using values from the `settings` objects' `defaulValue`
+ * properties.
+ */
+export const defaultSettingState = Object.entries(settings).reduce(
+  (partialSettingState, settingEntry) => {
+    const [settingName, setting] = settingEntry as [SettingNames, SettingUnion];
+    partialSettingState[settingName] = setting.defaultValue;
+    return partialSettingState;
+  },
+  {} as Partial<SettingState>,
+) as SettingState;
