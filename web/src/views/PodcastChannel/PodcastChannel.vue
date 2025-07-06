@@ -152,6 +152,23 @@ useHead({
         </div>
       </div>
 
+      <div class="pb-12">
+        <a :href="`voieech://podcast/channel/${channelID}`" target="_blank">
+          <div
+            class="flex w-full flex-row items-center gap-4 rounded-full border border-zinc-200 bg-zinc-50 p-4 shadow-lg"
+          >
+            <img
+              class="h-8 w-8 sm:h-12 sm:w-12"
+              src="../../assets/app-icon.png"
+              alt="app icon"
+            />
+            <div class="w-full">
+              <p>Voieech App</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
       <div>
         <p class="pb-2 pl-4 text-sm font-light text-zinc-400 italic">
           {{ $t("common.ExternalPodcastPlatforms") }}
