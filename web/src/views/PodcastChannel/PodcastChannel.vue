@@ -12,6 +12,7 @@ import {
   PodcastEpisodeRoute,
   PodcastChannelEpisodesRoute,
 } from "@/router";
+import { createAppLink } from "@/utils/links";
 
 import PlatformCard from "./PlatformCard.vue";
 
@@ -153,7 +154,7 @@ useHead({
       </div>
 
       <div class="pb-12">
-        <a :href="`voieech://podcast/channel/${channelID}`" target="_blank">
+        <a :href="createAppLink.forPodcastChannel(channelID)" target="_blank">
           <div
             class="flex w-full flex-row items-center gap-4 rounded-full border border-zinc-200 bg-zinc-50 p-4 shadow-lg"
           >

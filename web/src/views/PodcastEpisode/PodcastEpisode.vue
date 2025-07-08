@@ -8,6 +8,7 @@ import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { usePodcastEpisode } from "@/composables/usePodcastEpisode";
 import { HomeRoute } from "@/router";
+import { createAppLink } from "@/utils/links";
 
 import PlatformCard from "./PlatformCard.vue";
 import WebPlayer from "./WebPlayer.vue";
@@ -114,7 +115,7 @@ useHead({
       </div>
 
       <div class="pb-12">
-        <a :href="`voieech://podcast/episode/${vanityID}`" target="_blank">
+        <a :href="createAppLink.forPodcastEpisode(vanityID)" target="_blank">
           <div
             class="flex w-full flex-row items-center gap-4 rounded-full border border-zinc-200 bg-zinc-50 p-4 shadow-lg"
           >
