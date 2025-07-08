@@ -91,7 +91,10 @@ useHead({
         </p>
         <div class="flex flex-col gap-4">
           <template
-            v-for="episode of podcastChannelEpisodesQuery.data.value"
+            v-for="episode of podcastChannelEpisodesQuery.data.value?.slice(
+              0,
+              3,
+            )"
             :key="episode.id"
           >
             <RouterLink
