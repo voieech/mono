@@ -6,11 +6,11 @@ import { useRoute, useRouter } from "vue-router";
 
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import ExternallyHostedPlatformCard from "@/components/ExternallyHostedPlatformCard.vue";
 import { usePodcastEpisode } from "@/composables/usePodcastEpisode";
 import { HomeRoute } from "@/router";
 import { createAppLink } from "@/utils/links";
 
-import PlatformCard from "./PlatformCard.vue";
 import WebPlayer from "./WebPlayer.vue";
 
 const i18n = useI18n({ useScope: "global" });
@@ -141,7 +141,7 @@ useHead({
           :url="podcastEpisodeQuery.data.value.audio_public_url"
         />
 
-        <PlatformCard
+        <ExternallyHostedPlatformCard
           class="pb-4"
           v-for="platform in podcastEpisodeQuery.data.value
             .externally_hosted_links"

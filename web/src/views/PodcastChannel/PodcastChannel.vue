@@ -5,6 +5,7 @@ import { useRoute, useRouter, RouterLink } from "vue-router";
 
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import ExternallyHostedPlatformCard from "@/components/ExternallyHostedPlatformCard.vue";
 import { usePodcastChannel } from "@/composables/usePodcastChannel";
 import { usePodcastChannelEpisodes } from "@/composables/usePodcastChannelEpisodes";
 import {
@@ -13,8 +14,6 @@ import {
   PodcastChannelEpisodesRoute,
 } from "@/router";
 import { createAppLink } from "@/utils/links";
-
-import PlatformCard from "./PlatformCard.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -193,8 +192,7 @@ useHead({
           {{ $t("common.ExternalPodcastPlatforms") }}
         </p>
 
-        <!-- @todo -->
-        <PlatformCard
+        <ExternallyHostedPlatformCard
           class="pb-4"
           v-for="platform in [{ podcast_platform: 'spotify' as any, url: '' }]"
           :key="platform.podcast_platform"

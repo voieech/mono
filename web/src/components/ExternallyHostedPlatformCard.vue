@@ -6,7 +6,7 @@ const props = defineProps<{
 }>();
 
 const imageLink = new URL(
-  `../../assets/platform-logo/${props.platform.podcast_platform}.png`,
+  `../assets/platform-logo/${props.platform.podcast_platform}.png`,
   import.meta.url,
 ).href;
 </script>
@@ -18,7 +18,7 @@ const imageLink = new URL(
         class="flex w-full flex-row items-center gap-4 rounded-full border border-zinc-200 bg-zinc-50 p-4 shadow-lg"
       >
         <img
-          class="h-8 w-8 sm:h-12 sm:w-12"
+          class="h-6 w-6 sm:h-8 sm:w-8"
           :src="imageLink"
           :alt="`${props.platform.podcast_platform}-icon`"
         />
