@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npx expo start",
+    "expo:prebuild-clean": "npx expo prebuild --clean",
     "android": "npx expo run:android",
     "ios": "npx expo run:ios",
     "ios:device": "npx expo run:ios --device",
