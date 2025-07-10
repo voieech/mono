@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { appLink } from "../../utils/links.ts";
+import { createAppLink } from "../../utils/links.ts";
 </script>
 
 <template>
@@ -29,7 +29,7 @@ import { appLink } from "../../utils/links.ts";
 
       <div class="pt-4">
         <a
-          :href="appLink"
+          :href="createAppLink.base()"
           target="_blank"
           class="bg-primary cursor-pointer rounded-full px-20 py-2.5 text-xl font-light text-zinc-500 hover:shadow-2xl lg:py-3 lg:text-2xl"
         >
