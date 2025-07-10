@@ -1,12 +1,12 @@
 export const signupLink = "";
 
-export const appLink = "";
+export const appSlug = "voieech";
 
 export const createAppLink = {
   forPodcastChannel(channelID: string) {
-    return `voieech://podcast/channel/${channelID}`;
+    return `${appSlug}://podcast/channel/${channelID}`;
   },
   forPodcastEpisode(vanityID: string) {
-    return `voieech://podcast/episode/${vanityID}`;
+    return `${appSlug}://podcast/episode/${vanityID}`;
   },
 };
