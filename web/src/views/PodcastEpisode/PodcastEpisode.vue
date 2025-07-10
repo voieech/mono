@@ -89,7 +89,37 @@ useHead({
           {{ $t("common.mins") }}
         </p>
 
-        <div class="py-2"></div>
+        <div class="py-4 sm:py-8">
+          <a :href="createAppLink.forPodcastEpisode(vanityID)" target="_blank">
+            <div
+              class="flex w-full flex-row items-center gap-4 rounded-full border border-zinc-200 bg-zinc-50 p-4 py-3 shadow-lg"
+            >
+              <img
+                class="h-6 w-6 sm:h-8 sm:w-8"
+                src="../../assets/app-icon.png"
+                alt="app icon"
+              />
+              <div class="flex w-full flex-row items-center justify-between">
+                <p>Listen on Voieech App</p>
+                <svg
+                  class="h-6 w-6 shrink-0 rotate-90 text-yellow-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5 5 1 1 5"
+                  />
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
 
         <p
           class="text-sm leading-relaxed font-light"
