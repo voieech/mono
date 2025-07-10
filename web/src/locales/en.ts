@@ -35,6 +35,7 @@ export default {
     ChannelImage: "Channel Image",
     see_all_episodes: "see all episodes",
     browse_on_voieech_app: "Browse on Voieech App",
+    listen_on_voieech_app: "Listen on Voieech App",
   },
 
   PodcastChannelEpisodes: {

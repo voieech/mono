@@ -100,7 +100,7 @@ useHead({
                 alt="app icon"
               />
               <div class="flex w-full flex-row items-center justify-between">
-                <p>Listen on Voieech App</p>
+                <p>{{ $t("PodcastChannel.listen_on_voieech_app") }}</p>
                 <svg
                   class="h-6 w-6 shrink-0 rotate-90 text-yellow-400"
                   aria-hidden="true"

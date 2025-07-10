@@ -21,6 +21,7 @@ export default {
     ChannelImage: "频道图片",
     see_all_episodes: "查看所有剧集",
     browse_on_voieech_app: "在 Voieech 应用上浏览",
+    listen_on_voieech_app: "在 Voieech 应用上收听",
   },
 
   PodcastChannelEpisodes: {
