@@ -34,7 +34,6 @@ export default {
 
     WebPlayer: {
       name: "Voieech 网络播放器",
-      preferred: "推荐",
       Control: "控制",
       SkipBackward: "跳回几秒",
       SkipForward: "跳前几秒",

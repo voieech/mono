@@ -48,7 +48,6 @@ export default {
 
     WebPlayer: {
       name: "Voieech Web Player",
-      preferred: "preferred",
       Control: "Control",
       SkipBackward: "Skip Backward",
       SkipForward: "Skip Forward",
