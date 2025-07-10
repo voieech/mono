@@ -41,19 +41,21 @@ export function AudioPlayer() {
       if (audioLength === undefined) {
         return;
       }
+      TrackPlayer.seekBy(jumpInterval);
 
-      const newPosition = positionAsInt + jumpInterval;
-      if (newPosition < 0) {
-        TrackPlayer.seekTo(0);
-        return;
-      }
-      if (newPosition > audioLength) {
-        TrackPlayer.seekTo(audioLength);
-        return;
-      }
-      TrackPlayer.seekTo(newPosition);
+      // Alternative way that works abit better with syncing to IOS media player
+      // const newPosition = positionAsInt + jumpInterval;
+      // if (newPosition < 0) {
+      //   await TrackPlayer.seekTo(0);
+      //   return;
+      // }
+      // if (newPosition > audioLength) {
+      //   await TrackPlayer.seekTo(audioLength);
+      //   return;
+      // }
+      // await TrackPlayer.seekTo(newPosition);
     },
-    [positionAsInt, audioLength],
+    [audioLength],
   );
 
   if (activeTrack === undefined) {
