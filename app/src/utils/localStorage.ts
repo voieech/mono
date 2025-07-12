@@ -30,4 +30,4 @@ export const localStorage = {
       return [e as Error, null] as const;
     }
   },
-};
+} as const;
