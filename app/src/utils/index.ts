@@ -3,6 +3,7 @@
  */
 
 export * from "./ExperimentalSurfaceName";
+export * from "./localStorage";
 export * from "./posthog";
 export * from "./queryClient";
 export * from "./ReactNativeTrackPlayerCapabilitiesOptions";
