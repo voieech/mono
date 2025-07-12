@@ -12,11 +12,15 @@ export const localStorage = {
     }
   },
 
-  async readData(key: string) {
+  async readData<T = any>(key: string) {
     try {
-      const jsonValue = await AsyncStorage.getItem(key);
-      const value = jsonValue != null ? JSON.parse(jsonValue) : null;
-      return [null, value] as const;
+      const value = await AsyncStorage.getItem(key);
+      if (value === null) {
+        throw new Error(`[localStorage] No data for key: ${key}`);
+      }
+
+      const jsonValue = JSON.parse(value);
+      return [null, jsonValue as T] as const;
     } catch (e) {
       console.error(e);
       return [e as Error, null] as const;
