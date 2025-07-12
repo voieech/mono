@@ -16,12 +16,17 @@ import {
   Icon,
   AudioPlayer,
 } from "@/components";
+import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
 export default function AudioPlayerModal() {
   const windowDimensions = useWindowDimensions();
   const activeTrack = useActiveTrackWithMetadata();
   const [modalVisible, setModalVisible] = useState(false);
+  const useCardPlayerInsteadOfModal =
+    useExperimentalSurfaceContext().getShowExperimentalSurface(
+      "use-card-player-instead-of-modal",
+    );
   return (
     <SafeScrollViewContainer>
       {/*
@@ -44,7 +49,12 @@ export default function AudioPlayerModal() {
           <Pressable
             onPress={() => router.dismissTo(router.canGoBack() ? ".." : "/")}
           >
-            <Icon name="chevron.down" color="white" />
+            <Icon
+              name={
+                useCardPlayerInsteadOfModal ? "chevron.left" : "chevron.down"
+              }
+              color="white"
+            />
           </Pressable>
           <ThemedText
             style={{
