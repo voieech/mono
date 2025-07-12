@@ -42,6 +42,28 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
         }
       }}
     >
+      {/*
+        @todo
+        Alternative modal implementation instead of relying on router modal
+        the problem with this is that using "SafeScrollViewContainer" in another
+        "SafeScrollViewContainer" will cause the safe area view to not work, and
+        we would also need to implement our own gesture control for closing the
+        modal, but the end state would probably be better since it will avoid
+        the modal switching bug.
+      */}
+      {/* <SafeScrollViewContainer>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(false);
+          }}
+        >
+          <AudioPlayerModal onClose={() => setModalVisible(false)} />
+        </Modal>
+      </SafeScrollViewContainer> */}
+
       <View
         style={{
           flex: 1,
