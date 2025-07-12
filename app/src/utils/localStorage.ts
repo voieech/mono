@@ -1,6 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const localStorage = {
+  notFoundErrorName: "NotFound",
+
   async writeData(key: string, value: any) {
     try {
       const jsonValue = JSON.stringify(value);
@@ -16,7 +18,9 @@ export const localStorage = {
     try {
       const value = await AsyncStorage.getItem(key);
       if (value === null) {
-        throw new Error(`[localStorage] No data for key: ${key}`);
+        const err = new Error(`[localStorage] No data for key: ${key}`);
+        err.name = this.notFoundErrorName;
+        throw err;
       }
 
       const jsonValue = JSON.parse(value);
