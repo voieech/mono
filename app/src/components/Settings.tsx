@@ -1,4 +1,4 @@
-import { useState, type PropsWithChildren } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
 
 import { SettingContext } from "@/context";
 import {
@@ -6,11 +6,30 @@ import {
   defaultSettingState,
   type SettingState,
   posthog,
+  localStorage,
 } from "@/utils";
 
 export function SettingsProvider(props: PropsWithChildren) {
   const [settingState, setSettingState] =
     useState<SettingState>(defaultSettingState);
+
+  useEffect(() => {
+    localStorage
+      .readData<SettingState>("settings")
+      .then(async ([err, data]) => {
+        if (err !== null) {
+          // Only on first use, since setting data not in local storage yet, we
+          // will write the default settings in
+          if (err.name === localStorage.notFoundErrorName) {
+            await localStorage.writeData("settings", defaultSettingState);
+          }
+          return;
+        }
+
+        setSettingState(data);
+      });
+  }, [setSettingState]);
+
   return (
     <SettingContext
       value={{
