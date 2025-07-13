@@ -40,10 +40,12 @@ export function SettingsProvider(props: PropsWithChildren) {
         updateSetting(setting, newValue) {
           const oldValue = settingState[setting] as any;
 
-          setSettingState((state) => ({
-            ...state,
+          const newSetting = {
+            ...settingState,
             [setting]: newValue,
-          }));
+          };
+          setSettingState(newSetting);
+          localStorage.writeData("settings", newSetting);
 
           // Call the onChange callback, the types are widened to be `any` here
           // since the types can be generic on the extended Setting interfaces
