@@ -55,4 +55,7 @@ export const settingsInLocalStorage = {
   update(settings: SettingState) {
     return localStorage.writeData(this.settingsStorageKey, settings);
   },
+  resetToDefault() {
+    return this.update(defaultSettingState);
+  },
 } as const;

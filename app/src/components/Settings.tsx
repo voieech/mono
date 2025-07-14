@@ -15,19 +15,18 @@ export function SettingsProvider(props: PropsWithChildren) {
     useState<SettingState>(defaultSettingState);
 
   useEffect(() => {
-    settingsInLocalStorage.read()
-      .then(async ([err, data]) => {
-        if (err !== null) {
-          // Only on first use, since setting data not in local storage yet, we
-          // will write the default settings in
-          if (err.name === localStorage.notFoundErrorName) {
-            await settingsInLocalStorage.update(defaultSettingState);
-          }
-          return;
+    settingsInLocalStorage.read().then(async ([err, data]) => {
+      if (err !== null) {
+        // Only on first use, since setting data not in local storage yet, we
+        // will write the default settings in
+        if (err.name === localStorage.notFoundErrorName) {
+          await settingsInLocalStorage.resetToDefault();
         }
+        return;
+      }
 
-        setSettingState(data);
-      });
+      setSettingState(data);
+    });
   }, [setSettingState]);
 
   return (
