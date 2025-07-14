@@ -1,5 +1,6 @@
 import type { SettingUnion } from "./types/SettingUnion";
 
+import { localStorage } from "../localStorage";
 import { defaultPlaybackSpeed } from "./defaultPlaybackSpeed";
 import { externalMediaControls } from "./externalMediaControls";
 
@@ -42,3 +43,16 @@ export const defaultSettingState = Object.entries(settings).reduce(
   },
   {} as Partial<SettingState>,
 ) as SettingState;
+
+/**
+ * Wrapper around `localStorage` API for settings
+ */
+export const settingsInLocalStorage = {
+  settingsStorageKey: "settings",
+  read() {
+    return localStorage.readData<SettingState>(this.settingsStorageKey);
+  },
+  update(settings: SettingState) {
+    return localStorage.writeData(this.settingsStorageKey, settings);
+  },
+} as const;

@@ -4,6 +4,7 @@ import { SettingContext } from "@/context";
 import {
   settings,
   defaultSettingState,
+  settingsInLocalStorage,
   type SettingState,
   posthog,
   localStorage,
@@ -14,14 +15,13 @@ export function SettingsProvider(props: PropsWithChildren) {
     useState<SettingState>(defaultSettingState);
 
   useEffect(() => {
-    localStorage
-      .readData<SettingState>("settings")
+    settingsInLocalStorage.read()
       .then(async ([err, data]) => {
         if (err !== null) {
           // Only on first use, since setting data not in local storage yet, we
           // will write the default settings in
           if (err.name === localStorage.notFoundErrorName) {
-            await localStorage.writeData("settings", defaultSettingState);
+            await settingsInLocalStorage.update(defaultSettingState);
           }
           return;
         }
@@ -45,7 +45,7 @@ export function SettingsProvider(props: PropsWithChildren) {
             [setting]: newValue,
           };
           setSettingState(newSetting);
-          localStorage.writeData("settings", newSetting);
+          settingsInLocalStorage.update(newSetting);
 
           // Call the onChange callback, the types are widened to be `any` here
           // since the types can be generic on the extended Setting interfaces
