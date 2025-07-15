@@ -31,13 +31,16 @@ export function ExperimentalSurfaceProvider(props: PropsWithChildren) {
   const [experimentalSurfaces, setExperimentalSurfaces] = useState<
     Record<string, boolean>
   >({});
+
+  const getShowExperimentalSurface = (
+    experimentalSurfaceName: ExperimentalSurfaceName,
+  ) => experimentalSurfaces[experimentalSurfaceName] ?? __DEV__;
+
   return (
     <ExperimentalSurfaceContext
       value={{
         experimentalSurfaces,
-        getShowExperimentalSurface(experimentalSurfaceName) {
-          return experimentalSurfaces[experimentalSurfaceName] ?? __DEV__;
-        },
+        getShowExperimentalSurface,
         setShowExperimentalSurface(
           experimentalSurfaceName,
           showExperimentalSurface,
