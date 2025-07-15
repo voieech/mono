@@ -1,4 +1,4 @@
-import { useState, type PropsWithChildren } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
 
 import type { ExperimentalSurfaceName } from "@/utils";
 
@@ -6,7 +6,7 @@ import {
   useExperimentalSurfaceContext,
   ExperimentalSurfaceContext,
 } from "@/context";
-import { posthog } from "@/utils";
+import { experimentalSurfaceInLocalStorage, posthog } from "@/utils";
 
 /**
  * Wrapper component to conditionally show your children/wrapper component
@@ -33,6 +33,10 @@ export function ExperimentalSurfaceProvider(props: PropsWithChildren) {
     Record<string, boolean>
   >({});
 
+  useEffect(() => {
+    experimentalSurfaceInLocalStorage.read().then(setExperimentalSurfaces);
+  }, [setExperimentalSurfaces]);
+
   const getShowExperimentalSurface = (
     experimentalSurfaceName: ExperimentalSurfaceName,
   ) => experimentalSurfaces[experimentalSurfaceName] ?? __DEV__;
@@ -46,10 +50,12 @@ export function ExperimentalSurfaceProvider(props: PropsWithChildren) {
           experimentalSurfaceName,
           showExperimentalSurface,
         ) {
-          setExperimentalSurfaces((state) => ({
-            ...state,
+          const newState = {
+            ...experimentalSurfaces,
             [experimentalSurfaceName]: showExperimentalSurface,
-          }));
+          };
+          setExperimentalSurfaces(newState);
+          experimentalSurfaceInLocalStorage.update(newState);
 
           posthog.capture("experimental_surface_update", {
             experimentalSurfaceName,
