@@ -12,7 +12,7 @@ export abstract class LocalStorageWrapper<T> {
    * default value to localStorage if no data is read the first time.
    */
   async read() {
-    const [err, data] = await localStorage.readData<T>(this._storageKey);
+    const [err, data] = await localStorage.read<T>(this._storageKey);
 
     if (err !== null) {
       // Only on first use, since data not in local storage yet, we will write
@@ -34,7 +34,7 @@ export abstract class LocalStorageWrapper<T> {
   }
 
   update(value: T) {
-    return localStorage.writeData(this._storageKey, value);
+    return localStorage.write(this._storageKey, value);
   }
 
   resetToDefault() {

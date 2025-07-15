@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const localStorage = {
   notFoundErrorName: "NotFound",
 
-  async writeData(key: string, value: any) {
+  async write(key: string, value: any) {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(key, jsonValue);
@@ -14,7 +14,7 @@ export const localStorage = {
     }
   },
 
-  async readData<T = any>(key: string) {
+  async read<T = any>(key: string) {
     try {
       const value = await AsyncStorage.getItem(key);
       if (value === null) {
