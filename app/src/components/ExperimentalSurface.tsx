@@ -6,6 +6,7 @@ import {
   useExperimentalSurfaceContext,
   ExperimentalSurfaceContext,
 } from "@/context";
+import { posthog } from "@/utils";
 
 /**
  * Wrapper component to conditionally show your children/wrapper component
@@ -49,6 +50,12 @@ export function ExperimentalSurfaceProvider(props: PropsWithChildren) {
             ...state,
             [experimentalSurfaceName]: showExperimentalSurface,
           }));
+
+          posthog.capture("experimental_surface_update", {
+            experimentalSurfaceName,
+            from: getShowExperimentalSurface(experimentalSurfaceName),
+            to: showExperimentalSurface,
+          });
         },
       }}
     >
