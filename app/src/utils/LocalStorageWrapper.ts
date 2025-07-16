@@ -33,10 +33,17 @@ export abstract class LocalStorageWrapper<T> {
     return data;
   }
 
+  /**
+   * Update the value as a whole
+   */
   update(value: T) {
     return localStorage.write(this._storageKey, value);
   }
 
+  /**
+   * Reset the value in localStorage back to the `_defaultValue` property set on
+   * this class.
+   */
   resetToDefault() {
     return this.update(this._defaultValue);
   }
