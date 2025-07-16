@@ -7,6 +7,7 @@ import TrackPlayer, {
   useProgress,
 } from "react-native-track-player";
 
+import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
 import { PauseButton } from "./PauseButton";
@@ -18,6 +19,10 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const router = useRouter();
+  const useCardPlayerInsteadOfModal =
+    useExperimentalSurfaceContext().getShowExperimentalSurface(
+      "use-card-player-instead-of-modal",
+    );
 
   // Only if there is no active track do we disable the overlay
   if (activeTrack === undefined) {
@@ -32,6 +37,11 @@ export function PlayerOverlay(props: { tabBarHeight: number }) {
       // Use these to implement open modal on swipe up
       onPressIn={(evt) => (startY.current = evt.nativeEvent.pageY)}
       onPressOut={(evt) => {
+        // Disable when using card/page style UI for audio player
+        if (useCardPlayerInsteadOfModal) {
+          return;
+        }
+
         // Small threshold since the overlay is small, so we can detect any
         // swipe ups as a swipe up motion
         const swipeUpPixelTriggerThreshold = 1;
