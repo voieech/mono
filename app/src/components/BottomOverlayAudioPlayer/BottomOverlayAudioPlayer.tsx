@@ -1,17 +1,16 @@
 import { useRouter } from "expo-router";
 import { useRef } from "react";
-import { View, Text, Pressable, useWindowDimensions } from "react-native";
+import { Pressable, View, Text, useWindowDimensions } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
 
+import { Icon } from "@/components/provided";
 import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
 import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerProgessBar";
-import { PauseButton } from "./PauseButton";
-import { PlayButton } from "./PlayButton";
 
 export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
   const startY = useRef(0);
@@ -138,9 +137,27 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                 any other) state to paused state.
               */}
               {playerState === PlayerState.Playing ? (
-                <PauseButton onPress={TrackPlayer.pause} size={24} />
+                <Pressable onPress={TrackPlayer.pause}>
+                  <Icon
+                    name="pause.fill"
+                    color="white"
+                    size={24}
+                    style={{
+                      height: "100%",
+                    }}
+                  />
+                </Pressable>
               ) : (
-                <PlayButton onPress={TrackPlayer.play} size={24} />
+                <Pressable onPress={TrackPlayer.play}>
+                  <Icon
+                    name="play.fill"
+                    color="white"
+                    size={24}
+                    style={{
+                      height: "100%",
+                    }}
+                  />
+                </Pressable>
               )}
             </View>
           </View>
