@@ -21,6 +21,10 @@ import {
   AudioPlayerJumpBackwardButton,
   AudioPlayerJumpForwardButton,
 } from "./AudioPlayerJumpButton";
+import {
+  AudioPlayerSkipPreviousButton,
+  AudioPlayerSkipNextButton,
+} from "./AudioPlayerSkipButtons";
 import { AudioPlayerTime } from "./AudioPlayerTime";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
@@ -33,7 +37,6 @@ export function AudioPlayer() {
   const playerState = usePlaybackState().state;
   const progress = useProgress();
 
-  const positionAsInt = Math.trunc(progress.position);
   const durationAsInt = Math.trunc(progress.duration);
   const bufferedAsInt = Math.trunc(progress.buffered);
 
@@ -148,16 +151,7 @@ export function AudioPlayer() {
           justifyContent: "space-between",
         }}
       >
-        <Pressable
-          // @todo Make this a configurable setting
-          onPress={() =>
-            positionAsInt > 3
-              ? TrackPlayer.seekTo(0)
-              : TrackPlayer.skipToPrevious()
-          }
-        >
-          <Icon name="backward.end.fill" color="white" />
-        </Pressable>
+        <AudioPlayerSkipPreviousButton />
         <AudioPlayerJumpBackwardButton />
         {/*
           Even if player is not paused, i.e. it is loading or whatever show the
@@ -178,9 +172,7 @@ export function AudioPlayer() {
           />
         )}
         <AudioPlayerJumpForwardButton />
-        <Pressable onPress={() => TrackPlayer.skipToNext()}>
-          <Icon name="forward.end.fill" color="white" />
-        </Pressable>
+        <AudioPlayerSkipNextButton />
       </ThemedView>
 
       <AppDebuggingSurface>
