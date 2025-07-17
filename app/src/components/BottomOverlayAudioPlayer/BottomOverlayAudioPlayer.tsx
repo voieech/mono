@@ -4,12 +4,12 @@ import { View, Text, Pressable, useWindowDimensions } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
   usePlaybackState,
-  useProgress,
 } from "react-native-track-player";
 
 import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
+import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerProgessBar";
 import { PauseButton } from "./PauseButton";
 import { PlayButton } from "./PlayButton";
 
@@ -151,25 +151,10 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
               width: "100%",
             }}
           >
-            <MiniProgessBar />
+            <BottomOverlayAudioPlayerProgessBar />
           </View>
         </View>
       </View>
     </Pressable>
-  );
-}
-
-function MiniProgessBar() {
-  // Get progress at a higher frequency to show a smoother moving progress bar
-  const progress = useProgress(100);
-  const progressBarPercentage = (progress.position / progress.duration) * 100;
-  return (
-    <View
-      style={{
-        height: 2,
-        backgroundColor: "#d4d4d8",
-        width: `${progressBarPercentage}%`,
-      }}
-    />
   );
 }
