@@ -13,7 +13,7 @@ import { useActiveTrackWithMetadata } from "@/hooks";
 import { PauseButton } from "./PauseButton";
 import { PlayButton } from "./PlayButton";
 
-export function PlayerOverlay(props: { tabBarHeight: number }) {
+export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
   const startY = useRef(0);
   const { width } = useWindowDimensions();
   const activeTrack = useActiveTrackWithMetadata();

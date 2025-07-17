@@ -6,7 +6,7 @@ import {
   Icon,
   TabBarBackground,
   ThemedView,
-  PlayerOverlay,
+  BottomOverlayAudioPlayer,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useTheme } from "@/hooks";
@@ -79,7 +79,7 @@ export default function TabLayout() {
 
           return (
             <ThemedView>
-              <PlayerOverlay tabBarHeight={tabBarHeight} />
+              <BottomOverlayAudioPlayer tabBarHeight={tabBarHeight} />
               <BottomTabBar
                 {...props}
                 // Custom tab bar height using the same formula as the library
