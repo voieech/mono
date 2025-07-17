@@ -17,9 +17,9 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
+import { AudioPlayerTime } from "./AudioPlayerTime";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
-import { convertSecondsToMSS } from "./convertSecondsToMSS";
 import { RepeatIcon } from "./RepeatIcon";
 import { ShareCurrentTrackIcon } from "./ShareCurrentTrackIcon";
 
@@ -33,8 +33,6 @@ export function AudioPlayer() {
   const positionAsInt = Math.trunc(progress.position);
   const durationAsInt = Math.trunc(progress.duration);
   const bufferedAsInt = Math.trunc(progress.buffered);
-  const currentPos = convertSecondsToMSS(positionAsInt);
-  const remainingTime = convertSecondsToMSS(durationAsInt - positionAsInt);
 
   const jump = useCallback(
     function (jumpInterval: number) {
@@ -159,15 +157,7 @@ export function AudioPlayer() {
         duration={durationAsInt}
       />
 
-      <ThemedView
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <ThemedText style={{ fontSize: 12 }}>{currentPos}</ThemedText>
-        <ThemedText style={{ fontSize: 12 }}>-{remainingTime}</ThemedText>
-      </ThemedView>
+      <AudioPlayerTime />
 
       <ThemedView
         style={{
