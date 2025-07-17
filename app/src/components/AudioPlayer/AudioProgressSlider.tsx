@@ -2,11 +2,14 @@ import { Slider } from "@react-native-assets/slider";
 import { useEffect, useState } from "react";
 import TrackPlayer from "react-native-track-player";
 
+import type { TrackWithMetadata } from "@/utils";
+
 export function AudioProgressSlider(props: {
   defaultTrackPosition: number;
   updateInterval: number;
-  duration: number;
+  activeTrack: TrackWithMetadata;
 }) {
+  const durationAsInt = Math.trunc(props.activeTrack.duration);
   const [position, setPosition] = useState(props.defaultTrackPosition);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ export function AudioProgressSlider(props: {
   return (
     <Slider
       minimumValue={0}
-      maximumValue={props.duration}
+      maximumValue={durationAsInt}
       //
       value={position}
       //

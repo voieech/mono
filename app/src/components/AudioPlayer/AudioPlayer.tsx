@@ -4,7 +4,6 @@ import { Pressable } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
   usePlaybackState,
-  useProgress,
 } from "react-native-track-player";
 
 import { ExperimentalSurface } from "@/components/ExperimentalSurface";
@@ -33,9 +32,6 @@ export function AudioPlayer() {
   const router = useRouter();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
-  const progress = useProgress();
-
-  const durationAsInt = Math.trunc(progress.duration);
 
   if (activeTrack === undefined) {
     return null;
@@ -135,7 +131,7 @@ export function AudioPlayer() {
         defaultTrackPosition={0}
         // Setting high polling frequency so that the slider animation is smooth
         updateInterval={100}
-        duration={durationAsInt}
+        activeTrack={activeTrack}
       />
 
       <AudioPlayerTime />
