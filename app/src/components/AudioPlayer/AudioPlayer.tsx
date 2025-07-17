@@ -1,7 +1,7 @@
 import { Slider } from "@react-native-assets/slider";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
@@ -17,6 +17,10 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
+import {
+  AudioPlayerJumpBackwardButton,
+  AudioPlayerJumpForwardButton,
+} from "./AudioPlayerJumpButton";
 import { AudioPlayerTime } from "./AudioPlayerTime";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
@@ -29,32 +33,9 @@ export function AudioPlayer() {
   const playerState = usePlaybackState().state;
   const progress = useProgress();
 
-  const audioLength = activeTrack?.duration;
   const positionAsInt = Math.trunc(progress.position);
   const durationAsInt = Math.trunc(progress.duration);
   const bufferedAsInt = Math.trunc(progress.buffered);
-
-  const jump = useCallback(
-    function (jumpInterval: number) {
-      if (audioLength === undefined) {
-        return;
-      }
-      TrackPlayer.seekBy(jumpInterval);
-
-      // Alternative way that works abit better with syncing to IOS media player
-      // const newPosition = positionAsInt + jumpInterval;
-      // if (newPosition < 0) {
-      //   await TrackPlayer.seekTo(0);
-      //   return;
-      // }
-      // if (newPosition > audioLength) {
-      //   await TrackPlayer.seekTo(audioLength);
-      //   return;
-      // }
-      // await TrackPlayer.seekTo(newPosition);
-    },
-    [audioLength],
-  );
 
   if (activeTrack === undefined) {
     return null;
@@ -177,9 +158,7 @@ export function AudioPlayer() {
         >
           <Icon name="backward.end.fill" color="white" />
         </Pressable>
-        <Pressable onPress={() => jump(-10)}>
-          <Icon name="gobackward.10" color="white" size={48} />
-        </Pressable>
+        <AudioPlayerJumpBackwardButton />
         {/*
           Even if player is not paused, i.e. it is loading or whatever show the
           play symbol to prevent fast flashing when changing from loading (or
@@ -198,9 +177,7 @@ export function AudioPlayer() {
             outerBackgroundSize={20}
           />
         )}
-        <Pressable onPress={() => jump(10)}>
-          <Icon name="goforward.10" color="white" size={48} />
-        </Pressable>
+        <AudioPlayerJumpForwardButton />
         <Pressable onPress={() => TrackPlayer.skipToNext()}>
           <Icon name="forward.end.fill" color="white" />
         </Pressable>
