@@ -9,14 +9,13 @@ import TrackPlayer, {
   useProgress,
 } from "react-native-track-player";
 
-import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
 import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
-import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
+import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
 import {
   AudioPlayerJumpBackwardButton,
   AudioPlayerJumpForwardButton,
@@ -38,7 +37,6 @@ export function AudioPlayer() {
   const progress = useProgress();
 
   const durationAsInt = Math.trunc(progress.duration);
-  const bufferedAsInt = Math.trunc(progress.buffered);
 
   if (activeTrack === undefined) {
     return null;
@@ -175,12 +173,7 @@ export function AudioPlayer() {
         <AudioPlayerSkipNextButton />
       </ThemedView>
 
-      <AppDebuggingSurface>
-        <ThemedText>
-          Buffered: {bufferedAsInt}s{"\n"}
-          Total: {durationAsInt}s
-        </ThemedText>
-      </AppDebuggingSurface>
+      <AudioPlayerDebugger />
     </ThemedView>
   );
 }
