@@ -10,13 +10,8 @@ import {
  * depending on whether the `AppDebuggingSurfaceContext`'s showDebuggingSurfaces
  * setting is set to true/false.
  */
-export function AppDebuggingSurface(props: PropsWithChildren) {
-  const appDebuggingSurfaceContext = useAppDebuggingSurfaceContext();
-  if (!appDebuggingSurfaceContext.showDebuggingSurfaces) {
-    return null;
-  }
-  return props.children;
-}
+export const AppDebuggingSurface = (props: PropsWithChildren) =>
+  useAppDebuggingSurfaceContext().showDebuggingSurfaces ? props.children : null;
 
 export function AppDebuggingSurfaceProvider(props: PropsWithChildren) {
   const [showDebuggingSurfaces, setShowDebuggingSurfaces] = useState(__DEV__);
