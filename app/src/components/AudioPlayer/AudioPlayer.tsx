@@ -6,6 +6,7 @@ import TrackPlayer, {
   usePlaybackState,
 } from "react-native-track-player";
 
+import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
 import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
@@ -168,7 +169,9 @@ export function AudioPlayer() {
         <AudioPlayerSkipNextButton />
       </ThemedView>
 
-      <AudioPlayerDebugger />
+      <AppDebuggingSurface>
+        <AudioPlayerDebugger />
+      </AppDebuggingSurface>
     </ThemedView>
   );
 }
