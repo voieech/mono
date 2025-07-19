@@ -33,8 +33,8 @@ export type SettingState = {
 };
 
 /**
- * Default setting state using values from the `settings` objects' `defaulValue`
- * properties.
+ * Default setting state using values from the `settings` objects'
+ * `defaultValue` properties.
  */
 export const defaultSettingState = Object.entries(settings).reduce(
   (partialSettingState, settingEntry) => {
