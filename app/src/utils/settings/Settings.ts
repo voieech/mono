@@ -21,13 +21,13 @@ export type SettingNames = keyof typeof settings;
  * the 'type' string literal type field in each Settings interface.
  */
 export type SettingState = {
-  [K in SettingNames]: (typeof settings)[K] extends {
-    type: "dropdown";
-  }
-    ? string
-    : (typeof settings)[K] extends { type: "numeric-string" }
+  [K in SettingNames]: (typeof settings)[K] extends { type: "boolean-switch" }
+    ? boolean
+    : (typeof settings)[K] extends { type: "dropdown" }
       ? string
-      : never;
+      : (typeof settings)[K] extends { type: "numeric-string" }
+        ? string
+        : never;
 };
 
 /**
