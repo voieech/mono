@@ -4,22 +4,17 @@ import type { Track } from "react-native-track-player";
 import type { RemoveIndexSignature, MakeSomeFieldsRequired } from "@/types";
 
 /**
- * Track without the Index signature to make it easier to extend since the index
+ * `ExtendedTrack` type removes index fields, makes some fields required, and
+ * adds a required `id` field to uniquely identify every single track.
+ *
+ * Removing the Index signature to make it easier to extend since the index
  * signature make the entire object's keyof type into generic `string` and all
  * values into generic `any`.
  */
-type StrictTrack = RemoveIndexSignature<Track>;
-
-/**
- * ExtendedTrack type that makes some fields required, and adds a required `id`
- * field to uniquely identify every single track.
- */
 type ExtendedTrack = MakeSomeFieldsRequired<
-  StrictTrack,
+  RemoveIndexSignature<Track>,
   "artist" | "url" | "title" | "duration" | "artwork"
-> & {
-  id: string;
-};
+> & { id: string };
 
 export interface TrackWithPodcastEpisode extends ExtendedTrack {
   trackType: "podcast_episode";
