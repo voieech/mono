@@ -2,6 +2,7 @@ import type { SettingUnion } from "./types/SettingUnion";
 
 import { defaultPlaybackSpeed } from "./defaultPlaybackSpeed";
 import { externalMediaControls } from "./externalMediaControls";
+import { rewindToStartOnSkipPrevious } from "./rewindToStartOnSkipPrevious";
 
 /**
  * Settings objects holding all possible setting values
@@ -9,6 +10,7 @@ import { externalMediaControls } from "./externalMediaControls";
 export const settings = {
   externalMediaControls,
   defaultPlaybackSpeed,
+  rewindToStartOnSkipPrevious,
 } as const satisfies Record<string, SettingUnion>;
 
 /**
