@@ -6,22 +6,26 @@ import type { TrackWithMetadata } from "@/utils";
 
 export function AudioProgressSlider(props: {
   defaultTrackPosition: number;
-  updateInterval: number;
   activeTrack: TrackWithMetadata;
 }) {
   const durationAsInt = Math.trunc(props.activeTrack.duration);
   const [position, setPosition] = useState(props.defaultTrackPosition);
 
   useEffect(() => {
-    const intervalID = setInterval(() => {
-      TrackPlayer.getProgress()
-        .then(({ position }) => setPosition(position))
-        // This only throw if you haven't yet setup RNTP, ignore failure
-        .catch(() => {});
-    }, props.updateInterval);
+    const intervalID = setInterval(
+      () => {
+        TrackPlayer.getProgress()
+          .then(({ position }) => setPosition(position))
+          // This only throw if you haven't yet setup RNTP, ignore failure
+          .catch(() => {});
+      },
+
+      // Setting high polling frequency so that the slider animation is smooth
+      100,
+    );
 
     return () => clearInterval(intervalID);
-  }, [props.updateInterval, setPosition]);
+  }, [setPosition]);
 
   async function onSlidingComplete(newPosition: number) {
     setPosition(newPosition);

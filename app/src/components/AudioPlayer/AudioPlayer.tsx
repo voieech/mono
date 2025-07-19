@@ -130,8 +130,6 @@ export function AudioPlayer() {
       <AudioProgressSlider
         // @todo Can pass in custom default starting position based on last use
         defaultTrackPosition={0}
-        // Setting high polling frequency so that the slider animation is smooth
-        updateInterval={100}
         activeTrack={activeTrack}
       />
 
