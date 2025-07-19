@@ -2,16 +2,20 @@ import { Pressable } from "react-native";
 import TrackPlayer from "react-native-track-player";
 
 import { Icon } from "@/components/provided";
+import { useSettingContext } from "@/context";
 
 export function AudioPlayerSkipPreviousButton() {
+  const shouldRewindToStartOnSkipPrevious = useSettingContext().getSetting(
+    "rewindToStartOnSkipPrevious",
+  );
+
   return (
     <Pressable
       onPress={async () => {
         const progress = await TrackPlayer.getProgress();
         const positionAsInt = Math.trunc(progress.position);
 
-        // @todo Make this a configurable setting
-        if (positionAsInt > 3) {
+        if (shouldRewindToStartOnSkipPrevious && positionAsInt > 3) {
           TrackPlayer.seekTo(0);
           return;
         }

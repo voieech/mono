@@ -90,6 +90,18 @@ export default function Settings() {
             ),
           )}
         </View>
+        <SwitchSettingRow
+          settingTitle={
+            settingContext.settings.rewindToStartOnSkipPrevious.name
+          }
+          description={
+            settingContext.settings.rewindToStartOnSkipPrevious.description
+          }
+          switchValue={settingContext.getSetting("rewindToStartOnSkipPrevious")}
+          onValueChange={(value) =>
+            settingContext.updateSetting("rewindToStartOnSkipPrevious", value)
+          }
+        />
       </Collapsible>
       {/* @todo Show if featureFlag is on for current user OR __DEV__ */}
       {__DEV__ && (
