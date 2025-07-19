@@ -3,6 +3,7 @@ import { Share, Pressable } from "react-native";
 import type { TrackWithMetadata } from "@/utils";
 
 import { Icon } from "@/components/provided";
+import { posthog } from "@/utils";
 
 export function ShareCurrentTrackIcon(props: {
   activeTrack: TrackWithMetadata;
@@ -13,7 +14,13 @@ export function ShareCurrentTrackIcon(props: {
         generateShareSheetObjectForTrack(props.activeTrack),
       );
 
-      // @todo Log to analytics
+      posthog.capture("share_current_track", {
+        // Cast to any is safe since it is a JSON stringifiable type.
+        track: props.activeTrack as any,
+        shareAction: result.action,
+        shareActivityType: result.activityType ?? null,
+      });
+
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
@@ -24,7 +31,7 @@ export function ShareCurrentTrackIcon(props: {
         // dismissed
       }
     } catch (_: any) {
-      // @todo Log to analytics
+      // @todo Log to app monitoring
     }
   }
 
