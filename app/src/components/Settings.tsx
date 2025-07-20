@@ -47,6 +47,7 @@ export function SettingsProvider(props: PropsWithChildren) {
           // Call the onChange callback, the types are widened to be `any` here
           // since the types can be generic on the extended Setting interfaces
           // e.g. a string literal type is used
+          // @ts-expect-error Unable to easily narrow the generic type down
           settings[setting]?.onChange?.(newValue as any, oldValue);
 
           posthog.capture("setting_update", {
