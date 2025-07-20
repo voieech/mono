@@ -10,12 +10,22 @@ import {
 } from "@/utils";
 
 export function SettingsProvider(props: PropsWithChildren) {
+  const [isSettingsLoaded, setIsSettingsLoaded] = useState(false);
   const [settingState, setSettingState] =
     useState<SettingState>(defaultSettingState);
 
   useEffect(() => {
-    settingsInLocalStorage.read().then(setSettingState);
-  }, [setSettingState]);
+    settingsInLocalStorage.read().then((settings) => {
+      setSettingState(settings);
+      setIsSettingsLoaded(true);
+    });
+  }, [setSettingState, setIsSettingsLoaded]);
+
+  // Dont return context and its children until settings data is loaded to
+  // prevent showing wrong settings and re-rendering again after settings loads.
+  if (!isSettingsLoaded) {
+    return null;
+  }
 
   return (
     <SettingContext
