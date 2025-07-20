@@ -12,7 +12,7 @@ import {
 export function SettingsProvider(props: PropsWithChildren) {
   const [isSettingsLoaded, setIsSettingsLoaded] = useState(false);
   const [settingState, setSettingState] =
-    useState<SettingState>(defaultSettingState);
+    useState<Partial<SettingState>>(defaultSettingState);
 
   useEffect(() => {
     settingsInLocalStorage.read().then((settings) => {
@@ -32,7 +32,7 @@ export function SettingsProvider(props: PropsWithChildren) {
       value={{
         settings,
         getSetting(setting) {
-          return settingState[setting];
+          return settingState[setting] ?? defaultSettingState[setting];
         },
         updateSetting(setting, newValue) {
           const oldValue = settingState[setting] as any;

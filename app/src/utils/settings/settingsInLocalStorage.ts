@@ -1,7 +1,9 @@
 import { LocalStorageWrapper } from "../LocalStorageWrapper";
 import { SettingState, defaultSettingState } from "./Settings";
 
-class SettingsInLocalStorage extends LocalStorageWrapper<SettingState> {
+class SettingsInLocalStorage extends LocalStorageWrapper<
+  Partial<SettingState>
+> {
   _storageKey = "settings";
   _defaultValue = defaultSettingState;
 }
