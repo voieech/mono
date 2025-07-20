@@ -7,6 +7,7 @@ import {
 } from "@react-navigation/native";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { PostHogProvider } from "posthog-react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -18,6 +19,15 @@ import {
 } from "@/components";
 import { useTheme } from "@/hooks";
 import { queryClient, posthog } from "@/utils";
+
+// Dont auto hide the splash screen until all initialisation steps are done
+SplashScreen.preventAutoHideAsync();
+
+// Fade out the splash screen on IOS instead of immediately hiding it to prevent
+// the UI from looking very janky.
+SplashScreen.setOptions({
+  fade: true,
+});
 
 /**
  * Handles initialisation and all the root providers. Expects child to be root
