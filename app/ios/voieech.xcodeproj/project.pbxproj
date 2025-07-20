@@ -7,26 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D1CA7A1F41A6083134CFC7A /* libPods-voieech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C08DC37F8E3A547177DCB3 /* libPods-voieech.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		27FD97BF41DD3587F92FCCBB /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE63CDC405841E20C796D2B /* ExpoModulesProvider.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		68F747FB4F1858567381A8FC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 930144150A77C81F8A3E17F0 /* PrivacyInfo.xcprivacy */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		C55C41CABB70588806F96E91 /* libPods-voieech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 904104F9AAB7C1F93E21B92F /* libPods-voieech.a */; };
-		DEE15087572A226A4B9CDEEC /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A208DF54B5AB2DC915C97959 /* ExpoModulesProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
+		F68769A1F3B02E716A5D756C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 40F46A2274DC09AA849D932E /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0270EA59B797EAB3CF66485D /* Pods-voieech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voieech.debug.xcconfig"; path = "Target Support Files/Pods-voieech/Pods-voieech.debug.xcconfig"; sourceTree = "<group>"; };
+		07EE9E355FB4B6F39A862BB7 /* Pods-voieech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voieech.release.xcconfig"; path = "Target Support Files/Pods-voieech/Pods-voieech.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* voieech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = voieech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = voieech/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = voieech/Info.plist; sourceTree = "<group>"; };
-		904104F9AAB7C1F93E21B92F /* libPods-voieech.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-voieech.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		930144150A77C81F8A3E17F0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = voieech/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		A208DF54B5AB2DC915C97959 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-voieech/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		21D4130E14A377BBF85109B7 /* Pods-voieech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voieech.debug.xcconfig"; path = "Target Support Files/Pods-voieech/Pods-voieech.debug.xcconfig"; sourceTree = "<group>"; };
+		40F46A2274DC09AA849D932E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = voieech/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		52C08DC37F8E3A547177DCB3 /* libPods-voieech.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-voieech.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = voieech/SplashScreen.storyboard; sourceTree = "<group>"; };
+		ACE63CDC405841E20C796D2B /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-voieech/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		DDBDDB9944B3692A3EBD369F /* Pods-voieech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voieech.release.xcconfig"; path = "Target Support Files/Pods-voieech/Pods-voieech.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = voieech/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* voieech-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "voieech-Bridging-Header.h"; path = "voieech/voieech-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C55C41CABB70588806F96E91 /* libPods-voieech.a in Frameworks */,
+				0D1CA7A1F41A6083134CFC7A /* libPods-voieech.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +53,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				930144150A77C81F8A3E17F0 /* PrivacyInfo.xcprivacy */,
+				40F46A2274DC09AA849D932E /* PrivacyInfo.xcprivacy */,
 			);
 			name = voieech;
 			sourceTree = "<group>";
@@ -62,25 +62,27 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				904104F9AAB7C1F93E21B92F /* libPods-voieech.a */,
+				52C08DC37F8E3A547177DCB3 /* libPods-voieech.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		604446116105C67DBA96C381 /* voieech */ = {
+		50DC37EB674FF13ECB638D34 /* voieech */ = {
 			isa = PBXGroup;
 			children = (
-				A208DF54B5AB2DC915C97959 /* ExpoModulesProvider.swift */,
+				ACE63CDC405841E20C796D2B /* ExpoModulesProvider.swift */,
 			);
 			name = voieech;
 			sourceTree = "<group>";
 		};
-		6F4F4BFE312652BE62F24275 /* ExpoModulesProviders */ = {
+		58AC9E74661C283B920CD930 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				604446116105C67DBA96C381 /* voieech */,
+				21D4130E14A377BBF85109B7 /* Pods-voieech.debug.xcconfig */,
+				07EE9E355FB4B6F39A862BB7 /* Pods-voieech.release.xcconfig */,
 			);
-			name = ExpoModulesProviders;
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -97,8 +99,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				F129401D4100356A3384E104 /* Pods */,
-				6F4F4BFE312652BE62F24275 /* ExpoModulesProviders */,
+				58AC9E74661C283B920CD930 /* Pods */,
+				FF63706881A1DAB12374F3F9 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -122,14 +124,12 @@
 			path = voieech/Supporting;
 			sourceTree = "<group>";
 		};
-		F129401D4100356A3384E104 /* Pods */ = {
+		FF63706881A1DAB12374F3F9 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				0270EA59B797EAB3CF66485D /* Pods-voieech.debug.xcconfig */,
-				DDBDDB9944B3692A3EBD369F /* Pods-voieech.release.xcconfig */,
+				50DC37EB674FF13ECB638D34 /* voieech */,
 			);
-			name = Pods;
-			path = Pods;
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "voieech" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				BFBE6A04A527CEDF2A3A4F1B /* [Expo] Configure project */,
+				501F1AB277048EB0ACDA33FE /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				753776327978E610ACC78AAE /* [CP] Embed Pods Frameworks */,
+				CA060D8890EA0ACA016C80C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,8 +166,8 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = CQ8JTV2223;
 						LastSwiftMigration = 1250;
+						DevelopmentTeam = "CQ8JTV2223";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -198,7 +198,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				68F747FB4F1858567381A8FC /* PrivacyInfo.xcprivacy in Resources */,
+				F68769A1F3B02E716A5D756C /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,23 +242,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		753776327978E610ACC78AAE /* [CP] Embed Pods Frameworks */ = {
+		501F1AB277048EB0ACDA33FE /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-voieech/Pods-voieech-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			inputFileListPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-voieech/Pods-voieech-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-voieech/expo-configure-project.sh\"\n";
 		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -308,24 +309,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-voieech/Pods-voieech-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BFBE6A04A527CEDF2A3A4F1B /* [Expo] Configure project */ = {
+		CA060D8890EA0ACA016C80C7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-voieech/Pods-voieech-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
 			);
-			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-voieech/expo-configure-project.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-voieech/Pods-voieech-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -335,7 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				DEE15087572A226A4B9CDEEC /* ExpoModulesProvider.swift in Sources */,
+				27FD97BF41DD3587F92FCCBB /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,15 +344,12 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0270EA59B797EAB3CF66485D /* Pods-voieech.debug.xcconfig */;
+			baseConfigurationReference = 21D4130E14A377BBF85109B7 /* Pods-voieech.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = voieech/voieech.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CQ8JTV2223;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -378,20 +375,20 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+				DEVELOPMENT_TEAM = "CQ8JTV2223";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDBDDB9944B3692A3EBD369F /* Pods-voieech.release.xcconfig */;
+			baseConfigurationReference = 07EE9E355FB4B6F39A862BB7 /* Pods-voieech.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = voieech/voieech.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CQ8JTV2223;
 				INFOPLIST_FILE = voieech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -411,6 +408,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
+				DEVELOPMENT_TEAM = "CQ8JTV2223";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 			};
 			name = Release;
 		};
