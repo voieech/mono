@@ -39,7 +39,7 @@ export function ExperimentalSurfaceProvider(props: PropsWithChildren) {
       setExperimentalSurfaces(data);
       setIsAsyncDataLoaded(true);
     });
-  }, [setExperimentalSurfaces]);
+  }, [setExperimentalSurfaces, setIsAsyncDataLoaded]);
 
   // Dont return context and its children until data is loaded to prevent
   // showing UI with wrong data and re-rendering again after data loads.
