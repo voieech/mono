@@ -29,13 +29,23 @@ export const ExperimentalSurface = (
     : null;
 
 export function ExperimentalSurfaceProvider(props: PropsWithChildren) {
+  const [isAsyncDataLoaded, setIsAsyncDataLoaded] = useState(false);
   const [experimentalSurfaces, setExperimentalSurfaces] = useState<
     Record<string, boolean>
   >({});
 
   useEffect(() => {
-    experimentalSurfaceInLocalStorage.read().then(setExperimentalSurfaces);
+    experimentalSurfaceInLocalStorage.read().then((data) => {
+      setExperimentalSurfaces(data);
+      setIsAsyncDataLoaded(true);
+    });
   }, [setExperimentalSurfaces]);
+
+  // Dont return context and its children until data is loaded to prevent
+  // showing UI with wrong data and re-rendering again after data loads.
+  if (!isAsyncDataLoaded) {
+    return null;
+  }
 
   const getShowExperimentalSurface = (
     experimentalSurfaceName: ExperimentalSurfaceName,
