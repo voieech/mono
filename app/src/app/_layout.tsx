@@ -1,4 +1,6 @@
 import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
 
 import { AppRoot } from "@/AppRoot";
 import { useExperimentalSurfaceContext } from "@/context";
@@ -8,6 +10,12 @@ function RootLayout() {
     useExperimentalSurfaceContext().getShowExperimentalSurface(
       "use-card-player-instead-of-modal",
     );
+
+  // Hide on the first time RootLayout is rendered, assuming that the moment
+  // this root layout is rendered, all the initialisation / setup is done.
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   return (
     <Stack
