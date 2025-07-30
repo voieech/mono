@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 
 import { AppRoot } from "@/AppRoot";
 import { useExperimentalSurfaceContext } from "@/context";
-import { seeIntroSetting } from "@/utils";
+import { IntroSetting, seeIntroSetting } from "@/utils";
 
 import Welcome from "./welcome";
 
 function RootLayout() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [introSetting, setIntroSetting] = useState<IntroSetting>({
+    lastSeenISO: new Date().toISOString(),
+    showIntro: true,
+  });
 
   const useCardPlayerInsteadOfModal =
     useExperimentalSurfaceContext().getShowExperimentalSurface(
@@ -25,18 +28,20 @@ function RootLayout() {
 
   useEffect(() => {
     seeIntroSetting.read().then((setting) => {
-      setShowIntro(setting);
-      setIsLoaded(true);
+      setIntroSetting(setting);
+      setIsLoading(true);
     });
-  }, [isLoaded, showIntro]);
+  }, [isLoading, introSetting]);
 
-  if (!isLoaded) {
+  if (!isLoading) {
     return null;
   }
 
-  return showIntro ? (
-    <Welcome setShowIntro={setShowIntro} />
-  ) : (
+  if (introSetting.showIntro) {
+    return <Welcome onReload={setIsLoading} />;
+  }
+
+  return (
     <Stack
       screenOptions={{
         headerShown: false,
