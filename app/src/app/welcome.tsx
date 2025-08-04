@@ -1,8 +1,8 @@
 import { Image } from "expo-image";
-import { Dimensions, Pressable, ScrollView } from "react-native";
+import { View, Dimensions, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ThemedText, ThemedView } from "@/components";
+import { ThemedText } from "@/components";
 import { seeIntroSetting } from "@/utils";
 
 export default function Welcome(props: { onReload: (val: boolean) => void }) {
@@ -16,84 +16,62 @@ export default function Welcome(props: { onReload: (val: boolean) => void }) {
         // pagingEnabled={true}
         scrollEnabled={false} // disabled scolling for now until more pages are added into welcome screen
       >
-        <ThemedView style={{ width }}>
-          <ThemedView
+        <View style={{ width }}>
+          <View
             style={{
               flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
               paddingHorizontal: 30,
-              backgroundColor: "black",
+              paddingBottom: 24,
             }}
           >
-            <Image
-              source={require("@/assets/images/logo.png")}
+            <View
               style={{
-                height: "100%",
-                width: "100%",
-                maxHeight: 108,
-              }}
-            />
-            <ThemedText
-              style={{
-                fontSize: 30,
-                fontWeight: "bold",
-                paddingTop: 30,
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              Welcome to Voieech
-            </ThemedText>
-            <ThemedText
-              style={{
-                fontSize: 20,
-                textAlign: "center",
-                paddingTop: 10,
-              }}
-            >
-              Where we bring voices to text
-            </ThemedText>
-            <ThemedView
-              style={{
-                backgroundColor: "black",
-                position: "absolute",
-                bottom: 100,
-              }}
-            >
-              <Pressable
-                onPress={() => {
-                  seeIntroSetting.update({
-                    lastSeenISO: new Date().toISOString(),
-                    showIntro: false,
-                  });
-                  props.onReload(true);
+              <Image
+                source={require("@/assets/images/logo.png")}
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  maxHeight: 108,
                 }}
-                style={({ pressed }) => [
-                  {
-                    opacity: pressed ? 0.5 : 1,
-                  },
-                  {
-                    borderWidth: 3,
-                    borderColor: "yellow",
-                    borderRadius: 30,
-                  },
-                ]}
-              >
-                <ThemedText
-                  style={{
-                    color: "yellow",
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    fontSize: 26,
-                    padding: 15,
-                  }}
-                >
-                  Start
+              />
+              <View style={{ backgroundColor: "black", alignItems: "center" }}>
+                <ThemedText type="title">Welcome to Voieech</ThemedText>
+                <ThemedText type="default">
+                  Where we bring voices to text
                 </ThemedText>
-              </Pressable>
-              {/* <Button color={"yellow"} title="Start" /> */}
-            </ThemedView>
-          </ThemedView>
-        </ThemedView>
+              </View>
+            </View>
+            <Pressable
+              onPress={() => {
+                seeIntroSetting.update({
+                  lastSeenISO: new Date().toISOString(),
+                  showIntro: false,
+                });
+                props.onReload(true);
+              }}
+              style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.5 : 1,
+                },
+                {
+                  backgroundColor: "#00BFFF",
+                  borderWidth: 2,
+                  borderRadius: 20,
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <ThemedText type="title" style={{ padding: 15 }}>
+                Start
+              </ThemedText>
+            </Pressable>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
