@@ -3,12 +3,18 @@ import { View, Dimensions, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components";
-import { seeIntroSetting } from "@/utils";
+import { useWelcomeContext } from "@/context";
 
-export default function Welcome(props: { onReload: (val: boolean) => void }) {
+export default function Welcome() {
   const width = Dimensions.get("window").width;
+  const { markWelcomeSeen } = useWelcomeContext();
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "black",
+      }}
+    >
       <ScrollView
         style={{ flex: 1 }}
         horizontal={true}
@@ -41,18 +47,14 @@ export default function Welcome(props: { onReload: (val: boolean) => void }) {
               />
               <View style={{ backgroundColor: "black", alignItems: "center" }}>
                 <ThemedText type="title">Welcome to Voieech</ThemedText>
-                <ThemedText type="default">
-                  Where we bring voices to text
+                <ThemedText type="default" style={{ textAlign: "center" }}>
+                  Enjoy a hyper-personalized podcast, tailored to you
                 </ThemedText>
               </View>
             </View>
             <Pressable
               onPress={() => {
-                seeIntroSetting.update({
-                  lastSeenISO: new Date().toISOString(),
-                  showIntro: false,
-                });
-                props.onReload(true);
+                markWelcomeSeen();
               }}
               style={({ pressed }) => [
                 {
@@ -66,8 +68,8 @@ export default function Welcome(props: { onReload: (val: boolean) => void }) {
                 },
               ]}
             >
-              <ThemedText type="title" style={{ padding: 15 }}>
-                Start
+              <ThemedText type="subtitle" style={{ padding: 15 }}>
+                Start listening
               </ThemedText>
             </Pressable>
           </View>
