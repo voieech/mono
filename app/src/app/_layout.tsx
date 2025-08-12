@@ -1,17 +1,13 @@
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { AppRoot } from "@/AppRoot";
-import { useExperimentalSurfaceContext } from "@/context";
-import { seeIntroSetting } from "@/utils";
+import { useExperimentalSurfaceContext, useWelcomeContext } from "@/context";
 
 import Welcome from "./welcome";
 
 function RootLayout() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
-
   const useCardPlayerInsteadOfModal =
     useExperimentalSurfaceContext().getShowExperimentalSurface(
       "use-card-player-instead-of-modal",
@@ -23,20 +19,13 @@ function RootLayout() {
     SplashScreen.hide();
   }, []);
 
-  useEffect(() => {
-    seeIntroSetting.read().then((setting) => {
-      setShowIntro(setting);
-      setIsLoaded(true);
-    });
-  }, [isLoaded, showIntro]);
+  const { hasSeenWelcome } = useWelcomeContext();
 
-  if (!isLoaded) {
-    return null;
+  if (hasSeenWelcome.lastSeenISO === undefined) {
+    return <Welcome />;
   }
 
-  return showIntro ? (
-    <Welcome setShowIntro={setShowIntro} />
-  ) : (
+  return (
     <Stack
       screenOptions={{
         headerShown: false,

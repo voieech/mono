@@ -1,73 +1,79 @@
 import { Image } from "expo-image";
-import { Button, Dimensions, ScrollView } from "react-native";
+import { View, Dimensions, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ThemedText, ThemedView } from "@/components";
-import { useThemeColor } from "@/hooks";
-import { seeIntroSetting } from "@/utils";
+import { ThemedText } from "@/components";
+import { useWelcomeContext } from "@/context";
 
-type WelcomeProps = {
-  setShowIntro: (val: boolean) => void;
-};
-
-export default function Welcome({ setShowIntro }: WelcomeProps) {
-  const backgroundColor = useThemeColor("background");
-  const { width, height } = Dimensions.get("window");
+export default function Welcome() {
+  const width = Dimensions.get("window").width;
+  const { markWelcomeSeen } = useWelcomeContext();
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "black",
+      }}
+    >
       <ScrollView
-        style={{ flex: 1, backgroundColor }}
+        style={{ flex: 1 }}
         horizontal={true}
-        scrollEventThrottle={16}
-        pagingEnabled={true}
+        // scrollEventThrottle={16}
+        // pagingEnabled={true}
+        scrollEnabled={false} // disabled scolling for now until more pages are added into welcome screen
       >
-        <ThemedView style={{ height, width }}>
-          <ThemedView
+        <View style={{ width }}>
+          <View
             style={{
               flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
               paddingHorizontal: 30,
+              paddingBottom: 24,
             }}
           >
-            <Image
-              // @todo replace absolute image path
-              source={require("@/assets/images/logo.png")}
+            <View
               style={{
-                height: "100%",
-                width: "100%",
-                maxHeight: 108,
-              }}
-            />
-            <ThemedText
-              style={{
-                fontSize: 30,
-                fontWeight: "bold",
-                paddingTop: 30,
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              Welcome to Voieech
-            </ThemedText>
-            <ThemedText
-              style={{
-                fontSize: 20,
-                textAlign: "center",
-                paddingTop: 10,
-              }}
-            >
-              Where we bring voices to text
-            </ThemedText>
-            <ThemedView style={{ paddingTop: 20 }}>
-              <Button
-                onPress={() => {
-                  seeIntroSetting.update(false);
-                  setShowIntro(false);
+              <Image
+                source={require("@/assets/images/logo.png")}
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  maxHeight: 108,
                 }}
-                title="Continue"
               />
-            </ThemedView>
-          </ThemedView>
-        </ThemedView>
+              <View style={{ backgroundColor: "black", alignItems: "center" }}>
+                <ThemedText type="title">Welcome to Voieech</ThemedText>
+                <ThemedText type="default" style={{ textAlign: "center" }}>
+                  Enjoy a hyper-personalized podcast, tailored to you
+                </ThemedText>
+              </View>
+            </View>
+            <Pressable
+              onPress={() => {
+                markWelcomeSeen();
+              }}
+              style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.5 : 1,
+                },
+                {
+                  backgroundColor: "#00BFFF",
+                  borderWidth: 2,
+                  borderRadius: 20,
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <ThemedText type="subtitle" style={{ padding: 15 }}>
+                Start listening
+              </ThemedText>
+            </Pressable>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
