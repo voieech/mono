@@ -125,7 +125,10 @@ export function AudioPlayer() {
           </ExperimentalSurface>
           <RepeatIcon />
         </ThemedView>
-        <PlaybackSpeedButton />
+        <PlaybackSpeedButton
+          getTrackPlaybackRate={TrackPlayer.getRate}
+          setTrackPlaybackRate={TrackPlayer.setRate}
+        />
         <ShareCurrentTrackIcon activeTrack={activeTrack} />
       </ThemedView>
 
