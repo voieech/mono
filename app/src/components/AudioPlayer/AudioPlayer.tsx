@@ -125,11 +125,19 @@ export function AudioPlayer() {
           </ExperimentalSurface>
           <RepeatIcon />
         </ThemedView>
-        <PlaybackSpeedButton
-          getTrackPlaybackRate={TrackPlayer.getRate}
-          setTrackPlaybackRate={TrackPlayer.setRate}
-        />
-        <ShareCurrentTrackIcon activeTrack={activeTrack} />
+        <ThemedView
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            columnGap: 16,
+          }}
+        >
+          <PlaybackSpeedButton
+            getTrackPlaybackRate={TrackPlayer.getRate}
+            setTrackPlaybackRate={TrackPlayer.setRate}
+          />
+          <ShareCurrentTrackIcon activeTrack={activeTrack} />
+        </ThemedView>
       </ThemedView>
 
       <AudioProgressSlider
