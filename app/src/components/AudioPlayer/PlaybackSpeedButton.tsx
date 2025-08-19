@@ -1,24 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pressable } from "react-native";
 
 import { ThemedText } from "@/components";
 
 export function PlaybackSpeedButton(props: {
-  getTrackPlaybackRate: () => Promise<number>;
+  trackPlaybackSpeed: number;
   setTrackPlaybackRate: (rate: number) => Promise<void>;
 }) {
   const allPlaybackSpeed = [0.75, 1, 1.5, 2];
-  const [trackPlaybackSpeed, setTrackPlaybackSpeed] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const trackPlaybackRate = await props.getTrackPlaybackRate();
-      setTrackPlaybackSpeed(trackPlaybackRate);
-      setIsLoading(false);
-    };
-    fetchData();
-  });
+  const [trackPlaybackSpeed, setTrackPlaybackSpeed] = useState(
+    props.trackPlaybackSpeed,
+  );
 
   function handleOnClick() {
     const currentIndex = allPlaybackSpeed.indexOf(trackPlaybackSpeed);
@@ -29,10 +21,6 @@ export function PlaybackSpeedButton(props: {
       props.setTrackPlaybackRate(newSpeed);
       setTrackPlaybackSpeed(newSpeed);
     }
-  }
-
-  if (isLoading) {
-    return <ThemedText style={{ paddingTop: 10 }}>Loading...</ThemedText>;
   }
 
   return (
