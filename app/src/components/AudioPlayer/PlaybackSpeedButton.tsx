@@ -7,7 +7,7 @@ export function PlaybackSpeedButton(props: {
   trackPlaybackSpeed: number;
   setTrackPlaybackRate: (rate: number) => Promise<void>;
 }) {
-  const allPlaybackSpeed = [0.75, 1, 1.5, 2];
+  const allPlaybackSpeed = [0.75, 1, 1.25, 1.5, 1.75, 2];
   const [trackPlaybackSpeed, setTrackPlaybackSpeed] = useState(
     props.trackPlaybackSpeed,
   );
