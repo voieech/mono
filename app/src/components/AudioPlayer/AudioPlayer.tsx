@@ -1,6 +1,5 @@
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
@@ -35,17 +34,8 @@ export function AudioPlayer() {
   const router = useRouter();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
-  const [trackRate, setTrackRate] = useState<number>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const trackRate = await TrackPlayer.getRate();
-      setTrackRate(trackRate);
-    };
-    fetchData();
-  }, []);
-
-  if (activeTrack === undefined || trackRate === undefined) {
+  if (activeTrack === undefined) {
     return null;
   }
 
@@ -142,10 +132,7 @@ export function AudioPlayer() {
             columnGap: 16,
           }}
         >
-          <PlaybackSpeedButton
-            trackPlaybackSpeed={trackRate}
-            setTrackPlaybackRate={TrackPlayer.setRate}
-          />
+          <PlaybackSpeedButton />
           <ShareCurrentTrackIcon activeTrack={activeTrack} />
         </ThemedView>
       </ThemedView>

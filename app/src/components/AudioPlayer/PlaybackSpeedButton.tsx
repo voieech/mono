@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
+import TrackPlayer from "react-native-track-player";
 
 import { ThemedText } from "@/components";
+import { useSettingContext } from "@/context";
 
-export function PlaybackSpeedButton(props: {
-  trackPlaybackSpeed: number;
-  setTrackPlaybackRate: (rate: number) => Promise<void>;
-}) {
+export function PlaybackSpeedButton() {
   const allPlaybackSpeed = [0.75, 1, 1.25, 1.5, 1.75, 2];
   const [trackPlaybackSpeed, setTrackPlaybackSpeed] = useState(
-    props.trackPlaybackSpeed,
+    Number(useSettingContext().getSetting("defaultPlaybackSpeed")),
   );
 
-  function handleOnClick() {
+  useEffect(() => {
+    TrackPlayer.setRate(trackPlaybackSpeed);
+  }, [trackPlaybackSpeed]);
+
+  function cycleSpeed() {
     const currentIndex = allPlaybackSpeed.indexOf(trackPlaybackSpeed);
     const newSpeed =
       allPlaybackSpeed[(currentIndex + 1) % allPlaybackSpeed.length];
@@ -21,12 +24,11 @@ export function PlaybackSpeedButton(props: {
       throw new Error("New playback speed is undefined");
     }
 
-    props.setTrackPlaybackRate(newSpeed);
     setTrackPlaybackSpeed(newSpeed);
   }
 
   return (
-    <Pressable onPress={handleOnClick}>
+    <Pressable onPress={cycleSpeed}>
       <ThemedText style={{ fontSize: 28, paddingTop: 10 }}>
         {trackPlaybackSpeed}x
       </ThemedText>
