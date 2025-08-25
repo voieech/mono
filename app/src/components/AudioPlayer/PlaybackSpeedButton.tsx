@@ -17,10 +17,12 @@ export function PlaybackSpeedButton(props: {
     const newSpeed =
       allPlaybackSpeed[(currentIndex + 1) % allPlaybackSpeed.length];
 
-    if (newSpeed !== undefined) {
-      props.setTrackPlaybackRate(newSpeed);
-      setTrackPlaybackSpeed(newSpeed);
+    if (newSpeed === undefined) {
+      throw new Error("New playback speed is undefined");
     }
+
+    props.setTrackPlaybackRate(newSpeed);
+    setTrackPlaybackSpeed(newSpeed);
   }
 
   return (
