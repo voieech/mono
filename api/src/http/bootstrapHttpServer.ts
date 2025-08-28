@@ -441,7 +441,10 @@ export function bootstrapHttpServer() {
         });
       }
 
-      res.status(200).end(feed.xml());
+      res
+        .set("Content-Type", "application/rss+xml")
+        .status(200)
+        .end(feed.xml());
     })
 
     .listen(process.env["PORT"] ?? 3000);
