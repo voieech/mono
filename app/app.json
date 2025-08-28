@@ -9,11 +9,12 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "bundleIdentifier": "voieech-app",
+      "bundleIdentifier": "com.voieech-app",
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": ["audio"]
-      }
+      },
+      "associatedDomains": ["applinks:www.voieech.com"]
     },
     "android": {
       "adaptiveIcon": {
