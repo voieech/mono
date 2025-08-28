@@ -46,24 +46,44 @@ export interface PodcastChannelTable {
   img_url: string;
 
   /**
-   * Category, e.g. "Technology"
+   * Optional primary category, e.g. "News"
    *
    * This will always be in english, and users will see the localised string in
    * app when we return / display in the UI according to the `language` column
    * (also because Apple Podcast only allow a list of fixed categories in
    * english).
    */
-  category: string;
+  category_primary: $Nullable<string>;
 
   /**
-   * Optional subcategory, e.g. "Daily News"
+   * Optional primary subcategory, e.g. "Daily News"
    *
    * This will always be in english, and users will see the localised string in
    * app when we return / display in the UI according to the `language` column
    * (also because Apple Podcast only allow a list of fixed categories in
    * english).
    */
-  subcategory: $Nullable<string>;
+  subcategory_primary: $Nullable<string>;
+
+  /**
+   * Optional secondary category, e.g. "Sports"
+   *
+   * This will always be in english, and users will see the localised string in
+   * app when we return / display in the UI according to the `language` column
+   * (also because Apple Podcast only allow a list of fixed categories in
+   * english).
+   */
+  category_secondary: $Nullable<string>;
+
+  /**
+   * Optional secondary subcategory, e.g. "Baseball"
+   *
+   * This will always be in english, and users will see the localised string in
+   * app when we return / display in the UI according to the `language` column
+   * (also because Apple Podcast only allow a list of fixed categories in
+   * english).
+   */
+  subcategory_secondary: $Nullable<string>;
 }
 
 export type PodcastChannel = Selectable<PodcastChannelTable>;
