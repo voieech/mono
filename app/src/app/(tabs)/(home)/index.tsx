@@ -131,13 +131,17 @@ export default function HomeScreen() {
                   >
                     {channel.description}
                   </ThemedText>
-                  <ThemedText
-                    style={{
-                      fontSize: 12,
-                    }}
-                  >
-                    {channel.category}, {channel.subcategory}
-                  </ThemedText>
+                  {channel.category_primary !== null && (
+                    <ThemedText
+                      style={{
+                        fontSize: 12,
+                      }}
+                    >
+                      {channel.category_primary}
+                      {channel.subcategory_primary !== null &&
+                        `, ${channel.subcategory_primary}`}
+                    </ThemedText>
+                  )}
                 </ThemedView>
               </ThemedView>
             </Link>
