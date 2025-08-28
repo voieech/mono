@@ -20,8 +20,9 @@ async function runSeed() {
       language: "en",
       img_url:
         "https://voieechcontent.sgp1.cdn.digitaloceanspaces.com/podcast_channel_image/7051547f-b765-4c55-b1c7-c6ea0c472db0.png",
-      category: "Technology",
-      subcategory: "Daily News",
+      category_primary: "News",
+      subcategory_primary: "Daily News",
+      category_secondary: "Technology",
     })
     .execute();
 
