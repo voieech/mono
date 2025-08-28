@@ -296,9 +296,9 @@ export function bootstrapHttpServer() {
         image_url: channel.img_url,
 
         categories: [
-          channel.category,
-          ...(channel.subcategory !== null ? [channel.subcategory] : []),
-        ],
+          channel.category_primary,
+          channel.category_secondary,
+        ].filter((category) => category !== null),
 
         // @todo
         // ttl: 60 // in minutes
@@ -352,19 +352,24 @@ export function bootstrapHttpServer() {
           //   <itunes:category text="Society &amp; Culture">
           //     <itunes:category text="Documentary" />
           //   </itunes:category>
-          {
-            "itunes:category": [
-              { _attr: { text: channel.category } },
-
-              // When no subcategory, set empty object so that the XML tag will
-              // be self closing.
-              channel.subcategory !== null
-                ? {
-                    "itunes:category": { _attr: { text: channel.subcategory } },
-                  }
-                : {},
-            ],
-          },
+          //
+          // When no category/subcategory, use empty object to make XML tag self
+          // closing.
+          ...[
+            [channel.category_primary, channel.subcategory_primary],
+            [channel.category_secondary, channel.subcategory_secondary],
+          ].map(([category, subcategory]) =>
+            category === null
+              ? {}
+              : {
+                  "itunes:category": [
+                    { _attr: { text: category } },
+                    subcategory === null
+                      ? {}
+                      : { "itunes:category": { _attr: { text: subcategory } } },
+                  ],
+                },
+          ),
 
           // The podcast parental advisory information.
           { "itunes:explicit": false },
