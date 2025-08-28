@@ -19,6 +19,21 @@ export function bootstrapHttpServer() {
       res.status(200).end("ok");
     })
 
+    .get("/.well-known/apple-app-site-association", function (_, res) {
+      // @todo Add cache headers
+      res.status(200).json({
+        applinks: {
+          apps: [],
+          details: [
+            {
+              appID: `${process.env["APPLE_TEAM_ID"]}.com.voieech-app`,
+              paths: ["/podcast/channel/*", "/podcast/episode/*"],
+            },
+          ],
+        },
+      });
+    })
+
     .get("/v1/landing-page/featured-channels", async function (req, res) {
       const requestedLanguage = req.query["lang"]?.toString() ?? "en";
 
