@@ -70,7 +70,6 @@ const {
             />
 
             <div class="flex flex-col justify-between p-4 lg:p-6">
-              <div class=""></div>
               <div class="pb-2">
                 <p class="line-clamp-1 text-lg sm:text-2xl">
                   {{ channel.name }}
@@ -79,9 +78,12 @@ const {
                   {{ channel.description }}
                 </p>
               </div>
-              <div>
+              <div v-if="channel.category_primary !== null">
                 <p class="text-xs font-light text-zinc-600 italic">
-                  {{ channel.category }}, {{ channel.subcategory }}
+                  {{ channel.category_primary
+                  }}<template v-if="channel.subcategory_primary !== null"
+                    >, {{ channel.subcategory_primary }}</template
+                  >
                 </p>
               </div>
             </div>
