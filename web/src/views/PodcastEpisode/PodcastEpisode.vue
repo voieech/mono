@@ -4,9 +4,9 @@ import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 
+import ExternallyHostedPlatformCard from "@/components/ExternallyHostedPlatformCard.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
-import ExternallyHostedPlatformCard from "@/components/ExternallyHostedPlatformCard.vue";
 import { usePodcastEpisode } from "@/composables/usePodcastEpisode";
 import { HomeRoute } from "@/router";
 import { createAppLink } from "@/utils/links";
@@ -142,23 +142,6 @@ useHead({
             }}
           </button>
         </div>
-      </div>
-
-      <div class="pb-12">
-        <a :href="createAppLink.forPodcastEpisode(vanityID)" target="_blank">
-          <div
-            class="flex w-full flex-row items-center gap-4 rounded-full border border-zinc-200 bg-zinc-50 p-4 shadow-lg"
-          >
-            <img
-              class="h-8 w-8 sm:h-12 sm:w-12"
-              src="../../assets/app-icon.png"
-              alt="app icon"
-            />
-            <div class="w-full">
-              <p>Listen on Voieech App</p>
-            </div>
-          </div>
-        </a>
       </div>
 
       <div>
