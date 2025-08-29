@@ -163,7 +163,8 @@ export function bootstrapHttpServer() {
         return;
       }
 
-      res.status(200).json(episode satisfies Episode);
+      // @todo
+      res.status(200).json(episode /* satisfies Episode */);
     })
 
     .get("/v1/podcast/channel/:channelID", async function (req, res) {
