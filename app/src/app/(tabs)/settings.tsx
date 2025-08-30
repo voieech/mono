@@ -9,6 +9,7 @@ import {
   Icon,
   Collapsible,
   ThemedView,
+  PlaybackRateButton,
 } from "@/components";
 import {
   useSettingContext,
@@ -47,10 +48,30 @@ export default function Settings() {
           paddingBottom: 32,
         }}
       >
-        <ThemedText>
-          Default audio playback rate:{" "}
-          {settingContext.getSetting("playbackRate")}
-        </ThemedText>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            backgroundColor: "black",
+            borderRadius: 16,
+          }}
+        >
+          <ThemedText>Default audio playback rate:</ThemedText>
+          <View
+            style={{
+              paddingVertical: 2,
+              paddingHorizontal: 8,
+              backgroundColor: "#999",
+              borderRadius: 8,
+            }}
+          >
+            <PlaybackRateButton fontSize={18} />
+          </View>
+        </View>
         <View>
           <ThemedText>External Audio controls</ThemedText>
           {settingContext.settings.externalMediaControls.options.map(

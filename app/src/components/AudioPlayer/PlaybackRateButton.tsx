@@ -5,7 +5,12 @@ import { ThemedText } from "@/components";
 import { useSettingContext } from "@/context";
 import { TrackPlayerPlaybackRates, TrackPlayerPlaybackRateMap } from "@/utils";
 
-export function PlaybackRateButton() {
+export function PlaybackRateButton(props: {
+  /**
+   * Defaults to 24
+   */
+  fontSize?: number;
+}) {
   const settingContext = useSettingContext();
   const trackPlaybackRateSetting = settingContext.getSetting("playbackRate");
   const trackPlaybackRate = TrackPlayerPlaybackRateMap.get(
@@ -40,7 +45,7 @@ export function PlaybackRateButton() {
     <Pressable onPress={cycleRate}>
       <ThemedText
         style={{
-          fontSize: 24,
+          fontSize: props.fontSize ?? 24,
         }}
       >
         {trackPlaybackRate}x
