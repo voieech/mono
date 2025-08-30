@@ -1,18 +1,17 @@
 import { Image } from "expo-image";
-import { View, Dimensions, Pressable, ScrollView } from "react-native";
+import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components";
 import { useSettingContext } from "@/context";
 
 export default function Welcome() {
+  const windowDimensions = useWindowDimensions();
   const settingContext = useSettingContext();
-  const width = Dimensions.get("window").width;
   return (
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "black",
       }}
     >
       <ScrollView
@@ -22,11 +21,15 @@ export default function Welcome() {
         // pagingEnabled={true}
         scrollEnabled={false} // disabled scolling for now until more pages are added into welcome screen
       >
-        <View style={{ width }}>
+        <View
+          style={{
+            width: windowDimensions.width,
+          }}
+        >
           <View
             style={{
               flex: 1,
-              paddingHorizontal: 30,
+              paddingHorizontal: 24,
               paddingBottom: 24,
             }}
           >
@@ -35,6 +38,7 @@ export default function Welcome() {
                 flex: 1,
                 alignItems: "center",
                 justifyContent: "center",
+                rowGap: 8,
               }}
             >
               <Image
@@ -45,12 +49,9 @@ export default function Welcome() {
                   maxHeight: 108,
                 }}
               />
-              <View style={{ backgroundColor: "black", alignItems: "center" }}>
-                <ThemedText type="title">Welcome to Voieech</ThemedText>
-                <ThemedText type="default" style={{ textAlign: "center" }}>
-                  Enjoy a hyper-personalized podcast, tailored to you
-                </ThemedText>
-              </View>
+              <ThemedText type="subtitle">
+                Your Hyper Personalized Podcasts
+              </ThemedText>
             </View>
             <Pressable
               onPress={() =>
@@ -59,17 +60,13 @@ export default function Welcome() {
                   new Date().toISOString(),
                 )
               }
-              style={({ pressed }) => [
-                {
-                  opacity: pressed ? 0.5 : 1,
-                },
-                {
-                  backgroundColor: "#00BFFF",
-                  borderWidth: 2,
-                  borderRadius: 20,
-                  alignItems: "center",
-                },
-              ]}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.8 : 1,
+                backgroundColor: "#00BFFF",
+                borderWidth: 2,
+                borderRadius: 20,
+                alignItems: "center",
+              })}
             >
               <ThemedText type="subtitle" style={{ padding: 15 }}>
                 Start listening
