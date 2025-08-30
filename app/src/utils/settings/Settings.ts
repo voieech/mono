@@ -27,9 +27,11 @@ export type SettingState = {
     ? boolean
     : (typeof settings)[K] extends { type: "dropdown" }
       ? string
-      : (typeof settings)[K] extends { type: "numeric-string" }
+      : (typeof settings)[K] extends { type: "string" }
         ? string
-        : never;
+        : (typeof settings)[K] extends { type: "numeric-string" }
+          ? string
+          : never;
 };
 
 /**
