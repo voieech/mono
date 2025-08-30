@@ -10,4 +10,5 @@ export * from "./posthog";
 export * from "./queryClient";
 export * from "./ReactNativeTrackPlayerCapabilitiesOptions";
 export * from "./settings";
+export * from "./TrackPlayerPlaybackRates";
 export * from "./TrackWithMetadata";
