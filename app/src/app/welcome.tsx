@@ -3,11 +3,11 @@ import { View, Dimensions, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components";
-import { useWelcomeContext } from "@/context";
+import { useSettingContext } from "@/context";
 
 export default function Welcome() {
+  const settingContext = useSettingContext();
   const width = Dimensions.get("window").width;
-  const { markWelcomeSeen } = useWelcomeContext();
   return (
     <SafeAreaView
       style={{
@@ -53,9 +53,12 @@ export default function Welcome() {
               </View>
             </View>
             <Pressable
-              onPress={() => {
-                markWelcomeSeen();
-              }}
+              onPress={() =>
+                settingContext.updateSetting(
+                  "lastOnboardingTime",
+                  new Date().toISOString(),
+                )
+              }
               style={({ pressed }) => [
                 {
                   opacity: pressed ? 0.5 : 1,

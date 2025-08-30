@@ -134,6 +134,28 @@ export default function Settings() {
                 appDebuggingSurfaceContext.setShowDebuggingSurfaces
               }
             />
+            <SwitchSettingRow
+              settingTitle={settingContext.settings.lastOnboardingTime.name}
+              description={
+                settingContext.settings.lastOnboardingTime.description +
+                (settingContext.getSetting("lastOnboardingTime") === ""
+                  ? ""
+                  : ` The last onboarding time is ${settingContext.getSetting("lastOnboardingTime")}`)
+              }
+              switchValue={
+                settingContext.getSetting("lastOnboardingTime") === ""
+              }
+              onValueChange={(reset) => {
+                if (reset) {
+                  settingContext.updateSetting("lastOnboardingTime", "");
+                } else {
+                  settingContext.updateSetting(
+                    "lastOnboardingTime",
+                    new Date().toISOString(),
+                  );
+                }
+              }}
+            />
             <ExperimentalSurfaceSettingRow
               settingTitle="Use 'card' player instead of 'modal'"
               description="There is a bug on IOS where modal route gets warped with stack route in home page when switching between audio player modal and a route quickly"

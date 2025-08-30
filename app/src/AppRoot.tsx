@@ -16,7 +16,6 @@ import {
   AppDebuggingSurfaceProvider,
   ExperimentalSurfaceProvider,
   SettingsProvider,
-  WelcomeProvider,
 } from "@/components";
 import { useTheme } from "@/hooks";
 import { queryClient, posthog } from "@/utils";
@@ -74,10 +73,8 @@ export function AppRoot(props: PropsWithChildren) {
             <AppDebuggingSurfaceProvider>
               <ExperimentalSurfaceProvider>
                 <SettingsProvider>
-                  <WelcomeProvider>
-                    <StatusBar style="auto" />
-                    {props.children}
-                  </WelcomeProvider>
+                  <StatusBar style="auto" />
+                  {props.children}
                 </SettingsProvider>
               </ExperimentalSurfaceProvider>
             </AppDebuggingSurfaceProvider>

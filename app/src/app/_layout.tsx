@@ -3,11 +3,12 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
 import { AppRoot } from "@/AppRoot";
-import { useExperimentalSurfaceContext, useWelcomeContext } from "@/context";
+import { useSettingContext, useExperimentalSurfaceContext } from "@/context";
 
 import Welcome from "./welcome";
 
 function RootLayout() {
+  const settingContext = useSettingContext();
   const useCardPlayerInsteadOfModal =
     useExperimentalSurfaceContext().getShowExperimentalSurface(
       "use-card-player-instead-of-modal",
@@ -19,9 +20,7 @@ function RootLayout() {
     SplashScreen.hide();
   }, []);
 
-  const { hasSeenWelcome } = useWelcomeContext();
-
-  if (hasSeenWelcome.lastSeenISO === undefined) {
+  if (settingContext.getSetting("lastOnboardingTime") === "") {
     return <Welcome />;
   }
 
