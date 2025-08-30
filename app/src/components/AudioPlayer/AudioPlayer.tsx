@@ -12,6 +12,7 @@ import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedView";
 import { useActiveTrackWithMetadata } from "@/hooks";
+import { TrackPlayerPlayWithGlobalRate } from "@/utils";
 
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
 import {
@@ -171,7 +172,7 @@ export function AudioPlayer() {
           />
         ) : (
           <CircularPlayButton
-            onPress={TrackPlayer.play}
+            onPress={TrackPlayerPlayWithGlobalRate}
             innerIconSize={32}
             outerBackgroundSize={20}
           />

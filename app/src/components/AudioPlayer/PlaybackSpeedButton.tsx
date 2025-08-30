@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Pressable } from "react-native";
 import TrackPlayer from "react-native-track-player";
 
@@ -14,11 +13,6 @@ export function PlaybackSpeedButton() {
   const trackPlaybackSpeed = TrackPlayerPlaybackRateMap.get(
     trackPlaybackSpeedSetting,
   )!;
-
-  // @todo do this with the play button!
-  useEffect(() => {
-    TrackPlayer.setRate(trackPlaybackSpeed);
-  }, [trackPlaybackSpeed]);
 
   function cycleSpeed() {
     // Match against string instead of number to avoid float comparisons

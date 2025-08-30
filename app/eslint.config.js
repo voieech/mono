@@ -26,6 +26,15 @@ module.exports = defineConfig([
           ignoreRestSiblings: true,
         },
       ],
+      "no-restricted-properties": [
+        "error",
+        {
+          object: "TrackPlayer",
+          property: "play",
+          message:
+            "Please use the `TrackPlayerPlayWithGlobalRate()` wrapper instead",
+        },
+      ],
       "perfectionist/sort-imports": "error",
       "perfectionist/sort-exports": "error",
     },

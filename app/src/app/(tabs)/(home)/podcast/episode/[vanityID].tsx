@@ -20,7 +20,10 @@ import {
 } from "@/components";
 import { apiBaseUrl } from "@/constants";
 import { useActiveTrackWithMetadata } from "@/hooks";
-import { createTrackWithMetadata } from "@/utils";
+import {
+  createTrackWithMetadata,
+  TrackPlayerPlayWithGlobalRate,
+} from "@/utils";
 
 export default function PodcastEpisode() {
   const router = useRouter();
@@ -70,7 +73,7 @@ export default function PodcastEpisode() {
 
       // If current episode is the active track, just continue playing
       if (isCurrentEpisodeTheActiveTrack) {
-        await TrackPlayer.play();
+        await TrackPlayerPlayWithGlobalRate();
         return;
       }
 
@@ -92,7 +95,7 @@ export default function PodcastEpisode() {
         }),
       );
 
-      await TrackPlayer.play();
+      await TrackPlayerPlayWithGlobalRate();
     },
     [episode, isCurrentEpisodeTheActiveTrack],
   );

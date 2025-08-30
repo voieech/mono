@@ -2,7 +2,7 @@ import { Slider } from "@react-native-assets/slider";
 import { useEffect, useState } from "react";
 import TrackPlayer from "react-native-track-player";
 
-import type { TrackWithMetadata } from "@/utils";
+import { type TrackWithMetadata, TrackPlayerPlayWithGlobalRate } from "@/utils";
 
 export function AudioProgressSlider(props: {
   defaultTrackPosition: number;
@@ -31,7 +31,7 @@ export function AudioProgressSlider(props: {
     setPosition(newPosition);
 
     await TrackPlayer.seekTo(newPosition);
-    await TrackPlayer.play();
+    await TrackPlayerPlayWithGlobalRate();
   }
 
   return (
@@ -46,8 +46,8 @@ export function AudioProgressSlider(props: {
       onTouchStart={() => {
         TrackPlayer.pause();
       }}
-      // onTouchEnd={() => TrackPlayer.play()}
-      // onTouchCancel={() => TrackPlayer.play()}
+      // onTouchEnd={() => TrackPlayerPlayWithGlobalRate()}
+      // onTouchCancel={() => TrackPlayerPlayWithGlobalRate()}
       //
       // This is the same as "onValueChange", just that it is not called
       // continously and only called once user lifts their finger

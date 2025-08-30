@@ -9,6 +9,7 @@ import TrackPlayer, {
 import { Icon } from "@/components/provided";
 import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
+import { TrackPlayerPlayWithGlobalRate } from "@/utils";
 
 import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerProgessBar";
 
@@ -148,7 +149,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                   />
                 </Pressable>
               ) : (
-                <Pressable onPress={TrackPlayer.play}>
+                <Pressable onPress={TrackPlayerPlayWithGlobalRate}>
                   <Icon
                     name="play.fill"
                     color="white"
