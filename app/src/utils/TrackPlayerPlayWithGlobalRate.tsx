@@ -14,8 +14,7 @@ export async function TrackPlayerPlayWithGlobalRate() {
   const localStorageSettings = await settingsInLocalStorage.read();
 
   const playbackRateString =
-    localStorageSettings.defaultPlaybackSpeed ??
-    settings.defaultPlaybackSpeed.defaultValue;
+    localStorageSettings.playbackRate ?? settings.playbackRate.defaultValue;
 
   const playbackRate = TrackPlayerPlaybackRateMap.get(playbackRateString) ?? 1;
 

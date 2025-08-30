@@ -48,8 +48,8 @@ export default function Settings() {
         }}
       >
         <ThemedText>
-          Default audio playback speed:{" "}
-          {settingContext.getSetting("defaultPlaybackSpeed")}
+          Default audio playback rate:{" "}
+          {settingContext.getSetting("playbackRate")}
         </ThemedText>
         <View>
           <ThemedText>External Audio controls</ThemedText>

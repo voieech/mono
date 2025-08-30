@@ -27,7 +27,7 @@ import { AudioPlayerTime } from "./AudioPlayerTime";
 import { AudioProgressSlider } from "./AudioProgressSlider";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
-import { PlaybackSpeedButton } from "./PlaybackSpeedButton";
+import { PlaybackRateButton } from "./PlaybackRateButton";
 import { RepeatIcon } from "./RepeatIcon";
 import { ShareCurrentTrackIcon } from "./ShareCurrentTrackIcon";
 
@@ -136,7 +136,7 @@ export function AudioPlayer() {
             columnGap: 16,
           }}
         >
-          <PlaybackSpeedButton />
+          <PlaybackRateButton />
           <ShareCurrentTrackIcon activeTrack={activeTrack} />
         </ThemedView>
       </ThemedView>

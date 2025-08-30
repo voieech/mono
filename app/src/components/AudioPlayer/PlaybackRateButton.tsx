@@ -5,47 +5,45 @@ import { ThemedText } from "@/components";
 import { useSettingContext } from "@/context";
 import { TrackPlayerPlaybackRates, TrackPlayerPlaybackRateMap } from "@/utils";
 
-export function PlaybackSpeedButton() {
+export function PlaybackRateButton() {
   const settingContext = useSettingContext();
-  const trackPlaybackSpeedSetting = settingContext.getSetting(
-    "defaultPlaybackSpeed",
-  );
-  const trackPlaybackSpeed = TrackPlayerPlaybackRateMap.get(
-    trackPlaybackSpeedSetting,
+  const trackPlaybackRateSetting = settingContext.getSetting("playbackRate");
+  const trackPlaybackRate = TrackPlayerPlaybackRateMap.get(
+    trackPlaybackRateSetting,
   )!;
 
-  function cycleSpeed() {
+  function cycleRate() {
     // Match against string instead of number to avoid float comparisons
     const currentIndex = TrackPlayerPlaybackRates.findIndex(
-      ([val]) => val === trackPlaybackSpeedSetting,
+      ([val]) => val === trackPlaybackRateSetting,
     );
 
-    let newSpeed =
+    let newRate =
       TrackPlayerPlaybackRates[
         (currentIndex + 1) % TrackPlayerPlaybackRates.length
       ]?.[0];
 
     // Dont throw error, fallback to default for users to still use
-    if (newSpeed === undefined) {
+    if (newRate === undefined) {
       console.error(
-        new Error("Unable to cycle playback speed, defaulting to 1"),
+        new Error("Unable to cycle playback rate, defaulting to 1"),
       );
-      newSpeed = "1";
+      newRate = "1";
     }
 
-    TrackPlayer.setRate(TrackPlayerPlaybackRateMap.get(newSpeed)!);
+    TrackPlayer.setRate(TrackPlayerPlaybackRateMap.get(newRate)!);
 
-    settingContext.updateSetting("defaultPlaybackSpeed", newSpeed);
+    settingContext.updateSetting("playbackRate", newRate);
   }
 
   return (
-    <Pressable onPress={cycleSpeed}>
+    <Pressable onPress={cycleRate}>
       <ThemedText
         style={{
           fontSize: 24,
         }}
       >
-        {trackPlaybackSpeed}x
+        {trackPlaybackRate}x
       </ThemedText>
     </Pressable>
   );
