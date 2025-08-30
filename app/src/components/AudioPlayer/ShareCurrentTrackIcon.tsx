@@ -37,7 +37,13 @@ export function ShareCurrentTrackIcon(props: {
 
   return (
     <Pressable onPress={onShare}>
-      <Icon name="square.and.arrow.up" color="white" size={32} />
+      <Icon
+        name="square.and.arrow.up"
+        color="white"
+        style={{
+          marginBottom: 6,
+        }}
+      />
     </Pressable>
   );
 }

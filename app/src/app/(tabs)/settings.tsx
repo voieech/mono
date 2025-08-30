@@ -47,7 +47,10 @@ export default function Settings() {
           paddingBottom: 32,
         }}
       >
-        <ThemedText>Default audio playback speed: {1}</ThemedText>
+        <ThemedText>
+          Default audio playback speed:{" "}
+          {settingContext.getSetting("defaultPlaybackSpeed")}
+        </ThemedText>
         <View>
           <ThemedText>External Audio controls</ThemedText>
           {settingContext.settings.externalMediaControls.options.map(

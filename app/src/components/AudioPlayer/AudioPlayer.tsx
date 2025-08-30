@@ -104,6 +104,7 @@ export function AudioPlayer() {
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
+          alignItems: "center",
           paddingBottom: 32,
         }}
       >
@@ -111,6 +112,7 @@ export function AudioPlayer() {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
+            alignItems: "center",
             columnGap: 16,
           }}
         >
@@ -129,6 +131,7 @@ export function AudioPlayer() {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
+            alignItems: "center",
             columnGap: 16,
           }}
         >
