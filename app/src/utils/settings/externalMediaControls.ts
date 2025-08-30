@@ -11,16 +11,16 @@ export const externalMediaControls: DropdownSetting<
   "jump-time" | "skip-track"
 > = {
   type: "dropdown",
-  name: "",
-  description: "",
+  name: "External Audio controls",
+  description: "Choose the type of native media controls you want to see.",
   options: [
     {
       value: "jump-time",
-      name: "Show controls for jumping back and forth in 15 seconds intervals",
+      name: "Show controls for jumping back and forth in 15 seconds intervals.",
     },
     {
       value: "skip-track",
-      name: "Show controls for skipping tracks to next/previous",
+      name: "Show controls for skipping tracks to next/previous.",
     },
   ],
   defaultValue: "jump-time",

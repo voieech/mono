@@ -1,4 +1,5 @@
 import { Link } from "expo-router";
+import { Fragment } from "react";
 import { Pressable, Switch, useWindowDimensions, View } from "react-native";
 
 import type { ExperimentalSurfaceName } from "@/utils";
@@ -72,45 +73,81 @@ export default function Settings() {
             <PlaybackRateButton fontSize={18} />
           </View>
         </View>
-        <View>
-          <ThemedText>External Audio controls</ThemedText>
+        <View
+          style={{
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            backgroundColor: "black",
+            borderRadius: 16,
+          }}
+        >
+          <ThemedText type="defaultSemiBold">
+            {settingContext.settings.externalMediaControls.name}
+          </ThemedText>
+          <ThemedText
+            style={{
+              fontSize: 14,
+              color: "#999",
+              lineHeight: 20,
+            }}
+          >
+            {settingContext.settings.externalMediaControls.description}
+          </ThemedText>
+          <View
+            style={{
+              backgroundColor: "#777",
+              height: 0.5,
+              marginTop: 8,
+              marginBottom: 16,
+            }}
+          />
           {settingContext.settings.externalMediaControls.options.map(
-            (option) => (
-              <Pressable
-                key={option.value}
-                onPress={() => {
-                  settingContext.updateSetting(
-                    "externalMediaControls",
-                    option.value,
-                  );
-                }}
-              >
-                <View
-                  style={{
-                    paddingRight: 24,
+            (option, index) => (
+              <Fragment key={option.value}>
+                {index !== 0 && (
+                  <View
+                    style={{
+                      backgroundColor: "#444",
+                      height: 0.5,
+                      marginVertical: 4,
+                    }}
+                  />
+                )}
+                <Pressable
+                  onPress={() => {
+                    settingContext.updateSetting(
+                      "externalMediaControls",
+                      option.value,
+                    );
                   }}
                 >
                   <View
                     style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
+                      paddingRight: 24,
                     }}
                   >
-                    <ThemedText
+                    <View
                       style={{
-                        paddingRight: 16,
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
                       }}
                     >
-                      {option.name}
-                    </ThemedText>
-                    {option.value ===
-                      settingContext.getSetting("externalMediaControls") && (
-                      <Icon name="checkmark" color="#16a34a" />
-                    )}
+                      <ThemedText
+                        style={{
+                          paddingRight: 16,
+                        }}
+                      >
+                        {option.name}
+                      </ThemedText>
+                      {option.value ===
+                        settingContext.getSetting("externalMediaControls") && (
+                        <Icon name="checkmark" color="#16a34a" />
+                      )}
+                    </View>
                   </View>
-                </View>
-              </Pressable>
+                </Pressable>
+              </Fragment>
             ),
           )}
         </View>
