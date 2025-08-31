@@ -1,3 +1,4 @@
+import { getLocales, getCalendars } from "expo-localization";
 import { Link } from "expo-router";
 import { Fragment } from "react";
 import { Pressable, Switch, useWindowDimensions, View } from "react-native";
@@ -21,6 +22,8 @@ import {
 export default function Settings() {
   const settingContext = useSettingContext();
   const appDebuggingSurfaceContext = useAppDebuggingSurfaceContext();
+  const deviceLocale = getLocales()[0]!;
+  const deviceCalendar = getCalendars()[0];
   return (
     <ParallaxScrollViewContainer
       headerImage={
@@ -227,6 +230,37 @@ export default function Settings() {
               description="For every surface that didnt specify a custom experiment name"
               experimentalSurfaceName="default"
             />
+            <ThemedText
+              type="defaultSemiBold"
+              style={{
+                paddingVertical: 4,
+              }}
+            >
+              Debugging Data
+            </ThemedText>
+            <View
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                backgroundColor: "black",
+                borderRadius: 16,
+              }}
+            >
+              <ThemedText
+                type="defaultSemiBold"
+                style={{
+                  paddingBottom: 4,
+                }}
+              >
+                Device i18n data
+              </ThemedText>
+              <ThemedText>
+                deviceLocale: {JSON.stringify(deviceLocale, null, 2)}
+              </ThemedText>
+              <ThemedText>
+                deviceCalendar: {JSON.stringify(deviceCalendar, null, 2)}
+              </ThemedText>
+            </View>
           </ThemedView>
         </Collapsible>
       )}

@@ -12,6 +12,7 @@
       "bundleIdentifier": "com.voieech-app",
       "supportsTablet": true,
       "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
         "UIBackgroundModes": ["audio"]
       },
       "associatedDomains": ["applinks:www.voieech.com"]
@@ -29,6 +30,10 @@
       "output": "static",
       "favicon": "./src/assets/images/favicon.png"
     },
+    "locales": {
+      "zh-Hans": "./app_languages/chinese_simplified.json",
+      "zh-Hant": "./app_languages/chinese_traditional.json"
+    },
     "plugins": [
       "expo-router",
       [
@@ -38,6 +43,20 @@
           "imageWidth": 100,
           "resizeMode": "contain",
           "backgroundColor": "#000000"
+        }
+      ],
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            // For ios, use the language name or ISO language designator
+            "ios": ["en", "zh-Hans", "zh-Hant"],
+
+            // For android, see links to guidelines
+            // https://developer.android.com/guide/topics/resources/app-languages#locale-names
+            // https://developer.android.com/guide/topics/resources/app-languages#sample-config
+            "android": ["en", "zh-Hans", "zh-Hant"]
+          }
         }
       ]
     ],
