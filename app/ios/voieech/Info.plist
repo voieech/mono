@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>voieech</string>
-          <string>voieech-app</string>
+          <string>com.voieech-app</string>
         </array>
       </dict>
       <dict>
