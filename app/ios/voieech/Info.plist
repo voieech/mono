@@ -30,7 +30,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>voieech</string>
-          <string>com.voieech.app</string>
+          <string>com.voieech</string>
         </array>
       </dict>
       <dict>
