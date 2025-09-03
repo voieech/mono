@@ -12,6 +12,7 @@ export default function Welcome() {
     <SafeAreaView
       style={{
         flex: 1,
+        backgroundColor: "black",
       }}
     >
       <ScrollView
