@@ -1,5 +1,6 @@
 import { getLocales, getCalendars } from "expo-localization";
 import { Link } from "expo-router";
+import { useFeatureFlag } from "posthog-react-native";
 import { Fragment } from "react";
 import { Pressable, Switch, useWindowDimensions, View } from "react-native";
 
@@ -22,6 +23,7 @@ import {
 export default function Settings() {
   const settingContext = useSettingContext();
   const appDebuggingSurfaceContext = useAppDebuggingSurfaceContext();
+  const isInternalUser = useFeatureFlag("internal");
   const deviceLocale = getLocales()[0]!;
   const deviceCalendar = getCalendars()[0];
   return (
@@ -167,8 +169,7 @@ export default function Settings() {
           }
         />
       </Collapsible>
-      {/* @todo Show if featureFlag is on for current user OR __DEV__ */}
-      {__DEV__ && (
+      {(__DEV__ || isInternalUser) && (
         <Collapsible title="Internal" openByDefault={__DEV__}>
           <ThemedView
             style={{
