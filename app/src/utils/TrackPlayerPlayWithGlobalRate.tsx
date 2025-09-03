@@ -18,5 +18,5 @@ export async function TrackPlayerPlayWithGlobalRate() {
 
   const playbackRate = TrackPlayerPlaybackRateMap.get(playbackRateString) ?? 1;
 
-  TrackPlayer.setRate(playbackRate);
+  await TrackPlayer.setRate(playbackRate);
 }
