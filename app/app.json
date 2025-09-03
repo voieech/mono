@@ -9,13 +9,17 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "bundleIdentifier": "com.voieech-app",
+      "bundleIdentifier": "com.voieech.app",
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
-        "UIBackgroundModes": ["audio"]
+        "UIBackgroundModes": [
+          "audio"
+        ]
       },
-      "associatedDomains": ["applinks:www.voieech.com"]
+      "associatedDomains": [
+        "applinks:www.voieech.com"
+      ]
     },
     "android": {
       "adaptiveIcon": {
@@ -49,19 +53,30 @@
         "expo-localization",
         {
           "supportedLocales": {
-            // For ios, use the language name or ISO language designator
-            "ios": ["en", "zh-Hans", "zh-Hant"],
-
-            // For android, see links to guidelines
-            // https://developer.android.com/guide/topics/resources/app-languages#locale-names
-            // https://developer.android.com/guide/topics/resources/app-languages#sample-config
-            "android": ["en", "zh-Hans", "zh-Hant"]
+            "ios": [
+              "en",
+              "zh-Hans",
+              "zh-Hant"
+            ],
+            "android": [
+              "en",
+              "zh-Hans",
+              "zh-Hant"
+            ]
           }
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "88e4c651-e6f7-40af-8b21-0ac2976bd6f6"
+      }
+    },
+    "owner": "voieech"
   }
 }
