@@ -77,6 +77,10 @@
         "projectId": "88e4c651-e6f7-40af-8b21-0ac2976bd6f6"
       }
     },
-    "owner": "voieech"
+    "owner": "voieech",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/88e4c651-e6f7-40af-8b21-0ac2976bd6f6"
+    }
   }
 }
