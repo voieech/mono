@@ -2,7 +2,7 @@ name: Deploy ios to production
 
 on:
   push:
-    branches: ["master"]
+    branches: ["prod-ios"]
 
 jobs:
   fingerprint: # Takes a hash of the native characteristics of the project using Expo Fingerprint
