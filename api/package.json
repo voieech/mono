@@ -14,6 +14,8 @@
     "db:seed": "npx tsx ./src/kysely/seed/runSeed.ts",
     "lint": "npx eslint",
     "lint:fix": "npx eslint --fix",
+    "scratchpad": "npx tsx ./src/scratchpad.ts",
+    "scratchpad:watch": "npx tsx watch ./src/scratchpad.ts",
     "reverse-proxy": "npx ngrok http 3000"
   },
   "dependencies": {
