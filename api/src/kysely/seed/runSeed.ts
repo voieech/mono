@@ -5,7 +5,7 @@ async function runSeed() {
   // @todo just like migration CLI, this one should ask to confirm first before allowing you to run!
 
   const apiDB = createDB({
-    connectionString: process.env["DATABASE_URL"]!,
+    connectionString: process.env["DB_CONN_STRING"]!,
   });
 
   await apiDB

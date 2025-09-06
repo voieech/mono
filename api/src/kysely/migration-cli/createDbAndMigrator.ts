@@ -18,7 +18,7 @@ export async function createDbAndMigrator() {
   }
 
   const db = createDB({
-    connectionString: process.env["DATABASE_URL"]!,
+    connectionString: process.env["DB_CONN_STRING"]!,
     kysely_log_error: true,
   });
 

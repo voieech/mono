@@ -9,7 +9,7 @@ import { createDB } from "../kysely/createDB.js";
 
 export function bootstrapHttpServer() {
   const apiDB = createDB({
-    connectionString: process.env["DATABASE_URL"]!,
+    connectionString: process.env["DB_CONN_STRING"]!,
   });
 
   express()
