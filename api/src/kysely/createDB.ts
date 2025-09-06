@@ -14,6 +14,10 @@ import type { Database } from "./definitions/index.js";
 // https://github.com/brianc/node-pg-types/blob/master/lib/builtins.js
 pg.types.setTypeParser(1114, $DateTime.ISO.DateTime.makeStrongAndThrowOnError);
 
+// Custom parser for vector (oid 1884170) from the pgvector extension so that
+// the returned data type is an array of numbers instead of a string.
+pg.types.setTypeParser(1884170, JSON.parse);
+
 /**
  * Creates a new kysely db instance. You should only create one instance per
  * use case, so e.g. for API services, all API services should only share a
