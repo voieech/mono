@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { Pressable } from "react-native";
 import TrackPlayer, {
   State as PlayerState,
@@ -35,6 +36,7 @@ export function AudioPlayer() {
   const router = useRouter();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
+  const [like, setLike] = useState<null | boolean>(null);
 
   if (activeTrack === undefined) {
     return null;
@@ -124,6 +126,30 @@ export function AudioPlayer() {
               }}
             >
               <Icon name="shuffle" color="white" size={32} />
+            </Pressable>
+          </ExperimentalSurface>
+          <ExperimentalSurface>
+            <Pressable
+              onPress={() => {
+                setLike(true);
+              }}
+            >
+              <Icon
+                name={"hand.thumbsup.fill"}
+                color={like ? "green" : "white"}
+                size={32}
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                setLike(false);
+              }}
+            >
+              <Icon
+                name={"hand.thumbsdown.fill"}
+                color={!like ? "#fa4d4d" : "white"}
+                size={32}
+              />
             </Pressable>
           </ExperimentalSurface>
           <RepeatIcon />
