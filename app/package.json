@@ -8,7 +8,7 @@
     "android": "npx expo run:android",
     "ios": "npx expo run:ios",
     "ios:device": "npx expo run:ios --device",
-    "ios:open-xcode": "open ios/app.xcworkspace",
+    "ios:open-xcode": "open ios/voieech.xcworkspace",
     "web": "npx expo start --web",
     "debug": "npx react-devtools",
     "sitemap": "npx expo-router-sitemap",
