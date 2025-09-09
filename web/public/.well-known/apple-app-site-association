@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "CQ8JTV2223.com.voieech-app",
+        "paths": [
+          "/podcast/channel/*",
+          "/podcast/episode/*"
+        ]
+      }
+    ]
+  }
+}
