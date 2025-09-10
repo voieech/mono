@@ -5,13 +5,9 @@ import express from "express";
 import * as kyselyPostgresHelpers from "kysely/helpers/postgres";
 import rss from "rss";
 
-import { createDB } from "../kysely/createDB.js";
+import { apiDB } from "../kysely/apiDB.js";
 
 export function bootstrapHttpServer() {
-  const apiDB = createDB({
-    connectionString: process.env["DB_CONN_STRING"]!,
-  });
-
   express()
     .use(cors())
 
