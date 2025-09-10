@@ -142,8 +142,16 @@ export function bootstrapHttpServer() {
               eb
                 .selectFrom("podcast_episode_externally_hosted_link")
                 .select([
-                  "podcast_episode_externally_hosted_link.podcast_platform",
-                  "podcast_episode_externally_hosted_link.url",
+                  eb
+                    .ref(
+                      "podcast_episode_externally_hosted_link.podcast_platform",
+                    )
+                    .$notNull()
+                    .as("podcast_platform"),
+                  eb
+                    .ref("podcast_episode_externally_hosted_link.url")
+                    .$notNull()
+                    .as("url"),
                 ])
                 .whereRef(
                   "podcast_episode_externally_hosted_link.podcast_episode_id",
@@ -163,8 +171,7 @@ export function bootstrapHttpServer() {
         return;
       }
 
-      // @todo
-      res.status(200).json(episode /* satisfies Episode */);
+      res.status(200).json(episode satisfies Episode);
     })
 
     .get("/v1/podcast/channel/:channelID", async function (req, res) {
