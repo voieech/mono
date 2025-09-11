@@ -31,6 +31,12 @@ export default [
           property: "randomUUID",
           message: "Please use the globally available $UUID.generate()",
         },
+        {
+          object: "res",
+          property: "end",
+          message:
+            "Please use res.send/alternatives instead of the low level .end method, for features like Etag generation",
+        },
       ],
       "no-fallthrough": [
         "error",
