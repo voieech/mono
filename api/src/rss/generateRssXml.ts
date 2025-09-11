@@ -3,8 +3,10 @@ import type { Episode, Channel } from "dto";
 import rss from "rss";
 
 /**
- * Stateless function to generate RSS XML string given a channel and its
- * episodes.
+ * Generate RSS XML string given a channel and its episodes.
+ *
+ * Note this is not idempotent since the generated XML will have a timestamp of
+ * generation so this will return a different string even with the same inputs.
  */
 export function generateRssXml(
   channel: Channel,
