@@ -9,6 +9,8 @@ import { generateRssXml } from "../rss/index.js";
 
 export function bootstrapHttpServer() {
   express()
+    .disable("x-powered-by")
+
     .use(cors())
 
     .get("/", (_, res) => {
