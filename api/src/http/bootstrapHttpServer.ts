@@ -182,7 +182,7 @@ export function bootstrapHttpServer() {
         .executeTakeFirst();
 
       if (channel === undefined) {
-        res.status(404).end(`Invalid Channel ID: ${channelID}`);
+        res.status(404).send(`Invalid Channel ID: ${channelID}`);
         return;
       }
 
@@ -199,7 +199,7 @@ export function bootstrapHttpServer() {
         .executeTakeFirst();
 
       if (channel === undefined) {
-        res.status(404).end(`Invalid Channel ID: ${channelID}`);
+        res.status(404).send(`Invalid Channel ID: ${channelID}`);
         return;
       }
 
@@ -256,7 +256,7 @@ export function bootstrapHttpServer() {
         .executeTakeFirst();
 
       if (channel === undefined) {
-        res.status(404).end(`Invalid Channel ID: ${channelID}`);
+        res.status(404).send(`Invalid Channel ID: ${channelID}`);
         return;
       }
 
@@ -277,7 +277,7 @@ export function bootstrapHttpServer() {
 
       const feedXML = generateRssXml(channel, episodes);
 
-      res.set("Content-Type", "application/rss+xml").status(200).end(feedXML);
+      res.set("Content-Type", "application/rss+xml").status(200).send(feedXML);
     })
 
     .listen(process.env["PORT"] ?? 3000);
