@@ -3,9 +3,9 @@ import type { Episode, Channel, PodcastPlatform } from "dto";
 import cors from "cors";
 import express from "express";
 import * as kyselyPostgresHelpers from "kysely/helpers/postgres";
-import rss from "rss";
 
 import { apiDB } from "../kysely/apiDB.js";
+import { generateRssXml } from "../rss/index.js";
 
 export function bootstrapHttpServer() {
   express()
