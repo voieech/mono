@@ -20,6 +20,7 @@ import {
   useAppDebuggingSurfaceContext,
   useExperimentalSurfaceContext,
 } from "@/context";
+import { posthog } from "@/utils";
 
 export default function Settings() {
   const settingContext = useSettingContext();
@@ -27,6 +28,7 @@ export default function Settings() {
   const isInternalUser = useFeatureFlag("internal");
   const deviceLocale = getLocales()[0]!;
   const deviceCalendar = getCalendars()[0];
+  const posthogDistinctID = posthog.getDistinctId();
   return (
     <ParallaxScrollViewContainer
       headerImage={
@@ -175,6 +177,29 @@ export default function Settings() {
             settingContext.updateSetting("rewindToStartOnSkipPrevious", value)
           }
         />
+      </Collapsible>
+      <Collapsible
+        title="Details"
+        openByDefault
+        expandedViewStyle={{
+          paddingTop: 16,
+          rowGap: 16,
+          paddingBottom: 32,
+        }}
+      >
+        <View>
+          <ThemedText type="defaultSemiBold">Posthog Distinct ID</ThemedText>
+          <View
+            style={{
+              paddingVertical: 8,
+              paddingHorizontal: 16,
+              backgroundColor: "black",
+              borderRadius: 16,
+            }}
+          >
+            <ThemedText>{posthogDistinctID}</ThemedText>
+          </View>
+        </View>
       </Collapsible>
       {(__DEV__ || isInternalUser) && (
         <Collapsible title="Internal" openByDefault={__DEV__}>
