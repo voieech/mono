@@ -53,7 +53,7 @@ function generateShareSheetObjectForTrack(track: TrackWithMetadata) {
   switch (track.trackType) {
     case "podcast_episode": {
       return {
-        url: `https://www.voieech.com/podcast/episode/${track.episode.vanity_id}`,
+        url: `https://voieech.com/podcast/episode/${track.episode.vanity_id}`,
         title: track.title,
         message: `Check out voieech for ${track.title}`,
       };

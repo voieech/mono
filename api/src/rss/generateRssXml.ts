@@ -21,7 +21,7 @@ export function generateRssXml(
     // @todo Use URL builder
     // The full URL associated with the podcast, typically a home page for a
     // podcast or a dedicated portion of a larger website.
-    site_url: `https://www.voieech.com`,
+    site_url: `https://voieech.com`,
 
     // Apple podcast: only supports values from the ISO 639 list (two-letter
     // language codes, with some possible modifiers, such as "fr-ca").
@@ -36,7 +36,7 @@ export function generateRssXml(
     // prevent formatting issues, and to ensure proper link functionality.
     // For example:
     // <![CDATA[
-    //   <a href="https://www.voieech.com">Voieech</a>
+    //   <a href="https://voieech.com">Voieech</a>
     // ]]>
     description: channel.description,
 
@@ -148,7 +148,7 @@ export function generateRssXml(
     feed.item({
       guid: episode.id,
       // @todo Use a URL builder
-      url: `https://www.voieech.com/podcast/episode/${episode.vanity_id}?lang=${episode.language}`,
+      url: `https://voieech.com/podcast/episode/${episode.vanity_id}?lang=${episode.language}`,
       date: episode.created_at,
       title: episode.title,
 
