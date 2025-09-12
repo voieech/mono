@@ -7,6 +7,10 @@ import { useSettingContext, useExperimentalSurfaceContext } from "@/context";
 
 import Welcome from "./welcome";
 
+export const unstable_settings = {
+  initialRouteName: "(tabs)",
+};
+
 function RootLayout() {
   const settingContext = useSettingContext();
   const useCardPlayerInsteadOfModal =
