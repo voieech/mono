@@ -1,3 +1,4 @@
+import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
 import { getLocales, getCalendars } from "expo-localization";
 import { Link } from "expo-router";
 import { useFeatureFlag } from "posthog-react-native";
@@ -45,7 +46,13 @@ export default function Settings() {
         gap: 16,
       }}
     >
-      <ThemedText type="title">Settings</ThemedText>
+      <ThemedText type="title">
+        Settings
+        <ThemedText>
+          ({nativeApplicationVersion}-{nativeBuildVersion})
+        </ThemedText>
+      </ThemedText>
+
       <Collapsible
         title="Audio Playback"
         openByDefault
