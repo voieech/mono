@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "CQ8JTV2223.com.voieech-app",
+        "appID": "CQ8JTV2223.com.voieech",
         "paths": [
           "/podcast/channel/*",
           "/podcast/episode/*"
