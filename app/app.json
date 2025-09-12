@@ -13,13 +13,9 @@
       "supportsTablet": true,
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
-        "UIBackgroundModes": [
-          "audio"
-        ]
+        "UIBackgroundModes": ["audio"]
       },
-      "associatedDomains": [
-        "applinks:www.voieech.com"
-      ]
+      "associatedDomains": ["applinks:voieech.com"]
     },
     "android": {
       "adaptiveIcon": {
