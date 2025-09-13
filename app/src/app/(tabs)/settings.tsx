@@ -48,12 +48,7 @@ export default function Settings() {
         gap: 16,
       }}
     >
-      <ThemedText type="title">
-        Settings
-        <ThemedText>
-          ({nativeApplicationVersion}-{nativeBuildVersion})
-        </ThemedText>
-      </ThemedText>
+      <ThemedText type="title">Settings</ThemedText>
 
       <Collapsible
         title="Audio Playback"
@@ -187,6 +182,22 @@ export default function Settings() {
           paddingBottom: 32,
         }}
       >
+        <View>
+          <ThemedText type="defaultSemiBold">App Version</ThemedText>
+          <View
+            style={{
+              paddingVertical: 8,
+              paddingHorizontal: 16,
+              backgroundColor: "black",
+              borderRadius: 16,
+            }}
+          >
+            <ThemedText>
+              Native app version: {nativeApplicationVersion}
+            </ThemedText>
+            <ThemedText>Native build version: {nativeBuildVersion}</ThemedText>
+          </View>
+        </View>
         <View>
           <ThemedText type="defaultSemiBold">Posthog Distinct ID</ThemedText>
           <View
