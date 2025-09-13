@@ -1,6 +1,7 @@
 import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
 import { getLocales, getCalendars } from "expo-localization";
 import { Link } from "expo-router";
+import * as ExpoUpdates from "expo-updates";
 import { useFeatureFlag } from "posthog-react-native";
 import { Fragment } from "react";
 import { Pressable, Switch, useWindowDimensions, View } from "react-native";
@@ -196,6 +197,25 @@ export default function Settings() {
               Native app version: {nativeApplicationVersion}
             </ThemedText>
             <ThemedText>Native build version: {nativeBuildVersion}</ThemedText>
+            <ThemedText>
+              OTA updates enabled: {ExpoUpdates.isEnabled.toString()}
+            </ThemedText>
+            <ThemedText>
+              OTA updates runtime version: {ExpoUpdates.runtimeVersion}
+            </ThemedText>
+            <ThemedText>OTA update UUID: {ExpoUpdates.updateId}</ThemedText>
+            <ThemedText>
+              OTA update checks: {ExpoUpdates.checkAutomatically}
+            </ThemedText>
+            <ThemedText>
+              OTA last update time: {ExpoUpdates.createdAt?.toString()}
+            </ThemedText>
+            <ThemedText>
+              OTA launch duration: {ExpoUpdates.launchDuration}
+            </ThemedText>
+            <ThemedText>
+              Using embedded version: {ExpoUpdates.isEmbeddedLaunch.toString()}
+            </ThemedText>
           </View>
         </View>
         <View>
@@ -288,22 +308,43 @@ export default function Settings() {
                 paddingHorizontal: 16,
                 backgroundColor: "black",
                 borderRadius: 16,
+                rowGap: 16,
               }}
             >
-              <ThemedText
-                type="defaultSemiBold"
-                style={{
-                  paddingBottom: 4,
-                }}
-              >
-                Device i18n data
-              </ThemedText>
-              <ThemedText>
-                deviceLocale: {JSON.stringify(deviceLocale, null, 2)}
-              </ThemedText>
-              <ThemedText>
-                deviceCalendar: {JSON.stringify(deviceCalendar, null, 2)}
-              </ThemedText>
+              <View>
+                <ThemedText
+                  type="defaultSemiBold"
+                  style={{
+                    paddingBottom: 4,
+                  }}
+                >
+                  Expo Updates data
+                </ThemedText>
+                <ThemedText>
+                  Latest Context:{" "}
+                  {JSON.stringify(ExpoUpdates.latestContext, null, 2)}
+                </ThemedText>
+                <ThemedText>
+                  Update Manifest:{" "}
+                  {JSON.stringify(ExpoUpdates.manifest, null, 2)}
+                </ThemedText>
+              </View>
+              <View>
+                <ThemedText
+                  type="defaultSemiBold"
+                  style={{
+                    paddingBottom: 4,
+                  }}
+                >
+                  Device i18n data
+                </ThemedText>
+                <ThemedText>
+                  deviceLocale: {JSON.stringify(deviceLocale, null, 2)}
+                </ThemedText>
+                <ThemedText>
+                  deviceCalendar: {JSON.stringify(deviceCalendar, null, 2)}
+                </ThemedText>
+              </View>
             </View>
           </ThemedView>
         </Collapsible>
