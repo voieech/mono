@@ -74,7 +74,12 @@
       }
     },
     "owner": "voieech",
-    "runtimeVersion": "1.0.0",
+
+    // Get expo to auto calculate runtime version using @expo/fingerprint lib
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    },
+
     "updates": {
       "url": "https://u.expo.dev/88e4c651-e6f7-40af-8b21-0ac2976bd6f6"
     }
