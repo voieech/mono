@@ -21,7 +21,7 @@ export function getMigrationIndex(
 
   // Get the last migration index of today if any
   const lastUsedMigrationIndex = migrationDatesWithTheSameDate
-    .map((dateWithIndex) => parseInt(dateWithIndex.slice(8))) // 8 bcs YYYYMMDD
+    .map((dateWithIndex) => parseInt(dateWithIndex.slice(10))) // 10 bcs YYYY-MM-DD
     .sort((a, b) => a - b)
     .at(-1);
 
