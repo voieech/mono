@@ -1,4 +1,5 @@
 import type { AudioTable } from "./AudioTable.js";
+import type { BroadcastScriptChunkTable } from "./BroadcastScriptChunkTable.js";
 import type { ContentTable } from "./ContentTable.js";
 import type { ContentTagTable } from "./ContentTagTable.js";
 import type { PodcastChannelTable } from "./PodcastChannelTable.js";
@@ -8,6 +9,7 @@ import type { PodcastEpisodeTable } from "./PodcastEpisodeTable.js";
 
 export interface Database {
   audio: AudioTable;
+  broadcast_script_chunk: BroadcastScriptChunkTable;
   content: ContentTable;
   content_tag: ContentTagTable;
   podcast_channel: PodcastChannelTable;
