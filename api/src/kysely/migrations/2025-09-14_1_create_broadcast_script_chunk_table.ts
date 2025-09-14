@@ -7,7 +7,6 @@ const broadcastScriptChunkTableName = "broadcast_script_chunk";
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(broadcastScriptChunkTableName)
-    .ifNotExists()
     .addColumn("id", "text", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("updated_at", "timestamp", (col) => col.notNull())
