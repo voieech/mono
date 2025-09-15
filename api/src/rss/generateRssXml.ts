@@ -7,6 +7,10 @@ import rss from "rss";
  *
  * Note this is not idempotent since the generated XML will have a timestamp of
  * generation so this will return a different string even with the same inputs.
+ *
+ * Test using
+ * - https://podba.se/validate/
+ * - https://www.castfeedvalidator.com/
  */
 export function generateRssXml(
   channel: Channel,
