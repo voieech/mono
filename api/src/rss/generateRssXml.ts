@@ -2,6 +2,8 @@ import type { Episode, Channel } from "dto";
 
 import rss from "rss";
 
+import { urlBuilders } from "../util/urlBuilders.js";
+
 /**
  * Generate RSS XML string given a channel and its episodes.
  *
@@ -22,10 +24,9 @@ export function generateRssXml(
   >,
 ) {
   const feed = new rss({
-    // @todo Use URL builder
     // The full URL associated with the podcast, typically a home page for a
     // podcast or a dedicated portion of a larger website.
-    site_url: `https://voieech.com`,
+    site_url: urlBuilders.rootDomain(),
 
     // Apple podcast: only supports values from the ISO 639 list (two-letter
     // language codes, with some possible modifiers, such as "fr-ca").
@@ -44,8 +45,7 @@ export function generateRssXml(
     // ]]>
     description: channel.description,
 
-    // @todo Use URL builder
-    feed_url: `https://api.voieech.com/v1/podcast/channel/rss/${channel.id}`,
+    feed_url: urlBuilders.apiDomain(1, `/podcast/channel/rss/${channel.id}`),
 
     image_url: channel.img_url,
 
@@ -151,8 +151,9 @@ export function generateRssXml(
   for (const episode of episodes) {
     feed.item({
       guid: episode.id,
-      // @todo Use a URL builder
-      url: `https://voieech.com/podcast/episode/${episode.vanity_id}?lang=${episode.language}`,
+      url: urlBuilders.rootDomain(
+        `/podcast/episode/${episode.vanity_id}?lang=${episode.language}`,
+      ),
       date: episode.created_at,
       title: episode.title,
 
