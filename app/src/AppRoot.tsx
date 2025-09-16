@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from "react";
 
+import { i18n } from "@lingui/core";
+import { I18nProvider } from "@lingui/react";
 import {
   DarkTheme,
   DefaultTheme,
@@ -18,7 +20,10 @@ import {
   SettingsProvider,
 } from "@/components";
 import { useTheme } from "@/hooks";
-import { queryClient, posthog } from "@/utils";
+import { queryClient, posthog, deviceLanguage } from "@/utils";
+
+import { messages as enMessages } from "./locales/en/messages";
+import { messages as zhMessages } from "./locales/zh/messages";
 
 // Dont auto hide the splash screen until all initialisation steps are done
 SplashScreen.preventAutoHideAsync();
@@ -28,6 +33,14 @@ SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   fade: true,
 });
+
+// i18n.load("en", enMessages);
+// i18n.load("zh", zhMessages);
+i18n.load({
+  en: enMessages,
+  zh: zhMessages,
+});
+i18n.activate(deviceLanguage);
 
 /**
  * Handles initialisation and all the root providers. Expects child to be root
@@ -46,41 +59,43 @@ export function AppRoot(props: PropsWithChildren) {
   }
 
   return (
-    <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
-      <QueryClientProvider client={queryClient}>
-        {/*
-          PostHogProvider adds a new build warning:
-          Using outdated JSX transform https://react.dev/link/new-jsx-transform
-        */}
-        <PostHogProvider
-          client={posthog}
-          autocapture={{
-            captureScreens: true,
-            captureTouches: true,
+    <I18nProvider i18n={i18n}>
+      <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
+        <QueryClientProvider client={queryClient}>
+          {/*
+            PostHogProvider adds a new build warning:
+            Using outdated JSX transform https://react.dev/link/new-jsx-transform
+          */}
+          <PostHogProvider
+            client={posthog}
+            autocapture={{
+              captureScreens: true,
+              captureTouches: true,
 
-            // Add this if not in navigation container
-            // https://github.com/PostHog/posthog-js-lite/pull/455
-            // import { createNavigationContainerRef } from "@react-navigation/native";
-            // const navigationRef = createNavigationContainerRef();
-            // navigationRef,
-          }}
-        >
-          <GestureHandlerRootView
-            style={{
-              flex: 1,
+              // Add this if not in navigation container
+              // https://github.com/PostHog/posthog-js-lite/pull/455
+              // import { createNavigationContainerRef } from "@react-navigation/native";
+              // const navigationRef = createNavigationContainerRef();
+              // navigationRef,
             }}
           >
-            <AppDebuggingSurfaceProvider>
-              <ExperimentalSurfaceProvider>
-                <SettingsProvider>
-                  <StatusBar style="auto" />
-                  {props.children}
-                </SettingsProvider>
-              </ExperimentalSurfaceProvider>
-            </AppDebuggingSurfaceProvider>
-          </GestureHandlerRootView>
-        </PostHogProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+            <GestureHandlerRootView
+              style={{
+                flex: 1,
+              }}
+            >
+              <AppDebuggingSurfaceProvider>
+                <ExperimentalSurfaceProvider>
+                  <SettingsProvider>
+                    <StatusBar style="auto" />
+                    {props.children}
+                  </SettingsProvider>
+                </ExperimentalSurfaceProvider>
+              </AppDebuggingSurfaceProvider>
+            </GestureHandlerRootView>
+          </PostHogProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </I18nProvider>
   );
 }

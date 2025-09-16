@@ -1,5 +1,6 @@
 import type { Channel, Episode } from "dto";
 
+import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
@@ -123,7 +124,7 @@ export default function PodcastChannel() {
               }}
               type="subtitle"
             >
-              Featured
+              <Trans>Featured</Trans>
             </ThemedText>
             {podcastChannelEpisodesQuery.data.map((episode) => (
               <Link

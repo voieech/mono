@@ -1,0 +1,1 @@
+/*eslint-disable*/import type{Messages}from"@lingui/core";export const messages=JSON.parse("{\"34JKq2\":[\"Default audio playback rate:\"],\"8tjQCz\":[\"Explore\"],\"FkMol5\":[\"Featured\"],\"IBh/88\":[\"Audio Playback\"],\"S0/Qnt\":[\"For You\"],\"Tz0i8g\":[\"Settings\"],\"URmyfc\":[\"Details\"],\"hXnJ+U\":[\"精选频道\"],\"kwySsX\":[\"精选剧集\"]}")as Messages;

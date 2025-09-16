@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-09-16 16:27+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/app/(tabs)/settings.tsx:59
+msgid "Audio Playback"
+msgstr "Audio Playback"
+
+#: src/app/(tabs)/settings.tsx:79
+msgid "Default audio playback rate:"
+msgstr "Default audio playback rate:"
+
+#: src/app/(tabs)/settings.tsx:185
+msgid "Details"
+msgstr "Details"
+
+#: src/app/(tabs)/_layout.tsx:99
+msgid "Explore"
+msgstr "Explore"
+
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:127
+msgid "Featured"
+msgstr "Featured"
+
+#: src/app/(tabs)/(home)/index.tsx:82
+msgid "Featured Channels"
+msgstr "Featured Channels"
+
+#: src/app/(tabs)/(home)/index.tsx:167
+msgid "Featured Episodes"
+msgstr "Featured Episodes"
+
+#: src/app/(tabs)/_layout.tsx:111
+msgid "For You"
+msgstr "For You"
+
+#: src/app/(tabs)/_layout.tsx:120
+#: src/app/(tabs)/settings.tsx:55
+msgid "Settings"
+msgstr "Settings"

@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react/macro";
 import { BottomTabBar } from "@react-navigation/bottom-tabs";
 import { Tabs } from "expo-router";
 import { Platform, View } from "react-native";
@@ -13,6 +14,7 @@ import { useTheme } from "@/hooks";
 
 export default function TabLayout() {
   const theme = useTheme();
+  const { t } = useLingui();
   return (
     <View
       style={{
@@ -94,7 +96,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="(home)"
           options={{
-            title: "Explore",
+            title: t`Explore`,
             tabBarIcon: ({ color, size }) => (
               <Icon size={size} name="magnifyingglass" color={color} />
             ),
@@ -106,7 +108,7 @@ export default function TabLayout() {
             // @todo Temporarily hide this until this is available
             href: null,
 
-            title: "For You",
+            title: t`For You`,
             tabBarIcon: ({ color, size }) => (
               <Icon size={size} name="person" color={color} />
             ),
@@ -115,7 +117,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="settings"
           options={{
-            title: "Settings",
+            title: t`Settings`,
             tabBarIcon: ({ color, size }) => (
               <Icon size={size} name="gear" color={color} />
             ),

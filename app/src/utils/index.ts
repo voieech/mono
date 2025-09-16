@@ -2,6 +2,7 @@
  * Barrel file.
  */
 
+export * from "./deviceLanguage";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
 export * from "./localStorage";

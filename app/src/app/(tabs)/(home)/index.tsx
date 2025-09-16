@@ -1,5 +1,6 @@
 import type { Channel, Episode } from "dto";
 
+import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
@@ -77,7 +78,9 @@ export default function HomeScreen() {
             marginBottom: 8,
           }}
         >
-          <ThemedText type="subtitle">Featured Channels</ThemedText>
+          <ThemedText type="subtitle">
+            <Trans>Featured Channels</Trans>
+          </ThemedText>
           {featuredChannelsQuery.data.map((channel) => (
             <Link
               key={channel.id}
@@ -160,7 +163,9 @@ export default function HomeScreen() {
             marginBottom: 8,
           }}
         >
-          <ThemedText type="subtitle">Featured Episodes</ThemedText>
+          <ThemedText type="subtitle">
+            <Trans>Featured Episodes</Trans>
+          </ThemedText>
           {featuredEpisodesQuery.data.map((episode) => (
             <Link
               key={episode.id}

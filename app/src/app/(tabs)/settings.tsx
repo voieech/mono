@@ -1,3 +1,4 @@
+import { useLingui, Trans } from "@lingui/react/macro";
 import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
 import { getLocales, getCalendars } from "expo-localization";
 import { Link } from "expo-router";
@@ -30,6 +31,7 @@ export default function Settings() {
   const deviceLocale = getLocales()[0]!;
   const deviceCalendar = getCalendars()[0];
   const posthogDistinctID = posthog.getDistinctId();
+  const { t } = useLingui();
   return (
     <ParallaxScrollViewContainer
       headerImage={
@@ -49,10 +51,12 @@ export default function Settings() {
         gap: 16,
       }}
     >
-      <ThemedText type="title">Settings</ThemedText>
+      <ThemedText type="title">
+        <Trans>Settings</Trans>
+      </ThemedText>
 
       <Collapsible
-        title="Audio Playback"
+        title={t`Audio Playback`}
         openByDefault
         expandedViewStyle={{
           rowGap: 16,
@@ -71,7 +75,9 @@ export default function Settings() {
             borderRadius: 16,
           }}
         >
-          <ThemedText>Default audio playback rate:</ThemedText>
+          <ThemedText>
+            <Trans>Default audio playback rate:</Trans>
+          </ThemedText>
           <View
             style={{
               paddingVertical: 2,
@@ -92,6 +98,7 @@ export default function Settings() {
           }}
         >
           <ThemedText type="defaultSemiBold">
+            {/* @todo Translate */}
             {settingContext.settings.externalMediaControls.name}
           </ThemedText>
           <ThemedText
@@ -175,7 +182,7 @@ export default function Settings() {
         />
       </Collapsible>
       <Collapsible
-        title="Details"
+        title={t`Details`}
         openByDefault
         expandedViewStyle={{
           paddingTop: 16,
