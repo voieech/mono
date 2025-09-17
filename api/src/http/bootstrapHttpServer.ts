@@ -272,7 +272,7 @@ export function bootstrapHttpServer() {
         ])
         .where("channel_id", "=", channelID)
         .orderBy("podcast_episode.created_at", "desc")
-        .limit(20)
+        .limit(100)
         .execute();
 
       const feedXML = generateRssXml(channel, episodes);
