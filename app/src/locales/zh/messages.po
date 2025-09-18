@@ -8,50 +8,50 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: voieech\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-18 11:16\n"
+"PO-Revision-Date: 2025-09-18 11:30\n"
 "Last-Translator: \n"
-"Language-Team: Chinese Traditional\n"
+"Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: voieech\n"
 "X-Crowdin-Project-ID: 829928\n"
-"X-Crowdin-Language: zh-TW\n"
+"X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /[voieech.mono] prod-ios/app/src/locales/en/messages.po\n"
 "X-Crowdin-File-ID: 12\n"
 
 #: src/app/(tabs)/settings.tsx:59
 msgid "Audio Playback"
-msgstr ""
+msgstr "音频播放"
 
 #: src/app/(tabs)/settings.tsx:79
 msgid "Default audio playback rate:"
-msgstr ""
+msgstr "默认音频播放速度"
 
 #: src/app/(tabs)/settings.tsx:185
 msgid "Details"
-msgstr ""
+msgstr "软件详情"
 
 #: src/app/(tabs)/_layout.tsx:99
 msgid "Explore"
-msgstr ""
+msgstr "浏览"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:127
 msgid "Featured"
-msgstr ""
+msgstr "精选"
 
 #: src/app/(tabs)/(home)/index.tsx:82
 msgid "Featured Channels"
-msgstr ""
+msgstr "精选频道"
 
 #: src/app/(tabs)/(home)/index.tsx:167
 msgid "Featured Episodes"
-msgstr ""
+msgstr "精选剧集"
 
 #: src/app/(tabs)/_layout.tsx:111
 msgid "For You"
-msgstr ""
+msgstr "推荐"
 
 #: src/app/(tabs)/_layout.tsx:120
 #: src/app/(tabs)/settings.tsx:55
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
