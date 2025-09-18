@@ -123,6 +123,7 @@ export default function HomeScreen() {
                       paddingBottom: 2,
                       fontSize: 24,
                     }}
+                    numberOfLines={1}
                   >
                     {channel.name}
                   </ThemedText>
@@ -131,6 +132,7 @@ export default function HomeScreen() {
                       paddingBottom: 4,
                       fontSize: 12,
                     }}
+                    numberOfLines={2}
                   >
                     {channel.description}
                   </ThemedText>
