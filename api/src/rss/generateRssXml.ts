@@ -73,6 +73,9 @@ export function generateRssXml(
     custom_elements: [
       /********************** Apple Podcast Required **********************/
 
+      // @todo Remove hardcoded email
+      { "itunes:email": "jeremy@voieech.com" },
+
       // The artwork for the show.
       // Depending on their device, subscribers see your podcast artwork in
       // varying sizes. Therefore, make sure your design is effective at
