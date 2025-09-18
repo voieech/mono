@@ -15,6 +15,7 @@ import {
   Icon,
   Collapsible,
   ThemedView,
+  CopyOnPress,
   PlaybackRateButton,
 } from "@/components";
 import {
@@ -227,16 +228,18 @@ export default function Settings() {
         </View>
         <View>
           <ThemedText type="defaultSemiBold">Posthog Distinct ID</ThemedText>
-          <View
-            style={{
-              paddingVertical: 8,
-              paddingHorizontal: 16,
-              backgroundColor: "black",
-              borderRadius: 16,
-            }}
-          >
-            <ThemedText>{posthogDistinctID}</ThemedText>
-          </View>
+          <CopyOnPress text={posthogDistinctID}>
+            <View
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                backgroundColor: "black",
+                borderRadius: 16,
+              }}
+            >
+              <ThemedText>{posthogDistinctID}</ThemedText>
+            </View>
+          </CopyOnPress>
         </View>
       </Collapsible>
       {(__DEV__ || isInternalUser) && (
