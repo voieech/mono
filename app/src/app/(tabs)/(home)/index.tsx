@@ -243,6 +243,11 @@ export default function HomeScreen() {
           ))}
         </ThemedView>
       )}
+      <View
+        style={{
+          paddingBottom: 64,
+        }}
+      />
     </SafeScrollViewContainer>
   );
 }
