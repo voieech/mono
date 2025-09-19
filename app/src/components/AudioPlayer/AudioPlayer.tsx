@@ -147,7 +147,7 @@ export function AudioPlayer() {
             >
               <Icon
                 name={"hand.thumbsdown.fill"}
-                color={!like ? "#fa4d4d" : "white"}
+                color={like === false ? "#fa4d4d" : "white"}
                 size={32}
               />
             </Pressable>
