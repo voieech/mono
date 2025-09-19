@@ -13,6 +13,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { PostHogProvider } from "posthog-react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 import {
   AppDebuggingSurfaceProvider,
@@ -84,14 +85,16 @@ export function AppRoot(props: PropsWithChildren) {
                 flex: 1,
               }}
             >
-              <AppDebuggingSurfaceProvider>
-                <ExperimentalSurfaceProvider>
-                  <SettingsProvider>
-                    <StatusBar style="auto" />
-                    {props.children}
-                  </SettingsProvider>
-                </ExperimentalSurfaceProvider>
-              </AppDebuggingSurfaceProvider>
+              <RootSiblingParent>
+                <AppDebuggingSurfaceProvider>
+                  <ExperimentalSurfaceProvider>
+                    <SettingsProvider>
+                      <StatusBar style="auto" />
+                      {props.children}
+                    </SettingsProvider>
+                  </ExperimentalSurfaceProvider>
+                </AppDebuggingSurfaceProvider>
+              </RootSiblingParent>
             </GestureHandlerRootView>
           </PostHogProvider>
         </QueryClientProvider>

@@ -10,10 +10,16 @@ import { Pressable } from "react-native";
 export function CopyOnPress(
   props: PropsWithChildren<{
     text: string;
+    onCopy?: () => void;
   }>,
 ) {
   return (
-    <Pressable onPress={() => Clipboard.setStringAsync(props.text)}>
+    <Pressable
+      onPress={async () => {
+        await Clipboard.setStringAsync(props.text);
+        props.onCopy?.();
+      }}
+    >
       {props.children}
     </Pressable>
   );
