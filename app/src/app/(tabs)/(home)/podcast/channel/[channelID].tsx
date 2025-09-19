@@ -4,6 +4,8 @@ import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams, Link } from "expo-router";
+import { useState } from "react";
+import { RefreshControl } from "react-native";
 
 import {
   ParallaxScrollViewContainer,
@@ -73,6 +75,16 @@ export default function PodcastChannel() {
     },
   });
 
+  const [refreshing, setRefreshing] = useState(false);
+  async function onRefresh() {
+    setRefreshing(true);
+    await Promise.all([
+      podcastChannelQuery.refetch(),
+      podcastChannelEpisodesQuery.refetch(),
+    ]);
+    setRefreshing(false);
+  }
+
   if (podcastChannelQuery.isPending) {
     return <FullScreenLoader />;
   }
@@ -108,6 +120,9 @@ export default function PodcastChannel() {
             contentFit="contain"
           />
         </ThemedView>
+      }
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
       <ThemedText type="title">{podcastChannelQuery.data.name}</ThemedText>

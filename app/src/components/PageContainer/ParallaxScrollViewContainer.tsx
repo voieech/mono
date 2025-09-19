@@ -1,6 +1,7 @@
 import type { PropsWithChildren, ReactElement } from "react";
+import type { RefreshControlProps, ViewProps } from "react-native";
 
-import { useWindowDimensions, type ViewProps } from "react-native";
+import { useWindowDimensions } from "react-native";
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -39,6 +40,8 @@ export function ParallaxScrollViewContainer(
      * can apply styles.
      */
     innerContentStyle?: ViewProps["style"];
+
+    refreshControl?: React.ReactElement<RefreshControlProps>;
   }>,
 ) {
   const colorScheme = useTheme();
@@ -87,6 +90,10 @@ export function ParallaxScrollViewContainer(
         scrollEventThrottle={16}
         scrollIndicatorInsets={{ bottom }}
         contentContainerStyle={{ paddingBottom: bottom }}
+        // @todo
+        // Refresh control works but the spinner cant be seen as the headerImage
+        // covers it entirely.
+        refreshControl={props.refreshControl}
       >
         {props.headerImage != null && props.headerImage !== false && (
           <Animated.View
