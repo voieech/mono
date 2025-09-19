@@ -4,7 +4,8 @@ import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import { View } from "react-native";
+import { useState } from "react";
+import { RefreshControl, View } from "react-native";
 
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { apiBaseUrl } from "@/constants";
@@ -69,8 +70,22 @@ export default function HomeScreen() {
     },
   });
 
+  const [refreshing, setRefreshing] = useState(false);
+  async function onRefresh() {
+    setRefreshing(true);
+    await Promise.all([
+      featuredChannelsQuery.refetch(),
+      featuredEpisodesQuery.refetch(),
+    ]);
+    setRefreshing(false);
+  }
+
   return (
-    <SafeScrollViewContainer>
+    <SafeScrollViewContainer
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       {featuredChannelsQuery.data !== undefined && (
         <ThemedView
           style={{

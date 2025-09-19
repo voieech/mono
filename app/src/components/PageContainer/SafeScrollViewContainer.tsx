@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import type { RefreshControlProps } from "react-native";
 
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,7 +9,11 @@ import { useBottomTabOverflow, useThemeColor } from "@/hooks";
 /**
  * Use this as a top level page wrapper component. Do not wrap this as a child.
  */
-export function SafeScrollViewContainer(props: PropsWithChildren) {
+export function SafeScrollViewContainer(
+  props: PropsWithChildren<{
+    refreshControl?: React.ReactElement<RefreshControlProps>;
+  }>,
+) {
   const bottomOverflow = useBottomTabOverflow();
   const backgroundColor = useThemeColor("background");
   const padding = 16;
@@ -40,6 +45,7 @@ export function SafeScrollViewContainer(props: PropsWithChildren) {
         scrollIndicatorInsets={{
           bottom: paddingBottom,
         }}
+        refreshControl={props.refreshControl}
 
         // @todo Take as prop
         // keyboardShouldPersistTaps='handled'
