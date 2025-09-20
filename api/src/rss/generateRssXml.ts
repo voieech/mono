@@ -81,6 +81,14 @@ export function generateRssXml(
         ],
       },
 
+      // @todo Temporary for RSS migration
+      {
+        "itunes:new-feed-url": urlBuilders.apiDomain(
+          1,
+          `/podcast/channel/rss/${channel.id}`,
+        ),
+      },
+
       // The artwork for the show.
       // Depending on their device, subscribers see your podcast artwork in
       // varying sizes. Therefore, make sure your design is effective at
