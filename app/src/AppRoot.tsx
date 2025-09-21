@@ -23,8 +23,8 @@ import {
 import { useTheme } from "@/hooks";
 import { queryClient, posthog, deviceLanguage } from "@/utils";
 
-import { messages as enMessages } from "./locales/en/messages";
-import { messages as zhMessages } from "./locales/zh/messages";
+import { messages as enMessages } from "./locales/en/messages.po";
+import { messages as zhMessages } from "./locales/zh/messages.po";
 
 // Dont auto hide the splash screen until all initialisation steps are done
 SplashScreen.preventAutoHideAsync();
