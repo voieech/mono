@@ -30,6 +30,10 @@ jobs:
     permissions:
       contents: write
 
+    defaults:
+      run:
+        working-directory: app
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,13 +50,12 @@ jobs:
         run: npm run i18n:extract
 
       - name: Commit generated PO if changed
-        # id: check_changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # check if PO files changed
           git diff --exit-code || (
-            git add app/src/locales/**/*.po
+            git add src/locales/**/*.po
             git commit -m "ci-chore: extract and update *.po with lingui"
             git push
           )
