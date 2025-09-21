@@ -1,0 +1,37 @@
+name: i18n Crowdin - download translations
+run-name: ${{ github.actor }} requested to download translations from crowdin
+
+###### Description ######
+# This workflow will be triggered manually by users when translations are ready.
+#
+# This will download the transactions from crowdin and create a PR with the
+# changes.
+
+on:
+  workflow_dispatch:
+
+# Permissions needed to create the PR
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  crowdin-download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Crowdin pull
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: true
+          localization_branch_name: i18n_crowdin_translations
+          create_pull_request: true
+          pull_request_base_branch_name: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
