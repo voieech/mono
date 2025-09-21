@@ -13,15 +13,20 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/(tabs)/settings.tsx:59
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:201
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:169
+msgid "{episodeLengthInMins} mins"
+msgstr "{episodeLengthInMins} mins"
+
+#: src/app/(tabs)/settings.tsx:61
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
-#: src/app/(tabs)/settings.tsx:79
+#: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate:"
 msgstr "Default audio playback rate:"
 
-#: src/app/(tabs)/settings.tsx:185
+#: src/app/(tabs)/settings.tsx:187
 msgid "Details"
 msgstr "Details"
 
@@ -29,15 +34,15 @@ msgstr "Details"
 msgid "Explore"
 msgstr "Explore"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:127
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:142
 msgid "Featured"
 msgstr "Featured"
 
-#: src/app/(tabs)/(home)/index.tsx:82
+#: src/app/(tabs)/(home)/index.tsx:97
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:167
+#: src/app/(tabs)/(home)/index.tsx:184
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -45,7 +50,11 @@ msgstr "Featured Episodes"
 msgid "For You"
 msgstr "For You"
 
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
+msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
+msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
+
 #: src/app/(tabs)/_layout.tsx:120
-#: src/app/(tabs)/settings.tsx:55
+#: src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "Settings"

@@ -18,15 +18,20 @@ msgstr ""
 "X-Crowdin-File: /master/app/src/locales/en/messages.po\n"
 "X-Crowdin-File-ID: 24\n"
 
-#: src/app/(tabs)/settings.tsx:59
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:201
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:169
+msgid "{episodeLengthInMins} mins"
+msgstr ""
+
+#: src/app/(tabs)/settings.tsx:61
 msgid "Audio Playback"
 msgstr "音频播放"
 
-#: src/app/(tabs)/settings.tsx:79
+#: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate:"
 msgstr "默认音频播放速度:"
 
-#: src/app/(tabs)/settings.tsx:185
+#: src/app/(tabs)/settings.tsx:187
 msgid "Details"
 msgstr "软件详情"
 
@@ -34,15 +39,15 @@ msgstr "软件详情"
 msgid "Explore"
 msgstr "浏览"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:127
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:142
 msgid "Featured"
 msgstr "精选"
 
-#: src/app/(tabs)/(home)/index.tsx:82
+#: src/app/(tabs)/(home)/index.tsx:97
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:167
+#: src/app/(tabs)/(home)/index.tsx:184
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -50,8 +55,11 @@ msgstr "精选剧集"
 msgid "For You"
 msgstr "推荐"
 
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
+msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
+msgstr ""
+
 #: src/app/(tabs)/_layout.tsx:120
-#: src/app/(tabs)/settings.tsx:55
+#: src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "设置"
-
