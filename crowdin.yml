@@ -1,3 +1,5 @@
+"preserve_hierarchy": true
+
 files:
   - source: /app/src/locales/en/messages.po
     translation: /app/src/locales/%two_letters_code%/messages.po
