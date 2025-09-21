@@ -1,0 +1,34 @@
+name: i18n Crowdin - upload sources
+run-name: Changes by ${{ github.actor }} triggered upload of translation source files to crowdin for translation
+
+###### Description ######
+# This workflow will be triggered on changes to the app/ UI codes.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      # include all .ts / .tsx in app/src
+      - "app/src/**/*.ts"
+      - "app/src/**/*.tsx"
+      # exclude the messages.ts in locales to prevent cyclic workflow runs
+      - "!app/src/locales/**/messages.ts"
+
+jobs:
+  crowdin-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Crowdin push
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: true
+          upload_translations: false
+          download_translations: false
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
