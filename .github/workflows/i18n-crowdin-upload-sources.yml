@@ -3,6 +3,12 @@ run-name: Changes by ${{ github.actor }} triggered upload of translation source 
 
 ###### Description ######
 # This workflow will be triggered on changes to the app/ UI codes.
+#
+# This will use lingui CLI to extract translation source strings out from UI
+# code (.ts, .tsx files) to generate "$locale/messages.po" file for every single
+# locale defined in "lingui.config.js", and commit the changes.
+#
+# Push .po file source strings to crowdin.
 
 on:
   workflow_dispatch:
@@ -19,9 +25,39 @@ on:
 jobs:
   crowdin-upload:
     runs-on: ubuntu-latest
+
+    # Need write access to auto commit generated changes to .po file
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Use "lingui" to extract strings and generate the source .po file(s)
+        run: npm run i18n:extract
+
+      - name: Commit generated PO if changed
+        # id: check_changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # check if PO files changed
+          git diff --exit-code || (
+            git add app/src/locales/**/*.po
+            git commit -m "ci-chore: extract and update *.po with lingui"
+            git push
+          )
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Crowdin push
         uses: crowdin/github-action@v2
