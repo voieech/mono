@@ -63,4 +63,3 @@ msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 #: src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "设置"
-
