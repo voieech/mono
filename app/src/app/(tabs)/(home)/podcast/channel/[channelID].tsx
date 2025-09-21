@@ -141,67 +141,70 @@ export default function PodcastChannel() {
             >
               <Trans>Featured</Trans>
             </ThemedText>
-            {podcastChannelEpisodesQuery.data.map((episode) => (
-              <Link
-                key={episode.id}
-                href={{
-                  pathname: "/podcast/episode/[vanityID]",
-                  params: {
-                    vanityID: episode.vanity_id,
-                  },
-                }}
-                style={{
-                  marginBottom: 8,
-                }}
-              >
-                <ThemedView
+            {podcastChannelEpisodesQuery.data.map((episode) => {
+              const episodeLengthInMins = Math.trunc(episode.audio_length / 60);
+              return (
+                <Link
+                  key={episode.id}
+                  href={{
+                    pathname: "/podcast/episode/[vanityID]",
+                    params: {
+                      vanityID: episode.vanity_id,
+                    },
+                  }}
                   style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    borderRadius: 16,
+                    marginBottom: 8,
                   }}
                 >
-                  <Image
-                    source={episode.img_url}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      maxWidth: 128,
-                      borderTopLeftRadius: 16,
-                      borderBottomLeftRadius: 16,
-                    }}
-                    contentFit="cover"
-                  />
                   <ThemedView
                     style={{
                       flex: 1,
-                      borderTopRightRadius: 16,
-                      borderBottomRightRadius: 16,
-                      padding: 16,
-                      backgroundColor: "#3f3f46",
+                      flexDirection: "row",
+                      borderRadius: 16,
                     }}
                   >
-                    <ThemedText
+                    <Image
+                      source={episode.img_url}
                       style={{
-                        paddingBottom: 2,
+                        width: "100%",
+                        height: "100%",
+                        maxWidth: 128,
+                        borderTopLeftRadius: 16,
+                        borderBottomLeftRadius: 16,
                       }}
-                      numberOfLines={2}
-                    >
-                      {episode.title}
-                    </ThemedText>
-                    <ThemedText
+                      contentFit="cover"
+                    />
+                    <ThemedView
                       style={{
-                        fontSize: 12,
+                        flex: 1,
+                        borderTopRightRadius: 16,
+                        borderBottomRightRadius: 16,
+                        padding: 16,
+                        backgroundColor: "#3f3f46",
                       }}
                     >
-                      {episode.created_at.split("T")[0]}
-                      {"\n"}
-                      {Math.trunc(episode.audio_length / 60)} mins
-                    </ThemedText>
+                      <ThemedText
+                        style={{
+                          paddingBottom: 2,
+                        }}
+                        numberOfLines={2}
+                      >
+                        {episode.title}
+                      </ThemedText>
+                      <ThemedText
+                        style={{
+                          fontSize: 12,
+                        }}
+                      >
+                        {episode.created_at.split("T")[0]}
+                        {"\n"}
+                        <Trans>{episodeLengthInMins} mins</Trans>
+                      </ThemedText>
+                    </ThemedView>
                   </ThemedView>
-                </ThemedView>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </>
         )}
     </ParallaxScrollViewContainer>

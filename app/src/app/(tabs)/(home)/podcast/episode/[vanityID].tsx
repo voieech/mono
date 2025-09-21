@@ -1,5 +1,6 @@
 import type { Episode } from "dto";
 
+import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams } from "expo-router";
@@ -114,6 +115,10 @@ export default function PodcastEpisode() {
     );
   }
 
+  const episodeSeasonNumber = episode.season_number;
+  const episodeNumber = episode.episode_number;
+  const episodeLengthInMins = Math.trunc(episode.audio_length / 60);
+
   return (
     <ParallaxScrollViewContainer
       headerHeightUseWidth={true}
@@ -155,11 +160,13 @@ export default function PodcastEpisode() {
             lineHeight: 20,
           }}
         >
-          Season {episode.season_number}, Episode {episode.episode_number}
+          <Trans>
+            Season {episodeSeasonNumber}, Episode {episodeNumber}
+          </Trans>
           {"\n"}
           {episode.created_at.split("T")[0]}
           {"\n"}
-          {Math.trunc(episode.audio_length / 60)} mins
+          <Trans>{episodeLengthInMins} mins</Trans>
         </ThemedText>
         {/*
           Even if player is not paused, i.e. it is loading or whatever show the
