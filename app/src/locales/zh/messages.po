@@ -8,20 +8,20 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: voieech\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-18 12:57\n"
+"PO-Revision-Date: 2025-09-21 16:36\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: voieech\n"
 "X-Crowdin-Project-ID: 829928\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /master/app/src/locales/en/messages.po\n"
-"X-Crowdin-File-ID: 24\n"
+"X-Crowdin-File: /app/src/locales/en/messages.po\n"
+"X-Crowdin-File-ID: 34\n"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:201
 #: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:169
 msgid "{episodeLengthInMins} mins"
-msgstr ""
+msgstr "{episodeLengthInMins} 分钟"
 
 #: src/app/(tabs)/settings.tsx:61
 msgid "Audio Playback"
@@ -57,9 +57,10 @@ msgstr "推荐"
 
 #: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
-msgstr ""
+msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 
 #: src/app/(tabs)/_layout.tsx:120
 #: src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "设置"
+
