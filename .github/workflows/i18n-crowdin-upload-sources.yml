@@ -47,7 +47,7 @@ jobs:
         run: npm ci
 
       - name: Use "lingui" to extract strings and generate the source .po file(s)
-        run: npm run i18n:extract
+        run: npx lingui extract
 
       - name: Commit generated PO if changed
         run: |

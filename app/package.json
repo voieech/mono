@@ -13,7 +13,6 @@
     "web": "npx expo start --web",
     "debug": "npx react-devtools",
     "sitemap": "npx expo-router-sitemap",
-    "i18n:extract": "npx lingui extract",
     "typecheck": "npx tsc",
     "format": "npx prettier --write ./src",
     "lint": "npx expo lint",
