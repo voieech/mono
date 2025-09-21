@@ -19,8 +19,6 @@ on:
       # include all .ts / .tsx in app/src
       - "app/src/**/*.ts"
       - "app/src/**/*.tsx"
-      # exclude the messages.ts in locales to prevent cyclic workflow runs
-      - "!app/src/locales/**/messages.ts"
 
 jobs:
   crowdin-upload:
