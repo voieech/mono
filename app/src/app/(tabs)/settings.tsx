@@ -24,7 +24,7 @@ import {
   useAppDebuggingSurfaceContext,
   useExperimentalSurfaceContext,
 } from "@/context";
-import { posthog } from "@/utils";
+import { posthog, linguiMsgToString } from "@/utils";
 
 export default function Settings() {
   const settingContext = useSettingContext();
@@ -100,8 +100,9 @@ export default function Settings() {
           }}
         >
           <ThemedText type="defaultSemiBold">
-            {/* @todo Translate */}
-            {settingContext.settings.externalMediaControls.name}
+            {linguiMsgToString(
+              settingContext.settings.externalMediaControls.name,
+            )}
           </ThemedText>
           <ThemedText
             style={{
@@ -110,7 +111,9 @@ export default function Settings() {
               lineHeight: 20,
             }}
           >
-            {settingContext.settings.externalMediaControls.description}
+            {linguiMsgToString(
+              settingContext.settings.externalMediaControls.description,
+            )}
           </ThemedText>
           <View
             style={{
@@ -157,7 +160,7 @@ export default function Settings() {
                           paddingRight: 16,
                         }}
                       >
-                        {option.name}
+                        {linguiMsgToString(option.name)}
                       </ThemedText>
                       {option.value ===
                         settingContext.getSetting("externalMediaControls") && (
@@ -171,12 +174,12 @@ export default function Settings() {
           )}
         </View>
         <SwitchSettingRow
-          settingTitle={
-            settingContext.settings.rewindToStartOnSkipPrevious.name
-          }
-          description={
-            settingContext.settings.rewindToStartOnSkipPrevious.description
-          }
+          settingTitle={linguiMsgToString(
+            settingContext.settings.rewindToStartOnSkipPrevious.name,
+          )}
+          description={linguiMsgToString(
+            settingContext.settings.rewindToStartOnSkipPrevious.description,
+          )}
           switchValue={settingContext.getSetting("rewindToStartOnSkipPrevious")}
           onValueChange={(value) =>
             settingContext.updateSetting("rewindToStartOnSkipPrevious", value)
@@ -285,7 +288,9 @@ export default function Settings() {
               }
             />
             <SwitchSettingRow
-              settingTitle={settingContext.settings.lastOnboardingTime.name}
+              settingTitle={linguiMsgToString(
+                settingContext.settings.lastOnboardingTime.name,
+              )}
               description={
                 settingContext.settings.lastOnboardingTime.description +
                 (settingContext.getSetting("lastOnboardingTime") === ""

@@ -5,6 +5,7 @@
 export * from "./deviceLanguage";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
+export * from "./linguiMsgToString";
 export * from "./localStorage";
 export * from "./LocalStorageWrapper";
 export * from "./posthog";

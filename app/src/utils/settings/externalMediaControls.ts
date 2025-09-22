@@ -1,3 +1,4 @@
+import { msg } from "@lingui/core/macro";
 import TrackPlayer from "react-native-track-player";
 
 import type { DropdownSetting } from "./types/DropdownSetting";
@@ -11,16 +12,16 @@ export const externalMediaControls: DropdownSetting<
   "jump-time" | "skip-track"
 > = {
   type: "dropdown",
-  name: "External Audio controls",
-  description: "Choose the type of native media controls you want to see.",
+  name: msg`External Audio controls`,
+  description: msg`Choose the type of native media controls you want to see.`,
   options: [
     {
       value: "jump-time",
-      name: "Show controls for jumping back and forth in 15 seconds intervals.",
+      name: msg`Show controls for jumping back and forth in 15 seconds intervals.`,
     },
     {
       value: "skip-track",
-      name: "Show controls for skipping tracks to next/previous.",
+      name: msg`Show controls for skipping tracks to next/previous.`,
     },
   ],
   defaultValue: "jump-time",
