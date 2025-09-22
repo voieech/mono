@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: voieech\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-21 16:36\n"
+"PO-Revision-Date: 2025-09-22 06:59\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -29,7 +29,7 @@ msgstr "音频播放"
 
 #: src/utils/settings/externalMediaControls.ts:16
 msgid "Choose the type of native media controls you want to see."
-msgstr ""
+msgstr "选择你想要看到的本地媒体控制类型。"
 
 #: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate:"
@@ -45,7 +45,7 @@ msgstr "浏览"
 
 #: src/utils/settings/externalMediaControls.ts:15
 msgid "External Audio controls"
-msgstr ""
+msgstr "手机媒体控制"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:142
 msgid "Featured"
@@ -65,7 +65,7 @@ msgstr "推荐"
 
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
-msgstr ""
+msgstr "跳到上一个剧集时，先跳到剧集开头"
 
 #: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
@@ -78,12 +78,13 @@ msgstr "设置"
 
 #: src/utils/settings/externalMediaControls.ts:20
 msgid "Show controls for jumping back and forth in 15 seconds intervals."
-msgstr ""
+msgstr "显示跳前和跳后十五秒的按键。"
 
 #: src/utils/settings/externalMediaControls.ts:24
 msgid "Show controls for skipping tracks to next/previous."
-msgstr ""
+msgstr "显示跳至下一个和上一个剧集的按键。"
 
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:8
 msgid "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
-msgstr ""
+msgstr "当剧集播放三秒后按下“跳至上一个剧集”按钮时，先跳到剧集开头。如果剧集播放3秒内按下“跳至上一个剧集”按钮时才会跳到上一个剧集。"
+
