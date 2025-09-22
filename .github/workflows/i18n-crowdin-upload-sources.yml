@@ -52,7 +52,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # check if PO files changed
-          git diff --exit-code || (
+          git diff --ignore-space-at-eol --exit-code || (
             git add src/locales/**/*.po
             git commit -m "ci-chore: extract and update *.po with lingui"
             git push
