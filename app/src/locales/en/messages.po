@@ -22,17 +22,25 @@ msgstr "{episodeLengthInMins} mins"
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
+#: src/utils/settings/externalMediaControls.ts:16
+msgid "Choose the type of native media controls you want to see."
+msgstr "Choose the type of native media controls you want to see."
+
 #: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate:"
 msgstr "Default audio playback rate:"
 
-#: src/app/(tabs)/settings.tsx:187
+#: src/app/(tabs)/settings.tsx:190
 msgid "Details"
 msgstr "Details"
 
 #: src/app/(tabs)/_layout.tsx:99
 msgid "Explore"
 msgstr "Explore"
+
+#: src/utils/settings/externalMediaControls.ts:15
+msgid "External Audio controls"
+msgstr "External Audio controls"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:142
 msgid "Featured"
@@ -50,6 +58,10 @@ msgstr "Featured Episodes"
 msgid "For You"
 msgstr "For You"
 
+#: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
+msgid "Rewind to track start when skipping to previous"
+msgstr "Rewind to track start when skipping to previous"
+
 #: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
@@ -58,3 +70,15 @@ msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 #: src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "Settings"
+
+#: src/utils/settings/externalMediaControls.ts:20
+msgid "Show controls for jumping back and forth in 15 seconds intervals."
+msgstr "Show controls for jumping back and forth in 15 seconds intervals."
+
+#: src/utils/settings/externalMediaControls.ts:24
+msgid "Show controls for skipping tracks to next/previous."
+msgstr "Show controls for skipping tracks to next/previous."
+
+#: src/utils/settings/rewindToStartOnSkipPrevious.ts:8
+msgid "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
+msgstr "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."

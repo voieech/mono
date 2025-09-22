@@ -27,17 +27,25 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "Audio Playback"
 msgstr "音频播放"
 
+#: src/utils/settings/externalMediaControls.ts:16
+msgid "Choose the type of native media controls you want to see."
+msgstr ""
+
 #: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate:"
 msgstr "默认音频播放速度:"
 
-#: src/app/(tabs)/settings.tsx:187
+#: src/app/(tabs)/settings.tsx:190
 msgid "Details"
 msgstr "软件详情"
 
 #: src/app/(tabs)/_layout.tsx:99
 msgid "Explore"
 msgstr "浏览"
+
+#: src/utils/settings/externalMediaControls.ts:15
+msgid "External Audio controls"
+msgstr ""
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:142
 msgid "Featured"
@@ -55,6 +63,10 @@ msgstr "精选剧集"
 msgid "For You"
 msgstr "推荐"
 
+#: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
+msgid "Rewind to track start when skipping to previous"
+msgstr ""
+
 #: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
@@ -63,3 +75,15 @@ msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 #: src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "设置"
+
+#: src/utils/settings/externalMediaControls.ts:20
+msgid "Show controls for jumping back and forth in 15 seconds intervals."
+msgstr ""
+
+#: src/utils/settings/externalMediaControls.ts:24
+msgid "Show controls for skipping tracks to next/previous."
+msgstr ""
+
+#: src/utils/settings/rewindToStartOnSkipPrevious.ts:8
+msgid "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
+msgstr ""
