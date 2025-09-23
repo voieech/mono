@@ -32,8 +32,12 @@ msgid "Choose the type of native media controls you want to see."
 msgstr "选择你想要看到的本地媒体控制类型。"
 
 #: src/app/(tabs)/settings.tsx:81
-msgid "Default audio playback rate:"
-msgstr "默认音频播放速度:"
+msgid "Default audio playback rate"
+msgstr ""
+
+#: src/app/(tabs)/settings.tsx:81
+#~ msgid "Default audio playback rate:"
+#~ msgstr "默认音频播放速度:"
 
 #: src/app/(tabs)/settings.tsx:190
 msgid "Details"
@@ -87,4 +91,3 @@ msgstr "显示跳至下一个和上一个剧集的按键。"
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:8
 msgid "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
 msgstr "当剧集播放三秒后按下“跳至上一个剧集”按钮时，先跳到剧集开头。如果剧集播放3秒内按下“跳至上一个剧集”按钮时才会跳到上一个剧集。"
-
