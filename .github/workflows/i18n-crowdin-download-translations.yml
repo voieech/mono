@@ -44,7 +44,8 @@ jobs:
           upload_sources: false
           upload_translations: false
 
-          # Will create PR ourselves since we want to process the files first.
+          # Will commit and create PR ourselves to process the files first.
+          push_translations: false
           create_pull_request: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
