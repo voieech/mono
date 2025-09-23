@@ -4,8 +4,10 @@ run-name: ${{ github.actor }} requested to download translations from crowdin
 ###### Description ######
 # This workflow will be triggered manually by users when translations are ready.
 #
-# This will download the transactions from crowdin and create a PR with the
-# changes.
+# 1. This will download the transactions from crowdin
+# 2. Use "lingui extract" command to ensure that the formatting of the .po files
+#    are correct.
+# 3. Create PR with the changes.
 
 on:
   workflow_dispatch:
@@ -22,17 +24,45 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Crowdin pull
         uses: crowdin/github-action@v2
         with:
+          download_translations: true
           upload_sources: false
           upload_translations: false
-          download_translations: true
 
-          create_pull_request: true
-          pull_request_base_branch_name: master
-          localization_branch_name: i18n_crowdin_translations
+          # Will create PR ourselves since we want to process the files first.
+          create_pull_request: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
+      - name: Use "lingui extract" to format *.po files
+        run: npx lingui extract
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: i18n_crowdin_translations
+          base: master
+          title: New Crowdin translations
+          body: ""
+
+          # Use GH Actions bot as both the author and committer instead of
+          # defaulting to the user account that triggered the job.
+          author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+          committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+
+          # Delete the branch to clean up if the branch still exists without an
+          # open PR or changes on subsequent runs.
+          delete-branch: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
