@@ -78,7 +78,7 @@ export default function Settings() {
           }}
         >
           <ThemedText>
-            <Trans>Default audio playback rate:</Trans>
+            <Trans>Default audio playback rate</Trans>
           </ThemedText>
           <View
             style={{
