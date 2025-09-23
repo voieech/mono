@@ -35,10 +35,6 @@ msgstr "选择你想要看到的本地媒体控制类型。"
 msgid "Default audio playback rate"
 msgstr ""
 
-#: src/app/(tabs)/settings.tsx:81
-#~ msgid "Default audio playback rate:"
-#~ msgstr "默认音频播放速度:"
-
 #: src/app/(tabs)/settings.tsx:190
 msgid "Details"
 msgstr "软件详情"

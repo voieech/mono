@@ -30,10 +30,6 @@ msgstr "Choose the type of native media controls you want to see."
 msgid "Default audio playback rate"
 msgstr "Default audio playback rate"
 
-#: src/app/(tabs)/settings.tsx:81
-#~ msgid "Default audio playback rate:"
-#~ msgstr "Default audio playback rate:"
-
 #: src/app/(tabs)/settings.tsx:190
 msgid "Details"
 msgstr "Details"
