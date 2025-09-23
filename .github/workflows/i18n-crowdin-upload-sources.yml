@@ -45,7 +45,8 @@ jobs:
         run: npm ci
 
       - name: Use "lingui" to extract strings and generate the source .po file(s)
-        run: npx lingui extract
+        # Use clean to ensure that catalogs that no longer exists are deleted
+        run: npx lingui extract --clean
 
       - name: Commit generated PO if changed
         run: |
