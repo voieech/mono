@@ -53,7 +53,8 @@ jobs:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
       - name: Use "lingui extract" to format *.po files
-        run: npx lingui extract
+        # Need to specify path here due to different working directory
+        run: npx lingui extract ./src/**/*.ts*
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
