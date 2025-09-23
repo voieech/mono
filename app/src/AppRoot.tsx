@@ -21,10 +21,7 @@ import {
   SettingsProvider,
 } from "@/components";
 import { useTheme } from "@/hooks";
-import { queryClient, posthog, deviceLanguage } from "@/utils";
-
-import { messages as enMessages } from "./locales/en/messages.po";
-import { messages as zhMessages } from "./locales/zh/messages.po";
+import { queryClient, posthog } from "@/utils";
 
 // Dont auto hide the splash screen until all initialisation steps are done
 SplashScreen.preventAutoHideAsync();
@@ -34,14 +31,6 @@ SplashScreen.preventAutoHideAsync();
 SplashScreen.setOptions({
   fade: true,
 });
-
-// i18n.load("en", enMessages);
-// i18n.load("zh", zhMessages);
-i18n.load({
-  en: enMessages,
-  zh: zhMessages,
-});
-i18n.activate(deviceLanguage);
 
 /**
  * Handles initialisation and all the root providers. Expects child to be root

@@ -5,12 +5,17 @@
 
 /******************* Import side effects first and services *******************/
 import { setupReactNativeTrackPlayer } from "@/setup";
+import { dynamicallyLoadAndActivateLocale } from "@/utils";
 
 /**************************** Initialize services *****************************/
 // Cant do top level await yet unforunately
 // https://github.com/facebook/hermes/issues/1481
 // await setupReactNativeTrackPlayer();
 setupReactNativeTrackPlayer();
+
+// Lingui's I18nProvider will not render its child components until a current
+// locale is set, which is why we dont need to await this.
+dynamicallyLoadAndActivateLocale();
 
 /****************** Register app entry through Expo Router ********************/
 // This must be last to ensure all configurations are properly set up before the

@@ -2,9 +2,9 @@
  * Barrel file.
  */
 
-export * from "./deviceLanguage";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
+export * from "./i18n/dynamicallyLoadAndActivateLocale";
 export * from "./linguiMsgToString";
 export * from "./localStorage";
 export * from "./LocalStorageWrapper";
