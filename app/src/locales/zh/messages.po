@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: voieech\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-23 08:24\n"
+"PO-Revision-Date: 2025-09-25 14:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -29,7 +29,7 @@ msgstr "音频播放"
 
 #: src/components/AudioPlayer/ShareCurrentTrackIcon.tsx:61
 msgid "Check out voieech for \"{trackTitle}\""
-msgstr ""
+msgstr "用 voieech 收听 “{trackTitle}”"
 
 #: src/utils/settings/externalMediaControls.ts:16
 msgid "Choose the type of native media controls you want to see."
@@ -37,7 +37,7 @@ msgstr "选择你想要看到的本地媒体控制类型。"
 
 #: src/app/audio-player-modal.tsx:132
 msgid "close"
-msgstr ""
+msgstr "关闭"
 
 #: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate"
@@ -73,23 +73,23 @@ msgstr "推荐"
 
 #: src/app/+not-found.tsx:58
 msgid "Go back Home"
-msgstr ""
+msgstr "返回首页"
 
 #: src/app/(tabs)/(home)/_layout.tsx:15
 msgid "Home"
-msgstr ""
+msgstr "主页"
 
 #: src/app/audio-player-modal.tsx:114
 msgid "Made by {activeTrackArtist}"
-msgstr ""
+msgstr "由{activeTrackArtist}制作"
 
 #: src/app/(tabs)/(home)/_layout.tsx:28
 msgid "Podcast Channel"
-msgstr ""
+msgstr "播客频道"
 
 #: src/app/(tabs)/(home)/_layout.tsx:34
 msgid "Podcast Episode"
-msgstr ""
+msgstr "播客剧集"
 
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
@@ -118,12 +118,12 @@ msgstr "当剧集播放三秒后按下“跳至上一个剧集”按钮时，先
 
 #: src/app/welcome.tsx:74
 msgid "Start listening"
-msgstr ""
+msgstr "开始收听"
 
 #: src/app/+not-found.tsx:36
 msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
-msgstr ""
+msgstr "我们找不到你想要的东西，这里是一幅我们非常抱歉的画……"
 
 #: src/app/welcome.tsx:55
 msgid "Your Hyper Personalized Podcasts"
-msgstr ""
+msgstr "您的超人个性化播客"
