@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: voieech\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-22 06:59\n"
+"PO-Revision-Date: 2025-09-23 08:24\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -33,7 +33,7 @@ msgstr "选择你想要看到的本地媒体控制类型。"
 
 #: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate"
-msgstr ""
+msgstr "默认音频播放速度"
 
 #: src/app/(tabs)/settings.tsx:190
 msgid "Details"
