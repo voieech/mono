@@ -2,7 +2,8 @@ name: i18n Crowdin - download translations
 run-name: ${{ github.actor }} requested to download translations from crowdin
 
 ###### Description ######
-# This workflow will be triggered manually by users when translations are ready.
+# This workflow will be triggered by crowdin webhook when translations are all
+# completed, or manually via workflow dispatch.
 #
 # 1. This will download the transactions from crowdin
 # 2. Use "lingui extract" command to ensure that the formatting of the .po files
@@ -52,14 +53,11 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
-      - name: Check translation files ownership
-        run: ls -l ./src/locales/**/*.po
-
+      # Update translation files' permissions from "-rw-r--r--" to "-rw-rw-rw-"
+      # after downloading them in the previous step, so that the next step have
+      # write permission to write the formatting changes with lingui.
       - name: Ensure write permissions for translation files
         run: sudo chmod -R a+w ./src/locales
-
-      - name: Check translation files ownership
-        run: ls -l ./src/locales/**/*.po
 
       - name: Use "lingui extract" to format *.po files
         run: npx lingui extract
@@ -71,6 +69,7 @@ jobs:
           base: master
           title: New Crowdin translations
           body: ""
+          commit-message: "ci-chore: download updated *.po from crowdin"
 
           # Use GH Actions bot as both the author and committer instead of
           # defaulting to the user account that triggered the job.
