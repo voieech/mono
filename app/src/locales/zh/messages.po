@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: voieech\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-09-25 14:46\n"
+"PO-Revision-Date: 2025-09-25 14:51\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -126,4 +126,4 @@ msgstr "我们找不到你想要的东西，这里是一幅我们非常抱歉的
 
 #: src/app/welcome.tsx:55
 msgid "Your Hyper Personalized Podcasts"
-msgstr "您的超人个性化播客"
+msgstr "你的声伴"
