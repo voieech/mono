@@ -52,9 +52,11 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
+      - name: Ensure write permissions for translation files
+        run: chmod -R u+w ./src/locales
+
       - name: Use "lingui extract" to format *.po files
-        # Need to specify path here due to different working directory
-        run: npx lingui extract ./src/**/*.ts*
+        run: npx lingui extract
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
