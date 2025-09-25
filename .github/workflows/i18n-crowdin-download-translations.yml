@@ -52,8 +52,11 @@ jobs:
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
+      - name: Check translation files ownership
+        run: ls -l ./src/locales
+
       - name: Ensure write permissions for translation files
-        run: chmod -R u+w ./src/locales
+        run: sudo chmod -R u+w ./src/locales
 
       - name: Use "lingui extract" to format *.po files
         run: npx lingui extract
