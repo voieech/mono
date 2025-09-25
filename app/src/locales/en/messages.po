@@ -22,9 +22,17 @@ msgstr "{episodeLengthInMins} mins"
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
+#: src/components/AudioPlayer/ShareCurrentTrackIcon.tsx:61
+msgid "Check out voieech for \"{trackTitle}\""
+msgstr "Check out voieech for \"{trackTitle}\""
+
 #: src/utils/settings/externalMediaControls.ts:16
 msgid "Choose the type of native media controls you want to see."
 msgstr "Choose the type of native media controls you want to see."
+
+#: src/app/audio-player-modal.tsx:132
+msgid "close"
+msgstr "close"
 
 #: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate"
@@ -58,6 +66,26 @@ msgstr "Featured Episodes"
 msgid "For You"
 msgstr "For You"
 
+#: src/app/+not-found.tsx:58
+msgid "Go back Home"
+msgstr "Go back Home"
+
+#: src/app/(tabs)/(home)/_layout.tsx:15
+msgid "Home"
+msgstr "Home"
+
+#: src/app/audio-player-modal.tsx:114
+msgid "Made by {activeTrackArtist}"
+msgstr "Made by {activeTrackArtist}"
+
+#: src/app/(tabs)/(home)/_layout.tsx:28
+msgid "Podcast Channel"
+msgstr "Podcast Channel"
+
+#: src/app/(tabs)/(home)/_layout.tsx:34
+msgid "Podcast Episode"
+msgstr "Podcast Episode"
+
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
 msgstr "Rewind to track start when skipping to previous"
@@ -82,3 +110,15 @@ msgstr "Show controls for skipping tracks to next/previous."
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:8
 msgid "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
 msgstr "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
+
+#: src/app/welcome.tsx:74
+msgid "Start listening"
+msgstr "Start listening"
+
+#: src/app/+not-found.tsx:36
+msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
+msgstr "We can't find what you want, here's is a drawing of us being very sorry and sad..."
+
+#: src/app/welcome.tsx:55
+msgid "Your Hyper Personalized Podcasts"
+msgstr "Your Hyper Personalized Podcasts"

@@ -27,9 +27,17 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "Audio Playback"
 msgstr "音频播放"
 
+#: src/components/AudioPlayer/ShareCurrentTrackIcon.tsx:61
+msgid "Check out voieech for \"{trackTitle}\""
+msgstr ""
+
 #: src/utils/settings/externalMediaControls.ts:16
 msgid "Choose the type of native media controls you want to see."
 msgstr "选择你想要看到的本地媒体控制类型。"
+
+#: src/app/audio-player-modal.tsx:132
+msgid "close"
+msgstr ""
 
 #: src/app/(tabs)/settings.tsx:81
 msgid "Default audio playback rate"
@@ -63,6 +71,26 @@ msgstr "精选剧集"
 msgid "For You"
 msgstr "推荐"
 
+#: src/app/+not-found.tsx:58
+msgid "Go back Home"
+msgstr ""
+
+#: src/app/(tabs)/(home)/_layout.tsx:15
+msgid "Home"
+msgstr ""
+
+#: src/app/audio-player-modal.tsx:114
+msgid "Made by {activeTrackArtist}"
+msgstr ""
+
+#: src/app/(tabs)/(home)/_layout.tsx:28
+msgid "Podcast Channel"
+msgstr ""
+
+#: src/app/(tabs)/(home)/_layout.tsx:34
+msgid "Podcast Episode"
+msgstr ""
+
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
 msgstr "跳到上一个剧集时，先跳到剧集开头"
@@ -87,3 +115,15 @@ msgstr "显示跳至下一个和上一个剧集的按键。"
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:8
 msgid "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
 msgstr "当剧集播放三秒后按下“跳至上一个剧集”按钮时，先跳到剧集开头。如果剧集播放3秒内按下“跳至上一个剧集”按钮时才会跳到上一个剧集。"
+
+#: src/app/welcome.tsx:74
+msgid "Start listening"
+msgstr ""
+
+#: src/app/+not-found.tsx:36
+msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
+msgstr ""
+
+#: src/app/welcome.tsx:55
+msgid "Your Hyper Personalized Podcasts"
+msgstr ""
