@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { Link, Stack } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -32,8 +33,10 @@ export default function NotFoundScreen() {
           Oops Sorry!
         </ThemedText>
         <ThemedText>
-          We can&apos;t find what you want, here&apos;s is a drawing of us being
-          very sorry and sad...
+          <Trans>
+            We can&apos;t find what you want, here&apos;s is a drawing of us
+            being very sorry and sad...
+          </Trans>
         </ThemedText>
         <Image
           source={require("@/assets/images/404.png")}
@@ -52,7 +55,7 @@ export default function NotFoundScreen() {
           replace
         >
           <ThemedText type="link" style={{ fontSize: 24 }}>
-            Go back Home
+            <Trans>Go back Home</Trans>
           </ThemedText>
         </Link>
       </SafeAreaView>

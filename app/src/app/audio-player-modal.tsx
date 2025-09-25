@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -27,6 +28,7 @@ export default function AudioPlayerModal() {
     useExperimentalSurfaceContext().getShowExperimentalSurface(
       "use-card-player-instead-of-modal",
     );
+  const activeTrackArtist = activeTrack?.artist;
   return (
     <SafeScrollViewContainer>
       {/*
@@ -63,7 +65,7 @@ export default function AudioPlayerModal() {
             }}
             numberOfLines={1}
           >
-            {activeTrack?.artist}
+            {activeTrackArtist}
           </ThemedText>
           <Pressable onPress={() => setModalVisible(true)}>
             <Icon name="ellipsis" color="white" />
@@ -109,7 +111,7 @@ export default function AudioPlayerModal() {
                 textAlign: "center",
               }}
             >
-              Made by {activeTrack?.artist}
+              <Trans>Made by {activeTrackArtist}</Trans>
             </Text>
             <Pressable
               style={{
@@ -127,7 +129,7 @@ export default function AudioPlayerModal() {
                   textAlign: "center",
                 }}
               >
-                close
+                <Trans>close</Trans>
               </Text>
             </Pressable>
           </View>

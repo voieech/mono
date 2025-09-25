@@ -1,8 +1,11 @@
+import type { MessageDescriptor } from "@lingui/core";
+
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { linguiMsgToString } from "@/utils";
 
 export function FullScreenLoader(props: {
   /**
@@ -18,7 +21,7 @@ export function FullScreenLoader(props: {
   /**
    * Custom loading message to override the default loading message
    */
-  loadingMessage?: string;
+  loadingMessage?: MessageDescriptor | string;
 }) {
   const loadingMessage = props.loadingMessage ?? "...loading...";
 
@@ -50,7 +53,7 @@ export function FullScreenLoader(props: {
         }}
         alt="Loading Image"
       />
-      <ThemedText type="title">{loadingMessage}</ThemedText>
+      <ThemedText type="title">{linguiMsgToString(loadingMessage)}</ThemedText>
     </ThemedView>
   );
 }

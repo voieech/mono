@@ -1,6 +1,8 @@
+import { useLingui } from "@lingui/react/macro";
 import { Stack } from "expo-router";
 
 export default function HomeLayout() {
+  const { t } = useLingui();
   return (
     <Stack
       screenOptions={{
@@ -10,7 +12,7 @@ export default function HomeLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Home",
+          title: t`Home`,
           headerShown: false,
         }}
       />
@@ -22,11 +24,15 @@ export default function HomeLayout() {
       */}
       <Stack.Screen
         name="podcast/channel/[channelID]"
-        options={{ title: "Podcast Channel" }}
+        options={{
+          title: t`Podcast Channel`,
+        }}
       />
       <Stack.Screen
         name="podcast/episode/[vanityID]"
-        options={{ title: "Podcast Episode" }}
+        options={{
+          title: t`Podcast Episode`,
+        }}
       />
     </Stack>
   );

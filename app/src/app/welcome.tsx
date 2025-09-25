@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -51,7 +52,7 @@ export default function Welcome() {
                 }}
               />
               <ThemedText type="subtitle">
-                Your Hyper Personalized Podcasts
+                <Trans>Your Hyper Personalized Podcasts</Trans>
               </ThemedText>
             </View>
             <Pressable
@@ -70,7 +71,7 @@ export default function Welcome() {
               })}
             >
               <ThemedText type="subtitle" style={{ padding: 15 }}>
-                Start listening
+                <Trans>Start listening</Trans>
               </ThemedText>
             </Pressable>
           </View>
