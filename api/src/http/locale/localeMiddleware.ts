@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from "express";
 import { convertAcceptLanguageHeaderToMaybeString } from "./convertAcceptLanguageHeaderToMaybeString.js";
 import { convertUrlQueryParamToMaybeString } from "./convertUrlQueryParamToMaybeString.js";
 import { DEFAULT_FALLBACK_LOCALE } from "./DEFAULT_FALLBACK_LOCALE.js";
+import { isLocaleSupported } from "./supportedLocales.js";
 
 // Add locale to express Request type globally.
 // Assumes localeMiddleware will be used before all use of `req.locale`.
@@ -24,12 +25,16 @@ export function localeMiddleware(
   res: Response,
   next: NextFunction,
 ) {
-  const locale = (
+  const rawLocale =
     convertUrlQueryParamToMaybeString(req.query["locale"]) ??
     convertUrlQueryParamToMaybeString(req.query["lang"]) ??
     convertAcceptLanguageHeaderToMaybeString(req.headers["accept-language"]) ??
-    DEFAULT_FALLBACK_LOCALE
-  ).toLowerCase();
+    DEFAULT_FALLBACK_LOCALE;
+
+  // Get validated supported locale or fallback locale
+  const locale = isLocaleSupported(rawLocale)
+    ? rawLocale
+    : DEFAULT_FALLBACK_LOCALE;
 
   req.locale = locale;
 
