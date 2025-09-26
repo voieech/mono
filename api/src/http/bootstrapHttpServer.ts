@@ -6,12 +6,15 @@ import * as kyselyPostgresHelpers from "kysely/helpers/postgres";
 
 import { apiDB } from "../kysely/apiDB.js";
 import { generateRssXml } from "../rss/index.js";
+import { localeMiddleware } from "./locale/index.js";
 
 export function bootstrapHttpServer() {
   express()
     .disable("x-powered-by")
 
     .use(cors())
+
+    .use(localeMiddleware)
 
     .get("/", (_, res) => {
       res.status(200).end("ok");
