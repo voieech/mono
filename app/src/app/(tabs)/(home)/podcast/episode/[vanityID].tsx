@@ -93,6 +93,7 @@ export default function PodcastEpisode() {
           title: episode.title,
           duration: episode.audio_length,
           artwork: episode.img_url,
+          locale: episode.language,
         }),
       );
 

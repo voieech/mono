@@ -14,7 +14,10 @@ import type { RemoveIndexSignature, MakeSomeFieldsRequired } from "@/types";
 type ExtendedTrack = MakeSomeFieldsRequired<
   RemoveIndexSignature<Track>,
   "artist" | "url" | "title" | "duration" | "artwork"
-> & { id: string };
+> & {
+  id: string;
+  locale: string;
+};
 
 export interface TrackWithPodcastEpisode extends ExtendedTrack {
   trackType: "podcast_episode";
