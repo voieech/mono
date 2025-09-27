@@ -1,13 +1,13 @@
+import type { Locale } from "./Locale";
+
 /**
- * Switches a language code to a dynamically imported language .po file.
+ * Dynamically import language .po file based on given Locale.
  */
-export function dynamicallyImportLanguage(language: string) {
-  switch (language) {
+export function dynamicallyImportLanguage(locale: Locale) {
+  switch (locale) {
     case "zh":
     case "zh-CN":
     case "zh-TW":
-    case "zh-Hans":
-    case "zh-Hant":
       return import("../../locales/zh/messages.po").then((mod) => mod.messages);
 
     // "en" is the default locale for every other unsupported language.
