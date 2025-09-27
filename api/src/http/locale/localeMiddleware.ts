@@ -18,7 +18,7 @@ declare global {
 /**
  * Middleware to get request locale value from various sources in order, before
  * validating that it is a supported locale and setting it to the global express
- * `Request` object.
+ * `Request` object. This will also set the response `Content-Language` header.
  */
 export function localeMiddleware(
   req: Request,
@@ -37,6 +37,10 @@ export function localeMiddleware(
     : DEFAULT_FALLBACK_LOCALE;
 
   req.locale = locale;
+
+  // Set content-language response headers automatically to the validated locale
+  // value instead of making every API controller set it manually.
+  res.set("Content-Language", locale);
 
   next();
 }
