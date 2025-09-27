@@ -54,11 +54,11 @@ msgstr "External Audio controls"
 msgid "Featured"
 msgstr "Featured"
 
-#: src/app/(tabs)/(home)/index.tsx:97
+#: src/app/(tabs)/(home)/index.tsx:106
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:184
+#: src/app/(tabs)/(home)/index.tsx:193
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 

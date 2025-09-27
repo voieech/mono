@@ -59,11 +59,11 @@ msgstr "手机媒体控制"
 msgid "Featured"
 msgstr "精选"
 
-#: src/app/(tabs)/(home)/index.tsx:97
+#: src/app/(tabs)/(home)/index.tsx:106
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:184
+#: src/app/(tabs)/(home)/index.tsx:193
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
