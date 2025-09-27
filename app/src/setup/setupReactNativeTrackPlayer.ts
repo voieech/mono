@@ -1,4 +1,4 @@
-import TrackPlayer, {
+import RNTPTrackPlayer, {
   Event,
   IOSCategory,
   Capability,
@@ -9,58 +9,52 @@ import { capabilitiesWithJump } from "@/utils/ReactNativeTrackPlayerCapabilities
 import { TrackPlayerPlayWithGlobalRate } from "@/utils/TrackPlayerPlayWithGlobalRate";
 
 export async function setupReactNativeTrackPlayer() {
-  TrackPlayer.registerPlaybackService(
+  RNTPTrackPlayer.registerPlaybackService(
     () =>
       async function playbackService() {
-        TrackPlayer.addEventListener(Event.RemotePlay, () => {
-          console.log("RNTP Event.RemotePlay");
-          TrackPlayerPlayWithGlobalRate();
-        });
+        RNTPTrackPlayer.addEventListener(Event.RemotePlay, () =>
+          TrackPlayerPlayWithGlobalRate(),
+        );
 
-        TrackPlayer.addEventListener(Event.RemotePause, () => {
-          console.log("RNTP Event.RemotePause");
-          TrackPlayer.pause();
-        });
+        RNTPTrackPlayer.addEventListener(Event.RemotePause, () =>
+          RNTPTrackPlayer.pause(),
+        );
 
-        TrackPlayer.addEventListener(Event.RemoteStop, () => {
-          console.log("RNTP Event.RemoteStop");
-          TrackPlayer.stop();
-        });
+        RNTPTrackPlayer.addEventListener(Event.RemoteStop, () =>
+          RNTPTrackPlayer.stop(),
+        );
 
-        TrackPlayer.addEventListener(Event.RemoteJumpForward, (e) => {
-          console.log("RNTP Event.RemoteJumpForward");
-          TrackPlayer.seekBy(e.interval);
-        });
+        RNTPTrackPlayer.addEventListener(Event.RemoteJumpForward, (e) =>
+          RNTPTrackPlayer.seekBy(e.interval),
+        );
 
-        TrackPlayer.addEventListener(Event.RemoteJumpBackward, async (e) => {
-          console.log("RNTP Event.RemoteJumpBackward");
+        RNTPTrackPlayer.addEventListener(
+          Event.RemoteJumpBackward,
+          async (e) => {
+            const progress = await RNTPTrackPlayer.getProgress();
+            if (progress.position < e.interval) {
+              RNTPTrackPlayer.seekTo(0);
+              return;
+            }
 
-          const progress = await TrackPlayer.getProgress();
-          if (progress.position < e.interval) {
-            TrackPlayer.seekTo(0);
-            return;
-          }
+            RNTPTrackPlayer.seekBy(-e.interval);
+          },
+        );
 
-          TrackPlayer.seekBy(-e.interval);
-        });
+        RNTPTrackPlayer.addEventListener(Event.RemoteSeek, (e) =>
+          RNTPTrackPlayer.seekTo(e.position),
+        );
 
-        TrackPlayer.addEventListener(Event.RemoteSeek, (e) => {
-          console.log("RNTP Event.RemoteSeek");
-          TrackPlayer.seekTo(e.position);
-        });
-
-        TrackPlayer.addEventListener(Event.RemotePrevious, () => {
-          console.log("RNTP Event.RemotePrevious");
+        RNTPTrackPlayer.addEventListener(Event.RemotePrevious, () => {
           // Conditionally execute either one of this based on current playback
           // position.
           // TrackPlayer.skipToPrevious();
-          TrackPlayer.seekTo(0);
+          RNTPTrackPlayer.seekTo(0);
         });
 
         // @todo do nothing if no next? Or loop back?
-        TrackPlayer.addEventListener(Event.RemoteNext, () => {
-          console.log("RNTP Event.RemoteNext");
-          TrackPlayer.skipToNext();
+        RNTPTrackPlayer.addEventListener(Event.RemoteNext, () => {
+          RNTPTrackPlayer.skipToNext();
         });
 
         console.log("RNTP PlaybackService registered");
@@ -68,11 +62,11 @@ export async function setupReactNativeTrackPlayer() {
   );
 
   // @todo see all the options here
-  await TrackPlayer.setupPlayer({
+  await RNTPTrackPlayer.setupPlayer({
     iosCategory: IOSCategory.Playback,
   });
 
-  TrackPlayer.updateOptions({
+  RNTPTrackPlayer.updateOptions({
     // @todo Read past settings instead of always setting to default value
     capabilities: capabilitiesWithJump,
 
