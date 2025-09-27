@@ -9,14 +9,19 @@ import { RefreshControl, View } from "react-native";
 
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { apiBaseUrl } from "@/constants";
+import { getAcceptLanguageHeader } from "@/utils";
 
 export default function HomeScreen() {
   const featuredChannelsQuery = useQuery({
     queryKey: ["podcast", "featured-channels"],
     async queryFn() {
-      // ?lang=${i18n.locale.value}
       const res = await fetch(
-        `${apiBaseUrl}/v1/landing-page/featured-channels/`,
+        `${apiBaseUrl}/v1/landing-page/featured-channels/?lang=zh`,
+        {
+          headers: {
+            ...getAcceptLanguageHeader(),
+          },
+        },
       );
 
       if (!res.ok) {
@@ -42,9 +47,13 @@ export default function HomeScreen() {
   const featuredEpisodesQuery = useQuery({
     queryKey: ["podcast", "featured-episodes"],
     async queryFn() {
-      // ?lang=${i18n.locale.value}
       const res = await fetch(
         `${apiBaseUrl}/v1/landing-page/featured-episodes/`,
+        {
+          headers: {
+            ...getAcceptLanguageHeader(),
+          },
+        },
       );
 
       if (!res.ok) {
