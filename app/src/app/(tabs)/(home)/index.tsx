@@ -16,7 +16,7 @@ export default function HomeScreen() {
     queryKey: ["podcast", "featured-channels"],
     async queryFn() {
       const res = await fetch(
-        `${apiBaseUrl}/v1/landing-page/featured-channels/?lang=zh`,
+        `${apiBaseUrl}/v1/landing-page/featured-channels/`,
         {
           headers: {
             ...getAcceptLanguageHeader(),
