@@ -36,20 +36,10 @@ export function bootstrapHttpServer() {
     })
 
     .get("/v1/landing-page/featured-channels", async function (req, res) {
-      const requestedLanguage = req.query["lang"]?.toString() ?? "en";
-
-      // @todo
-      // Check if language is a valid option first before even attempting to
-      // querying DB, instead of relying on the DB query to check if language is
-      // valid. Use $LanguageCode.makeStrongSafely, and fall back to en if none
-      const isRequestedLanguageAvailable = true;
-
-      const language = isRequestedLanguageAvailable ? requestedLanguage : "en";
-
       const featuredChannels = await apiDB
         .selectFrom("podcast_channel")
         .selectAll()
-        .where("language", "like", `${language}%`)
+        .where("language", "like", `${req.locale}%`)
         // @todo Ordery by popularity
         .limit(4)
         .execute();
@@ -62,16 +52,6 @@ export function bootstrapHttpServer() {
     })
 
     .get("/v1/landing-page/featured-episodes", async function (req, res) {
-      const requestedLanguage = req.query["lang"]?.toString() ?? "en";
-
-      // @todo
-      // Check if language is a valid option first before even attempting to
-      // querying DB, instead of relying on the DB query to check if language is
-      // valid. Use $LanguageCode.makeStrongSafely, and fall back to en if none
-      const isRequestedLanguageAvailable = true;
-
-      const language = isRequestedLanguageAvailable ? requestedLanguage : "en";
-
       const featuredEpisodes = await apiDB
         .selectFrom("podcast_episode")
         .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
@@ -108,7 +88,7 @@ export function bootstrapHttpServer() {
             .as("externally_hosted_links"),
         )
         .groupBy(["podcast_episode.id", "audio.public_url", "audio.length"])
-        .where("podcast_episode.language", "like", `${language}%`)
+        .where("podcast_episode.language", "like", `${req.locale}%`)
         // @todo Ordery by popularity
         .orderBy("podcast_episode.created_at", "desc")
         .limit(4)
