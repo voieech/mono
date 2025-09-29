@@ -41,4 +41,8 @@ export const TrackPlayer = {
       playbackRate,
     });
   },
+
+  async pause() {
+    await RNTPTrackPlayer.pause();
+  },
 };

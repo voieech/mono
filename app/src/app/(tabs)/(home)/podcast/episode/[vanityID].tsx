@@ -174,7 +174,7 @@ export default function PodcastEpisode() {
         {isCurrentEpisodeTheActiveTrack &&
         playerState === PlayerState.Playing ? (
           <CircularPauseButton
-            onPress={RNTPTrackPlayer.pause}
+            onPress={TrackPlayer.pause}
             innerIconSize={24}
             outerBackgroundSize={8}
           />

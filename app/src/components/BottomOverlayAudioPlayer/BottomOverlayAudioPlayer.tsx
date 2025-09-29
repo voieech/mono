@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useRef } from "react";
 import { Pressable, View, Text, useWindowDimensions } from "react-native";
-import RNTPTrackPlayer, {
+import {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
@@ -138,7 +138,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                 any other) state to paused state.
               */}
               {playerState === PlayerState.Playing ? (
-                <Pressable onPress={RNTPTrackPlayer.pause}>
+                <Pressable onPress={TrackPlayer.pause}>
                   <Icon
                     name="pause.fill"
                     color="white"

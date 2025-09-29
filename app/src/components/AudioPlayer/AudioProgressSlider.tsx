@@ -45,9 +45,7 @@ export function AudioProgressSlider(props: {
       //
       // Stop updating position when user start touching it
       // Position will be auto updated again after user stop touching it
-      onTouchStart={() => {
-        RNTPTrackPlayer.pause();
-      }}
+      onTouchStart={() => TrackPlayer.pause()}
       // onTouchEnd={() => TrackPlayerPlayWithGlobalRate()}
       // onTouchCancel={() => TrackPlayerPlayWithGlobalRate()}
       //

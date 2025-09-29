@@ -2,7 +2,7 @@ import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable } from "react-native";
-import RNTPTrackPlayer, {
+import {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
@@ -192,7 +192,7 @@ export function AudioPlayer() {
         */}
         {playerState === PlayerState.Playing ? (
           <CircularPauseButton
-            onPress={RNTPTrackPlayer.pause}
+            onPress={TrackPlayer.pause}
             innerIconSize={32}
             outerBackgroundSize={20}
           />

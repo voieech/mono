@@ -17,7 +17,7 @@ export async function setupReactNativeTrackPlayer() {
         );
 
         RNTPTrackPlayer.addEventListener(Event.RemotePause, () =>
-          RNTPTrackPlayer.pause(),
+          TrackPlayer.pause(),
         );
 
         RNTPTrackPlayer.addEventListener(Event.RemoteStop, () =>
