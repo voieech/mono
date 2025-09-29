@@ -2,7 +2,7 @@ import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable } from "react-native";
-import TrackPlayer, {
+import RNTPTrackPlayer, {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
@@ -13,7 +13,7 @@ import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedView";
 import { useActiveTrackWithMetadata } from "@/hooks";
-import { TrackPlayerPlayWithGlobalRate } from "@/utils";
+import { TrackPlayer } from "@/utils";
 
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
 import {
@@ -192,13 +192,13 @@ export function AudioPlayer() {
         */}
         {playerState === PlayerState.Playing ? (
           <CircularPauseButton
-            onPress={TrackPlayer.pause}
+            onPress={RNTPTrackPlayer.pause}
             innerIconSize={32}
             outerBackgroundSize={20}
           />
         ) : (
           <CircularPlayButton
-            onPress={TrackPlayerPlayWithGlobalRate}
+            onPress={TrackPlayer.playWithGlobalRate}
             innerIconSize={32}
             outerBackgroundSize={20}
           />

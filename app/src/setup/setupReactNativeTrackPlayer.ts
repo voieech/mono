@@ -6,14 +6,14 @@ import RNTPTrackPlayer, {
 } from "react-native-track-player";
 
 import { capabilitiesWithJump } from "@/utils/ReactNativeTrackPlayerCapabilitiesOptions";
-import { TrackPlayerPlayWithGlobalRate } from "@/utils/TrackPlayerPlayWithGlobalRate";
+import { TrackPlayer } from "@/utils/TrackPlayer";
 
 export async function setupReactNativeTrackPlayer() {
   RNTPTrackPlayer.registerPlaybackService(
     () =>
       async function playbackService() {
         RNTPTrackPlayer.addEventListener(Event.RemotePlay, () =>
-          TrackPlayerPlayWithGlobalRate(),
+          TrackPlayer.playWithGlobalRate(),
         );
 
         RNTPTrackPlayer.addEventListener(Event.RemotePause, () =>

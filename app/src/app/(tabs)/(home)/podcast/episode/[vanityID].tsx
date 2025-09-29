@@ -6,7 +6,7 @@ import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useCallback } from "react";
 import { View } from "react-native";
-import TrackPlayer, {
+import RNTPTrackPlayer, {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
@@ -21,10 +21,7 @@ import {
 } from "@/components";
 import { apiBaseUrl } from "@/constants";
 import { useActiveTrackWithMetadata } from "@/hooks";
-import {
-  createTrackWithMetadata,
-  TrackPlayerPlayWithGlobalRate,
-} from "@/utils";
+import { createTrackWithMetadata, TrackPlayer } from "@/utils";
 
 export default function PodcastEpisode() {
   const router = useRouter();
@@ -74,13 +71,13 @@ export default function PodcastEpisode() {
 
       // If current episode is the active track, just continue playing
       if (isCurrentEpisodeTheActiveTrack) {
-        await TrackPlayerPlayWithGlobalRate();
+        await TrackPlayer.playWithGlobalRate();
         return;
       }
 
       // If there is a track queue already, replace the current track with this,
       // else, create a new queue and add this as the new current active track.
-      await TrackPlayer.load(
+      await RNTPTrackPlayer.load(
         createTrackWithMetadata({
           trackType: "podcast_episode",
           id: episode.id,
@@ -97,7 +94,7 @@ export default function PodcastEpisode() {
         }),
       );
 
-      await TrackPlayerPlayWithGlobalRate();
+      await TrackPlayer.playWithGlobalRate();
     },
     [episode, isCurrentEpisodeTheActiveTrack],
   );
@@ -177,7 +174,7 @@ export default function PodcastEpisode() {
         {isCurrentEpisodeTheActiveTrack &&
         playerState === PlayerState.Playing ? (
           <CircularPauseButton
-            onPress={TrackPlayer.pause}
+            onPress={RNTPTrackPlayer.pause}
             innerIconSize={24}
             outerBackgroundSize={8}
           />

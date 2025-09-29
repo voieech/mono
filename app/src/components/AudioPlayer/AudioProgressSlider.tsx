@@ -1,8 +1,10 @@
 import { Slider } from "@react-native-assets/slider";
 import { useEffect, useState } from "react";
-import TrackPlayer from "react-native-track-player";
+import RNTPTrackPlayer from "react-native-track-player";
 
-import { type TrackWithMetadata, TrackPlayerPlayWithGlobalRate } from "@/utils";
+import type { TrackWithMetadata } from "@/utils";
+
+import { TrackPlayer } from "@/utils";
 
 export function AudioProgressSlider(props: {
   defaultTrackPosition: number;
@@ -14,7 +16,7 @@ export function AudioProgressSlider(props: {
   useEffect(() => {
     const intervalID = setInterval(
       () => {
-        TrackPlayer.getProgress()
+        RNTPTrackPlayer.getProgress()
           .then(({ position }) => setPosition(position))
           // This only throw if you haven't yet setup RNTP, ignore failure
           .catch(() => {});
@@ -30,8 +32,8 @@ export function AudioProgressSlider(props: {
   async function onSlidingComplete(newPosition: number) {
     setPosition(newPosition);
 
-    await TrackPlayer.seekTo(newPosition);
-    await TrackPlayerPlayWithGlobalRate();
+    await RNTPTrackPlayer.seekTo(newPosition);
+    await TrackPlayer.playWithGlobalRate();
   }
 
   return (
@@ -44,7 +46,7 @@ export function AudioProgressSlider(props: {
       // Stop updating position when user start touching it
       // Position will be auto updated again after user stop touching it
       onTouchStart={() => {
-        TrackPlayer.pause();
+        RNTPTrackPlayer.pause();
       }}
       // onTouchEnd={() => TrackPlayerPlayWithGlobalRate()}
       // onTouchCancel={() => TrackPlayerPlayWithGlobalRate()}

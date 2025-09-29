@@ -14,5 +14,4 @@ export * from "./ReactNativeTrackPlayerCapabilitiesOptions";
 export * from "./settings";
 export * from "./TrackPlayer";
 export * from "./TrackPlayerPlaybackRates";
-export * from "./TrackPlayerPlayWithGlobalRate";
 export * from "./TrackWithMetadata";

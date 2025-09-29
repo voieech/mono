@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useRef } from "react";
 import { Pressable, View, Text, useWindowDimensions } from "react-native";
-import TrackPlayer, {
+import RNTPTrackPlayer, {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
@@ -9,7 +9,7 @@ import TrackPlayer, {
 import { Icon } from "@/components/provided";
 import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
-import { TrackPlayerPlayWithGlobalRate } from "@/utils";
+import { TrackPlayer } from "@/utils";
 
 import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerProgessBar";
 
@@ -138,7 +138,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                 any other) state to paused state.
               */}
               {playerState === PlayerState.Playing ? (
-                <Pressable onPress={TrackPlayer.pause}>
+                <Pressable onPress={RNTPTrackPlayer.pause}>
                   <Icon
                     name="pause.fill"
                     color="white"
@@ -149,7 +149,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                   />
                 </Pressable>
               ) : (
-                <Pressable onPress={TrackPlayerPlayWithGlobalRate}>
+                <Pressable onPress={TrackPlayer.playWithGlobalRate}>
                   <Icon
                     name="play.fill"
                     color="white"
