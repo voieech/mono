@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:201
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:169
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:167
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
 
@@ -90,7 +90,7 @@ msgstr "Podcast Episode"
 msgid "Rewind to track start when skipping to previous"
 msgstr "Rewind to track start when skipping to previous"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:161
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 

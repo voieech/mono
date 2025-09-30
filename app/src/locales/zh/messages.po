@@ -19,7 +19,7 @@ msgstr ""
 "X-Crowdin-File-ID: 34\n"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:201
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:169
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:167
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
 
@@ -95,7 +95,7 @@ msgstr "播客剧集"
 msgid "Rewind to track start when skipping to previous"
 msgstr "跳到上一个剧集时，先跳到剧集开头"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:163
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:161
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 
