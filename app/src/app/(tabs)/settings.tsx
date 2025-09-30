@@ -210,23 +210,7 @@ export default function Settings() {
             </ThemedText>
             <ThemedText>Native build version: {nativeBuildVersion}</ThemedText>
             <ThemedText>
-              OTA updates enabled: {ExpoUpdates.isEnabled.toString()}
-            </ThemedText>
-            <ThemedText>
-              OTA updates runtime version: {ExpoUpdates.runtimeVersion}
-            </ThemedText>
-            <ThemedText>OTA update UUID: {ExpoUpdates.updateId}</ThemedText>
-            <ThemedText>
-              OTA update checks: {ExpoUpdates.checkAutomatically}
-            </ThemedText>
-            <ThemedText>
-              OTA last update time: {ExpoUpdates.createdAt?.toString()}
-            </ThemedText>
-            <ThemedText>
-              OTA launch duration: {ExpoUpdates.launchDuration}
-            </ThemedText>
-            <ThemedText>
-              Using embedded version: {ExpoUpdates.isEmbeddedLaunch.toString()}
+              Updates: {JSON.stringify(ExpoUpdates, null, 2)}
             </ThemedText>
           </View>
         </View>
