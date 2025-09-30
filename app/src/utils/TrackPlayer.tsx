@@ -14,6 +14,7 @@ export const TrackPlayer = {
    * playback rate is set to the global playback rate setting value.
    */
   async playWithGlobalRate() {
+    // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.play();
 
     const localStorageSettings = await settingsInLocalStorage.read();
@@ -43,6 +44,7 @@ export const TrackPlayer = {
   },
 
   async pause() {
+    // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.pause();
   },
 };

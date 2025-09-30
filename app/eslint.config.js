@@ -31,10 +31,15 @@ module.exports = defineConfig([
       "no-restricted-properties": [
         "error",
         {
-          object: "TrackPlayer",
+          object: "RNTPTrackPlayer",
           property: "play",
           message:
-            "Please use the `TrackPlayerPlayWithGlobalRate()` wrapper instead",
+            "Please use the `TrackPlayer.playWithGlobalRate()` wrapper instead",
+        },
+        {
+          object: "RNTPTrackPlayer",
+          property: "pause",
+          message: "Please use the `TrackPlayer.pause()` wrapper instead",
         },
       ],
       "perfectionist/sort-imports": "error",
