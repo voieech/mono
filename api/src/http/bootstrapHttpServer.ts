@@ -52,6 +52,7 @@ export function bootstrapHttpServer() {
       res.status(200).json(featuredChannels satisfies Array<Channel>);
     })
 
+    // @todo Deprecated, to delete
     .get("/v1/landing-page/featured-episodes", async function (req, res) {
       const featuredEpisodes = await apiDB
         .selectFrom("podcast_episode")
@@ -122,6 +123,62 @@ export function bootstrapHttpServer() {
         .execute();
 
       res.status(200).json(featuredChannels satisfies Array<Channel>);
+    })
+
+    .get("/v1/podcast/featured/episodes", async function (req, res) {
+      const rawCount = Number(req.query["count"]);
+      const count = isNaN(rawCount) || rawCount === 0 ? 4 : rawCount;
+
+      if (count < 1 || count > 20) {
+        res.status(400).json({
+          error: "Count must be between 1 and 20",
+        });
+        return;
+      }
+
+      const featuredEpisodes = await apiDB
+        .selectFrom("podcast_episode")
+        .innerJoin("audio", "podcast_episode.audio_id", "audio.id")
+        .leftJoin(
+          "podcast_episode_externally_hosted_link",
+          "podcast_episode.id",
+          "podcast_episode_externally_hosted_link.podcast_episode_id",
+        )
+        .selectAll("podcast_episode")
+        .select([
+          "audio.public_url as audio_public_url",
+          "audio.length as audio_length",
+        ])
+        .select((eb) =>
+          kyselyPostgresHelpers
+            .jsonArrayFrom(
+              eb
+                .selectFrom("podcast_episode_externally_hosted_link")
+                .select([
+                  "podcast_episode_externally_hosted_link.url",
+                  "podcast_episode_externally_hosted_link.podcast_platform",
+                ])
+                .$castTo<{
+                  podcast_platform: PodcastPlatform;
+                  url: string;
+                }>()
+                .whereRef(
+                  "podcast_episode_externally_hosted_link.podcast_episode_id",
+                  "=",
+                  eb.ref("podcast_episode.id"),
+                ),
+            )
+            .$notNull()
+            .as("externally_hosted_links"),
+        )
+        .groupBy(["podcast_episode.id", "audio.public_url", "audio.length"])
+        .where("podcast_episode.language", "like", `${req.locale}%`)
+        // @todo Ordery by popularity
+        .orderBy("podcast_episode.created_at", "desc")
+        .limit(count)
+        .execute();
+
+      res.status(200).json(featuredEpisodes satisfies Array<Episode>);
     })
 
     .get("/v1/podcast/episode/:vanityID", async function (req, res) {

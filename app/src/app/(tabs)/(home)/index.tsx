@@ -48,7 +48,7 @@ export default function HomeScreen() {
     queryKey: ["podcast", "featured-episodes"],
     async queryFn() {
       const res = await fetch(
-        `${apiBaseUrl}/v1/landing-page/featured-episodes/`,
+        `${apiBaseUrl}/v1/podcast/featured/episodes?count=20`,
         {
           headers: {
             ...getAcceptLanguageHeader(),
