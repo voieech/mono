@@ -19,7 +19,7 @@ const {
   queryKey: ["featured-channels"],
   async queryFn() {
     const res = await fetch(
-      `${apiBaseUrl}/v1/landing-page/featured-channels/?lang=${i18n.locale.value}`,
+      `${apiBaseUrl}/v1/podcast/featured/channel?count=6&lang=${i18n.locale.value}`,
     );
 
     if (!res.ok) {

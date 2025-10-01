@@ -35,6 +35,7 @@ export function bootstrapHttpServer() {
       });
     })
 
+    // @todo Deprecated, to delete
     .get("/v1/landing-page/featured-channels", async function (req, res) {
       const featuredChannels = await apiDB
         .selectFrom("podcast_channel")
@@ -99,6 +100,28 @@ export function bootstrapHttpServer() {
       // query. Cache in upstash or something with a builtin TTL...
 
       res.status(200).json(featuredEpisodes satisfies Array<Episode>);
+    })
+
+    .get("/v1/podcast/featured/channel", async function (req, res) {
+      const rawCount = Number(req.query["count"]);
+      const count = isNaN(rawCount) || rawCount === 0 ? 4 : rawCount;
+
+      if (count < 1 || count > 20) {
+        res.status(400).json({
+          error: "Count must be between 1 and 20",
+        });
+        return;
+      }
+
+      const featuredChannels = await apiDB
+        .selectFrom("podcast_channel")
+        .selectAll()
+        .where("language", "like", `${req.locale}%`)
+        // @todo Ordery by popularity
+        .limit(count)
+        .execute();
+
+      res.status(200).json(featuredChannels satisfies Array<Channel>);
     })
 
     .get("/v1/podcast/episode/:vanityID", async function (req, res) {
