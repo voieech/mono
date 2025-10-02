@@ -9,6 +9,7 @@ import { RefreshControl } from "react-native";
 
 import {
   ParallaxScrollViewContainer,
+  SafeScrollViewContainer,
   FullScreenLoader,
   ThemedView,
   ThemedText,
@@ -91,9 +92,9 @@ export default function PodcastChannel() {
 
   if (podcastChannelQuery.isError || podcastChannelQuery.data === undefined) {
     return (
-      <ThemedView>
+      <SafeScrollViewContainer>
         <ThemedText>Error: {podcastChannelQuery.error.message}</ThemedText>
-      </ThemedView>
+      </SafeScrollViewContainer>
     );
   }
 

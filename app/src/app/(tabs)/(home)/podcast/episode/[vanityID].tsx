@@ -10,6 +10,7 @@ import RNTPTrackPlayer, {
 
 import {
   ParallaxScrollViewContainer,
+  SafeScrollViewContainer,
   FullScreenLoader,
   ThemedView,
   ThemedText,
@@ -87,9 +88,9 @@ export default function PodcastEpisode() {
     }
 
     return (
-      <ThemedView>
+      <SafeScrollViewContainer>
         <ThemedText>Error: {error?.message}</ThemedText>
-      </ThemedView>
+      </SafeScrollViewContainer>
     );
   }
 
