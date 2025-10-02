@@ -81,31 +81,32 @@ const router = createRouter({
   ],
 });
 
-// Handle lang/locale query params
+// Handle locale/lang query params
 router.beforeEach((to) => {
-  const langQueryParam = to.query.lang?.toString();
+  const localeQueryParam =
+    to.query.locale?.toString() ?? to.query.lang?.toString();
 
-  // Do nothing if no language is set in URL
-  if (langQueryParam === undefined) {
+  // Do nothing if no locale is set in URL
+  if (localeQueryParam === undefined) {
     return;
   }
 
   // Set it if it is a valid locale
   if (
     i18n.global.availableLocales.some(
-      (availableLocale) => availableLocale === langQueryParam,
+      (availableLocale) => availableLocale === localeQueryParam,
     )
   ) {
-    setLocale(langQueryParam);
+    setLocale(localeQueryParam);
     return;
   }
 
   // If it is a full locale, and same language is found, set to that language
   const availableSameLanguage = i18n.global.availableLocales.find(
-    (availableLocale) => langQueryParam.startsWith(availableLocale),
+    (availableLocale) => localeQueryParam.startsWith(availableLocale),
   );
   if (availableSameLanguage !== undefined) {
-    setLocale(langQueryParam);
+    setLocale(localeQueryParam);
     return;
   }
 
