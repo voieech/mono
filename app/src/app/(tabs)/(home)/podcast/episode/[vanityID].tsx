@@ -1,7 +1,4 @@
-import type { Episode } from "dto";
-
 import { Trans } from "@lingui/react/macro";
-import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useCallback } from "react";
@@ -19,8 +16,7 @@ import {
   CircularPlayButton,
   CircularPauseButton,
 } from "@/components";
-import { apiBaseUrl } from "@/constants";
-import { useActiveTrackWithMetadata } from "@/hooks";
+import { usePodcastEpisode, useActiveTrackWithMetadata } from "@/hooks";
 import { createTrackWithMetadata, TrackPlayer } from "@/utils";
 
 export default function PodcastEpisode() {
@@ -32,27 +28,7 @@ export default function PodcastEpisode() {
     isError,
     data: episode,
     error,
-  } = useQuery({
-    queryKey: ["episode", vanityID],
-    async queryFn() {
-      const res = await fetch(`${apiBaseUrl}/v1/podcast/episode/${vanityID}`);
-
-      if (!res.ok) {
-        if (res.status === 404) {
-          router.replace("/+not-found");
-        }
-
-        const defaultErrorMessage = `Failed to load episode: ${vanityID}`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
-      }
-
-      return (await res.json()) as Episode;
-    },
-  });
+  } = usePodcastEpisode(vanityID);
 
   const activeTrack = useActiveTrackWithMetadata();
 
