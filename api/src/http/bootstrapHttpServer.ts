@@ -184,7 +184,7 @@ export function bootstrapHttpServer() {
       res.status(200).json(channel satisfies Channel);
     })
 
-    .get("/v1/podcast/channel/episodes/:channelID", async function (req, res) {
+    .get("/v1/podcast/channel/:channelID/episodes", async function (req, res) {
       const channelID = req.params.channelID;
 
       const channel = await apiDB
