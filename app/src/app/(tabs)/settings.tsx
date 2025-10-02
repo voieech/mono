@@ -210,7 +210,7 @@ export default function Settings() {
             </ThemedText>
             <ThemedText>Native build version: {nativeBuildVersion}</ThemedText>
             <ThemedText>
-              Updates: {JSON.stringify(ExpoUpdates, null, 2)}
+              Updates: {JSON.stringify(getExpoUpdatesData(), null, 2)}
             </ThemedText>
           </View>
         </View>
@@ -463,4 +463,28 @@ function SwitchSettingRow(props: {
       )}
     </>
   );
+}
+
+/**
+ * Get only expo updates data for display without things like constants and etc.
+ */
+function getExpoUpdatesData() {
+  const data = { ...ExpoUpdates };
+
+  // @ts-expect-error
+  delete data.localAssets;
+  // @ts-expect-error
+  delete data.manifest;
+  // @ts-expect-error
+  delete data.UpdateCheckResultNotAvailableReason;
+  // @ts-expect-error
+  delete data.UpdatesCheckAutomaticallyValue;
+  // @ts-expect-error
+  delete data.UpdatesLogEntryCode;
+  // @ts-expect-error
+  delete data.UpdatesLogEntryLevel;
+  // @ts-expect-error
+  delete data.UpdateInfoType;
+
+  return data as typeof ExpoUpdates;
 }
