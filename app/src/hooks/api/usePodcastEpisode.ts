@@ -19,7 +19,7 @@ export function usePodcastEpisode(vanityID: string) {
           .catch(() => defaultErrorMessage);
 
         if (res.status === 404) {
-          throw new NotFoundError();
+          throw new NotFoundError(errorMessage);
         }
 
         throw new Error(errorMessage);
