@@ -1,6 +1,6 @@
 import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, Redirect } from "expo-router";
 import { useCallback } from "react";
 import { View } from "react-native";
 import RNTPTrackPlayer, {
@@ -16,11 +16,11 @@ import {
   CircularPlayButton,
   CircularPauseButton,
 } from "@/components";
+import { NotFoundError } from "@/errors";
 import { usePodcastEpisode, useActiveTrackWithMetadata } from "@/hooks";
 import { createTrackWithMetadata, TrackPlayer } from "@/utils";
 
 export default function PodcastEpisode() {
-  const router = useRouter();
   const vanityID = useLocalSearchParams<{ vanityID: string }>().vanityID;
 
   const {
@@ -82,6 +82,10 @@ export default function PodcastEpisode() {
   }
 
   if (isError || episode === undefined) {
+    if (error instanceof NotFoundError) {
+      return <Redirect href="/+not-found" />;
+    }
+
     return (
       <ThemedView>
         <ThemedText>Error: {error?.message}</ThemedText>
