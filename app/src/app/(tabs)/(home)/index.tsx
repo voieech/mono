@@ -1,54 +1,15 @@
-import type { Episode } from "dto";
-
 import { Trans } from "@lingui/react/macro";
-import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
 import { RefreshControl, View } from "react-native";
 
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
-import { apiBaseUrl } from "@/constants";
-import { useFeaturedChannels } from "@/hooks";
-import { getAcceptLanguageHeader } from "@/utils";
+import { useFeaturedChannels, useFeaturedEpisodes } from "@/hooks";
 
 export default function HomeScreen() {
   const featuredChannelsQuery = useFeaturedChannels();
-
-  const featuredEpisodesQuery = useQuery({
-    queryKey: ["podcast", "featured-episodes"],
-    async queryFn() {
-      const res = await fetch(
-        `${apiBaseUrl}/v1/podcast/featured/episodes?count=20`,
-        {
-          headers: {
-            ...getAcceptLanguageHeader(),
-          },
-        },
-      );
-
-      if (!res.ok) {
-        const defaultErrorMessage = "Failed to load featured episodes";
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
-      }
-
-      const episodes = (await res.json()) as Array<Episode>;
-
-      // Cache data so these dont need to be re queried again on navigate
-      for (const _episode of episodes) {
-        // queryClient.setQueryData(
-        //   ["podcast-episode", "vanityID", episode.vanity_id],
-        //   episode
-        // );
-      }
-
-      return episodes;
-    },
-  });
+  const featuredEpisodesQuery = useFeaturedEpisodes();
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
