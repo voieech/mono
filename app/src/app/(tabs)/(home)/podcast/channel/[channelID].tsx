@@ -1,9 +1,6 @@
-import type { Episode } from "dto";
-
 import { Trans } from "@lingui/react/macro";
-import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
-import { useRouter, useLocalSearchParams, Link, Redirect } from "expo-router";
+import { useLocalSearchParams, Link, Redirect } from "expo-router";
 import { useState } from "react";
 import { RefreshControl } from "react-native";
 
@@ -14,49 +11,13 @@ import {
   ThemedView,
   ThemedText,
 } from "@/components";
-import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
-import { usePodcastChannel } from "@/hooks";
+import { usePodcastChannel, usePodcastChannelEpisodes } from "@/hooks";
 
 export default function PodcastChannel() {
-  const router = useRouter();
   const channelID = useLocalSearchParams<{ channelID: string }>().channelID;
-
   const podcastChannelQuery = usePodcastChannel(channelID);
-
-  const podcastChannelEpisodesQuery = useQuery({
-    queryKey: ["podcast", "channel-episodes", channelID],
-    async queryFn() {
-      const res = await fetch(
-        `${apiBaseUrl}/v1/podcast/channel/${channelID}/episodes`,
-      );
-
-      if (!res.ok) {
-        if (res.status === 404) {
-          router.replace("/+not-found");
-        }
-
-        const defaultErrorMessage = `Failed to load channel episodes: ${channelID}`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
-      }
-
-      const episodes = (await res.json()) as Array<Episode>;
-
-      // Cache data so these dont need to be re queried again on navigate
-      for (const _episode of episodes) {
-        // queryClient.setQueryData(
-        //   ["podcast-episode", "vanityID", episode.vanity_id],
-        //   episode,
-        // );
-      }
-
-      return episodes;
-    },
-  });
+  const podcastChannelEpisodesQuery = usePodcastChannelEpisodes(channelID);
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
