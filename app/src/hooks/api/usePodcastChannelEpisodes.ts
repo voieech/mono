@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
+import { queryClient } from "@/utils";
 
 export function usePodcastChannelEpisodes(channelID: string) {
   return useQuery({
@@ -30,11 +31,8 @@ export function usePodcastChannelEpisodes(channelID: string) {
       const episodes = (await res.json()) as Array<Episode>;
 
       // Cache data so these dont need to be re queried again on navigate
-      for (const _episode of episodes) {
-        // queryClient.setQueryData(
-        //   ["podcast-episode", "vanityID", episode.vanity_id],
-        //   episode,
-        // );
+      for (const episode of episodes) {
+        queryClient.setQueryData(["episode", episode.vanity_id], episode);
       }
 
       return episodes;
