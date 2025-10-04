@@ -1,9 +1,9 @@
-import type { Channel, Episode } from "dto";
+import type { Episode } from "dto";
 
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
-import { useRouter, useLocalSearchParams, Link } from "expo-router";
+import { useRouter, useLocalSearchParams, Link, Redirect } from "expo-router";
 import { useState } from "react";
 import { RefreshControl } from "react-native";
 
@@ -15,32 +15,14 @@ import {
   ThemedText,
 } from "@/components";
 import { apiBaseUrl } from "@/constants";
+import { NotFoundError } from "@/errors";
+import { usePodcastChannel } from "@/hooks";
 
 export default function PodcastChannel() {
   const router = useRouter();
   const channelID = useLocalSearchParams<{ channelID: string }>().channelID;
 
-  const podcastChannelQuery = useQuery({
-    queryKey: ["podcast", "channel", channelID],
-    async queryFn() {
-      const res = await fetch(`${apiBaseUrl}/v1/podcast/channel/${channelID}`);
-
-      if (!res.ok) {
-        if (res.status === 404) {
-          router.replace("/+not-found");
-        }
-
-        const defaultErrorMessage = `Failed to load channel: ${channelID}`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
-      }
-
-      return (await res.json()) as Channel;
-    },
-  });
+  const podcastChannelQuery = usePodcastChannel(channelID);
 
   const podcastChannelEpisodesQuery = useQuery({
     queryKey: ["podcast", "channel-episodes", channelID],
@@ -91,6 +73,10 @@ export default function PodcastChannel() {
   }
 
   if (podcastChannelQuery.isError || podcastChannelQuery.data === undefined) {
+    if (podcastChannelQuery.error instanceof NotFoundError) {
+      return <Redirect href="/+not-found" />;
+    }
+
     return (
       <SafeScrollViewContainer>
         <ThemedText>Error: {podcastChannelQuery.error.message}</ThemedText>
