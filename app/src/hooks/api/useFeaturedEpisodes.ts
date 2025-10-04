@@ -3,7 +3,7 @@ import type { Episode } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
-import { getAcceptLanguageHeader } from "@/utils";
+import { queryClient, getAcceptLanguageHeader } from "@/utils";
 
 export function useFeaturedEpisodes() {
   return useQuery({
@@ -30,11 +30,8 @@ export function useFeaturedEpisodes() {
       const episodes = (await res.json()) as Array<Episode>;
 
       // Cache data so these dont need to be re queried again on navigate
-      for (const _episode of episodes) {
-        // queryClient.setQueryData(
-        //   ["podcast-episode", "vanityID", episode.vanity_id],
-        //   episode
-        // );
+      for (const episode of episodes) {
+        queryClient.setQueryData(["episode", episode.vanity_id], episode);
       }
 
       return episodes;
