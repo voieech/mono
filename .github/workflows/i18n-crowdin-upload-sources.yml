@@ -12,13 +12,13 @@ run-name: Changes by ${{ github.actor }} triggered upload of translation source 
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      # include all .ts / .tsx in app/src
-      - "app/src/**/*.ts"
-      - "app/src/**/*.tsx"
+  # push:
+  #   branches:
+  #     - master
+  #   paths:
+  #     # include all .ts / .tsx in app/src
+  #     - "app/src/**/*.ts"
+  #     - "app/src/**/*.tsx"
 
 jobs:
   crowdin-upload:
