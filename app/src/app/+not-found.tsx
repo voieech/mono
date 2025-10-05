@@ -30,7 +30,7 @@ export default function NotFoundScreen() {
             paddingBottom: 16,
           }}
         >
-          Oops Sorry!
+          <Trans>Oops Sorry!</Trans>
         </ThemedText>
         <ThemedText>
           <Trans>
