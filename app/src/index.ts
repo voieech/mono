@@ -4,6 +4,16 @@
 // root layout (app/_layout.tsx)
 
 /******************* Import side effects first and services *******************/
+// Polyfill Intl.PluralRules as React Native JS engine doesnt support it yet
+// https://formatjs.github.io/docs/polyfills/intl-locale
+import "@formatjs/intl-locale/polyfill";
+// Polyfill Intl.PluralRules as React Native JS engine doesnt support it yet
+// https://formatjs.github.io/docs/polyfills/intl-pluralrules/#react-native
+// Forcing polyfill since polyfill conditional detection code runs very slowly
+// on Android and can slow down your app's startup time by seconds.
+import "@formatjs/intl-pluralrules/polyfill-force";
+import "@formatjs/intl-pluralrules/locale-data/en";
+
 import { setupReactNativeTrackPlayer } from "@/setup";
 import { dynamicallyLoadAndActivateLocale } from "@/utils";
 

@@ -21,6 +21,8 @@
   "dependencies": {
     "@animatereactnative/marquee": "^0.5.2",
     "@expo/vector-icons": "^14.1.0",
+    "@formatjs/intl-locale": "^4.2.12",
+    "@formatjs/intl-pluralrules": "^5.4.5",
     "@lingui/core": "^5.5.0",
     "@lingui/react": "^5.5.0",
     "@react-native-assets/slider": "^11.0.8",
