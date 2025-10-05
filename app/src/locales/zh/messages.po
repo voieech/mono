@@ -18,8 +18,8 @@ msgstr ""
 "X-Crowdin-File: /app/src/locales/en/messages.po\n"
 "X-Crowdin-File-ID: 34\n"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:201
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:167
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:149
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:148
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
 
@@ -55,15 +55,15 @@ msgstr "浏览"
 msgid "External Audio controls"
 msgstr "手机媒体控制"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:142
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:90
 msgid "Featured"
 msgstr "精选"
 
-#: src/app/(tabs)/(home)/index.tsx:106
+#: src/app/(tabs)/(home)/index.tsx:38
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:193
+#: src/app/(tabs)/(home)/index.tsx:125
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -83,6 +83,10 @@ msgstr "主页"
 msgid "Made by {activeTrackArtist}"
 msgstr "由{activeTrackArtist}制作"
 
+#: src/app/+not-found.tsx:33
+msgid "Oops Sorry!"
+msgstr ""
+
 #: src/app/(tabs)/(home)/_layout.tsx:28
 msgid "Podcast Channel"
 msgstr "播客频道"
@@ -95,7 +99,7 @@ msgstr "播客剧集"
 msgid "Rewind to track start when skipping to previous"
 msgstr "跳到上一个剧集时，先跳到剧集开头"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:161
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:142
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 

@@ -13,8 +13,8 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:201
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:167
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:149
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:148
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
 
@@ -50,15 +50,15 @@ msgstr "Explore"
 msgid "External Audio controls"
 msgstr "External Audio controls"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:142
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:90
 msgid "Featured"
 msgstr "Featured"
 
-#: src/app/(tabs)/(home)/index.tsx:106
+#: src/app/(tabs)/(home)/index.tsx:38
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:193
+#: src/app/(tabs)/(home)/index.tsx:125
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -78,6 +78,10 @@ msgstr "Home"
 msgid "Made by {activeTrackArtist}"
 msgstr "Made by {activeTrackArtist}"
 
+#: src/app/+not-found.tsx:33
+msgid "Oops Sorry!"
+msgstr "Oops Sorry!"
+
 #: src/app/(tabs)/(home)/_layout.tsx:28
 msgid "Podcast Channel"
 msgstr "Podcast Channel"
@@ -90,7 +94,7 @@ msgstr "Podcast Episode"
 msgid "Rewind to track start when skipping to previous"
 msgstr "Rewind to track start when skipping to previous"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:161
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:142
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 
