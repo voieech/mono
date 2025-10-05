@@ -4,7 +4,7 @@ import cors from "cors";
 import express from "express";
 import * as kyselyPostgresHelpers from "kysely/helpers/postgres";
 
-import { apiDB } from "../kysely/apiDB.js";
+import { apiDB } from "../kysely/index.js";
 import { generateRssXml } from "../rss/index.js";
 import { localeMiddleware } from "./locale/index.js";
 
