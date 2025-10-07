@@ -3,12 +3,15 @@ import RNTPTrackPlayer from "react-native-track-player";
 import { posthog } from "./posthog";
 import { settings, settingsInLocalStorage } from "./settings";
 import { TrackPlayerPlaybackRateMap } from "./TrackPlayerPlaybackRates";
+import { trackQueue } from "./TrackQueue";
 import { TrackWithMetadata } from "./TrackWithMetadata";
 
 /**
  * Wrapper around the TrackPlayer from "react-native-track-player".
  */
 export const TrackPlayer = {
+  queue: trackQueue,
+
   /**
    * Wrapper for `RNTPTrackPlayer.play` method that will also ensure that the
    * playback rate is set to the global playback rate setting value.
