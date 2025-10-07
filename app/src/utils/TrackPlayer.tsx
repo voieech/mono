@@ -30,6 +30,9 @@ export const TrackPlayer = {
 
     await RNTPTrackPlayer.setRate(playbackRate);
 
+    // Make sure the current position is up to date
+    this.queue.updateCurrentPosition();
+
     const activeTrack = (await RNTPTrackPlayer.getActiveTrack()) as
       | TrackWithMetadata
       | undefined;
