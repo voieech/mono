@@ -38,6 +38,7 @@ const SfSymbolsToMaterialIconsMapping = {
   "hand.thumbsup.fill": "thumb-up",
   "hand.thumbsdown.fill": "thumb-down",
   trash: "delete-forever",
+  "list.dash": "playlist-play",
 
   // Using satisfies and partial to ensure that users can only use icons after
   // they added the SF->MI mapping here.

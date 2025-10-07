@@ -163,6 +163,19 @@ export function AudioPlayer() {
           }}
         >
           <PlaybackRateButton />
+          <Pressable
+            onPress={() => {
+              router.push("/track-queue-modal");
+            }}
+          >
+            <Icon
+              name="list.dash"
+              color="white"
+              style={{
+                marginBottom: 2,
+              }}
+            />
+          </Pressable>
           <ShareCurrentTrackIcon activeTrack={activeTrack} />
         </ThemedView>
       </ThemedView>
