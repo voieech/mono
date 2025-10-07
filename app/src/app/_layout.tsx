@@ -55,6 +55,12 @@ function RootLayout() {
           // presentation: "containedModal",
         }}
       />
+      <Stack.Screen
+        name="track-queue-modal"
+        options={{
+          presentation: useCardPlayerInsteadOfModal ? "card" : "modal",
+        }}
+      />
       <Stack.Screen name="+not-found" />
     </Stack>
   );

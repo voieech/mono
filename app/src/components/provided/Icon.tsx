@@ -37,6 +37,7 @@ const SfSymbolsToMaterialIconsMapping = {
   "heart.fill": "favorite",
   "hand.thumbsup.fill": "thumb-up",
   "hand.thumbsdown.fill": "thumb-down",
+  trash: "delete-forever",
 
   // Using satisfies and partial to ensure that users can only use icons after
   // they added the SF->MI mapping here.
