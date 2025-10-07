@@ -48,7 +48,7 @@ export default function PodcastEpisode() {
 
       // If current episode is the active track, just continue playing
       if (isCurrentEpisodeTheActiveTrack) {
-        await TrackPlayer.playWithGlobalRate();
+        await TrackPlayer.play();
         return;
       }
 
@@ -71,7 +71,7 @@ export default function PodcastEpisode() {
         }),
       );
 
-      await TrackPlayer.playWithGlobalRate();
+      await TrackPlayer.play();
     },
     [episode, isCurrentEpisodeTheActiveTrack],
   );

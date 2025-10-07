@@ -211,7 +211,7 @@ export function AudioPlayer() {
           />
         ) : (
           <CircularPlayButton
-            onPress={TrackPlayer.playWithGlobalRate}
+            onPress={TrackPlayer.play}
             innerIconSize={32}
             outerBackgroundSize={20}
           />

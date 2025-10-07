@@ -13,10 +13,12 @@ export const TrackPlayer = {
   queue: trackQueue,
 
   /**
-   * Wrapper for `RNTPTrackPlayer.play` method that will also ensure that the
-   * playback rate is set to the global playback rate setting value.
+   * 1. Start playing audio / current track
+   * 1. Ensures that player is using the global playback rate
+   * 1. Make sure the track queue current position is updated
+   * 1. Track play event with posthog
    */
-  async playWithGlobalRate() {
+  async play() {
     // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.play();
 

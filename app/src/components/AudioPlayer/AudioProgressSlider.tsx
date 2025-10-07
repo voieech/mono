@@ -33,7 +33,7 @@ export function AudioProgressSlider(props: {
     setPosition(newPosition);
 
     await RNTPTrackPlayer.seekTo(newPosition);
-    await TrackPlayer.playWithGlobalRate();
+    await TrackPlayer.play();
   }
 
   return (

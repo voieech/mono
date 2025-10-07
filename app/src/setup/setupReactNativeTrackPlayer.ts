@@ -26,7 +26,7 @@ export async function setupReactNativeTrackPlayer() {
         /* Remote Control events */
 
         RNTPTrackPlayer.addEventListener(Event.RemotePlay, () =>
-          TrackPlayer.playWithGlobalRate(),
+          TrackPlayer.play(),
         );
 
         RNTPTrackPlayer.addEventListener(Event.RemotePause, () =>

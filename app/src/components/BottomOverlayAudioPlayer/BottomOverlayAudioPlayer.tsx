@@ -149,7 +149,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                   />
                 </Pressable>
               ) : (
-                <Pressable onPress={TrackPlayer.playWithGlobalRate}>
+                <Pressable onPress={TrackPlayer.play}>
                   <Icon
                     name="play.fill"
                     color="white"
