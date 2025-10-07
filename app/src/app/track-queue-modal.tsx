@@ -72,8 +72,7 @@ export default function TrackQueueModal() {
             </ThemedText>
             <Pressable
               onPress={() => {
-                // @todo Clear the queue but keep current track
-                TrackPlayer.setQueue([]);
+                TrackPlayer.removeUpcomingTracks();
               }}
             >
               <Icon name="trash" color="white" />
