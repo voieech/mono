@@ -12,6 +12,19 @@ export async function setupReactNativeTrackPlayer() {
   RNTPTrackPlayer.registerPlaybackService(
     () =>
       async function playbackService() {
+        RNTPTrackPlayer.addEventListener(
+          Event.PlaybackActiveTrackChanged,
+          (_e) => {
+            TrackPlayer.queue.updateCurrentPosition();
+          },
+        );
+
+        RNTPTrackPlayer.addEventListener(Event.PlaybackQueueEnded, (_e) => {
+          TrackPlayer.queue.updateCurrentPosition();
+        });
+
+        /* Remote Control events */
+
         RNTPTrackPlayer.addEventListener(Event.RemotePlay, () =>
           TrackPlayer.playWithGlobalRate(),
         );
