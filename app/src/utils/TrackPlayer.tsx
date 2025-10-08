@@ -57,12 +57,19 @@ export const TrackPlayer = {
   },
 
   /**
-   * Enqueue track(s) right after the current track.
-   * This will also ensure the track queue and current position is updated.
+   * 1. Filter out tracks that are already in the queue.
+   * 1. Enqueue filtered track(s) right after the current track.
+   * 1. Ensure track queue and current position is updated.
    */
   async enqueueTracksAfterCurrent(tracks: Array<TrackWithMetadata>) {
+    const currentTracks = this.queue.getAllTracks();
+    const currentTracksSet = new Set(currentTracks.map((track) => track.id));
+    const filteredTracks = tracks.filter(
+      (track) => !currentTracksSet.has(track.id),
+    );
+
     // Add it to index 1, to be the next in line after the current track
-    await RNTPTrackPlayer.add(tracks, 1);
+    await RNTPTrackPlayer.add(filteredTracks, 1);
 
     await Promise.all([
       this.queue.updateCurrentPosition(),
