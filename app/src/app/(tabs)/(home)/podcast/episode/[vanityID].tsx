@@ -87,7 +87,7 @@ export default function PodcastEpisode() {
         (await getPodcastEpisodeNextReccomendations(episode.vanity_id))
           ?.reccomendations;
 
-      await RNTPTrackPlayer.add(
+      await TrackPlayer.enqueueTracksAfterCurrent(
         reccomendations.map((episode) =>
           createTrackWithMetadata({
             trackType: "podcast_episode",
@@ -104,12 +104,7 @@ export default function PodcastEpisode() {
             locale: episode.language,
           }),
         ),
-
-        // Add it to be the next in line after the current track
-        1,
       );
-      TrackPlayer.queue.updateCurrentPosition();
-      TrackPlayer.queue.updateTracks();
     },
     [
       episode,

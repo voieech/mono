@@ -55,4 +55,18 @@ export const TrackPlayer = {
     // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.pause();
   },
+
+  /**
+   * Enqueue track(s) right after the current track.
+   * This will also ensure the track queue and current position is updated.
+   */
+  async enqueueTracksAfterCurrent(tracks: Array<TrackWithMetadata>) {
+    // Add it to index 1, to be the next in line after the current track
+    await RNTPTrackPlayer.add(tracks, 1);
+
+    await Promise.all([
+      this.queue.updateCurrentPosition(),
+      this.queue.updateTracks(),
+    ]);
+  },
 };
