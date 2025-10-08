@@ -1,6 +1,6 @@
 import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
-import { useLocalSearchParams, Redirect } from "expo-router";
+import { useLocalSearchParams, Redirect, Link } from "expo-router";
 import { useCallback } from "react";
 import { View } from "react-native";
 import RNTPTrackPlayer, {
@@ -18,7 +18,11 @@ import {
   CircularPauseButton,
 } from "@/components";
 import { NotFoundError } from "@/errors";
-import { usePodcastEpisode, useActiveTrackWithMetadata } from "@/hooks";
+import {
+  usePodcastEpisode,
+  useActiveTrackWithMetadata,
+  usePodcastEpisodeNextReccomendations,
+} from "@/hooks";
 import { createTrackWithMetadata, TrackPlayer } from "@/utils";
 
 export default function PodcastEpisode() {
@@ -38,6 +42,9 @@ export default function PodcastEpisode() {
     episode !== undefined &&
     activeTrack !== undefined &&
     episode.id === activeTrack.id;
+
+  const podcastEpisodeNextReccomendationsQuery =
+    usePodcastEpisodeNextReccomendations(vanityID);
 
   const playEpisode = useCallback(
     async function () {
@@ -175,6 +182,92 @@ export default function PodcastEpisode() {
         }}
       />
       <ThemedText>{episode.description}</ThemedText>
+      {podcastEpisodeNextReccomendationsQuery.data !== undefined && (
+        <>
+          <View
+            style={{
+              borderTopColor: "#777",
+              borderTopWidth: 0.5,
+              marginTop: 20,
+              paddingBottom: 20,
+            }}
+          />
+          <ThemedText
+            type="defaultSemiBold"
+            style={{
+              paddingBottom: 8,
+            }}
+          >
+            <Trans>Reccomended Episodes</Trans>
+          </ThemedText>
+          {podcastEpisodeNextReccomendationsQuery.data.reccomendations.map(
+            (episode) => (
+              <View
+                key={episode.id}
+                style={{
+                  paddingBottom: 8,
+                }}
+              >
+                <Link
+                  href={{
+                    pathname: "/podcast/episode/[vanityID]",
+                    params: {
+                      vanityID: episode.vanity_id,
+                    },
+                  }}
+                >
+                  <ThemedView
+                    style={{
+                      flex: 1,
+                      flexDirection: "row",
+                      borderRadius: 16,
+                    }}
+                  >
+                    <Image
+                      source={episode.img_url}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        maxWidth: 128,
+                        borderTopLeftRadius: 16,
+                        borderBottomLeftRadius: 16,
+                      }}
+                      contentFit="cover"
+                    />
+                    <ThemedView
+                      style={{
+                        flex: 1,
+                        borderTopRightRadius: 16,
+                        borderBottomRightRadius: 16,
+                        padding: 16,
+                        backgroundColor: "#3f3f46",
+                      }}
+                    >
+                      <ThemedText
+                        style={{
+                          paddingBottom: 2,
+                        }}
+                        numberOfLines={2}
+                      >
+                        {episode.title}
+                      </ThemedText>
+                      <ThemedText
+                        style={{
+                          fontSize: 12,
+                        }}
+                      >
+                        {episode.created_at.split("T")[0]}
+                        {"\n"}
+                        {Math.trunc(episode.audio_length / 60)} mins
+                      </ThemedText>
+                    </ThemedView>
+                  </ThemedView>
+                </Link>
+              </View>
+            ),
+          )}
+        </>
+      )}
     </ParallaxScrollViewContainer>
   );
 }
