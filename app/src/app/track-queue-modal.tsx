@@ -95,9 +95,13 @@ export default function TrackQueueModal() {
             </ThemedView>
           )}
           {queue.map((track) => (
-            <>
+            <View
+              key={track.id}
+              style={{
+                marginBottom: 8,
+              }}
+            >
               <Pressable
-                key={track.id}
                 onPress={() => {
                   // @todo
                 }}
@@ -135,12 +139,7 @@ export default function TrackQueueModal() {
                   </ThemedView>
                 </ThemedView>
               </Pressable>
-              <View
-                style={{
-                  paddingVertical: 4,
-                }}
-              />
-            </>
+            </View>
           ))}
         </ThemedView>
       </GestureHandlerRootView>
