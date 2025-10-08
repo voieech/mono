@@ -9,10 +9,10 @@ import { apiBaseUrl } from "@/constants";
  */
 export function usePodcastEpisodeNextReccomendations(
   vanityID: string,
-  limit?: number,
+  limit: number = 10,
 ) {
   return useQuery({
-    queryKey: ["podcast", "episode", "reccomendations", vanityID],
+    queryKey: ["podcast", "episode", "reccomendations", vanityID, limit],
     queryFn: () => getPodcastEpisodeNextReccomendations(vanityID, limit),
   });
 }
@@ -22,10 +22,10 @@ export function usePodcastEpisodeNextReccomendations(
  */
 export async function getPodcastEpisodeNextReccomendations(
   vanityID: string,
-  limit?: number,
+  limit: number = 10,
 ) {
   const res = await fetch(
-    `${apiBaseUrl}/v1/podcast/reccomendations/next?current_episode_vanity_id=${vanityID}&limit=${limit ?? 10}`,
+    `${apiBaseUrl}/v1/podcast/reccomendations/next?current_episode_vanity_id=${vanityID}&limit=${limit}`,
   );
 
   if (!res.ok) {
