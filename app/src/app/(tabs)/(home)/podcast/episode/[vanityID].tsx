@@ -22,6 +22,7 @@ import {
   usePodcastEpisode,
   useActiveTrackWithMetadata,
   usePodcastEpisodeNextReccomendations,
+  getPodcastEpisodeNextReccomendations,
 } from "@/hooks";
 import { createTrackWithMetadata, TrackPlayer } from "@/utils";
 
@@ -79,8 +80,42 @@ export default function PodcastEpisode() {
       );
 
       await TrackPlayer.play();
+
+      // Call API to get reccomendations if it wasnt already loaded
+      const reccomendations =
+        podcastEpisodeNextReccomendationsQuery.data?.reccomendations ??
+        (await getPodcastEpisodeNextReccomendations(episode.vanity_id))
+          ?.reccomendations;
+
+      await RNTPTrackPlayer.add(
+        reccomendations.map((episode) =>
+          createTrackWithMetadata({
+            trackType: "podcast_episode",
+            id: episode.id,
+            episode,
+
+            // Artist is always voieech for pre-generated podcasts, will be
+            // different if it is user generated content in the future.
+            artist: "voieech.com",
+            url: episode.audio_public_url,
+            title: episode.title,
+            duration: episode.audio_length,
+            artwork: episode.img_url,
+            locale: episode.language,
+          }),
+        ),
+
+        // Add it to be the next in line after the current track
+        1,
+      );
+      TrackPlayer.queue.updateCurrentPosition();
+      TrackPlayer.queue.updateTracks();
     },
-    [episode, isCurrentEpisodeTheActiveTrack],
+    [
+      episode,
+      isCurrentEpisodeTheActiveTrack,
+      podcastEpisodeNextReccomendationsQuery.data?.reccomendations,
+    ],
   );
 
   const playerState = usePlaybackState().state;
