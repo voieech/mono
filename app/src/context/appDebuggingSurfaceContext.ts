@@ -1,19 +1,22 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
+
+import { createUseContextHook } from "@/utils";
 
 export const AppDebuggingSurfaceContext = createContext<{
+  /**
+   * Should debugging surfaces be shown?
+   */
   showDebuggingSurfaces: boolean;
-  setShowDebuggingSurfaces: (showDebuggingSurfaces: boolean) => void;
-}>({
-  showDebuggingSurfaces: false,
   /**
    * Setter to toggle whether debugging surfaces should be shown.
    */
-  setShowDebuggingSurfaces: () => {
-    throw new Error(
-      "Cannot call AppDebuggingSurfaceContext.setShowDebuggingSurfaces outside of provider",
-    );
-  },
-});
+  setShowDebuggingSurfaces: (showDebuggingSurfaces: boolean) => void;
+}>(
+  // @ts-expect-error
+  null,
+);
 
-export const useAppDebuggingSurfaceContext = () =>
-  useContext(AppDebuggingSurfaceContext);
+export const useAppDebuggingSurfaceContext = createUseContextHook(
+  AppDebuggingSurfaceContext,
+  "AppDebuggingSurfaceContext",
+);

@@ -1,5 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 
+import { createUseContextHook } from "@/utils";
 import { settings, type SettingNames, type SettingState } from "@/utils";
 
 export const SettingContext = createContext<{
@@ -22,21 +23,12 @@ export const SettingContext = createContext<{
     setting: T,
     newValue: SettingState[T],
   ) => void;
-}>({
-  settings,
-  getSetting: (_setting) => {
-    throw new Error(
-      "Cannot call SettingContext.getSetting outside of provider",
-    );
-  },
-  updateSetting(_setting, _newValue) {
-    throw new Error(
-      "Cannot call SettingContext.updateSetting outside of provider",
-    );
-  },
-});
+}>(
+  // @ts-expect-error
+  null,
+);
 
-/**
- * Access the whole `SettingContext` value.
- */
-export const useSettingContext = () => useContext(SettingContext);
+export const useSettingContext = createUseContextHook(
+  SettingContext,
+  "SettingContext",
+);
