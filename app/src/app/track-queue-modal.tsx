@@ -13,7 +13,6 @@ import {
   Icon,
 } from "@/components";
 import { useExperimentalSurfaceContext } from "@/context";
-// import { usePlayerQueue } from "@/hooks";
 import { TrackPlayer } from "@/utils";
 
 function useForceRerender() {
@@ -23,7 +22,6 @@ function useForceRerender() {
 
 export default function TrackQueueModal() {
   const windowDimensions = useWindowDimensions();
-  // const queue = usePlayerQueue();
   const queue = TrackPlayer.queue.getTracksAhead();
   const queueLength = queue.length;
   const useCardPlayerInsteadOfModal =
