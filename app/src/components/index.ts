@@ -13,3 +13,4 @@ export * from "./provided";
 export * from "./Settings";
 export * from "./ThemedText";
 export * from "./ThemedView";
+export * from "./TrackPlayerProvider";
