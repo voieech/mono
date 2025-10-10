@@ -7,6 +7,12 @@ import RNTPTrackPlayer, {
 import type { TrackWithMetadata } from "@/utils";
 
 import { TrackPlayerContext } from "@/context";
+import {
+  settings,
+  settingsInLocalStorage,
+  TrackPlayerPlaybackRateMap,
+  posthog,
+} from "@/utils";
 
 export function TrackPlayerProvider(props: PropsWithChildren) {
   const [currentPosition, setCurrentPosition] = useState(0);
@@ -42,6 +48,54 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     );
   }, []);
 
+  const play = useCallback(async () => {
+    // eslint-disable-next-line no-restricted-properties
+    await RNTPTrackPlayer.play();
+
+    const localStorageSettings = await settingsInLocalStorage.read();
+
+    const playbackRateString =
+      localStorageSettings.playbackRate ?? settings.playbackRate.defaultValue;
+
+    const playbackRate =
+      TrackPlayerPlaybackRateMap.get(playbackRateString) ?? 1;
+
+    await RNTPTrackPlayer.setRate(playbackRate);
+
+    // Make sure the current position is up to date
+    updateCurrentPosition();
+
+    const activeTrack = (await RNTPTrackPlayer.getActiveTrack()) as
+      | TrackWithMetadata
+      | undefined;
+
+    if (activeTrack === undefined) {
+      return;
+    }
+
+    posthog.capture("track_playback", {
+      id: activeTrack.id,
+      type: activeTrack.trackType,
+      locale: activeTrack.locale,
+      playbackRate,
+    });
+  }, [updateCurrentPosition]);
+
+  const enqueueTracksAfterCurrent = useCallback(
+    async (tracks: Array<TrackWithMetadata>) => {
+      const currentTracksSet = new Set(tracks.map((track) => track.id));
+      const filteredTracks = tracks.filter(
+        (track) => !currentTracksSet.has(track.id),
+      );
+
+      // Add it to index 1, to be the next in line after the current track
+      await RNTPTrackPlayer.add(filteredTracks, 1);
+
+      await Promise.all([updateCurrentPosition(), updateTracks()]);
+    },
+    [updateCurrentPosition, updateTracks],
+  );
+
   useTrackPlayerEvents(
     [Event.PlaybackActiveTrackChanged, Event.PlaybackQueueEnded],
     (e) => {
@@ -63,6 +117,12 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
   return (
     <TrackPlayerContext
       value={{
+        play,
+        // eslint-disable-next-line no-restricted-properties
+        pause: RNTPTrackPlayer.pause,
+        enqueueTracksAfterCurrent,
+
+        /* Queue related */
         currentPosition,
         tracks,
         getTracksBehind,
