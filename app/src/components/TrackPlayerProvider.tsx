@@ -87,9 +87,9 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
   }, [updateCurrentPosition]);
 
   const enqueueTracksAfterCurrent = useCallback(
-    async (tracks: Array<TrackWithMetadata>) => {
+    async (newTracks: Array<TrackWithMetadata>) => {
       const currentTracksSet = new Set(tracks.map((track) => track.id));
-      const filteredTracks = tracks.filter(
+      const filteredTracks = newTracks.filter(
         (track) => !currentTracksSet.has(track.id),
       );
 
@@ -98,7 +98,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
 
       await Promise.all([updateCurrentPosition(), updateTracks()]);
     },
-    [updateCurrentPosition, updateTracks],
+    [tracks, updateCurrentPosition, updateTracks],
   );
 
   useTrackPlayerEvents(
