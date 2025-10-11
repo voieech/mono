@@ -17,6 +17,7 @@ import {
   CircularPlayButton,
   CircularPauseButton,
 } from "@/components";
+import { useTrackPlayer } from "@/context";
 import { NotFoundError } from "@/errors";
 import {
   usePodcastEpisode,
@@ -24,7 +25,7 @@ import {
   usePodcastEpisodeNextReccomendations,
   getPodcastEpisodeNextReccomendations,
 } from "@/hooks";
-import { createTrackWithMetadata, TrackPlayer } from "@/utils";
+import { createTrackWithMetadata } from "@/utils";
 
 export default function PodcastEpisode() {
   const vanityID = useLocalSearchParams<{ vanityID: string }>().vanityID;
@@ -47,6 +48,8 @@ export default function PodcastEpisode() {
   const podcastEpisodeNextReccomendationsQuery =
     usePodcastEpisodeNextReccomendations(vanityID);
 
+  const trackPlayer = useTrackPlayer();
+
   const playEpisode = useCallback(
     async function () {
       // Should not happen since UI wont be shown until episode is loaded
@@ -56,7 +59,7 @@ export default function PodcastEpisode() {
 
       // If current episode is the active track, just continue playing
       if (isCurrentEpisodeTheActiveTrack) {
-        await TrackPlayer.play();
+        await trackPlayer.play();
         return;
       }
 
@@ -79,7 +82,7 @@ export default function PodcastEpisode() {
         }),
       );
 
-      await TrackPlayer.play();
+      await trackPlayer.play();
 
       // Call API to get reccomendations if it wasnt already loaded
       const reccomendations =
@@ -87,7 +90,7 @@ export default function PodcastEpisode() {
         (await getPodcastEpisodeNextReccomendations(episode.vanity_id))
           ?.reccomendations;
 
-      await TrackPlayer.enqueueTracksAfterCurrent(
+      await trackPlayer.enqueueTracksAfterCurrent(
         reccomendations.map((episode) =>
           createTrackWithMetadata({
             trackType: "podcast_episode",
@@ -108,6 +111,7 @@ export default function PodcastEpisode() {
     },
     [
       episode,
+      trackPlayer,
       isCurrentEpisodeTheActiveTrack,
       podcastEpisodeNextReccomendationsQuery.data?.reccomendations,
     ],
@@ -192,7 +196,7 @@ export default function PodcastEpisode() {
         {isCurrentEpisodeTheActiveTrack &&
         playerState === PlayerState.Playing ? (
           <CircularPauseButton
-            onPress={TrackPlayer.pause}
+            onPress={trackPlayer.pause}
             innerIconSize={24}
             outerBackgroundSize={8}
           />

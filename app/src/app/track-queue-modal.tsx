@@ -1,10 +1,8 @@
 import { Trans, Plural } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { router } from "expo-router";
-import { useState } from "react";
 import { Pressable, useWindowDimensions, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import RNTPTrackPlayer from "react-native-track-player";
 
 import {
   SafeScrollViewContainer,
@@ -12,23 +10,17 @@ import {
   ThemedText,
   Icon,
 } from "@/components";
-import { useExperimentalSurfaceContext } from "@/context";
-import { TrackPlayer } from "@/utils";
-
-function useForceRerender() {
-  const [_, setState] = useState(0);
-  return () => setState((s) => s + 1);
-}
+import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
 
 export default function TrackQueueModal() {
   const windowDimensions = useWindowDimensions();
-  const queue = TrackPlayer.queue.getTracksAhead();
+  const trackPlayer = useTrackPlayer();
+  const queue = trackPlayer.getTracksAhead();
   const queueLength = queue.length;
   const useCardPlayerInsteadOfModal =
     useExperimentalSurfaceContext().getShowExperimentalSurface(
       "use-card-player-instead-of-modal",
     );
-  const reRender = useForceRerender();
   return (
     <SafeScrollViewContainer>
       {/*
@@ -77,14 +69,7 @@ export default function TrackQueueModal() {
                 other="Player Queue (#)"
               />
             </ThemedText>
-            <Pressable
-              onPress={async () => {
-                await RNTPTrackPlayer.removeUpcomingTracks();
-                await TrackPlayer.queue.updateCurrentPosition();
-                await TrackPlayer.queue.updateTracks();
-                reRender();
-              }}
-            >
+            <Pressable onPress={trackPlayer.removeUpcomingTracks}>
               <Icon name="trash" color="white" />
             </Pressable>
           </ThemedView>

@@ -12,8 +12,8 @@ import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedView";
+import { useTrackPlayer } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
-import { TrackPlayer } from "@/utils";
 
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
 import {
@@ -37,6 +37,7 @@ export function AudioPlayer() {
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const [like, setLike] = useState<null | boolean>(null);
+  const trackPlayer = useTrackPlayer();
 
   if (activeTrack === undefined) {
     return null;
@@ -205,13 +206,13 @@ export function AudioPlayer() {
         */}
         {playerState === PlayerState.Playing ? (
           <CircularPauseButton
-            onPress={TrackPlayer.pause}
+            onPress={trackPlayer.pause}
             innerIconSize={32}
             outerBackgroundSize={20}
           />
         ) : (
           <CircularPlayButton
-            onPress={TrackPlayer.play}
+            onPress={trackPlayer.play}
             innerIconSize={32}
             outerBackgroundSize={20}
           />

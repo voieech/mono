@@ -4,7 +4,7 @@ import RNTPTrackPlayer from "react-native-track-player";
 
 import type { TrackWithMetadata } from "@/utils";
 
-import { TrackPlayer } from "@/utils";
+import { useTrackPlayer } from "@/context";
 
 export function AudioProgressSlider(props: {
   defaultTrackPosition: number;
@@ -12,6 +12,7 @@ export function AudioProgressSlider(props: {
 }) {
   const durationAsInt = Math.trunc(props.activeTrack.duration);
   const [position, setPosition] = useState(props.defaultTrackPosition);
+  const trackPlayer = useTrackPlayer();
 
   useEffect(() => {
     const intervalID = setInterval(
@@ -33,7 +34,7 @@ export function AudioProgressSlider(props: {
     setPosition(newPosition);
 
     await RNTPTrackPlayer.seekTo(newPosition);
-    await TrackPlayer.play();
+    await trackPlayer.play();
   }
 
   return (
@@ -45,9 +46,9 @@ export function AudioProgressSlider(props: {
       //
       // Stop updating position when user start touching it
       // Position will be auto updated again after user stop touching it
-      onTouchStart={() => TrackPlayer.pause()}
-      // onTouchEnd={() => TrackPlayerPlayWithGlobalRate()}
-      // onTouchCancel={() => TrackPlayerPlayWithGlobalRate()}
+      onTouchStart={() => trackPlayer.pause()}
+      // onTouchEnd={() => trackPlayer.play()}
+      // onTouchCancel={() => trackPlayer.play()}
       //
       // This is the same as "onValueChange", just that it is not called
       // continously and only called once user lifts their finger

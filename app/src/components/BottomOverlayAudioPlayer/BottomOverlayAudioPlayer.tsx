@@ -7,15 +7,15 @@ import {
 } from "react-native-track-player";
 
 import { Icon } from "@/components/provided";
-import { useExperimentalSurfaceContext } from "@/context";
+import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
-import { TrackPlayer } from "@/utils";
 
 import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerProgessBar";
 
 export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
   const startY = useRef(0);
   const { width } = useWindowDimensions();
+  const trackPlayer = useTrackPlayer();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const router = useRouter();
@@ -138,7 +138,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                 any other) state to paused state.
               */}
               {playerState === PlayerState.Playing ? (
-                <Pressable onPress={TrackPlayer.pause}>
+                <Pressable onPress={trackPlayer.pause}>
                   <Icon
                     name="pause.fill"
                     color="white"
@@ -149,7 +149,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                   />
                 </Pressable>
               ) : (
-                <Pressable onPress={TrackPlayer.play}>
+                <Pressable onPress={trackPlayer.play}>
                   <Icon
                     name="play.fill"
                     color="white"
