@@ -6,31 +6,16 @@ import RNTPTrackPlayer, {
 } from "react-native-track-player";
 
 import { capabilitiesWithJump } from "@/utils/ReactNativeTrackPlayerCapabilitiesOptions";
-import { TrackPlayer } from "@/utils/TrackPlayer";
 
 export async function setupReactNativeTrackPlayer() {
   RNTPTrackPlayer.registerPlaybackService(
     () =>
       async function playbackService() {
-        RNTPTrackPlayer.addEventListener(
-          Event.PlaybackActiveTrackChanged,
-          (_e) => {
-            TrackPlayer.queue.updateCurrentPosition();
-          },
-        );
-
-        RNTPTrackPlayer.addEventListener(Event.PlaybackQueueEnded, (_e) => {
-          TrackPlayer.queue.updateCurrentPosition();
-        });
-
         /* Remote Control events */
 
-        RNTPTrackPlayer.addEventListener(Event.RemotePlay, () =>
-          TrackPlayer.play(),
-        );
-
         RNTPTrackPlayer.addEventListener(Event.RemotePause, () =>
-          TrackPlayer.pause(),
+          // eslint-disable-next-line no-restricted-properties
+          RNTPTrackPlayer.pause(),
         );
 
         RNTPTrackPlayer.addEventListener(Event.RemoteStop, () =>

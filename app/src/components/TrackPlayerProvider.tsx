@@ -102,9 +102,17 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
   );
 
   useTrackPlayerEvents(
-    [Event.PlaybackActiveTrackChanged, Event.PlaybackQueueEnded],
+    [
+      Event.RemotePlay,
+      Event.PlaybackActiveTrackChanged,
+      Event.PlaybackQueueEnded,
+    ],
     (e) => {
       switch (e.type) {
+        case Event.RemotePlay:
+          play();
+          break;
+
         case Event.PlaybackActiveTrackChanged:
           updateCurrentPosition();
           break;
