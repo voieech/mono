@@ -1,5 +1,6 @@
 import { View } from "react-native";
-import { useProgress } from "react-native-track-player";
+
+import { useProgress } from "@/TrackPlayer";
 
 /**
  * Mini progress bar at the bottom of the `BottomOverlayAudioPlayer`.

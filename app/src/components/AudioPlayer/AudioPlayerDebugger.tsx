@@ -1,6 +1,5 @@
-import { useProgress } from "react-native-track-player";
-
 import { ThemedText } from "@/components/ThemedText";
+import { useProgress } from "@/TrackPlayer";
 
 export function AudioPlayerDebugger() {
   const progress = useProgress();
