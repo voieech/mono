@@ -37,6 +37,10 @@ export const TrackPlayerContext = createContext<{
    * Sync queue with source of truth
    */
   updateTracks: () => void;
+  /**
+   * Removes all upcoming tracks from queue
+   */
+  removeUpcomingTracks: () => Promise<void>;
 }>(
   // @ts-expect-error
   null,
