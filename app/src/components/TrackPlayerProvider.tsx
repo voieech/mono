@@ -156,6 +156,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
         pause: RNTPTrackPlayer.pause,
         enqueueTracksAfterCurrent,
         goToPreviousOrStartOfTrack,
+        goToNextTrack: () => RNTPTrackPlayer.skipToNext(),
 
         /* Queue related */
         currentPosition,

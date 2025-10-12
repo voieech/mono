@@ -1,5 +1,4 @@
 import { Pressable } from "react-native";
-import TrackPlayer from "react-native-track-player";
 
 import { Icon } from "@/components/provided";
 import { useTrackPlayer } from "@/context";
@@ -14,8 +13,9 @@ export function AudioPlayerSkipPreviousButton() {
 }
 
 export function AudioPlayerSkipNextButton() {
+  const trackPlayer = useTrackPlayer();
   return (
-    <Pressable onPress={() => TrackPlayer.skipToNext()}>
+    <Pressable onPress={trackPlayer.goToNextTrack}>
       <Icon name="forward.end.fill" color="white" />
     </Pressable>
   );
