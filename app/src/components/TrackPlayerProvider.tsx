@@ -6,7 +6,7 @@ import RNTPTrackPlayer, {
 
 import type { TrackWithMetadata } from "@/utils";
 
-import { TrackPlayerContext } from "@/context";
+import { TrackPlayerContext, useSettingContext } from "@/context";
 import {
   settings,
   settingsInLocalStorage,
@@ -15,6 +15,7 @@ import {
 } from "@/utils";
 
 export function TrackPlayerProvider(props: PropsWithChildren) {
+  const settingContext = useSettingContext();
   const [currentPosition, setCurrentPosition] = useState(0);
   const [tracks, setTracks] = useState<Array<TrackWithMetadata>>([]);
 
@@ -101,6 +102,26 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     [tracks, updateCurrentPosition, updateTracks],
   );
 
+  const goToPreviousOrStartOfTrack = useCallback(async () => {
+    const shouldRewindToStartOnSkipPrevious = settingContext.getSetting(
+      "rewindToStartOnSkipPrevious",
+    );
+
+    if (shouldRewindToStartOnSkipPrevious) {
+      const progress = await RNTPTrackPlayer.getProgress();
+      const positionAsInt = Math.trunc(progress.position);
+      if (positionAsInt > 3) {
+        await RNTPTrackPlayer.seekTo(0);
+      } else {
+        await RNTPTrackPlayer.skipToPrevious();
+      }
+    } else {
+      await RNTPTrackPlayer.skipToPrevious();
+    }
+
+    await updateCurrentPosition();
+  }, [settingContext, updateCurrentPosition]);
+
   useTrackPlayerEvents(
     [
       Event.RemotePlay,
@@ -134,6 +155,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
         // eslint-disable-next-line no-restricted-properties
         pause: RNTPTrackPlayer.pause,
         enqueueTracksAfterCurrent,
+        goToPreviousOrStartOfTrack,
 
         /* Queue related */
         currentPosition,

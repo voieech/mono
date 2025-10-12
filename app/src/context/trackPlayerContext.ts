@@ -21,6 +21,11 @@ export const TrackPlayerContext = createContext<{
   enqueueTracksAfterCurrent: (
     tracks: Array<TrackWithMetadata>,
   ) => Promise<void>;
+  /**
+   * This will either go to start of track or to the previous track and start
+   * playing, see `rewindToStartOnSkipPrevious` setting.
+   */
+  goToPreviousOrStartOfTrack: () => Promise<void>;
 
   /****************************** Queue related *******************************/
   currentPosition: number;
