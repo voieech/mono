@@ -30,6 +30,15 @@ export const TrackPlayerContext = createContext<{
    * This will either go to the next track and start playing.
    */
   goToNextTrack: () => Promise<void>;
+  /**
+   * Playback rate of the current track. This rate is persisted across use in
+   * settings.
+   */
+  playbackRate: number;
+  /**
+   * Update the playback rate and save it to settings.
+   */
+  updatePlaybackRateByCycling: () => Promise<void>;
 
   /****************************** Queue related *******************************/
   currentPosition: number;

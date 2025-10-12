@@ -1,4 +1,6 @@
-import { useState, useCallback, type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+
+import { useState, useCallback } from "react";
 import RNTPTrackPlayer, {
   useTrackPlayerEvents,
   Event,
@@ -8,8 +10,7 @@ import type { TrackWithMetadata } from "@/utils";
 
 import { TrackPlayerContext, useSettingContext } from "@/context";
 import {
-  settings,
-  settingsInLocalStorage,
+  TrackPlayerPlaybackRates,
   TrackPlayerPlaybackRateMap,
   posthog,
 } from "@/utils";
@@ -18,6 +19,8 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
   const settingContext = useSettingContext();
   const [currentPosition, setCurrentPosition] = useState(0);
   const [tracks, setTracks] = useState<Array<TrackWithMetadata>>([]);
+  const playbackRateSetting = settingContext.getSetting("playbackRate");
+  const playbackRate = TrackPlayerPlaybackRateMap.get(playbackRateSetting) ?? 1;
 
   const getTracksBehind = useCallback(
     () => tracks.slice(0, currentPosition),
@@ -58,14 +61,6 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.play();
 
-    const localStorageSettings = await settingsInLocalStorage.read();
-
-    const playbackRateString =
-      localStorageSettings.playbackRate ?? settings.playbackRate.defaultValue;
-
-    const playbackRate =
-      TrackPlayerPlaybackRateMap.get(playbackRateString) ?? 1;
-
     await RNTPTrackPlayer.setRate(playbackRate);
 
     // Make sure the current position is up to date
@@ -85,7 +80,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
       locale: activeTrack.locale,
       playbackRate,
     });
-  }, [updateCurrentPosition]);
+  }, [playbackRate, updateCurrentPosition]);
 
   const enqueueTracksAfterCurrent = useCallback(
     async (newTracks: Array<TrackWithMetadata>) => {
@@ -122,6 +117,28 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     await updateCurrentPosition();
   }, [settingContext, updateCurrentPosition]);
 
+  const updatePlaybackRateByCycling = useCallback(async () => {
+    // Match against string instead of number to avoid float comparisons
+    const currentIndex = TrackPlayerPlaybackRates.findIndex(
+      ([val]) => val === playbackRateSetting,
+    );
+
+    let newRate =
+      TrackPlayerPlaybackRates[
+        (currentIndex + 1) % TrackPlayerPlaybackRates.length
+      ]?.[0];
+
+    // Dont throw error, fallback to default for users to still use
+    if (newRate === undefined) {
+      console.error("Unable to cycle playback rate, defaulting to 1");
+      newRate = "1";
+    }
+
+    await RNTPTrackPlayer.setRate(TrackPlayerPlaybackRateMap.get(newRate)!);
+
+    settingContext.updateSetting("playbackRate", newRate);
+  }, [settingContext, playbackRateSetting]);
+
   useTrackPlayerEvents(
     [
       Event.RemotePlay,
@@ -157,6 +174,8 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
         enqueueTracksAfterCurrent,
         goToPreviousOrStartOfTrack,
         goToNextTrack: () => RNTPTrackPlayer.skipToNext(),
+        playbackRate,
+        updatePlaybackRateByCycling,
 
         /* Queue related */
         currentPosition,
