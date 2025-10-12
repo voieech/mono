@@ -82,6 +82,9 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     });
   }, [playbackRate, updateCurrentPosition]);
 
+  // eslint-disable-next-line no-restricted-properties
+  const pause = useCallback(() => RNTPTrackPlayer.pause(), []);
+
   const enqueueTracksAfterCurrent = useCallback(
     async (newTracks: Array<TrackWithMetadata>) => {
       const currentTracksSet = new Set(tracks.map((track) => track.id));
@@ -143,26 +146,100 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
 
   useTrackPlayerEvents(
     [
-      Event.RemotePlay,
       Event.PlaybackActiveTrackChanged,
       Event.PlaybackQueueEnded,
+      Event.RemotePlay,
+      Event.RemotePause,
+      Event.RemoteStop,
+      Event.RemoteNext,
+      Event.RemotePrevious,
+      Event.RemoteJumpForward,
+      Event.RemoteJumpBackward,
+      Event.RemoteSeek,
+      Event.PlaybackError,
     ],
-    (e) => {
-      switch (e.type) {
-        case Event.RemotePlay:
-          play();
-          break;
+    async (e) => {
+      if (__DEV__) {
+        console.log(`RNTPTrackPlayer event fired: ${e.type}`);
+      }
 
+      switch (e.type) {
         case Event.PlaybackActiveTrackChanged:
-          updateCurrentPosition();
+          {
+            await updateCurrentPosition();
+          }
           break;
 
         case Event.PlaybackQueueEnded:
-          updateCurrentPosition();
+          {
+          }
           break;
 
+        /* Remote Control events */
+
+        case Event.RemotePlay:
+          {
+            await play();
+          }
+          break;
+
+        case Event.RemotePause:
+          {
+            await pause();
+          }
+          break;
+
+        case Event.RemoteStop:
+          {
+            await RNTPTrackPlayer.stop();
+          }
+          break;
+
+        case Event.RemoteNext:
+          {
+            await goToNextTrack();
+          }
+          break;
+
+        case Event.RemotePrevious:
+          {
+            await goToPreviousOrStartOfTrack();
+          }
+          break;
+
+        case Event.RemoteJumpForward:
+          {
+            await RNTPTrackPlayer.seekBy(e.interval);
+          }
+          break;
+
+        case Event.RemoteJumpBackward:
+          {
+            const progress = await RNTPTrackPlayer.getProgress();
+            if (progress.position < e.interval) {
+              await RNTPTrackPlayer.seekTo(0);
+            } else {
+              await RNTPTrackPlayer.seekBy(-e.interval);
+            }
+          }
+          break;
+
+        case Event.RemoteSeek:
+          {
+            await RNTPTrackPlayer.seekTo(e.position);
+          }
+          break;
+
+        // @todo
+        // Log these errors and in dev mode / intern user mode,
+        // show snackbar about error
+        //
+        // case Event.PlayerError:
+        // case Event.PlaybackError:
+        //   break;
+
         default:
-          console.log("Unsupported event type!");
+          console.error(`Unsupported event type: ${e.type}`);
       }
     },
   );
@@ -171,8 +248,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     <TrackPlayerContext
       value={{
         play,
-        // eslint-disable-next-line no-restricted-properties
-        pause: RNTPTrackPlayer.pause,
+        pause,
         enqueueTracksAfterCurrent,
         goToNextTrack,
         goToPreviousOrStartOfTrack,
