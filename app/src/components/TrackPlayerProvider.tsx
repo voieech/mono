@@ -97,6 +97,8 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     [tracks, updateCurrentPosition, updateTracks],
   );
 
+  const goToNextTrack = useCallback(() => RNTPTrackPlayer.skipToNext(), []);
+
   const goToPreviousOrStartOfTrack = useCallback(async () => {
     const shouldRewindToStartOnSkipPrevious = settingContext.getSetting(
       "rewindToStartOnSkipPrevious",
@@ -172,8 +174,8 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
         // eslint-disable-next-line no-restricted-properties
         pause: RNTPTrackPlayer.pause,
         enqueueTracksAfterCurrent,
+        goToNextTrack,
         goToPreviousOrStartOfTrack,
-        goToNextTrack: () => RNTPTrackPlayer.skipToNext(),
         playbackRate,
         updatePlaybackRateByCycling,
 

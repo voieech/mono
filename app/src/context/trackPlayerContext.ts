@@ -22,14 +22,14 @@ export const TrackPlayerContext = createContext<{
     tracks: Array<TrackWithMetadata>,
   ) => Promise<void>;
   /**
+   * This will either go to the next track and start playing.
+   */
+  goToNextTrack: () => Promise<void>;
+  /**
    * This will either go to start of track or to the previous track and start
    * playing, see `rewindToStartOnSkipPrevious` setting.
    */
   goToPreviousOrStartOfTrack: () => Promise<void>;
-  /**
-   * This will either go to the next track and start playing.
-   */
-  goToNextTrack: () => Promise<void>;
   /**
    * Playback rate of the current track. This rate is persisted across use in
    * settings.
