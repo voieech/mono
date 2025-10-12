@@ -1,14 +1,12 @@
 import type { PropsWithChildren } from "react";
 
 import { useState, useCallback } from "react";
-import RNTPTrackPlayer, {
-  useTrackPlayerEvents,
-  Event,
-} from "react-native-track-player";
+import RNTPTrackPlayer, { Event } from "react-native-track-player";
 
 import type { TrackWithMetadata } from "@/utils";
 
 import { TrackPlayerContext, useSettingContext } from "@/context";
+import { useTrackPlayerEventHandler } from "@/TrackPlayer";
 import {
   TrackPlayerPlaybackRates,
   TrackPlayerPlaybackRateMap,
@@ -144,105 +142,46 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     settingContext.updateSetting("playbackRate", newRate);
   }, [settingContext, playbackRateSetting]);
 
-  useTrackPlayerEvents(
-    [
-      Event.PlaybackActiveTrackChanged,
-      Event.PlaybackQueueEnded,
-      Event.RemotePlay,
-      Event.RemotePause,
-      Event.RemoteStop,
-      Event.RemoteNext,
-      Event.RemotePrevious,
-      Event.RemoteJumpForward,
-      Event.RemoteJumpBackward,
-      Event.RemoteSeek,
-      Event.PlaybackError,
-    ],
-    async (e) => {
-      if (__DEV__) {
-        console.log(`RNTPTrackPlayer event fired: ${e.type}`);
-      }
+  useTrackPlayerEventHandler(Event.PlaybackActiveTrackChanged, async () => {
+    await updateCurrentPosition();
+  });
 
-      switch (e.type) {
-        case Event.PlaybackActiveTrackChanged:
-          {
-            await updateCurrentPosition();
-          }
-          break;
+  useTrackPlayerEventHandler(Event.RemotePlay, async () => {
+    await play();
+  });
 
-        case Event.PlaybackQueueEnded:
-          {
-          }
-          break;
+  useTrackPlayerEventHandler(Event.RemotePause, async () => {
+    await pause();
+  });
 
-        /* Remote Control events */
+  useTrackPlayerEventHandler(Event.RemoteStop, async () => {
+    await RNTPTrackPlayer.stop();
+  });
 
-        case Event.RemotePlay:
-          {
-            await play();
-          }
-          break;
+  useTrackPlayerEventHandler(Event.RemoteNext, async () => {
+    await goToNextTrack();
+  });
 
-        case Event.RemotePause:
-          {
-            await pause();
-          }
-          break;
+  useTrackPlayerEventHandler(Event.RemotePrevious, async () => {
+    await goToPreviousOrStartOfTrack();
+  });
 
-        case Event.RemoteStop:
-          {
-            await RNTPTrackPlayer.stop();
-          }
-          break;
+  useTrackPlayerEventHandler(Event.RemoteJumpForward, async (e) => {
+    await RNTPTrackPlayer.seekBy(e.interval);
+  });
 
-        case Event.RemoteNext:
-          {
-            await goToNextTrack();
-          }
-          break;
+  useTrackPlayerEventHandler(Event.RemoteJumpBackward, async (e) => {
+    const progress = await RNTPTrackPlayer.getProgress();
+    if (progress.position < e.interval) {
+      await RNTPTrackPlayer.seekTo(0);
+    } else {
+      await RNTPTrackPlayer.seekBy(-e.interval);
+    }
+  });
 
-        case Event.RemotePrevious:
-          {
-            await goToPreviousOrStartOfTrack();
-          }
-          break;
-
-        case Event.RemoteJumpForward:
-          {
-            await RNTPTrackPlayer.seekBy(e.interval);
-          }
-          break;
-
-        case Event.RemoteJumpBackward:
-          {
-            const progress = await RNTPTrackPlayer.getProgress();
-            if (progress.position < e.interval) {
-              await RNTPTrackPlayer.seekTo(0);
-            } else {
-              await RNTPTrackPlayer.seekBy(-e.interval);
-            }
-          }
-          break;
-
-        case Event.RemoteSeek:
-          {
-            await RNTPTrackPlayer.seekTo(e.position);
-          }
-          break;
-
-        // @todo
-        // Log these errors and in dev mode / intern user mode,
-        // show snackbar about error
-        //
-        // case Event.PlayerError:
-        // case Event.PlaybackError:
-        //   break;
-
-        default:
-          console.error(`Unsupported event type: ${e.type}`);
-      }
-    },
-  );
+  useTrackPlayerEventHandler(Event.RemoteSeek, async (e) => {
+    await RNTPTrackPlayer.seekTo(e.position);
+  });
 
   return (
     <TrackPlayerContext

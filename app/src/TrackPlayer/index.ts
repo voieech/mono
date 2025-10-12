@@ -4,3 +4,4 @@
 
 export * from "./useProgress";
 export * from "./useRepeatMode";
+export * from "./useTrackPlayerEventHandler";
