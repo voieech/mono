@@ -1,58 +1,39 @@
-import { useCallback, useEffect, useState } from "react";
 import { Pressable } from "react-native";
-import TrackPlayer, {
-  RepeatMode as PlayerRepeatMode,
-} from "react-native-track-player";
+import { RepeatMode } from "react-native-track-player";
 
 import { Icon } from "@/components/provided";
+import { useRepeatMode } from "@/TrackPlayer";
 
 export function RepeatIcon() {
-  const [repeatMode, setRepeatModeState] = useState<PlayerRepeatMode>(
-    PlayerRepeatMode.Off,
-  );
-  const [isPressDisabled, setIsPressDisabled] = useState(false);
-
-  useEffect(() => {
-    TrackPlayer.getRepeatMode().then(setRepeatModeState);
-  }, []);
-
-  const setRepeatMode = useCallback(
-    async function (repeatMode: PlayerRepeatMode) {
-      setIsPressDisabled(true);
-      TrackPlayer.setRepeatMode(repeatMode).then(() => {
-        setRepeatModeState(repeatMode);
-        setIsPressDisabled(false);
-      });
-    },
-    [setIsPressDisabled, setRepeatModeState],
-  );
-
-  switch (repeatMode) {
-    case PlayerRepeatMode.Off: {
+  const repeatMode = useRepeatMode();
+  switch (repeatMode.repeatMode) {
+    case null:
+      return null;
+    case RepeatMode.Off: {
       return (
         <Pressable
-          onPress={() => setRepeatMode(PlayerRepeatMode.Queue)}
-          disabled={isPressDisabled}
+          onPress={() => repeatMode.setRepeatMode(RepeatMode.Queue)}
+          disabled={repeatMode.isRepeatModeUpdating}
         >
           <Icon name="repeat" color="white" size={32} />
         </Pressable>
       );
     }
-    case PlayerRepeatMode.Queue: {
+    case RepeatMode.Queue: {
       return (
         <Pressable
-          onPress={() => setRepeatMode(PlayerRepeatMode.Track)}
-          disabled={isPressDisabled}
+          onPress={() => repeatMode.setRepeatMode(RepeatMode.Track)}
+          disabled={repeatMode.isRepeatModeUpdating}
         >
           <Icon name="repeat" color="#16a34a" size={32} />
         </Pressable>
       );
     }
-    case PlayerRepeatMode.Track: {
+    case RepeatMode.Track: {
       return (
         <Pressable
-          onPress={() => setRepeatMode(PlayerRepeatMode.Off)}
-          disabled={isPressDisabled}
+          onPress={() => repeatMode.setRepeatMode(RepeatMode.Off)}
+          disabled={repeatMode.isRepeatModeUpdating}
         >
           <Icon name="repeat.1" color="#16a34a" size={32} />
         </Pressable>

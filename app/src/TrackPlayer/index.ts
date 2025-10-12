@@ -3,3 +3,4 @@
  */
 
 export * from "./useProgress";
+export * from "./useRepeatMode";
