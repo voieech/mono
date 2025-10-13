@@ -17,7 +17,7 @@ import { urlBuilders } from "../util/urlBuilders.js";
 export function generateRssXml(
   channel: Channel,
   episodes: Array<
-    Episode & {
+    Omit<Episode, "channel_name"> & {
       audio_mime_type: string;
       audio_size: number;
     }

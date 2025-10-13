@@ -70,10 +70,7 @@ export default function PodcastEpisode() {
           trackType: "podcast_episode",
           id: episode.id,
           episode,
-
-          // Artist is always voieech for pre-generated podcasts, will be
-          // different if it is user generated content in the future.
-          artist: "voieech.com",
+          artist: episode.channel_name,
           url: episode.audio_public_url,
           title: episode.title,
           duration: episode.audio_length,
@@ -96,10 +93,7 @@ export default function PodcastEpisode() {
             trackType: "podcast_episode",
             id: episode.id,
             episode,
-
-            // Artist is always voieech for pre-generated podcasts, will be
-            // different if it is user generated content in the future.
-            artist: "voieech.com",
+            artist: episode.channel_name,
             url: episode.audio_public_url,
             title: episode.title,
             duration: episode.audio_length,

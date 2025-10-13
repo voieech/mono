@@ -11,4 +11,5 @@ export type Episode = {
   description: string;
   img_url: string;
   channel_id: string;
+  channel_name: string;
 };
