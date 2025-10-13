@@ -4,8 +4,6 @@ import RNTPTrackPlayer, {
   AppKilledPlaybackBehavior,
 } from "react-native-track-player";
 
-import { capabilitiesWithJump } from "@/utils/ReactNativeTrackPlayerCapabilitiesOptions";
-
 export async function setupReactNativeTrackPlayer() {
   RNTPTrackPlayer.registerPlaybackService(
     () =>
@@ -20,9 +18,6 @@ export async function setupReactNativeTrackPlayer() {
   });
 
   RNTPTrackPlayer.updateOptions({
-    // @todo Read past settings instead of always setting to default value
-    capabilities: capabilitiesWithJump,
-
     // Android only: Capabilities shown when notification is in compact form
     compactCapabilities: [Capability.Play, Capability.Pause],
 

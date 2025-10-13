@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import RNTPTrackPlayer, { Event } from "react-native-track-player";
 
 import type { TrackWithMetadata } from "@/utils";
@@ -8,6 +8,8 @@ import type { TrackWithMetadata } from "@/utils";
 import { TrackPlayerContext, useSettingContext } from "@/context";
 import { useTrackPlayerEventHandler } from "@/TrackPlayer";
 import {
+  capabilitiesWithJump,
+  capabilitiesWithSkip,
   TrackPlayerPlaybackRates,
   TrackPlayerPlaybackRateMap,
   posthog,
@@ -182,6 +184,27 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
   useTrackPlayerEventHandler(Event.RemoteSeek, async (e) => {
     await RNTPTrackPlayer.seekTo(e.position);
   });
+
+  // Setup external media control capabilities based on settings value
+  useEffect(() => {
+    let capabilities = capabilitiesWithSkip;
+    const externalMediaControls = settingContext.getSetting(
+      "externalMediaControls",
+    );
+    switch (externalMediaControls) {
+      case "jump-time":
+        capabilities = capabilitiesWithJump;
+        break;
+      case "skip-track":
+        capabilities = capabilitiesWithSkip;
+        break;
+      default:
+        throw new Error(
+          `Invalid "externalMediaControls" settings found: ${externalMediaControls}`,
+        );
+    }
+    RNTPTrackPlayer.updateOptions({ capabilities });
+  }, [settingContext]);
 
   return (
     <TrackPlayerContext
