@@ -34,11 +34,7 @@ export default function TrackQueueModal() {
           flex: 1,
         }}
       >
-        <ThemedView
-          style={{
-            flex: 1,
-          }}
-        >
+        <ThemedView>
           <ThemedView
             style={{
               flexDirection: "row",
