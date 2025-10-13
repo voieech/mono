@@ -98,7 +98,7 @@ export default function TrackQueueModal() {
             >
               <Pressable
                 onPress={() => {
-                  // @todo
+                  trackPlayer.goToTrack(track.id);
                 }}
               >
                 <ThemedView

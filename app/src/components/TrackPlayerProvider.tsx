@@ -100,6 +100,24 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     [tracks, updateCurrentPosition, updateTracks],
   );
 
+  const goToTrack = useCallback(
+    async (trackID: string) => {
+      const newTrackPosition = tracks.findIndex(
+        (track) => track.id === trackID,
+      );
+
+      // Do nothing if somehow the track id is invalid / no track in current
+      // queue have that track id.
+      if (newTrackPosition === -1) {
+        return;
+      }
+
+      await RNTPTrackPlayer.skip(newTrackPosition);
+      await updateCurrentPosition();
+    },
+    [tracks, updateCurrentPosition],
+  );
+
   const goToNextTrack = useCallback(() => RNTPTrackPlayer.skipToNext(), []);
 
   const goToPreviousOrStartOfTrack = useCallback(async () => {
@@ -212,6 +230,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
         play,
         pause,
         enqueueTracksAfterCurrent,
+        goToTrack,
         goToNextTrack,
         goToPreviousOrStartOfTrack,
         playbackRate,

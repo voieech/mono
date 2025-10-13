@@ -22,6 +22,10 @@ export const TrackPlayerContext = createContext<{
     tracks: Array<TrackWithMetadata>,
   ) => Promise<void>;
   /**
+   * Go to a specific track and start playing.
+   */
+  goToTrack: (trackID: string) => Promise<void>;
+  /**
    * This will either go to the next track and start playing.
    */
   goToNextTrack: () => Promise<void>;
