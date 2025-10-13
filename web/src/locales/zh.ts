@@ -7,7 +7,6 @@ export default {
     EpisodeNumber: "第{episodeNumber}集",
     mins: "分钟",
     PodcastPlatforms: "播客平台",
-    ExternalPodcastPlatforms: "其他播客平台",
     Featured: "精选",
     Episodes: "剧集",
   },

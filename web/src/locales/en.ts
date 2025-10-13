@@ -7,7 +7,6 @@ export default {
     EpisodeNumber: "Episode {episodeNumber}",
     mins: "mins",
     PodcastPlatforms: "Podcast Platforms",
-    ExternalPodcastPlatforms: "External Podcast Platforms",
     Featured: "Featured",
     Episodes: "Episodes",
   },

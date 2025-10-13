@@ -17,7 +17,7 @@ import { urlBuilders } from "../util/urlBuilders.js";
 export function generateRssXml(
   channel: Channel,
   episodes: Array<
-    Omit<Episode, "externally_hosted_links"> & {
+    Episode & {
       audio_mime_type: string;
       audio_size: number;
     }

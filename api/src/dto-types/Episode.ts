@@ -1,5 +1,3 @@
-import type { PodcastPlatform } from "./PodcastPlatform.js";
-
 export type Episode = {
   id: string;
   created_at: string;
@@ -13,8 +11,4 @@ export type Episode = {
   description: string;
   img_url: string;
   channel_id: string;
-  externally_hosted_links: Array<{
-    podcast_platform: PodcastPlatform;
-    url: string;
-  }>;
 };

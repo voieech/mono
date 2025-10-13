@@ -4,7 +4,6 @@ import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 
-import ExternallyHostedPlatformCard from "@/components/ExternallyHostedPlatformCard.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { usePodcastEpisode } from "@/composables/usePodcastEpisode";
@@ -152,14 +151,6 @@ useHead({
         <WebPlayer
           class="pb-4"
           :url="podcastEpisodeQuery.data.value.audio_public_url"
-        />
-
-        <ExternallyHostedPlatformCard
-          class="pb-4"
-          v-for="platform in podcastEpisodeQuery.data.value
-            .externally_hosted_links"
-          :key="platform.podcast_platform"
-          :platform="platform"
         />
       </div>
     </div>
