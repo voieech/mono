@@ -1,7 +1,10 @@
 import type { PropsWithChildren } from "react";
 
 import { useState, useCallback, useEffect } from "react";
-import RNTPTrackPlayer, { Event } from "react-native-track-player";
+import RNTPTrackPlayer, {
+  Event,
+  State as PlaybackState,
+} from "react-native-track-player";
 
 import type { TrackWithMetadata } from "@/utils";
 
@@ -82,6 +85,14 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     });
   }, [playbackRate, updateCurrentPosition]);
 
+  // Wrapper around `play` to only run if not already playing
+  const playIfNotPlaying = useCallback(async () => {
+    const { state } = await RNTPTrackPlayer.getPlaybackState();
+    if (state !== PlaybackState.Playing) {
+      await play();
+    }
+  }, [play]);
+
   // eslint-disable-next-line no-restricted-properties
   const pause = useCallback(() => RNTPTrackPlayer.pause(), []);
 
@@ -114,11 +125,15 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
 
       await RNTPTrackPlayer.skip(newTrackPosition);
       await updateCurrentPosition();
+      await playIfNotPlaying();
     },
-    [tracks, updateCurrentPosition],
+    [tracks, updateCurrentPosition, playIfNotPlaying],
   );
 
-  const goToNextTrack = useCallback(() => RNTPTrackPlayer.skipToNext(), []);
+  const goToNextTrack = useCallback(async () => {
+    await RNTPTrackPlayer.skipToNext();
+    await playIfNotPlaying();
+  }, [playIfNotPlaying]);
 
   const goToPreviousOrStartOfTrack = useCallback(async () => {
     const shouldRewindToStartOnSkipPrevious = settingContext.getSetting(
@@ -138,7 +153,8 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     }
 
     await updateCurrentPosition();
-  }, [settingContext, updateCurrentPosition]);
+    await playIfNotPlaying();
+  }, [settingContext, updateCurrentPosition, playIfNotPlaying]);
 
   const updatePlaybackRateByCycling = useCallback(async () => {
     // Match against string instead of number to avoid float comparisons
