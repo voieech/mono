@@ -68,7 +68,12 @@ export function bootstrapHttpServer() {
       }
 
       const featuredEpisodes = await genPodcastEpisodeBaseQuery()
-        .groupBy(["podcast_episode.id", "audio.public_url", "audio.length"])
+        .groupBy([
+          "podcast_episode.id",
+          "audio.public_url",
+          "audio.length",
+          "podcast_channel.name",
+        ])
         .where("podcast_episode.language", "like", `${req.locale}%`)
         // @todo Ordery by popularity
         .orderBy("podcast_episode.created_at", "desc")
@@ -183,7 +188,12 @@ export function bootstrapHttpServer() {
       }
 
       const episodes = await genPodcastEpisodeBaseQuery()
-        .groupBy(["podcast_episode.id", "audio.public_url", "audio.length"])
+        .groupBy([
+          "podcast_episode.id",
+          "audio.public_url",
+          "audio.length",
+          "podcast_channel.name",
+        ])
         .where("podcast_episode.channel_id", "=", channelID)
         .orderBy("podcast_episode.created_at", "desc")
         .limit(20)
