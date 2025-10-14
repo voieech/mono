@@ -19,9 +19,13 @@ msgstr ""
 "X-Crowdin-File-ID: 34\n"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:149
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:148
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:184
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
+
+#: src/app/track-queue-modal.tsx:62
+msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
+msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
 #: src/app/(tabs)/settings.tsx:61
 msgid "Audio Playback"
@@ -83,9 +87,13 @@ msgstr "主页"
 msgid "Made by {activeTrackArtist}"
 msgstr "由{activeTrackArtist}制作"
 
+#: src/app/track-queue-modal.tsx:83
+msgid "Nothing left in Queue!"
+msgstr "播放列表已空！"
+
 #: src/app/+not-found.tsx:33
 msgid "Oops Sorry!"
-msgstr ""
+msgstr "哎呀，抱歉！"
 
 #: src/app/(tabs)/(home)/_layout.tsx:28
 msgid "Podcast Channel"
@@ -95,16 +103,19 @@ msgstr "播客频道"
 msgid "Podcast Episode"
 msgstr "播客剧集"
 
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:230
+msgid "Reccomended Episodes"
+msgstr "推荐剧集"
+
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
 msgstr "跳到上一个剧集时，先跳到剧集开头"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:142
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:178
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 
-#: src/app/(tabs)/_layout.tsx:120
-#: src/app/(tabs)/settings.tsx:57
+#: src/app/(tabs)/_layout.tsx:120 src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "设置"
 

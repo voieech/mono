@@ -14,9 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:149
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:148
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:184
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
+
+#: src/app/track-queue-modal.tsx:62
+msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
+msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 
 #: src/app/(tabs)/settings.tsx:61
 msgid "Audio Playback"
@@ -78,6 +82,10 @@ msgstr "Home"
 msgid "Made by {activeTrackArtist}"
 msgstr "Made by {activeTrackArtist}"
 
+#: src/app/track-queue-modal.tsx:83
+msgid "Nothing left in Queue!"
+msgstr "Nothing left in Queue!"
+
 #: src/app/+not-found.tsx:33
 msgid "Oops Sorry!"
 msgstr "Oops Sorry!"
@@ -90,11 +98,15 @@ msgstr "Podcast Channel"
 msgid "Podcast Episode"
 msgstr "Podcast Episode"
 
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:230
+msgid "Reccomended Episodes"
+msgstr "Reccomended Episodes"
+
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
 msgstr "Rewind to track start when skipping to previous"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:142
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:178
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 
