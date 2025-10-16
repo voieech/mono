@@ -1,4 +1,5 @@
 import RNTPTrackPlayer, {
+  RepeatMode,
   IOSCategory,
   Capability,
   AppKilledPlaybackBehavior,
@@ -8,6 +9,9 @@ export async function setupReactNativeTrackPlayer() {
   RNTPTrackPlayer.registerPlaybackService(
     () =>
       async function playbackService() {
+        // By default, repeat mode should repeat entire queue
+        RNTPTrackPlayer.setRepeatMode(RepeatMode.Queue);
+
         console.log("RNTP PlaybackService registered");
       },
   );
