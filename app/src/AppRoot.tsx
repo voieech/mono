@@ -16,6 +16,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootSiblingParent } from "react-native-root-siblings";
 
 import {
+  AppUpdater,
   AppDebuggingSurfaceProvider,
   ExperimentalSurfaceProvider,
   SettingsProvider,
@@ -50,47 +51,49 @@ export function AppRoot(props: PropsWithChildren) {
   }
 
   return (
-    <I18nProvider i18n={i18n}>
-      <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
-        <QueryClientProvider client={queryClient}>
-          {/*
-            PostHogProvider adds a new build warning:
-            Using outdated JSX transform https://react.dev/link/new-jsx-transform
-          */}
-          <PostHogProvider
-            client={posthog}
-            autocapture={{
-              captureScreens: true,
-              captureTouches: true,
+    <AppUpdater>
+      <I18nProvider i18n={i18n}>
+        <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
+          <QueryClientProvider client={queryClient}>
+            {/*
+              PostHogProvider adds a new build warning:
+              Using outdated JSX transform https://react.dev/link/new-jsx-transform
+            */}
+            <PostHogProvider
+              client={posthog}
+              autocapture={{
+                captureScreens: true,
+                captureTouches: true,
 
-              // Add this if not in navigation container
-              // https://github.com/PostHog/posthog-js-lite/pull/455
-              // import { createNavigationContainerRef } from "@react-navigation/native";
-              // const navigationRef = createNavigationContainerRef();
-              // navigationRef,
-            }}
-          >
-            <GestureHandlerRootView
-              style={{
-                flex: 1,
+                // Add this if not in navigation container
+                // https://github.com/PostHog/posthog-js-lite/pull/455
+                // import { createNavigationContainerRef } from "@react-navigation/native";
+                // const navigationRef = createNavigationContainerRef();
+                // navigationRef,
               }}
             >
-              <RootSiblingParent>
-                <AppDebuggingSurfaceProvider>
-                  <ExperimentalSurfaceProvider>
-                    <SettingsProvider>
-                      <TrackPlayerProvider>
-                        <StatusBar style="auto" />
-                        {props.children}
-                      </TrackPlayerProvider>
-                    </SettingsProvider>
-                  </ExperimentalSurfaceProvider>
-                </AppDebuggingSurfaceProvider>
-              </RootSiblingParent>
-            </GestureHandlerRootView>
-          </PostHogProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </I18nProvider>
+              <GestureHandlerRootView
+                style={{
+                  flex: 1,
+                }}
+              >
+                <RootSiblingParent>
+                  <AppDebuggingSurfaceProvider>
+                    <ExperimentalSurfaceProvider>
+                      <SettingsProvider>
+                        <TrackPlayerProvider>
+                          <StatusBar style="auto" />
+                          {props.children}
+                        </TrackPlayerProvider>
+                      </SettingsProvider>
+                    </ExperimentalSurfaceProvider>
+                  </AppDebuggingSurfaceProvider>
+                </RootSiblingParent>
+              </GestureHandlerRootView>
+            </PostHogProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </I18nProvider>
+    </AppUpdater>
   );
 }

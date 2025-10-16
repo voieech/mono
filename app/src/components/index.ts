@@ -3,6 +3,7 @@
  */
 
 export * from "./AppDebuggingSurface";
+export * from "./AppUpdater";
 export * from "./AudioPlayer";
 export * from "./BottomOverlayAudioPlayer";
 export * from "./CopyOnPress";
