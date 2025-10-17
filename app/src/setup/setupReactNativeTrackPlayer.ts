@@ -8,10 +8,7 @@ import RNTPTrackPlayer, {
 export async function setupReactNativeTrackPlayer() {
   RNTPTrackPlayer.registerPlaybackService(
     () =>
-      async function playbackService() {
-        // By default, repeat mode should repeat entire queue
-        RNTPTrackPlayer.setRepeatMode(RepeatMode.Queue);
-
+      async function () {
         console.log("RNTP PlaybackService registered");
       },
   );
@@ -21,7 +18,7 @@ export async function setupReactNativeTrackPlayer() {
     iosCategory: IOSCategory.Playback,
   });
 
-  RNTPTrackPlayer.updateOptions({
+  await RNTPTrackPlayer.updateOptions({
     // Android only: Capabilities shown when notification is in compact form
     compactCapabilities: [Capability.Play, Capability.Pause],
 
@@ -29,4 +26,7 @@ export async function setupReactNativeTrackPlayer() {
       appKilledPlaybackBehavior: AppKilledPlaybackBehavior.PausePlayback,
     },
   });
+
+  // By default, repeat mode should repeat entire queue
+  await RNTPTrackPlayer.setRepeatMode(RepeatMode.Queue);
 }
