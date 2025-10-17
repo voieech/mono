@@ -3,6 +3,7 @@ import RNTPTrackPlayer, {
   IOSCategory,
   Capability,
   AppKilledPlaybackBehavior,
+  AndroidAudioContentType,
 } from "react-native-track-player";
 
 export async function setupReactNativeTrackPlayer() {
@@ -13,9 +14,9 @@ export async function setupReactNativeTrackPlayer() {
       },
   );
 
-  // @todo see all the options here
   await RNTPTrackPlayer.setupPlayer({
     iosCategory: IOSCategory.Playback,
+    androidAudioContentType: AndroidAudioContentType.Speech,
   });
 
   await RNTPTrackPlayer.updateOptions({
