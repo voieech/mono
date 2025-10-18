@@ -1,0 +1,48 @@
+name: iOS deploy to production
+
+on:
+  push:
+    branches: ["prod-ios"]
+
+jobs:
+  # Get the project's native build hash (fingerprint) using Expo Fingerprint
+  get_fingerprint:
+    name: Get Fingerprint
+    type: fingerprint
+
+  # Checks if a native build already exists for the given fingerprint
+  check_for_existing_ios_build:
+    name: Check for existing native iOS build
+    needs: [get_fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.get_fingerprint.outputs.ios_fingerprint_hash }}
+      profile: production
+
+  # If a native build exists, send changes with over-the-air update
+  publish_ios_ota_update:
+    name: Publish iOS OTA update
+    needs: [check_for_existing_ios_build]
+    if: ${{ needs.check_for_existing_ios_build.outputs.build_id }}
+    type: update
+    params:
+      branch: production
+      platform: ios
+
+  # If a native build does not exist, create new native build
+  create_ios_build:
+    name: Create new native iOS build
+    needs: [check_for_existing_ios_build]
+    if: ${{ !needs.check_for_existing_ios_build.outputs.build_id }}
+    type: build
+    params:
+      platform: ios
+      profile: production
+
+  # Submit new native build to app store
+  submit_ios_build:
+    name: Submit new native iOS build to Apple App Store
+    needs: [create_ios_build]
+    type: submit
+    params:
+      build_id: ${{ needs.create_ios_build.outputs.build_id }}
