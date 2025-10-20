@@ -19,7 +19,9 @@
     "reverse-proxy": "npx ngrok http 3000"
   },
   "dependencies": {
+    "@workos-inc/node": "^7.71.0",
     "convert-unknown-catch-to-error": "^1.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "datetime-ts": "^1.0.0",
     "dotenv": "^16.5.0",
@@ -30,6 +32,7 @@
     "safety-number-one": "^1.0.2"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",
     "@types/pg": "^8.15.2",

@@ -1,10 +1,12 @@
 import type { Episode, Channel } from "dto";
 
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 
 import { apiDB, genPodcastEpisodeBaseQuery } from "../kysely/index.js";
 import { generateRssXml } from "../rss/index.js";
+import { authRoutes } from "./auth/index.js";
 import { localeMiddleware } from "./locale/index.js";
 
 export function bootstrapHttpServer() {
@@ -14,6 +16,10 @@ export function bootstrapHttpServer() {
     .use(cors())
 
     .use(localeMiddleware)
+
+    .use(cookieParser())
+
+    .use(authRoutes)
 
     .get("/", (_, res) => {
       res.status(200).end("ok");
