@@ -7,31 +7,19 @@ import type { TrackWithMetadata } from "@/utils";
 import { Icon } from "@/components/provided";
 import { posthog } from "@/utils";
 
-export function ShareCurrentTrackIcon(props: {
-  activeTrack: TrackWithMetadata;
-}) {
+export function ShareTrackIcon(props: { track: TrackWithMetadata }) {
   async function onShare() {
     try {
       const result = await Share.share(
-        generateShareSheetObjectForTrack(props.activeTrack),
+        generateShareSheetObjectForTrack(props.track),
       );
 
-      posthog.capture("share_current_track", {
+      posthog.capture("share_track", {
         // Cast to any is safe since it is a JSON stringifiable type.
-        track: props.activeTrack as any,
+        track: props.track as any,
         shareAction: result.action,
         shareActivityType: result.activityType ?? null,
       });
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
     } catch (_: any) {
       // @todo Log to app monitoring
     }

@@ -15,6 +15,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { useTrackPlayer } from "@/context";
 import { useActiveTrackWithMetadata } from "@/hooks";
 
+import { ShareTrackIcon } from "../ShareTrackIcon";
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
 import {
   AudioPlayerJumpBackwardButton,
@@ -30,7 +31,6 @@ import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
 import { PlaybackRateButton } from "./PlaybackRateButton";
 import { RepeatIcon } from "./RepeatIcon";
-import { ShareCurrentTrackIcon } from "./ShareCurrentTrackIcon";
 
 export function AudioPlayer() {
   const router = useRouter();
@@ -177,7 +177,7 @@ export function AudioPlayer() {
               }}
             />
           </Pressable>
-          <ShareCurrentTrackIcon activeTrack={activeTrack} />
+          <ShareTrackIcon track={activeTrack} />
         </ThemedView>
       </ThemedView>
 
