@@ -16,6 +16,7 @@ import {
   ThemedText,
   CircularPlayButton,
   CircularPauseButton,
+  ShareTrackIcon,
 } from "@/components";
 import { useTrackPlayer } from "@/context";
 import { NotFoundError } from "@/errors";
@@ -182,25 +183,49 @@ export default function PodcastEpisode() {
           {"\n"}
           <Trans>{episodeLengthInMins} mins</Trans>
         </ThemedText>
-        {/*
-          Even if player is not paused, i.e. it is loading or whatever show the
-          play symbol to prevent fast flashing when changing from loading (or
-          any other) state to paused state.
-        */}
-        {isCurrentEpisodeTheActiveTrack &&
-        playerState === PlayerState.Playing ? (
-          <CircularPauseButton
-            onPress={trackPlayer.pause}
-            innerIconSize={24}
-            outerBackgroundSize={8}
-          />
-        ) : (
-          <CircularPlayButton
-            onPress={playEpisode}
-            innerIconSize={24}
-            outerBackgroundSize={8}
-          />
-        )}
+        <ThemedView
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            columnGap: 24,
+          }}
+        >
+          {episode !== undefined && (
+            <ShareTrackIcon
+              track={createTrackWithMetadata({
+                trackType: "podcast_episode",
+                id: episode.id,
+                episode,
+                artist: episode.channel_name,
+                url: episode.audio_public_url,
+                title: episode.title,
+                duration: episode.audio_length,
+                artwork: episode.img_url,
+                locale: episode.language,
+              })}
+            />
+          )}
+          {/*
+            Even if player is not paused, i.e. it is loading or whatever show the
+            play symbol to prevent fast flashing when changing from loading (or
+            any other) state to paused state.
+          */}
+          {isCurrentEpisodeTheActiveTrack &&
+          playerState === PlayerState.Playing ? (
+            <CircularPauseButton
+              onPress={trackPlayer.pause}
+              innerIconSize={24}
+              outerBackgroundSize={8}
+            />
+          ) : (
+            <CircularPlayButton
+              onPress={playEpisode}
+              innerIconSize={24}
+              outerBackgroundSize={8}
+            />
+          )}
+        </ThemedView>
       </ThemedView>
       <View
         style={{
