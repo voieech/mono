@@ -121,7 +121,7 @@ useHead({
         </div>
 
         <p
-          class="text-sm leading-relaxed font-light"
+          class="text-sm leading-relaxed font-light whitespace-pre-line"
           :class="{
             'line-clamp-3 text-zinc-800': !isDescriptionExpanded,
           }"
