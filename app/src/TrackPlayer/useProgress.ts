@@ -17,7 +17,7 @@ const INITIAL_STATE = {
  * **Re-implementing hook** to write polling mechanism differently to prevent
  * potential uncontrolled recursive stack depth.
  */
-export function useProgress(updateIntervalInMs = 1000) {
+function useProgressWithLoop(updateIntervalInMs = 1000) {
   const [state, setState] = useState(INITIAL_STATE);
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], () => {
     setState(INITIAL_STATE);
@@ -53,7 +53,6 @@ export function useProgress(updateIntervalInMs = 1000) {
       }
     }
     poll();
-    console.log("after polling starts");
 
     return () => {
       mounted = false;
@@ -62,3 +61,5 @@ export function useProgress(updateIntervalInMs = 1000) {
 
   return state;
 }
+
+export const useProgress = useProgressWithLoop;
