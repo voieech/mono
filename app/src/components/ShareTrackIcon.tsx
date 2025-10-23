@@ -1,3 +1,5 @@
+import type { StyleProp, TextStyle } from "react-native";
+
 import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Share, Pressable } from "react-native";
@@ -7,7 +9,11 @@ import type { TrackWithMetadata } from "@/utils";
 import { Icon } from "@/components/provided";
 import { posthog } from "@/utils";
 
-export function ShareTrackIcon(props: { track: TrackWithMetadata }) {
+export function ShareTrackIcon(props: {
+  track: TrackWithMetadata;
+  style?: StyleProp<TextStyle>;
+  size?: number;
+}) {
   async function onShare() {
     try {
       const result = await Share.share(
@@ -30,9 +36,8 @@ export function ShareTrackIcon(props: { track: TrackWithMetadata }) {
       <Icon
         name="square.and.arrow.up"
         color="white"
-        style={{
-          marginBottom: 6,
-        }}
+        style={props.style}
+        size={props.size}
       />
     </Pressable>
   );

@@ -177,7 +177,12 @@ export function AudioPlayer() {
               }}
             />
           </Pressable>
-          <ShareTrackIcon track={activeTrack} />
+          <ShareTrackIcon
+            track={activeTrack}
+            style={{
+              marginBottom: 6,
+            }}
+          />
         </ThemedView>
       </ThemedView>
 

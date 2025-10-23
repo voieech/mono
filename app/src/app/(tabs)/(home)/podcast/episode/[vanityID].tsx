@@ -204,6 +204,7 @@ export default function PodcastEpisode() {
                 artwork: episode.img_url,
                 locale: episode.language,
               })}
+              size={36}
             />
           )}
           {/*
