@@ -159,8 +159,24 @@ export default function PodcastEpisode() {
         </ThemedView>
       }
     >
-      <ThemedText type="subtitle">{episode.title}</ThemedText>
-      {/* @todo Add link back to the channel page */}
+      <ThemedText
+        type="subtitle"
+        style={{
+          paddingBottom: 4,
+        }}
+      >
+        {episode.title}
+      </ThemedText>
+      <Link
+        href={{
+          pathname: "/podcast/channel/[channelID]",
+          params: {
+            channelID: episode.channel_id,
+          },
+        }}
+      >
+        <ThemedText>{episode.channel_name}</ThemedText>
+      </Link>
       <ThemedView
         style={{
           paddingVertical: 20,
