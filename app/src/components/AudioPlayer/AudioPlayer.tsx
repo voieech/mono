@@ -13,7 +13,7 @@ import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedView";
 import { useTrackPlayer } from "@/context";
-import { useActiveTrackWithMetadata } from "@/hooks";
+import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
 import { ShareTrackIcon } from "../ShareTrackIcon";
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";

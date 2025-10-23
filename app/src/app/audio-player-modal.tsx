@@ -18,7 +18,7 @@ import {
   AudioPlayer,
 } from "@/components";
 import { useExperimentalSurfaceContext } from "@/context";
-import { useActiveTrackWithMetadata } from "@/hooks";
+import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
 export default function AudioPlayerModal() {
   const windowDimensions = useWindowDimensions();

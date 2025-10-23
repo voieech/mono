@@ -8,7 +8,7 @@ import {
 
 import { Icon } from "@/components/provided";
 import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
-import { useActiveTrackWithMetadata } from "@/hooks";
+import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
 import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerProgessBar";
 

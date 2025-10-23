@@ -22,10 +22,10 @@ import { useTrackPlayer } from "@/context";
 import { NotFoundError } from "@/errors";
 import {
   usePodcastEpisode,
-  useActiveTrackWithMetadata,
   usePodcastEpisodeNextReccomendations,
   getPodcastEpisodeNextReccomendations,
 } from "@/hooks";
+import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 import { createTrackWithMetadata } from "@/utils";
 
 export default function PodcastEpisode() {
