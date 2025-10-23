@@ -174,6 +174,10 @@ export default function PodcastEpisode() {
             channelID: episode.channel_id,
           },
         }}
+        style={{
+          // Dont extend the clickable link surface for the whole row/line
+          alignSelf: "flex-start",
+        }}
       >
         <ThemedText>{episode.channel_name}</ThemedText>
       </Link>
