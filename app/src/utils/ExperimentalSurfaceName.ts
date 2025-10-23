@@ -7,4 +7,5 @@ export type ExperimentalSurfaceName =
   | "default"
 
   // Add your ExperimentalSurfaceName here
+  | "use-interval-for-useProgress"
   | "use-card-player-instead-of-modal";

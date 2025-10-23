@@ -4,6 +4,8 @@ import RNTPTrackPlayer, {
   useTrackPlayerEvents,
 } from "react-native-track-player";
 
+import { useExperimentalSurfaceContext } from "@/context";
+
 const INITIAL_STATE = {
   position: 0,
   duration: 0,
@@ -99,4 +101,13 @@ function useProgressWithInterval(updateIntervalInMs = 1000) {
   return state;
 }
 
-export const useProgress = useProgressWithLoop;
+// @todo Replace this by using either implementation
+export function useProgress(updateIntervalInMs = 1000) {
+  return useExperimentalSurfaceContext().getShowExperimentalSurface(
+    "use-interval-for-useProgress",
+  )
+    ? // eslint-disable-next-line react-hooks/rules-of-hooks
+      useProgressWithInterval(updateIntervalInMs)
+    : // eslint-disable-next-line react-hooks/rules-of-hooks
+      useProgressWithLoop(updateIntervalInMs);
+}
