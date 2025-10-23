@@ -1,3 +1,5 @@
+import type { GestureResponderEvent } from "react-native";
+
 import { useRouter } from "expo-router";
 import { useRef } from "react";
 import { Pressable, View, Text, useWindowDimensions } from "react-native";
@@ -24,6 +26,22 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
       "use-card-player-instead-of-modal",
     );
 
+  function onSwipeUpOpenModal(evt: GestureResponderEvent) {
+    // Disable when using card/page style UI for audio player
+    if (useCardPlayerInsteadOfModal) {
+      return;
+    }
+
+    // Small threshold since the overlay is small, so we can detect any
+    // swipe ups as a swipe up motion
+    const swipeUpPixelTriggerThreshold = 1;
+    const endY = evt.nativeEvent.pageY;
+    const swipePixelDelta = startY.current - endY;
+    if (swipePixelDelta > swipeUpPixelTriggerThreshold) {
+      router.push("/audio-player-modal");
+    }
+  }
+
   // Only if there is no active track do we disable the overlay
   if (activeTrack === undefined) {
     return null;
@@ -37,19 +55,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
       // Use these to implement open modal on swipe up
       onPressIn={(evt) => (startY.current = evt.nativeEvent.pageY)}
       onPressOut={(evt) => {
-        // Disable when using card/page style UI for audio player
-        if (useCardPlayerInsteadOfModal) {
-          return;
-        }
-
-        // Small threshold since the overlay is small, so we can detect any
-        // swipe ups as a swipe up motion
-        const swipeUpPixelTriggerThreshold = 1;
-        const endY = evt.nativeEvent.pageY;
-        const swipePixelDelta = startY.current - endY;
-        if (swipePixelDelta > swipeUpPixelTriggerThreshold) {
-          router.push("/audio-player-modal");
-        }
+        onSwipeUpOpenModal(evt);
       }}
     >
       {/*
