@@ -63,6 +63,10 @@ export const TrackPlayerContext = createContext<{
    * Removes all upcoming tracks from queue
    */
   removeUpcomingTracks: () => Promise<void>;
+  /**
+   * Removes all tracks from queue, i.e. empty it
+   */
+  removeAllTracks: () => Promise<void>;
 }>(
   // @ts-expect-error
   null,

@@ -60,6 +60,12 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     await Promise.all([updateCurrentPosition(), updateTracks()]);
   }, [updateCurrentPosition, updateTracks]);
 
+  const removeAllTracks = useCallback(async () => {
+    await RNTPTrackPlayer.reset();
+    setCurrentPosition(0);
+    setTracks([]);
+  }, []);
+
   const play = useCallback(async () => {
     // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.play();
@@ -262,6 +268,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
         updateCurrentPosition,
         updateTracks,
         removeUpcomingTracks,
+        removeAllTracks,
       }}
     >
       {props.children}
