@@ -42,6 +42,17 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
     }
   }
 
+  function onSwipeDownClearTracks(evt: GestureResponderEvent) {
+    // Small threshold since the overlay is small, so we can detect any
+    // swipe downs as a swipe down motion
+    const swipeDownPixelTriggerThreshold = 1;
+    const endY = evt.nativeEvent.pageY;
+    const swipePixelDelta = endY - startY.current;
+    if (swipePixelDelta > swipeDownPixelTriggerThreshold) {
+      trackPlayer.removeAllTracks();
+    }
+  }
+
   // Only if there is no active track do we disable the overlay
   if (activeTrack === undefined) {
     return null;
@@ -56,6 +67,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
       onPressIn={(evt) => (startY.current = evt.nativeEvent.pageY)}
       onPressOut={(evt) => {
         onSwipeUpOpenModal(evt);
+        onSwipeDownClearTracks(evt);
       }}
     >
       {/*
