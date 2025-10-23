@@ -10,6 +10,7 @@ import {
   FullScreenLoader,
   ThemedView,
   ThemedText,
+  ShareChannelIcon,
 } from "@/components";
 import { NotFoundError } from "@/errors";
 import { usePodcastChannel, usePodcastChannelEpisodes } from "@/hooks";
@@ -74,7 +75,34 @@ export default function PodcastChannel() {
       }
     >
       <ThemedText type="title">{podcastChannelQuery.data.name}</ThemedText>
-      <ThemedText>{podcastChannelQuery.data.description}</ThemedText>
+      <ThemedView
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <ThemedView
+          style={{
+            flex: 1,
+          }}
+        >
+          <ThemedText>{podcastChannelQuery.data.description}</ThemedText>
+          {podcastChannelQuery.data.category_primary !== null && (
+            <ThemedText
+              style={{
+                marginTop: 4,
+                fontSize: 12,
+              }}
+            >
+              {podcastChannelQuery.data.category_primary}
+              {podcastChannelQuery.data.subcategory_primary !== null &&
+                `, ${podcastChannelQuery.data.subcategory_primary}`}
+            </ThemedText>
+          )}
+        </ThemedView>
+        <ShareChannelIcon channel={podcastChannelQuery.data} size={32} />
+      </ThemedView>
       {!podcastChannelEpisodesQuery.isLoading &&
         !podcastChannelEpisodesQuery.isError &&
         podcastChannelEpisodesQuery.data !== undefined && (
