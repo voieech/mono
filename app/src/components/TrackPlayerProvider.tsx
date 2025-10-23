@@ -18,10 +18,17 @@ import {
   posthog,
 } from "@/utils";
 
+const DEFAULT = {
+  position: 0,
+  tracks: [],
+};
+
 export function TrackPlayerProvider(props: PropsWithChildren) {
   const settingContext = useSettingContext();
-  const [currentPosition, setCurrentPosition] = useState(0);
-  const [tracks, setTracks] = useState<Array<TrackWithMetadata>>([]);
+  const [currentPosition, setCurrentPosition] = useState(DEFAULT.position);
+  const [tracks, setTracks] = useState<Array<TrackWithMetadata>>(
+    DEFAULT.tracks,
+  );
   const playbackRateSetting = settingContext.getSetting("playbackRate");
   const playbackRate = TrackPlayerPlaybackRateMap.get(playbackRateSetting) ?? 1;
 
@@ -62,8 +69,8 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
 
   const removeAllTracks = useCallback(async () => {
     await RNTPTrackPlayer.reset();
-    setCurrentPosition(0);
-    setTracks([]);
+    setCurrentPosition(DEFAULT.position);
+    setTracks(DEFAULT.tracks);
   }, []);
 
   const play = useCallback(async () => {
