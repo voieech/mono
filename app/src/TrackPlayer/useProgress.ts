@@ -62,4 +62,41 @@ function useProgressWithLoop(updateIntervalInMs = 1000) {
   return state;
 }
 
+/**
+ * Poll for track progress for the given interval (in miliseconds, default to
+ * 1000) using runtime interval loop
+ *
+ * **Re-implementing hook** to write polling mechanism differently to prevent
+ * potential uncontrolled recursive stack depth.
+ */
+function useProgressWithInterval(updateIntervalInMs = 1000) {
+  const [state, setState] = useState(INITIAL_STATE);
+
+  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], () => {
+    setState(INITIAL_STATE);
+  });
+
+  useEffect(() => {
+    const intervalID = setInterval(
+      () =>
+        RNTPTrackPlayer.getProgress()
+          .then((newProgress) =>
+            setState((state) =>
+              newProgress.position === state.position &&
+              newProgress.duration === state.duration &&
+              newProgress.buffered === state.buffered
+                ? state
+                : newProgress,
+            ),
+          )
+          // Ignore failure as method only throws if you haven't ran setup yet.
+          .catch(() => {}),
+      updateIntervalInMs,
+    );
+    return () => clearInterval(intervalID);
+  }, [updateIntervalInMs]);
+
+  return state;
+}
+
 export const useProgress = useProgressWithLoop;
