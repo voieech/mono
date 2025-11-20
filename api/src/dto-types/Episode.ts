@@ -12,4 +12,5 @@ export type Episode = {
   img_url: string;
   channel_id: string;
   channel_name: string;
+  youtube_id: string | null;
 };
