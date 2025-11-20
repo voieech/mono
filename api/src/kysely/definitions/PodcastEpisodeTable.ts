@@ -73,6 +73,11 @@ export interface PodcastEpisodeTable {
    * is available for this episode.
    */
   img_url: string;
+
+  /**
+   * Youtube video ID of episodes that are also published onto youtube.
+   */
+  youtube_id: $Nullable<string>;
 }
 
 export type PodcastEpisode = Selectable<PodcastEpisodeTable>;
