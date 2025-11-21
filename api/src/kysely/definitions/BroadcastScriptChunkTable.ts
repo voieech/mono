@@ -29,7 +29,7 @@ export interface BroadcastScriptChunkTable {
   /**
    * Which content is this chunk from?
    */
-  content_id: NonUpdatableIdColumnType;
+  content_id: $Nullable<NonUpdatableIdColumnType>;
 
   /**
    * Number between 1 to 4
