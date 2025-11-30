@@ -27,13 +27,15 @@ export type SettingNames = keyof typeof settings;
 export type SettingState = {
   [K in SettingNames]: (typeof settings)[K] extends { type: "boolean-switch" }
     ? boolean
-    : (typeof settings)[K] extends { type: "dropdown" }
-      ? string
-      : (typeof settings)[K] extends { type: "string" }
+    : (typeof settings)[K] extends { type: "multi-select" }
+      ? Array<string>
+      : (typeof settings)[K] extends { type: "dropdown" }
         ? string
-        : (typeof settings)[K] extends { type: "numeric-string" }
+        : (typeof settings)[K] extends { type: "string" }
           ? string
-          : never;
+          : (typeof settings)[K] extends { type: "numeric-string" }
+            ? string
+            : never;
 };
 
 /**
