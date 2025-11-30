@@ -59,7 +59,6 @@ export default function Settings() {
 
       <Collapsible
         title={t`Audio Playback`}
-        openByDefault
         expandedViewStyle={{
           rowGap: 16,
           paddingBottom: 32,
@@ -131,7 +130,7 @@ export default function Settings() {
                     style={{
                       backgroundColor: "#444",
                       height: 0.5,
-                      marginVertical: 4,
+                      marginVertical: 8,
                     }}
                   />
                 )}
@@ -145,23 +144,19 @@ export default function Settings() {
                 >
                   <View
                     style={{
-                      paddingRight: 24,
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    <View
+                    <ThemedText
                       style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
+                        flexShrink: 1,
                       }}
                     >
-                      <ThemedText
-                        style={{
-                          paddingRight: 16,
-                        }}
-                      >
-                        {linguiMsgToString(option.name)}
-                      </ThemedText>
+                      {linguiMsgToString(option.name)}
+                    </ThemedText>
+                    <View>
                       {option.value ===
                         settingContext.getSetting("externalMediaControls") && (
                         <Icon name="checkmark" color="#16a34a" />
@@ -188,7 +183,6 @@ export default function Settings() {
       </Collapsible>
       <Collapsible
         title={t`Details`}
-        openByDefault
         expandedViewStyle={{
           paddingTop: 16,
           rowGap: 16,
