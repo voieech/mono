@@ -9,13 +9,22 @@ import {
   useWindowDimensions,
 } from "react-native";
 
-import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
+import {
+  SafeScrollViewContainer,
+  ThemedView,
+  ThemedText,
+  Icon,
+} from "@/components";
+import { Colors } from "@/constants";
 import { useFeaturedChannels, useFeaturedEpisodes } from "@/hooks";
 
 export default function HomeScreen() {
   const windowDimensions = useWindowDimensions();
   const featuredChannelImageWidth = windowDimensions.width * 0.4;
-  const featuredChannelImageMargin = windowDimensions.width * 0.03;
+  const featuredChannelImageMargin = Math.min(
+    windowDimensions.width * 0.03,
+    16,
+  );
 
   const featuredChannelsQuery = useFeaturedChannels();
   const featuredEpisodesQuery = useFeaturedEpisodes();
@@ -43,14 +52,29 @@ export default function HomeScreen() {
             marginBottom: 8,
           }}
         >
-          <ThemedText
-            style={{
-              fontSize: 24,
-              fontWeight: "300",
+          <Link
+            href={{
+              pathname: "/featured-channels",
             }}
           >
-            <Trans>Featured Channels</Trans>
-          </ThemedText>
+            <ThemedView
+              style={{
+                flexDirection: "row",
+                columnGap: 16,
+              }}
+            >
+              <ThemedText
+                style={{
+                  fontSize: 28,
+                  lineHeight: 28,
+                  fontWeight: "300",
+                }}
+              >
+                <Trans>Featured Channels</Trans>
+              </ThemedText>
+              <Icon name="chevron.right" color={Colors.dark.text} />
+            </ThemedView>
+          </Link>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {featuredChannelsQuery.data.map((channel) => (
               <Link

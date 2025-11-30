@@ -20,6 +20,13 @@ export default function HomeLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="featured-channels"
+        options={{
+          title: t`Featured Channels`,
+          headerShown: false,
+        }}
+      />
 
       {/*
         These title have no effect since the headers are not shown, but just
