@@ -182,6 +182,88 @@ export default function Settings() {
         />
       </Collapsible>
       <Collapsible
+        title={t`Content Language`}
+        expandedViewStyle={{
+          paddingTop: 16,
+          rowGap: 16,
+          paddingBottom: 32,
+        }}
+      >
+        <View
+          style={{
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            backgroundColor: "black",
+            borderRadius: 16,
+          }}
+        >
+          <ThemedText
+            style={{
+              fontSize: 14,
+              color: "#999",
+              lineHeight: 20,
+            }}
+          >
+            {linguiMsgToString(
+              settingContext.settings.contentLanguage.description,
+            )}
+          </ThemedText>
+          <View
+            style={{
+              backgroundColor: "#777",
+              height: 0.5,
+              marginTop: 8,
+              marginBottom: 16,
+            }}
+          />
+          {settingContext.settings.contentLanguage.options.map(
+            (option, index) => (
+              <Fragment key={option.value}>
+                {index !== 0 && (
+                  <View
+                    style={{
+                      backgroundColor: "#444",
+                      height: 0.5,
+                      marginVertical: 12,
+                    }}
+                  />
+                )}
+                <Pressable
+                  onPress={() => {
+                    settingContext.updateSetting("contentLanguage", [
+                      option.value,
+                    ]);
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <ThemedText
+                      style={{
+                        flexShrink: 1,
+                      }}
+                    >
+                      {linguiMsgToString(option.name)}
+                    </ThemedText>
+                    <View>
+                      {settingContext
+                        .getSetting("contentLanguage")
+                        .includes(option.value) && (
+                        <Icon name="checkmark" color="#16a34a" size={16} />
+                      )}
+                    </View>
+                  </View>
+                </Pressable>
+              </Fragment>
+            ),
+          )}
+        </View>
+      </Collapsible>
+      <Collapsible
         title={t`Details`}
         expandedViewStyle={{
           paddingTop: 16,

@@ -1,5 +1,6 @@
 import type { SettingUnion } from "./types/SettingUnion";
 
+import { contentLanguage } from "./contentLanguage";
 import { externalMediaControls } from "./externalMediaControls";
 import { lastOnboardingTime } from "./lastOnboardingTime";
 import { playbackRate } from "./playbackRate";
@@ -9,6 +10,7 @@ import { rewindToStartOnSkipPrevious } from "./rewindToStartOnSkipPrevious";
  * Settings objects holding all possible setting values
  */
 export const settings = {
+  contentLanguage,
   externalMediaControls,
   lastOnboardingTime,
   playbackRate,
