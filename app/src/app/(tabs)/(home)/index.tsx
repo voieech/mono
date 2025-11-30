@@ -2,12 +2,21 @@ import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { RefreshControl, View } from "react-native";
+import {
+  RefreshControl,
+  View,
+  ScrollView,
+  useWindowDimensions,
+} from "react-native";
 
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { useFeaturedChannels, useFeaturedEpisodes } from "@/hooks";
 
 export default function HomeScreen() {
+  const windowDimensions = useWindowDimensions();
+  const featuredChannelImageWidth = windowDimensions.width * 0.4;
+  const featuredChannelImageMargin = windowDimensions.width * 0.03;
+
   const featuredChannelsQuery = useFeaturedChannels();
   const featuredEpisodesQuery = useFeaturedEpisodes();
 
@@ -34,79 +43,52 @@ export default function HomeScreen() {
             marginBottom: 8,
           }}
         >
-          <ThemedText type="subtitle">
+          <ThemedText
+            style={{
+              fontSize: 24,
+              fontWeight: "300",
+            }}
+          >
             <Trans>Featured Channels</Trans>
           </ThemedText>
-          {featuredChannelsQuery.data.map((channel) => (
-            <Link
-              key={channel.id}
-              href={{
-                pathname: "/podcast/channel/[channelID]",
-                params: {
-                  channelID: channel.id,
-                },
-              }}
-            >
-              <ThemedView
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {featuredChannelsQuery.data.map((channel) => (
+              <Link
+                key={channel.id}
+                href={{
+                  pathname: "/podcast/channel/[channelID]",
+                  params: {
+                    channelID: channel.id,
+                  },
+                }}
                 style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  borderRadius: 16,
+                  marginRight: featuredChannelImageMargin,
                 }}
               >
-                <Image
-                  source={channel.img_url}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    maxWidth: 128,
-                    borderTopLeftRadius: 16,
-                    borderBottomLeftRadius: 16,
-                  }}
-                  contentFit="cover"
-                />
-                <ThemedView
-                  style={{
-                    flex: 1,
-                    borderTopRightRadius: 16,
-                    borderBottomRightRadius: 16,
-                    padding: 16,
-                    backgroundColor: "#3f3f46",
-                  }}
-                >
-                  <ThemedText
+                <View>
+                  <Image
+                    source={channel.img_url}
                     style={{
-                      paddingBottom: 2,
-                      fontSize: 24,
+                      width: featuredChannelImageWidth,
+                      aspectRatio: 1,
+                      borderRadius: 4,
                     }}
+                    contentFit="cover"
+                  />
+                  <ThemedText
                     numberOfLines={1}
+                    style={{
+                      paddingTop: 4,
+                      color: "#CCC",
+                      fontSize: 14,
+                    }}
                   >
                     {channel.name}
                   </ThemedText>
-                  <ThemedText
-                    style={{
-                      paddingBottom: 4,
-                      fontSize: 12,
-                    }}
-                    numberOfLines={2}
-                  >
-                    {channel.description}
-                  </ThemedText>
-                  {channel.category_primary !== null && (
-                    <ThemedText
-                      style={{
-                        fontSize: 12,
-                      }}
-                    >
-                      {channel.category_primary}
-                      {channel.subcategory_primary !== null &&
-                        `, ${channel.subcategory_primary}`}
-                    </ThemedText>
-                  )}
-                </ThemedView>
-              </ThemedView>
-            </Link>
-          ))}
+                </View>
+              </Link>
+            ))}
+          </ScrollView>
         </ThemedView>
       )}
       <View
