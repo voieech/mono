@@ -10,7 +10,7 @@ export function useFeaturedEpisodes() {
     queryKey: ["podcast", "featured-episodes"],
     async queryFn() {
       const res = await fetch(
-        `${apiBaseUrl}/v1/podcast/featured/episodes?count=20`,
+        `${apiBaseUrl}/v1/podcast/featured/episodes?limit=20`,
         {
           headers: {
             ...getAcceptLanguageHeader(),

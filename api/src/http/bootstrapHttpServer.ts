@@ -41,12 +41,12 @@ export function bootstrapHttpServer() {
     })
 
     .get("/v1/podcast/featured/channel", async function (req, res) {
-      const rawCount = Number(req.query["count"]);
-      const count = isNaN(rawCount) || rawCount === 0 ? 4 : rawCount;
+      const rawLimit = Number(req.query["limit"]);
+      const limit = isNaN(rawLimit) || rawLimit === 0 ? 4 : rawLimit;
 
-      if (count < 1 || count > 20) {
+      if (limit < 1 || limit > 20) {
         res.status(400).json({
-          error: "Count must be between 1 and 20",
+          error: "Limit must be between 1 and 20",
         });
         return;
       }
@@ -56,19 +56,19 @@ export function bootstrapHttpServer() {
         .selectAll()
         .where("language", "like", `${req.locale}%`)
         // @todo Ordery by popularity
-        .limit(count)
+        .limit(limit)
         .execute();
 
       res.status(200).json(featuredChannels satisfies Array<Channel>);
     })
 
     .get("/v1/podcast/featured/episodes", async function (req, res) {
-      const rawCount = Number(req.query["count"]);
-      const count = isNaN(rawCount) || rawCount === 0 ? 4 : rawCount;
+      const rawLimit = Number(req.query["limit"]);
+      const limit = isNaN(rawLimit) || rawLimit === 0 ? 4 : rawLimit;
 
-      if (count < 1 || count > 20) {
+      if (limit < 1 || limit > 20) {
         res.status(400).json({
-          error: "Count must be between 1 and 20",
+          error: "Limit must be between 1 and 20",
         });
         return;
       }
@@ -83,7 +83,7 @@ export function bootstrapHttpServer() {
         .where("podcast_episode.language", "like", `${req.locale}%`)
         // @todo Ordery by popularity
         .orderBy("podcast_episode.created_at", "desc")
-        .limit(count)
+        .limit(limit)
         .execute();
 
       res.status(200).json(featuredEpisodes satisfies Array<Episode>);

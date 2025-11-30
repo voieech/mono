@@ -10,7 +10,7 @@ export function useFeaturedChannels() {
     queryKey: ["podcast", "featured-channels"],
     async queryFn() {
       const res = await fetch(
-        `${apiBaseUrl}/v1/podcast/featured/channel?count=2`,
+        `${apiBaseUrl}/v1/podcast/featured/channel?limit=20`,
         {
           headers: {
             ...getAcceptLanguageHeader(),
