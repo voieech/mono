@@ -23,6 +23,12 @@ export interface BaseSetting<T> {
   defaultValue: T;
 
   /**
+   * If your setting needs to be processed manually before the updateSetting
+   * method is called, implement this.
+   */
+  beforeChange?: (newValue: T, oldValue: T) => T;
+
+  /**
    * If your setting needs to be synchronized with external systems on change,
    * and not just app internal UI changes.
    */

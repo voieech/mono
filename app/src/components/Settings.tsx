@@ -37,9 +37,18 @@ export function SettingsProvider(props: PropsWithChildren) {
         updateSetting(setting, newValue) {
           const oldValue = settingState[setting] as any;
 
+          // Call the beforeChange callback if available to process/transform
+          // the values before saving. The types are widened to be `any` here
+          // since the types can be generic on the extended Setting interfaces
+          // e.g. a string literal type is used
+          const processedNewValue =
+            // @ts-expect-error Unable to easily narrow the generic type down
+            settings[setting]?.beforeChange?.(newValue as any, oldValue) ??
+            newValue;
+
           const newSetting = {
             ...settingState,
-            [setting]: newValue,
+            [setting]: processedNewValue,
           };
           setSettingState(newSetting);
           settingsInLocalStorage.update(newSetting);
