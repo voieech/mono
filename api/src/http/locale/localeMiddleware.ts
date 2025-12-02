@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from "express";
 
-import { convertAcceptLanguageHeaderToMaybeString } from "./convertAcceptLanguageHeaderToMaybeString.js";
-import { convertUrlQueryParamToMaybeString } from "./convertUrlQueryParamToMaybeString.js";
-import { DEFAULT_FALLBACK_LOCALE } from "./DEFAULT_FALLBACK_LOCALE.js";
+import { convertAcceptLanguageHeaderToMaybeStringArray } from "./convertAcceptLanguageHeaderToMaybeStringArray.js";
+import { convertUrlQueryParamToMaybeStringArray } from "./convertUrlQueryParamToMaybeStringArray.js";
+import { DEFAULT_FALLBACK_LOCALES } from "./DEFAULT_FALLBACK_LOCALE.js";
 import { isLocaleSupported } from "./supportedLocales.js";
 
 // Add locale to express Request type globally.
@@ -11,6 +11,7 @@ declare global {
   namespace Express {
     interface Request {
       locale: string;
+      locales: Array<string>;
     }
   }
 }
@@ -22,25 +23,33 @@ declare global {
  */
 export function localeMiddleware(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction,
 ) {
-  const rawLocale =
-    convertUrlQueryParamToMaybeString(req.query["locale"]) ??
-    convertUrlQueryParamToMaybeString(req.query["lang"]) ??
-    convertAcceptLanguageHeaderToMaybeString(req.headers["accept-language"]) ??
-    DEFAULT_FALLBACK_LOCALE;
+  const rawLocales =
+    convertUrlQueryParamToMaybeStringArray(req.query["locale"]) ??
+    convertUrlQueryParamToMaybeStringArray(req.query["lang"]) ??
+    convertAcceptLanguageHeaderToMaybeStringArray(
+      req.headers["accept-language"],
+    ) ??
+    DEFAULT_FALLBACK_LOCALES;
 
-  // Get validated supported locale or fallback locale
-  const locale = isLocaleSupported(rawLocale)
-    ? rawLocale
-    : DEFAULT_FALLBACK_LOCALE;
+  // Check if language is a valid option first before even attempting to
+  // querying DB, instead of relying on the DB query to check if language is
+  // valid.
+  // @todo Use $LanguageCode.makeStrongSafely
+  const filteredRawLocales = rawLocales.filter((rawLocale) =>
+    isLocaleSupported(rawLocale),
+  );
 
-  req.locale = locale;
+  req.locales =
+    filteredRawLocales.length === 0
+      ? DEFAULT_FALLBACK_LOCALES
+      : filteredRawLocales;
 
-  // Set content-language response headers automatically to the validated locale
-  // value instead of making every API controller set it manually.
-  res.set("Content-Language", locale);
+  // Note that content-language header is not set since we support APIs that can
+  // return content in multiple languages and in those cases setting this header
+  // is not advised.
 
   next();
 }
