@@ -54,7 +54,7 @@ export function bootstrapHttpServer() {
       const featuredChannels = await apiDB
         .selectFrom("podcast_channel")
         .selectAll()
-        .where("language", "like", `${req.locale}%`)
+        .where("language", "like", `${req.locales.at(0)}%`)
         // @todo Ordery by popularity
         .limit(limit)
         .execute();
@@ -80,7 +80,7 @@ export function bootstrapHttpServer() {
           "audio.length",
           "podcast_channel.name",
         ])
-        .where("podcast_episode.language", "like", `${req.locale}%`)
+        .where("podcast_episode.language", "like", `${req.locales.at(0)}%`)
         // @todo Ordery by popularity
         .orderBy("podcast_episode.created_at", "desc")
         .limit(limit)

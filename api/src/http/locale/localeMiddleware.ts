@@ -10,7 +10,6 @@ import { isLocaleSupported } from "./supportedLocales.js";
 declare global {
   namespace Express {
     interface Request {
-      locale: string;
       locales: Array<string>;
     }
   }
