@@ -3,9 +3,13 @@ import type { Channel } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
-import { queryClient, getAcceptLanguageHeader } from "@/utils";
+import { queryClient } from "@/utils";
+
+import { useAcceptLanguageHeader } from "./useAcceptLanguageHeader";
 
 export function useFeaturedChannels() {
+  const acceptLanguageHeader = useAcceptLanguageHeader();
+
   return useQuery({
     queryKey: ["podcast", "featured-channels"],
     async queryFn() {
@@ -13,7 +17,7 @@ export function useFeaturedChannels() {
         `${apiBaseUrl}/v1/podcast/featured/channel?limit=20`,
         {
           headers: {
-            ...getAcceptLanguageHeader(),
+            ...acceptLanguageHeader,
           },
         },
       );
