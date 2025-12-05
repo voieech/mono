@@ -1,15 +1,16 @@
+import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 
 import { getLocale } from "@/utils";
 
 import type { MultiSelectSetting } from "./types/MultiSelectSetting";
 
-export const contentLanguage: MultiSelectSetting<
-  Array<"en" | "zh" | "zh-CN" | "zh-TW">
-> = {
+type AllowedLocales = "en" | "zh" | "zh-CN" | "zh-TW";
+
+export const contentLanguage: MultiSelectSetting<Array<AllowedLocales>> = {
   type: "multi-select",
   name: msg`Content Language`,
-  description: msg`Select all the content languages you would like to see. You need to select at least one.`,
+  description: msg`Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language.`,
   options: [
     {
       value: "en",
@@ -45,7 +46,13 @@ export const contentLanguage: MultiSelectSetting<
       }
     }
 
-    return Array.from(set);
+    // Get device current locale to remove it from set before setting it back as
+    // the first locale in the list so that when making API requests this will
+    // be treated with priority.
+    const deviceLocale = i18n.locale as AllowedLocales;
+    set.delete(deviceLocale);
+
+    return [deviceLocale, ...set];
   },
   onChange() {
     // @todo Clear cache for all previous API calls
