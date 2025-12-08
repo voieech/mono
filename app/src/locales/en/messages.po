@@ -13,8 +13,8 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:149
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:184
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:177
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:205
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
 
@@ -26,9 +26,25 @@ msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
-#: src/components/AudioPlayer/ShareCurrentTrackIcon.tsx:61
+#: src/components/ShareChannelIcon.tsx:23
+msgid "Check out \"{channelName}\" on voieech.com"
+msgstr "Check out \"{channelName}\" on voieech.com"
+
+#: src/components/ShareTrackIcon.tsx:54
 msgid "Check out voieech for \"{trackTitle}\""
 msgstr "Check out voieech for \"{trackTitle}\""
+
+#: src/utils/settings/contentLanguage.ts:25
+msgid "Chinese (Simplified / Mainland China)"
+msgstr "Chinese (Simplified / Mainland China)"
+
+#: src/utils/settings/contentLanguage.ts:21
+msgid "Chinese (Simplified and Traditional)"
+msgstr "Chinese (Simplified and Traditional)"
+
+#: src/utils/settings/contentLanguage.ts:29
+msgid "Chinese (Traditional / Taiwan)"
+msgstr "Chinese (Traditional / Taiwan)"
 
 #: src/utils/settings/externalMediaControls.ts:16
 msgid "Choose the type of native media controls you want to see."
@@ -38,13 +54,22 @@ msgstr "Choose the type of native media controls you want to see."
 msgid "close"
 msgstr "close"
 
-#: src/app/(tabs)/settings.tsx:81
+#: src/app/(tabs)/settings.tsx:185
+#: src/utils/settings/contentLanguage.ts:12
+msgid "Content Language"
+msgstr "Content Language"
+
+#: src/app/(tabs)/settings.tsx:80
 msgid "Default audio playback rate"
 msgstr "Default audio playback rate"
 
-#: src/app/(tabs)/settings.tsx:190
+#: src/app/(tabs)/settings.tsx:267
 msgid "Details"
 msgstr "Details"
+
+#: src/utils/settings/contentLanguage.ts:17
+msgid "English"
+msgstr "English"
 
 #: src/app/(tabs)/_layout.tsx:99
 msgid "Explore"
@@ -54,15 +79,17 @@ msgstr "Explore"
 msgid "External Audio controls"
 msgstr "External Audio controls"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:90
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:118
 msgid "Featured"
 msgstr "Featured"
 
-#: src/app/(tabs)/(home)/index.tsx:38
+#: src/app/(tabs)/(home)/_layout.tsx:26
+#: src/app/(tabs)/(home)/featured-channels.tsx:40
+#: src/app/(tabs)/(home)/index.tsx:73
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:125
+#: src/app/(tabs)/(home)/index.tsx:131
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -74,7 +101,7 @@ msgstr "For You"
 msgid "Go back Home"
 msgstr "Go back Home"
 
-#: src/app/(tabs)/(home)/_layout.tsx:15
+#: src/app/(tabs)/(home)/_layout.tsx:19
 msgid "Home"
 msgstr "Home"
 
@@ -90,15 +117,15 @@ msgstr "Nothing left in Queue!"
 msgid "Oops Sorry!"
 msgstr "Oops Sorry!"
 
-#: src/app/(tabs)/(home)/_layout.tsx:28
+#: src/app/(tabs)/(home)/_layout.tsx:39
 msgid "Podcast Channel"
 msgstr "Podcast Channel"
 
-#: src/app/(tabs)/(home)/_layout.tsx:34
+#: src/app/(tabs)/(home)/_layout.tsx:45
 msgid "Podcast Episode"
 msgstr "Podcast Episode"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:230
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:276
 msgid "Reccomended Episodes"
 msgstr "Reccomended Episodes"
 
@@ -106,9 +133,13 @@ msgstr "Reccomended Episodes"
 msgid "Rewind to track start when skipping to previous"
 msgstr "Rewind to track start when skipping to previous"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:178
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:199
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
+
+#: src/utils/settings/contentLanguage.ts:13
+msgid "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
+msgstr "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
 
 #: src/app/(tabs)/_layout.tsx:120
 #: src/app/(tabs)/settings.tsx:57

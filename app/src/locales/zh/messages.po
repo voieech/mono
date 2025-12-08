@@ -18,8 +18,8 @@ msgstr ""
 "X-Crowdin-File: /app/src/locales/en/messages.po\n"
 "X-Crowdin-File-ID: 34\n"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:149
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:184
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:177
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:205
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
 
@@ -31,9 +31,25 @@ msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 msgid "Audio Playback"
 msgstr "音频播放"
 
-#: src/components/AudioPlayer/ShareCurrentTrackIcon.tsx:61
+#: src/components/ShareChannelIcon.tsx:23
+msgid "Check out \"{channelName}\" on voieech.com"
+msgstr "在 voieech.com 上关注 \"{channelName}\""
+
+#: src/components/ShareTrackIcon.tsx:54
 msgid "Check out voieech for \"{trackTitle}\""
 msgstr "用 voieech 收听 “{trackTitle}”"
+
+#: src/utils/settings/contentLanguage.ts:25
+msgid "Chinese (Simplified / Mainland China)"
+msgstr "中文 (简体字 / 中国大陆)"
+
+#: src/utils/settings/contentLanguage.ts:21
+msgid "Chinese (Simplified and Traditional)"
+msgstr "中文 (简体字 / 繁体字)"
+
+#: src/utils/settings/contentLanguage.ts:29
+msgid "Chinese (Traditional / Taiwan)"
+msgstr "中文 (繁体字 / 台湾)"
 
 #: src/utils/settings/externalMediaControls.ts:16
 msgid "Choose the type of native media controls you want to see."
@@ -43,13 +59,22 @@ msgstr "选择你想要看到的本地媒体控制类型。"
 msgid "close"
 msgstr "关闭"
 
-#: src/app/(tabs)/settings.tsx:81
+#: src/app/(tabs)/settings.tsx:185
+#: src/utils/settings/contentLanguage.ts:12
+msgid "Content Language"
+msgstr "内容语言"
+
+#: src/app/(tabs)/settings.tsx:80
 msgid "Default audio playback rate"
 msgstr "默认音频播放速度"
 
-#: src/app/(tabs)/settings.tsx:190
+#: src/app/(tabs)/settings.tsx:267
 msgid "Details"
 msgstr "软件详情"
+
+#: src/utils/settings/contentLanguage.ts:17
+msgid "English"
+msgstr "英文"
 
 #: src/app/(tabs)/_layout.tsx:99
 msgid "Explore"
@@ -59,15 +84,17 @@ msgstr "浏览"
 msgid "External Audio controls"
 msgstr "手机媒体控制"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:90
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:118
 msgid "Featured"
 msgstr "精选"
 
-#: src/app/(tabs)/(home)/index.tsx:38
+#: src/app/(tabs)/(home)/_layout.tsx:26
+#: src/app/(tabs)/(home)/featured-channels.tsx:40
+#: src/app/(tabs)/(home)/index.tsx:73
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:125
+#: src/app/(tabs)/(home)/index.tsx:131
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -79,7 +106,7 @@ msgstr "推荐"
 msgid "Go back Home"
 msgstr "返回首页"
 
-#: src/app/(tabs)/(home)/_layout.tsx:15
+#: src/app/(tabs)/(home)/_layout.tsx:19
 msgid "Home"
 msgstr "主页"
 
@@ -95,15 +122,15 @@ msgstr "播放列表已空！"
 msgid "Oops Sorry!"
 msgstr "哎呀，抱歉！"
 
-#: src/app/(tabs)/(home)/_layout.tsx:28
+#: src/app/(tabs)/(home)/_layout.tsx:39
 msgid "Podcast Channel"
 msgstr "播客频道"
 
-#: src/app/(tabs)/(home)/_layout.tsx:34
+#: src/app/(tabs)/(home)/_layout.tsx:45
 msgid "Podcast Episode"
 msgstr "播客剧集"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:230
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:276
 msgid "Reccomended Episodes"
 msgstr "推荐剧集"
 
@@ -111,11 +138,16 @@ msgstr "推荐剧集"
 msgid "Rewind to track start when skipping to previous"
 msgstr "跳到上一个剧集时，先跳到剧集开头"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:178
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:199
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 
-#: src/app/(tabs)/_layout.tsx:120 src/app/(tabs)/settings.tsx:57
+#: src/utils/settings/contentLanguage.ts:13
+msgid "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
+msgstr "请选择您希望看到的内容语言。您至少需要选择一种语言，并且无法移除应用当前的语言设置。"
+
+#: src/app/(tabs)/_layout.tsx:120
+#: src/app/(tabs)/settings.tsx:57
 msgid "Settings"
 msgstr "设置"
 
