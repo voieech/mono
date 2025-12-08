@@ -29,6 +29,14 @@ export interface PodcastEpisodeContentSourceTable {
   podcast_episode_id: NonUpdatableIdColumnType;
 
   /**
+   * Type of content used, the `content_id` refers to the ID of a row in this
+   * specific content table
+   */
+  content_type: $Nullable<
+    "news_article" | "github_repo" | "tweet" | "youtube_video"
+  >;
+
+  /**
    * Content source ID
    */
   content_id: NonUpdatableIdColumnType;
