@@ -24,7 +24,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("transcript_method", "text")
     .addColumn("transcript_status", "text", (col) => col.notNull())
     .addColumn("error_message", "text")
-    .addColumn("total_duration_transcribed", "integer")
+    .addColumn("total_duration_transcribed", "double precision")
     .addColumn("transcript_text", "text")
     .addColumn("snippet_count", "integer")
     .execute();
