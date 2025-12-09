@@ -24,7 +24,7 @@ export interface ContentYoutubeVideoTable {
    * When did the content originally get published at? If this is not available
    * use `created_at` time as substitute
    */
-  original_content_publised_at: UpdatableDateTimeColumnType;
+  published_at: UpdatableDateTimeColumnType;
 
   /**
    * Youtube's channel ID
@@ -35,6 +35,11 @@ export interface ContentYoutubeVideoTable {
    * Youtube's channel title
    */
   channel_title: string;
+
+  /**
+   * Youtube's video's URL
+   */
+  video_url: string;
 
   /**
    * Youtube's video ID
@@ -88,14 +93,14 @@ export interface ContentYoutubeVideoTable {
   transcript_status: string;
 
   /**
-   * @todo
+   * @todo Rename to transcript_error_message
    */
-  transcript_error_message: $Nullable<string>;
+  error_message: $Nullable<string>;
 
   /**
-   * @todo
+   * @todo Rename to transcript_duration
    */
-  transcript_duration: $Nullable<number>;
+  total_duration_transcribed: $Nullable<number>;
 
   /**
    * @todo

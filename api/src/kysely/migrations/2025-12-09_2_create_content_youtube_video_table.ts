@@ -7,11 +7,10 @@ export async function up(db: Kysely<any>): Promise<void> {
     .createTable(contentYoutubeVideoTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
     .addColumn("created_at", "timestamp", (col) => col.notNull())
-    .addColumn("original_content_publised_at", "timestamp", (col) =>
-      col.notNull(),
-    )
+    .addColumn("published_at", "timestamp", (col) => col.notNull())
     .addColumn("channel_id", "text", (col) => col.notNull())
     .addColumn("channel_title", "text", (col) => col.notNull())
+    .addColumn("video_url", "text", (col) => col.notNull())
     .addColumn("video_id", "text", (col) => col.notNull())
     .addColumn("video_title", "text", (col) => col.notNull())
     .addColumn("duration", "integer")
@@ -24,8 +23,8 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("has_subtitles", "boolean")
     .addColumn("transcript_method", "text")
     .addColumn("transcript_status", "text", (col) => col.notNull())
-    .addColumn("transcript_error_message", "text")
-    .addColumn("transcript_duration", "integer")
+    .addColumn("error_message", "text")
+    .addColumn("total_duration_transcribed", "integer")
     .addColumn("transcript_text", "text")
     .addColumn("snippet_count", "integer")
     .execute();
