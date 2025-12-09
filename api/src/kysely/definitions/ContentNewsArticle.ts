@@ -9,7 +9,7 @@ import type {
 /**
  * Actual content from the various news sources
  */
-export interface ContentNewsArticle {
+export interface ContentNewsArticleTable {
   /**
    * UUID
    */
@@ -87,6 +87,6 @@ export interface ContentNewsArticle {
   embedding_update_timestamp: $Nullable<UpdatableDateTimeColumnType>;
 }
 
-export type Content = Selectable<ContentNewsArticle>;
-export type CreateContent = Insertable<ContentNewsArticle>;
-export type UpdateContent = Updateable<ContentNewsArticle>;
+export type ContentNewsArticle = Selectable<ContentNewsArticleTable>;
+export type CreateContentNewsArticle = Insertable<ContentNewsArticleTable>;
+export type UpdateContentNewsArticle = Updateable<ContentNewsArticleTable>;
