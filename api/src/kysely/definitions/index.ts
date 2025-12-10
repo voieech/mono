@@ -3,7 +3,7 @@
  */
 
 export * from "./AudioTable.js";
-export * from "./ContentTable.js";
+export * from "./ContentNewsArticleTable.js";
 export * from "./ContentTagTable.js";
 export * from "./DatabaseDefinition.js";
 export * from "./PodcastChannelTable.js";
