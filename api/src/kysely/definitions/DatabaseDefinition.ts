@@ -1,6 +1,6 @@
 import type { AudioTable } from "./AudioTable.js";
 import type { BroadcastScriptChunkTable } from "./BroadcastScriptChunkTable.js";
-import type { ContentNewsArticleTable } from "./ContentNewsArticle.js";
+import type { ContentNewsArticleTable } from "./ContentNewsArticleTable.js";
 import type { ContentTagTable } from "./ContentTagTable.js";
 import type { ContentTweetTable } from "./ContentTweetTable.js";
 import type { ContentYoutubeVideoTable } from "./ContentYoutubeVideoTable.js";
