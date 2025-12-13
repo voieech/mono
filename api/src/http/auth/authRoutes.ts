@@ -1,6 +1,5 @@
 import express from "express";
 
-import { signMobileJwt } from "./jwt.js";
 import {
   workos,
   WORKOS_CLIENT_ID,
@@ -17,7 +16,7 @@ export const authRoutes = express
 
   // Redirect user here to generate WorkOS AuthKit link for user to authenticate
   .get("/auth/workos/login", (req, res) => {
-    const target = req.query["target"] ?? "web";
+    const target = req.query["target"]?.toString() || "web";
     const authorizationUrl = workos.userManagement.getAuthorizationUrl({
       clientId: WORKOS_CLIENT_ID,
 
@@ -27,12 +26,17 @@ export const authRoutes = express
       // Callback endpoint that WorkOS redirects to after a user authenticates
       redirectUri: WORKOS_REDIRECT_URI,
 
-      // Encode context in state
+      // Encode target in state to know how to respond in callback
       state: JSON.stringify({ target }),
     });
 
-    // Redirect the user to the AuthKit sign-in page
-    res.redirect(authorizationUrl);
+    // For web: redirect directly
+    // For mobile: return JSON with authUrl (mobile will open it)
+    if (target === "mobile") {
+      res.json({ authUrl: authorizationUrl });
+    } else {
+      res.redirect(authorizationUrl);
+    }
   })
 
   // Called after user successfully authenticates
@@ -41,6 +45,7 @@ export const authRoutes = express
     // Get authorization code string returned by AuthKit
     const code = req.query["code"]?.toString?.();
 
+    // Decode state to determine client type
     const state = req.query["state"]
       ? JSON.parse(req.query["state"].toString())
       : { target: "web" };
@@ -61,36 +66,91 @@ export const authRoutes = express
           },
         });
 
-      // Store the session in a cookie
-      res.cookie(WORKOS_COOKIE_NAME, authenticationResponse.sealedSession, {
-        path: "/",
-        httpOnly: true,
-        secure: true,
-        sameSite: "lax",
-      });
-
-      // Use the information in `user` as needed for other business logic
-      // authenticationResponse.user;
-
-      // Redirect based on client type
+      // Handle based on client type
       if (state.target === "mobile") {
-        const token = signMobileJwt({
+        const userData = {
           id: authenticationResponse.user.id,
           email: authenticationResponse.user.email,
+          firstName: authenticationResponse.user.firstName,
+          lastName: authenticationResponse.user.lastName,
+          createdAt: authenticationResponse.user.createdAt,
+        };
+        // For mobile: redirect to app with tokens
+        return res.redirect(
+          `voieech://auth/callback?` +
+            `accessToken=${encodeURIComponent(
+              authenticationResponse.accessToken,
+            )}` +
+            `&refreshToken=${encodeURIComponent(
+              authenticationResponse.refreshToken,
+            )}` +
+            `&user=${encodeURIComponent(JSON.stringify(userData))}`,
+        );
+      } else {
+        // For web: store cookie in session and redirect to homepage
+        res.cookie(WORKOS_COOKIE_NAME, authenticationResponse.sealedSession, {
+          path: "/",
+          httpOnly: true,
+          secure: true,
+          sameSite: "lax",
         });
 
-        return res.redirect(
-          `voieech://auth/callback?token=${encodeURIComponent(token)}`,
-        );
+        // Use the information in `user` as needed for other business logic
+        // authenticationResponse.user;
+        // @todo Modifiable
+        // Redirect the user to the homepage
+        res.redirect("/");
+        return;
       }
-
-      // @todo Modifiable
-      // Redirect the user to the homepage
-      res.redirect("/");
-      return;
     } catch (error) {
-      res.redirect("/auth/workos/login");
+      // Redirect to login based on client type
+      if (state.target === "mobile") {
+        res.redirect("voieech://auth/error");
+      } else {
+        res.redirect("/auth/workos/login");
+      }
       return;
+    }
+  })
+
+  // Refresh endpoint for mobile
+  .post("/auth/refresh", async (req, res) => {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      res.status(401).json({
+        error: "No refresh token provided",
+        user: null,
+        accessToken: null,
+        refreshToken: null,
+      });
+      return;
+    }
+
+    try {
+      const refreshed =
+        await workos.userManagement.authenticateWithRefreshToken({
+          refreshToken,
+          clientId: WORKOS_CLIENT_ID,
+        });
+
+      res.json({
+        user: {
+          id: refreshed.user.id,
+          email: refreshed.user.email,
+          firstName: refreshed.user.firstName,
+          lastName: refreshed.user.lastName,
+        },
+        accessToken: refreshed.accessToken,
+        refreshToken: refreshed.refreshToken,
+      });
+    } catch (error) {
+      res.status(401).json({
+        error: "Invalid or expired refresh token",
+        user: null,
+        accessToken: null,
+        refreshToken: null,
+      });
     }
   })
 

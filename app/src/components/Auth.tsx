@@ -9,42 +9,20 @@ import { User } from "@/utils";
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User | undefined>(undefined);
-
-  // Fetch user using JWT
-  const refreshSession = async () => {
-    const token = await SecureStore.getItemAsync("auth_token");
-    if (!token) {
-      setUser(undefined);
-      return;
-    }
-
-    try {
-      const res = await fetch(`${apiBaseUrl}/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-      } else {
-        setUser(undefined);
-      }
-    } catch (err) {
-      console.error("Error fetching session:", err);
-      setUser(undefined);
-    }
-  };
+  const [isLoading, setIsLoading] = useState(true);
 
   const login = async () => {
     try {
-      const loginUrl = `${apiBaseUrl}/auth/workos/login?target=mobile`;
-      const redirectUri = "voieech://auth/callback";
+      // Step 1: Get auth URL from your backend (with target=mobile)
+      const urlRes = await fetch(
+        `${apiBaseUrl}/auth/workos/login?target=mobile`,
+      );
+      const { authUrl } = await urlRes.json();
 
+      // Step 2: Open system browser with WorkOS auth
       const result = await WebBrowser.openAuthSessionAsync(
-        loginUrl,
-        redirectUri,
+        authUrl,
+        "voieech://auth/callback",
       );
 
       if (result.type !== "success" || !result.url) {
@@ -52,35 +30,115 @@ export function AuthProvider({ children }: PropsWithChildren) {
         return;
       }
 
-      // Extract JWT from deep link
+      // Step 3: Extract tokens and user data from callback (already exchanged by backend)
       const { queryParams } = Linking.parse(result.url);
-      const token = queryParams?.token as string | undefined;
+      const accessToken = queryParams?.accessToken as string;
+      const refreshToken = queryParams?.refreshToken as string;
+      const userData = queryParams?.user as string;
 
-      if (!token) {
-        console.error("No token in redirect");
+      if (!accessToken || !refreshToken) {
+        console.error("No tokens received");
         return;
       }
 
-      await SecureStore.setItemAsync("auth_token", token);
-      await refreshSession();
+      if (!userData) {
+        console.error("Missing user data");
+        return;
+      }
+
+      // Step 4: Store tokens
+      await SecureStore.setItemAsync("access_token", accessToken);
+      await SecureStore.setItemAsync("refresh_token", refreshToken);
+      await SecureStore.setItemAsync("user_data", userData);
+
+      setUser(JSON.parse(userData));
     } catch (err) {
       console.error("Login error:", err);
     }
   };
 
-  const logout = async () => {
-    await SecureStore.deleteItemAsync("auth_token");
-    setUser(undefined);
-    await fetch(`${apiBaseUrl}/auth/workos/logout`);
+  const refreshSession = async () => {
+    try {
+      const refreshToken = await SecureStore.getItemAsync("refresh_token");
+      if (!refreshToken) {
+        setUser(undefined);
+        return;
+      }
+
+      const res = await fetch(`${apiBaseUrl}/auth/refresh`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken }),
+      });
+
+      if (!res.ok) {
+        await SecureStore.getItemAsync("access_token");
+        await SecureStore.getItemAsync("refresh_token");
+        await SecureStore.deleteItemAsync("user_data");
+        setUser(undefined);
+        return;
+      }
+
+      const data = await res.json();
+      await SecureStore.setItemAsync("access_token", data.accessToken);
+      await SecureStore.setItemAsync("refresh_token", data.refreshToken);
+      await SecureStore.setItemAsync("user_data", JSON.stringify(data.user));
+      setUser(data.user);
+      return;
+    } catch (err) {
+      console.error("Refresh error: ", err);
+      // Don't clear user state on network errors - keep cached state
+      return;
+    }
   };
 
-  // Bootstrap auth on app start
+  const logout = async () => {
+    // Clear all stored auth data
+    await SecureStore.deleteItemAsync("access_token");
+    await SecureStore.deleteItemAsync("refresh_token");
+    await SecureStore.deleteItemAsync("user_data");
+    setUser(undefined);
+  };
+
   useEffect(() => {
-    refreshSession();
+    const initAuth = async () => {
+      setIsLoading(true);
+
+      try {
+        // Check if user has logged in before
+        const storedUser = await SecureStore.getItemAsync("user_data");
+        const refreshToken = await SecureStore.getItemAsync("refresh_token");
+
+        if (storedUser && refreshToken) {
+          // User has logged in before - restore their session immediately
+          setUser(JSON.parse(storedUser));
+
+          // Refresh token in background to:
+          // 1. Validate session is still valid
+          // 2. Get fresh user data
+          // 3. Get new access token if needed
+          // Don't await - let app load instantly
+          refreshSession().catch((err) => {
+            console.error("Background refresh failed:", err);
+            // User keeps cached state even if refresh fails
+          });
+        }
+        // If no stored data, user hasn't logged in - do nothing
+        // Let them continue using the app as guest
+      } catch (err) {
+        console.error("Error initializing auth:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, refreshSession }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, refreshSession, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );
