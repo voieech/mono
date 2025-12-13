@@ -6,7 +6,7 @@ import express from "express";
 
 import { apiDB, genPodcastEpisodeBaseQuery } from "../kysely/index.js";
 import { generateRssXml } from "../rss/index.js";
-import { authRoutes } from "./auth/index.js";
+import { authRoutes, userRoutes } from "./auth/index.js";
 import { localeMiddleware } from "./locale/index.js";
 
 export function bootstrapHttpServer() {
@@ -20,6 +20,7 @@ export function bootstrapHttpServer() {
     .use(cookieParser())
 
     .use(authRoutes)
+    .use(userRoutes)
 
     .get("/", (_, res) => {
       res.status(200).end("ok");
