@@ -1,6 +1,7 @@
 import { useLingui } from "@lingui/react/macro";
 import { BottomTabBar } from "@react-navigation/bottom-tabs";
 import { Tabs } from "expo-router";
+import { useFeatureFlag } from "posthog-react-native";
 import { Platform, View } from "react-native";
 
 import {
@@ -13,6 +14,7 @@ import { Colors } from "@/constants";
 import { useTheme } from "@/hooks";
 
 export default function TabLayout() {
+  const isInternalUser = useFeatureFlag("internal");
   const theme = useTheme();
   const { t } = useLingui();
   return (
@@ -123,15 +125,17 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: t`Me`,
-            tabBarIcon: ({ color, size }) => (
-              <Icon size={size} name="person" color={color} />
-            ),
-          }}
-        />
+        {(__DEV__ || isInternalUser) && (
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: t`Me`,
+              tabBarIcon: ({ color, size }) => (
+                <Icon size={size} name="person" color={color} />
+              ),
+            }}
+          />
+        )}
       </Tabs>
     </View>
   );
