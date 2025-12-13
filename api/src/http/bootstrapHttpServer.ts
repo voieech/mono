@@ -8,7 +8,6 @@ import { apiDB, genPodcastEpisodeBaseQuery } from "../kysely/index.js";
 import { generateRssXml } from "../rss/index.js";
 import { authRoutes } from "./auth/index.js";
 import { localeMiddleware } from "./locale/index.js";
-import { userRoutes } from "./user/index.js";
 
 export function bootstrapHttpServer() {
   express()
@@ -23,7 +22,6 @@ export function bootstrapHttpServer() {
     .use(express.json())
 
     .use(authRoutes)
-    .use(userRoutes)
 
     .get("/", (_, res) => {
       res.status(200).end("ok");
