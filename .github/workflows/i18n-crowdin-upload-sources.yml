@@ -8,7 +8,7 @@ run-name: Changes by ${{ github.actor }} triggered upload of translation source 
 # code (.ts, .tsx files) to generate "$locale/messages.po" file for every single
 # locale defined in "lingui.config.js", and commit the changes.
 #
-# Push .po file source strings to crowdin.
+# Push .po file source strings to a TaaS.
 
 on:
   workflow_dispatch:
@@ -41,6 +41,9 @@ jobs:
         with:
           node-version: lts/*
 
+      # @todo
+      # Potentially optimise by only installing some dependencies, e.g. like
+      # only install lingui, and maybe install as a global package
       - name: Install dependencies
         run: npm ci
 
@@ -60,12 +63,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Crowdin push
-        uses: crowdin/github-action@v2
-        with:
-          upload_sources: true
-          upload_translations: false
-          download_translations: false
-        env:
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      # @todo Replace with another TaaS
+      # - name: Crowdin push
+      #   uses: crowdin/github-action@v2
+      #   with:
+      #     upload_sources: true
+      #     upload_translations: false
+      #     download_translations: false
+      #   env:
+      #     CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+      #     CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
