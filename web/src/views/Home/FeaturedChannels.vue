@@ -51,7 +51,7 @@ const {
     <p class="pb-4 text-2xl text-zinc-800">Featured Channels</p>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-8">
-      <template v-for="channel of featuredChannels" :key="channel.vanityID">
+      <template v-for="channel of featuredChannels" :key="channel.id">
         <RouterLink
           :to="{
             name: PodcastChannelRoute.name,
