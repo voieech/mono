@@ -3,6 +3,7 @@ import type { Episode, Channel } from "dto";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import { sql } from "kysely";
 
 import { apiDB, genPodcastEpisodeBaseQuery } from "../kysely/index.js";
 import { generateRssXml } from "../rss/index.js";
@@ -62,6 +63,7 @@ export function bootstrapHttpServer() {
           ),
         )
         // @todo Ordery by popularity
+        .orderBy(sql`random()`)
         .limit(limit)
         .execute();
 
