@@ -1,11 +1,11 @@
-name: i18n Crowdin - download translations
-run-name: ${{ github.actor }} requested to download translations from crowdin
+name: i18n - download translations and create PR
+run-name: ${{ github.actor }} requested to download translations from TaaS and create PR with changes
 
 ###### Description ######
-# This workflow will be triggered by crowdin webhook when translations are all
+# This workflow will be triggered by TaaS webhook when translations are
 # completed, or manually via workflow dispatch.
 #
-# 1. This will download the transactions from crowdin
+# 1. This will download the transactions from TaaS
 # 2. Use "lingui extract" command to ensure that the formatting of the .po files
 #    are correct.
 # 3. Create PR with the changes.
@@ -19,7 +19,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  crowdin-download:
+  download-and-create-PR:
     runs-on: ubuntu-latest
 
     defaults:
@@ -66,11 +66,11 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: i18n_crowdin_translations
+          branch: i18n_translations
           base: master
-          title: New Crowdin translations
+          title: New i18n translations
           body: ""
-          commit-message: "ci-chore: download updated *.po from crowdin"
+          commit-message: "ci-chore: updated *.po"
 
           # Use GH Actions bot as both the author and committer instead of
           # defaulting to the user account that triggered the job.
