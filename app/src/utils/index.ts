@@ -2,6 +2,7 @@
  * Barrel file.
  */
 
+export * from "./auth";
 export * from "./createUseContextHook";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
