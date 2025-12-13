@@ -143,6 +143,7 @@ export default function Profile() {
         <ProfileRow label="Member Since" value={formatDate(user?.createdAt)} />
       </Collapsible>
 
+      {/* TODO: Add actionable component when ready */}
       <Collapsible
         title="Preferences"
         expandedViewStyle={{
@@ -168,6 +169,7 @@ export default function Profile() {
         />
       </Collapsible>
 
+      {/* TODO: Add actionable component when ready */}
       <Collapsible
         title="About"
         expandedViewStyle={{
