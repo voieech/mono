@@ -1,5 +1,5 @@
-name: i18n Crowdin - upload sources
-run-name: Changes by ${{ github.actor }} triggered upload of translation source files to crowdin for translation
+name: i18n - extract and upload sources
+run-name: Changes by ${{ github.actor }} triggered extraction and upload of translation source files to TaaS for translation
 
 ###### Description ######
 # This workflow will be triggered on changes to the app/ UI codes.
@@ -21,7 +21,7 @@ on:
   #     - "app/src/**/*.tsx"
 
 jobs:
-  crowdin-upload:
+  extract-and-upload:
     runs-on: ubuntu-latest
 
     # Need write access to auto commit generated changes to .po file
