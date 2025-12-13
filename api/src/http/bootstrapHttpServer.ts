@@ -6,8 +6,9 @@ import express from "express";
 
 import { apiDB, genPodcastEpisodeBaseQuery } from "../kysely/index.js";
 import { generateRssXml } from "../rss/index.js";
-import { authRoutes, userRoutes } from "./auth/index.js";
+import { authRoutes } from "./auth/index.js";
 import { localeMiddleware } from "./locale/index.js";
+import { userRoutes } from "./user/index.js";
 
 export function bootstrapHttpServer() {
   express()
@@ -18,6 +19,8 @@ export function bootstrapHttpServer() {
     .use(localeMiddleware)
 
     .use(cookieParser())
+    // Middleware to parse json request body
+    .use(express.json())
 
     .use(authRoutes)
     .use(userRoutes)
