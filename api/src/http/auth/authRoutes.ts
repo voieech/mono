@@ -1,3 +1,5 @@
+import type { User } from "@workos-inc/node";
+
 import express from "express";
 
 import {
@@ -68,13 +70,7 @@ export const authRoutes = express
 
       // Handle based on client type
       if (state.target === "mobile") {
-        const userData = {
-          id: authenticationResponse.user.id,
-          email: authenticationResponse.user.email,
-          firstName: authenticationResponse.user.firstName,
-          lastName: authenticationResponse.user.lastName,
-          createdAt: authenticationResponse.user.createdAt,
-        };
+        const userData = mapWorkOsUser(authenticationResponse.user);
         // For mobile: redirect to app with tokens
         return res.redirect(
           `voieech://auth/callback?` +
@@ -135,12 +131,7 @@ export const authRoutes = express
         });
 
       res.json({
-        user: {
-          id: refreshed.user.id,
-          email: refreshed.user.email,
-          firstName: refreshed.user.firstName,
-          lastName: refreshed.user.lastName,
-        },
+        user: mapWorkOsUser(refreshed.user),
         accessToken: refreshed.accessToken,
         refreshToken: refreshed.refreshToken,
       });
@@ -166,3 +157,16 @@ export const authRoutes = express
     );
     res.clearCookie(WORKOS_COOKIE_NAME);
   });
+
+function mapWorkOsUser(user: User) {
+  return {
+    id: user.id,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    emailVerified: user.emailVerified,
+    profilePictureUrl: user.profilePictureUrl,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+  };
+}
