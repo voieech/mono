@@ -1,5 +1,5 @@
 import { Trans } from "@lingui/react/macro";
-import { View, Pressable } from "react-native";
+import { View, Pressable, Image } from "react-native";
 
 import {
   ParallaxScrollViewContainer,
@@ -11,8 +11,30 @@ import {
 
 export default function Profile() {
   const { user, login, logout } = useAuth();
+
+  // Helper to get full name
+  const getFullName = () => {
+    if (!user) return "Guest User";
+    if (user.firstName && user.lastName) {
+      return `${user.firstName} ${user.lastName}`;
+    }
+    if (user.firstName) return user.firstName;
+    if (user.lastName) return user.lastName;
+    return "Guest User";
+  };
+
+  // Helper to format date
+  const formatDate = (dateString?: string) => {
+    console.log(dateString);
+    if (!dateString) return "N/A";
+    try {
+      return new Date(dateString).toLocaleDateString();
+    } catch {
+      return "N/A";
+    }
+  };
+
   return (
-    // @ Todo add user image if any or remove
     <ParallaxScrollViewContainer
       headerImage={
         <Icon
@@ -46,24 +68,62 @@ export default function Profile() {
           gap: 12,
         }}
       >
-        <View
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: 40,
-            backgroundColor: "#333",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Icon name="person" size={40} color="#999" />
-        </View>
+        {user?.profilePictureUrl ? (
+          <View
+            style={{
+              width: 80,
+              height: 80,
+              borderRadius: 40,
+              backgroundColor: "#333",
+            }}
+          >
+            {/* TODO: Add Image component when ready */}
+            <Image
+              source={{ uri: user.profilePictureUrl }}
+              style={{ width: 80, height: 80, borderRadius: 40 }}
+            />
+          </View>
+        ) : (
+          <View
+            style={{
+              width: 80,
+              height: 80,
+              borderRadius: 40,
+              backgroundColor: "#333",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Icon name="person" size={40} color="#999" />
+          </View>
+        )}
+
         <ThemedText type="defaultSemiBold" style={{ fontSize: 18 }}>
-          {user?.name || "Guest User"}
+          {getFullName()}
         </ThemedText>
+
         <ThemedText style={{ fontSize: 14, color: "#999" }}>
           {user?.email || "Not logged in"}
         </ThemedText>
+
+        {user?.emailVerified && (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 4,
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+              backgroundColor: "#166534",
+              borderRadius: 8,
+            }}
+          >
+            <Icon name="checkmark" size={14} color="#22c55e" />
+            <ThemedText style={{ fontSize: 12, color: "#22c55e" }}>
+              Verified
+            </ThemedText>
+          </View>
+        )}
       </View>
 
       <Collapsible
@@ -74,18 +134,15 @@ export default function Profile() {
           paddingBottom: 32,
         }}
       >
-        <ProfileRow label="ID" value={user?.id ?? "000000000"} />
-        <ProfileRow label="Username" value={user?.username ?? "Guest User"} />
-
-        <ProfileRow label="Phone" value={user?.phone ?? "N/A"} />
-
+        <ProfileRow label="Name" value={getFullName()} />
+        <ProfileRow label="Email" value={user?.email || "N/A"} />
         <ProfileRow
-          label="Member Since"
-          value={user?.memberSince ?? new Date().toLocaleDateString()}
+          label="Email Verified"
+          value={user?.emailVerified ? "Yes" : "No"}
         />
+        <ProfileRow label="Member Since" value={formatDate(user?.createdAt)} />
       </Collapsible>
 
-      {/* @ Todo create actionable item */}
       <Collapsible
         title="Preferences"
         expandedViewStyle={{
@@ -111,7 +168,6 @@ export default function Profile() {
         />
       </Collapsible>
 
-      {/* @ Todo create actionable item */}
       <Collapsible
         title="About"
         expandedViewStyle={{
@@ -137,7 +193,7 @@ export default function Profile() {
         />
       </Collapsible>
 
-      {/* Sign Out Button */}
+      {/* Sign Out/In Button */}
       {user ? (
         <Pressable
           style={{
@@ -202,7 +258,8 @@ function ProfileActionRow({
     | "person"
     | "magnifyingglass"
     | "chevron.right"
-    | "chevron.left";
+    | "chevron.left"
+    | "checkmark";
   onPress: () => void;
 }) {
   return (
