@@ -1,5 +1,6 @@
 import express from "express";
 
+import { signMobileJwt } from "./jwt.js";
 import {
   workos,
   WORKOS_CLIENT_ID,
@@ -15,7 +16,8 @@ export const authRoutes = express
   .Router()
 
   // Redirect user here to generate WorkOS AuthKit link for user to authenticate
-  .get("/auth/workos/login", (_, res) => {
+  .get("/auth/workos/login", (req, res) => {
+    const target = req.query["target"] ?? "web";
     const authorizationUrl = workos.userManagement.getAuthorizationUrl({
       clientId: WORKOS_CLIENT_ID,
 
@@ -24,6 +26,9 @@ export const authRoutes = express
 
       // Callback endpoint that WorkOS redirects to after a user authenticates
       redirectUri: WORKOS_REDIRECT_URI,
+
+      // Encode context in state
+      state: JSON.stringify({ target }),
     });
 
     // Redirect the user to the AuthKit sign-in page
@@ -35,6 +40,11 @@ export const authRoutes = express
   .get("/auth/workos/login/callback", async (req, res) => {
     // Get authorization code string returned by AuthKit
     const code = req.query["code"]?.toString?.();
+
+    const state = req.query["state"]
+      ? JSON.parse(req.query["state"].toString())
+      : { target: "web" };
+
     if (code === undefined) {
       res.status(400).send("No auth code provided");
       return;
@@ -61,6 +71,18 @@ export const authRoutes = express
 
       // Use the information in `user` as needed for other business logic
       // authenticationResponse.user;
+
+      // Redirect based on client type
+      if (state.target === "mobile") {
+        const token = signMobileJwt({
+          id: authenticationResponse.user.id,
+          email: authenticationResponse.user.email,
+        });
+
+        return res.redirect(
+          `voieech://auth/callback?token=${encodeURIComponent(token)}`,
+        );
+      }
 
       // @todo Modifiable
       // Redirect the user to the homepage
