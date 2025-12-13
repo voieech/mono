@@ -9,4 +9,5 @@ export interface AuthContextValue {
   login: () => Promise<void>;
   logout: () => Promise<void>;
   refreshSession: () => Promise<void>;
+  isLoading: boolean;
 }
