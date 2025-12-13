@@ -21,6 +21,7 @@ import {
   ExperimentalSurfaceProvider,
   SettingsProvider,
   TrackPlayerProvider,
+  AuthProvider,
 } from "@/components";
 import { useTheme } from "@/hooks";
 import { queryClient, posthog } from "@/utils";
@@ -82,8 +83,10 @@ export function AppRoot(props: PropsWithChildren) {
                     <ExperimentalSurfaceProvider>
                       <SettingsProvider>
                         <TrackPlayerProvider>
-                          <StatusBar style="auto" />
-                          {props.children}
+                          <AuthProvider>
+                            <StatusBar style="auto" />
+                            {props.children}
+                          </AuthProvider>
                         </TrackPlayerProvider>
                       </SettingsProvider>
                     </ExperimentalSurfaceProvider>
