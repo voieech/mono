@@ -163,26 +163,29 @@ export default function HomeScreen() {
                     flex: 1,
                     borderTopRightRadius: 16,
                     borderBottomRightRadius: 16,
-                    padding: 16,
+                    paddingVertical: 4,
+                    paddingHorizontal: 16,
                     backgroundColor: "#3f3f46",
                   }}
                 >
                   <ThemedText
                     style={{
-                      paddingBottom: 2,
+                      paddingBottom: 8,
                     }}
                     numberOfLines={2}
                   >
                     {episode.title}
                   </ThemedText>
+                  <ThemedText numberOfLines={2}>
+                    {episode.channel_name}
+                  </ThemedText>
                   <ThemedText
                     style={{
-                      fontSize: 12,
+                      fontSize: 14,
+                      lineHeight: 0,
                     }}
                   >
                     {episode.created_at.split("T")[0]}
-                    {"\n"}
-                    {Math.trunc(episode.audio_length / 60)} mins
                   </ThemedText>
                 </ThemedView>
               </ThemedView>
