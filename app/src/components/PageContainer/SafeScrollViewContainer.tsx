@@ -1,10 +1,7 @@
 import type { PropsWithChildren } from "react";
 import type { RefreshControlProps } from "react-native";
 
-import { SafeAreaView } from "react-native-safe-area-context";
-
-import { useThemeColor } from "@/hooks";
-
+import { SafeAreaViewContainer } from "./SafeAreaViewContainer";
 import { ScrollViewContainer } from "./ScrollViewContainer";
 
 /**
@@ -15,17 +12,10 @@ export function SafeScrollViewContainer(
     refreshControl?: React.ReactElement<RefreshControlProps>;
   }>,
 ) {
-  const backgroundColor = useThemeColor("background");
-
   return (
     // @todo Only do this when there is no Tab / Navigation header
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor,
-      }}
-    >
+    <SafeAreaViewContainer>
       <ScrollViewContainer>{props.children}</ScrollViewContainer>
-    </SafeAreaView>
+    </SafeAreaViewContainer>
   );
 }
