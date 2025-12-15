@@ -263,6 +263,38 @@ export default function Settings() {
           )}
         </View>
       </Collapsible>
+      {(__DEV__ || isInternalUser) && (
+        <Collapsible
+          title={t`Personalisation`}
+          expandedViewStyle={{
+            paddingTop: 16,
+            rowGap: 16,
+            paddingBottom: 32,
+          }}
+        >
+          <Link
+            href={{
+              pathname: "/(onboarding)/default-content-preference-selection",
+            }}
+          >
+            <View
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                backgroundColor: "black",
+                borderRadius: 16,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignContent: "center",
+                width: "100%",
+              }}
+            >
+              <ThemedText>Customise content preferences</ThemedText>
+              <Icon name="chevron.right" color="white" />
+            </View>
+          </Link>
+        </Collapsible>
+      )}
       <Collapsible
         title={t`Details`}
         expandedViewStyle={{
