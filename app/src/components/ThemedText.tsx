@@ -4,14 +4,14 @@ import { Text } from "react-native";
 
 import { useThemeColor } from "@/hooks";
 
-type TextTypes = "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
+type TextTypes = "default" | "semiBold" | "title" | "subtitle" | "link";
 
 export const TextTypeStyles: Record<TextTypes, StyleProp<TextStyle>> = {
   default: {
     fontSize: 16,
     lineHeight: 24,
   },
-  defaultSemiBold: {
+  semiBold: {
     fontSize: 16,
     lineHeight: 24,
     fontWeight: "600",

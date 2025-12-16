@@ -37,7 +37,7 @@ export function Collapsible(
           style={{ transform: [{ rotate: isOpen ? "90deg" : "0deg" }] }}
         />
 
-        <ThemedText type="defaultSemiBold">{props.title}</ThemedText>
+        <ThemedText type="semiBold">{props.title}</ThemedText>
       </TouchableOpacity>
       {isOpen && (
         <ThemedView

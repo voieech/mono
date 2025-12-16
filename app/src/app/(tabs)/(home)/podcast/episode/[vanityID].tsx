@@ -267,7 +267,7 @@ export default function PodcastEpisode() {
             }}
           />
           <ThemedText
-            type="defaultSemiBold"
+            type="semiBold"
             style={{
               paddingBottom: 8,
             }}

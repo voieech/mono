@@ -135,7 +135,7 @@ export default function DefaultContentPreferenceSelection() {
                 }}
               >
                 <ThemedText
-                  type="defaultSemiBold"
+                  type="semiBold"
                   style={{
                     paddingBottom: 8,
                   }}
@@ -200,7 +200,7 @@ export default function DefaultContentPreferenceSelection() {
           }}
           onPress={saveAndNext}
         >
-          <ThemedText type="defaultSemiBold">
+          <ThemedText type="semiBold">
             <Trans>Save</Trans>
           </ThemedText>
         </Pressable>

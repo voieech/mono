@@ -100,7 +100,7 @@ export default function Profile() {
             </View>
           )}
 
-          <ThemedText type="defaultSemiBold" style={{ fontSize: 18 }}>
+          <ThemedText type="semiBold" style={{ fontSize: 18 }}>
             {getFullName()}
           </ThemedText>
 
@@ -212,7 +212,7 @@ export default function Profile() {
             }}
             onPress={logout}
           >
-            <ThemedText type="defaultSemiBold" style={{ color: "#fff" }}>
+            <ThemedText type="semiBold" style={{ color: "#fff" }}>
               <Trans>Sign Out</Trans>
             </ThemedText>
           </Pressable>
@@ -227,7 +227,7 @@ export default function Profile() {
             }}
             onPress={login}
           >
-            <ThemedText type="defaultSemiBold" style={{ color: "#fff" }}>
+            <ThemedText type="semiBold" style={{ color: "#fff" }}>
               <Trans>Sign In</Trans>
             </ThemedText>
           </Pressable>
@@ -247,7 +247,7 @@ function ProfileRow({ label, value }: { label: string; value: string }) {
         borderRadius: 16,
       }}
     >
-      <ThemedText type="defaultSemiBold">{label}</ThemedText>
+      <ThemedText type="semiBold">{label}</ThemedText>
       <ThemedText style={{ fontSize: 14, color: "#999", marginTop: 4 }}>
         {value}
       </ThemedText>

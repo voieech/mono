@@ -98,7 +98,7 @@ export default function Settings() {
             borderRadius: 16,
           }}
         >
-          <ThemedText type="defaultSemiBold">
+          <ThemedText type="semiBold">
             {linguiMsgToString(
               settingContext.settings.externalMediaControls.name,
             )}
@@ -304,7 +304,7 @@ export default function Settings() {
         }}
       >
         <View>
-          <ThemedText type="defaultSemiBold">App Version</ThemedText>
+          <ThemedText type="semiBold">App Version</ThemedText>
           <View
             style={{
               paddingVertical: 8,
@@ -323,7 +323,7 @@ export default function Settings() {
           </View>
         </View>
         <View>
-          <ThemedText type="defaultSemiBold">Posthog Distinct ID</ThemedText>
+          <ThemedText type="semiBold">Posthog Distinct ID</ThemedText>
           <CopyOnPress
             text={posthogDistinctID}
             onCopy={() => {
@@ -419,7 +419,7 @@ export default function Settings() {
               experimentalSurfaceName="default"
             />
             <ThemedText
-              type="defaultSemiBold"
+              type="semiBold"
               style={{
                 paddingVertical: 4,
               }}
@@ -437,7 +437,7 @@ export default function Settings() {
             >
               <View>
                 <ThemedText
-                  type="defaultSemiBold"
+                  type="semiBold"
                   style={{
                     paddingBottom: 4,
                   }}
@@ -455,7 +455,7 @@ export default function Settings() {
               </View>
               <View>
                 <ThemedText
-                  type="defaultSemiBold"
+                  type="semiBold"
                   style={{
                     paddingBottom: 4,
                   }}
