@@ -9,7 +9,7 @@ import {
   SafeScrollViewContainer,
   FullScreenLoader,
   ThemedView,
-  OldThemedText,
+  ThemedText,
   ShareChannelIcon,
 } from "@/components";
 import { NotFoundError } from "@/errors";
@@ -41,9 +41,7 @@ export default function PodcastChannel() {
 
     return (
       <SafeScrollViewContainer>
-        <OldThemedText>
-          Error: {podcastChannelQuery.error.message}
-        </OldThemedText>
+        <ThemedText>Error: {podcastChannelQuery.error.message}</ThemedText>
       </SafeScrollViewContainer>
     );
   }
@@ -76,9 +74,14 @@ export default function PodcastChannel() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <OldThemedText type="title">
+      <ThemedText
+        type="xl-normal"
+        style={{
+          marginBottom: 8,
+        }}
+      >
         {podcastChannelQuery.data.name}
-      </OldThemedText>
+      </ThemedText>
       <ThemedView
         style={{
           flexDirection: "row",
@@ -91,18 +94,20 @@ export default function PodcastChannel() {
             flex: 1,
           }}
         >
-          <OldThemedText>{podcastChannelQuery.data.description}</OldThemedText>
+          <ThemedText type="base-light">
+            {podcastChannelQuery.data.description}
+          </ThemedText>
           {podcastChannelQuery.data.category_primary !== null && (
-            <OldThemedText
+            <ThemedText
+              type="sm-light"
               style={{
-                marginTop: 4,
-                fontSize: 12,
+                marginTop: 8,
               }}
             >
               {podcastChannelQuery.data.category_primary}
               {podcastChannelQuery.data.subcategory_primary !== null &&
                 `, ${podcastChannelQuery.data.subcategory_primary}`}
-            </OldThemedText>
+            </ThemedText>
           )}
         </ThemedView>
         <ShareChannelIcon channel={podcastChannelQuery.data} size={32} />
@@ -111,16 +116,15 @@ export default function PodcastChannel() {
         !podcastChannelEpisodesQuery.isError &&
         podcastChannelEpisodesQuery.data !== undefined && (
           <>
-            <OldThemedText
+            <ThemedText
+              type="lg-light"
               style={{
                 paddingTop: 20,
                 paddingBottom: 8,
-                fontSize: 20,
               }}
-              type="subtitle"
             >
               <Trans>Featured</Trans>
-            </OldThemedText>
+            </ThemedText>
             {podcastChannelEpisodesQuery.data.map((episode) => {
               const episodeLengthInMins = Math.trunc(episode.audio_length / 60);
               return (
@@ -159,27 +163,25 @@ export default function PodcastChannel() {
                         flex: 1,
                         borderTopRightRadius: 16,
                         borderBottomRightRadius: 16,
-                        padding: 16,
+                        paddingHorizontal: 16,
+                        paddingVertical: 8,
                         backgroundColor: "#3f3f46",
+                        rowGap: 8,
                       }}
                     >
-                      <OldThemedText
+                      <ThemedText
+                        numberOfLines={3}
                         style={{
                           paddingBottom: 2,
                         }}
-                        numberOfLines={2}
                       >
                         {episode.title}
-                      </OldThemedText>
-                      <OldThemedText
-                        style={{
-                          fontSize: 12,
-                        }}
-                      >
+                      </ThemedText>
+                      <ThemedText type="sm-thin">
                         {episode.created_at.split("T")[0]}
                         {"\n"}
                         <Trans>{episodeLengthInMins} mins</Trans>
-                      </OldThemedText>
+                      </ThemedText>
                     </ThemedView>
                   </ThemedView>
                 </Link>
