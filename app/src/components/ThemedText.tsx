@@ -2,7 +2,7 @@ import type { TextProps, StyleProp, TextStyle } from "react-native";
 
 import { useThemeColor } from "@/hooks";
 
-import { ThemedText as NewThemedText } from "./NewThemedText";
+import { ThemedText } from "./NewThemedText";
 
 type TextTypes = "default" | "semiBold" | "title" | "subtitle" | "link";
 
@@ -51,7 +51,7 @@ export function OldThemedText({
   switch (type) {
     case "default":
       return (
-        <NewThemedText
+        <ThemedText
           type="base-normal"
           style={[{ color }, textTypeStyle, style]}
           {...rest}
@@ -59,7 +59,7 @@ export function OldThemedText({
       );
     case "semiBold":
       return (
-        <NewThemedText
+        <ThemedText
           type="base-semibold"
           style={[{ color }, textTypeStyle, style]}
           {...rest}
@@ -67,7 +67,7 @@ export function OldThemedText({
       );
     case "title":
       return (
-        <NewThemedText
+        <ThemedText
           type="xl-bold"
           style={[{ color }, textTypeStyle, style]}
           {...rest}
@@ -75,7 +75,7 @@ export function OldThemedText({
       );
     case "subtitle":
       return (
-        <NewThemedText
+        <ThemedText
           type="lg-semibold"
           style={[{ color }, textTypeStyle, style]}
           {...rest}
@@ -83,7 +83,7 @@ export function OldThemedText({
       );
     case "link":
       return (
-        <NewThemedText
+        <ThemedText
           type="base-normal"
           style={[{ color }, textTypeStyle, style]}
           {...rest}

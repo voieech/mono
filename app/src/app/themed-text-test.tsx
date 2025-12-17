@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Pressable, View, Text } from "react-native";
 
-import { SafeScrollViewContainer, NewThemedText } from "@/components";
+import { SafeScrollViewContainer, ThemedText } from "@/components";
 import { Colors } from "@/constants";
 
 const ThemedTextTypesBySize = [
@@ -184,9 +184,7 @@ function ThemedTextTestViewer(props: { types: Array<string> }) {
                 padding: 16,
               }}
             >
-              <NewThemedText type={type as any}>
-                Testing 123 test.
-              </NewThemedText>
+              <ThemedText type={type as any}>Testing 123 test.</ThemedText>
             </View>
           </View>
         ))}

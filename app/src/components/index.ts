@@ -10,7 +10,7 @@ export * from "./BottomOverlayAudioPlayer";
 export * from "./CopyOnPress";
 export * from "./ExperimentalSurface";
 export * from "./FullScreenLoader";
-export { ThemedText as NewThemedText } from "./NewThemedText";
+export * from "./NewThemedText";
 export * from "./PageContainer";
 export * from "./provided";
 export * from "./Settings";
