@@ -5,7 +5,7 @@ import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
 import {
   SafeAreaViewContainer,
   ScrollViewContainer,
-  OldThemedText,
+  ThemedText,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
@@ -111,20 +111,20 @@ export default function DefaultContentPreferenceSelection() {
               marginBottom: 32,
             }}
           >
-            <OldThemedText
-              type="title"
+            <ThemedText
+              type="xl-bold"
               style={{
                 paddingBottom: 8,
               }}
             >
               <Trans>What interests you?</Trans>
-            </OldThemedText>
-            <OldThemedText>
+            </ThemedText>
+            <ThemedText>
               <Trans>
                 Select topics you like so that we can personalise your starting
                 experience!
               </Trans>
-            </OldThemedText>
+            </ThemedText>
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             {CATEGORIES.map((category) => (
@@ -134,14 +134,14 @@ export default function DefaultContentPreferenceSelection() {
                   paddingBottom: 24,
                 }}
               >
-                <OldThemedText
-                  type="semiBold"
+                <ThemedText
+                  type="base-semibold"
                   style={{
                     paddingBottom: 8,
                   }}
                 >
                   {category.title}
-                </OldThemedText>
+                </ThemedText>
                 <View
                   style={{
                     flexDirection: "row",
@@ -157,22 +157,20 @@ export default function DefaultContentPreferenceSelection() {
                         onPress={() => toggleTag(tag.id)}
                         style={{
                           paddingHorizontal: 16,
-                          paddingVertical: 4,
+                          paddingVertical: 6,
                           borderRadius: 20,
                           backgroundColor: isSelected
                             ? "#3b82f6"
                             : Colors.dark.text,
                         }}
                       >
-                        <OldThemedText
+                        <ThemedText
                           style={{
-                            fontSize: 14,
-                            fontWeight: "500",
-                            color: isSelected ? "#ffffff" : "#374151",
+                            color: isSelected ? "white" : "#374151",
                           }}
                         >
                           {tag.name}
-                        </OldThemedText>
+                        </ThemedText>
                       </Pressable>
                     );
                   })}
@@ -200,9 +198,9 @@ export default function DefaultContentPreferenceSelection() {
           }}
           onPress={saveAndNext}
         >
-          <OldThemedText type="semiBold">
+          <ThemedText type="lg-light">
             <Trans>Save</Trans>
-          </OldThemedText>
+          </ThemedText>
         </Pressable>
       </View>
     </SafeAreaViewContainer>
