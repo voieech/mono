@@ -17,7 +17,7 @@ const TextTypeStyles: Record<TextTypes, StyleProp<TextStyle>> = {
     lineHeight: 24,
   },
   semiBold: {
-    fontWeight: "600",
+    fontWeight: "semibold",
   },
   title: {
     fontSize: 32,
