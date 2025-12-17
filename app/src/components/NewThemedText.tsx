@@ -158,7 +158,7 @@ export function ThemedText({
 }: TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type: TextTypes;
+  type?: TextTypes;
 }) {
   const color = useThemeColor("text", { light: lightColor, dark: darkColor });
   const textTypeStyle = TextTypeStyles[type];
