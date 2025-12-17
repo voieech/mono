@@ -1,8 +1,8 @@
 import type { TextProps, StyleProp, TextStyle } from "react-native";
 
-import { Text } from "react-native";
-
 import { useThemeColor } from "@/hooks";
+
+import { ThemedText as NewThemedText } from "./NewThemedText";
 
 type TextTypes = "default" | "semiBold" | "title" | "subtitle" | "link";
 
@@ -38,25 +38,58 @@ export function ThemedText({
   style,
   lightColor,
   darkColor,
-  type,
+  type = "default",
   ...rest
 }: TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: TextTypes;
+  type: TextTypes;
 }) {
   const color = useThemeColor("text", { light: lightColor, dark: darkColor });
   const textTypeStyle = type && TextTypeStyles[type];
-  return (
-    <Text
-      style={[
-        { color },
-        // Always use default text style as the base for overriding
-        TextTypeStyles.default,
-        textTypeStyle,
-        style,
-      ]}
-      {...rest}
-    />
-  );
+
+  switch (type) {
+    case "default":
+      return (
+        <NewThemedText
+          type="base-normal"
+          style={[{ color }, textTypeStyle, style]}
+          {...rest}
+        />
+      );
+    case "semiBold":
+      return (
+        <NewThemedText
+          type="base-semibold"
+          style={[{ color }, textTypeStyle, style]}
+          {...rest}
+        />
+      );
+    case "title":
+      return (
+        <NewThemedText
+          type="xl-bold"
+          style={[{ color }, textTypeStyle, style]}
+          {...rest}
+        />
+      );
+    case "subtitle":
+      return (
+        <NewThemedText
+          type="lg-semibold"
+          style={[{ color }, textTypeStyle, style]}
+          {...rest}
+        />
+      );
+    case "link":
+      return (
+        <NewThemedText
+          type="base-normal"
+          style={[{ color }, textTypeStyle, style]}
+          {...rest}
+        />
+      );
+    default:
+      throw new Error("Invalid text type", type);
+  }
 }
