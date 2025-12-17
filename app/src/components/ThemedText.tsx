@@ -6,14 +6,17 @@ import { useThemeColor } from "@/hooks";
 
 type TextTypes = "default" | "semiBold" | "title" | "subtitle" | "link";
 
+/**
+ * All `TextTypes` other than `default` will get the `default` styles applied
+ * first, so you only have to specify things to override `default` if needed and
+ * dont have to repeat anything from `default`.
+ */
 const TextTypeStyles: Record<TextTypes, StyleProp<TextStyle>> = {
   default: {
     fontSize: 16,
     lineHeight: 24,
   },
   semiBold: {
-    fontSize: 16,
-    lineHeight: 24,
     fontWeight: "600",
   },
   title: {
@@ -27,7 +30,6 @@ const TextTypeStyles: Record<TextTypes, StyleProp<TextStyle>> = {
   },
   link: {
     lineHeight: 30,
-    fontSize: 16,
     color: "#0a7ea4",
   },
 };
@@ -45,5 +47,16 @@ export function ThemedText({
 }) {
   const color = useThemeColor("text", { light: lightColor, dark: darkColor });
   const textTypeStyle = TextTypeStyles[type];
-  return <Text style={[{ color }, textTypeStyle, style]} {...rest} />;
+  return (
+    <Text
+      style={[
+        { color },
+        // Always use default text style as the base for overriding
+        TextTypeStyles.default,
+        textTypeStyle,
+        style,
+      ]}
+      {...rest}
+    />
+  );
 }
