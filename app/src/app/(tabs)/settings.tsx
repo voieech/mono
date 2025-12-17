@@ -371,6 +371,13 @@ export default function Settings() {
             >
               <ThemedText type="link">Not Found</ThemedText>
             </Link>
+            <Link
+              href={{
+                pathname: "/themed-text-test",
+              }}
+            >
+              <ThemedText type="link">Themed Text Test</ThemedText>
+            </Link>
             <SwitchSettingRow
               settingTitle="Show Debugging Surfaces"
               description="Show internal visual debugging surfaces"

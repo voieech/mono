@@ -61,6 +61,14 @@ function RootLayout() {
           presentation: useCardPlayerInsteadOfModal ? "card" : "modal",
         }}
       />
+      {__DEV__ && (
+        <Stack.Screen
+          name="themed-text-test"
+          options={{
+            presentation: "modal",
+          }}
+        />
+      )}
       <Stack.Screen name="+not-found" />
     </Stack>
   );
