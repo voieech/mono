@@ -1,4 +1,4 @@
-import { ThemedText } from "@/components/ThemedText";
+import { OldThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useProgress } from "@/TrackPlayer";
 
@@ -20,8 +20,8 @@ export function AudioPlayerTime() {
         justifyContent: "space-between",
       }}
     >
-      <ThemedText style={{ fontSize: 12 }}>{currentPos}</ThemedText>
-      <ThemedText style={{ fontSize: 12 }}>-{remainingTime}</ThemedText>
+      <OldThemedText style={{ fontSize: 12 }}>{currentPos}</OldThemedText>
+      <OldThemedText style={{ fontSize: 12 }}>-{remainingTime}</OldThemedText>
     </ThemedView>
   );
 }

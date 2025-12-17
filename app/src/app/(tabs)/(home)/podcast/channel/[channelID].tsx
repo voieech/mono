@@ -9,7 +9,7 @@ import {
   SafeScrollViewContainer,
   FullScreenLoader,
   ThemedView,
-  ThemedText,
+  OldThemedText,
   ShareChannelIcon,
 } from "@/components";
 import { NotFoundError } from "@/errors";
@@ -41,7 +41,9 @@ export default function PodcastChannel() {
 
     return (
       <SafeScrollViewContainer>
-        <ThemedText>Error: {podcastChannelQuery.error.message}</ThemedText>
+        <OldThemedText>
+          Error: {podcastChannelQuery.error.message}
+        </OldThemedText>
       </SafeScrollViewContainer>
     );
   }
@@ -74,7 +76,9 @@ export default function PodcastChannel() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <ThemedText type="title">{podcastChannelQuery.data.name}</ThemedText>
+      <OldThemedText type="title">
+        {podcastChannelQuery.data.name}
+      </OldThemedText>
       <ThemedView
         style={{
           flexDirection: "row",
@@ -87,9 +91,9 @@ export default function PodcastChannel() {
             flex: 1,
           }}
         >
-          <ThemedText>{podcastChannelQuery.data.description}</ThemedText>
+          <OldThemedText>{podcastChannelQuery.data.description}</OldThemedText>
           {podcastChannelQuery.data.category_primary !== null && (
-            <ThemedText
+            <OldThemedText
               style={{
                 marginTop: 4,
                 fontSize: 12,
@@ -98,7 +102,7 @@ export default function PodcastChannel() {
               {podcastChannelQuery.data.category_primary}
               {podcastChannelQuery.data.subcategory_primary !== null &&
                 `, ${podcastChannelQuery.data.subcategory_primary}`}
-            </ThemedText>
+            </OldThemedText>
           )}
         </ThemedView>
         <ShareChannelIcon channel={podcastChannelQuery.data} size={32} />
@@ -107,7 +111,7 @@ export default function PodcastChannel() {
         !podcastChannelEpisodesQuery.isError &&
         podcastChannelEpisodesQuery.data !== undefined && (
           <>
-            <ThemedText
+            <OldThemedText
               style={{
                 paddingTop: 20,
                 paddingBottom: 8,
@@ -116,7 +120,7 @@ export default function PodcastChannel() {
               type="subtitle"
             >
               <Trans>Featured</Trans>
-            </ThemedText>
+            </OldThemedText>
             {podcastChannelEpisodesQuery.data.map((episode) => {
               const episodeLengthInMins = Math.trunc(episode.audio_length / 60);
               return (
@@ -159,15 +163,15 @@ export default function PodcastChannel() {
                         backgroundColor: "#3f3f46",
                       }}
                     >
-                      <ThemedText
+                      <OldThemedText
                         style={{
                           paddingBottom: 2,
                         }}
                         numberOfLines={2}
                       >
                         {episode.title}
-                      </ThemedText>
-                      <ThemedText
+                      </OldThemedText>
+                      <OldThemedText
                         style={{
                           fontSize: 12,
                         }}
@@ -175,7 +179,7 @@ export default function PodcastChannel() {
                         {episode.created_at.split("T")[0]}
                         {"\n"}
                         <Trans>{episodeLengthInMins} mins</Trans>
-                      </ThemedText>
+                      </OldThemedText>
                     </ThemedView>
                   </ThemedView>
                 </Link>

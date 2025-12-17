@@ -2,7 +2,7 @@ import { Marquee } from "@animatereactnative/marquee";
 import { type PropsWithChildren, useState } from "react";
 import { View, ScrollView, type TextStyle } from "react-native";
 
-import { ThemedText } from "./ThemedText";
+import { OldThemedText } from "./ThemedText";
 
 /**
  * @todo Publish as lib to reuse in the other apps
@@ -86,7 +86,9 @@ export function MarqueeText(
                 (props.scrollSpacingAsContainerWidthPercentage ?? 0.2)
               }
             >
-              <ThemedText style={props.textStyle}>{props.text}</ThemedText>
+              <OldThemedText style={props.textStyle}>
+                {props.text}
+              </OldThemedText>
             </Marquee>
           </View>
         ) : (
@@ -97,7 +99,7 @@ export function MarqueeText(
             scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
           >
-            <ThemedText
+            <OldThemedText
               style={props.textStyle}
               onLayout={(e) => {
                 // Set state only if needed to prevent extra re-render
@@ -123,7 +125,7 @@ export function MarqueeText(
               }}
             >
               {props.text}
-            </ThemedText>
+            </OldThemedText>
           </ScrollView>
         ))}
     </View>

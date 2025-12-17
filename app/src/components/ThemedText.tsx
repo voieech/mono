@@ -34,7 +34,7 @@ const TextTypeStyles: Record<TextTypes, StyleProp<TextStyle>> = {
   },
 };
 
-export function ThemedText({
+export function OldThemedText({
   style,
   lightColor,
   darkColor,

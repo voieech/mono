@@ -13,7 +13,7 @@ import {
   SafeScrollViewContainer,
   FullScreenLoader,
   ThemedView,
-  ThemedText,
+  OldThemedText,
   CircularPlayButton,
   CircularPauseButton,
   ShareTrackIcon,
@@ -125,7 +125,7 @@ export default function PodcastEpisode() {
 
     return (
       <SafeScrollViewContainer>
-        <ThemedText>Error: {error?.message}</ThemedText>
+        <OldThemedText>Error: {error?.message}</OldThemedText>
       </SafeScrollViewContainer>
     );
   }
@@ -159,14 +159,14 @@ export default function PodcastEpisode() {
         </ThemedView>
       }
     >
-      <ThemedText
+      <OldThemedText
         type="subtitle"
         style={{
           paddingBottom: 4,
         }}
       >
         {episode.title}
-      </ThemedText>
+      </OldThemedText>
       <Link
         href={{
           pathname: "/podcast/channel/[channelID]",
@@ -179,7 +179,7 @@ export default function PodcastEpisode() {
           alignSelf: "flex-start",
         }}
       >
-        <ThemedText>{episode.channel_name}</ThemedText>
+        <OldThemedText>{episode.channel_name}</OldThemedText>
       </Link>
       <ThemedView
         style={{
@@ -189,7 +189,7 @@ export default function PodcastEpisode() {
           alignItems: "center",
         }}
       >
-        <ThemedText
+        <OldThemedText
           style={{
             fontSize: 14,
             lineHeight: 20,
@@ -202,7 +202,7 @@ export default function PodcastEpisode() {
           {episode.created_at.split("T")[0]}
           {"\n"}
           <Trans>{episodeLengthInMins} mins</Trans>
-        </ThemedText>
+        </OldThemedText>
         <ThemedView
           style={{
             flexDirection: "row",
@@ -255,7 +255,7 @@ export default function PodcastEpisode() {
           paddingBottom: 20,
         }}
       />
-      <ThemedText>{episode.description}</ThemedText>
+      <OldThemedText>{episode.description}</OldThemedText>
       {podcastEpisodeNextReccomendationsQuery.data !== undefined && (
         <>
           <View
@@ -266,14 +266,14 @@ export default function PodcastEpisode() {
               paddingBottom: 20,
             }}
           />
-          <ThemedText
+          <OldThemedText
             type="semiBold"
             style={{
               paddingBottom: 8,
             }}
           >
             <Trans>Reccomended Episodes</Trans>
-          </ThemedText>
+          </OldThemedText>
           {podcastEpisodeNextReccomendationsQuery.data.reccomendations.map(
             (episode) => (
               <View
@@ -317,15 +317,15 @@ export default function PodcastEpisode() {
                         backgroundColor: "#3f3f46",
                       }}
                     >
-                      <ThemedText
+                      <OldThemedText
                         style={{
                           paddingBottom: 2,
                         }}
                         numberOfLines={2}
                       >
                         {episode.title}
-                      </ThemedText>
-                      <ThemedText
+                      </OldThemedText>
+                      <OldThemedText
                         style={{
                           fontSize: 12,
                         }}
@@ -333,7 +333,7 @@ export default function PodcastEpisode() {
                         {episode.created_at.split("T")[0]}
                         {"\n"}
                         {Math.trunc(episode.audio_length / 60)} mins
-                      </ThemedText>
+                      </OldThemedText>
                     </ThemedView>
                   </ThemedView>
                 </Link>

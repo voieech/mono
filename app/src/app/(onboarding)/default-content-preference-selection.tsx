@@ -5,7 +5,7 @@ import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
 import {
   SafeAreaViewContainer,
   ScrollViewContainer,
-  ThemedText,
+  OldThemedText,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
@@ -111,20 +111,20 @@ export default function DefaultContentPreferenceSelection() {
               marginBottom: 32,
             }}
           >
-            <ThemedText
+            <OldThemedText
               type="title"
               style={{
                 paddingBottom: 8,
               }}
             >
               <Trans>What interests you?</Trans>
-            </ThemedText>
-            <ThemedText>
+            </OldThemedText>
+            <OldThemedText>
               <Trans>
                 Select topics you like so that we can personalise your starting
                 experience!
               </Trans>
-            </ThemedText>
+            </OldThemedText>
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             {CATEGORIES.map((category) => (
@@ -134,14 +134,14 @@ export default function DefaultContentPreferenceSelection() {
                   paddingBottom: 24,
                 }}
               >
-                <ThemedText
+                <OldThemedText
                   type="semiBold"
                   style={{
                     paddingBottom: 8,
                   }}
                 >
                   {category.title}
-                </ThemedText>
+                </OldThemedText>
                 <View
                   style={{
                     flexDirection: "row",
@@ -164,7 +164,7 @@ export default function DefaultContentPreferenceSelection() {
                             : Colors.dark.text,
                         }}
                       >
-                        <ThemedText
+                        <OldThemedText
                           style={{
                             fontSize: 14,
                             fontWeight: "500",
@@ -172,7 +172,7 @@ export default function DefaultContentPreferenceSelection() {
                           }}
                         >
                           {tag.name}
-                        </ThemedText>
+                        </OldThemedText>
                       </Pressable>
                     );
                   })}
@@ -200,9 +200,9 @@ export default function DefaultContentPreferenceSelection() {
           }}
           onPress={saveAndNext}
         >
-          <ThemedText type="semiBold">
+          <OldThemedText type="semiBold">
             <Trans>Save</Trans>
-          </ThemedText>
+          </OldThemedText>
         </Pressable>
       </View>
     </SafeAreaViewContainer>

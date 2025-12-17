@@ -4,7 +4,11 @@ import { Link } from "expo-router";
 import { useState } from "react";
 import { RefreshControl, View } from "react-native";
 
-import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
+import {
+  SafeScrollViewContainer,
+  ThemedView,
+  OldThemedText,
+} from "@/components";
 import { useFeaturedChannels } from "@/hooks";
 
 export default function FeaturedChannels() {
@@ -30,7 +34,7 @@ export default function FeaturedChannels() {
             marginBottom: 8,
           }}
         >
-          <ThemedText
+          <OldThemedText
             style={{
               fontSize: 28,
               lineHeight: 28,
@@ -38,7 +42,7 @@ export default function FeaturedChannels() {
             }}
           >
             <Trans>Featured Channels</Trans>
-          </ThemedText>
+          </OldThemedText>
           {featuredChannelsQuery.data.map((channel) => (
             <Link
               key={channel.id}
@@ -76,7 +80,7 @@ export default function FeaturedChannels() {
                     backgroundColor: "#3f3f46",
                   }}
                 >
-                  <ThemedText
+                  <OldThemedText
                     style={{
                       paddingBottom: 2,
                       fontSize: 24,
@@ -84,8 +88,8 @@ export default function FeaturedChannels() {
                     numberOfLines={1}
                   >
                     {channel.name}
-                  </ThemedText>
-                  <ThemedText
+                  </OldThemedText>
+                  <OldThemedText
                     style={{
                       paddingBottom: 4,
                       fontSize: 12,
@@ -93,9 +97,9 @@ export default function FeaturedChannels() {
                     numberOfLines={2}
                   >
                     {channel.description}
-                  </ThemedText>
+                  </OldThemedText>
                   {channel.category_primary !== null && (
-                    <ThemedText
+                    <OldThemedText
                       style={{
                         fontSize: 12,
                       }}
@@ -103,7 +107,7 @@ export default function FeaturedChannels() {
                       {channel.category_primary}
                       {channel.subcategory_primary !== null &&
                         `, ${channel.subcategory_primary}`}
-                    </ThemedText>
+                    </OldThemedText>
                   )}
                 </ThemedView>
               </ThemedView>

@@ -1,10 +1,10 @@
-import { SafeScrollViewContainer, ThemedText } from "@/components";
+import { SafeScrollViewContainer, OldThemedText } from "@/components";
 
 export default function TabTwoScreen() {
   return (
     <SafeScrollViewContainer>
-      <ThemedText type="title">For You</ThemedText>
-      <ThemedText>Personalised content just for you</ThemedText>
+      <OldThemedText type="title">For You</OldThemedText>
+      <OldThemedText>Personalised content just for you</OldThemedText>
     </SafeScrollViewContainer>
   );
 }

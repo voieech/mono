@@ -12,7 +12,7 @@ import type { ExperimentalSurfaceName } from "@/utils";
 
 import {
   ParallaxScrollViewContainer,
-  ThemedText,
+  OldThemedText,
   Icon,
   Collapsible,
   ThemedView,
@@ -53,9 +53,9 @@ export default function Settings() {
         gap: 16,
       }}
     >
-      <ThemedText type="title">
+      <OldThemedText type="title">
         <Trans>Settings</Trans>
-      </ThemedText>
+      </OldThemedText>
 
       <Collapsible
         title={t`Audio Playback`}
@@ -76,9 +76,9 @@ export default function Settings() {
             borderRadius: 16,
           }}
         >
-          <ThemedText>
+          <OldThemedText>
             <Trans>Default audio playback rate</Trans>
-          </ThemedText>
+          </OldThemedText>
           <View
             style={{
               paddingVertical: 2,
@@ -98,12 +98,12 @@ export default function Settings() {
             borderRadius: 16,
           }}
         >
-          <ThemedText type="semiBold">
+          <OldThemedText type="semiBold">
             {linguiMsgToString(
               settingContext.settings.externalMediaControls.name,
             )}
-          </ThemedText>
-          <ThemedText
+          </OldThemedText>
+          <OldThemedText
             style={{
               fontSize: 14,
               color: "#999",
@@ -113,7 +113,7 @@ export default function Settings() {
             {linguiMsgToString(
               settingContext.settings.externalMediaControls.description,
             )}
-          </ThemedText>
+          </OldThemedText>
           <View
             style={{
               backgroundColor: "#777",
@@ -149,13 +149,13 @@ export default function Settings() {
                       alignItems: "center",
                     }}
                   >
-                    <ThemedText
+                    <OldThemedText
                       style={{
                         flexShrink: 1,
                       }}
                     >
                       {linguiMsgToString(option.name)}
-                    </ThemedText>
+                    </OldThemedText>
                     <View>
                       {option.value ===
                         settingContext.getSetting("externalMediaControls") && (
@@ -197,7 +197,7 @@ export default function Settings() {
             borderRadius: 16,
           }}
         >
-          <ThemedText
+          <OldThemedText
             style={{
               fontSize: 14,
               color: "#999",
@@ -207,7 +207,7 @@ export default function Settings() {
             {linguiMsgToString(
               settingContext.settings.contentLanguage.description,
             )}
-          </ThemedText>
+          </OldThemedText>
           <View
             style={{
               backgroundColor: "#777",
@@ -242,13 +242,13 @@ export default function Settings() {
                       alignItems: "center",
                     }}
                   >
-                    <ThemedText
+                    <OldThemedText
                       style={{
                         flexShrink: 1,
                       }}
                     >
                       {linguiMsgToString(option.name)}
-                    </ThemedText>
+                    </OldThemedText>
                     <View>
                       {settingContext
                         .getSetting("contentLanguage")
@@ -289,7 +289,7 @@ export default function Settings() {
                 width: "100%",
               }}
             >
-              <ThemedText>Customise content preferences</ThemedText>
+              <OldThemedText>Customise content preferences</OldThemedText>
               <Icon name="chevron.right" color="white" />
             </View>
           </Link>
@@ -304,7 +304,7 @@ export default function Settings() {
         }}
       >
         <View>
-          <ThemedText type="semiBold">App Version</ThemedText>
+          <OldThemedText type="semiBold">App Version</OldThemedText>
           <View
             style={{
               paddingVertical: 8,
@@ -313,17 +313,19 @@ export default function Settings() {
               borderRadius: 16,
             }}
           >
-            <ThemedText>
+            <OldThemedText>
               Native app version: {nativeApplicationVersion}
-            </ThemedText>
-            <ThemedText>Native build version: {nativeBuildVersion}</ThemedText>
-            <ThemedText>
+            </OldThemedText>
+            <OldThemedText>
+              Native build version: {nativeBuildVersion}
+            </OldThemedText>
+            <OldThemedText>
               Updates: {JSON.stringify(getExpoUpdatesData(), null, 2)}
-            </ThemedText>
+            </OldThemedText>
           </View>
         </View>
         <View>
-          <ThemedText type="semiBold">Posthog Distinct ID</ThemedText>
+          <OldThemedText type="semiBold">Posthog Distinct ID</OldThemedText>
           <CopyOnPress
             text={posthogDistinctID}
             onCopy={() => {
@@ -344,7 +346,7 @@ export default function Settings() {
                 borderRadius: 16,
               }}
             >
-              <ThemedText>{posthogDistinctID}</ThemedText>
+              <OldThemedText>{posthogDistinctID}</OldThemedText>
             </View>
           </CopyOnPress>
         </View>
@@ -361,7 +363,7 @@ export default function Settings() {
                 pathname: "/_sitemap",
               }}
             >
-              <ThemedText type="link">Sitemap</ThemedText>
+              <OldThemedText type="link">Sitemap</OldThemedText>
             </Link>
             <Link
               href={{
@@ -369,14 +371,14 @@ export default function Settings() {
                 params: {},
               }}
             >
-              <ThemedText type="link">Not Found</ThemedText>
+              <OldThemedText type="link">Not Found</OldThemedText>
             </Link>
             <Link
               href={{
                 pathname: "/themed-text-test",
               }}
             >
-              <ThemedText type="link">Themed Text Test</ThemedText>
+              <OldThemedText type="link">Themed Text Test</OldThemedText>
             </Link>
             <SwitchSettingRow
               settingTitle="Show Debugging Surfaces"
@@ -425,14 +427,14 @@ export default function Settings() {
               description="For every surface that didnt specify a custom experiment name"
               experimentalSurfaceName="default"
             />
-            <ThemedText
+            <OldThemedText
               type="semiBold"
               style={{
                 paddingVertical: 4,
               }}
             >
               Debugging Data
-            </ThemedText>
+            </OldThemedText>
             <View
               style={{
                 paddingVertical: 8,
@@ -443,38 +445,38 @@ export default function Settings() {
               }}
             >
               <View>
-                <ThemedText
+                <OldThemedText
                   type="semiBold"
                   style={{
                     paddingBottom: 4,
                   }}
                 >
                   Expo Updates data
-                </ThemedText>
-                <ThemedText>
+                </OldThemedText>
+                <OldThemedText>
                   Latest Context:{" "}
                   {JSON.stringify(ExpoUpdates.latestContext, null, 2)}
-                </ThemedText>
-                <ThemedText>
+                </OldThemedText>
+                <OldThemedText>
                   Update Manifest:{" "}
                   {JSON.stringify(ExpoUpdates.manifest, null, 2)}
-                </ThemedText>
+                </OldThemedText>
               </View>
               <View>
-                <ThemedText
+                <OldThemedText
                   type="semiBold"
                   style={{
                     paddingBottom: 4,
                   }}
                 >
                   Device i18n data
-                </ThemedText>
-                <ThemedText>
+                </OldThemedText>
+                <OldThemedText>
                   deviceLocale: {JSON.stringify(deviceLocale, null, 2)}
-                </ThemedText>
-                <ThemedText>
+                </OldThemedText>
+                <OldThemedText>
                   deviceCalendar: {JSON.stringify(deviceCalendar, null, 2)}
-                </ThemedText>
+                </OldThemedText>
               </View>
             </View>
           </ThemedView>
@@ -539,17 +541,17 @@ function SwitchSettingRow(props: {
             flexGrow: 1,
           }}
         >
-          <ThemedText>{props.settingTitle}</ThemedText>
+          <OldThemedText>{props.settingTitle}</OldThemedText>
           {props.description !== undefined &&
             props.showDescriptionInsideRow && (
-              <ThemedText
+              <OldThemedText
                 style={{
                   fontSize: 12,
                   color: "#999",
                 }}
               >
                 {props.description}
-              </ThemedText>
+              </OldThemedText>
             )}
         </View>
         <View
@@ -569,7 +571,7 @@ function SwitchSettingRow(props: {
         </View>
       </View>
       {props.description !== undefined && !props.showDescriptionInsideRow && (
-        <ThemedText
+        <OldThemedText
           style={{
             paddingHorizontal: 16,
             marginTop: -4,
@@ -579,7 +581,7 @@ function SwitchSettingRow(props: {
           }}
         >
           {props.description}
-        </ThemedText>
+        </OldThemedText>
       )}
     </>
   );
