@@ -38,7 +38,7 @@ export function ThemedText({
   style,
   lightColor,
   darkColor,
-  type = "default",
+  type,
   ...rest
 }: TextProps & {
   lightColor?: string;
@@ -46,7 +46,7 @@ export function ThemedText({
   type?: TextTypes;
 }) {
   const color = useThemeColor("text", { light: lightColor, dark: darkColor });
-  const textTypeStyle = TextTypeStyles[type];
+  const textTypeStyle = type && TextTypeStyles[type];
   return (
     <Text
       style={[
