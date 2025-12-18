@@ -12,7 +12,7 @@ import {
 import {
   SafeScrollViewContainer,
   ThemedView,
-  OldThemedText,
+  ThemedText,
   Icon,
 } from "@/components";
 import { Colors } from "@/constants";
@@ -63,15 +63,9 @@ export default function HomeScreen() {
                 columnGap: 16,
               }}
             >
-              <OldThemedText
-                style={{
-                  fontSize: 28,
-                  lineHeight: 28,
-                  fontWeight: "300",
-                }}
-              >
+              <ThemedText type="lg-light">
                 <Trans>Featured Channels</Trans>
-              </OldThemedText>
+              </ThemedText>
               <Icon name="chevron.right" color={Colors.dark.text} />
             </ThemedView>
           </Link>
@@ -99,16 +93,16 @@ export default function HomeScreen() {
                     }}
                     contentFit="cover"
                   />
-                  <OldThemedText
+                  <ThemedText
+                    type="sm-semibold"
                     numberOfLines={1}
                     style={{
                       paddingTop: 4,
                       color: "#CCC",
-                      fontSize: 14,
                     }}
                   >
                     {channel.name}
-                  </OldThemedText>
+                  </ThemedText>
                 </View>
               </Link>
             ))}
@@ -127,9 +121,9 @@ export default function HomeScreen() {
             marginBottom: 8,
           }}
         >
-          <OldThemedText type="subtitle">
+          <ThemedText type="lg-light">
             <Trans>Featured Episodes</Trans>
-          </OldThemedText>
+          </ThemedText>
           {featuredEpisodesQuery.data.map((episode) => (
             <Link
               key={episode.id}
@@ -168,25 +162,20 @@ export default function HomeScreen() {
                     backgroundColor: "#3f3f46",
                   }}
                 >
-                  <OldThemedText
+                  <ThemedText
+                    numberOfLines={3}
                     style={{
                       paddingBottom: 8,
                     }}
-                    numberOfLines={2}
                   >
                     {episode.title}
-                  </OldThemedText>
-                  <OldThemedText numberOfLines={2}>
+                  </ThemedText>
+                  <ThemedText type="sm-light" numberOfLines={1}>
                     {episode.channel_name}
-                  </OldThemedText>
-                  <OldThemedText
-                    style={{
-                      fontSize: 14,
-                      lineHeight: 0,
-                    }}
-                  >
+                  </ThemedText>
+                  <ThemedText type="sm-light">
                     {episode.created_at.split("T")[0]}
-                  </OldThemedText>
+                  </ThemedText>
                 </ThemedView>
               </ThemedView>
             </Link>
