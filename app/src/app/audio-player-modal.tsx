@@ -13,7 +13,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   SafeScrollViewContainer,
   ThemedView,
-  OldThemedText,
+  ThemedText,
   Icon,
   AudioPlayer,
 } from "@/components";
@@ -58,15 +58,15 @@ export default function AudioPlayerModal() {
               color="white"
             />
           </Pressable>
-          <OldThemedText
+          <ThemedText
+            numberOfLines={1}
             style={{
               textAlign: "center",
               width: windowDimensions.width * 0.6,
             }}
-            numberOfLines={1}
           >
             {activeTrackArtist}
-          </OldThemedText>
+          </ThemedText>
           <Pressable onPress={() => setModalVisible(true)}>
             <Icon name="ellipsis" color="white" />
           </Pressable>

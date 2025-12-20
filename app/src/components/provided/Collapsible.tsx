@@ -1,7 +1,7 @@
 import { PropsWithChildren, useState } from "react";
 import { TouchableOpacity, type ViewStyle } from "react-native";
 
-import { OldThemedText } from "@/components/ThemedText";
+import { ThemedText } from "@/components/NewThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants";
 import { useTheme } from "@/hooks";
@@ -37,7 +37,7 @@ export function Collapsible(
           style={{ transform: [{ rotate: isOpen ? "90deg" : "0deg" }] }}
         />
 
-        <OldThemedText type="semiBold">{props.title}</OldThemedText>
+        <ThemedText type="base-semibold">{props.title}</ThemedText>
       </TouchableOpacity>
       {isOpen && (
         <ThemedView

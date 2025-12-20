@@ -1,4 +1,4 @@
-import { OldThemedText } from "@/components/ThemedText";
+import { ThemedText } from "@/components/NewThemedText";
 import { useProgress } from "@/TrackPlayer";
 
 export function AudioPlayerDebugger() {
@@ -6,9 +6,9 @@ export function AudioPlayerDebugger() {
   const durationAsInt = Math.trunc(progress.duration);
   const bufferedAsInt = Math.trunc(progress.buffered);
   return (
-    <OldThemedText>
+    <ThemedText>
       Buffered: {bufferedAsInt}s{"\n"}
       Total: {durationAsInt}s
-    </OldThemedText>
+    </ThemedText>
   );
 }

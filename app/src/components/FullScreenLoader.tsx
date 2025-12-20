@@ -3,7 +3,7 @@ import type { MessageDescriptor } from "@lingui/core";
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 
-import { OldThemedText } from "@/components/ThemedText";
+import { ThemedText } from "@/components/NewThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { linguiMsgToString } from "@/utils";
 
@@ -53,9 +53,9 @@ export function FullScreenLoader(props: {
         }}
         alt="Loading Image"
       />
-      <OldThemedText type="title">
+      <ThemedText type="xl-bold">
         {linguiMsgToString(loadingMessage)}
-      </OldThemedText>
+      </ThemedText>
     </ThemedView>
   );
 }

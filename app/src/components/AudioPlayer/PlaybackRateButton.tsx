@@ -2,7 +2,7 @@ import { Pressable } from "react-native";
 
 import { useTrackPlayer } from "@/context";
 
-import { OldThemedText } from "../ThemedText";
+import { ThemedText } from "../NewThemedText";
 
 export function PlaybackRateButton(props: {
   /**
@@ -13,13 +13,13 @@ export function PlaybackRateButton(props: {
   const trackPlayer = useTrackPlayer();
   return (
     <Pressable onPress={trackPlayer.updatePlaybackRateByCycling}>
-      <OldThemedText
+      <ThemedText
         style={{
           fontSize: props.fontSize ?? 24,
         }}
       >
         {trackPlayer.playbackRate}x
-      </OldThemedText>
+      </ThemedText>
     </Pressable>
   );
 }

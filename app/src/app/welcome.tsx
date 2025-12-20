@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { OldThemedText } from "@/components";
+import { ThemedText } from "@/components";
 import { useSettingContext } from "@/context";
 
 export default function Welcome() {
@@ -51,9 +51,9 @@ export default function Welcome() {
                   maxHeight: 108,
                 }}
               />
-              <OldThemedText type="subtitle">
+              <ThemedText type="lg-semibold">
                 <Trans>Your Hyper Personalized Podcasts</Trans>
-              </OldThemedText>
+              </ThemedText>
             </View>
             <Pressable
               onPress={() =>
@@ -70,9 +70,14 @@ export default function Welcome() {
                 alignItems: "center",
               })}
             >
-              <OldThemedText type="subtitle" style={{ padding: 15 }}>
+              <ThemedText
+                type="lg-semibold"
+                style={{
+                  padding: 16,
+                }}
+              >
                 <Trans>Start listening</Trans>
-              </OldThemedText>
+              </ThemedText>
             </Pressable>
           </View>
         </View>

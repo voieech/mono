@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   SafeScrollViewContainer,
   ThemedView,
-  OldThemedText,
+  ThemedText,
   Icon,
 } from "@/components";
 import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
@@ -53,7 +53,7 @@ export default function TrackQueueModal() {
                 color="white"
               />
             </Pressable>
-            <OldThemedText
+            <ThemedText
               style={{
                 textAlign: "center",
                 width: windowDimensions.width * 0.6,
@@ -64,7 +64,7 @@ export default function TrackQueueModal() {
                 _0="Player Queue"
                 other="Player Queue (#)"
               />
-            </OldThemedText>
+            </ThemedText>
             <Pressable onPress={trackPlayer.removeUpcomingTracks}>
               <Icon name="trash" color="white" />
             </Pressable>
@@ -75,14 +75,14 @@ export default function TrackQueueModal() {
                 flex: 1,
               }}
             >
-              <OldThemedText
+              <ThemedText
                 style={{
                   textAlign: "center",
                 }}
               >
                 <Trans>Nothing left in Queue!</Trans>
                 {/* @todo Show a graphic + a button to get random reccomendation to start playing */}
-              </OldThemedText>
+              </ThemedText>
             </ThemedView>
           )}
           {queue.map((track) => (
@@ -124,9 +124,9 @@ export default function TrackQueueModal() {
                       backgroundColor: "#3f3f46",
                     }}
                   >
-                    <OldThemedText numberOfLines={3}>
+                    <ThemedText numberOfLines={3}>
                       {track.episode.title}
-                    </OldThemedText>
+                    </ThemedText>
                   </ThemedView>
                 </ThemedView>
               </Pressable>
