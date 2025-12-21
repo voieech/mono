@@ -2,7 +2,7 @@ import type { TextProps, StyleProp, TextStyle } from "react-native";
 
 import { Text } from "react-native";
 
-import type { TextColorNames } from "@/constants";
+import type { ThemeTextColorNames } from "@/constants";
 
 import { useThemeColor } from "@/hooks";
 
@@ -159,7 +159,7 @@ type ThemedTextProps = TextProps & {
    * Color type other than the default "text" color, see `Colors` constant to
    * find a type you want to use
    */
-  colorType?: TextColorNames;
+  colorType?: ThemeTextColorNames;
   /**
    * If you want completely different colors from the prescribed `Colors`
    * constant, and you also want ThemedText's sizing and theming support, you

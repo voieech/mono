@@ -248,33 +248,6 @@ export const Colors = {
   rose800: "#9f1239",
   rose900: "#881337",
   rose950: "#4c0519",
-};
+} as const;
 
-/**
- * App UI component specific colors split by theme.
- */
-export const ThemeColors = {
-  light: {
-    text: Colors.gray950,
-    subtext: Colors.gray950,
-    background: Colors.white,
-    tint: Colors.cyan500,
-    icon: Colors.gray500,
-    tabIconDefault: Colors.gray500,
-    tabIconSelected: Colors.cyan500,
-  },
-  dark: {
-    text: Colors.neutral50,
-    subtext: Colors.neutral300,
-    background: Colors.neutral900,
-    tint: Colors.white,
-    icon: Colors.neutral500,
-    tabIconDefault: Colors.neutral400,
-    tabIconSelected: Colors.white,
-  },
-};
-
-export type ColorNames = keyof typeof ThemeColors.light &
-  keyof typeof ThemeColors.dark;
-
-export type TextColorNames = Extract<ColorNames, `${string}text`>;
+export type ColorValues = (typeof Colors)[keyof typeof Colors];
