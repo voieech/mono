@@ -7,7 +7,7 @@ import {
   ScrollViewContainer,
   ThemedText,
 } from "@/components";
-import { ThemeColors } from "@/constants";
+import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
 import { useBottomTabOverflow } from "@/hooks";
 
@@ -161,7 +161,7 @@ export default function DefaultContentPreferenceSelection() {
                           borderRadius: 20,
                           backgroundColor: isSelected
                             ? "#3b82f6"
-                            : ThemeColors.dark.text,
+                            : Colors.neutral50,
                         }}
                       >
                         <ThemedText
