@@ -2,6 +2,8 @@ import type { TextProps, StyleProp, TextStyle } from "react-native";
 
 import { Text } from "react-native";
 
+import type { TextColorNames } from "@/constants";
+
 import { useThemeColor } from "@/hooks";
 
 type FontSizes = "xl" | "lg" | "base" | "sm" | "xs";
@@ -148,19 +150,36 @@ const TextTypeStyles: Record<TextTypes, StyleProp<TextStyle>> = {
   },
 };
 
-export function ThemedText({
-  style,
-  lightColor,
-  darkColor,
-  type = "base-normal",
-  // @todo limit the style prop passed in
-  ...rest
-}: TextProps & {
-  lightColor?: string;
-  darkColor?: string;
+type ThemedTextProps = TextProps & {
+  /**
+   * Type of text component to render, similar to tailwind style naming
+   */
   type?: TextTypes;
-}) {
-  const color = useThemeColor("text", { light: lightColor, dark: darkColor });
+  /**
+   * Color type other than the default "text" color, see `Colors` constant to
+   * find a type you want to use
+   */
+  colorType?: TextColorNames;
+  /**
+   * If you want completely different colors from the prescribed `Colors`
+   * constant, and you also want ThemedText's sizing and theming support, you
+   * can pass in `customColors`.
+   */
+  customColors?: {
+    light?: string;
+    dark?: string;
+  };
+};
+
+export function ThemedText({
+  type = "base-normal",
+  colorType = "text",
+  customColors,
+  // @todo limit the style prop passed in
+  style,
+  ...rest
+}: ThemedTextProps) {
+  const color = useThemeColor(colorType, customColors);
   const textTypeStyle = TextTypeStyles[type];
   return <Text style={[{ color }, textTypeStyle, style]} {...rest} />;
 }

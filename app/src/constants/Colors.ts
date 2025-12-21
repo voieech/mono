@@ -9,6 +9,7 @@ const tintColorDark = "#fff";
 export const Colors = {
   light: {
     text: "#11181C",
+    subtext: "#11181C",
     background: "#fff",
     tint: tintColorLight,
     icon: "#687076",
@@ -17,6 +18,7 @@ export const Colors = {
   },
   dark: {
     text: "#ECEDEE",
+    subtext: "#999",
     background: "#111111",
     tint: tintColorDark,
     icon: "#9BA1A6",
@@ -24,3 +26,7 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+export type ColorNames = keyof typeof Colors.light & keyof typeof Colors.dark;
+
+export type TextColorNames = Extract<ColorNames, `${string}text`>;
