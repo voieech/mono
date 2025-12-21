@@ -4,11 +4,7 @@ import { Link } from "expo-router";
 import { useState } from "react";
 import { RefreshControl, View } from "react-native";
 
-import {
-  SafeScrollViewContainer,
-  ThemedView,
-  OldThemedText,
-} from "@/components";
+import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { useFeaturedChannels } from "@/hooks";
 
 export default function FeaturedChannels() {
@@ -34,15 +30,9 @@ export default function FeaturedChannels() {
             marginBottom: 8,
           }}
         >
-          <OldThemedText
-            style={{
-              fontSize: 28,
-              lineHeight: 28,
-              fontWeight: "300",
-            }}
-          >
+          <ThemedText type="lg-light">
             <Trans>Featured Channels</Trans>
-          </OldThemedText>
+          </ThemedText>
           {featuredChannelsQuery.data.map((channel) => (
             <Link
               key={channel.id}
@@ -76,38 +66,35 @@ export default function FeaturedChannels() {
                     flex: 1,
                     borderTopRightRadius: 16,
                     borderBottomRightRadius: 16,
-                    padding: 16,
+                    paddingVertical: 8,
+                    paddingHorizontal: 16,
                     backgroundColor: "#3f3f46",
                   }}
                 >
-                  <OldThemedText
-                    style={{
-                      paddingBottom: 2,
-                      fontSize: 24,
-                    }}
+                  <ThemedText
+                    type="lg-normal"
                     numberOfLines={1}
+                    style={{
+                      paddingBottom: 8,
+                    }}
                   >
                     {channel.name}
-                  </OldThemedText>
-                  <OldThemedText
+                  </ThemedText>
+                  <ThemedText
+                    type="sm-light"
+                    numberOfLines={4}
                     style={{
-                      paddingBottom: 4,
-                      fontSize: 12,
+                      paddingBottom: 8,
                     }}
-                    numberOfLines={2}
                   >
                     {channel.description}
-                  </OldThemedText>
+                  </ThemedText>
                   {channel.category_primary !== null && (
-                    <OldThemedText
-                      style={{
-                        fontSize: 12,
-                      }}
-                    >
+                    <ThemedText type="sm-light">
                       {channel.category_primary}
                       {channel.subcategory_primary !== null &&
                         `, ${channel.subcategory_primary}`}
-                    </OldThemedText>
+                    </ThemedText>
                   )}
                 </ThemedView>
               </ThemedView>
