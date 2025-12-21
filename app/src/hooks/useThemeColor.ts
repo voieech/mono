@@ -5,7 +5,7 @@
 
 import type { ColorNames } from "@/constants";
 
-import { Colors } from "@/constants";
+import { ThemeColors } from "@/constants";
 
 import { useTheme } from "./useTheme";
 
@@ -15,5 +15,5 @@ export function useThemeColor(
 ) {
   const theme = useTheme();
   const customColor = customColors?.[theme];
-  return customColor ? customColor : Colors[theme][colorName];
+  return customColor ? customColor : ThemeColors[theme][colorName];
 }

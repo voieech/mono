@@ -6,7 +6,7 @@
 const tintColorLight = "#0a7ea4";
 const tintColorDark = "#fff";
 
-export const Colors = {
+export const ThemeColors = {
   light: {
     text: "#11181C",
     subtext: "#11181C",
@@ -27,6 +27,7 @@ export const Colors = {
   },
 };
 
-export type ColorNames = keyof typeof Colors.light & keyof typeof Colors.dark;
+export type ColorNames = keyof typeof ThemeColors.light &
+  keyof typeof ThemeColors.dark;
 
 export type TextColorNames = Extract<ColorNames, `${string}text`>;

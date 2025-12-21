@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pressable, View, Text } from "react-native";
 
 import { SafeScrollViewContainer, ThemedText } from "@/components";
-import { Colors } from "@/constants";
+import { ThemeColors } from "@/constants";
 
 const ThemedTextTypesBySize = [
   "xl-black",
@@ -169,7 +169,7 @@ function ThemedTextTestViewer(props: { types: Array<string> }) {
           <View key={index}>
             <Text
               style={{
-                color: Colors.dark.text,
+                color: ThemeColors.dark.text,
                 fontSize: 20,
                 paddingBottom: 4,
               }}

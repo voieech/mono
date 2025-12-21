@@ -15,7 +15,7 @@ import {
   ThemedText,
   Icon,
 } from "@/components";
-import { Colors } from "@/constants";
+import { ThemeColors } from "@/constants";
 import { useFeaturedChannels, useFeaturedEpisodes } from "@/hooks";
 
 export default function HomeScreen() {
@@ -66,7 +66,7 @@ export default function HomeScreen() {
               <ThemedText type="lg-light">
                 <Trans>Featured Channels</Trans>
               </ThemedText>
-              <Icon name="chevron.right" color={Colors.dark.text} />
+              <Icon name="chevron.right" color={ThemeColors.dark.text} />
             </ThemedView>
           </Link>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>

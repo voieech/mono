@@ -1,7 +1,7 @@
 import { Pressable, View } from "react-native";
 
 import { Icon } from "@/components/provided";
-import { Colors } from "@/constants";
+import { ThemeColors } from "@/constants";
 
 export function CircularPlayButton(props: {
   innerIconSize: number;
@@ -18,7 +18,7 @@ export function CircularPlayButton(props: {
         <View
           style={{
             padding: props.outerBackgroundSize,
-            backgroundColor: Colors.dark.text,
+            backgroundColor: ThemeColors.dark.text,
             borderRadius: "50%",
           }}
         >

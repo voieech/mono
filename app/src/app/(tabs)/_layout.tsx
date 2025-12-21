@@ -10,7 +10,7 @@ import {
   ThemedView,
   BottomOverlayAudioPlayer,
 } from "@/components";
-import { Colors } from "@/constants";
+import { ThemeColors } from "@/constants";
 import { useTheme } from "@/hooks";
 
 export default function TabLayout() {
@@ -25,7 +25,7 @@ export default function TabLayout() {
     >
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: Colors[theme].tint,
+          tabBarActiveTintColor: ThemeColors[theme].tint,
           // tabBarActiveBackgroundColor: "grey",
           // tabBarIconStyle: {
           //   backgroundColor: "yellow",
