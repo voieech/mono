@@ -12,7 +12,7 @@ import type { ExperimentalSurfaceName } from "@/utils";
 
 import {
   ParallaxScrollViewContainer,
-  OldThemedLink,
+  ThemedLink,
   ThemedText,
   Icon,
   Collapsible,
@@ -360,7 +360,7 @@ export default function Settings() {
                 pathname: "/_sitemap",
               }}
             >
-              <OldThemedLink>Sitemap</OldThemedLink>
+              <ThemedLink>Sitemap</ThemedLink>
             </Link>
             <Link
               href={{
@@ -368,14 +368,14 @@ export default function Settings() {
                 params: {},
               }}
             >
-              <OldThemedLink>Not Found</OldThemedLink>
+              <ThemedLink>Not Found</ThemedLink>
             </Link>
             <Link
               href={{
                 pathname: "/themed-text-test",
               }}
             >
-              <OldThemedLink>Themed Text Test</OldThemedLink>
+              <ThemedLink>Themed Text Test</ThemedLink>
             </Link>
             <SwitchSettingRow
               settingTitle="Show Debugging Surfaces"

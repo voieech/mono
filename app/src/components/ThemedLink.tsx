@@ -4,7 +4,7 @@ import { useThemeColor } from "@/hooks";
 
 import { ThemedText } from "./NewThemedText";
 
-export function OldThemedLink({
+export function ThemedLink({
   style,
   lightColor,
   darkColor,

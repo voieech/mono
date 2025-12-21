@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { Link, Stack } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ThemedView, OldThemedLink, ThemedText } from "@/components";
+import { ThemedView, ThemedLink, ThemedText } from "@/components";
 
 export default function NotFoundScreen() {
   return (
@@ -54,9 +54,9 @@ export default function NotFoundScreen() {
           }}
           replace
         >
-          <OldThemedLink type="lg-normal">
+          <ThemedLink type="lg-normal">
             <Trans>Go back Home</Trans>
-          </OldThemedLink>
+          </ThemedLink>
         </Link>
       </SafeAreaView>
     </ThemedView>
