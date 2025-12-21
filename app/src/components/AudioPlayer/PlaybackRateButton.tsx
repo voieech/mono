@@ -2,7 +2,7 @@ import { Pressable } from "react-native";
 
 import { useTrackPlayer } from "@/context";
 
-import { ThemedText } from "../NewThemedText";
+import { ThemedText } from "../ThemedText";
 
 export function PlaybackRateButton(props: {
   /**

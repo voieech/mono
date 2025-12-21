@@ -2,7 +2,7 @@ import { Marquee } from "@animatereactnative/marquee";
 import { type PropsWithChildren, useState } from "react";
 import { View, ScrollView, type TextStyle } from "react-native";
 
-import { ThemedText } from "./NewThemedText";
+import { ThemedText } from "./ThemedText";
 
 /**
  * @todo Publish as lib to reuse in the other apps

@@ -1,7 +1,7 @@
 import { PropsWithChildren, useState } from "react";
 import { TouchableOpacity, type ViewStyle } from "react-native";
 
-import { ThemedText } from "@/components/NewThemedText";
+import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants";
 import { useTheme } from "@/hooks";

@@ -3,7 +3,7 @@ import type { MessageDescriptor } from "@lingui/core";
 import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 
-import { ThemedText } from "@/components/NewThemedText";
+import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { linguiMsgToString } from "@/utils";
 

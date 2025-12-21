@@ -1,4 +1,4 @@
-import { ThemedText } from "@/components/NewThemedText";
+import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useProgress } from "@/TrackPlayer";
 

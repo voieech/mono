@@ -2,7 +2,7 @@ import type { TextProps } from "react-native";
 
 import { useThemeColor } from "@/hooks";
 
-import { ThemedText } from "./NewThemedText";
+import { ThemedText } from "./ThemedText";
 
 export function ThemedLink({
   style,
