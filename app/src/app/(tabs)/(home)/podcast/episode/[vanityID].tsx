@@ -13,7 +13,7 @@ import {
   SafeScrollViewContainer,
   FullScreenLoader,
   ThemedView,
-  OldThemedText,
+  ThemedText,
   CircularPlayButton,
   CircularPauseButton,
   ShareTrackIcon,
@@ -64,6 +64,7 @@ export default function PodcastEpisode() {
         return;
       }
 
+      // @todo Replace with my own load method
       // If there is a track queue already, replace the current track with this,
       // else, create a new queue and add this as the new current active track.
       await RNTPTrackPlayer.load(
@@ -125,7 +126,7 @@ export default function PodcastEpisode() {
 
     return (
       <SafeScrollViewContainer>
-        <OldThemedText>Error: {error?.message}</OldThemedText>
+        <ThemedText>Error: {error?.message}</ThemedText>
       </SafeScrollViewContainer>
     );
   }
@@ -159,14 +160,14 @@ export default function PodcastEpisode() {
         </ThemedView>
       }
     >
-      <OldThemedText
-        type="subtitle"
+      <ThemedText
+        type="lg-semibold"
         style={{
           paddingBottom: 4,
         }}
       >
         {episode.title}
-      </OldThemedText>
+      </ThemedText>
       <Link
         href={{
           pathname: "/podcast/channel/[channelID]",
@@ -179,7 +180,7 @@ export default function PodcastEpisode() {
           alignSelf: "flex-start",
         }}
       >
-        <OldThemedText>{episode.channel_name}</OldThemedText>
+        <ThemedText>{episode.channel_name}</ThemedText>
       </Link>
       <ThemedView
         style={{
@@ -189,12 +190,7 @@ export default function PodcastEpisode() {
           alignItems: "center",
         }}
       >
-        <OldThemedText
-          style={{
-            fontSize: 14,
-            lineHeight: 20,
-          }}
-        >
+        <ThemedText type="sm-normal">
           <Trans>
             Season {episodeSeasonNumber}, Episode {episodeNumber}
           </Trans>
@@ -202,7 +198,7 @@ export default function PodcastEpisode() {
           {episode.created_at.split("T")[0]}
           {"\n"}
           <Trans>{episodeLengthInMins} mins</Trans>
-        </OldThemedText>
+        </ThemedText>
         <ThemedView
           style={{
             flexDirection: "row",
@@ -255,7 +251,7 @@ export default function PodcastEpisode() {
           paddingBottom: 20,
         }}
       />
-      <OldThemedText>{episode.description}</OldThemedText>
+      <ThemedText>{episode.description}</ThemedText>
       {podcastEpisodeNextReccomendationsQuery.data !== undefined && (
         <>
           <View
@@ -266,14 +262,14 @@ export default function PodcastEpisode() {
               paddingBottom: 20,
             }}
           />
-          <OldThemedText
-            type="semiBold"
+          <ThemedText
+            type="base-semibold"
             style={{
               paddingBottom: 8,
             }}
           >
             <Trans>Reccomended Episodes</Trans>
-          </OldThemedText>
+          </ThemedText>
           {podcastEpisodeNextReccomendationsQuery.data.reccomendations.map(
             (episode) => (
               <View
@@ -317,23 +313,19 @@ export default function PodcastEpisode() {
                         backgroundColor: "#3f3f46",
                       }}
                     >
-                      <OldThemedText
+                      <ThemedText
+                        numberOfLines={2}
                         style={{
                           paddingBottom: 2,
                         }}
-                        numberOfLines={2}
                       >
                         {episode.title}
-                      </OldThemedText>
-                      <OldThemedText
-                        style={{
-                          fontSize: 12,
-                        }}
-                      >
+                      </ThemedText>
+                      <ThemedText type="sm-normal">
                         {episode.created_at.split("T")[0]}
                         {"\n"}
                         {Math.trunc(episode.audio_length / 60)} mins
-                      </OldThemedText>
+                      </ThemedText>
                     </ThemedView>
                   </ThemedView>
                 </Link>
