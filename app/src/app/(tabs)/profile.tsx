@@ -102,12 +102,7 @@ export default function Profile() {
 
           <ThemedText type="lg-light">{getFullName()}</ThemedText>
 
-          <ThemedText
-            type="sm-normal"
-            style={{
-              color: "#999",
-            }}
-          >
+          <ThemedText type="sm-normal" colorType="subtext">
             {user?.email || "Not logged in"}
           </ThemedText>
 
@@ -220,11 +215,7 @@ export default function Profile() {
             }}
             onPress={logout}
           >
-            <ThemedText
-              style={{
-                color: "#fff",
-              }}
-            >
+            <ThemedText>
               <Trans>Sign Out</Trans>
             </ThemedText>
           </Pressable>
@@ -239,11 +230,7 @@ export default function Profile() {
             }}
             onPress={login}
           >
-            <ThemedText
-              style={{
-                color: "#fff",
-              }}
-            >
+            <ThemedText>
               <Trans>Sign In</Trans>
             </ThemedText>
           </Pressable>
@@ -266,8 +253,8 @@ function ProfileRow({ label, value }: { label: string; value: string }) {
       <ThemedText type="base-semibold">{label}</ThemedText>
       <ThemedText
         type="sm-normal"
+        colorType="subtext"
         style={{
-          color: "#999",
           marginTop: 4,
         }}
       >

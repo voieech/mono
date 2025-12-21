@@ -104,12 +104,7 @@ export default function Settings() {
               settingContext.settings.externalMediaControls.name,
             )}
           </ThemedText>
-          <ThemedText
-            type="sm-light"
-            style={{
-              color: "#999",
-            }}
-          >
+          <ThemedText type="sm-light" colorType="subtext">
             {linguiMsgToString(
               settingContext.settings.externalMediaControls.description,
             )}
@@ -197,12 +192,7 @@ export default function Settings() {
             borderRadius: 16,
           }}
         >
-          <ThemedText
-            type="sm-normal"
-            style={{
-              color: "#999",
-            }}
-          >
+          <ThemedText type="sm-normal" colorType="subtext">
             {linguiMsgToString(
               settingContext.settings.contentLanguage.description,
             )}
@@ -541,12 +531,7 @@ function SwitchSettingRow(props: {
           <ThemedText>{props.settingTitle}</ThemedText>
           {props.description !== undefined &&
             props.showDescriptionInsideRow && (
-              <ThemedText
-                type="sm-normal"
-                style={{
-                  color: "#999",
-                }}
-              >
+              <ThemedText type="sm-normal" colorType="subtext">
                 {props.description}
               </ThemedText>
             )}
@@ -570,8 +555,8 @@ function SwitchSettingRow(props: {
       {props.description !== undefined && !props.showDescriptionInsideRow && (
         <ThemedText
           type="sm-normal"
+          colorType="subtext"
           style={{
-            color: "#999",
             paddingHorizontal: 16,
             marginTop: -4,
             paddingBottom: 16,
