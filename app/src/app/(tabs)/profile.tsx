@@ -4,7 +4,7 @@ import { View, Pressable, Image } from "react-native";
 
 import {
   ParallaxScrollViewContainer,
-  OldThemedText,
+  ThemedText,
   Icon,
   Collapsible,
   useAuth,
@@ -55,9 +55,9 @@ export default function Profile() {
           gap: 16,
         }}
       >
-        <OldThemedText type="title">
+        <ThemedText type="xl-bold">
           <Trans>Profile</Trans>
-        </OldThemedText>
+        </ThemedText>
 
         {/* Profile Header */}
         <View
@@ -100,13 +100,16 @@ export default function Profile() {
             </View>
           )}
 
-          <OldThemedText type="semiBold" style={{ fontSize: 18 }}>
-            {getFullName()}
-          </OldThemedText>
+          <ThemedText type="lg-light">{getFullName()}</ThemedText>
 
-          <OldThemedText style={{ fontSize: 14, color: "#999" }}>
+          <ThemedText
+            type="sm-normal"
+            style={{
+              color: "#999",
+            }}
+          >
             {user?.email || "Not logged in"}
-          </OldThemedText>
+          </ThemedText>
 
           {user?.emailVerified && (
             <View
@@ -121,9 +124,14 @@ export default function Profile() {
               }}
             >
               <Icon name="checkmark" size={14} color="#22c55e" />
-              <OldThemedText style={{ fontSize: 12, color: "#22c55e" }}>
+              <ThemedText
+                type="sm-normal"
+                style={{
+                  color: "#22c55e",
+                }}
+              >
                 Verified
-              </OldThemedText>
+              </ThemedText>
             </View>
           )}
         </View>
@@ -212,9 +220,13 @@ export default function Profile() {
             }}
             onPress={logout}
           >
-            <OldThemedText type="semiBold" style={{ color: "#fff" }}>
+            <ThemedText
+              style={{
+                color: "#fff",
+              }}
+            >
               <Trans>Sign Out</Trans>
-            </OldThemedText>
+            </ThemedText>
           </Pressable>
         ) : (
           <Pressable
@@ -227,9 +239,13 @@ export default function Profile() {
             }}
             onPress={login}
           >
-            <OldThemedText type="semiBold" style={{ color: "#fff" }}>
+            <ThemedText
+              style={{
+                color: "#fff",
+              }}
+            >
               <Trans>Sign In</Trans>
-            </OldThemedText>
+            </ThemedText>
           </Pressable>
         )}
       </ParallaxScrollViewContainer>
@@ -247,10 +263,16 @@ function ProfileRow({ label, value }: { label: string; value: string }) {
         borderRadius: 16,
       }}
     >
-      <OldThemedText type="semiBold">{label}</OldThemedText>
-      <OldThemedText style={{ fontSize: 14, color: "#999", marginTop: 4 }}>
+      <ThemedText type="base-semibold">{label}</ThemedText>
+      <ThemedText
+        type="sm-normal"
+        style={{
+          color: "#999",
+          marginTop: 4,
+        }}
+      >
         {value}
-      </OldThemedText>
+      </ThemedText>
     </View>
   );
 }
@@ -291,7 +313,7 @@ function ProfileActionRow({
         }}
       >
         <Icon name={icon} size={20} color="#999" />
-        <OldThemedText>{label}</OldThemedText>
+        <ThemedText>{label}</ThemedText>
       </View>
       <Icon name="chevron.right" size={20} color="#999" />
     </Pressable>
