@@ -16,11 +16,6 @@ export interface ContentGithubRepoTable {
   id: NonUpdatableIdColumnType;
 
   /**
-   * Time of content insertion / web crawl time
-   */
-  created_at: NonUpdatableDateTimeColumnType;
-
-  /**
    * Full name of the github repo, usually consists of owner_username/repo_name
    */
   full_name: string;
@@ -28,7 +23,7 @@ export interface ContentGithubRepoTable {
   /**
    * Owner's username
    */
-  owner_username: string;
+  owner: string;
 
   /**
    * Repo's name
@@ -80,16 +75,6 @@ export interface ContentGithubRepoTable {
    * When this repo first start trending?
    */
   trending_date: NonUpdatableDateTimeColumnType;
-
-  /**
-   * Programming language
-   */
-  trending_language: string;
-
-  /**
-   * E.g. daily
-   */
-  trending_since: string;
 
   /**
    * When did we last crawl and update this information?

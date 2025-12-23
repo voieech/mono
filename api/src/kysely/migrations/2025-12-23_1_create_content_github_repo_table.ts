@@ -6,7 +6,6 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable(contentGithubRepoTableName)
     .addColumn("id", "text", (col) => col.primaryKey())
-    .addColumn("created_at", "timestamp", (col) => col.notNull())
     .addColumn("full_name", "text", (col) => col.notNull())
     .addColumn("owner", "text", (col) => col.notNull())
     .addColumn("repo_name", "text", (col) => col.notNull())
@@ -19,8 +18,6 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("readme_text", "text", (col) => col.notNull())
     .addColumn("readme_status", "text", (col) => col.notNull())
     .addColumn("trending_date", "timestamp", (col) => col.notNull())
-    .addColumn("readme_language", "text", (col) => col.notNull())
-    .addColumn("trending_since", "text", (col) => col.notNull())
     .addColumn("crawled_at", "timestamp", (col) => col.notNull())
     .execute();
 }
