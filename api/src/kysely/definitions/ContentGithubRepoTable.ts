@@ -16,19 +16,9 @@ export interface ContentGithubRepoTable {
   id: NonUpdatableIdColumnType;
 
   /**
-   * Full name of the github repo, usually consists of owner_username/repo_name
+   * Full name of the github repo, which is `$owner_username/$repo_name`
    */
   full_name: string;
-
-  /**
-   * Owner's username
-   */
-  owner: string;
-
-  /**
-   * Repo's name
-   */
-  repo_name: string;
 
   /**
    * URL to the repo
