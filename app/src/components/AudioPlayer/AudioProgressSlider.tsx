@@ -33,6 +33,7 @@ export function AudioProgressSlider(props: {
   async function onSlidingComplete(newPosition: number) {
     setPosition(newPosition);
 
+    // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.seekTo(newPosition);
     await trackPlayer.play();
   }
