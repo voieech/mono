@@ -22,7 +22,11 @@ export function CircularPauseButton(props: {
             borderRadius: "50%",
           }}
         >
-          <Icon name="pause.fill" color="black" size={props.innerIconSize} />
+          <Icon
+            name="pause.fill"
+            color={Colors.black}
+            size={props.innerIconSize}
+          />
         </View>
       </View>
     </Pressable>

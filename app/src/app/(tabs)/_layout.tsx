@@ -99,7 +99,7 @@ export default function TabLayout() {
           options={{
             title: t`Explore`,
             tabBarIcon: ({ color, size }) => (
-              <Icon size={size} name="magnifyingglass" color={color} />
+              <Icon size={size} name="magnifyingglass" color={color as any} />
             ),
           }}
         />
@@ -111,7 +111,7 @@ export default function TabLayout() {
 
             title: t`For You`,
             tabBarIcon: ({ color, size }) => (
-              <Icon size={size} name="person" color={color} />
+              <Icon size={size} name="person" color={color as any} />
             ),
           }}
         />
@@ -120,7 +120,7 @@ export default function TabLayout() {
           options={{
             title: t`Settings`,
             tabBarIcon: ({ color, size }) => (
-              <Icon size={size} name="gear" color={color} />
+              <Icon size={size} name="gear" color={color as any} />
             ),
           }}
         />
@@ -130,7 +130,7 @@ export default function TabLayout() {
             options={{
               title: t`Me`,
               tabBarIcon: ({ color, size }) => (
-                <Icon size={size} name="person" color={color} />
+                <Icon size={size} name="person" color={color as any} />
               ),
             }}
           />

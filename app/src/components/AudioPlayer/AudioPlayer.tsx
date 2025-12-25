@@ -12,6 +12,7 @@ import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants";
 import { useTrackPlayer } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
@@ -126,7 +127,7 @@ export function AudioPlayer() {
                 //
               }}
             >
-              <Icon name="shuffle" color="white" size={32} />
+              <Icon name="shuffle" color={Colors.white} size={32} />
             </Pressable>
           </ExperimentalSurface>
           <ExperimentalSurface>
@@ -137,7 +138,7 @@ export function AudioPlayer() {
             >
               <Icon
                 name={"hand.thumbsup.fill"}
-                color={like ? "green" : "white"}
+                color={like ? Colors.green600 : Colors.white}
                 size={32}
               />
             </Pressable>
@@ -148,7 +149,7 @@ export function AudioPlayer() {
             >
               <Icon
                 name={"hand.thumbsdown.fill"}
-                color={like === false ? "#fa4d4d" : "white"}
+                color={like === false ? Colors.red400 : Colors.white}
                 size={32}
               />
             </Pressable>
@@ -171,7 +172,7 @@ export function AudioPlayer() {
           >
             <Icon
               name="list.dash"
-              color="white"
+              color={Colors.white}
               style={{
                 marginBottom: 2,
               }}

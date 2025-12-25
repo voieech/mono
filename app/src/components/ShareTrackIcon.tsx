@@ -7,6 +7,7 @@ import { Share, Pressable } from "react-native";
 import type { TrackWithMetadata } from "@/utils";
 
 import { Icon } from "@/components/provided";
+import { Colors } from "@/constants";
 import { posthog } from "@/utils";
 
 export function ShareTrackIcon(props: {
@@ -35,7 +36,7 @@ export function ShareTrackIcon(props: {
     <Pressable onPress={onShare}>
       <Icon
         name="square.and.arrow.up"
-        color="white"
+        color={Colors.white}
         style={props.style}
         size={props.size}
       />

@@ -10,6 +10,7 @@ import {
   ThemedText,
   Icon,
 } from "@/components";
+import { Colors } from "@/constants";
 import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
 
 export default function TrackQueueModal() {
@@ -50,7 +51,7 @@ export default function TrackQueueModal() {
                 name={
                   useCardPlayerInsteadOfModal ? "chevron.left" : "chevron.down"
                 }
-                color="white"
+                color={Colors.white}
               />
             </Pressable>
             <ThemedText
@@ -66,7 +67,7 @@ export default function TrackQueueModal() {
               />
             </ThemedText>
             <Pressable onPress={trackPlayer.removeUpcomingTracks}>
-              <Icon name="trash" color="white" />
+              <Icon name="trash" color={Colors.white} />
             </Pressable>
           </ThemedView>
           {queue.length === 0 && (

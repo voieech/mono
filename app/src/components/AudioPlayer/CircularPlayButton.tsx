@@ -22,7 +22,11 @@ export function CircularPlayButton(props: {
             borderRadius: "50%",
           }}
         >
-          <Icon name="play.fill" color="black" size={props.innerIconSize} />
+          <Icon
+            name="play.fill"
+            color={Colors.black}
+            size={props.innerIconSize}
+          />
         </View>
       </View>
     </Pressable>

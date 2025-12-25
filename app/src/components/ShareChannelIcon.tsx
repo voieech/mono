@@ -6,6 +6,7 @@ import { msg } from "@lingui/core/macro";
 import { Share, Pressable } from "react-native";
 
 import { Icon } from "@/components/provided";
+import { Colors } from "@/constants";
 import { posthog } from "@/utils";
 
 export function ShareChannelIcon(props: {
@@ -38,7 +39,7 @@ export function ShareChannelIcon(props: {
     <Pressable onPress={onShare}>
       <Icon
         name="square.and.arrow.up"
-        color="white"
+        color={Colors.white}
         style={props.style}
         size={props.size}
       />

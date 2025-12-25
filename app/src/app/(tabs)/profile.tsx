@@ -9,6 +9,7 @@ import {
   Collapsible,
   useAuth,
 } from "@/components";
+import { Colors } from "@/constants";
 
 export default function Profile() {
   const { user, login, logout } = useAuth();
@@ -41,7 +42,7 @@ export default function Profile() {
         headerImage={
           <Icon
             size={360}
-            color="#D0D0D0"
+            color={Colors.gray300}
             name="person"
             style={{
               bottom: -120,
@@ -96,7 +97,7 @@ export default function Profile() {
                 justifyContent: "center",
               }}
             >
-              <Icon name="person" size={40} color="#999" />
+              <Icon name="person" size={40} color={Colors.gray300} />
             </View>
           )}
 
@@ -299,10 +300,10 @@ function ProfileActionRow({
           gap: 12,
         }}
       >
-        <Icon name={icon} size={20} color="#999" />
+        <Icon name={icon} size={20} color={Colors.gray400} />
         <ThemedText>{label}</ThemedText>
       </View>
-      <Icon name="chevron.right" size={20} color="#999" />
+      <Icon name="chevron.right" size={20} color={Colors.gray400} />
     </Pressable>
   );
 }

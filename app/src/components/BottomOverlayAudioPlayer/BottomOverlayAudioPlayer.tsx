@@ -9,6 +9,7 @@ import {
 } from "react-native-track-player";
 
 import { Icon } from "@/components/provided";
+import { Colors } from "@/constants";
 import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
@@ -159,7 +160,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                 <Pressable onPress={trackPlayer.pause}>
                   <Icon
                     name="pause.fill"
-                    color="white"
+                    color={Colors.white}
                     size={24}
                     style={{
                       height: "100%",
@@ -170,7 +171,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
                 <Pressable onPress={trackPlayer.play}>
                   <Icon
                     name="play.fill"
-                    color="white"
+                    color={Colors.white}
                     size={24}
                     style={{
                       height: "100%",

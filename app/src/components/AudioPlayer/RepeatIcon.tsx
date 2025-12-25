@@ -2,6 +2,7 @@ import { Pressable } from "react-native";
 import { RepeatMode } from "react-native-track-player";
 
 import { Icon } from "@/components/provided";
+import { Colors } from "@/constants";
 import { useRepeatMode } from "@/TrackPlayer";
 
 export function RepeatIcon() {
@@ -15,7 +16,7 @@ export function RepeatIcon() {
           onPress={() => repeatMode.setRepeatMode(RepeatMode.Queue)}
           disabled={repeatMode.isRepeatModeUpdating}
         >
-          <Icon name="repeat" color="white" size={32} />
+          <Icon name="repeat" color={Colors.white} size={32} />
         </Pressable>
       );
     }
@@ -25,7 +26,7 @@ export function RepeatIcon() {
           onPress={() => repeatMode.setRepeatMode(RepeatMode.Track)}
           disabled={repeatMode.isRepeatModeUpdating}
         >
-          <Icon name="repeat" color="#16a34a" size={32} />
+          <Icon name="repeat" color={Colors.green500} size={32} />
         </Pressable>
       );
     }
@@ -35,7 +36,7 @@ export function RepeatIcon() {
           onPress={() => repeatMode.setRepeatMode(RepeatMode.Off)}
           disabled={repeatMode.isRepeatModeUpdating}
         >
-          <Icon name="repeat.1" color="#16a34a" size={32} />
+          <Icon name="repeat.1" color={Colors.green500} size={32} />
         </Pressable>
       );
     }

@@ -17,6 +17,7 @@ import {
   Icon,
   AudioPlayer,
 } from "@/components";
+import { Colors } from "@/constants";
 import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
@@ -55,7 +56,7 @@ export default function AudioPlayerModal() {
               name={
                 useCardPlayerInsteadOfModal ? "chevron.left" : "chevron.down"
               }
-              color="white"
+              color={Colors.white}
             />
           </Pressable>
           <ThemedText
@@ -68,7 +69,7 @@ export default function AudioPlayerModal() {
             {activeTrackArtist}
           </ThemedText>
           <Pressable onPress={() => setModalVisible(true)}>
-            <Icon name="ellipsis" color="white" />
+            <Icon name="ellipsis" color={Colors.white} />
           </Pressable>
         </ThemedView>
         <AudioPlayer />

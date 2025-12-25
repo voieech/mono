@@ -20,6 +20,7 @@ import {
   CopyOnPress,
   PlaybackRateButton,
 } from "@/components";
+import { Colors } from "@/constants";
 import {
   useSettingContext,
   useAppDebuggingSurfaceContext,
@@ -40,7 +41,7 @@ export default function Settings() {
       headerImage={
         <Icon
           size={360}
-          color="#D0D0D0"
+          color={Colors.gray300}
           name="gear"
           style={{
             bottom: -120,
@@ -279,7 +280,7 @@ export default function Settings() {
               }}
             >
               <ThemedText>Customise content preferences</ThemedText>
-              <Icon name="chevron.right" color="white" />
+              <Icon name="chevron.right" color={Colors.white} />
             </View>
           </Link>
         </Collapsible>
