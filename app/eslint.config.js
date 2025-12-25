@@ -41,6 +41,10 @@ module.exports = defineConfig([
           message:
             "Please use the `TrackPlayer` wrapper via `const trackPlayer = useTrackPlayer();` instead",
         },
+        {
+          object: "ThemeColors",
+          message: "Please use `Colors.colorName` instead",
+        },
       ],
       "perfectionist/sort-imports": "error",
       "perfectionist/sort-exports": "error",
