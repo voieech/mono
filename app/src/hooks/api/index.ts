@@ -2,9 +2,9 @@
  * Barrel file
  */
 
-export * from "./useFeaturedChannels";
-export * from "./useFeaturedEpisodes";
-export * from "./usePodcastChannel";
-export * from "./usePodcastChannelEpisodes";
-export * from "./usePodcastEpisode";
-export * from "./usePodcastEpisodeNextReccomendations";
+export * from "./queries/useFeaturedChannelsQuery";
+export * from "./queries/useFeaturedEpisodesQuery";
+export * from "./queries/usePodcastChannelEpisodesQuery";
+export * from "./queries/usePodcastChannelQuery";
+export * from "./queries/usePodcastEpisodeNextReccomendationsQuery";
+export * from "./queries/usePodcastEpisodeQuery";

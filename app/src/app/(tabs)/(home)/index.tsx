@@ -16,7 +16,7 @@ import {
   Icon,
 } from "@/components";
 import { Colors } from "@/constants";
-import { useFeaturedChannels, useFeaturedEpisodes } from "@/hooks";
+import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/hooks";
 
 export default function HomeScreen() {
   const windowDimensions = useWindowDimensions();
@@ -26,8 +26,8 @@ export default function HomeScreen() {
     16,
   );
 
-  const featuredChannelsQuery = useFeaturedChannels();
-  const featuredEpisodesQuery = useFeaturedEpisodes();
+  const featuredChannelsQuery = useFeaturedChannelsQuery();
+  const featuredEpisodesQuery = useFeaturedEpisodesQuery();
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {

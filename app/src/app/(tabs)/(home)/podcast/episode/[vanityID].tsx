@@ -21,8 +21,8 @@ import {
 import { useTrackPlayer } from "@/context";
 import { NotFoundError } from "@/errors";
 import {
-  usePodcastEpisode,
-  usePodcastEpisodeNextReccomendations,
+  usePodcastEpisodeQuery,
+  usePodcastEpisodeNextReccomendationsQuery,
   getPodcastEpisodeNextReccomendations,
 } from "@/hooks";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
@@ -36,7 +36,7 @@ export default function PodcastEpisode() {
     isError,
     data: episode,
     error,
-  } = usePodcastEpisode(vanityID);
+  } = usePodcastEpisodeQuery(vanityID);
 
   const activeTrack = useActiveTrackWithMetadata();
 
@@ -47,7 +47,7 @@ export default function PodcastEpisode() {
     episode.id === activeTrack.id;
 
   const podcastEpisodeNextReccomendationsQuery =
-    usePodcastEpisodeNextReccomendations(vanityID);
+    usePodcastEpisodeNextReccomendationsQuery(vanityID);
 
   const trackPlayer = useTrackPlayer();
 

@@ -13,12 +13,15 @@ import {
   ShareChannelIcon,
 } from "@/components";
 import { NotFoundError } from "@/errors";
-import { usePodcastChannel, usePodcastChannelEpisodes } from "@/hooks";
+import {
+  usePodcastChannelQuery,
+  usePodcastChannelEpisodesQuery,
+} from "@/hooks";
 
 export default function PodcastChannel() {
   const channelID = useLocalSearchParams<{ channelID: string }>().channelID;
-  const podcastChannelQuery = usePodcastChannel(channelID);
-  const podcastChannelEpisodesQuery = usePodcastChannelEpisodes(channelID);
+  const podcastChannelQuery = usePodcastChannelQuery(channelID);
+  const podcastChannelEpisodesQuery = usePodcastChannelEpisodesQuery(channelID);
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {

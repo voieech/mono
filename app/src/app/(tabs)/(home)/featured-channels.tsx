@@ -5,10 +5,10 @@ import { useState } from "react";
 import { RefreshControl, View } from "react-native";
 
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
-import { useFeaturedChannels } from "@/hooks";
+import { useFeaturedChannelsQuery } from "@/hooks";
 
 export default function FeaturedChannels() {
-  const featuredChannelsQuery = useFeaturedChannels();
+  const featuredChannelsQuery = useFeaturedChannelsQuery();
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {

@@ -7,7 +7,7 @@ import { apiBaseUrl } from "@/constants";
 /**
  * Useful for showing reccomendations related to the current episode
  */
-export function usePodcastEpisodeNextReccomendations(
+export function usePodcastEpisodeNextReccomendationsQuery(
   vanityID: string,
   limit: number = 10,
 ) {

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
-export function usePodcastEpisode(vanityID: string) {
+export function usePodcastEpisodeQuery(vanityID: string) {
   return useQuery({
     queryKey: ["episode", vanityID],
     async queryFn() {

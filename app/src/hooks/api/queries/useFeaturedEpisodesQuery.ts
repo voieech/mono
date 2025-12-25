@@ -3,28 +3,31 @@ import type { Episode } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
-import { NotFoundError } from "@/errors";
 import { queryClient } from "@/utils";
 
-export function usePodcastChannelEpisodes(channelID: string) {
+import { useAcceptLanguageHeader } from "../useAcceptLanguageHeader";
+
+export function useFeaturedEpisodesQuery() {
+  const acceptLanguageHeader = useAcceptLanguageHeader();
+
   return useQuery({
-    queryKey: ["podcast", "channel-episodes", channelID],
+    queryKey: ["podcast", "featured-episodes"],
     async queryFn() {
       const res = await fetch(
-        `${apiBaseUrl}/v1/podcast/channel/${channelID}/episodes`,
+        `${apiBaseUrl}/v1/podcast/featured/episodes?limit=20`,
+        {
+          headers: {
+            ...acceptLanguageHeader,
+          },
+        },
       );
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to load channel episodes: ${channelID}`;
+        const defaultErrorMessage = "Failed to load featured episodes";
         const errorMessage = await res
           .json()
           .then((data) => data.error ?? defaultErrorMessage)
           .catch(() => defaultErrorMessage);
-
-        if (res.status === 404) {
-          throw new NotFoundError(errorMessage);
-        }
-
         throw new Error(errorMessage);
       }
 

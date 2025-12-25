@@ -5,9 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import { apiBaseUrl } from "@/constants";
 import { queryClient } from "@/utils";
 
-import { useAcceptLanguageHeader } from "./useAcceptLanguageHeader";
+import { useAcceptLanguageHeader } from "../useAcceptLanguageHeader";
 
-export function useFeaturedChannels() {
+export function useFeaturedChannelsQuery() {
   const acceptLanguageHeader = useAcceptLanguageHeader();
 
   return useQuery({
