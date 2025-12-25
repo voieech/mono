@@ -67,6 +67,7 @@ export default function PodcastEpisode() {
       // @todo Replace with my own load method
       // If there is a track queue already, replace the current track with this,
       // else, create a new queue and add this as the new current active track.
+      // eslint-disable-next-line no-restricted-properties
       await RNTPTrackPlayer.load(
         createTrackWithMetadata({
           trackType: "podcast_episode",

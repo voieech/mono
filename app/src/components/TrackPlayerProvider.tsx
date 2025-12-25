@@ -23,6 +23,7 @@ const DEFAULT = {
   tracks: [],
 };
 
+/* eslint-disable no-restricted-properties */
 export function TrackPlayerProvider(props: PropsWithChildren) {
   const settingContext = useSettingContext();
   const [currentPosition, setCurrentPosition] = useState(DEFAULT.position);
@@ -282,3 +283,4 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     </TrackPlayerContext>
   );
 }
+/* eslint-enable no-restricted-properties */

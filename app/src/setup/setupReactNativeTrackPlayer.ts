@@ -6,6 +6,7 @@ import RNTPTrackPlayer, {
   AndroidAudioContentType,
 } from "react-native-track-player";
 
+/* eslint-disable no-restricted-properties */
 export async function setupReactNativeTrackPlayer() {
   RNTPTrackPlayer.registerPlaybackService(
     () =>
@@ -31,3 +32,4 @@ export async function setupReactNativeTrackPlayer() {
   // By default, repeat mode should repeat entire queue
   await RNTPTrackPlayer.setRepeatMode(RepeatMode.Queue);
 }
+/* eslint-enable no-restricted-properties */

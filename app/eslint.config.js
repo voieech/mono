@@ -32,14 +32,14 @@ module.exports = defineConfig([
         "error",
         {
           object: "RNTPTrackPlayer",
-          property: "play",
+          allowProperties: [
+            "addEventListener",
+            "getProgress",
+            "getRepeatMode",
+            "setRepeatMode",
+          ],
           message:
-            "Please use the `TrackPlayer.playWithGlobalRate()` wrapper instead",
-        },
-        {
-          object: "RNTPTrackPlayer",
-          property: "pause",
-          message: "Please use the `TrackPlayer.pause()` wrapper instead",
+            "Please use the `TrackPlayer` wrapper via `const trackPlayer = useTrackPlayer();` instead",
         },
       ],
       "perfectionist/sort-imports": "error",
