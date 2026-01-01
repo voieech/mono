@@ -94,7 +94,8 @@ export default function ThemedTextTest() {
         >
           <View
             style={{
-              backgroundColor: textType === "size" ? "lightgreen" : "white",
+              backgroundColor:
+                textType === "size" ? Colors.green500 : Colors.white,
               borderWidth: 0.5,
               borderRadius: 16,
               paddingVertical: 8,
@@ -120,7 +121,8 @@ export default function ThemedTextTest() {
         >
           <View
             style={{
-              backgroundColor: textType === "weight" ? "lightgreen" : "white",
+              backgroundColor:
+                textType === "weight" ? Colors.green500 : Colors.white,
               borderWidth: 0.5,
               borderRadius: 16,
               paddingVertical: 8,

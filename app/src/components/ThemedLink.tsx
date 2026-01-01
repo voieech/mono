@@ -1,5 +1,6 @@
 import type { TextProps } from "react-native";
 
+import { Colors } from "@/constants";
 import { useThemeColor } from "@/hooks";
 
 import { ThemedText } from "./ThemedText";
@@ -22,7 +23,7 @@ export function ThemedLink({
       type={type as any}
       style={[
         {
-          color: "#0a7ea4",
+          color: Colors.sky400,
         },
         style,
       ]}

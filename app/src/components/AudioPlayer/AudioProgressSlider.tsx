@@ -4,6 +4,7 @@ import RNTPTrackPlayer from "react-native-track-player";
 
 import type { TrackWithMetadata } from "@/utils";
 
+import { Colors } from "@/constants";
 import { useTrackPlayer } from "@/context";
 
 export function AudioProgressSlider(props: {
@@ -54,9 +55,9 @@ export function AudioProgressSlider(props: {
       // This is the same as "onValueChange", just that it is not called
       // continously and only called once user lifts their finger
       onSlidingComplete={onSlidingComplete}
-      thumbTintColor="white"
-      minimumTrackTintColor="#FFFFFF" // Sets left track color
-      // maximumTrackTintColor="#000000" // Optional: Sets right track color
+      thumbTintColor={Colors.white}
+      minimumTrackTintColor={Colors.white} // Sets left track color
+      // maximumTrackTintColor={Colors.black} // Optional: Sets right track color
       // @todo This should be dynamic based on theme
     />
   );

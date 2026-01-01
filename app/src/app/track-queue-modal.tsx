@@ -122,7 +122,7 @@ export default function TrackQueueModal() {
                       borderTopRightRadius: 16,
                       borderBottomRightRadius: 16,
                       padding: 12,
-                      backgroundColor: "#3f3f46",
+                      backgroundColor: Colors.stone800,
                     }}
                   >
                     <ThemedText numberOfLines={3}>

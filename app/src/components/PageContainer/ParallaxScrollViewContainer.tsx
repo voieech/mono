@@ -10,6 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants";
 import { useTheme, useBottomTabOverflow } from "@/hooks";
 
 export function ParallaxScrollViewContainer(
@@ -74,7 +75,7 @@ export function ParallaxScrollViewContainer(
   });
   const headerImageBackgroundColor =
     props.headerBackgroundColor?.[colorScheme] ??
-    { light: "#D0D0D0", dark: "#353636" }[colorScheme];
+    { light: Colors.white, dark: Colors.neutral700 }[colorScheme];
 
   return (
     <ThemedView

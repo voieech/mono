@@ -68,7 +68,7 @@ export default function FeaturedChannels() {
                     borderBottomRightRadius: 16,
                     paddingVertical: 8,
                     paddingHorizontal: 16,
-                    backgroundColor: "#3f3f46",
+                    backgroundColor: Colors.neutral800,
                   }}
                 >
                   <ThemedText

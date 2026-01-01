@@ -109,7 +109,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
           style={{
             flex: 1,
             paddingHorizontal: 8,
-            backgroundColor: "#3f3f46",
+            backgroundColor: Colors.neutral700,
             borderRadius: 8,
           }}
         >
@@ -131,7 +131,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
             >
               <Text
                 style={{
-                  color: "white",
+                  color: Colors.white,
                 }}
                 numberOfLines={1}
               >
@@ -139,7 +139,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
               </Text>
               <Text
                 style={{
-                  color: "white",
+                  color: Colors.white,
                 }}
                 numberOfLines={1}
               >
@@ -184,7 +184,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
           <View
             style={{
               height: 2,
-              backgroundColor: "#71717b",
+              backgroundColor: Colors.neutral500,
               width: "100%",
             }}
           >

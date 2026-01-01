@@ -4,6 +4,7 @@ import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components";
+import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
 
 export default function Welcome() {
@@ -13,7 +14,7 @@ export default function Welcome() {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: Colors.black,
       }}
     >
       <ScrollView
@@ -64,7 +65,7 @@ export default function Welcome() {
               }
               style={({ pressed }) => ({
                 opacity: pressed ? 0.8 : 1,
-                backgroundColor: "#00BFFF",
+                backgroundColor: Colors.sky500,
                 borderWidth: 2,
                 borderRadius: 20,
                 alignItems: "center",

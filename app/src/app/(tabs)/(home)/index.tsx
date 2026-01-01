@@ -98,7 +98,7 @@ export default function HomeScreen() {
                     numberOfLines={1}
                     style={{
                       paddingTop: 4,
-                      color: "#CCC",
+                      color: Colors.neutral200,
                     }}
                   >
                     {channel.name}
@@ -159,7 +159,7 @@ export default function HomeScreen() {
                     borderBottomRightRadius: 16,
                     paddingVertical: 4,
                     paddingHorizontal: 16,
-                    backgroundColor: "#3f3f46",
+                    backgroundColor: Colors.neutral800,
                   }}
                 >
                   <ThemedText

@@ -99,7 +99,7 @@ export function AudioPlayer() {
             text={activeTrack.artist}
             delayInMsBeforeScrollStart={1500}
             textStyle={{
-              color: "#a1a1aa",
+              color: Colors.neutral400,
             }}
           />
         </Pressable>

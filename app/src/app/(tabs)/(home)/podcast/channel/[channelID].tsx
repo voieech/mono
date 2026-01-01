@@ -12,6 +12,7 @@ import {
   ThemedText,
   ShareChannelIcon,
 } from "@/components";
+import { Colors } from "@/constants";
 import { NotFoundError } from "@/errors";
 import {
   usePodcastChannelQuery,
@@ -168,7 +169,7 @@ export default function PodcastChannel() {
                         borderBottomRightRadius: 16,
                         paddingHorizontal: 16,
                         paddingVertical: 8,
-                        backgroundColor: "#3f3f46",
+                        backgroundColor: Colors.neutral800,
                         rowGap: 8,
                       }}
                     >

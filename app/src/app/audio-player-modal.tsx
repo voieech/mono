@@ -92,11 +92,11 @@ export default function AudioPlayerModal() {
           <View
             style={{
               margin: 20,
-              backgroundColor: "white",
+              backgroundColor: Colors.white,
               borderRadius: 20,
               padding: 35,
               alignItems: "center",
-              shadowColor: "#000",
+              shadowColor: Colors.black,
               shadowOffset: {
                 width: 0,
                 height: 2,
@@ -119,13 +119,13 @@ export default function AudioPlayerModal() {
                 borderRadius: 20,
                 padding: 10,
                 elevation: 2,
-                backgroundColor: "#2196F3",
+                backgroundColor: Colors.blue500,
               }}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text
                 style={{
-                  color: "white",
+                  color: Colors.white,
                   fontWeight: "bold",
                   textAlign: "center",
                 }}

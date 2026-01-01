@@ -18,6 +18,7 @@ import {
   CircularPauseButton,
   ShareTrackIcon,
 } from "@/components";
+import { Colors } from "@/constants";
 import { useTrackPlayer } from "@/context";
 import { NotFoundError } from "@/errors";
 import {
@@ -247,7 +248,7 @@ export default function PodcastEpisode() {
       </ThemedView>
       <View
         style={{
-          borderTopColor: "#777",
+          borderTopColor: Colors.neutral500,
           borderTopWidth: 0.5,
           paddingBottom: 20,
         }}
@@ -257,7 +258,7 @@ export default function PodcastEpisode() {
         <>
           <View
             style={{
-              borderTopColor: "#777",
+              borderTopColor: Colors.neutral500,
               borderTopWidth: 0.5,
               marginTop: 20,
               paddingBottom: 20,
@@ -311,7 +312,7 @@ export default function PodcastEpisode() {
                         borderTopRightRadius: 16,
                         borderBottomRightRadius: 16,
                         padding: 16,
-                        backgroundColor: "#3f3f46",
+                        backgroundColor: Colors.neutral800,
                       }}
                     >
                       <ThemedText

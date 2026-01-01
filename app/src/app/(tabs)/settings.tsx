@@ -74,7 +74,7 @@ export default function Settings() {
 
             paddingVertical: 8,
             paddingHorizontal: 16,
-            backgroundColor: "black",
+            backgroundColor: Colors.black,
             borderRadius: 16,
           }}
         >
@@ -85,7 +85,7 @@ export default function Settings() {
             style={{
               paddingVertical: 2,
               paddingHorizontal: 8,
-              backgroundColor: "#999",
+              backgroundColor: Colors.neutral600,
               borderRadius: 8,
             }}
           >
@@ -96,7 +96,7 @@ export default function Settings() {
           style={{
             paddingVertical: 8,
             paddingHorizontal: 16,
-            backgroundColor: "black",
+            backgroundColor: Colors.black,
             borderRadius: 16,
           }}
         >
@@ -112,7 +112,7 @@ export default function Settings() {
           </ThemedText>
           <View
             style={{
-              backgroundColor: "#777",
+              backgroundColor: Colors.neutral500,
               height: 0.5,
               marginTop: 8,
               marginBottom: 16,
@@ -124,7 +124,7 @@ export default function Settings() {
                 {index !== 0 && (
                   <View
                     style={{
-                      backgroundColor: "#444",
+                      backgroundColor: Colors.neutral600,
                       height: 0.5,
                       marginVertical: 8,
                     }}
@@ -155,7 +155,7 @@ export default function Settings() {
                     <View>
                       {option.value ===
                         settingContext.getSetting("externalMediaControls") && (
-                        <Icon name="checkmark" color="#16a34a" />
+                        <Icon name="checkmark" color={Colors.green600} />
                       )}
                     </View>
                   </View>
@@ -189,7 +189,7 @@ export default function Settings() {
           style={{
             paddingVertical: 8,
             paddingHorizontal: 16,
-            backgroundColor: "black",
+            backgroundColor: Colors.black,
             borderRadius: 16,
           }}
         >
@@ -200,7 +200,7 @@ export default function Settings() {
           </ThemedText>
           <View
             style={{
-              backgroundColor: "#777",
+              backgroundColor: Colors.neutral500,
               height: 0.5,
               marginTop: 8,
               marginBottom: 16,
@@ -212,7 +212,7 @@ export default function Settings() {
                 {index !== 0 && (
                   <View
                     style={{
-                      backgroundColor: "#444",
+                      backgroundColor: Colors.neutral600,
                       height: 0.5,
                       marginVertical: 12,
                     }}
@@ -243,7 +243,11 @@ export default function Settings() {
                       {settingContext
                         .getSetting("contentLanguage")
                         .includes(option.value) && (
-                        <Icon name="checkmark" color="#16a34a" size={16} />
+                        <Icon
+                          name="checkmark"
+                          color={Colors.green600}
+                          size={16}
+                        />
                       )}
                     </View>
                   </View>
@@ -271,7 +275,7 @@ export default function Settings() {
               style={{
                 paddingVertical: 8,
                 paddingHorizontal: 16,
-                backgroundColor: "black",
+                backgroundColor: Colors.black,
                 borderRadius: 16,
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -299,7 +303,7 @@ export default function Settings() {
             style={{
               paddingVertical: 8,
               paddingHorizontal: 16,
-              backgroundColor: "black",
+              backgroundColor: Colors.black,
               borderRadius: 16,
             }}
           >
@@ -330,7 +334,7 @@ export default function Settings() {
               style={{
                 paddingVertical: 8,
                 paddingHorizontal: 16,
-                backgroundColor: "black",
+                backgroundColor: Colors.black,
                 borderRadius: 16,
               }}
             >
@@ -427,7 +431,7 @@ export default function Settings() {
               style={{
                 paddingVertical: 8,
                 paddingHorizontal: 16,
-                backgroundColor: "black",
+                backgroundColor: Colors.black,
                 borderRadius: 16,
                 rowGap: 16,
               }}
@@ -519,7 +523,7 @@ function SwitchSettingRow(props: {
 
           paddingVertical: 8,
           paddingHorizontal: 16,
-          backgroundColor: "black",
+          backgroundColor: Colors.black,
           borderRadius: 16,
         }}
       >
@@ -545,10 +549,10 @@ function SwitchSettingRow(props: {
           <Switch
             value={props.switchValue}
             onValueChange={props.onValueChange}
-            thumbColor="#f4f3f4"
+            thumbColor={Colors.white}
             trackColor={{
-              false: "#ccc",
-              true: "#16a34a",
+              false: Colors.neutral500,
+              true: Colors.green600,
             }}
           />
         </View>

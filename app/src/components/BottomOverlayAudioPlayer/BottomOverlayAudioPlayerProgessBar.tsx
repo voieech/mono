@@ -1,5 +1,6 @@
 import { View } from "react-native";
 
+import { Colors } from "@/constants";
 import { useProgress } from "@/TrackPlayer";
 
 /**
@@ -13,7 +14,7 @@ export function BottomOverlayAudioPlayerProgessBar() {
     <View
       style={{
         height: 2,
-        backgroundColor: "#d4d4d8",
+        backgroundColor: Colors.neutral100,
         width: `${progressBarPercentage}%`,
       }}
     />

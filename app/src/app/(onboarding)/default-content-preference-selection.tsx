@@ -161,13 +161,13 @@ export default function DefaultContentPreferenceSelection() {
                           paddingVertical: 6,
                           borderRadius: 20,
                           backgroundColor: isSelected
-                            ? "#3b82f6"
+                            ? Colors.blue500
                             : Colors.neutral50,
                         }}
                       >
                         <ThemedText
                           style={{
-                            color: isSelected ? "white" : "#374151",
+                            color: isSelected ? Colors.white : Colors.gray800,
                           }}
                         >
                           {tag.name}

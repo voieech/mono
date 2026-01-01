@@ -65,7 +65,7 @@ export default function Profile() {
           style={{
             paddingVertical: 16,
             paddingHorizontal: 16,
-            backgroundColor: "black",
+            backgroundColor: Colors.black,
             borderRadius: 16,
             alignItems: "center",
             gap: 12,
@@ -77,7 +77,7 @@ export default function Profile() {
                 width: 80,
                 height: 80,
                 borderRadius: 40,
-                backgroundColor: "#333",
+                backgroundColor: Colors.neutral700,
               }}
             >
               {/* TODO: Add Image component when ready */}
@@ -92,7 +92,7 @@ export default function Profile() {
                 width: 80,
                 height: 80,
                 borderRadius: 40,
-                backgroundColor: "#333",
+                backgroundColor: Colors.neutral700,
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -115,15 +115,15 @@ export default function Profile() {
                 gap: 4,
                 paddingHorizontal: 8,
                 paddingVertical: 4,
-                backgroundColor: "#166534",
+                backgroundColor: Colors.white,
                 borderRadius: 8,
               }}
             >
-              <Icon name="checkmark" size={14} color="#22c55e" />
+              <Icon name="checkmark" size={14} color={Colors.green600} />
               <ThemedText
                 type="sm-normal"
                 style={{
-                  color: "#22c55e",
+                  color: Colors.green600,
                 }}
               >
                 Verified
@@ -210,7 +210,7 @@ export default function Profile() {
             style={{
               paddingVertical: 12,
               paddingHorizontal: 16,
-              backgroundColor: "#991b1b",
+              backgroundColor: Colors.red500,
               borderRadius: 16,
               alignItems: "center",
             }}
@@ -225,7 +225,7 @@ export default function Profile() {
             style={{
               paddingVertical: 12,
               paddingHorizontal: 16,
-              backgroundColor: "#16a34a",
+              backgroundColor: Colors.green600,
               borderRadius: 16,
               alignItems: "center",
             }}
@@ -247,7 +247,7 @@ function ProfileRow({ label, value }: { label: string; value: string }) {
       style={{
         paddingVertical: 8,
         paddingHorizontal: 16,
-        backgroundColor: "black",
+        backgroundColor: Colors.black,
         borderRadius: 16,
       }}
     >
@@ -288,7 +288,7 @@ function ProfileActionRow({
         alignItems: "center",
         paddingVertical: 12,
         paddingHorizontal: 16,
-        backgroundColor: "black",
+        backgroundColor: Colors.black,
         borderRadius: 16,
       }}
       onPress={onPress}
