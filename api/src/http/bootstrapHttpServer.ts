@@ -23,12 +23,11 @@ export function bootstrapHttpServer() {
     // Middleware to parse json request body
     .use(express.json())
 
-    .use(authRoutes)
-
     .get("/", (_, res) => {
       res.status(200).end("ok");
     })
 
+    .use(authRoutes)
     .use(userRoutes)
 
     .get("/.well-known/apple-app-site-association", function (_, res) {
