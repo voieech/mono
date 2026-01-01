@@ -79,6 +79,7 @@ export default function DefaultContentPreferenceSelection() {
 
   const _settingContext = useSettingContext();
   const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set());
+  const hasSelectedTags = selectedTags.size < 1;
 
   function toggleTag(tagID: string) {
     const newSelectedTags = new Set(selectedTags);
@@ -191,12 +192,13 @@ export default function DefaultContentPreferenceSelection() {
       >
         <Pressable
           style={{
-            backgroundColor: "#3b82f6",
+            backgroundColor: hasSelectedTags ? Colors.gray400 : Colors.blue600,
             paddingVertical: 8,
             borderRadius: 8,
             alignItems: "center",
           }}
           onPress={saveAndNext}
+          disabled={hasSelectedTags}
         >
           <ThemedText type="lg-light">
             <Trans>Save</Trans>
