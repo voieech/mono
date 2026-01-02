@@ -1,4 +1,6 @@
+import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { router } from "expo-router";
 import { useState } from "react";
 import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
 
@@ -6,10 +8,14 @@ import {
   SafeAreaViewContainer,
   ScrollViewContainer,
   ThemedText,
+  FullScreenLoader,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
-import { useBottomTabOverflow } from "@/hooks";
+import {
+  useBottomTabOverflow,
+  useSaveContentPreferenceSelectionMutation,
+} from "@/hooks";
 
 interface Tag {
   id: string;
@@ -77,6 +83,9 @@ export default function DefaultContentPreferenceSelection() {
   const floatingButtonPaddingBottom =
     (bottomOverflow > padding ? bottomOverflow : padding) + 16;
 
+  const saveContentPreferenceSelectionMutation =
+    useSaveContentPreferenceSelectionMutation();
+
   const _settingContext = useSettingContext();
   const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set());
   const hasSelectedTags = selectedTags.size < 1;
@@ -91,10 +100,15 @@ export default function DefaultContentPreferenceSelection() {
     setSelectedTags(newSelectedTags);
   }
 
-  // @todo
-  function saveAndNext() {
-    // save the selection
-    // move to next screen / do something else based on current context
+  async function saveAndNext() {
+    await saveContentPreferenceSelectionMutation.mutateAsync(
+      new Array(...selectedTags),
+    );
+    router.back();
+  }
+
+  if (saveContentPreferenceSelectionMutation.isPending) {
+    return <FullScreenLoader loadingMessage={msg`Saving`} />;
   }
 
   return (
@@ -198,7 +212,9 @@ export default function DefaultContentPreferenceSelection() {
             alignItems: "center",
           }}
           onPress={saveAndNext}
-          disabled={hasSelectedTags}
+          disabled={
+            hasSelectedTags || saveContentPreferenceSelectionMutation.isPending
+          }
         >
           <ThemedText type="lg-light">
             <Trans>Save</Trans>
