@@ -116,6 +116,15 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
+          name="(create)"
+          options={{
+            title: t`Create`,
+            tabBarIcon: ({ color, size }) => (
+              <Icon size={size} name="plus" color={color as any} />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="settings"
           options={{
             title: t`Settings`,
