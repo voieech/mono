@@ -17,6 +17,18 @@ import {
   useSaveContentPreferenceSelectionMutation,
 } from "@/hooks";
 
+/**
+ * Validates a YouTube URL and optionally returns the Video ID.
+ * Matches: youtube.com, youtu.be, m.youtube.com, and youtube.com
+ */
+function validateAndExtractYoutubeUrlVideoID(url: string) {
+  const match = url.match(
+    /(?:https?:\/\/)?(?:www\.|m\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([a-zA-Z0-9_-]{11})(?:\S+)?$/,
+  );
+  // match[1] contains the first capturing group: the 11-character ID
+  return match === null ? undefined : match[1];
+}
+
 export default function YoutubeVideoSummaryCreate() {
   const windowDimensions = useWindowDimensions();
   const bottomOverflow = useBottomTabOverflow();
@@ -29,14 +41,17 @@ export default function YoutubeVideoSummaryCreate() {
 
   const _settingContext = useSettingContext();
   const [youtubeVideoLink, setYoutubeVideoLink] = useState("");
+
   const isYoutubeVideoLinkEntered = youtubeVideoLink !== "";
+  const youtubeVideoID = validateAndExtractYoutubeUrlVideoID(youtubeVideoLink);
+  const isYoutubeVideoIDValid = youtubeVideoID !== undefined;
 
   async function submitYoutubeLink() {
-    if (!isYoutubeVideoLinkEntered) {
+    if (!isYoutubeVideoLinkEntered || !isYoutubeVideoIDValid) {
       return;
     }
 
-    // await submitYoutubeVideoLinkMutation.mutateAsync(youtubeVideoLink);
+    // await submitYoutubeVideoLinkMutation.mutateAsync(youtubeVideoID);
     router.back();
   }
 
@@ -96,6 +111,17 @@ export default function YoutubeVideoSummaryCreate() {
                 color: Colors.sky700,
               }}
             />
+            {isYoutubeVideoLinkEntered && !isYoutubeVideoIDValid && (
+              <ThemedText
+                style={{
+                  padding: 4,
+                  color: Colors.red400,
+                  textAlign: "right",
+                }}
+              >
+                <Trans>Invalid Youtube link</Trans>
+              </ThemedText>
+            )}
           </View>
         </View>
       </ScrollViewContainer>
@@ -110,7 +136,7 @@ export default function YoutubeVideoSummaryCreate() {
       >
         <Pressable
           style={{
-            backgroundColor: isYoutubeVideoLinkEntered
+            backgroundColor: isYoutubeVideoIDValid
               ? Colors.blue600
               : Colors.gray400,
             paddingVertical: 8,
@@ -119,8 +145,7 @@ export default function YoutubeVideoSummaryCreate() {
           }}
           onPress={submitYoutubeLink}
           disabled={
-            isYoutubeVideoLinkEntered ||
-            submitYoutubeVideoLinkMutation.isPending
+            !isYoutubeVideoIDValid || submitYoutubeVideoLinkMutation.isPending
           }
         >
           <ThemedText type="lg-light">
