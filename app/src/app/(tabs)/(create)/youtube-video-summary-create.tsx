@@ -1,6 +1,5 @@
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { router } from "expo-router";
 import { useState } from "react";
 import { View, Pressable, TextInput, useWindowDimensions } from "react-native";
 
@@ -11,7 +10,6 @@ import {
   FullScreenLoader,
 } from "@/components";
 import { Colors } from "@/constants";
-import { useSettingContext } from "@/context";
 import {
   useBottomTabOverflow,
   useSaveContentPreferenceSelectionMutation,
@@ -39,7 +37,6 @@ export default function YoutubeVideoSummaryCreate() {
   const submitYoutubeVideoLinkMutation =
     useSaveContentPreferenceSelectionMutation();
 
-  const _settingContext = useSettingContext();
   const [youtubeVideoLink, setYoutubeVideoLink] = useState("");
 
   const isYoutubeVideoLinkEntered = youtubeVideoLink !== "";
@@ -52,7 +49,9 @@ export default function YoutubeVideoSummaryCreate() {
     }
 
     // await submitYoutubeVideoLinkMutation.mutateAsync(youtubeVideoID);
-    router.back();
+    // @todo show successful submission toast
+
+    setYoutubeVideoLink("");
   }
 
   if (submitYoutubeVideoLinkMutation.isPending) {
