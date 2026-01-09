@@ -12,7 +12,7 @@ import {
 import { Colors } from "@/constants";
 import {
   useBottomTabOverflow,
-  useSaveContentPreferenceSelectionMutation,
+  useCreateYoutubeVideoSummaryMutation,
 } from "@/hooks";
 
 /**
@@ -34,8 +34,8 @@ export default function YoutubeVideoSummaryCreate() {
   const floatingButtonPaddingBottom =
     (bottomOverflow > padding ? bottomOverflow : padding) + 16;
 
-  const submitYoutubeVideoLinkMutation =
-    useSaveContentPreferenceSelectionMutation();
+  const createYoutubeVideoSummaryMutation =
+    useCreateYoutubeVideoSummaryMutation();
 
   const [youtubeVideoLink, setYoutubeVideoLink] = useState("");
 
@@ -48,13 +48,14 @@ export default function YoutubeVideoSummaryCreate() {
       return;
     }
 
-    // await submitYoutubeVideoLinkMutation.mutateAsync(youtubeVideoID);
+    await createYoutubeVideoSummaryMutation.mutateAsync(youtubeVideoID);
+
     // @todo show successful submission toast
 
     setYoutubeVideoLink("");
   }
 
-  if (submitYoutubeVideoLinkMutation.isPending) {
+  if (createYoutubeVideoSummaryMutation.isPending) {
     return <FullScreenLoader loadingMessage={msg`Saving`} />;
   }
 
@@ -144,7 +145,8 @@ export default function YoutubeVideoSummaryCreate() {
           }}
           onPress={submitYoutubeLink}
           disabled={
-            !isYoutubeVideoIDValid || submitYoutubeVideoLinkMutation.isPending
+            !isYoutubeVideoIDValid ||
+            createYoutubeVideoSummaryMutation.isPending
           }
         >
           <ThemedText type="lg-light">

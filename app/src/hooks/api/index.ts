@@ -2,6 +2,7 @@
  * Barrel file
  */
 
+export * from "./mutations/useCreateYoutubeVideoSummaryMutation";
 export * from "./mutations/useSaveContentPreferenceSelectionMutation";
 export * from "./queries/useFeaturedChannelsQuery";
 export * from "./queries/useFeaturedEpisodesQuery";
