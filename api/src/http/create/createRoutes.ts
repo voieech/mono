@@ -5,6 +5,8 @@ import express from "express";
 export const createRoutes = express
   .Router()
 
+  // @todo Add in Zod and do validation first
+  // @todo Add in authn middleware before allowing to continue
   .post("/v1/create/youtube-video-summary", (req, res) => {
     const youtubeVideoID = req.body.youtubeVideoID;
 

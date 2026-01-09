@@ -5,6 +5,8 @@ import express from "express";
 export const userRoutes = express
   .Router()
 
+  // @todo Add in Zod and do validation first
+  // @todo Add in authn middleware before allowing to continue
   .post("/v1/user/settings/content-preference", (req, res) => {
     const userContentPreferenceTags = req.body.userContentPreferenceTags;
 
