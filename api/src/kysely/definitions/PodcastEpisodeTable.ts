@@ -3,6 +3,7 @@ import type { Insertable, Selectable, Updateable } from "kysely";
 import type {
   NonUpdatableIdColumnType,
   NonUpdatableDateTimeColumnType,
+  UpdatableDateTimeColumnType,
 } from "./types/index.js";
 
 /**
@@ -78,6 +79,29 @@ export interface PodcastEpisodeTable {
    * Youtube video ID of episodes that are also published onto youtube.
    */
   youtube_id: $Nullable<string>;
+
+  /**
+   * When was the Youtube Video count metrics last updated?
+   */
+  youtube_video_count_last_updated_date: $Nullable<UpdatableDateTimeColumnType>;
+
+  /**
+   * Youtube video's view count that is updated asynchronously. See
+   * `youtube_video_count_last_updated_date`.
+   */
+  youtube_video_count_view: $Nullable<number>;
+
+  /**
+   * Youtube video's like count that is updated asynchronously. See
+   * `youtube_video_count_last_updated_date`.
+   */
+  youtube_video_count_like: $Nullable<number>;
+
+  /**
+   * Youtube video's comment count that is updated asynchronously. See
+   * `youtube_video_count_last_updated_date`.
+   */
+  youtube_video_count_comment: $Nullable<number>;
 }
 
 export type PodcastEpisode = Selectable<PodcastEpisodeTable>;
