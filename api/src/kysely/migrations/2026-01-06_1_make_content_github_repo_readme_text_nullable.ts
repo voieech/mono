@@ -15,15 +15,22 @@ export async function up(db: Kysely<any>): Promise<void> {
 // row with a null readme_text.
 export async function down(db: Kysely<any>): Promise<void> {
   await db
-    .updateTable(contentGithubRepoTableName)
-    .set({
-      readme_text: "__NULL__",
-    })
-    .where("readme_text", "is", null)
-    .execute();
+    // Perform the update and alter in a single transaction to prevent schema
+    // alters from failing if data is inserted with null value between the 2
+    // commands being performed.
+    .transaction()
+    .execute(async (transaction) => {
+      await transaction
+        .updateTable(contentGithubRepoTableName)
+        .set({
+          readme_text: "__NULL__",
+        })
+        .where("readme_text", "is", null)
+        .execute();
 
-  await db.schema
-    .alterTable(contentGithubRepoTableName)
-    .alterColumn("readme_text", (alterColumn) => alterColumn.setNotNull())
-    .execute();
+      await transaction.schema
+        .alterTable(contentGithubRepoTableName)
+        .alterColumn("readme_text", (alterColumn) => alterColumn.setNotNull())
+        .execute();
+    });
 }
