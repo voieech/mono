@@ -1,7 +1,8 @@
-import type { User } from "@workos-inc/node";
-
 import express from "express";
+import * as crypto from "node:crypto";
+import { mapWorkOsUser } from "src/util/mapWorkOsUser.js";
 
+import { consumeMobileHandoff, storeMobileHandoff } from "./mobileHandoff.js";
 import {
   workos,
   WORKOS_CLIENT_ID,
@@ -53,6 +54,11 @@ export const authRoutes = express
       : { target: "web" };
 
     if (code === undefined) {
+      if (state.target === "mobile") {
+        return res.redirect(
+          `voieech://auth/callback?error=${encodeURIComponent("no_code")}`,
+        );
+      }
       res.status(400).send("No auth code provided");
       return;
     }
@@ -71,16 +77,20 @@ export const authRoutes = express
       // Handle based on client type
       if (state.target === "mobile") {
         const userData = mapWorkOsUser(authenticationResponse.user);
-        // For mobile: redirect to app with tokens
+
+        // Generate one-time code for mobile to exchange
+        const handoffCode = crypto.randomBytes(32).toString("hex");
+
+        // Store tokens with one-time code
+        await storeMobileHandoff(handoffCode, {
+          accessToken: authenticationResponse.accessToken,
+          refreshToken: authenticationResponse.refreshToken,
+          user: userData,
+        });
+
+        // Redirect to mobile app with one-time code
         return res.redirect(
-          `voieech://auth/callback?` +
-            `accessToken=${encodeURIComponent(
-              authenticationResponse.accessToken,
-            )}` +
-            `&refreshToken=${encodeURIComponent(
-              authenticationResponse.refreshToken,
-            )}` +
-            `&user=${encodeURIComponent(JSON.stringify(userData))}`,
+          `voieech://auth/callback?code=${encodeURIComponent(handoffCode)}`,
         );
       } else {
         // For web: store cookie in session and redirect to homepage
@@ -105,6 +115,37 @@ export const authRoutes = express
       } else {
         res.redirect("/auth/workos/login");
       }
+      return;
+    }
+  })
+
+  // Mobile exchanges one-time code for tokens
+  .post("/auth/exchange-code", async (req, res) => {
+    const { code } = req.body;
+
+    if (!code || typeof code !== "string") {
+      res.status(400).json({ error: "Code must be a string" });
+      return;
+    }
+
+    try {
+      const session = await consumeMobileHandoff(code);
+
+      if (!session) {
+        res.status(404).json({ error: "Invalid or expired code" });
+        return;
+      }
+
+      // Response to mobile app
+      res.json({
+        accessToken: session.accessToken,
+        refreshToken: session.refreshToken,
+        user: session.user,
+        expiresAt: session.expiresAt,
+      });
+      return;
+    } catch (err) {
+      res.status(500).json({ error: "Internal server error" });
       return;
     }
   })
@@ -157,16 +198,3 @@ export const authRoutes = express
     );
     res.clearCookie(WORKOS_COOKIE_NAME);
   });
-
-function mapWorkOsUser(user: User) {
-  return {
-    id: user.id,
-    email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    emailVerified: user.emailVerified,
-    profilePictureUrl: user.profilePictureUrl,
-    createdAt: user.createdAt,
-    updatedAt: user.updatedAt,
-  };
-}

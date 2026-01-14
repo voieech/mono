@@ -7,17 +7,35 @@ import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
 import { User } from "@/utils";
 
+// Warm up browser for faster auth
+WebBrowser.maybeCompleteAuthSession();
+
+const STORAGE_KEYS = {
+  ACCESS_TOKEN: "access_token",
+  REFRESH_TOKEN: "refresh_token",
+  USER_DATA: "user_data",
+} as const;
+
 export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
-  const login = async () => {
+  async function login() {
     try {
       // Step 1: Get auth URL from your backend (with target=mobile)
       const urlRes = await fetch(
         `${apiBaseUrl}/auth/workos/login?target=mobile`,
       );
+
+      if (!urlRes.ok) {
+        throw new Error(`Failed to get auth URL: ${urlRes.status}`);
+      }
+
       const { authUrl } = await urlRes.json();
+
+      if (!authUrl) {
+        throw new Error("No auth URL received");
+      }
 
       // Step 2: Open system browser with WorkOS auth
       const result = await WebBrowser.openAuthSessionAsync(
@@ -25,43 +43,73 @@ export function AuthProvider({ children }: PropsWithChildren) {
         "voieech://auth/callback",
       );
 
-      if (result.type !== "success" || !result.url) {
-        console.log("Login cancelled");
+      if (result.type === "cancel") {
+        console.log("Login cancelled by user");
         return;
+      }
+
+      if (result.type !== "success" || !result.url) {
+        throw new Error("Authentication failed");
       }
 
       // Step 3: Extract tokens and user data from callback (already exchanged by backend)
       const { queryParams } = Linking.parse(result.url);
-      const accessToken = queryParams?.accessToken as string;
-      const refreshToken = queryParams?.refreshToken as string;
-      const userData = queryParams?.user as string;
 
-      if (!accessToken || !refreshToken) {
-        console.error("No tokens received");
-        return;
+      if (queryParams?.error) {
+        throw new Error(queryParams.error as string);
       }
 
-      if (!userData) {
-        console.error("Missing user data");
-        return;
+      const oneTimeCode = queryParams?.code as string;
+
+      if (!oneTimeCode) {
+        throw new Error("No code received from authentication");
       }
 
-      // Step 4: Store tokens
-      await SecureStore.setItemAsync("access_token", accessToken);
-      await SecureStore.setItemAsync("refresh_token", refreshToken);
-      await SecureStore.setItemAsync("user_data", userData);
+      // Step 4: Exchange one-time code for tokens
+      const exchangeRes = await fetch(`${apiBaseUrl}/auth/exchange-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: oneTimeCode }),
+      });
 
-      setUser(JSON.parse(userData));
+      if (!exchangeRes.ok) {
+        const errorData = await exchangeRes.json();
+        throw new Error(errorData.error || "Failed to exchange code");
+      }
+
+      const {
+        accessToken,
+        refreshToken,
+        user: userData,
+      } = await exchangeRes.json();
+
+      if (!accessToken || !refreshToken || !userData) {
+        throw new Error("Incomplete authentication data");
+      }
+
+      await Promise.all([
+        SecureStore.setItemAsync(STORAGE_KEYS.ACCESS_TOKEN, accessToken),
+        SecureStore.setItemAsync(STORAGE_KEYS.REFRESH_TOKEN, refreshToken),
+        SecureStore.setItemAsync(
+          STORAGE_KEYS.USER_DATA,
+          JSON.stringify(userData),
+        ),
+      ]);
+
+      setUser(userData);
     } catch (err) {
       console.error("Login error:", err);
     }
-  };
+  }
 
-  const refreshSession = async () => {
+  async function refreshSession() {
     try {
-      const refreshToken = await SecureStore.getItemAsync("refresh_token");
+      const refreshToken = await SecureStore.getItemAsync(
+        STORAGE_KEYS.REFRESH_TOKEN,
+      );
+
       if (!refreshToken) {
-        setUser(undefined);
+        await clearAuth();
         return;
       }
 
@@ -72,33 +120,64 @@ export function AuthProvider({ children }: PropsWithChildren) {
       });
 
       if (!res.ok) {
-        await SecureStore.getItemAsync("access_token");
-        await SecureStore.getItemAsync("refresh_token");
-        await SecureStore.deleteItemAsync("user_data");
-        setUser(undefined);
+        await clearAuth();
         return;
       }
 
       const data = await res.json();
-      await SecureStore.setItemAsync("access_token", data.accessToken);
-      await SecureStore.setItemAsync("refresh_token", data.refreshToken);
-      await SecureStore.setItemAsync("user_data", JSON.stringify(data.user));
-      setUser(data.user);
-      return;
-    } catch (err) {
-      console.error("Refresh error: ", err);
-      // Don't clear user state on network errors - keep cached state
-      return;
-    }
-  };
 
-  const logout = async () => {
-    // Clear all stored auth data
-    await SecureStore.deleteItemAsync("access_token");
-    await SecureStore.deleteItemAsync("refresh_token");
-    await SecureStore.deleteItemAsync("user_data");
+      await Promise.all([
+        SecureStore.setItemAsync(STORAGE_KEYS.ACCESS_TOKEN, data.accessToken),
+        SecureStore.setItemAsync(STORAGE_KEYS.REFRESH_TOKEN, data.refreshToken),
+        SecureStore.setItemAsync(
+          STORAGE_KEYS.USER_DATA,
+          JSON.stringify(data.user),
+        ),
+      ]);
+
+      setUser(data.user);
+      return data.user;
+    } catch (err) {
+      console.error("Refresh error:", err);
+      throw err;
+    }
+  }
+
+  async function clearAuth() {
+    await Promise.all([
+      SecureStore.deleteItemAsync(STORAGE_KEYS.ACCESS_TOKEN),
+      SecureStore.deleteItemAsync(STORAGE_KEYS.REFRESH_TOKEN),
+      SecureStore.deleteItemAsync(STORAGE_KEYS.USER_DATA),
+    ]);
     setUser(undefined);
-  };
+  }
+
+  async function logout() {
+    try {
+      const accessToken = await SecureStore.getItemAsync(
+        STORAGE_KEYS.ACCESS_TOKEN,
+      );
+
+      if (accessToken) {
+        // Fire and forget - don't wait for response
+        fetch(`${apiBaseUrl}/auth/logout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }).catch((err) => console.error("Logout API call failed:", err));
+      }
+    } catch (err) {
+      console.error("Error during logout:", err);
+    } finally {
+      await clearAuth();
+    }
+  }
+
+  async function getAccessToken(): Promise<string | null> {
+    return await SecureStore.getItemAsync(STORAGE_KEYS.ACCESS_TOKEN);
+  }
 
   useEffect(() => {
     const initAuth = async () => {
@@ -106,12 +185,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
       try {
         // Check if user has logged in before
-        const storedUser = await SecureStore.getItemAsync("user_data");
-        const refreshToken = await SecureStore.getItemAsync("refresh_token");
+        const [storedUser, refreshToken] = await Promise.all([
+          SecureStore.getItemAsync(STORAGE_KEYS.USER_DATA),
+          SecureStore.getItemAsync(STORAGE_KEYS.REFRESH_TOKEN),
+        ]);
 
         if (storedUser && refreshToken) {
           // User has logged in before - restore their session immediately
-          setUser(JSON.parse(storedUser));
+          try {
+            const parsedUser = JSON.parse(storedUser);
+            setUser(parsedUser);
+          } catch (parseErr) {
+            console.error("Failed to parse stored user data:", parseErr);
+            await clearAuth();
+            return;
+          }
 
           // Refresh token in background to:
           // 1. Validate session is still valid
@@ -137,7 +225,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, refreshSession, isLoading }}
+      value={{ user, login, logout, refreshSession, getAccessToken, isLoading }}
     >
       {children}
     </AuthContext.Provider>
