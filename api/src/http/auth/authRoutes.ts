@@ -80,7 +80,6 @@ export const authRoutes = express
 
         // Generate one-time code for mobile to exchange
         const handoffCode = crypto.randomBytes(32).toString("hex");
-
         // Store tokens with one-time code
         await storeMobileHandoff(handoffCode, {
           accessToken: authenticationResponse.accessToken,
@@ -141,7 +140,6 @@ export const authRoutes = express
         accessToken: session.accessToken,
         refreshToken: session.refreshToken,
         user: session.user,
-        expiresAt: session.expiresAt,
       });
       return;
     } catch (err) {

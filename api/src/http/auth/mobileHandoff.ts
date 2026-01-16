@@ -1,52 +1,61 @@
+import { redisDB } from "src/redis/redisDB.js";
 import { mapWorkOsUser } from "src/util/mapWorkOsUser.js";
 
 type MobileHandoffPayload = {
   accessToken: string;
   refreshToken: string;
   user: ReturnType<typeof mapWorkOsUser>;
-  expiresAt: number;
 };
 
-const store = new Map<string, MobileHandoffPayload>();
-const TTL_MS = 60_000;
+function isMobileHandoffPayload(value: any): value is MobileHandoffPayload {
+  return (
+    value &&
+    typeof value === "object" &&
+    typeof value.accessToken === "string" &&
+    typeof value.refreshToken === "string" &&
+    typeof value.user === "object"
+  );
+}
+
+const TTL_SECONDS = 60;
 
 export async function storeMobileHandoff(
   code: string,
-  payload: Omit<MobileHandoffPayload, "expiresAt">,
+  payload: MobileHandoffPayload,
 ) {
-  store.set(code, {
-    ...payload,
-    expiresAt: Date.now() + TTL_MS,
+  const key = `auth_exchange:handoff:${code}`;
+
+  await redisDB.set(key, payload, {
+    ex: TTL_SECONDS, // 60 seconds
+    nx: true, // prevent overwrite
   });
 }
+
+// LUA script to ensure “read once, then delete” atomic
+const consumeScript = `
+local val = redis.call("GET", KEYS[1])
+if not val then
+return nil
+end
+redis.call("DEL", KEYS[1])
+return val
+`;
 
 /**
  * Consume a one-time handoff
  */
 export async function consumeMobileHandoff(code: string) {
-  const payload = store.get(code);
-  if (!payload) {
+  const key = `auth_exchange:handoff:${code}`;
+
+  const result = await redisDB.eval(consumeScript, [key], []);
+
+  if (!result) {
     return null;
   }
 
-  // Enforce TTL at read time
-  if (payload.expiresAt < Date.now()) {
-    store.delete(code);
-    return null;
+  if (!isMobileHandoffPayload(result)) {
+    throw new Error("Invalid mobile handoff payload in Redis");
   }
 
-  store.delete(code); // one-time use
-  return payload;
+  return result;
 }
-
-/**
- * Periodic cleanup (start ONCE at boot)
- */
-setInterval(() => {
-  const now = Date.now();
-  for (const [code, payload] of store.entries()) {
-    if (payload.expiresAt < now) {
-      store.delete(code);
-    }
-  }
-}, TTL_MS);
