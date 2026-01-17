@@ -9,7 +9,7 @@ import Navbar from "./NavBar.vue";
 // import Demo from "./Demo.vue";
 // import CTA from "./CTA.vue";
 // import ContactUsForm from "./ContactUsForm.vue";
-// import Footer from "../components/Footer.vue";
+import Footer from "../../components/Footer.vue";
 </script>
 
 <template>
@@ -23,5 +23,5 @@ import Navbar from "./NavBar.vue";
   <!-- <Demo class="pb-12 md:pb-32" /> -->
   <!-- <CTA class="pb-16 md:pb-32" /> -->
   <!-- <ContactUsForm class="pb-12 md:pb-24" /> -->
-  <!-- <Footer></Footer> -->
+  <Footer></Footer>
 </template>

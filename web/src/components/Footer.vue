@@ -6,7 +6,10 @@ import { ContactRoute, AboutRoute, HomeRoute } from "@/router";
   <div
     class="bg-zinc-100 px-8 py-8 md:py-12 lg:px-28 xl:px-32 xl:pb-20 2xl:px-48"
   >
-    <div class="flex flex-col-reverse gap-8 pb-8 md:flex-row md:pb-20">
+    <div
+      v-if="false"
+      class="flex flex-col-reverse gap-8 pb-8 md:flex-row md:pb-20"
+    >
       <div class="flex flex-col gap-2 md:basis-1/4">
         <p class="tracking-wide">COMPANY</p>
         <router-link :to="{ name: ContactRoute.name }" class="w-max font-light">
@@ -84,33 +87,31 @@ import { ContactRoute, AboutRoute, HomeRoute } from "@/router";
 
     <div class="flex flex-row items-center justify-between gap-6">
       <router-link :to="{ name: HomeRoute.name }">
-        <img src="../../assets/logo.svg" class="w-40" />
+        <img src="../assets/logo.png" class="w-40" />
       </router-link>
 
       <div class="flex flex-col text-right md:flex-row md:gap-3 lg:gap-6">
         <a
-          href="/TC.pdf"
+          href="/terms-and-conditions.html"
           target="_blank"
           class="text-sm text-zinc-600 underline decoration-zinc-600"
         >
           Terms & Conditions
         </a>
-
         <a
-          href="/PP.pdf"
+          href="/privacy-policy.html"
           target="_blank"
           class="text-sm text-zinc-600 underline decoration-zinc-600"
         >
           Privacy Policy
         </a>
-
-        <a
+        <!-- <a
           href="/DPN.pdf"
           target="_blank"
           class="text-sm text-zinc-600 underline decoration-zinc-600"
         >
           PDPA Data Protection Notice
-        </a>
+        </a> -->
       </div>
     </div>
   </div>
