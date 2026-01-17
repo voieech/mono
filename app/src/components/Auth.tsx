@@ -75,11 +75,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
       }
 
       // Step 4: Exchange auth code and code verifier for tokens
-      const exchangeRes = await fetch(`${apiBaseUrl}/auth/exchange-code`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: oneTimeCode, codeVerifier: codeVerifier }),
-      });
+      const exchangeRes = await fetch(
+        `${apiBaseUrl}/auth/workos/exchange-code`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            code: oneTimeCode,
+            codeVerifier: codeVerifier,
+          }),
+        },
+      );
 
       if (!exchangeRes.ok) {
         const errorData = await exchangeRes.json();
@@ -122,7 +128,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         return;
       }
 
-      const res = await fetch(`${apiBaseUrl}/auth/refresh`, {
+      const res = await fetch(`${apiBaseUrl}/auth/workos/refresh`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ refreshToken }),
@@ -243,6 +249,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
 export function useAuth() {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  if (ctx === undefined) {
+    throw new Error(`${useAuth.name} must be used within AuthProvider`);
+  }
   return ctx;
 }
