@@ -1,13 +1,7 @@
 import * as Linking from "expo-linking";
 import * as SecureStore from "expo-secure-store";
 import * as WebBrowser from "expo-web-browser";
-import {
-  PropsWithChildren,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { PropsWithChildren, useContext, useEffect, useState } from "react";
 
 import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
@@ -81,11 +75,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
       }
 
       // Step 4: Exchange auth code and code verifier for tokens
-      const exchangeRes = await fetch(`${apiBaseUrl}/auth/exchange-code`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: oneTimeCode, codeVerifier: codeVerifier }),
-      });
+      const exchangeRes = await fetch(
+        `${apiBaseUrl}/auth/workos/exchange-code`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            code: oneTimeCode,
+            codeVerifier: codeVerifier,
+          }),
+        },
+      );
 
       if (!exchangeRes.ok) {
         const errorData = await exchangeRes.json();
@@ -117,61 +117,55 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }
 
-  const clearAuth = useCallback(async function () {
+  async function refreshSession() {
+    try {
+      const refreshToken = await SecureStore.getItemAsync(
+        STORAGE_KEYS.REFRESH_TOKEN,
+      );
+
+      if (!refreshToken) {
+        await clearAuth();
+        return;
+      }
+
+      const res = await fetch(`${apiBaseUrl}/auth/workos/refresh`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken }),
+      });
+
+      if (!res.ok) {
+        await clearAuth();
+        return;
+      }
+
+      const data = await res.json();
+
+      await Promise.all([
+        SecureStore.setItemAsync(STORAGE_KEYS.ACCESS_TOKEN, data.accessToken),
+        SecureStore.setItemAsync(STORAGE_KEYS.REFRESH_TOKEN, data.refreshToken),
+        SecureStore.setItemAsync(
+          STORAGE_KEYS.USER_DATA,
+          JSON.stringify(data.user),
+        ),
+      ]);
+
+      setUser(data.user);
+      return data.user;
+    } catch (err) {
+      console.error("Refresh error:", err);
+      throw err;
+    }
+  }
+
+  async function clearAuth() {
     await Promise.all([
       SecureStore.deleteItemAsync(STORAGE_KEYS.ACCESS_TOKEN),
       SecureStore.deleteItemAsync(STORAGE_KEYS.REFRESH_TOKEN),
       SecureStore.deleteItemAsync(STORAGE_KEYS.USER_DATA),
     ]);
     setUser(undefined);
-  }, []);
-
-  const refreshSession = useCallback(
-    async function () {
-      try {
-        const refreshToken = await SecureStore.getItemAsync(
-          STORAGE_KEYS.REFRESH_TOKEN,
-        );
-
-        if (!refreshToken) {
-          await clearAuth();
-          return;
-        }
-
-        const res = await fetch(`${apiBaseUrl}/auth/refresh`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ refreshToken }),
-        });
-
-        if (!res.ok) {
-          await clearAuth();
-          return;
-        }
-
-        const data = await res.json();
-
-        await Promise.all([
-          SecureStore.setItemAsync(STORAGE_KEYS.ACCESS_TOKEN, data.accessToken),
-          SecureStore.setItemAsync(
-            STORAGE_KEYS.REFRESH_TOKEN,
-            data.refreshToken,
-          ),
-          SecureStore.setItemAsync(
-            STORAGE_KEYS.USER_DATA,
-            JSON.stringify(data.user),
-          ),
-        ]);
-
-        setUser(data.user);
-        return data.user;
-      } catch (err) {
-        console.error("Refresh error:", err);
-        throw err;
-      }
-    },
-    [clearAuth],
-  );
+  }
 
   async function logout() {
     try {
@@ -242,7 +236,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     };
 
     initAuth();
-  }, [refreshSession, clearAuth]);
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -255,6 +249,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
 export function useAuth() {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  if (ctx === undefined) {
+    throw new Error(`${useAuth.name} must be used within AuthProvider`);
+  }
   return ctx;
 }
