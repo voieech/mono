@@ -11,6 +11,7 @@ import { createRoutes } from "./create/index.js";
 import { featuredContentRoutes } from "./featured/index.js";
 import { localeMiddleware } from "./locale/index.js";
 import { appleAppSiteAssociationRoute } from "./others/index.js";
+import { podcastEpisodeRoutes } from "./podcastEpisode/index.js";
 import { userRoutes } from "./user/index.js";
 
 export function bootstrapHttpServer() {
@@ -91,22 +92,7 @@ export function bootstrapHttpServer() {
       });
     })
 
-    .get("/v1/podcast/episode/:vanityID", async function (req, res) {
-      const vanityID = req.params.vanityID;
-
-      const episode = await genPodcastEpisodeBaseQuery()
-        .where("podcast_episode.vanity_id", "=", vanityID)
-        .executeTakeFirst();
-
-      if (episode === undefined) {
-        res.status(404).json({
-          error: `Cannot find episode with VanityID: ${vanityID}`,
-        });
-        return;
-      }
-
-      res.status(200).json(episode satisfies Episode);
-    })
+    .use(podcastEpisodeRoutes)
 
     .get("/v1/podcast/channel/:channelID", async function (req, res) {
       const channelID = req.params.channelID;
