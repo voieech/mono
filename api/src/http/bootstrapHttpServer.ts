@@ -18,16 +18,15 @@ export function bootstrapHttpServer() {
 
     .use(cors())
 
-    .use(localeMiddleware)
-
-    .use(cookieParser())
-    // Middleware to parse json request body
-    .use(express.json())
-
     .get("/", (_, res) => {
       res.status(200).end("ok");
     })
 
+    .use(localeMiddleware)
+    .use(cookieParser())
+    .use(express.json())
+
+    /* Routes */
     .use(authRoutes)
     .use(userRoutes)
     .use(createRoutes)
