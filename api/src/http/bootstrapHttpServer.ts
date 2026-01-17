@@ -10,6 +10,7 @@ import { generateRssXml } from "../rss/index.js";
 import { authRoutes } from "./auth/index.js";
 import { createRoutes } from "./create/index.js";
 import { localeMiddleware } from "./locale/index.js";
+import { appleAppSiteAssociationRoute } from "./others/index.js";
 import { userRoutes } from "./user/index.js";
 
 export function bootstrapHttpServer() {
@@ -31,21 +32,7 @@ export function bootstrapHttpServer() {
     .use(authRoutes)
     .use(userRoutes)
     .use(createRoutes)
-
-    .get("/.well-known/apple-app-site-association", function (_, res) {
-      // @todo Add cache headers
-      res.status(200).json({
-        applinks: {
-          apps: [],
-          details: [
-            {
-              appID: `${process.env["APPLE_TEAM_ID"]}.com.voieech-app`,
-              paths: ["/podcast/channel/*", "/podcast/episode/*"],
-            },
-          ],
-        },
-      });
-    })
+    .use(appleAppSiteAssociationRoute)
 
     .get("/v1/podcast/featured/channel", async function (req, res) {
       const rawLimit = Number(req.query["limit"]);
