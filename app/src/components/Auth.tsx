@@ -5,7 +5,7 @@ import { PropsWithChildren, useContext, useEffect, useState } from "react";
 
 import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
-import { User } from "@/utils";
+import { generatePKCE, User } from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
@@ -23,21 +23,35 @@ export function AuthProvider({ children }: PropsWithChildren) {
   async function login() {
     try {
       // Step 1: Get auth URL from your backend (with target=mobile)
+      const { codeVerifier, codeChallenge, codeChallengeMethod } =
+        await generatePKCE();
+
       const urlRes = await fetch(
-        `${apiBaseUrl}/auth/workos/login?target=mobile`,
+        `${apiBaseUrl}/auth/workos/login?target=mobile&codeChallenge=${codeChallenge}&challengeMethod=${codeChallengeMethod}`,
       );
+
+      // const url = `${apiBaseUrl}/auth/workos/login?
+      //   target=mobile
+      //   &codeChallenge=${codeChallenge}
+      //   &challengeMethod=${codeChallengeMethod}`;
+
+      // const urlRes = await WebBrowser.openAuthSessionAsync(
+      //   url,
+      //   "voieech://auth/callback",
+      // );
 
       if (!urlRes.ok) {
         throw new Error(`Failed to get auth URL: ${urlRes.status}`);
       }
 
       const { authUrl } = await urlRes.json();
+      // const { authUrl } = Linking.parse(urlRes.url);
 
       if (!authUrl) {
         throw new Error("No auth URL received");
       }
 
-      // Step 2: Open system browser with WorkOS auth
+      // // Step 2: Open system browser with WorkOS auth
       const result = await WebBrowser.openAuthSessionAsync(
         authUrl,
         "voieech://auth/callback",
@@ -69,7 +83,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const exchangeRes = await fetch(`${apiBaseUrl}/auth/exchange-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: oneTimeCode }),
+        body: JSON.stringify({ code: oneTimeCode, codeVerifier: codeVerifier }),
       });
 
       if (!exchangeRes.ok) {
