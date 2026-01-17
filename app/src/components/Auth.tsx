@@ -26,26 +26,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const { codeVerifier, codeChallenge, codeChallengeMethod } =
         await generatePKCE();
 
+      const params = new URLSearchParams({
+        target: "mobile",
+        codeChallenge: codeChallenge,
+        challengeMethod: codeChallengeMethod,
+      });
+
       const urlRes = await fetch(
-        `${apiBaseUrl}/auth/workos/login?target=mobile&codeChallenge=${codeChallenge}&challengeMethod=${codeChallengeMethod}`,
+        `${apiBaseUrl}/auth/workos/login?${params.toString()}`,
       );
-
-      // const url = `${apiBaseUrl}/auth/workos/login?
-      //   target=mobile
-      //   &codeChallenge=${codeChallenge}
-      //   &challengeMethod=${codeChallengeMethod}`;
-
-      // const urlRes = await WebBrowser.openAuthSessionAsync(
-      //   url,
-      //   "voieech://auth/callback",
-      // );
 
       if (!urlRes.ok) {
         throw new Error(`Failed to get auth URL: ${urlRes.status}`);
       }
 
       const { authUrl } = await urlRes.json();
-      // const { authUrl } = Linking.parse(urlRes.url);
 
       if (!authUrl) {
         throw new Error("No auth URL received");
@@ -66,7 +61,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         throw new Error("Authentication failed");
       }
 
-      // Step 3: Extract tokens and user data from callback (already exchanged by backend)
+      // Step 3: Extract auth code callback
       const { queryParams } = Linking.parse(result.url);
 
       if (queryParams?.error) {
@@ -79,7 +74,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         throw new Error("No code received from authentication");
       }
 
-      // Step 4: Exchange one-time code for tokens
+      // Step 4: Exchange auth code and code verifier for tokens
       const exchangeRes = await fetch(`${apiBaseUrl}/auth/exchange-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
