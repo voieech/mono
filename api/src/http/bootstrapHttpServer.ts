@@ -1,4 +1,4 @@
-import type { Episode, Channel } from "dto";
+import type { Episode } from "dto";
 
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -11,6 +11,7 @@ import { createRoutes } from "./create/index.js";
 import { featuredContentRoutes } from "./featured/index.js";
 import { localeMiddleware } from "./locale/index.js";
 import { appleAppSiteAssociationRoute } from "./others/index.js";
+import { podcastChannelRoutes } from "./podcastChannel/index.js";
 import { podcastEpisodeRoutes } from "./podcastEpisode/index.js";
 import { userRoutes } from "./user/index.js";
 
@@ -93,52 +94,7 @@ export function bootstrapHttpServer() {
     })
 
     .use(podcastEpisodeRoutes)
-
-    .get("/v1/podcast/channel/:channelID", async function (req, res) {
-      const channelID = req.params.channelID;
-
-      const channel = await apiDB
-        .selectFrom("podcast_channel")
-        .selectAll()
-        .where("podcast_channel.id", "=", channelID)
-        .executeTakeFirst();
-
-      if (channel === undefined) {
-        res.status(404).send(`Invalid Channel ID: ${channelID}`);
-        return;
-      }
-
-      res.status(200).json(channel satisfies Channel);
-    })
-
-    .get("/v1/podcast/channel/:channelID/episodes", async function (req, res) {
-      const channelID = req.params.channelID;
-
-      const channel = await apiDB
-        .selectFrom("podcast_channel")
-        .select("id")
-        .where("podcast_channel.id", "=", channelID)
-        .executeTakeFirst();
-
-      if (channel === undefined) {
-        res.status(404).send(`Invalid Channel ID: ${channelID}`);
-        return;
-      }
-
-      const episodes = await genPodcastEpisodeBaseQuery()
-        .groupBy([
-          "podcast_episode.id",
-          "audio.public_url",
-          "audio.length",
-          "podcast_channel.name",
-        ])
-        .where("podcast_episode.channel_id", "=", channelID)
-        .orderBy("podcast_episode.created_at", "desc")
-        .limit(20)
-        .execute();
-
-      res.status(200).json(episodes satisfies Array<Episode>);
-    })
+    .use(podcastChannelRoutes)
 
     .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {
       const channelID = req.params.channelID;
