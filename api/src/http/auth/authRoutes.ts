@@ -1,8 +1,6 @@
 import express from "express";
-import * as crypto from "node:crypto";
 import { mapWorkOsUser } from "src/util/mapWorkOsUser.js";
 
-import { consumeMobileHandoff, storeMobileHandoff } from "./mobileHandoff.js";
 import {
   workos,
   WORKOS_CLIENT_ID,
@@ -10,6 +8,10 @@ import {
   WORKOS_COOKIE_PASSWORD,
   WORKOS_COOKIE_NAME,
 } from "./workos.js";
+
+function isValidChallengeMethod(txt: unknown): txt is "S256" {
+  return txt === "S256";
+}
 
 /**
  * Routes for auth using WorkOS
@@ -20,8 +22,20 @@ export const authRoutes = express
   // Redirect user here to generate WorkOS AuthKit link for user to authenticate
   .get("/auth/workos/login", (req, res) => {
     const target = req.query["target"]?.toString() || "web";
+    const codeChallenge = req.query["codeChallenge"]?.toString();
+    const challengeMethod = req.query["challengeMethod"]?.toString();
+    if (!isValidChallengeMethod(challengeMethod)) {
+      throw new Error("Invalid challenge method");
+    }
+
+    if (typeof codeChallenge !== "string") {
+      throw new Error("Invalid code challenge");
+    }
+
     const authorizationUrl = workos.userManagement.getAuthorizationUrl({
       clientId: WORKOS_CLIENT_ID,
+      codeChallenge: codeChallenge,
+      codeChallengeMethod: challengeMethod,
 
       // Use AuthKit to handle the authentication flow
       provider: "authkit",
@@ -63,6 +77,12 @@ export const authRoutes = express
       return;
     }
 
+    if (state.target === "mobile") {
+      return res.redirect(
+        `voieech://auth/callback?code=${encodeURIComponent(code)}`,
+      );
+    }
+
     try {
       const authenticationResponse =
         await workos.userManagement.authenticateWithCode({
@@ -74,24 +94,6 @@ export const authRoutes = express
           },
         });
 
-      // Handle based on client type
-      if (state.target === "mobile") {
-        const userData = mapWorkOsUser(authenticationResponse.user);
-
-        // Generate one-time code for mobile to exchange
-        const handoffCode = crypto.randomBytes(32).toString("hex");
-        // Store tokens with one-time code
-        await storeMobileHandoff(handoffCode, {
-          accessToken: authenticationResponse.accessToken,
-          refreshToken: authenticationResponse.refreshToken,
-          user: userData,
-        });
-
-        // Redirect to mobile app with one-time code
-        return res.redirect(
-          `voieech://auth/callback?code=${encodeURIComponent(handoffCode)}`,
-        );
-      } else {
         // For web: store cookie in session and redirect to homepage
         res.cookie(WORKOS_COOKIE_NAME, authenticationResponse.sealedSession, {
           path: "/",
@@ -120,26 +122,36 @@ export const authRoutes = express
 
   // Mobile exchanges one-time code for tokens
   .post("/auth/exchange-code", async (req, res) => {
-    const { code } = req.body;
-
+    // Get authorization code string returned by AuthKit
+    const code = req.body["code"]?.toString();
+    const codeVerifier = req.body["codeVerifier"]?.toString();
     if (!code || typeof code !== "string") {
       res.status(400).json({ error: "Code must be a string" });
       return;
     }
+    if (!codeVerifier || typeof codeVerifier !== "string") {
+      res.status(400).json({ error: "Code Verifier must be a string" });
+      return;
+    }
 
     try {
-      const session = await consumeMobileHandoff(code);
+      const authenticationResponse =
+        await workos.userManagement.authenticateWithCode({
+          code,
+          codeVerifier: codeVerifier,
+          clientId: WORKOS_CLIENT_ID,
+        });
 
-      if (!session) {
+      if (!authenticationResponse) {
         res.status(404).json({ error: "Invalid or expired code" });
         return;
       }
 
       // Response to mobile app
       res.json({
-        accessToken: session.accessToken,
-        refreshToken: session.refreshToken,
-        user: session.user,
+        accessToken: authenticationResponse.accessToken,
+        refreshToken: authenticationResponse.refreshToken,
+        user: mapWorkOsUser(authenticationResponse.user),
       });
       return;
     } catch (err) {
