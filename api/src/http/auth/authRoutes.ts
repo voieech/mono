@@ -77,7 +77,12 @@ export const authRoutes = express
       return;
     }
 
+    // Redirect back to mobile with auth code
     if (state.target === "mobile") {
+      // instead of redirecting back through deep link we could do universal link instead
+      // https://voieech/auth/callback - have to implement route on web and app association scheme for redirection back to mobile app
+      // universal links requires secure and verified association with specific domain
+      // could unify app in this way
       return res.redirect(
         `voieech://auth/callback?code=${encodeURIComponent(code)}`,
       );
@@ -94,21 +99,20 @@ export const authRoutes = express
           },
         });
 
-        // For web: store cookie in session and redirect to homepage
-        res.cookie(WORKOS_COOKIE_NAME, authenticationResponse.sealedSession, {
-          path: "/",
-          httpOnly: true,
-          secure: true,
-          sameSite: "lax",
-        });
+      // For web: store cookie in session and redirect to homepage
+      res.cookie(WORKOS_COOKIE_NAME, authenticationResponse.sealedSession, {
+        path: "/",
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+      });
 
-        // Use the information in `user` as needed for other business logic
-        // authenticationResponse.user;
-        // @todo Modifiable
-        // Redirect the user to the homepage
-        res.redirect("/");
-        return;
-      }
+      // Use the information in `user` as needed for other business logic
+      // authenticationResponse.user;
+      // @todo Modifiable
+      // Redirect the user to the homepage
+      res.redirect("/");
+      return;
     } catch (error) {
       // Redirect to login based on client type
       if (state.target === "mobile") {
@@ -120,7 +124,7 @@ export const authRoutes = express
     }
   })
 
-  // Mobile exchanges one-time code for tokens
+  // Mobile exchanges for tokens using one time auth code from workos
   .post("/auth/exchange-code", async (req, res) => {
     // Get authorization code string returned by AuthKit
     const code = req.body["code"]?.toString();
