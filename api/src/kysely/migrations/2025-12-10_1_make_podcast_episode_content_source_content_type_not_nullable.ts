@@ -7,6 +7,14 @@ const podcastEpisodeContentSourceTableName = "podcast_episode_content_source";
 // this until you have filled every single nullable column first, or drop every
 // row with a null content_type.
 export async function up(db: Kysely<any>): Promise<void> {
+  await db
+    .updateTable(podcastEpisodeContentSourceTableName)
+    .set({
+      content_type: "__NULL__",
+    })
+    .where("content_type", "is", null)
+    .execute();
+
   await db.schema
     .alterTable(podcastEpisodeContentSourceTableName)
     .alterColumn("content_type", (alterColumn) => alterColumn.setNotNull())

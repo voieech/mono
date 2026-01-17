@@ -20,9 +20,11 @@ export async function down(db: Kysely<any>): Promise<void> {
     .alterTable(contentGithubRepoTableName)
     // Non null columns since it follows the original table design, see previous
     // migration script that created the table.
-    .addColumn("owner", "text", (col) => col.notNull().defaultTo("_NULL_"))
+    .addColumn("owner", "text", (col) => col.notNull().defaultTo("__NULL__"))
     // Non null columns since it follows the original table design, see previous
     // migration script that created the table.
-    .addColumn("repo_name", "text", (col) => col.notNull().defaultTo("_NULL_"))
+    .addColumn("repo_name", "text", (col) =>
+      col.notNull().defaultTo("__NULL__"),
+    )
     .execute();
 }
