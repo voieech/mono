@@ -39,7 +39,7 @@ import { ContactRoute, AboutRoute, HomeRoute } from "@/router";
       <div class="md:basis-1/4">
         <p class="pb-2 tracking-wide">SOCIALS</p>
         <!-- @todo use env var -->
-        <div class="flex flex-row flex-wrap gap-4 md:basis-1/4">
+        <!-- <div class="flex flex-row flex-wrap gap-4 md:basis-1/4">
           <a href="https://www.linkedin.com/company/muwno/" target="_blank">
             <img src="../../assets/social-icons/li.svg" />
           </a>
@@ -58,7 +58,7 @@ import { ContactRoute, AboutRoute, HomeRoute } from "@/router";
           <a href="https://www.reddit.com/user/muwno" target="_blank">
             <img src="../../assets/social-icons/rd.svg" />
           </a>
-        </div>
+        </div> -->
       </div>
 
       <!-- <div class="md:basis-2/4">
