@@ -80,12 +80,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
         throw new Error("No code received from authentication");
       }
 
-      // Step 4: Exchange one-time code for tokens
-      const exchangeRes = await fetch(`${apiBaseUrl}/auth/exchange-code`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: oneTimeCode, codeVerifier: codeVerifier }),
-      });
+      // Step 4: Exchange auth code and code verifier for tokens
+      const exchangeRes = await fetch(
+        `${apiBaseUrl}/auth/workos/exchange-code`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            code: oneTimeCode,
+            codeVerifier: codeVerifier,
+          }),
+        },
+      );
 
       if (!exchangeRes.ok) {
         const errorData = await exchangeRes.json();
