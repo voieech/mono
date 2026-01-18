@@ -1,5 +1,7 @@
 import * as Crypto from "expo-crypto";
 
+import { base64URLEncode } from "./base64URLEncode";
+
 /**
  * Custom PKCE code generation implementation
  */
@@ -20,8 +22,8 @@ export async function generatePkceCode() {
   const codeChallenge = await Crypto.digestStringAsync(
     Crypto.CryptoDigestAlgorithm.SHA256,
     codeVerifier,
-    { encoding: Crypto.CryptoEncoding.HEX },
-  );
+    { encoding: Crypto.CryptoEncoding.BASE64 },
+  ).then(base64URLEncode);
 
   /**
    * Const to Sha256 for now since this is the only supported option
