@@ -2,7 +2,6 @@
  * Barrel file.
  */
 
-export * from "./auth";
 export * from "./createUseContextHook";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
@@ -14,6 +13,7 @@ export * from "./pkce";
 export * from "./posthog";
 export * from "./queryClient";
 export * from "./ReactNativeTrackPlayerCapabilitiesOptions";
+export * from "./secureStoreForAuth";
 export * from "./settings";
 export * from "./TrackPlayerPlaybackRates";
 export * from "./TrackWithMetadata";

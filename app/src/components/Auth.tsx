@@ -1,5 +1,4 @@
 import * as Linking from "expo-linking";
-import * as SecureStore from "expo-secure-store";
 import * as WebBrowser from "expo-web-browser";
 import {
   PropsWithChildren,
@@ -9,19 +8,16 @@ import {
   useState,
 } from "react";
 
+import type { User } from "@/types";
+
 import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
-import { generatePKCE, User } from "@/utils";
+import { generatePKCE, secureStoreForAuth } from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
 
-const STORAGE_KEYS = {
-  ACCESS_TOKEN: "access_token",
-  REFRESH_TOKEN: "refresh_token",
-  USER_DATA: "user_data",
-} as const;
-
+// @todo Rename the files
 export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -52,7 +48,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         throw new Error("No auth URL received");
       }
 
-      // // Step 2: Open system browser with WorkOS auth
+      // Step 2: Open system browser with WorkOS auth
       const result = await WebBrowser.openAuthSessionAsync(
         authUrl,
         "voieech://auth/callback",
@@ -68,16 +64,19 @@ export function AuthProvider({ children }: PropsWithChildren) {
       }
 
       // Step 3: Extract auth code callback
-      const { queryParams } = Linking.parse(result.url);
+      const queryParams = Linking.parse(result.url)?.queryParams;
 
-      if (queryParams?.error) {
+      if (queryParams == null) {
+        throw new Error("Missing query params from auth callback");
+      }
+
+      if (queryParams.error !== undefined) {
         throw new Error(queryParams.error as string);
       }
 
-      const oneTimeCode = queryParams?.code as string;
-
-      if (!oneTimeCode) {
-        throw new Error("No code received from authentication");
+      const oneTimeCode = queryParams.code?.toString?.();
+      if (oneTimeCode === undefined) {
+        throw new Error("No one time code received from auth callback");
       }
 
       // Step 4: Exchange auth code and code verifier for tokens
@@ -88,14 +87,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             code: oneTimeCode,
-            codeVerifier: codeVerifier,
+            codeVerifier,
           }),
         },
       );
 
       if (!exchangeRes.ok) {
         const errorData = await exchangeRes.json();
-        throw new Error(errorData.error || "Failed to exchange code");
+        throw new Error(errorData?.error || "Failed to exchange code");
       }
 
       const {
@@ -104,18 +103,19 @@ export function AuthProvider({ children }: PropsWithChildren) {
         user: userData,
       } = await exchangeRes.json();
 
-      if (!accessToken || !refreshToken || !userData) {
-        throw new Error("Incomplete authentication data");
+      if (
+        accessToken === undefined ||
+        refreshToken === undefined ||
+        userData === undefined
+      ) {
+        throw new Error("Incomplete authentication data from exchange");
       }
 
-      await Promise.all([
-        SecureStore.setItemAsync(STORAGE_KEYS.ACCESS_TOKEN, accessToken),
-        SecureStore.setItemAsync(STORAGE_KEYS.REFRESH_TOKEN, refreshToken),
-        SecureStore.setItemAsync(
-          STORAGE_KEYS.USER_DATA,
-          JSON.stringify(userData),
-        ),
-      ]);
+      await secureStoreForAuth.saveAllAuthData({
+        accessToken,
+        refreshToken,
+        userData,
+      });
 
       setUser(userData);
     } catch (err) {
@@ -124,22 +124,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }
 
   const clearAuth = useCallback(async function () {
-    await Promise.all([
-      SecureStore.deleteItemAsync(STORAGE_KEYS.ACCESS_TOKEN),
-      SecureStore.deleteItemAsync(STORAGE_KEYS.REFRESH_TOKEN),
-      SecureStore.deleteItemAsync(STORAGE_KEYS.USER_DATA),
-    ]);
+    await secureStoreForAuth.deleteAllData();
     setUser(undefined);
   }, []);
 
   const refreshSession = useCallback(
     async function () {
       try {
-        const refreshToken = await SecureStore.getItemAsync(
-          STORAGE_KEYS.REFRESH_TOKEN,
-        );
+        const refreshToken = await secureStoreForAuth.getRefreshToken();
 
-        if (!refreshToken) {
+        // @todo why?
+        if (refreshToken === null) {
           await clearAuth();
           return;
         }
@@ -157,17 +152,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
         const data = await res.json();
 
-        await Promise.all([
-          SecureStore.setItemAsync(STORAGE_KEYS.ACCESS_TOKEN, data.accessToken),
-          SecureStore.setItemAsync(
-            STORAGE_KEYS.REFRESH_TOKEN,
-            data.refreshToken,
-          ),
-          SecureStore.setItemAsync(
-            STORAGE_KEYS.USER_DATA,
-            JSON.stringify(data.user),
-          ),
-        ]);
+        await secureStoreForAuth.saveAllAuthData({
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+          userData: data.user,
+        });
 
         setUser(data.user);
         return data.user;
@@ -181,11 +170,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   async function logout() {
     try {
-      const accessToken = await SecureStore.getItemAsync(
-        STORAGE_KEYS.ACCESS_TOKEN,
-      );
+      const accessToken = await secureStoreForAuth.getAccessToken();
 
-      if (accessToken) {
+      if (accessToken !== null) {
         // Fire and forget - don't wait for response
         fetch(`${apiBaseUrl}/auth/logout`, {
           method: "POST",
@@ -202,26 +189,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }
 
-  async function getAccessToken(): Promise<string | null> {
-    return await SecureStore.getItemAsync(STORAGE_KEYS.ACCESS_TOKEN);
-  }
-
   useEffect(() => {
     const initAuth = async () => {
       setIsLoading(true);
 
       try {
         // Check if user has logged in before
-        const [storedUser, refreshToken] = await Promise.all([
-          SecureStore.getItemAsync(STORAGE_KEYS.USER_DATA),
-          SecureStore.getItemAsync(STORAGE_KEYS.REFRESH_TOKEN),
-        ]);
-
-        if (storedUser && refreshToken) {
+        const authData = await secureStoreForAuth.getAllAuthData();
+        if (authData.userData !== null && authData.refreshToken !== null) {
           // User has logged in before - restore their session immediately
           try {
-            const parsedUser = JSON.parse(storedUser);
-            setUser(parsedUser);
+            setUser(authData.userData);
           } catch (parseErr) {
             console.error("Failed to parse stored user data:", parseErr);
             await clearAuth();
@@ -238,6 +216,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
             // User keeps cached state even if refresh fails
           });
         }
+
         // If no stored data, user hasn't logged in - do nothing
         // Let them continue using the app as guest
       } catch (err) {
@@ -252,7 +231,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, refreshSession, getAccessToken, isLoading }}
+      value={{
+        user,
+        login,
+        logout,
+        refreshSession,
+        getAccessToken: secureStoreForAuth.getAccessToken,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

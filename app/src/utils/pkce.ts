@@ -1,8 +1,8 @@
 import * as Crypto from "expo-crypto";
 
-export const generatePKCE = async () => {
+export async function generatePKCE() {
   // Generate random code verifier (43-128 characters)
-  const randomBytes = await Crypto.getRandomBytesAsync(32);
+  const randomBytes = await Crypto.getRandomBytesAsync(90);
   const codeVerifier = base64URLEncode(randomBytes);
 
   // Create code challenge from verifier using SHA256
@@ -18,10 +18,10 @@ export const generatePKCE = async () => {
     codeChallenge,
     codeChallengeMethod: "S256",
   };
-};
+}
 
 // Helper to convert base64 to base64url format (RFC 4648)
-const base64URLEncode = (str: string | Uint8Array): string => {
+function base64URLEncode(str: string | Uint8Array): string {
   let base64: string;
 
   if (typeof str === "string") {
@@ -33,4 +33,4 @@ const base64URLEncode = (str: string | Uint8Array): string => {
 
   // Convert to base64url format
   return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
-};
+}
