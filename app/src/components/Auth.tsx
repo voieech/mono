@@ -169,7 +169,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   async function logout() {
     try {
-      const accessToken = await secureStoreForAuth.getAccessToken();
+      const accessToken = await secureStoreForAuth.getAccessTokenString();
 
       if (accessToken !== null) {
         // Fire and forget - don't wait for response
@@ -235,7 +235,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         login,
         logout,
         refreshSession,
-        getAccessToken: secureStoreForAuth.getAccessToken,
+        getAccessToken: secureStoreForAuth.getAccessTokenString,
         isLoading,
       }}
     >

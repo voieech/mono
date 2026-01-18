@@ -22,7 +22,10 @@ type AuthData = {
 };
 
 export const secureStoreForAuth = {
-  getAccessToken() {
+  /**
+   * Get the Access token string if available. This is an encoded JWT string.
+   */
+  getAccessTokenString() {
     return SecureStore.getItemAsync(AUTH_DATA_STORAGE_KEYS.ACCESS_TOKEN);
   },
 
