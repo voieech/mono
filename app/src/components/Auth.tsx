@@ -12,7 +12,12 @@ import type { User } from "@/types";
 
 import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
-import { generatePkceCode, secureStoreForAuth } from "@/utils";
+import {
+  generatePkceCode,
+  secureStoreForAuth,
+  decodeJwtToken,
+  isJwtExpiredOrExpiringSoon,
+} from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
@@ -167,6 +172,34 @@ export function AuthProvider({ children }: PropsWithChildren) {
     [clearAuth],
   );
 
+  /**
+   * Returns the authorization header needed for API calls with a fresh (will
+   * refresh if stale) access token string.
+   */
+  const getAuthHeader = useCallback(
+    async function () {
+      let accessTokenString = await secureStoreForAuth.getAccessTokenString();
+
+      // @todo Handle this better
+      if (accessTokenString === null) {
+        throw new Error("No auth token available for auth header");
+      }
+
+      // @todo Should maintain a cached object instead of constantly decoding it from string
+      const accessToken = decodeJwtToken(accessTokenString);
+
+      if (isJwtExpiredOrExpiringSoon(accessToken.exp)) {
+        await refreshSession();
+        accessTokenString = await secureStoreForAuth.getAccessTokenString();
+      }
+
+      return {
+        Authorization: `Bearer ${accessTokenString}`,
+      };
+    },
+    [refreshSession],
+  );
+
   async function logout() {
     try {
       const accessToken = await secureStoreForAuth.getAccessTokenString();
@@ -236,6 +269,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         logout,
         refreshSession,
         getAccessToken: secureStoreForAuth.getAccessTokenString,
+        getAuthHeader,
         isLoading,
       }}
     >

@@ -8,6 +8,7 @@ export const AuthContext = createContext<{
   logout: () => Promise<void>;
   refreshSession: () => Promise<void>;
   getAccessToken: () => Promise<string | null>;
+  getAuthHeader: () => Promise<{ Authorization: string }>;
   isLoading: boolean;
 }>(
   // @ts-expect-error
