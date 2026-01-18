@@ -205,7 +205,11 @@ export const authRoutes = express
       });
       return;
     } catch (err) {
-      res.status(500).json({ error: "Internal server error" });
+      // eslint-disable-next-line no-console
+      console.error(err);
+      res
+        .status(500)
+        .json({ error: (err as any)?.msg ?? "Internal server error" });
       return;
     }
   })
