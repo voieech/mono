@@ -1,5 +1,7 @@
 import * as SecureStore from "expo-secure-store";
 
+import type { AuthData } from "@/types";
+
 /**
  * Storage keys are name spaced under "auth" to prevent naming conflicts
  */
@@ -8,18 +10,6 @@ const AUTH_DATA_STORAGE_KEYS = {
   REFRESH_TOKEN: "auth.refresh_token",
   USER_DATA: "auth.user_data",
 } as const;
-
-// @todo Add concrete type
-type UserData = object;
-
-/**
- * Auth data from workos auth
- */
-type AuthData = {
-  accessToken: string;
-  refreshToken: string;
-  userData: UserData;
-};
 
 export const secureStoreForAuth = {
   /**
