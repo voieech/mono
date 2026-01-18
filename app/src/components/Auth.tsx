@@ -12,7 +12,7 @@ import type { User } from "@/types";
 
 import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
-import { generatePKCE, secureStoreForAuth } from "@/utils";
+import { generatePkceCode, secureStoreForAuth } from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
@@ -25,13 +25,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
   async function login() {
     try {
       // Step 1: Get auth URL from your backend (with target=mobile)
-      const { codeVerifier, codeChallenge, codeChallengeMethod } =
-        await generatePKCE();
+      const pkceCode = await generatePkceCode();
 
       const params = new URLSearchParams({
         target: "mobile",
-        codeChallenge: codeChallenge,
-        challengeMethod: codeChallengeMethod,
+        codeChallenge: pkceCode.codeChallenge,
+        challengeMethod: pkceCode.codeChallengeMethod,
       });
 
       const urlRes = await fetch(
@@ -74,8 +73,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
         throw new Error(queryParams.error as string);
       }
 
-      const oneTimeCode = queryParams.code?.toString?.();
-      if (oneTimeCode === undefined) {
+      const authorizationCode = queryParams.authorizationCode?.toString?.();
+      if (authorizationCode === undefined) {
         throw new Error("No one time code received from auth callback");
       }
 
@@ -86,8 +85,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            code: oneTimeCode,
-            codeVerifier,
+            authorizationCode,
+            pkceCodeVerifier: pkceCode.codeVerifier,
           }),
         },
       );

@@ -9,9 +9,8 @@ import {
   WORKOS_COOKIE_NAME,
 } from "./workos.js";
 
-function isValidChallengeMethod(txt: unknown): txt is "S256" {
-  return txt === "S256";
-}
+const isValidPkceCodeChallengeMethod = (txt: unknown): txt is "S256" =>
+  txt === "S256";
 
 /**
  * Routes for auth using WorkOS
@@ -34,7 +33,7 @@ export const authRoutes = express
     }
 
     const challengeMethod = req.query["challengeMethod"]?.toString();
-    if (!isValidChallengeMethod(challengeMethod)) {
+    if (!isValidPkceCodeChallengeMethod(challengeMethod)) {
       throw new Error("Invalid challenge method");
     }
 
@@ -119,7 +118,7 @@ export const authRoutes = express
         // universal links requires secure and verified association with specific domain
         // could unify app in this way
         res.redirect(
-          `voieech://auth/callback?code=${encodeURIComponent(authorizationCodeFromAuthkit)}`,
+          `voieech://auth/callback?authorizationCode=${encodeURIComponent(authorizationCodeFromAuthkit)}`,
         );
         return;
       }
@@ -166,7 +165,8 @@ export const authRoutes = express
    * @todo Add mobile prefix in URL if this is mobile only
    */
   .post("/auth/workos/exchange-code", async (req, res) => {
-    const authorizationCodeFromAuthkit = req.body["code"]?.toString();
+    const authorizationCodeFromAuthkit =
+      req.body["authorizationCode"]?.toString();
     if (typeof authorizationCodeFromAuthkit !== "string") {
       res.status(400).json({
         error: "Authorization Code must be a string",
@@ -174,7 +174,7 @@ export const authRoutes = express
       return;
     }
 
-    const pkceCodeVerifier = req.body["codeVerifier"]?.toString();
+    const pkceCodeVerifier = req.body["pkceCodeVerifier"]?.toString();
     if (typeof pkceCodeVerifier !== "string") {
       res.status(400).json({
         error: "PKCE Code Verifier must be a string",
