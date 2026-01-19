@@ -240,7 +240,7 @@ export const authRoutes = express
         });
 
       res.json({
-        user: mapWorkOsUser(refreshedTokens.user),
+        userData: mapWorkOsUser(refreshedTokens.user),
         accessToken: refreshedTokens.accessToken,
         refreshToken: refreshedTokens.refreshToken,
       });

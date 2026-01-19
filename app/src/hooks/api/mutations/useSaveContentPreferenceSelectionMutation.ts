@@ -2,11 +2,12 @@ import { useMutation } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
+import { wrappedFetch } from "@/utils";
 
 export function useSaveContentPreferenceSelectionMutation() {
   return useMutation({
     async mutationFn(userContentPreferenceTags: Array<string>) {
-      const res = await fetch(
+      const res = await wrappedFetch(
         `${apiBaseUrl}/v1/user/settings/content-preference`,
         {
           method: "POST",

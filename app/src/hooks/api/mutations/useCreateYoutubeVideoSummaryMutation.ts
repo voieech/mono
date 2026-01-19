@@ -2,19 +2,23 @@ import { useMutation } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
+import { wrappedFetch } from "@/utils";
 
 export function useCreateYoutubeVideoSummaryMutation() {
   return useMutation({
     async mutationFn(youtubeVideoID: string) {
-      const res = await fetch(`${apiBaseUrl}/v1/create/youtube-video-summary`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await wrappedFetch(
+        `${apiBaseUrl}/v1/create/youtube-video-summary`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            youtubeVideoID,
+          }),
         },
-        body: JSON.stringify({
-          youtubeVideoID,
-        }),
-      });
+      );
 
       if (!res.ok) {
         const defaultErrorMessage = `Failed to create youtube video summary`;

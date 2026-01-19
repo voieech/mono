@@ -4,12 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
+import { wrappedFetch } from "@/utils";
 
 export function usePodcastEpisodeQuery(vanityID: string) {
   return useQuery({
     queryKey: ["episode", vanityID],
     async queryFn() {
-      const res = await fetch(`${apiBaseUrl}/v1/podcast/episode/${vanityID}`);
+      const res = await wrappedFetch(
+        `${apiBaseUrl}/v1/podcast/episode/${vanityID}`,
+      );
 
       if (!res.ok) {
         const defaultErrorMessage = `Failed to load episode: ${vanityID}`;

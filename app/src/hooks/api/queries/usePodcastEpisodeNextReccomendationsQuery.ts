@@ -3,6 +3,7 @@ import type { Episode } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
+import { wrappedFetch } from "@/utils";
 
 /**
  * Useful for showing reccomendations related to the current episode
@@ -24,7 +25,7 @@ export async function getPodcastEpisodeNextReccomendations(
   vanityID: string,
   limit: number = 10,
 ) {
-  const res = await fetch(
+  const res = await wrappedFetch(
     `${apiBaseUrl}/v1/podcast/reccomendations/next?current_episode_vanity_id=${vanityID}&limit=${limit}`,
   );
 

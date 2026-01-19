@@ -3,7 +3,7 @@ import type { Episode } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
-import { queryClient } from "@/utils";
+import { wrappedFetch, queryClient } from "@/utils";
 
 import { useAcceptLanguageHeader } from "../useAcceptLanguageHeader";
 
@@ -13,7 +13,7 @@ export function useFeaturedEpisodesQuery() {
   return useQuery({
     queryKey: ["podcast", "featured-episodes"],
     async queryFn() {
-      const res = await fetch(
+      const res = await wrappedFetch(
         `${apiBaseUrl}/v1/podcast/featured/episodes?limit=20`,
         {
           headers: {

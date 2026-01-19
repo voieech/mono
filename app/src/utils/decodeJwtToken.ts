@@ -1,16 +1,9 @@
-type JWTPayload = {
-  exp: number;
-  iat: number;
-  iss: string;
-  jti: string;
-  sid: string;
-  sub: string;
-};
+import type { JWTPayload } from "@/types";
 
 /**
  * Decode JWT token's payload section (without verification).
  */
-export function decodeJwtToken(token: string): JWTPayload {
+export function decodeJwtToken(token: string) {
   // Get the payload part only
   const jwtPayloadSection = token.split(".")[1];
   if (jwtPayloadSection === undefined) {
@@ -25,5 +18,6 @@ export function decodeJwtToken(token: string): JWTPayload {
       .join(""),
   );
 
-  return JSON.parse(jsonPayload);
+  // @todo Validate on parse
+  return JSON.parse(jsonPayload) as JWTPayload;
 }

@@ -4,13 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
-import { queryClient } from "@/utils";
+import { wrappedFetch, queryClient } from "@/utils";
 
 export function usePodcastChannelEpisodesQuery(channelID: string) {
   return useQuery({
     queryKey: ["podcast", "channel-episodes", channelID],
     async queryFn() {
-      const res = await fetch(
+      const res = await wrappedFetch(
         `${apiBaseUrl}/v1/podcast/channel/${channelID}/episodes`,
       );
 
