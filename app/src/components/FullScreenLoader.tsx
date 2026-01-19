@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import { useWindowDimensions } from "react-native";
 
 import { SafeScrollViewContainer } from "@/components/PageContainer";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { ThemedView, ThemedText } from "@/components/ThemedComponents/index";
 import { linguiMsgToString } from "@/utils";
 
 export function FullScreenLoader(props: {

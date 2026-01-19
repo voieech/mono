@@ -1,4 +1,4 @@
-import { ThemedText } from "@/components/ThemedText";
+import { ThemedText } from "@/components/ThemedComponents/index";
 import { useProgress } from "@/TrackPlayer";
 
 export function AudioPlayerDebugger() {

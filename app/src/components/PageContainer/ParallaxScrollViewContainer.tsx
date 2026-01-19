@@ -9,7 +9,7 @@ import Animated, {
   useScrollViewOffset,
 } from "react-native-reanimated";
 
-import { ThemedView } from "@/components/ThemedView";
+import { ThemedView } from "@/components/ThemedComponents/index";
 import { Colors } from "@/constants";
 import { useTheme, useBottomTabOverflow } from "@/hooks";
 

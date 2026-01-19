@@ -11,7 +11,7 @@ import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
 import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
-import { ThemedView } from "@/components/ThemedView";
+import { ThemedView } from "@/components/ThemedComponents/index";
 import { Colors } from "@/constants";
 import { useTrackPlayer } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";

@@ -1,5 +1,4 @@
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { ThemedText, ThemedView } from "@/components/ThemedComponents/index";
 import { useProgress } from "@/TrackPlayer";
 
 import { convertSecondsToMSS } from "./convertSecondsToMSS";

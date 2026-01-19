@@ -16,7 +16,5 @@ export * from "./Providers";
 export * from "./Settings";
 export * from "./ShareChannelIcon";
 export * from "./ShareTrackIcon";
-export * from "./ThemedLink";
-export * from "./ThemedText";
-export * from "./ThemedView";
+export * from "./ThemedComponents";
 export * from "./TrackPlayerProvider";
