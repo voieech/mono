@@ -19,7 +19,6 @@
     "reverse-proxy": "npx ngrok http 3000"
   },
   "dependencies": {
-    "@upstash/redis": "^1.36.1",
     "@workos-inc/node": "^7.71.0",
     "convert-unknown-catch-to-error": "^1.0.3",
     "cookie-parser": "^1.4.7",
