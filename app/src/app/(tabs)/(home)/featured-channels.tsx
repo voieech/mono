@@ -5,6 +5,7 @@ import { useState } from "react";
 import { RefreshControl, View } from "react-native";
 
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
+import { Colors } from "@/constants";
 import { useFeaturedChannelsQuery } from "@/hooks";
 
 export default function FeaturedChannels() {
