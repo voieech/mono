@@ -1,9 +1,6 @@
-import { useState, type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-import {
-  useAppDebuggingSurfaceContext,
-  AppDebuggingSurfaceContext,
-} from "@/context";
+import { useAppDebuggingSurfaceContext } from "@/context";
 
 /**
  * Wrapper component to conditionally show your children/wrapper component
@@ -12,17 +9,3 @@ import {
  */
 export const AppDebuggingSurface = (props: PropsWithChildren) =>
   useAppDebuggingSurfaceContext().showDebuggingSurfaces ? props.children : null;
-
-export function AppDebuggingSurfaceProvider(props: PropsWithChildren) {
-  const [showDebuggingSurfaces, setShowDebuggingSurfaces] = useState(__DEV__);
-  return (
-    <AppDebuggingSurfaceContext
-      value={{
-        showDebuggingSurfaces,
-        setShowDebuggingSurfaces,
-      }}
-    >
-      {props.children}
-    </AppDebuggingSurfaceContext>
-  );
-}
