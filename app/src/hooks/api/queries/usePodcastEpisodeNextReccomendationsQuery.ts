@@ -2,8 +2,8 @@ import type { Episode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
+import { wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
-import { wrappedFetch } from "@/utils";
 
 /**
  * Useful for showing reccomendations related to the current episode

@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 
-export const queryClient = new QueryClient({
+export const reactQueryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // Set these options to ensure that once data is loaded and cached it will

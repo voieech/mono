@@ -5,10 +5,9 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { AuthDataFromWorkos } from "@/types";
 
+import { authController, secureStoreForAuth } from "@/auth";
 import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
-import { authController } from "@/controller";
-import { secureStoreForAuth } from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
@@ -106,7 +105,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     <AuthContext.Provider
       value={{
         isLoading,
-        isAuthenticated: authData?.userData !== null,
+        isAuthenticated: authData?.userData !== undefined,
         authData,
         login,
         logout,

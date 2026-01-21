@@ -2,8 +2,8 @@ import type { Episode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
+import { wrappedFetch, reactQueryClient } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
-import { wrappedFetch, queryClient } from "@/utils";
 
 import { useAcceptLanguageHeader } from "../useAcceptLanguageHeader";
 
@@ -35,7 +35,7 @@ export function useFeaturedEpisodesQuery() {
 
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
-        queryClient.setQueryData(["episode", episode.vanity_id], episode);
+        reactQueryClient.setQueryData(["episode", episode.vanity_id], episode);
       }
 
       return episodes;

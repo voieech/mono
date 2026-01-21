@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 
+import { wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
-import { wrappedFetch } from "@/utils";
 
 export function useSaveContentPreferenceSelectionMutation() {
   return useMutation({

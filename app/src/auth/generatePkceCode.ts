@@ -1,6 +1,6 @@
 import * as Crypto from "expo-crypto";
 
-import { base64URLEncode } from "./base64URLEncode";
+import { base64URLEncode } from "@/utils";
 
 /**
  * Custom PKCE code generation implementation

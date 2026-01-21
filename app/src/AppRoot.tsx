@@ -15,6 +15,7 @@ import { PostHogProvider } from "posthog-react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootSiblingParent } from "react-native-root-siblings";
 
+import { reactQueryClient } from "@/api-client";
 import {
   AppUpdater,
   AppDebuggingSurfaceProvider,
@@ -24,7 +25,7 @@ import {
   AuthProvider,
 } from "@/components";
 import { useTheme } from "@/hooks";
-import { queryClient, posthog } from "@/utils";
+import { posthog } from "@/utils";
 
 // Dont auto hide the splash screen until all initialisation steps are done
 SplashScreen.preventAutoHideAsync();
@@ -55,7 +56,7 @@ export function AppRoot(props: PropsWithChildren) {
     <AppUpdater>
       <I18nProvider i18n={i18n}>
         <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
-          <QueryClientProvider client={queryClient}>
+          <QueryClientProvider client={reactQueryClient}>
             {/*
               PostHogProvider adds a new build warning:
               Using outdated JSX transform https://react.dev/link/new-jsx-transform

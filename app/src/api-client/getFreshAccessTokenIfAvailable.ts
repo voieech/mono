@@ -1,15 +1,14 @@
-import { authController } from "@/controller";
+import { authController, secureStoreForAuth } from "@/auth";
 
 import { isJwtExpiredOrExpiringSoon } from "./isJwtExpiredOrExpiringSoon";
-import { secureStoreForAuth } from "./secureStoreForAuth";
 
 let promiseForAccessTokenAfterRefresh: Promise<string> | null = null;
 
 /**
- * Returns the authorization header needed for API calls with a fresh (will
- * refresh if stale) access token string.
+ * Returns the access token string needed for API calls if available, and will
+ * refresh if it is stale.
  */
-async function getValidToken(): Promise<string | null> {
+export async function getFreshAccessTokenIfAvailable(): Promise<string | null> {
   // TO AVOID RACE CONDITIONS: If a refresh is already in progress, wait for it
   if (promiseForAccessTokenAfterRefresh !== null) {
     return promiseForAccessTokenAfterRefresh;
@@ -39,28 +38,14 @@ async function getValidToken(): Promise<string | null> {
       },
       onFailure() {
         promiseForAccessTokenAfterRefresh = null;
-        // @todo Pass in an error token
-        reject();
+        reject(
+          new Error(
+            `${getFreshAccessTokenIfAvailable.name}: Failed to refresh token`,
+          ),
+        );
       },
     });
   });
 
   return promiseForAccessTokenAfterRefresh;
-}
-
-export async function wrappedFetch(...args: Parameters<typeof fetch>) {
-  let [input, init] = args;
-
-  if (init === undefined) {
-    init = {};
-  }
-
-  const originalHeaders = init.headers;
-
-  init.headers = {
-    ...originalHeaders,
-    Authorization: `Bearer ${await getValidToken()}`,
-  };
-
-  return fetch(input, init);
 }

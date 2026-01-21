@@ -1,8 +1,8 @@
 import * as SecureStore from "expo-secure-store";
 
-import type { User, JWTPayload, AuthData, AuthDataFromWorkos } from "@/types";
+import type { User, AuthData, AuthDataFromWorkos } from "@/types";
 
-import { decodeJwtToken } from "./decodeJwtToken";
+import { getAccessTokenPayload } from "./getAccessTokenPayload";
 
 /**
  * Storage keys are name spaced under "auth" to prevent naming conflicts
@@ -12,20 +12,6 @@ const AUTH_DATA_STORAGE_KEYS = {
   REFRESH_TOKEN: "auth.refresh_token",
   USER_DATA: "auth.user_data",
 } as const;
-
-let cachedAccessToken: string | null = null;
-let cachedAccessTokenPayload: JWTPayload | null = null;
-
-function getAccessTokenPayload(accessToken: string) {
-  if (accessToken === cachedAccessToken && cachedAccessTokenPayload !== null) {
-    return cachedAccessTokenPayload;
-  }
-
-  cachedAccessToken = accessToken;
-  cachedAccessTokenPayload = decodeJwtToken(accessToken);
-
-  return cachedAccessTokenPayload;
-}
 
 export const secureStoreForAuth = {
   /**

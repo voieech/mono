@@ -4,7 +4,9 @@ import * as WebBrowser from "expo-web-browser";
 import type { AuthDataFromWorkos } from "@/types";
 
 import { apiBaseUrl } from "@/constants";
-import { generatePkceCode, secureStoreForAuth } from "@/utils";
+
+import { generatePkceCode } from "./generatePkceCode";
+import { secureStoreForAuth } from "./secureStoreForAuth";
 
 export const authController = {
   async login() {
