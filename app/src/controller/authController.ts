@@ -135,12 +135,7 @@ export const authController = {
       }
 
       // @todo Validate data instead of type casting it
-      // const data: AuthDataFromWorkos = await res.json();
-      const data1: AuthDataFromWorkos = await res.json();
-      const data = {
-        ...data1,
-        userData: (data1 as any)?.user,
-      };
+      const data: AuthDataFromWorkos = await res.json();
 
       await secureStoreForAuth.saveAllAuthData(data);
 

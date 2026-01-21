@@ -62,8 +62,5 @@ export async function wrappedFetch(...args: Parameters<typeof fetch>) {
     Authorization: `Bearer ${await getValidToken()}`,
   };
 
-  // @todo
-  console.log("final header for", input, init.headers);
-
   return fetch(input, init);
 }
