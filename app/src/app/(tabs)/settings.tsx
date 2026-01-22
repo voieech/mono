@@ -22,6 +22,7 @@ import {
 } from "@/components";
 import { Colors } from "@/constants";
 import {
+  useAuthContext,
   useSettingContext,
   useAppDebuggingSurfaceContext,
   useExperimentalSurfaceContext,
@@ -29,6 +30,7 @@ import {
 import { posthog, linguiMsgToString } from "@/utils";
 
 export default function Settings() {
+  const authContext = useAuthContext();
   const settingContext = useSettingContext();
   const appDebuggingSurfaceContext = useAppDebuggingSurfaceContext();
   const isInternalUser = useFeatureFlag("internal");
@@ -266,27 +268,58 @@ export default function Settings() {
             paddingBottom: 32,
           }}
         >
-          <Link
-            href={{
-              pathname: "/(onboarding)/default-content-preference-selection",
-            }}
-          >
-            <View
-              style={{
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-                backgroundColor: Colors.black,
-                borderRadius: 16,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignContent: "center",
-                width: "100%",
+          {!authContext.isAuthenticated ? (
+            <Link
+              href={{
+                pathname: "/(tabs)/profile",
               }}
             >
-              <ThemedText>Customise content preferences</ThemedText>
-              <Icon name="chevron.right" color={Colors.white} />
-            </View>
-          </Link>
+              <View
+                style={{
+                  paddingVertical: 8,
+                  paddingHorizontal: 16,
+                  backgroundColor: Colors.black,
+                  borderRadius: 16,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignContent: "center",
+                  width: "100%",
+                }}
+              >
+                <ThemedText>
+                  <Trans>Sign in to Personalise!</Trans>
+                </ThemedText>
+                <Icon name="chevron.right" color={Colors.white} />
+              </View>
+            </Link>
+          ) : (
+            <>
+              <Link
+                href={{
+                  pathname:
+                    "/(onboarding)/default-content-preference-selection",
+                }}
+              >
+                <View
+                  style={{
+                    paddingVertical: 8,
+                    paddingHorizontal: 16,
+                    backgroundColor: Colors.black,
+                    borderRadius: 16,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  <ThemedText>
+                    <Trans>Customise content preferences</Trans>
+                  </ThemedText>
+                  <Icon name="chevron.right" color={Colors.white} />
+                </View>
+              </Link>
+            </>
+          )}
         </Collapsible>
       )}
       <Collapsible
