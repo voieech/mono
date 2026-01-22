@@ -5,6 +5,7 @@
 export * from "./AppDebuggingSurface";
 export * from "./AppUpdater";
 export * from "./AudioPlayer";
+export * from "./AuthenticatedUsersOnly";
 export * from "./BottomOverlayAudioPlayer";
 export * from "./CopyOnPress";
 export * from "./ExperimentalSurface";
