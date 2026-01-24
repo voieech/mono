@@ -11,6 +11,13 @@ import {
 } from "@/components";
 import { useThemeColor } from "@/hooks";
 
+export const unstable_settings = {
+  // Ensure that index.tsx is the first route loaded. This happens by default
+  // usually, but since "index" route is set to `href: null`, we need to
+  // explicitly mention it here for it to work.
+  initialRouteName: "index",
+};
+
 export default function TabLayout() {
   const tabBarActiveTintColor = useThemeColor("tint");
   const { t } = useLingui();
@@ -92,6 +99,18 @@ export default function TabLayout() {
           );
         }}
       >
+        {/*
+          index.tsx is only used to redirect to (home)/index.tsx page, since
+          expo router uses alphabetical order, so (create)/index.tsx becomes
+          the default home page if not set.
+          This is set to `href: null` so the tab button doesnt show.
+        */}
+        <Tabs.Screen
+          name="index"
+          options={{
+            href: null,
+          }}
+        />
         <Tabs.Screen
           name="(home)"
           options={{
