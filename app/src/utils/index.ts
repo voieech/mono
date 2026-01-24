@@ -6,6 +6,7 @@ export * from "./base64URLEncode";
 export * from "./createUseContextHook";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
+export * from "./getUserFullName";
 export * from "./i18n/index";
 export * from "./linguiMsgToString";
 export * from "./localStorage";
