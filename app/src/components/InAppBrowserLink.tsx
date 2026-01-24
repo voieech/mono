@@ -1,4 +1,4 @@
-import type { Href } from "expo-router";
+import type { ExternalPathString } from "expo-router";
 import type { PropsWithChildren } from "react";
 
 import { Link } from "expo-router";
@@ -10,7 +10,7 @@ import { Platform } from "react-native";
  * in the in app modal browser instead of the external system browser.
  */
 export function InAppBrowserLink(
-  props: PropsWithChildren<{ href: Href & string }>,
+  props: PropsWithChildren<{ href: ExternalPathString }>,
 ) {
   return (
     <Link

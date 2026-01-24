@@ -1,17 +1,41 @@
-import { Trans } from "@lingui/react/macro";
+import type { ExternalPathString } from "expo-router";
+
+import { useLingui, Trans } from "@lingui/react/macro";
+import { useCallback } from "react";
 import { View, Pressable, Image } from "react-native";
 
 import {
   ParallaxScrollViewContainer,
+  ThemedView,
   ThemedText,
   Icon,
   Collapsible,
+  InAppBrowserLink,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
+import { getUserFullName } from "@/utils";
 
 export default function Profile() {
+  const supportLink = "https://forms.gle/hsQdT47mnb9zmbFE7";
   const authContext = useAuthContext();
+  const { t } = useLingui();
+
+  const formatDate = useCallback(
+    function (dateString?: string) {
+      const notApplicableString = t`Not Available`;
+      if (dateString === undefined) {
+        return notApplicableString;
+      }
+      try {
+        return new Date(dateString).toLocaleDateString();
+      } catch {
+        return notApplicableString;
+      }
+    },
+    [t],
+  );
+
   return (
     <ParallaxScrollViewContainer
       headerImage={
@@ -44,124 +68,99 @@ export default function Profile() {
           gap: 12,
         }}
       >
-        {authContext.authData?.userData?.profilePictureUrl != null ? (
-          <View
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: 40,
-              backgroundColor: Colors.neutral700,
-            }}
-          >
-            {/* TODO: Add Image component when ready */}
+        <View
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: 40,
+            backgroundColor: Colors.neutral700,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {authContext.authData?.userData?.profilePictureUrl != null ? (
             <Image
               source={{ uri: authContext.authData.userData.profilePictureUrl }}
               style={{ width: 80, height: 80, borderRadius: 40 }}
             />
-          </View>
-        ) : (
-          <View
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: 40,
-              backgroundColor: Colors.neutral700,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          ) : (
             <Icon name="person" size={40} color={Colors.gray300} />
-          </View>
-        )}
+          )}
+        </View>
         <ThemedText type="lg-light">
           {getUserFullName(
             authContext.authData?.userData?.firstName,
             authContext.authData?.userData?.lastName,
           )}
         </ThemedText>
-        <ThemedText type="sm-normal" colorType="subtext">
-          {authContext.authData?.userData?.email || "Not logged in"}
-        </ThemedText>
-        {authContext.authData?.userData?.emailVerified === true && (
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 4,
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              backgroundColor: Colors.white,
-              borderRadius: 8,
-            }}
-          >
-            <Icon name="checkmark" size={14} color={Colors.green600} />
-            <ThemedText
-              type="sm-normal"
-              style={{
-                color: Colors.green600,
-              }}
-            >
-              Verified
-            </ThemedText>
-          </View>
+        {authContext.authData?.userData?.email !== undefined && (
+          <ThemedText type="sm-normal" colorType="subtext">
+            {authContext.authData?.userData?.email}
+          </ThemedText>
         )}
       </View>
+      {authContext.isAuthenticated && (
+        <>
+          <Collapsible
+            title={t`Account Information`}
+            expandedViewStyle={{
+              paddingTop: 16,
+              rowGap: 16,
+              paddingBottom: 32,
+            }}
+          >
+            <ProfileRow
+              label={t`Name`}
+              value={getUserFullName(
+                authContext.authData?.userData?.firstName,
+                authContext.authData?.userData?.lastName,
+              )}
+            />
+            <ProfileRow
+              label={t`Email`}
+              value={authContext.authData?.userData?.email}
+            />
+            <ProfileRow
+              label={t`Member Since`}
+              value={formatDate(authContext.authData?.userData?.createdAt)}
+            />
+            <ProfileRow
+              label={t`Email Verified?`}
+              value={
+                authContext.authData?.userData?.emailVerified ? t`Yes` : t`No`
+              }
+            />
+          </Collapsible>
+
+          {/* @todo Add actionable component when ready */}
+          <Collapsible
+            title={t`Preferences`}
+            expandedViewStyle={{
+              paddingTop: 16,
+              rowGap: 16,
+              paddingBottom: 32,
+            }}
+          >
+            <ProfileActionRow
+              label={t`Edit Profile`}
+              icon="gear"
+              onPress={() => console.log("Edit Profile")}
+            />
+            <ProfileActionRow
+              label={t`Change Password`}
+              icon="gear"
+              onPress={() => console.log("Change Password")}
+            />
+            <ProfileActionRow
+              label={t`Notifications`}
+              icon="gear"
+              onPress={() => console.log("Notifications")}
+            />
+          </Collapsible>
+        </>
+      )}
       <Collapsible
-        title="Account Information"
-        expandedViewStyle={{
-          paddingTop: 16,
-          rowGap: 16,
-          paddingBottom: 32,
-        }}
-      >
-        <ProfileRow
-          label="Name"
-          value={getUserFullName(
-            authContext.authData?.userData?.firstName,
-            authContext.authData?.userData?.lastName,
-          )}
-        />
-        <ProfileRow
-          label="Email"
-          value={authContext.authData?.userData?.email || "N/A"}
-        />
-        <ProfileRow
-          label="Email Verified"
-          value={authContext.authData?.userData?.emailVerified ? "Yes" : "No"}
-        />
-        <ProfileRow
-          label="Member Since"
-          value={formatDate(authContext.authData?.userData?.createdAt)}
-        />
-      </Collapsible>
-      {/* TODO: Add actionable component when ready */}
-      <Collapsible
-        title="Preferences"
-        expandedViewStyle={{
-          paddingTop: 16,
-          rowGap: 16,
-          paddingBottom: 32,
-        }}
-      >
-        <ProfileActionRow
-          label="Edit Profile"
-          icon="gear"
-          onPress={() => console.log("Edit Profile")}
-        />
-        <ProfileActionRow
-          label="Change Password"
-          icon="gear"
-          onPress={() => console.log("Change Password")}
-        />
-        <ProfileActionRow
-          label="Notifications"
-          icon="gear"
-          onPress={() => console.log("Notifications")}
-        />
-      </Collapsible>
-      {/* TODO: Add actionable component when ready */}
-      <Collapsible
-        title="About"
+        title={t`About`}
         expandedViewStyle={{
           paddingTop: 16,
           rowGap: 16,
@@ -169,59 +168,49 @@ export default function Profile() {
         }}
       >
         {/* @todo Add links */}
-        <ProfileActionRow
-          label="Privacy Policy"
+        <ProfileRowLink
+          label={t`Privacy Policy`}
+          href="https://voieech.com/privacy-policy.html"
           icon="gear"
-          onPress={() => console.log("Privacy Policy")}
         />
-        <ProfileActionRow
-          label="Terms of Service"
+        <ProfileRowLink
+          label={t`Terms of Service`}
+          href="https://voieech.com/terms-and-conditions.html"
           icon="gear"
-          onPress={() => console.log("Terms of Service")}
         />
-        <ProfileActionRow
-          label="Help & Support"
+        <ProfileRowLink
+          label={t`Help & Support`}
+          href={supportLink}
           icon="gear"
-          onPress={() => console.log("Help & Support")}
         />
       </Collapsible>
-      {/* @todo Change to use isAuthenticated instead */}
-      {authContext.authData?.userData === undefined ? (
-        <Pressable
-          style={{
-            paddingVertical: 12,
-            paddingHorizontal: 16,
-            backgroundColor: Colors.green600,
-            borderRadius: 16,
-            alignItems: "center",
-          }}
-          onPress={authContext.login}
-        >
-          <ThemedText>
-            <Trans>Sign In</Trans>
-          </ThemedText>
-        </Pressable>
-      ) : (
-        <Pressable
-          style={{
-            paddingVertical: 12,
-            paddingHorizontal: 16,
-            backgroundColor: Colors.red500,
-            borderRadius: 16,
-            alignItems: "center",
-          }}
-          onPress={authContext.logout}
-        >
-          <ThemedText>
+      <Pressable
+        style={{
+          paddingVertical: 12,
+          paddingHorizontal: 16,
+          borderRadius: 16,
+          alignItems: "center",
+          backgroundColor: authContext.isAuthenticated
+            ? Colors.red500
+            : Colors.green600,
+        }}
+        onPress={
+          authContext.isAuthenticated ? authContext.logout : authContext.login
+        }
+      >
+        <ThemedText>
+          {authContext.isAuthenticated ? (
             <Trans>Sign Out</Trans>
-          </ThemedText>
-        </Pressable>
-      )}
+          ) : (
+            <Trans>Sign In</Trans>
+          )}
+        </ThemedText>
+      </Pressable>
     </ParallaxScrollViewContainer>
   );
 }
 
-function ProfileRow(props: { label: string; value: string }) {
+function ProfileRow(props: { label: string; value?: string }) {
   return (
     <View
       style={{
@@ -239,7 +228,7 @@ function ProfileRow(props: { label: string; value: string }) {
           marginTop: 4,
         }}
       >
-        {props.value}
+        {props.value ?? <Trans>Not Available</Trans>}
       </ThemedText>
     </View>
   );
@@ -284,39 +273,43 @@ function ProfileActionRow(props: {
   );
 }
 
-/**
- * Will return guest user name if name not available
- */
-function getUserFullName(
-  firstName: string | null | undefined,
-  lastName: string | null | undefined,
-) {
-  if (firstName != null && lastName != null) {
-    return `${firstName} ${lastName}`;
-  }
-
-  if (firstName != null) {
-    return firstName;
-  }
-
-  if (lastName != null) {
-    return lastName;
-  }
-
-  // @todo Add in localisation
-  return "Guest User";
-}
-
-function formatDate(dateString?: string) {
-  // @todo Add in localisation
-  const notApplicableString = "N/A";
-
-  if (dateString === undefined) {
-    return notApplicableString;
-  }
-  try {
-    return new Date(dateString).toLocaleDateString();
-  } catch {
-    return notApplicableString;
-  }
+function ProfileRowLink(props: {
+  label: string;
+  href: ExternalPathString;
+  icon:
+    | "gear"
+    | "person"
+    | "magnifyingglass"
+    | "chevron.right"
+    | "chevron.left"
+    | "checkmark";
+}) {
+  return (
+    <InAppBrowserLink href={props.href}>
+      <ThemedView
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingVertical: 12,
+          paddingHorizontal: 16,
+          backgroundColor: Colors.black,
+          borderRadius: 16,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <Icon name={props.icon} size={20} color={Colors.gray400} />
+          <ThemedText>{props.label}</ThemedText>
+        </View>
+        <Icon name="chevron.right" size={20} color={Colors.gray400} />
+      </ThemedView>
+    </InAppBrowserLink>
+  );
 }
