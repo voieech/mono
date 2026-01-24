@@ -18,24 +18,36 @@ msgstr ""
 "X-Crowdin-File: /app/src/locales/en/messages.po\n"
 "X-Crowdin-File-ID: 34\n"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:177
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:205
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:187
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:202
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
 
-#: src/app/track-queue-modal.tsx:62
+#: src/app/track-queue-modal.tsx:63
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
-#: src/app/(tabs)/settings.tsx:61
+#: src/app/(tabs)/profile.tsx:165
+msgid "About"
+msgstr "关于"
+
+#: src/app/(tabs)/profile.tsx:107
+msgid "Account Information"
+msgstr "账户信息"
+
+#: src/app/(tabs)/settings.tsx:65
 msgid "Audio Playback"
 msgstr "音频播放"
 
-#: src/components/ShareChannelIcon.tsx:23
+#: src/app/(tabs)/profile.tsx:152
+msgid "Change Password"
+msgstr "更改密码"
+
+#: src/components/ShareChannelIcon.tsx:24
 msgid "Check out \"{channelName}\" on voieech.com"
 msgstr "在 voieech.com 上关注 \"{channelName}\""
 
-#: src/components/ShareTrackIcon.tsx:54
+#: src/components/ShareTrackIcon.tsx:55
 msgid "Check out voieech for \"{trackTitle}\""
 msgstr "用 voieech 收听 “{trackTitle}”"
 
@@ -55,28 +67,54 @@ msgstr "中文 (繁体字 / 台湾)"
 msgid "Choose the type of native media controls you want to see."
 msgstr "选择你想要看到的本地媒体控制类型。"
 
-#: src/app/audio-player-modal.tsx:132
+#: src/app/audio-player-modal.tsx:133
 msgid "close"
 msgstr "关闭"
 
-#: src/app/(tabs)/settings.tsx:185
+#: src/app/(tabs)/settings.tsx:183
 #: src/utils/settings/contentLanguage.ts:12
 msgid "Content Language"
 msgstr "内容语言"
 
-#: src/app/(tabs)/settings.tsx:80
+#: src/app/(tabs)/_layout.tsx:138
+#: src/app/(tabs)/(create)/_layout.tsx:19
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:153
+msgid "Create"
+msgstr "创造"
+
+#: src/app/(tabs)/(create)/index.tsx:31
+msgid "Create your own content"
+msgstr "创建您自己的内容"
+
+#: src/app/(tabs)/settings.tsx:316
+msgid "Customise content preferences"
+msgstr "自定义内容偏好"
+
+#: src/app/(tabs)/settings.tsx:84
 msgid "Default audio playback rate"
 msgstr "默认音频播放速度"
 
-#: src/app/(tabs)/settings.tsx:267
+#: src/app/(tabs)/settings.tsx:326
 msgid "Details"
 msgstr "软件详情"
+
+#: src/app/(tabs)/profile.tsx:147
+msgid "Edit Profile"
+msgstr "编辑个人资料"
+
+#: src/app/(tabs)/profile.tsx:122
+msgid "Email"
+msgstr "电子邮件"
+
+#: src/app/(tabs)/profile.tsx:130
+msgid "Email Verified?"
+msgstr "电子邮件已验证？"
 
 #: src/utils/settings/contentLanguage.ts:17
 msgid "English"
 msgstr "英文"
 
-#: src/app/(tabs)/_layout.tsx:99
+#: src/app/(tabs)/_layout.tsx:117
 msgid "Explore"
 msgstr "浏览"
 
@@ -84,43 +122,96 @@ msgstr "浏览"
 msgid "External Audio controls"
 msgstr "手机媒体控制"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:118
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:130
 msgid "Featured"
 msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/featured-channels.tsx:40
-#: src/app/(tabs)/(home)/index.tsx:73
+#: src/app/(tabs)/(home)/featured-channels.tsx:35
+#: src/app/(tabs)/(home)/index.tsx:67
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:131
+#: src/app/(tabs)/(home)/index.tsx:125
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
-#: src/app/(tabs)/_layout.tsx:111
+#: src/app/(tabs)/_layout.tsx:129
 msgid "For You"
 msgstr "推荐"
+
+#: src/components/FullScreenSigninWall.tsx:63
+msgid "Get access to exclusive member only features right now!"
+msgstr "立即获取会员专属功能！"
 
 #: src/app/+not-found.tsx:58
 msgid "Go back Home"
 msgstr "返回首页"
 
+#: src/utils/getUserFullName.ts:24
+msgid "Guest User"
+msgstr "访客用户"
+
+#: src/app/(tabs)/profile.tsx:184
+msgid "Help & Support"
+msgstr "帮助与支持"
+
 #: src/app/(tabs)/(home)/_layout.tsx:19
 msgid "Home"
 msgstr "主页"
 
-#: src/app/audio-player-modal.tsx:114
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:122
+msgid "Invalid Youtube link"
+msgstr "YouTube 链接无效"
+
+#: src/app/audio-player-modal.tsx:115
 msgid "Made by {activeTrackArtist}"
 msgstr "由{activeTrackArtist}制作"
 
-#: src/app/track-queue-modal.tsx:83
+#: src/app/(tabs)/_layout.tsx:156
+msgid "Me"
+msgstr "我"
+
+#: src/app/(tabs)/profile.tsx:126
+msgid "Member Since"
+msgstr "会员自"
+
+#: src/app/(tabs)/profile.tsx:115
+msgid "Name"
+msgstr "姓名"
+
+#: src/app/(tabs)/profile.tsx:132
+msgid "No"
+msgstr "不"
+
+#: src/app/(tabs)/profile.tsx:28
+#: src/app/(tabs)/profile.tsx:233
+msgid "Not Available"
+msgstr "信息不存在"
+
+#: src/app/track-queue-modal.tsx:84
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
+
+#: src/app/(tabs)/profile.tsx:157
+msgid "Notifications"
+msgstr "通知"
 
 #: src/app/+not-found.tsx:33
 msgid "Oops Sorry!"
 msgstr "哎呀，抱歉！"
+
+#: src/app/(tabs)/settings.tsx:264
+msgid "Personalisation"
+msgstr "个性化"
+
+#: src/app/(tabs)/(create)/index.tsx:34
+msgid "Pick a content source to start creating content in your own style!"
+msgstr "选择内容来源，并开始创作属于你自己的内容！"
+
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:98
+msgid "Please paste your Youtube link"
+msgstr "请粘贴您的 YouTube 链接"
 
 #: src/app/(tabs)/(home)/_layout.tsx:39
 msgid "Podcast Channel"
@@ -130,7 +221,19 @@ msgstr "播客频道"
 msgid "Podcast Episode"
 msgstr "播客剧集"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:276
+#: src/app/(tabs)/profile.tsx:139
+msgid "Preferences"
+msgstr "偏好设置"
+
+#: src/app/(tabs)/profile.tsx:174
+msgid "Privacy Policy"
+msgstr "隐私政策"
+
+#: src/app/(tabs)/profile.tsx:61
+msgid "Profile"
+msgstr "个人资料"
+
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:273
 msgid "Reccomended Episodes"
 msgstr "推荐剧集"
 
@@ -138,7 +241,16 @@ msgstr "推荐剧集"
 msgid "Rewind to track start when skipping to previous"
 msgstr "跳到上一个剧集时，先跳到剧集开头"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:199
+#: src/app/(onboarding)/default-content-preference-selection.tsx:220
+msgid "Save"
+msgstr "保存"
+
+#: src/app/(onboarding)/default-content-preference-selection.tsx:111
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:59
+msgid "Saving"
+msgstr "正在保存"
+
+#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:196
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 
@@ -146,8 +258,12 @@ msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 msgid "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
 msgstr "请选择您希望看到的内容语言。您至少需要选择一种语言，并且无法移除应用当前的语言设置。"
 
-#: src/app/(tabs)/_layout.tsx:120
-#: src/app/(tabs)/settings.tsx:57
+#: src/app/(onboarding)/default-content-preference-selection.tsx:138
+msgid "Select topics you like so that we can personalise your starting experience!"
+msgstr "选择您感兴趣的主题，以便我们为您量身定制入门体验！"
+
+#: src/app/(tabs)/_layout.tsx:147
+#: src/app/(tabs)/settings.tsx:61
 msgid "Settings"
 msgstr "设置"
 
@@ -159,18 +275,75 @@ msgstr "显示跳前和跳后十五秒的按键。"
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
+#: src/app/(tabs)/profile.tsx:207
+#: src/components/FullScreenSigninWall.tsx:92
+msgid "Sign In"
+msgstr "登入"
+
+#: src/components/FullScreenSigninWall.tsx:60
+msgid "Sign In to Continue"
+msgstr "登录以继续"
+
+#: src/app/(tabs)/settings.tsx:290
+msgid "Sign in to Personalise!"
+msgstr "登录以进行个性化设置！"
+
+#: src/app/(tabs)/profile.tsx:205
+msgid "Sign Out"
+msgstr "退出应用程序"
+
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:8
 msgid "Skip to the start of the track when the 'skip to previous track' button is pressed after the track has played for 3 seconds, instead of skipping to the previous track immediately."
 msgstr "当剧集播放三秒后按下“跳至上一个剧集”按钮时，先跳到剧集开头。如果剧集播放3秒内按下“跳至上一个剧集”按钮时才会跳到上一个剧集。"
 
-#: src/app/welcome.tsx:74
+#: src/app/welcome.tsx:80
 msgid "Start listening"
 msgstr "开始收听"
+
+#: src/app/(tabs)/(create)/index.tsx:84
+msgid "Summarise a YouTube video into a podcast episode."
+msgstr "将一段 YouTube 视频改编成一期播客节目。"
+
+#: src/app/(tabs)/(create)/index.tsx:126
+msgid "Tell us what other content sources you would like us to add!"
+msgstr "请告诉我们您还希望我们添加哪些其他内容来源！"
+
+#: src/app/(tabs)/profile.tsx:179
+msgid "Terms of Service"
+msgstr "服务条款"
+
+#: src/app/(tabs)/(create)/index.tsx:123
+msgid "Want more?"
+msgstr "想要更多吗？"
 
 #: src/app/+not-found.tsx:36
 msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 msgstr "我们找不到你想要的东西，这里是一幅我们非常抱歉的画……"
 
-#: src/app/welcome.tsx:55
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:86
+msgid "We will help you summarise your youtube video and create a audio podcast."
+msgstr "我们将帮助您总结您的 YouTube 视频并制作音频播客。"
+
+#: src/app/(onboarding)/default-content-preference-selection.tsx:135
+msgid "What interests you?"
+msgstr "你对什么感兴趣？"
+
+#: src/app/(tabs)/profile.tsx:132
+msgid "Yes"
+msgstr "是"
+
+#: src/app/welcome.tsx:56
 msgid "Your Hyper Personalized Podcasts"
 msgstr "你的声伴"
+
+#: src/app/(tabs)/(create)/index.tsx:81
+msgid "YouTube"
+msgstr "YouTube"
+
+#: src/app/(tabs)/(create)/_layout.tsx:26
+msgid "Youtube Video Summary Create"
+msgstr "YouTube 视频摘要创建"
+
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:83
+msgid "Youtube Video Summary Creator"
+msgstr "YouTube 视频摘要创建者"
