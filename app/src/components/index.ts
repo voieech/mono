@@ -11,6 +11,7 @@ export * from "./CopyOnPress";
 export * from "./ExperimentalSurface";
 export * from "./FullScreenLoader";
 export * from "./FullScreenSigninWall";
+export * from "./InAppBrowserLink";
 export * from "./PageContainer";
 export * from "./provided";
 export * from "./Providers";

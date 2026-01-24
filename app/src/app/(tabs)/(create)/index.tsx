@@ -1,14 +1,14 @@
 import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import * as WebBrowser from "expo-web-browser";
-import { View, Platform } from "react-native";
+import { View } from "react-native";
 
 import {
   FullScreenSigninWall,
   SafeScrollViewContainer,
   ThemedView,
   ThemedText,
+  InAppBrowserLink,
 } from "@/components";
 import { Colors } from "@/constants";
 
@@ -86,20 +86,7 @@ export default function CreateTabHomeScreen() {
               </ThemedView>
             </ThemedView>
           </Link>
-          <Link
-            href={contentSourceFeedbackLink}
-            onPress={async (e: any) => {
-              // Allow default behaviour to continue for web platform
-              if (Platform.OS === "web") {
-                return;
-              }
-
-              // Prevent default behavior of opening system browser, and open in
-              // in-app modal browser instead
-              e.preventDefault();
-              await WebBrowser.openBrowserAsync(contentSourceFeedbackLink);
-            }}
-          >
+          <InAppBrowserLink href={contentSourceFeedbackLink}>
             <ThemedView
               style={{
                 flex: 1,
@@ -140,7 +127,7 @@ export default function CreateTabHomeScreen() {
                 </ThemedText>
               </ThemedView>
             </ThemedView>
-          </Link>
+          </InAppBrowserLink>
         </ThemedView>
         <View
           style={{
