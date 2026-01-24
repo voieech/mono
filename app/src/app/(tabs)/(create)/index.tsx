@@ -4,13 +4,19 @@ import { Link } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { View, Platform } from "react-native";
 
-import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
+import {
+  FullScreenSigninWall,
+  SafeScrollViewContainer,
+  ThemedView,
+  ThemedText,
+} from "@/components";
 import { Colors } from "@/constants";
 
 export default function CreateTabHomeScreen() {
   const contentSourceFeedbackLink = "https://forms.gle/wTFB2S6rhPxhG27n7";
   return (
     <>
+      <FullScreenSigninWall />
       <SafeScrollViewContainer>
         <ThemedView
           style={{
