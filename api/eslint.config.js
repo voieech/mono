@@ -27,11 +27,6 @@ export default [
       "no-restricted-properties": [
         "error",
         {
-          object: "crypto",
-          property: "randomUUID",
-          message: "Please use the globally available $UUID.generate()",
-        },
-        {
           object: "res",
           property: "end",
           message:
