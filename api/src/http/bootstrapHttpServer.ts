@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 
-import { authRoutes } from "./auth/index.js";
+import { authRoutes, authWebhookRoutes } from "./auth/index.js";
 import { createRoutes } from "./create/index.js";
 import { featuredContentRoutes } from "./featured/index.js";
 import { localeMiddleware } from "./locale/index.js";
@@ -27,6 +27,7 @@ export function bootstrapHttpServer() {
     .use(express.json())
 
     /* Routes */
+    .use(authWebhookRoutes)
     .use(authRoutes)
     .use(userRoutes)
     .use(createRoutes)
