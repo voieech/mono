@@ -19,28 +19,35 @@ export const authRoutes = express
   .Router()
 
   /**
-   * Redirect user here to generate WorkOS AuthKit link for user to authenticate
+   * Make API call to this endpoint to generate a WorkOS AuthKit link for user
+   * to authenticate at. This could be done on device/client in theory, but the
+   * benefits of doing it in the API server are:
+   * 1. Better security since we prevent redirect_uri hijacking and state
+   * manipulation.
+   * 2. Better update strategy where changes to the auth URL generation does not
+   * require a new app deployment.
    */
   .get("/auth/workos/login", (req, res) => {
-    const target = req.query["target"]?.toString() || "web";
-    if (target !== "web" && target !== "mobile") {
-      throw new Error("Invalid target type");
+    const clientType = req.query["clientType"]?.toString() || "web";
+    if (clientType !== "web" && clientType !== "mobile") {
+      throw new Error("Invalid client type");
     }
 
-    const codeChallenge = req.query["codeChallenge"]?.toString();
-    if (typeof codeChallenge !== "string") {
-      throw new Error("Invalid code challenge");
+    const pkceCodeChallenge = req.query["pkceCodeChallenge"]?.toString();
+    if (typeof pkceCodeChallenge !== "string") {
+      throw new Error("Invalid PKCE code challenge");
     }
 
-    const challengeMethod = req.query["challengeMethod"]?.toString();
-    if (!isValidPkceCodeChallengeMethod(challengeMethod)) {
-      throw new Error("Invalid challenge method");
+    const pkceCodeChallengeMethod =
+      req.query["pkceCodeChallengeMethod"]?.toString();
+    if (!isValidPkceCodeChallengeMethod(pkceCodeChallengeMethod)) {
+      throw new Error("Invalid PKCE code challenge method");
     }
 
     const authorizationUrl = workos.userManagement.getAuthorizationUrl({
       clientId: WORKOS_CLIENT_ID,
-      codeChallenge: codeChallenge,
-      codeChallengeMethod: challengeMethod,
+      codeChallenge: pkceCodeChallenge,
+      codeChallengeMethod: pkceCodeChallengeMethod,
 
       // Use AuthKit to handle the authentication flow
       provider: "authkit",
@@ -48,18 +55,20 @@ export const authRoutes = express
       // WorkOS will redirect to this callback endpoint to after a user authenticates
       redirectUri: WORKOS_REDIRECT_URI,
 
-      // Encode target in state to know how to respond in callback
-      state: JSON.stringify({ target }),
+      // Encode state so that the callback API endpoint knows how to respond
+      state: JSON.stringify({
+        clientType,
+      }),
     });
 
     // Mobile app will open the authUrl
-    if (target === "mobile") {
+    if (clientType === "mobile") {
       res.json({ authUrl: authorizationUrl });
       return;
     }
 
     // Redirect web client to the authUrl
-    if (target === "web") {
+    if (clientType === "web") {
       res.redirect(authorizationUrl);
       return;
     }
@@ -79,7 +88,9 @@ export const authRoutes = express
       return;
     }
 
-    const reflectedState = JSON.parse(req.query["state"]?.toString());
+    const reflectedState = JSON.parse(req.query["state"]?.toString()) as {
+      clientType: "mobile" | "web";
+    };
     if (typeof reflectedState !== "object") {
       res.status(400).json({
         error: "Reflected state from auth provider is not an object",
@@ -92,7 +103,7 @@ export const authRoutes = express
     const authorizationCodeFromAuthkit = req.query["code"]?.toString();
 
     if (authorizationCodeFromAuthkit === undefined) {
-      switch (reflectedState.target) {
+      switch (reflectedState.clientType) {
         case "mobile": {
           res.redirect(`voieech://auth/callback?error='no_code'`);
           return;
@@ -110,7 +121,7 @@ export const authRoutes = express
       }
     }
 
-    switch (reflectedState.target) {
+    switch (reflectedState.clientType) {
       case "mobile": {
         // Redirect back to mobile with auth code
         // instead of redirecting back through deep link we could do universal link instead

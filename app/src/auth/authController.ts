@@ -11,15 +11,13 @@ import { secureStoreForAuth } from "./secureStoreForAuth";
 export const authController = {
   async login() {
     try {
-      // Step 1: Get auth URL from your backend (with target=mobile)
+      // Step 1: Get auth URL from your backend
       const pkceCode = await generatePkceCode();
 
       const params = new URLSearchParams({
-        // @todo Rename this
-        target: "mobile",
-        // @todo Rename this to have PKCE prefix
-        codeChallenge: pkceCode.codeChallenge,
-        challengeMethod: pkceCode.codeChallengeMethod,
+        clientType: "mobile",
+        pkceCodeChallenge: pkceCode.codeChallenge,
+        pkceCodeChallengeMethod: pkceCode.codeChallengeMethod,
       });
 
       const urlRes = await fetch(
