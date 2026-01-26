@@ -42,6 +42,6 @@ export interface ContentTagTable {
   weight: number;
 }
 
-export type ContentTag = Selectable<ContentTagTable>;
-export type CreateContentTag = Insertable<ContentTagTable>;
-export type UpdateContentTag = Updateable<ContentTagTable>;
+export type DatabaseContentTag = Selectable<ContentTagTable>;
+export type DatabaseContentTagCreateArg = Insertable<ContentTagTable>;
+export type DatabaseContentTagUpdateArg = Updateable<ContentTagTable>;

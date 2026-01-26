@@ -79,6 +79,6 @@ export interface AudioTable {
   ssml_model: $Nullable<string>;
 }
 
-export type Audio = Selectable<AudioTable>;
-export type CreateAudio = Insertable<AudioTable>;
-export type UpdateAudio = Updateable<AudioTable>;
+export type DatabaseAudio = Selectable<AudioTable>;
+export type DatabaseAudioCreateArg = Insertable<AudioTable>;
+export type DatabaseAudioUpdateArg = Updateable<AudioTable>;

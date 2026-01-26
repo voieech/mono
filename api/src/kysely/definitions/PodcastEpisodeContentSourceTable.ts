@@ -40,9 +40,9 @@ export interface PodcastEpisodeContentSourceTable {
   content_id: NonUpdatableIdColumnType;
 }
 
-export type PodcastEpisodeContentSource =
+export type DatabasePodcastEpisodeContentSource =
   Selectable<PodcastEpisodeContentSourceTable>;
-export type CreatePodcastEpisodeContentSource =
+export type DatabasePodcastEpisodeContentSourceCreateArg =
   Insertable<PodcastEpisodeContentSourceTable>;
-export type UpdatePodcastEpisodeContentSource =
+export type DatabasePodcastEpisodeContentSourceUpdateArg =
   Updateable<PodcastEpisodeContentSourceTable>;

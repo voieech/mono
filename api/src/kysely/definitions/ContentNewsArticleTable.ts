@@ -87,6 +87,8 @@ export interface ContentNewsArticleTable {
   embedding_update_timestamp: $Nullable<UpdatableDateTimeColumnType>;
 }
 
-export type ContentNewsArticle = Selectable<ContentNewsArticleTable>;
-export type CreateContentNewsArticle = Insertable<ContentNewsArticleTable>;
-export type UpdateContentNewsArticle = Updateable<ContentNewsArticleTable>;
+export type DatabaseContentNewsArticle = Selectable<ContentNewsArticleTable>;
+export type DatabaseContentNewsArticleCreateArg =
+  Insertable<ContentNewsArticleTable>;
+export type DatabaseContentNewsArticleUpdateArg =
+  Updateable<ContentNewsArticleTable>;

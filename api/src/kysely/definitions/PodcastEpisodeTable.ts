@@ -104,6 +104,6 @@ export interface PodcastEpisodeTable {
   youtube_video_count_comment: $Nullable<number>;
 }
 
-export type PodcastEpisode = Selectable<PodcastEpisodeTable>;
-export type CreatePodcastEpisode = Insertable<PodcastEpisodeTable>;
-export type UpdatePodcastEpisode = Updateable<PodcastEpisodeTable>;
+export type DatabasePodcastEpisode = Selectable<PodcastEpisodeTable>;
+export type DatabasePodcastEpisodeCreateArg = Insertable<PodcastEpisodeTable>;
+export type DatabasePodcastEpisodeUpdateArg = Updateable<PodcastEpisodeTable>;

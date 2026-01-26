@@ -55,6 +55,6 @@ export interface UserTable {
   profile_picture_url: $Nullable<string>;
 }
 
-export type User = Selectable<UserTable>;
-export type CreateUser = Insertable<UserTable>;
-export type UpdateUser = Updateable<UserTable>;
+export type DatabaseUser = Selectable<UserTable>;
+export type DatabaseUserCreateArg = Insertable<UserTable>;
+export type DatabaseUserUpdateArg = Updateable<UserTable>;

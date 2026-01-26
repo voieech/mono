@@ -86,6 +86,6 @@ export interface PodcastChannelTable {
   subcategory_secondary: $Nullable<string>;
 }
 
-export type PodcastChannel = Selectable<PodcastChannelTable>;
-export type CreatePodcastChannel = Insertable<PodcastChannelTable>;
-export type UpdatePodcastChannel = Updateable<PodcastChannelTable>;
+export type DatabasePodcastChannel = Selectable<PodcastChannelTable>;
+export type DatabasePodcastChannelCreateArg = Insertable<PodcastChannelTable>;
+export type DatabasePodcastChannelUpdateArg = Updateable<PodcastChannelTable>;
