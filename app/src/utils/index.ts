@@ -4,6 +4,7 @@
 
 export * from "./base64URLEncode";
 export * from "./createUseContextHook";
+export * from "./envVar";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
 export * from "./getUserFullName";

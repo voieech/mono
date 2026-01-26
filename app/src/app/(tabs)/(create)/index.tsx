@@ -11,9 +11,9 @@ import {
   InAppBrowserLink,
 } from "@/components";
 import { Colors } from "@/constants";
+import { envVar } from "@/utils";
 
 export default function CreateTabHomeScreen() {
-  const contentSourceFeedbackLink = "https://forms.gle/wTFB2S6rhPxhG27n7";
   return (
     <>
       <FullScreenSigninWall />
@@ -86,7 +86,7 @@ export default function CreateTabHomeScreen() {
               </ThemedView>
             </ThemedView>
           </Link>
-          <InAppBrowserLink href={contentSourceFeedbackLink}>
+          <InAppBrowserLink href={envVar.contentSourceFeedbackLink}>
             <ThemedView
               style={{
                 flex: 1,

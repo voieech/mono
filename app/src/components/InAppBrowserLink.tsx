@@ -10,11 +10,11 @@ import { Platform } from "react-native";
  * in the in app modal browser instead of the external system browser.
  */
 export function InAppBrowserLink(
-  props: PropsWithChildren<{ href: ExternalPathString }>,
+  props: PropsWithChildren<{ href: ExternalPathString | string }>,
 ) {
   return (
     <Link
-      href={props.href}
+      href={props.href as ExternalPathString}
       onPress={async (e: any) => {
         // Allow default behaviour to continue for web platform
         if (Platform.OS === "web") {

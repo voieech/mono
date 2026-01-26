@@ -1,5 +1,3 @@
-import type { ExternalPathString } from "expo-router";
-
 import { useLingui, Trans } from "@lingui/react/macro";
 import { useCallback } from "react";
 import { View, Pressable, Image } from "react-native";
@@ -14,10 +12,9 @@ import {
 } from "@/components";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
-import { getUserFullName } from "@/utils";
+import { envVar, getUserFullName } from "@/utils";
 
 export default function Profile() {
-  const supportLink = "https://forms.gle/hsQdT47mnb9zmbFE7";
   const authContext = useAuthContext();
   const { t } = useLingui();
 
@@ -180,7 +177,7 @@ export default function Profile() {
         />
         <ProfileRowLink
           label={t`Help & Support`}
-          href={supportLink}
+          href={envVar.supportLink}
           icon="gear"
         />
       </Collapsible>
@@ -275,7 +272,7 @@ function ProfileActionRow(props: {
 
 function ProfileRowLink(props: {
   label: string;
-  href: ExternalPathString;
+  href: string;
   icon:
     | "gear"
     | "person"

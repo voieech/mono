@@ -22,11 +22,11 @@ msgstr "{episodeLengthInMins} mins"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 
-#: src/app/(tabs)/profile.tsx:165
+#: src/app/(tabs)/profile.tsx:160
 msgid "About"
 msgstr "About"
 
-#: src/app/(tabs)/profile.tsx:107
+#: src/app/(tabs)/profile.tsx:102
 msgid "Account Information"
 msgstr "Account Information"
 
@@ -34,7 +34,7 @@ msgstr "Account Information"
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
-#: src/app/(tabs)/profile.tsx:152
+#: src/app/(tabs)/profile.tsx:147
 msgid "Change Password"
 msgstr "Change Password"
 
@@ -77,7 +77,7 @@ msgstr "Content Language"
 msgid "Create"
 msgstr "Create"
 
-#: src/app/(tabs)/(create)/index.tsx:31
+#: src/app/(tabs)/(create)/index.tsx:29
 msgid "Create your own content"
 msgstr "Create your own content"
 
@@ -93,15 +93,15 @@ msgstr "Default audio playback rate"
 msgid "Details"
 msgstr "Details"
 
-#: src/app/(tabs)/profile.tsx:147
+#: src/app/(tabs)/profile.tsx:142
 msgid "Edit Profile"
 msgstr "Edit Profile"
 
-#: src/app/(tabs)/profile.tsx:122
+#: src/app/(tabs)/profile.tsx:117
 msgid "Email"
 msgstr "Email"
 
-#: src/app/(tabs)/profile.tsx:130
+#: src/app/(tabs)/profile.tsx:125
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
@@ -147,7 +147,7 @@ msgstr "Go back Home"
 msgid "Guest User"
 msgstr "Guest User"
 
-#: src/app/(tabs)/profile.tsx:184
+#: src/app/(tabs)/profile.tsx:179
 msgid "Help & Support"
 msgstr "Help & Support"
 
@@ -167,20 +167,20 @@ msgstr "Made by {activeTrackArtist}"
 msgid "Me"
 msgstr "Me"
 
-#: src/app/(tabs)/profile.tsx:126
+#: src/app/(tabs)/profile.tsx:121
 msgid "Member Since"
 msgstr "Member Since"
 
-#: src/app/(tabs)/profile.tsx:115
+#: src/app/(tabs)/profile.tsx:110
 msgid "Name"
 msgstr "Name"
 
-#: src/app/(tabs)/profile.tsx:132
+#: src/app/(tabs)/profile.tsx:127
 msgid "No"
 msgstr "No"
 
-#: src/app/(tabs)/profile.tsx:28
-#: src/app/(tabs)/profile.tsx:233
+#: src/app/(tabs)/profile.tsx:23
+#: src/app/(tabs)/profile.tsx:228
 msgid "Not Available"
 msgstr "Not Available"
 
@@ -188,7 +188,7 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile.tsx:157
+#: src/app/(tabs)/profile.tsx:152
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -200,7 +200,7 @@ msgstr "Oops Sorry!"
 msgid "Personalisation"
 msgstr "Personalisation"
 
-#: src/app/(tabs)/(create)/index.tsx:34
+#: src/app/(tabs)/(create)/index.tsx:32
 msgid "Pick a content source to start creating content in your own style!"
 msgstr "Pick a content source to start creating content in your own style!"
 
@@ -216,15 +216,15 @@ msgstr "Podcast Channel"
 msgid "Podcast Episode"
 msgstr "Podcast Episode"
 
-#: src/app/(tabs)/profile.tsx:139
+#: src/app/(tabs)/profile.tsx:134
 msgid "Preferences"
 msgstr "Preferences"
 
-#: src/app/(tabs)/profile.tsx:174
+#: src/app/(tabs)/profile.tsx:169
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/app/(tabs)/profile.tsx:61
+#: src/app/(tabs)/profile.tsx:56
 msgid "Profile"
 msgstr "Profile"
 
@@ -270,7 +270,7 @@ msgstr "Show controls for jumping back and forth in 15 seconds intervals."
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "Show controls for skipping tracks to next/previous."
 
-#: src/app/(tabs)/profile.tsx:207
+#: src/app/(tabs)/profile.tsx:202
 #: src/components/FullScreenSigninWall.tsx:92
 msgid "Sign In"
 msgstr "Sign In"
@@ -283,7 +283,7 @@ msgstr "Sign In to Continue"
 msgid "Sign in to Personalise!"
 msgstr "Sign in to Personalise!"
 
-#: src/app/(tabs)/profile.tsx:205
+#: src/app/(tabs)/profile.tsx:200
 msgid "Sign Out"
 msgstr "Sign Out"
 
@@ -295,19 +295,19 @@ msgstr "Skip to the start of the track when the 'skip to previous track' button 
 msgid "Start listening"
 msgstr "Start listening"
 
-#: src/app/(tabs)/(create)/index.tsx:84
+#: src/app/(tabs)/(create)/index.tsx:82
 msgid "Summarise a YouTube video into a podcast episode."
 msgstr "Summarise a YouTube video into a podcast episode."
 
-#: src/app/(tabs)/(create)/index.tsx:126
+#: src/app/(tabs)/(create)/index.tsx:124
 msgid "Tell us what other content sources you would like us to add!"
 msgstr "Tell us what other content sources you would like us to add!"
 
-#: src/app/(tabs)/profile.tsx:179
+#: src/app/(tabs)/profile.tsx:174
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
-#: src/app/(tabs)/(create)/index.tsx:123
+#: src/app/(tabs)/(create)/index.tsx:121
 msgid "Want more?"
 msgstr "Want more?"
 
@@ -323,7 +323,7 @@ msgstr "We will help you summarise your youtube video and create a audio podcast
 msgid "What interests you?"
 msgstr "What interests you?"
 
-#: src/app/(tabs)/profile.tsx:132
+#: src/app/(tabs)/profile.tsx:127
 msgid "Yes"
 msgstr "Yes"
 
@@ -331,7 +331,7 @@ msgstr "Yes"
 msgid "Your Hyper Personalized Podcasts"
 msgstr "Your Hyper Personalized Podcasts"
 
-#: src/app/(tabs)/(create)/index.tsx:81
+#: src/app/(tabs)/(create)/index.tsx:79
 msgid "YouTube"
 msgstr "YouTube"
 

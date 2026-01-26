@@ -27,11 +27,11 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
-#: src/app/(tabs)/profile.tsx:165
+#: src/app/(tabs)/profile.tsx:160
 msgid "About"
 msgstr "关于"
 
-#: src/app/(tabs)/profile.tsx:107
+#: src/app/(tabs)/profile.tsx:102
 msgid "Account Information"
 msgstr "账户信息"
 
@@ -39,7 +39,7 @@ msgstr "账户信息"
 msgid "Audio Playback"
 msgstr "音频播放"
 
-#: src/app/(tabs)/profile.tsx:152
+#: src/app/(tabs)/profile.tsx:147
 msgid "Change Password"
 msgstr "更改密码"
 
@@ -82,7 +82,7 @@ msgstr "内容语言"
 msgid "Create"
 msgstr "创造"
 
-#: src/app/(tabs)/(create)/index.tsx:31
+#: src/app/(tabs)/(create)/index.tsx:29
 msgid "Create your own content"
 msgstr "创建您自己的内容"
 
@@ -98,15 +98,15 @@ msgstr "默认音频播放速度"
 msgid "Details"
 msgstr "软件详情"
 
-#: src/app/(tabs)/profile.tsx:147
+#: src/app/(tabs)/profile.tsx:142
 msgid "Edit Profile"
 msgstr "编辑个人资料"
 
-#: src/app/(tabs)/profile.tsx:122
+#: src/app/(tabs)/profile.tsx:117
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/app/(tabs)/profile.tsx:130
+#: src/app/(tabs)/profile.tsx:125
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
@@ -152,7 +152,7 @@ msgstr "返回首页"
 msgid "Guest User"
 msgstr "访客用户"
 
-#: src/app/(tabs)/profile.tsx:184
+#: src/app/(tabs)/profile.tsx:179
 msgid "Help & Support"
 msgstr "帮助与支持"
 
@@ -172,20 +172,20 @@ msgstr "由{activeTrackArtist}制作"
 msgid "Me"
 msgstr "我"
 
-#: src/app/(tabs)/profile.tsx:126
+#: src/app/(tabs)/profile.tsx:121
 msgid "Member Since"
 msgstr "会员自"
 
-#: src/app/(tabs)/profile.tsx:115
+#: src/app/(tabs)/profile.tsx:110
 msgid "Name"
 msgstr "姓名"
 
-#: src/app/(tabs)/profile.tsx:132
+#: src/app/(tabs)/profile.tsx:127
 msgid "No"
 msgstr "不"
 
-#: src/app/(tabs)/profile.tsx:28
-#: src/app/(tabs)/profile.tsx:233
+#: src/app/(tabs)/profile.tsx:23
+#: src/app/(tabs)/profile.tsx:228
 msgid "Not Available"
 msgstr "信息不存在"
 
@@ -193,7 +193,7 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile.tsx:157
+#: src/app/(tabs)/profile.tsx:152
 msgid "Notifications"
 msgstr "通知"
 
@@ -205,7 +205,7 @@ msgstr "哎呀，抱歉！"
 msgid "Personalisation"
 msgstr "个性化"
 
-#: src/app/(tabs)/(create)/index.tsx:34
+#: src/app/(tabs)/(create)/index.tsx:32
 msgid "Pick a content source to start creating content in your own style!"
 msgstr "选择内容来源，并开始创作属于你自己的内容！"
 
@@ -221,15 +221,15 @@ msgstr "播客频道"
 msgid "Podcast Episode"
 msgstr "播客剧集"
 
-#: src/app/(tabs)/profile.tsx:139
+#: src/app/(tabs)/profile.tsx:134
 msgid "Preferences"
 msgstr "偏好设置"
 
-#: src/app/(tabs)/profile.tsx:174
+#: src/app/(tabs)/profile.tsx:169
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/app/(tabs)/profile.tsx:61
+#: src/app/(tabs)/profile.tsx:56
 msgid "Profile"
 msgstr "个人资料"
 
@@ -275,7 +275,7 @@ msgstr "显示跳前和跳后十五秒的按键。"
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
-#: src/app/(tabs)/profile.tsx:207
+#: src/app/(tabs)/profile.tsx:202
 #: src/components/FullScreenSigninWall.tsx:92
 msgid "Sign In"
 msgstr "登入"
@@ -288,7 +288,7 @@ msgstr "登录以继续"
 msgid "Sign in to Personalise!"
 msgstr "登录以进行个性化设置！"
 
-#: src/app/(tabs)/profile.tsx:205
+#: src/app/(tabs)/profile.tsx:200
 msgid "Sign Out"
 msgstr "退出应用程序"
 
@@ -300,19 +300,19 @@ msgstr "当剧集播放三秒后按下“跳至上一个剧集”按钮时，先
 msgid "Start listening"
 msgstr "开始收听"
 
-#: src/app/(tabs)/(create)/index.tsx:84
+#: src/app/(tabs)/(create)/index.tsx:82
 msgid "Summarise a YouTube video into a podcast episode."
 msgstr "将一段 YouTube 视频改编成一期播客节目。"
 
-#: src/app/(tabs)/(create)/index.tsx:126
+#: src/app/(tabs)/(create)/index.tsx:124
 msgid "Tell us what other content sources you would like us to add!"
 msgstr "请告诉我们您还希望我们添加哪些其他内容来源！"
 
-#: src/app/(tabs)/profile.tsx:179
+#: src/app/(tabs)/profile.tsx:174
 msgid "Terms of Service"
 msgstr "服务条款"
 
-#: src/app/(tabs)/(create)/index.tsx:123
+#: src/app/(tabs)/(create)/index.tsx:121
 msgid "Want more?"
 msgstr "想要更多吗？"
 
@@ -328,7 +328,7 @@ msgstr "我们将帮助您总结您的 YouTube 视频并制作音频播客。"
 msgid "What interests you?"
 msgstr "你对什么感兴趣？"
 
-#: src/app/(tabs)/profile.tsx:132
+#: src/app/(tabs)/profile.tsx:127
 msgid "Yes"
 msgstr "是"
 
@@ -336,7 +336,7 @@ msgstr "是"
 msgid "Your Hyper Personalized Podcasts"
 msgstr "你的声伴"
 
-#: src/app/(tabs)/(create)/index.tsx:81
+#: src/app/(tabs)/(create)/index.tsx:79
 msgid "YouTube"
 msgstr "YouTube"
 
