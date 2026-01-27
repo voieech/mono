@@ -1,7 +1,7 @@
 import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 
-import { getLocale } from "@/utils";
+import { getLocale } from "@/utils/i18n";
 
 import type { MultiSelectSetting } from "./types/MultiSelectSetting";
 

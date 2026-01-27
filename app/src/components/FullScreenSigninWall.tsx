@@ -2,7 +2,8 @@ import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { Pressable, useWindowDimensions } from "react-native";
 
-import { ThemedView, ThemedText, Icon } from "@/components";
+import { Icon } from "@/components/provided";
+import { ThemedView, ThemedText } from "@/components/ThemedComponents";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
 
