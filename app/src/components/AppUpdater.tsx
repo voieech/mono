@@ -9,6 +9,10 @@ import { useEffect } from "react";
  * continue using.
  */
 export function AppUpdater(props: PropsWithChildren) {
+  // Temporarily disable OTA update code to prevent issue with first update.
+  /* eslint-disable no-unreachable */
+  return props.children;
+
   const updates = ExpoUpdates.useUpdates();
 
   useEffect(() => {
