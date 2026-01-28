@@ -59,7 +59,13 @@ export const contentLanguage: MultiSelectSetting<Array<AllowedLocales>> = {
   // langauge change, such as episodes/channels/content related stuff, instead
   // of everything in cache.
   onChange() {
-    reactQueryClient.invalidateQueries({
+    // Need to use removeQueries instead of invalidateQueries, since
+    // invalidateQueries will trigger a background fetch immediately, before the
+    // language value in setting is updated, which means it will still load the
+    // old/original language value and show no changes. By doing removeQueries
+    // instead it will rely on the settings state change to trigger the reload
+    // which ensures that on reload the settings state is the new value already.
+    reactQueryClient.removeQueries({
       queryKey: ["episode"],
     });
   },
