@@ -1,6 +1,7 @@
 import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 
+import { reactQueryClient } from "@/api-client/reactQueryClient";
 import { getLocale } from "@/utils/i18n";
 
 import type { MultiSelectSetting } from "./types/MultiSelectSetting";
@@ -54,7 +55,12 @@ export const contentLanguage: MultiSelectSetting<Array<AllowedLocales>> = {
 
     return [deviceLocale, ...set];
   },
+  // Clear cache for all previous API calls that might be affected by content
+  // langauge change, such as episodes/channels/content related stuff, instead
+  // of everything in cache.
   onChange() {
-    // @todo Clear cache for all previous API calls
+    reactQueryClient.invalidateQueries({
+      queryKey: ["episode"],
+    });
   },
 };

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { AuthDataFromWorkos } from "@/types";
 
+import { reactQueryClient } from "@/api-client";
 import { authController, secureStoreForAuth } from "@/auth";
 import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
@@ -47,8 +48,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const accessToken = await secureStoreForAuth.getAccessTokenString();
 
       if (accessToken !== null) {
-        // Fire and forget - don't wait for response
-        fetch(`${apiBaseUrl}/auth/logout`, {
+        await fetch(`${apiBaseUrl}/auth/logout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -61,6 +61,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
 
     await clearAuth();
+    reactQueryClient.clear();
   }
 
   // On initial run, restore user's session if user was logged in the last time
