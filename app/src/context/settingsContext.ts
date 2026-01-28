@@ -20,7 +20,7 @@ export const SettingContext = createContext<{
    * Update setting based on the allowed value type
    */
   updateSetting: <T extends SettingNames>(
-    setting: T,
+    settingName: T,
     newValue: SettingState[T],
   ) => void;
 }>(

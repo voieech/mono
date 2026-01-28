@@ -34,21 +34,25 @@ export function SettingsProvider(props: PropsWithChildren) {
         getSetting(setting) {
           return settingState[setting] ?? defaultSettingState[setting];
         },
-        updateSetting(setting, newValue) {
-          const oldValue = settingState[setting] as any;
+        updateSetting(settingName, newSettingValue) {
+          const oldSettingValue = settingState[settingName] as any;
+
+          const setting = settings[settingName];
 
           // Call the beforeChange callback if available to process/transform
           // the values before saving. The types are widened to be `any` here
           // since the types can be generic on the extended Setting interfaces
           // e.g. a string literal type is used
           const processedNewValue =
-            // @ts-expect-error Unable to easily narrow the generic type down
-            settings[setting]?.beforeChange?.(newValue as any, oldValue) ??
-            newValue;
+            setting.beforeChange?.(
+              // @ts-expect-error Unable to easily narrow the generic type down
+              newSettingValue as any,
+              oldSettingValue,
+            ) ?? newSettingValue;
 
           const newSetting = {
             ...settingState,
-            [setting]: processedNewValue,
+            [settingName]: processedNewValue,
           };
           setSettingState(newSetting);
           settingsInLocalStorage.update(newSetting);
@@ -56,13 +60,16 @@ export function SettingsProvider(props: PropsWithChildren) {
           // Call the onChange callback, the types are widened to be `any` here
           // since the types can be generic on the extended Setting interfaces
           // e.g. a string literal type is used
-          // @ts-expect-error Unable to easily narrow the generic type down
-          settings[setting]?.onChange?.(newValue as any, oldValue);
+          setting.onChange?.(
+            // @ts-expect-error Unable to easily narrow the generic type down
+            newSettingValue as any,
+            oldSettingValue,
+          );
 
           posthog.capture("setting_update", {
-            setting,
-            oldValue,
-            newValue,
+            setting: settingName,
+            oldValue: oldSettingValue,
+            newValue: newSettingValue,
           });
         },
       }}
