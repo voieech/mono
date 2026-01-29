@@ -15,7 +15,9 @@ export function SafeScrollViewContainer(
   return (
     // @todo Only do this when there is no Tab / Navigation header
     <SafeAreaViewContainer>
-      <ScrollViewContainer>{props.children}</ScrollViewContainer>
+      <ScrollViewContainer refreshControl={props.refreshControl}>
+        {props.children}
+      </ScrollViewContainer>
     </SafeAreaViewContainer>
   );
 }
