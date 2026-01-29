@@ -2,13 +2,18 @@ import type { Channel } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { wrappedFetch } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
 export function usePodcastChannelQuery(channelID: string) {
   return useQuery({
-    queryKey: ["podcast", "channel", channelID],
+    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+      "podcast.channel.channelID.$channelID",
+      {
+        channelID,
+      },
+    ),
     async queryFn() {
       const res = await wrappedFetch(
         `${apiBaseUrl}/v1/podcast/channel/${channelID}`,

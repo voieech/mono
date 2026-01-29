@@ -2,7 +2,7 @@ import type { Episode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { wrappedFetch, reactQueryClient } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch, reactQueryClient } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 
 import { useAcceptLanguageHeader } from "../useAcceptLanguageHeader";
@@ -11,7 +11,9 @@ export function useFeaturedEpisodesQuery() {
   const acceptLanguageHeader = useAcceptLanguageHeader();
 
   return useQuery({
-    queryKey: ["podcast", "featured-episodes"],
+    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+      "podcast.featured.episodes",
+    ),
     async queryFn() {
       const res = await wrappedFetch(
         `${apiBaseUrl}/v1/podcast/featured/episodes?limit=20`,
@@ -35,7 +37,24 @@ export function useFeaturedEpisodesQuery() {
 
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
-        reactQueryClient.setQueryData(["episode", episode.vanity_id], episode);
+        reactQueryClient.setQueryData(
+          queryKeyBuilder.fullPathForDataInsertion(
+            "podcast.episode.vanityID.$vanityID",
+            {
+              vanityID: episode.vanity_id,
+            },
+          ),
+          episode,
+        );
+        reactQueryClient.setQueryData(
+          queryKeyBuilder.fullPathForDataInsertion(
+            "podcast.episode.episodeID.$episodeID",
+            {
+              episodeID: episode.id,
+            },
+          ),
+          episode,
+        );
       }
 
       return episodes;

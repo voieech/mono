@@ -1,6 +1,7 @@
 import { i18n } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 
+import { queryKeyBuilder } from "@/api-client/queryKeyBuilder";
 import { reactQueryClient } from "@/api-client/reactQueryClient";
 import { getLocale } from "@/utils/i18n";
 
@@ -66,7 +67,7 @@ export const contentLanguage: MultiSelectSetting<Array<AllowedLocales>> = {
     // instead it will rely on the settings state change to trigger the reload
     // which ensures that on reload the settings state is the new value already.
     reactQueryClient.removeQueries({
-      queryKey: ["episode"],
+      queryKey: queryKeyBuilder.partialPathForDataDeletion("podcast.featured"),
     });
   },
 };

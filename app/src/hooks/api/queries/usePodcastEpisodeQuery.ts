@@ -2,13 +2,18 @@ import type { Episode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { wrappedFetch } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
 export function usePodcastEpisodeQuery(vanityID: string) {
   return useQuery({
-    queryKey: ["episode", vanityID],
+    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+      "podcast.episode.vanityID.$vanityID",
+      {
+        vanityID,
+      },
+    ),
     async queryFn() {
       const res = await wrappedFetch(
         `${apiBaseUrl}/v1/podcast/episode/${vanityID}`,

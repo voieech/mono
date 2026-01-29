@@ -2,13 +2,18 @@ import type { Episode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { wrappedFetch, reactQueryClient } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch, reactQueryClient } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
 export function usePodcastChannelEpisodesQuery(channelID: string) {
   return useQuery({
-    queryKey: ["podcast", "channel-episodes", channelID],
+    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+      "podcast.channel.episodes.$channelID",
+      {
+        channelID,
+      },
+    ),
     async queryFn() {
       const res = await wrappedFetch(
         `${apiBaseUrl}/v1/podcast/channel/${channelID}/episodes`,
@@ -32,7 +37,24 @@ export function usePodcastChannelEpisodesQuery(channelID: string) {
 
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
-        reactQueryClient.setQueryData(["episode", episode.vanity_id], episode);
+        reactQueryClient.setQueryData(
+          queryKeyBuilder.fullPathForDataInsertion(
+            "podcast.episode.vanityID.$vanityID",
+            {
+              vanityID: episode.vanity_id,
+            },
+          ),
+          episode,
+        );
+        reactQueryClient.setQueryData(
+          queryKeyBuilder.fullPathForDataInsertion(
+            "podcast.episode.episodeID.$episodeID",
+            {
+              episodeID: episode.id,
+            },
+          ),
+          episode,
+        );
       }
 
       return episodes;

@@ -2,7 +2,7 @@ import type { Episode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { wrappedFetch } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 
 /**
@@ -13,7 +13,10 @@ export function usePodcastEpisodeNextReccomendationsQuery(
   limit: number = 10,
 ) {
   return useQuery({
-    queryKey: ["podcast", "episode", "reccomendations", vanityID, limit],
+    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+      "podcast.episode.reccomendations.vanityID.$vanityID.$limit",
+      { vanityID, limit },
+    ),
     queryFn: () => getPodcastEpisodeNextReccomendations(vanityID, limit),
   });
 }
