@@ -1,6 +1,7 @@
 import { useLingui, Trans } from "@lingui/react/macro";
+import { Image } from "expo-image";
 import { useCallback, useState } from "react";
-import { View, Pressable, Image, TouchableOpacity } from "react-native";
+import { View, Pressable, TouchableOpacity } from "react-native";
 
 import {
   ParallaxScrollViewContainer,
@@ -178,9 +179,7 @@ function ProfileInformationCard() {
             >
               {authContext.authData?.userData?.profilePictureUrl != null ? (
                 <Image
-                  source={{
-                    uri: authContext.authData.userData.profilePictureUrl,
-                  }}
+                  source={authContext.authData.userData.profilePictureUrl}
                   style={{ width: 40, height: 40, borderRadius: 40 }}
                 />
               ) : (
