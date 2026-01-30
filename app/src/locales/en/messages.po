@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:219
+msgid "... loading video ..."
+msgstr "... loading video ..."
+
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:187
 #: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:202
 msgid "{episodeLengthInMins} mins"
@@ -22,21 +26,17 @@ msgstr "{episodeLengthInMins} mins"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 
-#: src/app/(tabs)/profile.tsx:160
+#: src/app/(tabs)/profile.tsx:105
 msgid "About"
 msgstr "About"
 
-#: src/app/(tabs)/profile.tsx:102
+#: src/app/(tabs)/profile.tsx:228
 msgid "Account Information"
 msgstr "Account Information"
 
 #: src/app/(tabs)/settings.tsx:65
 msgid "Audio Playback"
 msgstr "Audio Playback"
-
-#: src/app/(tabs)/profile.tsx:147
-msgid "Change Password"
-msgstr "Change Password"
 
 #: src/components/ShareChannelIcon.tsx:24
 msgid "Check out \"{channelName}\" on voieech.com"
@@ -46,15 +46,15 @@ msgstr "Check out \"{channelName}\" on voieech.com"
 msgid "Check out voieech for \"{trackTitle}\""
 msgstr "Check out voieech for \"{trackTitle}\""
 
-#: src/utils/settings/contentLanguage.ts:25
+#: src/utils/settings/contentLanguage.ts:27
 msgid "Chinese (Simplified / Mainland China)"
 msgstr "Chinese (Simplified / Mainland China)"
 
-#: src/utils/settings/contentLanguage.ts:21
+#: src/utils/settings/contentLanguage.ts:23
 msgid "Chinese (Simplified and Traditional)"
 msgstr "Chinese (Simplified and Traditional)"
 
-#: src/utils/settings/contentLanguage.ts:29
+#: src/utils/settings/contentLanguage.ts:31
 msgid "Chinese (Traditional / Taiwan)"
 msgstr "Chinese (Traditional / Taiwan)"
 
@@ -62,18 +62,22 @@ msgstr "Chinese (Traditional / Taiwan)"
 msgid "Choose the type of native media controls you want to see."
 msgstr "Choose the type of native media controls you want to see."
 
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:163
+msgid "Clear"
+msgstr "Clear"
+
 #: src/app/audio-player-modal.tsx:133
 msgid "close"
 msgstr "close"
 
 #: src/app/(tabs)/settings.tsx:183
-#: src/utils/settings/contentLanguage.ts:12
+#: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "Content Language"
 
 #: src/app/(tabs)/_layout.tsx:138
 #: src/app/(tabs)/(create)/_layout.tsx:19
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:153
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:198
 msgid "Create"
 msgstr "Create"
 
@@ -93,19 +97,19 @@ msgstr "Default audio playback rate"
 msgid "Details"
 msgstr "Details"
 
-#: src/app/(tabs)/profile.tsx:142
+#: src/app/(tabs)/profile.tsx:83
 msgid "Edit Profile"
 msgstr "Edit Profile"
 
-#: src/app/(tabs)/profile.tsx:117
+#: src/app/(tabs)/profile.tsx:239
 msgid "Email"
 msgstr "Email"
 
-#: src/app/(tabs)/profile.tsx:125
+#: src/app/(tabs)/profile.tsx:247
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
-#: src/utils/settings/contentLanguage.ts:17
+#: src/utils/settings/contentLanguage.ts:19
 msgid "English"
 msgstr "English"
 
@@ -116,6 +120,10 @@ msgstr "Explore"
 #: src/utils/settings/externalMediaControls.ts:15
 msgid "External Audio controls"
 msgstr "External Audio controls"
+
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:234
+msgid "Failed to load video!"
+msgstr "Failed to load video!"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:130
 msgid "Featured"
@@ -135,7 +143,7 @@ msgstr "Featured Episodes"
 msgid "For You"
 msgstr "For You"
 
-#: src/components/FullScreenSigninWall.tsx:63
+#: src/components/FullScreenSigninWall.tsx:64
 msgid "Get access to exclusive member only features right now!"
 msgstr "Get access to exclusive member only features right now!"
 
@@ -147,7 +155,7 @@ msgstr "Go back Home"
 msgid "Guest User"
 msgstr "Guest User"
 
-#: src/app/(tabs)/profile.tsx:179
+#: src/app/(tabs)/profile.tsx:107
 msgid "Help & Support"
 msgstr "Help & Support"
 
@@ -155,7 +163,7 @@ msgstr "Help & Support"
 msgid "Home"
 msgstr "Home"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:122
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:126
 msgid "Invalid Youtube link"
 msgstr "Invalid Youtube link"
 
@@ -167,20 +175,20 @@ msgstr "Made by {activeTrackArtist}"
 msgid "Me"
 msgstr "Me"
 
-#: src/app/(tabs)/profile.tsx:121
+#: src/app/(tabs)/profile.tsx:243
 msgid "Member Since"
 msgstr "Member Since"
 
-#: src/app/(tabs)/profile.tsx:110
+#: src/app/(tabs)/profile.tsx:232
 msgid "Name"
 msgstr "Name"
 
-#: src/app/(tabs)/profile.tsx:127
+#: src/app/(tabs)/profile.tsx:249
 msgid "No"
 msgstr "No"
 
-#: src/app/(tabs)/profile.tsx:23
-#: src/app/(tabs)/profile.tsx:228
+#: src/app/(tabs)/profile.tsx:128
+#: src/app/(tabs)/profile.tsx:273
 msgid "Not Available"
 msgstr "Not Available"
 
@@ -188,13 +196,17 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile.tsx:152
+#: src/app/(tabs)/profile.tsx:91
 msgid "Notifications"
 msgstr "Notifications"
 
 #: src/app/+not-found.tsx:33
 msgid "Oops Sorry!"
 msgstr "Oops Sorry!"
+
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:150
+msgid "Paste from clipboard"
+msgstr "Paste from clipboard"
 
 #: src/app/(tabs)/settings.tsx:264
 msgid "Personalisation"
@@ -204,7 +216,7 @@ msgstr "Personalisation"
 msgid "Pick a content source to start creating content in your own style!"
 msgstr "Pick a content source to start creating content in your own style!"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:98
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:102
 msgid "Please paste your Youtube link"
 msgstr "Please paste your Youtube link"
 
@@ -216,15 +228,11 @@ msgstr "Podcast Channel"
 msgid "Podcast Episode"
 msgstr "Podcast Episode"
 
-#: src/app/(tabs)/profile.tsx:134
-msgid "Preferences"
-msgstr "Preferences"
-
-#: src/app/(tabs)/profile.tsx:169
+#: src/app/(tabs)/profile.tsx:109
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/app/(tabs)/profile.tsx:56
+#: src/app/(tabs)/profile.tsx:43
 msgid "Profile"
 msgstr "Profile"
 
@@ -241,7 +249,7 @@ msgid "Save"
 msgstr "Save"
 
 #: src/app/(onboarding)/default-content-preference-selection.tsx:111
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:59
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:63
 msgid "Saving"
 msgstr "Saving"
 
@@ -249,7 +257,7 @@ msgstr "Saving"
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 
-#: src/utils/settings/contentLanguage.ts:13
+#: src/utils/settings/contentLanguage.ts:15
 msgid "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
 msgstr "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
 
@@ -258,6 +266,7 @@ msgid "Select topics you like so that we can personalise your starting experienc
 msgstr "Select topics you like so that we can personalise your starting experience!"
 
 #: src/app/(tabs)/_layout.tsx:147
+#: src/app/(tabs)/profile.tsx:77
 #: src/app/(tabs)/settings.tsx:61
 msgid "Settings"
 msgstr "Settings"
@@ -270,12 +279,12 @@ msgstr "Show controls for jumping back and forth in 15 seconds intervals."
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "Show controls for skipping tracks to next/previous."
 
-#: src/app/(tabs)/profile.tsx:202
-#: src/components/FullScreenSigninWall.tsx:92
+#: src/app/(tabs)/profile.tsx:67
+#: src/components/FullScreenSigninWall.tsx:93
 msgid "Sign In"
 msgstr "Sign In"
 
-#: src/components/FullScreenSigninWall.tsx:60
+#: src/components/FullScreenSigninWall.tsx:61
 msgid "Sign In to Continue"
 msgstr "Sign In to Continue"
 
@@ -283,7 +292,7 @@ msgstr "Sign In to Continue"
 msgid "Sign in to Personalise!"
 msgstr "Sign in to Personalise!"
 
-#: src/app/(tabs)/profile.tsx:200
+#: src/app/(tabs)/profile.tsx:65
 msgid "Sign Out"
 msgstr "Sign Out"
 
@@ -303,7 +312,7 @@ msgstr "Summarise a YouTube video into a podcast episode."
 msgid "Tell us what other content sources you would like us to add!"
 msgstr "Tell us what other content sources you would like us to add!"
 
-#: src/app/(tabs)/profile.tsx:174
+#: src/app/(tabs)/profile.tsx:113
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
@@ -315,7 +324,7 @@ msgstr "Want more?"
 msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 msgstr "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:86
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:90
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "We will help you summarise your youtube video and create a audio podcast."
 
@@ -323,7 +332,7 @@ msgstr "We will help you summarise your youtube video and create a audio podcast
 msgid "What interests you?"
 msgstr "What interests you?"
 
-#: src/app/(tabs)/profile.tsx:127
+#: src/app/(tabs)/profile.tsx:249
 msgid "Yes"
 msgstr "Yes"
 
@@ -339,6 +348,6 @@ msgstr "YouTube"
 msgid "Youtube Video Summary Create"
 msgstr "Youtube Video Summary Create"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:83
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:87
 msgid "Youtube Video Summary Creator"
 msgstr "Youtube Video Summary Creator"
