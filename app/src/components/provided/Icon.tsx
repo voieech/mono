@@ -42,6 +42,7 @@ const SfSymbolsToMaterialIconsMapping = {
   trash: "delete-forever",
   "list.dash": "playlist-play",
   plus: "add",
+  safari: "open-in-browser",
 
   // Using satisfies and partial to ensure that users can only use icons after
   // they added the SF->MI mapping here.
