@@ -10,3 +10,4 @@ export * from "./queries/usePodcastChannelEpisodesQuery";
 export * from "./queries/usePodcastChannelQuery";
 export * from "./queries/usePodcastEpisodeNextReccomendationsQuery";
 export * from "./queries/usePodcastEpisodeQuery";
+export * from "./queries/useYoutubeVideoOEmbedMetadataQuery";

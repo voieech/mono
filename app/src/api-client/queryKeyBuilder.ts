@@ -8,4 +8,5 @@ export const queryKeyBuilder = new QueryKeyBuilder<
   | "podcast.episode.episodeID.$episodeID"
   | "podcast.episode.vanityID.$vanityID"
   | "podcast.episode.reccomendations.vanityID.$vanityID.$limit"
+  | "create.youtube-video-summary.youtubeVideoID.$youtubeVideoID"
 >();

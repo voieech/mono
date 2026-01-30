@@ -1,5 +1,7 @@
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import * as Clipboard from "expo-clipboard";
+import { Image } from "expo-image";
 import { useState } from "react";
 import { View, Pressable, TextInput, useWindowDimensions } from "react-native";
 
@@ -8,10 +10,12 @@ import {
   ScrollViewContainer,
   ThemedText,
   FullScreenLoader,
+  VerticalSpacer,
 } from "@/components";
 import { Colors } from "@/constants";
 import {
   useBottomTabOverflow,
+  useYoutubeVideoOEmbedMetadataQuery,
   useCreateYoutubeVideoSummaryMutation,
 } from "@/hooks";
 
@@ -52,7 +56,7 @@ export default function YoutubeVideoSummaryCreate() {
 
     // @todo show successful submission toast
 
-    setYoutubeVideoLink("");
+    // setYoutubeVideoLink("");
   }
 
   if (createYoutubeVideoSummaryMutation.isPending) {
@@ -123,6 +127,47 @@ export default function YoutubeVideoSummaryCreate() {
               </ThemedText>
             )}
           </View>
+          <VerticalSpacer />
+          <View
+            style={{
+              alignItems: "flex-end",
+            }}
+          >
+            {youtubeVideoLink === "" ? (
+              <Pressable
+                style={{
+                  padding: 8,
+                  borderRadius: 8,
+                  backgroundColor: Colors.blue600,
+                }}
+                onPress={() =>
+                  Clipboard.getStringAsync().then((text) =>
+                    setYoutubeVideoLink(text),
+                  )
+                }
+              >
+                <ThemedText>
+                  <Trans>Paste from clipboard</Trans>
+                </ThemedText>
+              </Pressable>
+            ) : (
+              <Pressable
+                style={{
+                  padding: 8,
+                  borderRadius: 8,
+                  backgroundColor: Colors.neutral600,
+                }}
+                onPress={() => setYoutubeVideoLink("")}
+              >
+                <ThemedText>
+                  <Trans>Clear</Trans>
+                </ThemedText>
+              </Pressable>
+            )}
+          </View>
+          {isYoutubeVideoIDValid && (
+            <YoutubeVideoPreview youtubeVideoID={youtubeVideoID} />
+          )}
         </View>
       </ScrollViewContainer>
       <View
@@ -155,5 +200,86 @@ export default function YoutubeVideoSummaryCreate() {
         </Pressable>
       </View>
     </SafeAreaViewContainer>
+  );
+}
+
+function YoutubeVideoPreview(props: {
+  /**
+   * This should already be validated
+   */
+  youtubeVideoID: string;
+}) {
+  const youtubeVideoOEmbedMetadataQuery = useYoutubeVideoOEmbedMetadataQuery(
+    props.youtubeVideoID,
+  );
+
+  if (youtubeVideoOEmbedMetadataQuery.isLoading) {
+    return (
+      <ThemedText>
+        <Trans>... loading video ...</Trans>
+      </ThemedText>
+    );
+  }
+
+  if (
+    youtubeVideoOEmbedMetadataQuery.isError ||
+    youtubeVideoOEmbedMetadataQuery.data === undefined
+  ) {
+    return (
+      <ThemedText
+        customColors={{
+          dark: Colors.red500,
+        }}
+      >
+        <Trans>Failed to load video!</Trans>
+      </ThemedText>
+    );
+  }
+
+  const youtubeVideoTitle = youtubeVideoOEmbedMetadataQuery.data.title;
+  const youtubeVideoCreatorName =
+    youtubeVideoOEmbedMetadataQuery.data.author_name;
+
+  /**
+   * There is 2 ways to get the video thumbnail. Either hardcoding to the URL
+   * and getting a fixed 16/9 aspect ratio image or a dynamic one from the
+   * OEmbed metadata, which uses a downscaled and resized 4/3 aspect ratio,
+   * which will always include upper and bottom black bars in the image.
+   *
+   * Temporarily using hardcoded one with this boolean flag to not have the bars
+   */
+  const useHardcodedThumbnailInsteadOfOEmbedThumbnail = true;
+
+  return (
+    <View>
+      <VerticalSpacer />
+      {useHardcodedThumbnailInsteadOfOEmbedThumbnail ? (
+        <Image
+          source={`https://img.youtube.com/vi/${props.youtubeVideoID}/mqdefault.jpg`}
+          style={{
+            width: "100%",
+            aspectRatio: 16 / 9,
+          }}
+          contentFit="contain"
+        />
+      ) : (
+        <Image
+          source={youtubeVideoOEmbedMetadataQuery.data.thumbnail_url}
+          style={{
+            width: "100%",
+            aspectRatio:
+              youtubeVideoOEmbedMetadataQuery.data.thumbnail_width /
+              youtubeVideoOEmbedMetadataQuery.data.thumbnail_height,
+          }}
+          contentFit="contain"
+        />
+      )}
+      <VerticalSpacer />
+      <ThemedText type="lg-light">{youtubeVideoTitle}</ThemedText>
+      <VerticalSpacer />
+      <ThemedText type="sm-normal" colorType="subtext">
+        {youtubeVideoCreatorName}
+      </ThemedText>
+    </View>
   );
 }
