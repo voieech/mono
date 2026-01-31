@@ -1,4 +1,4 @@
-export type Episode = {
+export type PodcastEpisode = {
   id: string;
   created_at: string;
   vanity_id: string;

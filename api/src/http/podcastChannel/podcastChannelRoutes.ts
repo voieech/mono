@@ -1,4 +1,4 @@
-import type { Episode, Channel } from "dto";
+import type { PodcastEpisode, PodcastChannel } from "dto";
 
 import express from "express";
 
@@ -22,7 +22,7 @@ export const podcastChannelRoutes = express
       return;
     }
 
-    res.status(200).json(channel satisfies Channel);
+    res.status(200).json(channel satisfies PodcastChannel);
   })
 
   .get("/v1/podcast/channel/:channelID/episodes", async function (req, res) {
@@ -52,7 +52,7 @@ export const podcastChannelRoutes = express
       .limit(20)
       .execute();
 
-    res.status(200).json(episodes satisfies Array<Episode>);
+    res.status(200).json(episodes satisfies Array<PodcastEpisode>);
   })
 
   .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {

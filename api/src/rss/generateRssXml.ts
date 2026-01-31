@@ -1,4 +1,4 @@
-import type { Episode, Channel } from "dto";
+import type { PodcastEpisode, PodcastChannel } from "dto";
 
 import rss from "rss";
 
@@ -15,9 +15,9 @@ import { urlBuilders } from "../util/urlBuilders.js";
  * - https://www.castfeedvalidator.com/
  */
 export function generateRssXml(
-  channel: Channel,
+  channel: PodcastChannel,
   episodes: Array<
-    Omit<Episode, "channel_name"> & {
+    Omit<PodcastEpisode, "channel_name"> & {
       audio_mime_type: string;
       audio_size: number;
     }

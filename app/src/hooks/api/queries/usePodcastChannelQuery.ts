@@ -1,4 +1,4 @@
-import type { Channel } from "dto";
+import type { PodcastChannel } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -33,7 +33,7 @@ export function usePodcastChannelQuery(channelID: string) {
         throw new Error(errorMessage);
       }
 
-      return (await res.json()) as Channel;
+      return (await res.json()) as PodcastChannel;
     },
   });
 }

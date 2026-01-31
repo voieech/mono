@@ -1,4 +1,4 @@
-import type { Episode, Channel } from "dto";
+import type { PodcastEpisode, PodcastChannel } from "dto";
 
 import express from "express";
 import { sql } from "kysely";
@@ -32,7 +32,7 @@ export const featuredContentRoutes = express
       .limit(limit)
       .execute();
 
-    res.status(200).json(featuredChannels satisfies Array<Channel>);
+    res.status(200).json(featuredChannels satisfies Array<PodcastChannel>);
   })
 
   .get("/v1/podcast/featured/episodes", async function (req, res) {
@@ -65,5 +65,5 @@ export const featuredContentRoutes = express
       .limit(limit)
       .execute();
 
-    res.status(200).json(featuredEpisodes satisfies Array<Episode>);
+    res.status(200).json(featuredEpisodes satisfies Array<PodcastEpisode>);
   });

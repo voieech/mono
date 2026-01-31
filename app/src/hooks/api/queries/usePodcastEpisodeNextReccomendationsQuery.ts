@@ -1,4 +1,4 @@
-import type { Episode } from "dto";
+import type { PodcastEpisode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -42,6 +42,6 @@ export async function getPodcastEpisodeNextReccomendations(
   }
 
   return (await res.json()) as {
-    reccomendations: Array<Episode>;
+    reccomendations: Array<PodcastEpisode>;
   };
 }

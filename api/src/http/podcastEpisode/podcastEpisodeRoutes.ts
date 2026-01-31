@@ -1,4 +1,4 @@
-import type { Episode } from "dto";
+import type { PodcastEpisode } from "dto";
 
 import express from "express";
 
@@ -21,5 +21,5 @@ export const podcastEpisodeRoutes = express
       return;
     }
 
-    res.status(200).json(episode satisfies Episode);
+    res.status(200).json(episode satisfies PodcastEpisode);
   });

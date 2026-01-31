@@ -1,4 +1,4 @@
-import type { Episode } from "dto";
+import type { PodcastEpisode } from "dto";
 import type { Composer } from "vue-i18n";
 import type { Router } from "vue-router";
 
@@ -54,7 +54,7 @@ export function usePodcastEpisode(
         throw new Error(errorMessage);
       }
 
-      const episode = (await res.json()) as Episode;
+      const episode = (await res.json()) as PodcastEpisode;
 
       // @todo Only set this if the user didnt explicitly set the language control before
       if (optionals?.i18n !== undefined) {

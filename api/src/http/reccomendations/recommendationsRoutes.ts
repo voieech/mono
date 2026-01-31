@@ -1,4 +1,4 @@
-import type { Episode } from "dto";
+import type { PodcastEpisode } from "dto";
 
 import express from "express";
 
@@ -59,6 +59,6 @@ export const recommendationsRoutes = express
       .execute();
 
     res.status(200).json({
-      reccomendations: reccomendations satisfies Array<Episode>,
+      reccomendations: reccomendations satisfies Array<PodcastEpisode>,
     });
   });

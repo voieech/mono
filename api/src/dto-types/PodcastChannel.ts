@@ -1,4 +1,4 @@
-export type Channel = {
+export type PodcastChannel = {
   id: string;
   created_at: string;
   language: string;

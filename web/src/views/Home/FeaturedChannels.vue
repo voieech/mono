@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Channel } from "dto";
+import type { PodcastChannel } from "dto";
 
 import { useQueryClient, useQuery } from "@tanstack/vue-query";
 import { useI18n } from "vue-i18n";
@@ -31,7 +31,7 @@ const {
       throw new Error(errorMessage);
     }
 
-    const channels = (await res.json()) as Array<Channel>;
+    const channels = (await res.json()) as Array<PodcastChannel>;
 
     // Cache data so these dont need to be re queried again on navigate
     for (const channel of channels) {

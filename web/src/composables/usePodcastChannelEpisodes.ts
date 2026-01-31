@@ -1,4 +1,4 @@
-import type { Episode } from "dto";
+import type { PodcastEpisode } from "dto";
 import type { Router } from "vue-router";
 
 import { useQueryClient, useQuery } from "@tanstack/vue-query";
@@ -38,7 +38,7 @@ export function usePodcastChannelEpisodes(
         throw new Error(errorMessage);
       }
 
-      const episodes = (await res.json()) as Array<Episode>;
+      const episodes = (await res.json()) as Array<PodcastEpisode>;
 
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {

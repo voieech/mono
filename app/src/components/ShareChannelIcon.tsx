@@ -1,4 +1,4 @@
-import type { Channel } from "dto";
+import type { PodcastChannel } from "dto";
 import type { StyleProp, TextStyle } from "react-native";
 
 import { i18n } from "@lingui/core";
@@ -10,7 +10,7 @@ import { Colors } from "@/constants";
 import { posthog } from "@/utils";
 
 export function ShareChannelIcon(props: {
-  channel: Channel;
+  channel: PodcastChannel;
   style?: StyleProp<TextStyle>;
   size?: number;
 }) {

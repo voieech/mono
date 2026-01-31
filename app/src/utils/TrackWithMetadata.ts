@@ -1,4 +1,4 @@
-import type { Episode } from "dto";
+import type { PodcastEpisode } from "dto";
 import type { Track } from "react-native-track-player";
 
 import type { RemoveIndexSignature, MakeSomeFieldsRequired } from "@/types";
@@ -21,7 +21,7 @@ type ExtendedTrack = MakeSomeFieldsRequired<
 
 export interface TrackWithPodcastEpisode extends ExtendedTrack {
   trackType: "podcast_episode";
-  episode: Episode;
+  episode: PodcastEpisode;
 }
 
 export type TrackWithMetadata = TrackWithPodcastEpisode;

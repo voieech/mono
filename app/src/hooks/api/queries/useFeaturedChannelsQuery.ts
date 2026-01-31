@@ -1,4 +1,4 @@
-import type { Channel } from "dto";
+import type { PodcastChannel } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -33,7 +33,7 @@ export function useFeaturedChannelsQuery() {
         throw new Error(errorMessage);
       }
 
-      const channels = (await res.json()) as Array<Channel>;
+      const channels = (await res.json()) as Array<PodcastChannel>;
 
       // Cache data so these dont need to be re queried again on navigate
       for (const channel of channels) {

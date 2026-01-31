@@ -1,4 +1,4 @@
-import type { Channel } from "dto";
+import type { PodcastChannel } from "dto";
 import type { Router } from "vue-router";
 
 import { useQuery } from "@tanstack/vue-query";
@@ -34,7 +34,7 @@ export function usePodcastChannel(
         throw new Error(errorMessage);
       }
 
-      return (await res.json()) as Channel;
+      return (await res.json()) as PodcastChannel;
     },
   });
 }

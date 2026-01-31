@@ -1,4 +1,4 @@
-import type { Episode } from "dto";
+import type { PodcastEpisode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -33,7 +33,7 @@ export function usePodcastEpisodeQuery(vanityID: string) {
         throw new Error(errorMessage);
       }
 
-      return (await res.json()) as Episode;
+      return (await res.json()) as PodcastEpisode;
     },
   });
 }
