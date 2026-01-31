@@ -26,12 +26,33 @@ export const AuthContext = createContext<{
   /**
    * Trigger login process
    */
-  login: () => Promise<void>;
+  login: (options?: {
+    /**
+     * Callback called when user successfully login
+     */
+    onLoginSuccess?: () => unknown;
+  }) => Promise<void>;
 
   /**
    * Trigger logout process
    */
   logout: () => Promise<void>;
+
+  /**
+   * Show a global / root level, full screen sign in modal.
+   */
+  showFullScreenSigninModal: boolean;
+
+  /**
+   * Show a global / root level, full screen sign in modal if the user is not
+   * authenticated.
+   */
+  showFullScreenSigninModalIfNotAuthenticated: () => void;
+
+  /**
+   * Clear the global / root level, full screen sign in modal.
+   */
+  clearFullScreenSigninModal: () => void;
 }>(
   // @ts-expect-error
   null,

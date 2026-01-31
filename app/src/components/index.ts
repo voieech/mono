@@ -10,6 +10,7 @@ export * from "./BottomOverlayAudioPlayer";
 export * from "./CopyOnPress";
 export * from "./ExperimentalSurface";
 export * from "./FullScreenLoader";
+export * from "./FullScreenSigninModal";
 export * from "./FullScreenSigninWall";
 export * from "./InAppBrowserLink";
 export * from "./PageContainer";

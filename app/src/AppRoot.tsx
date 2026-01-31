@@ -23,6 +23,7 @@ import {
   SettingsProvider,
   TrackPlayerProvider,
   AuthProvider,
+  FullScreenSigninModal,
 } from "@/components";
 import { useTheme } from "@/hooks";
 import { posthog } from "@/utils";
@@ -86,6 +87,7 @@ export function AppRoot(props: PropsWithChildren) {
                         <TrackPlayerProvider>
                           <AuthProvider>
                             <StatusBar style="auto" />
+                            <FullScreenSigninModal />
                             {props.children}
                           </AuthProvider>
                         </TrackPlayerProvider>

@@ -16,16 +16,23 @@ WebBrowser.maybeCompleteAuthSession();
 export function AuthProvider({ children }: PropsWithChildren) {
   const [isLoading, setIsLoading] = useState(true);
   const [authData, setAuthData] = useState<AuthDataFromWorkos | null>(null);
+  const [showFullScreenSigninModal, setShowFullScreenSigninModal] =
+    useState(false);
+  const isAuthenticated = authData?.userData !== undefined;
 
   async function clearAuth() {
     await secureStoreForAuth.deleteAllData();
     setAuthData(null);
   }
 
-  const login = useCallback(async function () {
+  const login = useCallback(async function (options?: {
+    onLoginSuccess?: () => unknown;
+  }) {
     await authController.login();
     const authData = await secureStoreForAuth.getAllAuthDataNonNull();
     setAuthData(authData);
+    reactQueryClient.clear();
+    await options?.onLoginSuccess?.();
   }, []);
 
   const refreshSession = useCallback(
@@ -62,6 +69,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     await clearAuth();
     reactQueryClient.clear();
+  }
+
+  async function showFullScreenSigninModalIfNotAuthenticated() {
+    if (!isAuthenticated) {
+      setShowFullScreenSigninModal(true);
+    }
+  }
+
+  async function clearFullScreenSigninModal() {
+    setShowFullScreenSigninModal(false);
   }
 
   // On initial run, restore user's session if user was logged in the last time
@@ -106,10 +123,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
     <AuthContext.Provider
       value={{
         isLoading,
-        isAuthenticated: authData?.userData !== undefined,
+        isAuthenticated,
         authData,
         login,
         logout,
+        showFullScreenSigninModal,
+        showFullScreenSigninModalIfNotAuthenticated,
+        clearFullScreenSigninModal,
       }}
     >
       {children}

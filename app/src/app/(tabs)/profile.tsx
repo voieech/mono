@@ -57,7 +57,9 @@ export default function ProfilePage() {
               : Colors.green600,
           }}
           onPress={
-            authContext.isAuthenticated ? authContext.logout : authContext.login
+            authContext.isAuthenticated
+              ? authContext.logout
+              : () => authContext.login()
           }
         >
           <ThemedText>
