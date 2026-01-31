@@ -9,7 +9,7 @@ import { NotFoundError } from "@/errors";
 export function usePodcastChannelEpisodesQuery(channelID: string) {
   return useQuery({
     queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.channel.episodes.$channelID",
+      "podcast.channel.channelID.$channelID.episodes",
       {
         channelID,
       },
