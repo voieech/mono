@@ -113,6 +113,8 @@ export interface ContentYoutubeVideoTable {
   snippet_count: $Nullable<number>;
 }
 
-export type ContentYoutubeVideo = Selectable<ContentYoutubeVideoTable>;
-export type CreateContentYoutubeVideo = Insertable<ContentYoutubeVideoTable>;
-export type UpdateContentYoutubeVideo = Updateable<ContentYoutubeVideoTable>;
+export type DatabaseContentYoutubeVideo = Selectable<ContentYoutubeVideoTable>;
+export type DatabaseContentYoutubeVideoCreateArg =
+  Insertable<ContentYoutubeVideoTable>;
+export type DatabaseContentYoutubeVideoUpdateArg =
+  Updateable<ContentYoutubeVideoTable>;

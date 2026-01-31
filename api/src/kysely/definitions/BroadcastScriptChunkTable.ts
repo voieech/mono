@@ -69,6 +69,9 @@ export interface BroadcastScriptChunkTable {
   embedding_voyage_1024: $Nullable<Array<number>>;
 }
 
-export type BroadcastScriptChunk = Selectable<BroadcastScriptChunkTable>;
-export type CreateBroadcastScriptChunk = Insertable<BroadcastScriptChunkTable>;
-export type UpdateBroadcastScriptChunk = Updateable<BroadcastScriptChunkTable>;
+export type DatabaseBroadcastScriptChunk =
+  Selectable<BroadcastScriptChunkTable>;
+export type DatabaseBroadcastScriptChunkCreateArg =
+  Insertable<BroadcastScriptChunkTable>;
+export type DatabaseBroadcastScriptChunkUpdateArg =
+  Updateable<BroadcastScriptChunkTable>;

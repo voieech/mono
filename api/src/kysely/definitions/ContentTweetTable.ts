@@ -70,6 +70,6 @@ export interface ContentTweetTable {
   category: string;
 }
 
-export type ContentTweet = Selectable<ContentTweetTable>;
-export type CreateContentTweet = Insertable<ContentTweetTable>;
-export type UpdateContentTweet = Updateable<ContentTweetTable>;
+export type DatabaseContentTweet = Selectable<ContentTweetTable>;
+export type DatabaseContentTweetCreateArg = Insertable<ContentTweetTable>;
+export type DatabaseContentTweetUpdateArg = Updateable<ContentTweetTable>;

@@ -72,6 +72,8 @@ export interface ContentGithubRepoTable {
   crawled_at: UpdatableDateTimeColumnType;
 }
 
-export type ContentGithubRepo = Selectable<ContentGithubRepoTable>;
-export type CreateContentGithubRepo = Insertable<ContentGithubRepoTable>;
-export type UpdateContentGithubRepo = Updateable<ContentGithubRepoTable>;
+export type DatabaseContentGithubRepo = Selectable<ContentGithubRepoTable>;
+export type DatabaseContentGithubRepoCreateArg =
+  Insertable<ContentGithubRepoTable>;
+export type DatabaseContentGithubRepoUpdateArg =
+  Updateable<ContentGithubRepoTable>;
