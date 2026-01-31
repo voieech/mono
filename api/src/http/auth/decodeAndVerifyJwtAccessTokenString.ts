@@ -1,6 +1,9 @@
 import { convertUnknownCatchToError } from "convert-unknown-catch-to-error";
 import * as jose from "jose";
 
+import type { JwtPayload } from "./jwtPayloadSchema.js";
+
+import { jwtPayloadSchema } from "./jwtPayloadSchema.js";
 import { workos, WORKOS_CLIENT_ID } from "./workos.js";
 
 const jwksUrl = workos.userManagement.getJwksUrl(WORKOS_CLIENT_ID);
@@ -13,7 +16,7 @@ const workosIssuerUrl = `https://api.workos.com/user_management/${WORKOS_CLIENT_
  */
 export async function decodeAndVerifyJwtAccessTokenString(
   token: string,
-): Promise<$ResultTuple<jose.JWTPayload>> {
+): Promise<$ResultTuple<JwtPayload>> {
   try {
     const { payload } = await jose.jwtVerify(token, JWKS, {
       issuer: workosIssuerUrl,
@@ -21,7 +24,7 @@ export async function decodeAndVerifyJwtAccessTokenString(
       // "audience" field for verification else it will fail
       // audience: WORKOS_CLIENT_ID,
     });
-    return [null, payload];
+    return [null, jwtPayloadSchema.parse(payload)];
   } catch (e) {
     const error = convertUnknownCatchToError(e);
     return [
