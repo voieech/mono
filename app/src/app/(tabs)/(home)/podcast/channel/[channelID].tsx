@@ -1,8 +1,18 @@
+import type { ReactNode } from "react";
+
+import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import { useLocalSearchParams, Link, Redirect } from "expo-router";
 import { useState } from "react";
-import { RefreshControl } from "react-native";
+import {
+  ActivityIndicator,
+  RefreshControl,
+  TouchableOpacity,
+} from "react-native";
+
+import type { ColorValues } from "@/constants";
 
 import {
   ParallaxScrollViewContainer,
@@ -11,13 +21,19 @@ import {
   ThemedView,
   ThemedText,
   ShareChannelIcon,
+  Icon,
+  VerticalSpacer,
 } from "@/components";
 import { Colors } from "@/constants";
+import { useAuthContext } from "@/context";
 import { NotFoundError } from "@/errors";
 import {
   usePodcastChannelQuery,
   usePodcastChannelEpisodesQuery,
+  usePodcastChannelUserSubscriptionStatusQuery,
+  usePodcastChannelUserSubscriptionStatusUpdateMutation,
 } from "@/hooks";
+import { toast } from "@/utils";
 
 export default function PodcastChannel() {
   const channelID = useLocalSearchParams<{ channelID: string }>().channelID;
@@ -78,44 +94,31 @@ export default function PodcastChannel() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <ThemedText
-        type="xl-normal"
-        style={{
-          marginBottom: 8,
-        }}
-      >
-        {podcastChannelQuery.data.name}
-      </ThemedText>
+      <ThemedText type="xl-normal">{podcastChannelQuery.data.name}</ThemedText>
+      {podcastChannelQuery.data.category_primary !== null && (
+        <ThemedText type="sm-light">
+          {podcastChannelQuery.data.category_primary}
+          {podcastChannelQuery.data.subcategory_primary !== null &&
+            `, ${podcastChannelQuery.data.subcategory_primary}`}
+        </ThemedText>
+      )}
+      <VerticalSpacer />
       <ThemedView
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          columnGap: 8,
+          columnGap: 16,
         }}
       >
-        <ThemedView
-          style={{
-            flex: 1,
-          }}
-        >
-          <ThemedText type="base-light">
-            {podcastChannelQuery.data.description}
-          </ThemedText>
-          {podcastChannelQuery.data.category_primary !== null && (
-            <ThemedText
-              type="sm-light"
-              style={{
-                marginTop: 8,
-              }}
-            >
-              {podcastChannelQuery.data.category_primary}
-              {podcastChannelQuery.data.subcategory_primary !== null &&
-                `, ${podcastChannelQuery.data.subcategory_primary}`}
-            </ThemedText>
-          )}
-        </ThemedView>
+        <PodcastChannelSubscriptionButtonMaybeUnauthenticated
+          channelID={channelID}
+        />
         <ShareChannelIcon channel={podcastChannelQuery.data} size={32} />
       </ThemedView>
+      <VerticalSpacer />
+      <ThemedText type="base-light">
+        {podcastChannelQuery.data.description}
+      </ThemedText>
       {!podcastChannelEpisodesQuery.isLoading &&
         !podcastChannelEpisodesQuery.isError &&
         podcastChannelEpisodesQuery.data !== undefined && (
@@ -194,5 +197,184 @@ export default function PodcastChannel() {
           </>
         )}
     </ParallaxScrollViewContainer>
+  );
+}
+
+function PodcastChannelSubscriptionButtonMaybeUnauthenticated(props: {
+  channelID: string;
+}) {
+  const authContext = useAuthContext();
+
+  if (!authContext.isAuthenticated) {
+    return (
+      <PodcastChannelSubscribeBaseButton
+        onPress={authContext.showFullScreenSigninModalIfNotAuthenticated}
+        isUpdating={false}
+      />
+    );
+  }
+
+  return <PodcastChannelSubscriptionButton channelID={props.channelID} />;
+}
+
+/**
+ * User is authenticated already
+ */
+function PodcastChannelSubscriptionButton(props: { channelID: string }) {
+  const podcastChannelUserSubscriptionStatusQuery =
+    usePodcastChannelUserSubscriptionStatusQuery(props.channelID);
+
+  if (podcastChannelUserSubscriptionStatusQuery.isLoading) {
+    return (
+      <PodcastChannelSubscriptionBaseButton
+        backgroundColor={Colors.black}
+        text={
+          <ThemedText type="base-light" colorType="subtext">
+            <Trans>Loading</Trans>
+          </ThemedText>
+        }
+        icon={<ActivityIndicator />}
+      />
+    );
+  }
+
+  // Actually if failed to load status, should treat it as the same as not subscribed
+  // Do nothing if loading or failed to load status
+  if (
+    podcastChannelUserSubscriptionStatusQuery.isError ||
+    podcastChannelUserSubscriptionStatusQuery.data === undefined
+  ) {
+    return null;
+  }
+
+  return podcastChannelUserSubscriptionStatusQuery.data.subscribed ? (
+    <PodcastChannelUnsubscribeButton channelID={props.channelID} />
+  ) : (
+    <PodcastChannelSubscribeButton channelID={props.channelID} />
+  );
+}
+
+function PodcastChannelSubscribeBaseButton(props: {
+  onPress: () => unknown;
+  isUpdating: boolean;
+}) {
+  return (
+    <PodcastChannelSubscriptionBaseButton
+      onPress={props.onPress}
+      disabled={props.isUpdating}
+      backgroundColor={Colors.neutral100}
+      text={
+        <ThemedText
+          type="base-semibold"
+          customColors={{
+            dark: Colors.green600,
+          }}
+        >
+          <Trans>Subscribe</Trans>
+        </ThemedText>
+      }
+      icon={
+        props.isUpdating ? (
+          <ActivityIndicator color={Colors.green600} />
+        ) : (
+          <Icon name="bell" size={20} color={Colors.green600} />
+        )
+      }
+    />
+  );
+}
+
+const showFailedToUpdateSubscriptionToast = () =>
+  toast(msg`Failed to update subscription`);
+
+function PodcastChannelSubscribeButton(props: { channelID: string }) {
+  const podcastChannelUserSubscriptionStatusUpdateMutation =
+    usePodcastChannelUserSubscriptionStatusUpdateMutation();
+  return (
+    <PodcastChannelSubscribeBaseButton
+      onPress={() => {
+        podcastChannelUserSubscriptionStatusUpdateMutation.mutate(
+          {
+            channelID: props.channelID,
+            subscribe: true,
+          },
+          {
+            onError: showFailedToUpdateSubscriptionToast,
+          },
+        );
+      }}
+      isUpdating={podcastChannelUserSubscriptionStatusUpdateMutation.isPending}
+    />
+  );
+}
+
+function PodcastChannelUnsubscribeButton(props: { channelID: string }) {
+  const podcastChannelUserSubscriptionStatusUpdateMutation =
+    usePodcastChannelUserSubscriptionStatusUpdateMutation();
+  return (
+    <PodcastChannelSubscriptionBaseButton
+      onPress={() => {
+        podcastChannelUserSubscriptionStatusUpdateMutation.mutate(
+          {
+            channelID: props.channelID,
+            subscribe: false,
+          },
+          {
+            onError: showFailedToUpdateSubscriptionToast,
+          },
+        );
+      }}
+      disabled={podcastChannelUserSubscriptionStatusUpdateMutation.isPending}
+      backgroundColor={Colors.black}
+      text={
+        <ThemedText
+          type="base-semibold"
+          customColors={{
+            dark: Colors.red600,
+          }}
+        >
+          <Trans>Unsubscribe</Trans>
+        </ThemedText>
+      }
+      icon={
+        podcastChannelUserSubscriptionStatusUpdateMutation.isPending ? (
+          <ActivityIndicator color={Colors.red600} />
+        ) : (
+          <Icon name="bell.slash" size={20} color={Colors.red600} />
+        )
+      }
+    />
+  );
+}
+
+export function PodcastChannelSubscriptionBaseButton(props: {
+  onPress?: () => unknown;
+  disabled?: boolean;
+  backgroundColor: ColorValues;
+  text: ReactNode;
+  icon: ReactNode;
+}) {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        props.onPress?.();
+      }}
+      disabled={props.disabled}
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 16,
+        columnGap: 8,
+        backgroundColor: props.backgroundColor,
+      }}
+    >
+      {props.text}
+      {props.icon}
+    </TouchableOpacity>
   );
 }
