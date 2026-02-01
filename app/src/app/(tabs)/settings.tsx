@@ -6,7 +6,6 @@ import * as ExpoUpdates from "expo-updates";
 import { useFeatureFlag } from "posthog-react-native";
 import { Fragment } from "react";
 import { Pressable, Switch, useWindowDimensions, View } from "react-native";
-import Toast from "react-native-root-toast";
 
 import type { ExperimentalSurfaceName } from "@/utils";
 
@@ -27,7 +26,7 @@ import {
   useAppDebuggingSurfaceContext,
   useExperimentalSurfaceContext,
 } from "@/context";
-import { posthog, linguiMsgToString } from "@/utils";
+import { posthog, linguiMsgToString, toast } from "@/utils";
 
 export default function Settings() {
   const authContext = useAuthContext();
@@ -353,15 +352,7 @@ export default function Settings() {
           <ThemedText>Posthog Distinct ID</ThemedText>
           <CopyOnPress
             text={posthogDistinctID}
-            onCopy={() => {
-              Toast.show("PostHog ID copied", {
-                position: Toast.positions.TOP,
-                shadow: true,
-                animation: true,
-                hideOnPress: true,
-                opacity: 1,
-              });
-            }}
+            onCopy={() => toast("PostHog ID copied")}
           >
             <View
               style={{

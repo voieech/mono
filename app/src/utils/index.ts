@@ -15,5 +15,6 @@ export * from "./LocalStorageWrapper";
 export * from "./posthog";
 export * from "./ReactNativeTrackPlayerCapabilitiesOptions";
 export * from "./settings";
+export * from "./toast";
 export * from "./TrackPlayerPlaybackRates";
 export * from "./TrackWithMetadata";
