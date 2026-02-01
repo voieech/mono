@@ -83,6 +83,39 @@ export const podcastChannelRoutes = express
     },
   )
 
+  .post(
+    "/v1/podcast/channel/:channelID/user-subscription-update",
+    authMiddleware,
+    async function (req, res) {
+      const userID = req.authenticatedUser?.id!;
+      const channelID = req.params["channelID"]!;
+      const shouldSubscribe = req.body["subscribe"]!;
+
+      if (shouldSubscribe) {
+        await apiDB
+          .insertInto("user_subscription_to_podcast_channel")
+          .values({
+            id: crypto.randomUUID(),
+            created_at: $DateTime.now.asIsoDateTime(),
+            user_id: userID,
+            podcast_channel_id: channelID,
+          })
+          .execute();
+      } else {
+        await apiDB
+          .deleteFrom("user_subscription_to_podcast_channel")
+          .where("user_id", "=", userID)
+          .where("podcast_channel_id", "=", channelID)
+          .execute();
+      }
+
+      // As long as DB calls did not throw, assume it succeeded
+      res.status(200).json({
+        subscribed: shouldSubscribe,
+      });
+    },
+  )
+
   .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {
     const channelID = req.params.channelID;
 
