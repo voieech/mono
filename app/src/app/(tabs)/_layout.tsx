@@ -142,15 +142,6 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="settings"
-          options={{
-            title: t`Settings`,
-            tabBarIcon: ({ color, size }) => (
-              <Icon size={size} name="gear" color={color as any} />
-            ),
-          }}
-        />
-        <Tabs.Screen
           name="profile"
           options={{
             title: t`Me`,

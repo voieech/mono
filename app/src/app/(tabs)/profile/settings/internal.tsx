@@ -6,8 +6,8 @@ import { View } from "react-native";
 import type { ExperimentalSurfaceName } from "@/utils";
 
 import { ThemedText, ThemedLink } from "@/components";
-import { SettingsPageLayout } from "@/components-page/(tabs)/settings/SettingsPageLayout";
-import { SwitchSettingRow } from "@/components-page/(tabs)/settings/SwitchSettingRow";
+import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
+import { SwitchSettingRow } from "@/components-page/(tabs)/profile/settings/SwitchSettingRow";
 import { Colors } from "@/constants";
 import {
   useSettingContext,

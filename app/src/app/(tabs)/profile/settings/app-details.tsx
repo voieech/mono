@@ -3,7 +3,7 @@ import * as ExpoUpdates from "expo-updates";
 import { View } from "react-native";
 
 import { ThemedText, CopyOnPress } from "@/components";
-import { SettingsPageLayout } from "@/components-page/(tabs)/settings/SettingsPageLayout";
+import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
 import { posthog, toast } from "@/utils";
 

@@ -3,7 +3,7 @@ import { Link } from "expo-router";
 import { View } from "react-native";
 
 import { ThemedText, Icon } from "@/components";
-import { SettingsPageLayout } from "@/components-page/(tabs)/settings/SettingsPageLayout";
+import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
 

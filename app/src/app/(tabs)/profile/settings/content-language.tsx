@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Pressable, View } from "react-native";
 
 import { ThemedText, Icon } from "@/components";
-import { SettingsPageLayout } from "@/components-page/(tabs)/settings/SettingsPageLayout";
+import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
 import { linguiMsgToString } from "@/utils";

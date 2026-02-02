@@ -1,46 +1,50 @@
 import { useLingui } from "@lingui/react/macro";
 import { Stack } from "expo-router";
 
-export default function SettingsLayout() {
+export default function ProfileLayout() {
   const { t } = useLingui();
-
   return (
     <Stack>
       <Stack.Screen
         name="index"
         options={{
-          title: "Settings",
           headerShown: false,
+          title: t`Profile`,
         }}
       />
       <Stack.Screen
-        name="audio-playback"
+        name="settings/audio-playback"
         options={{
           title: t`Audio Playback`,
+          headerBackTitle: t`Back`,
         }}
       />
       <Stack.Screen
-        name="content-language"
+        name="settings/content-language"
         options={{
           title: t`Content Language`,
+          headerBackTitle: t`Back`,
         }}
       />
       <Stack.Screen
-        name="personalisation"
+        name="settings/personalisation"
         options={{
           title: t`Personalisation`,
+          headerBackTitle: t`Back`,
         }}
       />
       <Stack.Screen
-        name="app-details"
+        name="settings/app-details"
         options={{
           title: t`App Details`,
+          headerBackTitle: t`Back`,
         }}
       />
       <Stack.Screen
-        name="internal"
+        name="settings/internal"
         options={{
           title: "Internal",
+          headerBackTitle: t`Back`,
         }}
       />
     </Stack>

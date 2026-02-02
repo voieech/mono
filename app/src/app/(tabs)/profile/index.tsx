@@ -1,5 +1,9 @@
+import type { Href } from "expo-router";
+
 import { useLingui, Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
+import { Link } from "expo-router";
+import { useFeatureFlag } from "posthog-react-native";
 import { useCallback, useState } from "react";
 import { View, Pressable, TouchableOpacity } from "react-native";
 
@@ -71,28 +75,8 @@ export default function ProfilePage() {
           </ThemedText>
         </Pressable>
       </View>
-      {__DEV__ && (
-        <>
-          <VerticalSpacer />
-          <View>
-            <ThemedText type="lg-light">
-              <Trans>Settings</Trans>
-            </ThemedText>
-            <VerticalSpacer height={4} />
-            <ProfileActionRow
-              label={t`Edit Profile`}
-              icon="gear"
-              onPress={() => console.log("Edit Profile")}
-            />
-            <VerticalSpacer height={4} />
-            <ProfileActionRow
-              label={t`Notifications`}
-              icon="gear"
-              onPress={() => console.log("Notifications")}
-            />
-          </View>
-        </>
-      )}
+      <VerticalSpacer />
+      <SettingsSection />
       <VerticalSpacer />
       <View
         style={{
@@ -274,42 +258,120 @@ function ProfileRow(props: { label: string; value?: string }) {
   );
 }
 
-function ProfileActionRow(props: {
-  label: string;
-  icon:
+function SettingsSection() {
+  const isInternalUser = useFeatureFlag("internal");
+  const authContext = useAuthContext();
+  const { t } = useLingui();
+
+  return (
+    <View>
+      <ThemedText
+        type="lg-light"
+        style={{
+          paddingBottom: 8,
+        }}
+      >
+        <Trans>Settings</Trans>
+      </ThemedText>
+      <View
+        style={{
+          flexDirection: "column",
+          rowGap: 8,
+        }}
+      >
+        {(__DEV__ || isInternalUser) && authContext.isAuthenticated && (
+          <SettingsPageLink
+            setting={t`Edit Profile`}
+            href={{
+              pathname: "/",
+            }}
+          />
+        )}
+        {(__DEV__ || isInternalUser) && authContext.isAuthenticated && (
+          <SettingsPageLink
+            setting={t`Notifications`}
+            href={{
+              pathname: "/",
+            }}
+          />
+        )}
+        <SettingsPageLink
+          setting={t`Audio Playback`}
+          href={{
+            pathname: "/profile/settings/audio-playback",
+          }}
+        />
+        <SettingsPageLink
+          setting={t`Content Language`}
+          href={{
+            pathname: "/profile/settings/content-language",
+          }}
+        />
+        {(__DEV__ || isInternalUser) && (
+          <SettingsPageLink
+            setting={t`Personalisation`}
+            href={{
+              pathname: "/profile/settings/personalisation",
+            }}
+          />
+        )}
+        <SettingsPageLink
+          setting={t`App Details`}
+          href={{
+            pathname: "/profile/settings/app-details",
+          }}
+        />
+        {(__DEV__ || isInternalUser) && (
+          <SettingsPageLink
+            setting={t`Internal`}
+            href={{
+              pathname: "/profile/settings/internal",
+            }}
+          />
+        )}
+      </View>
+    </View>
+  );
+}
+
+function SettingsPageLink(props: {
+  setting: string;
+  href: Href;
+  icon?:
     | "gear"
     | "person"
     | "magnifyingglass"
     | "chevron.right"
     | "chevron.left"
     | "checkmark";
-  onPress: () => void;
 }) {
   return (
-    <Pressable
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingVertical: 12,
-        paddingHorizontal: 16,
-        backgroundColor: Colors.black,
-        borderRadius: 16,
-      }}
-      onPress={props.onPress}
-    >
+    <Link href={props.href}>
       <View
         style={{
+          width: "100%",
           flexDirection: "row",
+          justifyContent: "space-between",
           alignItems: "center",
-          gap: 12,
+          paddingVertical: 12,
+          paddingHorizontal: 16,
+          backgroundColor: Colors.black,
+          borderRadius: 16,
         }}
       >
-        <Icon name={props.icon} size={20} color={Colors.gray400} />
-        <ThemedText>{props.label}</ThemedText>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          {/* <Icon name={props.icon} size={20} color={Colors.gray400} /> */}
+          <ThemedText>{props.setting}</ThemedText>
+        </View>
+        <Icon name="chevron.right" size={20} color={Colors.gray400} />
       </View>
-      <Icon name="chevron.right" size={20} color={Colors.gray400} />
-    </Pressable>
+    </Link>
   );
 }
 
