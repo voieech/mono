@@ -95,6 +95,12 @@ export default function ProfilePage() {
           label={t`Terms of Service`}
           href="https://voieech.com/terms-and-conditions.html"
         />
+        <SettingsPageLink
+          setting={t`App Details`}
+          href={{
+            pathname: "/profile/settings/app-details",
+          }}
+        />
       </View>
     </ParallaxScrollViewContainer>
   );
@@ -315,20 +321,6 @@ function SettingsSection() {
             }}
           />
         )}
-        <SettingsPageLink
-          setting={t`App Details`}
-          href={{
-            pathname: "/profile/settings/app-details",
-          }}
-        />
-        {(__DEV__ || isInternalUser) && (
-          <SettingsPageLink
-            setting={t`Internal`}
-            href={{
-              pathname: "/profile/settings/internal",
-            }}
-          />
-        )}
       </View>
     </View>
   );
@@ -353,10 +345,10 @@ function SettingsPageLink(props: {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          paddingVertical: 12,
+          paddingVertical: 10,
           paddingHorizontal: 16,
           backgroundColor: Colors.black,
-          borderRadius: 16,
+          borderRadius: 10,
         }}
       >
         <View
@@ -384,10 +376,10 @@ function ProfileRowLink(props: { label: string; href: string }) {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          paddingVertical: 8,
+          paddingVertical: 10,
           paddingHorizontal: 16,
           backgroundColor: Colors.black,
-          borderRadius: 16,
+          borderRadius: 10,
         }}
       >
         <ThemedLink>{props.label}</ThemedLink>
@@ -396,8 +388,8 @@ function ProfileRowLink(props: { label: string; href: string }) {
             flexDirection: "row",
           }}
         >
-          <Icon name="safari" size={20} color={Colors.gray300} />
-          <Icon name="chevron.right" size={20} color={Colors.gray300} />
+          <Icon name="safari" size={20} color={Colors.gray400} />
+          <Icon name="chevron.right" size={20} color={Colors.gray400} />
         </View>
       </View>
     </InAppBrowserLink>

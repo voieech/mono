@@ -1,14 +1,17 @@
 import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
+import { useRouter } from "expo-router";
 import * as ExpoUpdates from "expo-updates";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 
-import { ThemedText, CopyOnPress } from "@/components";
+import { ThemedText, CopyOnPress, VerticalSpacer } from "@/components";
 import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
 import { posthog, toast } from "@/utils";
 
 export default function AppDetails() {
   const posthogDistinctID = posthog.getDistinctId();
+  const router = useRouter();
+
   return (
     <SettingsPageLayout>
       <View
@@ -52,6 +55,22 @@ export default function AppDetails() {
               <ThemedText>{posthogDistinctID}</ThemedText>
             </View>
           </CopyOnPress>
+        </View>
+        <VerticalSpacer />
+        <View>
+          <Pressable
+            onLongPress={() => router.push("/profile/settings/internal")}
+            delayLongPress={1000}
+          >
+            <ThemedText
+              type="sm-thin"
+              style={{
+                textAlign: "center",
+              }}
+            >
+              Built by voieech.com
+            </ThemedText>
+          </Pressable>
         </View>
       </View>
     </SettingsPageLayout>
