@@ -29,24 +29,20 @@ function RootLayout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Stack>
       <Stack.Screen
         name="(tabs)"
         options={{
-          headerShown: false,
-
           // Set to home so when the podcast episode page is opened via a
           // deep link, the back button says "Home"
           title: "Home",
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="audio-player-modal"
         options={{
+          headerShown: false,
           presentation: useCardPlayerInsteadOfModal ? "card" : "modal",
 
           // @todo
@@ -58,6 +54,7 @@ function RootLayout() {
       <Stack.Screen
         name="track-queue-modal"
         options={{
+          headerShown: false,
           presentation: useCardPlayerInsteadOfModal ? "card" : "modal",
         }}
       />

@@ -58,7 +58,6 @@ export default function TabLayout() {
           //   opacity: 80,
           // },
 
-          headerShown: false,
           tabBarBackground: TabBarBackground,
           tabBarStyle: Platform.select({
             ios: {
@@ -109,12 +108,14 @@ export default function TabLayout() {
           name="index"
           options={{
             href: null,
+            headerShown: false,
           }}
         />
         <Tabs.Screen
           name="(home)"
           options={{
             title: t`Explore`,
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <Icon size={size} name="magnifyingglass" color={color as any} />
             ),
@@ -127,6 +128,7 @@ export default function TabLayout() {
             href: null,
 
             title: t`For You`,
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <Icon size={size} name="person" color={color as any} />
             ),
@@ -136,6 +138,7 @@ export default function TabLayout() {
           name="(create)"
           options={{
             title: t`Create`,
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <Icon size={size} name="plus" color={color as any} />
             ),
@@ -145,6 +148,7 @@ export default function TabLayout() {
           name="profile"
           options={{
             title: t`Me`,
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <Icon size={size} name="person" color={color as any} />
             ),
