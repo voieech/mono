@@ -18,7 +18,7 @@ msgstr ""
 "X-Crowdin-File: /app/src/locales/en/messages.po\n"
 "X-Crowdin-File-ID: 34\n"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:222
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:219
 msgid "... loading video ..."
 msgstr "... 加载视频中 ..."
 
@@ -31,11 +31,11 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
-#: src/app/(tabs)/profile.tsx:107
+#: src/app/(tabs)/profile/index.tsx:87
 msgid "About"
 msgstr "关于"
 
-#: src/app/(tabs)/profile.tsx:234
+#: src/app/(tabs)/profile/index.tsx:216
 msgid "Account Information"
 msgstr "账户信息"
 
@@ -51,6 +51,11 @@ msgstr "另类健康"
 msgid "Animation & Manga"
 msgstr "动画与漫画"
 
+#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/index.tsx:99
+msgid "App Details"
+msgstr "应用详情"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:12
 msgid "Arts"
 msgstr "艺术"
@@ -59,7 +64,8 @@ msgstr "艺术"
 msgid "Astronomy"
 msgstr "天文学"
 
-#: src/app/(tabs)/settings.tsx:64
+#: src/app/(tabs)/profile/_layout.tsx:18
+#: src/app/(tabs)/profile/index.tsx:305
 msgid "Audio Playback"
 msgstr "音频播放"
 
@@ -70,6 +76,14 @@ msgstr "汽车"
 #: src/locales/categoryStringToMsgDescriptor.ts:56
 msgid "Aviation"
 msgstr "航空"
+
+#: src/app/(tabs)/profile/_layout.tsx:19
+#: src/app/(tabs)/profile/_layout.tsx:26
+#: src/app/(tabs)/profile/_layout.tsx:33
+#: src/app/(tabs)/profile/_layout.tsx:40
+#: src/app/(tabs)/profile/_layout.tsx:47
+msgid "Back"
+msgstr "返回"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:99
 msgid "Baseball"
@@ -135,7 +149,7 @@ msgstr "选择你想要看到的本地媒体控制类型。"
 msgid "Christianity"
 msgstr "基督教"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:166
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:163
 msgid "Clear"
 msgstr "清除"
 
@@ -155,7 +169,8 @@ msgstr "喜剧小说"
 msgid "Comedy Interviews"
 msgstr "喜剧采访"
 
-#: src/app/(tabs)/settings.tsx:182
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:311
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "内容语言"
@@ -168,9 +183,9 @@ msgstr "课程"
 msgid "Crafts"
 msgstr "工艺"
 
-#: src/app/(tabs)/_layout.tsx:138
+#: src/app/(tabs)/_layout.tsx:140
 #: src/app/(tabs)/(create)/_layout.tsx:19
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:201
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:198
 msgid "Create"
 msgstr "创造"
 
@@ -182,7 +197,7 @@ msgstr "创建您自己的内容"
 msgid "Cricket"
 msgstr "板球"
 
-#: src/app/(tabs)/settings.tsx:315
+#: src/app/(tabs)/profile/settings/personalisation.tsx:62
 msgid "Customise content preferences"
 msgstr "自定义内容偏好"
 
@@ -190,17 +205,13 @@ msgstr "自定义内容偏好"
 msgid "Daily News"
 msgstr "每日新闻"
 
-#: src/app/(tabs)/settings.tsx:83
+#: src/app/(tabs)/profile/settings/audio-playback.tsx:34
 msgid "Default audio playback rate"
 msgstr "默认音频播放速度"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:14
 msgid "Design"
 msgstr "设计"
-
-#: src/app/(tabs)/settings.tsx:325
-msgid "Details"
-msgstr "软件详情"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:93
 msgid "Documentary"
@@ -214,7 +225,7 @@ msgstr "戏剧"
 msgid "Earth Sciences"
 msgstr "地球科学"
 
-#: src/app/(tabs)/profile.tsx:85
+#: src/app/(tabs)/profile/index.tsx:290
 msgid "Edit Profile"
 msgstr "编辑个人资料"
 
@@ -226,11 +237,11 @@ msgstr "教育"
 msgid "Education for Kids"
 msgstr "儿童教育"
 
-#: src/app/(tabs)/profile.tsx:245
+#: src/app/(tabs)/profile/index.tsx:227
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/app/(tabs)/profile.tsx:253
+#: src/app/(tabs)/profile/index.tsx:235
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
@@ -254,7 +265,7 @@ msgstr "浏览"
 msgid "External Audio controls"
 msgstr "手机媒体控制"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:237
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:234
 msgid "Failed to load video!"
 msgstr "视频加载失败！"
 
@@ -275,7 +286,7 @@ msgid "Featured"
 msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/featured-channels.tsx:35
+#: src/app/(tabs)/(home)/featured-channels.tsx:36
 #: src/app/(tabs)/(home)/index.tsx:67
 msgid "Featured Channels"
 msgstr "精选频道"
@@ -312,7 +323,7 @@ msgstr "美食"
 msgid "Football"
 msgstr "橄榄球"
 
-#: src/app/(tabs)/_layout.tsx:129
+#: src/app/(tabs)/_layout.tsx:130
 msgid "For You"
 msgstr "推荐"
 
@@ -344,7 +355,7 @@ msgstr "访客用户"
 msgid "Health & Fitness"
 msgstr "健康与健身"
 
-#: src/app/(tabs)/profile.tsx:109
+#: src/app/(tabs)/profile/index.tsx:89
 msgid "Help & Support"
 msgstr "帮助与支持"
 
@@ -380,7 +391,7 @@ msgstr "如何做"
 msgid "Improv"
 msgstr "即兴表演"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:129
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:126
 msgid "Invalid Youtube link"
 msgstr "YouTube 链接无效"
 
@@ -432,7 +443,7 @@ msgstr "营销"
 msgid "Mathematics"
 msgstr "数学"
 
-#: src/app/(tabs)/_layout.tsx:156
+#: src/app/(tabs)/_layout.tsx:150
 msgid "Me"
 msgstr "我"
 
@@ -440,7 +451,7 @@ msgstr "我"
 msgid "Medicine"
 msgstr "医学"
 
-#: src/app/(tabs)/profile.tsx:249
+#: src/app/(tabs)/profile/index.tsx:231
 msgid "Member Since"
 msgstr "会员自"
 
@@ -464,7 +475,7 @@ msgstr "音乐史"
 msgid "Music Interviews"
 msgstr "音乐采访"
 
-#: src/app/(tabs)/profile.tsx:238
+#: src/app/(tabs)/profile/index.tsx:220
 msgid "Name"
 msgstr "姓名"
 
@@ -484,7 +495,7 @@ msgstr "新闻"
 msgid "News Commentary"
 msgstr "新闻评论"
 
-#: src/app/(tabs)/profile.tsx:255
+#: src/app/(tabs)/profile/index.tsx:237
 msgid "No"
 msgstr "不"
 
@@ -492,8 +503,8 @@ msgstr "不"
 msgid "Non-Profit"
 msgstr "非营利组织"
 
-#: src/app/(tabs)/profile.tsx:130
-#: src/app/(tabs)/profile.tsx:279
+#: src/app/(tabs)/profile/index.tsx:116
+#: src/app/(tabs)/profile/index.tsx:261
 msgid "Not Available"
 msgstr "信息不存在"
 
@@ -501,7 +512,7 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile.tsx:93
+#: src/app/(tabs)/profile/index.tsx:298
 msgid "Notifications"
 msgstr "通知"
 
@@ -517,7 +528,7 @@ msgstr "哎呀，抱歉！"
 msgid "Parenting"
 msgstr "育儿"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:153
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:150
 msgid "Paste from clipboard"
 msgstr "从剪贴板粘贴"
 
@@ -529,7 +540,8 @@ msgstr "表演艺术"
 msgid "Personal Journals"
 msgstr "个人日记"
 
-#: src/app/(tabs)/settings.tsx:263
+#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/index.tsx:318
 msgid "Personalisation"
 msgstr "个性化"
 
@@ -553,7 +565,7 @@ msgstr "选择内容来源，并开始创作属于你自己的内容！"
 msgid "Places & Travel"
 msgstr "地点与旅行"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:105
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:102
 msgid "Please paste your Youtube link"
 msgstr "请粘贴您的 YouTube 链接"
 
@@ -569,11 +581,12 @@ msgstr "播客剧集"
 msgid "Politics"
 msgstr "政治"
 
-#: src/app/(tabs)/profile.tsx:111
+#: src/app/(tabs)/profile/index.tsx:91
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/app/(tabs)/profile.tsx:43
+#: src/app/(tabs)/profile/_layout.tsx:12
+#: src/app/(tabs)/profile/index.tsx:47
 msgid "Profile"
 msgstr "个人资料"
 
@@ -610,7 +623,7 @@ msgid "Save"
 msgstr "保存"
 
 #: src/app/(onboarding)/default-content-preference-selection.tsx:111
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:66
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:63
 msgid "Saving"
 msgstr "正在保存"
 
@@ -638,9 +651,7 @@ msgstr "选择您感兴趣的主题，以便我们为您量身定制入门体验
 msgid "Self-Improvement"
 msgstr "自我提升"
 
-#: src/app/(tabs)/_layout.tsx:147
-#: src/app/(tabs)/profile.tsx:79
-#: src/app/(tabs)/settings.tsx:60
+#: src/app/(tabs)/profile/index.tsx:280
 msgid "Settings"
 msgstr "设置"
 
@@ -656,7 +667,7 @@ msgstr "显示跳前和跳后十五秒的按键。"
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
-#: src/app/(tabs)/profile.tsx:69
+#: src/app/(tabs)/profile/index.tsx:73
 #: src/components/SigninToContinueCard.tsx:115
 msgid "Sign In"
 msgstr "登入"
@@ -665,11 +676,11 @@ msgstr "登入"
 msgid "Sign In to Continue"
 msgstr "登录以继续"
 
-#: src/app/(tabs)/settings.tsx:289
+#: src/app/(tabs)/profile/settings/personalisation.tsx:38
 msgid "Sign in to Personalise!"
 msgstr "登录以进行个性化设置！"
 
-#: src/app/(tabs)/profile.tsx:67
+#: src/app/(tabs)/profile/index.tsx:71
 msgid "Sign Out"
 msgstr "退出应用程序"
 
@@ -713,10 +724,6 @@ msgstr "开始收听"
 msgid "Stories for Kids"
 msgstr "儿童故事"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:60
-msgid "Submitted!"
-msgstr "已提交！"
-
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:276
 msgid "Subscribe"
 msgstr "订阅"
@@ -745,7 +752,7 @@ msgstr "请告诉我们您还希望我们添加哪些其他内容来源！"
 msgid "Tennis"
 msgstr "网球"
 
-#: src/app/(tabs)/profile.tsx:115
+#: src/app/(tabs)/profile/index.tsx:95
 msgid "Terms of Service"
 msgstr "服务条款"
 
@@ -785,7 +792,7 @@ msgstr "想要更多吗？"
 msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 msgstr "我们找不到你想要的东西，这里是一幅我们非常抱歉的画……"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:93
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:90
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "我们将帮助您总结您的 YouTube 视频并制作音频播客。"
 
@@ -801,7 +808,7 @@ msgstr "荒野"
 msgid "Wrestling"
 msgstr "摔角"
 
-#: src/app/(tabs)/profile.tsx:255
+#: src/app/(tabs)/profile/index.tsx:237
 msgid "Yes"
 msgstr "是"
 
@@ -817,6 +824,6 @@ msgstr "YouTube"
 msgid "Youtube Video Summary Create"
 msgstr "YouTube 视频摘要创建"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:90
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:87
 msgid "Youtube Video Summary Creator"
 msgstr "YouTube 视频摘要创建者"

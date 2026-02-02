@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:222
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:219
 msgid "... loading video ..."
 msgstr "... loading video ..."
 
@@ -26,11 +26,11 @@ msgstr "{episodeLengthInMins} mins"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 
-#: src/app/(tabs)/profile.tsx:107
+#: src/app/(tabs)/profile/index.tsx:87
 msgid "About"
 msgstr "About"
 
-#: src/app/(tabs)/profile.tsx:234
+#: src/app/(tabs)/profile/index.tsx:216
 msgid "Account Information"
 msgstr "Account Information"
 
@@ -46,6 +46,11 @@ msgstr "Alternative Health"
 msgid "Animation & Manga"
 msgstr "Animation & Manga"
 
+#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/index.tsx:99
+msgid "App Details"
+msgstr "App Details"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:12
 msgid "Arts"
 msgstr "Arts"
@@ -54,7 +59,8 @@ msgstr "Arts"
 msgid "Astronomy"
 msgstr "Astronomy"
 
-#: src/app/(tabs)/settings.tsx:64
+#: src/app/(tabs)/profile/_layout.tsx:18
+#: src/app/(tabs)/profile/index.tsx:305
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
@@ -65,6 +71,14 @@ msgstr "Automotive"
 #: src/locales/categoryStringToMsgDescriptor.ts:56
 msgid "Aviation"
 msgstr "Aviation"
+
+#: src/app/(tabs)/profile/_layout.tsx:19
+#: src/app/(tabs)/profile/_layout.tsx:26
+#: src/app/(tabs)/profile/_layout.tsx:33
+#: src/app/(tabs)/profile/_layout.tsx:40
+#: src/app/(tabs)/profile/_layout.tsx:47
+msgid "Back"
+msgstr "Back"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:99
 msgid "Baseball"
@@ -130,7 +144,7 @@ msgstr "Choose the type of native media controls you want to see."
 msgid "Christianity"
 msgstr "Christianity"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:166
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:163
 msgid "Clear"
 msgstr "Clear"
 
@@ -150,7 +164,8 @@ msgstr "Comedy Fiction"
 msgid "Comedy Interviews"
 msgstr "Comedy Interviews"
 
-#: src/app/(tabs)/settings.tsx:182
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:311
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "Content Language"
@@ -163,9 +178,9 @@ msgstr "Courses"
 msgid "Crafts"
 msgstr "Crafts"
 
-#: src/app/(tabs)/_layout.tsx:138
+#: src/app/(tabs)/_layout.tsx:140
 #: src/app/(tabs)/(create)/_layout.tsx:19
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:201
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:198
 msgid "Create"
 msgstr "Create"
 
@@ -177,7 +192,7 @@ msgstr "Create your own content"
 msgid "Cricket"
 msgstr "Cricket"
 
-#: src/app/(tabs)/settings.tsx:315
+#: src/app/(tabs)/profile/settings/personalisation.tsx:62
 msgid "Customise content preferences"
 msgstr "Customise content preferences"
 
@@ -185,17 +200,13 @@ msgstr "Customise content preferences"
 msgid "Daily News"
 msgstr "Daily News"
 
-#: src/app/(tabs)/settings.tsx:83
+#: src/app/(tabs)/profile/settings/audio-playback.tsx:34
 msgid "Default audio playback rate"
 msgstr "Default audio playback rate"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:14
 msgid "Design"
 msgstr "Design"
-
-#: src/app/(tabs)/settings.tsx:325
-msgid "Details"
-msgstr "Details"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:93
 msgid "Documentary"
@@ -209,7 +220,7 @@ msgstr "Drama"
 msgid "Earth Sciences"
 msgstr "Earth Sciences"
 
-#: src/app/(tabs)/profile.tsx:85
+#: src/app/(tabs)/profile/index.tsx:290
 msgid "Edit Profile"
 msgstr "Edit Profile"
 
@@ -221,11 +232,11 @@ msgstr "Education"
 msgid "Education for Kids"
 msgstr "Education for Kids"
 
-#: src/app/(tabs)/profile.tsx:245
+#: src/app/(tabs)/profile/index.tsx:227
 msgid "Email"
 msgstr "Email"
 
-#: src/app/(tabs)/profile.tsx:253
+#: src/app/(tabs)/profile/index.tsx:235
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
@@ -249,7 +260,7 @@ msgstr "Explore"
 msgid "External Audio controls"
 msgstr "External Audio controls"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:237
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:234
 msgid "Failed to load video!"
 msgstr "Failed to load video!"
 
@@ -270,7 +281,7 @@ msgid "Featured"
 msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/featured-channels.tsx:35
+#: src/app/(tabs)/(home)/featured-channels.tsx:36
 #: src/app/(tabs)/(home)/index.tsx:67
 msgid "Featured Channels"
 msgstr "Featured Channels"
@@ -307,7 +318,7 @@ msgstr "Food"
 msgid "Football"
 msgstr "Football"
 
-#: src/app/(tabs)/_layout.tsx:129
+#: src/app/(tabs)/_layout.tsx:130
 msgid "For You"
 msgstr "For You"
 
@@ -339,7 +350,7 @@ msgstr "Guest User"
 msgid "Health & Fitness"
 msgstr "Health & Fitness"
 
-#: src/app/(tabs)/profile.tsx:109
+#: src/app/(tabs)/profile/index.tsx:89
 msgid "Help & Support"
 msgstr "Help & Support"
 
@@ -375,7 +386,7 @@ msgstr "How To"
 msgid "Improv"
 msgstr "Improv"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:129
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:126
 msgid "Invalid Youtube link"
 msgstr "Invalid Youtube link"
 
@@ -427,7 +438,7 @@ msgstr "Marketing"
 msgid "Mathematics"
 msgstr "Mathematics"
 
-#: src/app/(tabs)/_layout.tsx:156
+#: src/app/(tabs)/_layout.tsx:150
 msgid "Me"
 msgstr "Me"
 
@@ -435,7 +446,7 @@ msgstr "Me"
 msgid "Medicine"
 msgstr "Medicine"
 
-#: src/app/(tabs)/profile.tsx:249
+#: src/app/(tabs)/profile/index.tsx:231
 msgid "Member Since"
 msgstr "Member Since"
 
@@ -459,7 +470,7 @@ msgstr "Music History"
 msgid "Music Interviews"
 msgstr "Music Interviews"
 
-#: src/app/(tabs)/profile.tsx:238
+#: src/app/(tabs)/profile/index.tsx:220
 msgid "Name"
 msgstr "Name"
 
@@ -479,7 +490,7 @@ msgstr "News"
 msgid "News Commentary"
 msgstr "News Commentary"
 
-#: src/app/(tabs)/profile.tsx:255
+#: src/app/(tabs)/profile/index.tsx:237
 msgid "No"
 msgstr "No"
 
@@ -487,8 +498,8 @@ msgstr "No"
 msgid "Non-Profit"
 msgstr "Non-Profit"
 
-#: src/app/(tabs)/profile.tsx:130
-#: src/app/(tabs)/profile.tsx:279
+#: src/app/(tabs)/profile/index.tsx:116
+#: src/app/(tabs)/profile/index.tsx:261
 msgid "Not Available"
 msgstr "Not Available"
 
@@ -496,7 +507,7 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile.tsx:93
+#: src/app/(tabs)/profile/index.tsx:298
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -512,7 +523,7 @@ msgstr "Oops Sorry!"
 msgid "Parenting"
 msgstr "Parenting"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:153
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:150
 msgid "Paste from clipboard"
 msgstr "Paste from clipboard"
 
@@ -524,7 +535,8 @@ msgstr "Performing Arts"
 msgid "Personal Journals"
 msgstr "Personal Journals"
 
-#: src/app/(tabs)/settings.tsx:263
+#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/index.tsx:318
 msgid "Personalisation"
 msgstr "Personalisation"
 
@@ -548,7 +560,7 @@ msgstr "Pick a content source to start creating content in your own style!"
 msgid "Places & Travel"
 msgstr "Places & Travel"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:105
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:102
 msgid "Please paste your Youtube link"
 msgstr "Please paste your Youtube link"
 
@@ -564,11 +576,12 @@ msgstr "Podcast Episode"
 msgid "Politics"
 msgstr "Politics"
 
-#: src/app/(tabs)/profile.tsx:111
+#: src/app/(tabs)/profile/index.tsx:91
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/app/(tabs)/profile.tsx:43
+#: src/app/(tabs)/profile/_layout.tsx:12
+#: src/app/(tabs)/profile/index.tsx:47
 msgid "Profile"
 msgstr "Profile"
 
@@ -605,7 +618,7 @@ msgid "Save"
 msgstr "Save"
 
 #: src/app/(onboarding)/default-content-preference-selection.tsx:111
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:66
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:63
 msgid "Saving"
 msgstr "Saving"
 
@@ -633,9 +646,7 @@ msgstr "Select topics you like so that we can personalise your starting experien
 msgid "Self-Improvement"
 msgstr "Self-Improvement"
 
-#: src/app/(tabs)/_layout.tsx:147
-#: src/app/(tabs)/profile.tsx:79
-#: src/app/(tabs)/settings.tsx:60
+#: src/app/(tabs)/profile/index.tsx:280
 msgid "Settings"
 msgstr "Settings"
 
@@ -651,7 +662,7 @@ msgstr "Show controls for jumping back and forth in 15 seconds intervals."
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "Show controls for skipping tracks to next/previous."
 
-#: src/app/(tabs)/profile.tsx:69
+#: src/app/(tabs)/profile/index.tsx:73
 #: src/components/SigninToContinueCard.tsx:115
 msgid "Sign In"
 msgstr "Sign In"
@@ -660,11 +671,11 @@ msgstr "Sign In"
 msgid "Sign In to Continue"
 msgstr "Sign In to Continue"
 
-#: src/app/(tabs)/settings.tsx:289
+#: src/app/(tabs)/profile/settings/personalisation.tsx:38
 msgid "Sign in to Personalise!"
 msgstr "Sign in to Personalise!"
 
-#: src/app/(tabs)/profile.tsx:67
+#: src/app/(tabs)/profile/index.tsx:71
 msgid "Sign Out"
 msgstr "Sign Out"
 
@@ -708,10 +719,6 @@ msgstr "Start listening"
 msgid "Stories for Kids"
 msgstr "Stories for Kids"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:60
-msgid "Submitted!"
-msgstr "Submitted!"
-
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:276
 msgid "Subscribe"
 msgstr "Subscribe"
@@ -740,7 +747,7 @@ msgstr "Tell us what other content sources you would like us to add!"
 msgid "Tennis"
 msgstr "Tennis"
 
-#: src/app/(tabs)/profile.tsx:115
+#: src/app/(tabs)/profile/index.tsx:95
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
@@ -780,7 +787,7 @@ msgstr "Want more?"
 msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 msgstr "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:93
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:90
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "We will help you summarise your youtube video and create a audio podcast."
 
@@ -796,7 +803,7 @@ msgstr "Wilderness"
 msgid "Wrestling"
 msgstr "Wrestling"
 
-#: src/app/(tabs)/profile.tsx:255
+#: src/app/(tabs)/profile/index.tsx:237
 msgid "Yes"
 msgstr "Yes"
 
@@ -812,6 +819,6 @@ msgstr "YouTube"
 msgid "Youtube Video Summary Create"
 msgstr "Youtube Video Summary Create"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:90
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:87
 msgid "Youtube Video Summary Creator"
 msgstr "Youtube Video Summary Creator"

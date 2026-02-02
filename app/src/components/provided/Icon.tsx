@@ -44,6 +44,8 @@ const SfSymbolsToMaterialIconsMapping = {
   plus: "add",
   safari: "open-in-browser",
   xmark: "close",
+  bell: "notifications",
+  "bell.slash": "notifications-off",
 
   // Using satisfies and partial to ensure that users can only use icons after
   // they added the SF->MI mapping here.
