@@ -7,6 +7,7 @@ import { RefreshControl, View } from "react-native";
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { Colors } from "@/constants";
 import { useFeaturedChannelsQuery } from "@/hooks";
+import { categoryStringToMsgDescriptor } from "@/locales";
 
 export default function FeaturedChannels() {
   const featuredChannelsQuery = useFeaturedChannelsQuery();
@@ -92,9 +93,9 @@ export default function FeaturedChannels() {
                   </ThemedText>
                   {channel.category_primary !== null && (
                     <ThemedText type="sm-light">
-                      {channel.category_primary}
+                      {categoryStringToMsgDescriptor(channel.category_primary)}
                       {channel.subcategory_primary !== null &&
-                        `, ${channel.subcategory_primary}`}
+                        `, ${categoryStringToMsgDescriptor(channel.subcategory_primary)}`}
                     </ThemedText>
                   )}
                 </ThemedView>

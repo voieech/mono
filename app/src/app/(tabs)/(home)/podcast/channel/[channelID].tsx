@@ -33,6 +33,7 @@ import {
   usePodcastChannelUserSubscriptionStatusQuery,
   usePodcastChannelUserSubscriptionStatusUpdateMutation,
 } from "@/hooks";
+import { categoryStringToMsgDescriptor } from "@/locales";
 import { toast } from "@/utils";
 
 export default function PodcastChannel() {
@@ -97,9 +98,11 @@ export default function PodcastChannel() {
       <ThemedText type="xl-normal">{podcastChannelQuery.data.name}</ThemedText>
       {podcastChannelQuery.data.category_primary !== null && (
         <ThemedText type="sm-light">
-          {podcastChannelQuery.data.category_primary}
+          {categoryStringToMsgDescriptor(
+            podcastChannelQuery.data.category_primary,
+          )}
           {podcastChannelQuery.data.subcategory_primary !== null &&
-            `, ${podcastChannelQuery.data.subcategory_primary}`}
+            `, ${categoryStringToMsgDescriptor(podcastChannelQuery.data.subcategory_primary)}`}
         </ThemedText>
       )}
       <VerticalSpacer />
