@@ -18,7 +18,8 @@
     "typecheck": "npx tsc",
     "format": "npx prettier --write ./src",
     "lint": "npx expo lint",
-    "lint:fix": "npx expo lint --fix"
+    "lint:fix": "npx expo lint --fix",
+    "scripts:mirror-app-and-page-components-folder": "npx tsx ./scripts/mirror-app-and-page-components-folder.ts"
   },
   "dependencies": {
     "@animatereactnative/marquee": "^0.5.2",
@@ -87,6 +88,7 @@
     "eslint-plugin-perfectionist": "^4.15.1",
     "prettier": "^3.7.4",
     "react-devtools": "^6.1.5",
+    "tsx": "^4.21.0",
     "typescript": "~5.8.3"
   },
   "private": true
