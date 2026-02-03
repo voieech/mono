@@ -1,13 +1,7 @@
 import { Trans } from "@lingui/react/macro";
 import { router } from "expo-router";
-import React, { useState } from "react";
-import {
-  Pressable,
-  useWindowDimensions,
-  Modal,
-  Text,
-  View,
-} from "react-native";
+import { useState } from "react";
+import { Pressable, useWindowDimensions } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import {
@@ -16,6 +10,7 @@ import {
   ThemedText,
   Icon,
   AudioPlayer,
+  CommonModal,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useExperimentalSurfaceContext } from "@/context";
@@ -24,12 +19,10 @@ import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 export default function AudioPlayerModal() {
   const windowDimensions = useWindowDimensions();
   const activeTrack = useActiveTrackWithMetadata();
-  const [modalVisible, setModalVisible] = useState(false);
   const useCardPlayerInsteadOfModal =
     useExperimentalSurfaceContext().getShowExperimentalSurface(
       "use-card-player-instead-of-modal",
     );
-  const activeTrackArtist = activeTrack?.artist;
   return (
     <SafeScrollViewContainer>
       {/*
@@ -66,76 +59,37 @@ export default function AudioPlayerModal() {
               width: windowDimensions.width * 0.6,
             }}
           >
-            {activeTrackArtist}
+            {activeTrack?.artist ?? ""}
           </ThemedText>
-          <Pressable onPress={() => setModalVisible(true)}>
-            <Icon name="ellipsis" color={Colors.white} />
-          </Pressable>
+          <MoreMenuButtonAndModal activeTrackArtist={activeTrack?.artist} />
         </ThemedView>
         <AudioPlayer />
       </GestureHandlerRootView>
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View
-            style={{
-              margin: 20,
-              backgroundColor: Colors.white,
-              borderRadius: 20,
-              padding: 35,
-              alignItems: "center",
-              shadowColor: Colors.black,
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 4,
-              elevation: 5,
-            }}
-          >
-            <Text
-              style={{
-                marginBottom: 15,
-                textAlign: "center",
-              }}
-            >
-              <Trans>Made by {activeTrackArtist}</Trans>
-            </Text>
-            <Pressable
-              style={{
-                borderRadius: 20,
-                padding: 10,
-                elevation: 2,
-                backgroundColor: Colors.blue500,
-              }}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text
-                style={{
-                  color: Colors.white,
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                <Trans>close</Trans>
-              </Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
     </SafeScrollViewContainer>
+  );
+}
+
+function MoreMenuButtonAndModal(props: { activeTrackArtist?: string }) {
+  const { activeTrackArtist } = props;
+  const [modalVisible, setModalVisible] = useState(false);
+  return (
+    <>
+      <Pressable onPress={() => setModalVisible(true)}>
+        <Icon name="ellipsis" color={Colors.white} />
+      </Pressable>
+      <CommonModal
+        modalVisible={modalVisible}
+        onClose={() => setModalVisible(false)}
+      >
+        {activeTrackArtist !== undefined && (
+          <>
+            <ThemedText type="lg-normal">
+              <Trans>Track made by</Trans>
+            </ThemedText>
+            <ThemedText>{activeTrackArtist}</ThemedText>
+          </>
+        )}
+      </CommonModal>
+    </>
   );
 }

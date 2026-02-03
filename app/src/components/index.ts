@@ -7,6 +7,7 @@ export * from "./AppUpdater";
 export * from "./AudioPlayer";
 export * from "./AuthenticatedUsersOnly";
 export * from "./BottomOverlayAudioPlayer";
+export * from "./CommonModal";
 export * from "./CopyOnPress";
 export * from "./ExperimentalSurface";
 export * from "./FullScreenLoader";

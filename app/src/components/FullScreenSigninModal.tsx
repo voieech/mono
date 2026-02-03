@@ -1,7 +1,6 @@
-import { Modal, Pressable } from "react-native";
-
 import { useAuthContext } from "@/context";
 
+import { CommonModal } from "./CommonModal";
 import { SigninToContinueCard } from "./SigninToContinueCard";
 
 /**
@@ -13,32 +12,14 @@ import { SigninToContinueCard } from "./SigninToContinueCard";
 export function FullScreenSigninModal() {
   const authContext = useAuthContext();
   return (
-    <Modal
-      transparent={true}
-      visible={authContext.showFullScreenSigninModal}
-      animationType={authContext.showFullScreenSigninModal ? "slide" : "fade"}
+    <CommonModal
+      modalVisible={authContext.showFullScreenSigninModal}
+      onClose={authContext.clearFullScreenSigninModal}
     >
-      <Pressable
-        onPress={authContext.clearFullScreenSigninModal}
-        style={{
-          // 1. Cover the entire screen
-          flex: 1,
-
-          // 2. Center the children vertically and horizontally
-          justifyContent: "center",
-          alignItems: "center",
-
-          // 3. Background styling, with a white "frosted" look
-          backgroundColor: "rgba(255, 255, 255, 0.4)",
-        }}
-      >
-        <Pressable onPress={(e) => e.stopPropagation()}>
-          <SigninToContinueCard
-            onCancel={authContext.clearFullScreenSigninModal}
-            onLoginSuccess={authContext.clearFullScreenSigninModal}
-          />
-        </Pressable>
-      </Pressable>
-    </Modal>
+      <SigninToContinueCard
+        onCancel={authContext.clearFullScreenSigninModal}
+        onLoginSuccess={authContext.clearFullScreenSigninModal}
+      />
+    </CommonModal>
   );
 }
