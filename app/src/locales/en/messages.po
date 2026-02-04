@@ -610,6 +610,10 @@ msgstr "Religion"
 msgid "Religion & Spirituality"
 msgstr "Religion & Spirituality"
 
+#: src/app/audio-player-modal.tsx:113
+msgid "Report Audio Track"
+msgstr "Report Audio Track"
+
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
 msgstr "Rewind to track start when skipping to previous"
@@ -760,7 +764,7 @@ msgstr "Tennis"
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
-#: src/app/audio-player-modal.tsx:92
+#: src/app/audio-player-modal.tsx:105
 msgid "Track made by"
 msgstr "Track made by"
 

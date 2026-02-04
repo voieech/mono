@@ -11,6 +11,10 @@ const envVars = [
     key: "supportLink",
     value: process.env.EXPO_PUBLIC_SUPPORT_LINK,
   },
+  {
+    key: "supportLinkPrefillable",
+    value: process.env.EXPO_PUBLIC_SUPPORT_LINK_PREFILLABLE,
+  },
 ] as const;
 
 type EnvVarKey = (typeof envVars)[number]["key"];

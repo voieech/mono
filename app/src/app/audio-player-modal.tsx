@@ -8,13 +8,17 @@ import {
   SafeScrollViewContainer,
   ThemedView,
   ThemedText,
+  ThemedLink,
   Icon,
   AudioPlayer,
   CommonModal,
+  VerticalSpacer,
+  InAppBrowserLink,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
+import { supportFormLinkPrefillContent } from "@/utils";
 
 export default function AudioPlayerModal() {
   const windowDimensions = useWindowDimensions();
@@ -66,7 +70,10 @@ export default function AudioPlayerModal() {
           >
             {activeTrack?.artist ?? ""}
           </ThemedText>
-          <MoreMenuButtonAndModal activeTrackArtist={activeTrack?.artist} />
+          <MoreMenuButtonAndModal
+            trackID={activeTrack.id}
+            activeTrackArtist={activeTrack?.artist}
+          />
         </ThemedView>
         <AudioPlayer />
       </GestureHandlerRootView>
@@ -74,9 +81,15 @@ export default function AudioPlayerModal() {
   );
 }
 
-function MoreMenuButtonAndModal(props: { activeTrackArtist?: string }) {
+function MoreMenuButtonAndModal(props: {
+  trackID: string;
+  activeTrackArtist?: string;
+}) {
   const { activeTrackArtist } = props;
   const [modalVisible, setModalVisible] = useState(false);
+  const supportFormLink = supportFormLinkPrefillContent(
+    `PLEASE DO NOT REMOVE THE PREFILLED AUDIO TRACK ID!\n\nI would like to report audio track "${props.trackID}"\n\nBecause ...`,
+  );
   return (
     <>
       <Pressable onPress={() => setModalVisible(true)}>
@@ -92,8 +105,14 @@ function MoreMenuButtonAndModal(props: { activeTrackArtist?: string }) {
               <Trans>Track made by</Trans>
             </ThemedText>
             <ThemedText>{activeTrackArtist}</ThemedText>
+            <VerticalSpacer />
           </>
         )}
+        <InAppBrowserLink href={supportFormLink}>
+          <ThemedLink>
+            <Trans>Report Audio Track</Trans>
+          </ThemedLink>
+        </InAppBrowserLink>
       </CommonModal>
     </>
   );

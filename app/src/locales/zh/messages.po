@@ -615,6 +615,10 @@ msgstr "宗教"
 msgid "Religion & Spirituality"
 msgstr "宗教与灵性"
 
+#: src/app/audio-player-modal.tsx:113
+msgid "Report Audio Track"
+msgstr "举报音轨"
+
 #: src/utils/settings/rewindToStartOnSkipPrevious.ts:7
 msgid "Rewind to track start when skipping to previous"
 msgstr "跳到上一个剧集时，先跳到剧集开头"
@@ -765,7 +769,7 @@ msgstr "网球"
 msgid "Terms of Service"
 msgstr "服务条款"
 
-#: src/app/audio-player-modal.tsx:92
+#: src/app/audio-player-modal.tsx:105
 msgid "Track made by"
 msgstr "音轨制作者"
 
