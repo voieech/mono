@@ -1,14 +1,11 @@
-import { getLocales, getCalendars } from "expo-localization";
 import { Link } from "expo-router";
-import * as ExpoUpdates from "expo-updates";
 import { View } from "react-native";
 
 import type { ExperimentalSurfaceName } from "@/utils";
 
-import { ThemedText, ThemedLink } from "@/components";
+import { ThemedLink } from "@/components";
 import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { SwitchSettingRow } from "@/components-page/(tabs)/profile/settings/SwitchSettingRow";
-import { Colors } from "@/constants";
 import {
   useSettingContext,
   useAppDebuggingSurfaceContext,
@@ -19,8 +16,6 @@ import { linguiMsgToString } from "@/utils";
 export default function SettingsInternal() {
   const settingContext = useSettingContext();
   const appDebuggingSurfaceContext = useAppDebuggingSurfaceContext();
-  const deviceLocale = getLocales()[0]!;
-  const deviceCalendar = getCalendars()[0];
   return (
     <SettingsPageLayout>
       <View
@@ -93,57 +88,6 @@ export default function SettingsInternal() {
           description="For every surface that didnt specify a custom experiment name"
           experimentalSurfaceName="default"
         />
-        <ThemedText
-          type="base-semibold"
-          style={{
-            paddingVertical: 4,
-          }}
-        >
-          Debugging Data
-        </ThemedText>
-        <View
-          style={{
-            paddingVertical: 8,
-            paddingHorizontal: 16,
-            backgroundColor: Colors.black,
-            borderRadius: 16,
-            rowGap: 16,
-          }}
-        >
-          <View>
-            <ThemedText
-              type="base-semibold"
-              style={{
-                paddingBottom: 4,
-              }}
-            >
-              Expo Updates data
-            </ThemedText>
-            <ThemedText>
-              Latest Context:{" "}
-              {JSON.stringify(ExpoUpdates.latestContext, null, 2)}
-            </ThemedText>
-            <ThemedText>
-              Update Manifest: {JSON.stringify(ExpoUpdates.manifest, null, 2)}
-            </ThemedText>
-          </View>
-          <View>
-            <ThemedText
-              type="base-semibold"
-              style={{
-                paddingBottom: 4,
-              }}
-            >
-              Device i18n data
-            </ThemedText>
-            <ThemedText>
-              deviceLocale: {JSON.stringify(deviceLocale, null, 2)}
-            </ThemedText>
-            <ThemedText>
-              deviceCalendar: {JSON.stringify(deviceCalendar, null, 2)}
-            </ThemedText>
-          </View>
-        </View>
       </View>
     </SettingsPageLayout>
   );

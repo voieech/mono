@@ -35,7 +35,7 @@ msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 msgid "About"
 msgstr "关于"
 
-#: src/app/(tabs)/profile/index.tsx:216
+#: src/app/(tabs)/profile/index.tsx:220
 msgid "Account Information"
 msgstr "账户信息"
 
@@ -56,6 +56,10 @@ msgstr "动画与漫画"
 msgid "App Details"
 msgstr "应用详情"
 
+#: src/app/(tabs)/profile/settings/app-details.tsx:38
+msgid "App Version"
+msgstr "应用程序版本"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:12
 msgid "Arts"
 msgstr "艺术"
@@ -65,7 +69,7 @@ msgid "Astronomy"
 msgstr "天文学"
 
 #: src/app/(tabs)/profile/_layout.tsx:18
-#: src/app/(tabs)/profile/index.tsx:305
+#: src/app/(tabs)/profile/index.tsx:309
 msgid "Audio Playback"
 msgstr "音频播放"
 
@@ -109,6 +113,7 @@ msgstr "商业"
 msgid "Business News"
 msgstr "商业新闻"
 
+#: src/components/CommonModal.tsx:73
 #: src/components/SigninToContinueCard.tsx:53
 msgid "Cancel"
 msgstr "取消"
@@ -153,10 +158,6 @@ msgstr "基督教"
 msgid "Clear"
 msgstr "清除"
 
-#: src/app/audio-player-modal.tsx:133
-msgid "close"
-msgstr "关闭"
-
 #: src/locales/categoryStringToMsgDescriptor.ts:26
 msgid "Comedy"
 msgstr "喜剧"
@@ -170,7 +171,7 @@ msgid "Comedy Interviews"
 msgstr "喜剧采访"
 
 #: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:311
+#: src/app/(tabs)/profile/index.tsx:315
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "内容语言"
@@ -205,6 +206,10 @@ msgstr "自定义内容偏好"
 msgid "Daily News"
 msgstr "每日新闻"
 
+#: src/app/(tabs)/profile/settings/app-details.tsx:97
+msgid "Debugging Data"
+msgstr "调试数据"
+
 #: src/app/(tabs)/profile/settings/audio-playback.tsx:34
 msgid "Default audio playback rate"
 msgstr "默认音频播放速度"
@@ -225,7 +230,7 @@ msgstr "戏剧"
 msgid "Earth Sciences"
 msgstr "地球科学"
 
-#: src/app/(tabs)/profile/index.tsx:290
+#: src/app/(tabs)/profile/index.tsx:294
 msgid "Edit Profile"
 msgstr "编辑个人资料"
 
@@ -237,11 +242,11 @@ msgstr "教育"
 msgid "Education for Kids"
 msgstr "儿童教育"
 
-#: src/app/(tabs)/profile/index.tsx:227
+#: src/app/(tabs)/profile/index.tsx:231
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/app/(tabs)/profile/index.tsx:235
+#: src/app/(tabs)/profile/index.tsx:239
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
@@ -259,7 +264,7 @@ msgstr "创业"
 
 #: src/app/(tabs)/_layout.tsx:117
 msgid "Explore"
-msgstr "浏览"
+msgstr "探索"
 
 #: src/utils/settings/externalMediaControls.ts:15
 msgid "External Audio controls"
@@ -427,10 +432,6 @@ msgstr "生命科学"
 msgid "Loading"
 msgstr "加载中"
 
-#: src/app/audio-player-modal.tsx:115
-msgid "Made by {activeTrackArtist}"
-msgstr "由{activeTrackArtist}制作"
-
 #: src/locales/categoryStringToMsgDescriptor.ts:23
 msgid "Management"
 msgstr "管理"
@@ -451,7 +452,7 @@ msgstr "我"
 msgid "Medicine"
 msgstr "医学"
 
-#: src/app/(tabs)/profile/index.tsx:231
+#: src/app/(tabs)/profile/index.tsx:235
 msgid "Member Since"
 msgstr "会员自"
 
@@ -475,9 +476,17 @@ msgstr "音乐史"
 msgid "Music Interviews"
 msgstr "音乐采访"
 
-#: src/app/(tabs)/profile/index.tsx:220
+#: src/app/(tabs)/profile/index.tsx:224
 msgid "Name"
 msgstr "姓名"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:50
+msgid "Native app version"
+msgstr "本机应用程序版本"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:54
+msgid "Native build version"
+msgstr "本机构建版本"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:88
 msgid "Natural Sciences"
@@ -495,7 +504,7 @@ msgstr "新闻"
 msgid "News Commentary"
 msgstr "新闻评论"
 
-#: src/app/(tabs)/profile/index.tsx:237
+#: src/app/(tabs)/profile/index.tsx:241
 msgid "No"
 msgstr "不"
 
@@ -504,7 +513,7 @@ msgid "Non-Profit"
 msgstr "非营利组织"
 
 #: src/app/(tabs)/profile/index.tsx:116
-#: src/app/(tabs)/profile/index.tsx:261
+#: src/app/(tabs)/profile/index.tsx:265
 msgid "Not Available"
 msgstr "信息不存在"
 
@@ -512,7 +521,7 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile/index.tsx:298
+#: src/app/(tabs)/profile/index.tsx:302
 msgid "Notifications"
 msgstr "通知"
 
@@ -541,7 +550,7 @@ msgid "Personal Journals"
 msgstr "个人日记"
 
 #: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:318
+#: src/app/(tabs)/profile/index.tsx:322
 msgid "Personalisation"
 msgstr "个性化"
 
@@ -651,7 +660,7 @@ msgstr "选择您感兴趣的主题，以便我们为您量身定制入门体验
 msgid "Self-Improvement"
 msgstr "自我提升"
 
-#: src/app/(tabs)/profile/index.tsx:280
+#: src/app/(tabs)/profile/index.tsx:284
 msgid "Settings"
 msgstr "设置"
 
@@ -756,6 +765,10 @@ msgstr "网球"
 msgid "Terms of Service"
 msgstr "服务条款"
 
+#: src/app/audio-player-modal.tsx:92
+msgid "Track made by"
+msgstr "音轨制作者"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:115
 msgid "True Crime"
 msgstr "真实犯罪"
@@ -771,6 +784,10 @@ msgstr "电视评论"
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:339
 msgid "Unsubscribe"
 msgstr "退订"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:87
+msgid "Updates"
+msgstr "更新"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:61
 msgid "Video Games"
@@ -808,7 +825,7 @@ msgstr "荒野"
 msgid "Wrestling"
 msgstr "摔角"
 
-#: src/app/(tabs)/profile/index.tsx:237
+#: src/app/(tabs)/profile/index.tsx:241
 msgid "Yes"
 msgstr "是"
 

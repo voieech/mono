@@ -140,7 +140,11 @@ function ProfileInformationCard() {
           alignItems: "center",
           gap: 6,
         }}
-        onPress={() => setCardInfoModalIsOpen((value) => !value)}
+        onPress={() => {
+          if (authContext.isAuthenticated) {
+            setCardInfoModalIsOpen((value) => !value);
+          }
+        }}
         activeOpacity={0.8}
       >
         <View

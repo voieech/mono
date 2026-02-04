@@ -23,6 +23,11 @@ export default function AudioPlayerModal() {
     useExperimentalSurfaceContext().getShowExperimentalSurface(
       "use-card-player-instead-of-modal",
     );
+
+  if (activeTrack === undefined) {
+    return null;
+  }
+
   return (
     <SafeScrollViewContainer>
       {/*
