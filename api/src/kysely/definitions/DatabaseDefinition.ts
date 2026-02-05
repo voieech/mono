@@ -8,7 +8,7 @@ import type { ContentYoutubeVideoTable } from "./ContentYoutubeVideoTable.js";
 import type { PodcastChannelTable } from "./PodcastChannelTable.js";
 import type { PodcastEpisodeContentSourceTable } from "./PodcastEpisodeContentSourceTable.js";
 import type { PodcastEpisodeTable } from "./PodcastEpisodeTable.js";
-import type { UserSubscriptionToPodcastChannelTable } from "./UserSubscriptionToPodcastChannelTable.js";
+import type { UserSubscriptionTable } from "./UserSubscriptionTable.js";
 import type { UserTable } from "./UserTable.js";
 
 export interface Database {
@@ -22,6 +22,6 @@ export interface Database {
   podcast_channel: PodcastChannelTable;
   podcast_episode_content_source: PodcastEpisodeContentSourceTable;
   podcast_episode: PodcastEpisodeTable;
-  user_subscription_to_podcast_channel: UserSubscriptionToPodcastChannelTable;
+  user_subscription: UserSubscriptionTable;
   user: UserTable;
 }

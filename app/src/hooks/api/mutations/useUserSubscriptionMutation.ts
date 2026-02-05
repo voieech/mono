@@ -1,4 +1,4 @@
-import type { PodcastChannelUserSubscriptionStatus } from "dto";
+import type { SubscribableItemType, UserSubscriptionStatus } from "dto";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -6,13 +6,17 @@ import { wrappedFetch, reactQueryClient, queryKeyBuilder } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 
 /**
- * Update the current user's podcast channel subscription status
+ * Generic user subscription mutation for a given item type and item ID.
  */
-export function usePodcastChannelUserSubscriptionStatusUpdateMutation() {
+export function useUserSubscriptionMutation() {
   return useMutation({
-    async mutationFn(variables: { channelID: string; subscribe: boolean }) {
+    async mutationFn(variables: {
+      itemType: SubscribableItemType;
+      itemID: string;
+      subscribe: boolean;
+    }) {
       const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/podcast/channel/${variables.channelID}/user-subscription-update`,
+        `${apiBaseUrl}/v1/user/subscription/${variables.itemType}/${variables.itemID}`,
         {
           method: "POST",
           headers: {
@@ -25,7 +29,7 @@ export function usePodcastChannelUserSubscriptionStatusUpdateMutation() {
       );
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to update user-subscription-status for channel: ${variables.channelID}`;
+        const defaultErrorMessage = `Failed to update user's subscription status for: ${variables.itemType}->${variables.itemID}`;
         const errorMessage = await res
           .json()
           .then((data) => data.error ?? defaultErrorMessage)
@@ -33,13 +37,14 @@ export function usePodcastChannelUserSubscriptionStatusUpdateMutation() {
         console.error(errorMessage);
       }
 
-      const data = (await res.json()) as PodcastChannelUserSubscriptionStatus;
+      const data = (await res.json()) as UserSubscriptionStatus;
 
       reactQueryClient.setQueryData(
         queryKeyBuilder.fullPathForDataInsertion(
-          "podcast.channel.channelID.$channelID.user-subscription-status",
+          "user.subscription.itemType.$itemType.itemID.$itemID",
           {
-            channelID: variables.channelID,
+            itemType: variables.itemType,
+            itemID: variables.itemID,
           },
         ),
         data,

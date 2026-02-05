@@ -4,7 +4,6 @@ import express from "express";
 
 import { apiDB, genPodcastEpisodeBaseQuery } from "../../kysely/index.js";
 import { generateRssXml } from "../../rss/index.js";
-import { authMiddleware } from "../auth/authMiddleware.js";
 
 export const podcastChannelRoutes = express
   .Router()
@@ -55,66 +54,6 @@ export const podcastChannelRoutes = express
 
     res.status(200).json(episodes satisfies Array<PodcastEpisode>);
   })
-
-  .get(
-    "/v1/podcast/channel/:channelID/user-subscription-status",
-    authMiddleware,
-    async function (req, res) {
-      const userID = req.authenticatedUser?.id!;
-      const channelID = req.params["channelID"]!;
-
-      const isSubscribed = await apiDB
-        .selectFrom("user_subscription_to_podcast_channel")
-        .select("id")
-        .where("user_id", "=", userID)
-        .where("podcast_channel_id", "=", channelID)
-        .executeTakeFirst();
-
-      if (isSubscribed === undefined) {
-        res.status(200).json({
-          subscribed: false,
-        });
-        return;
-      }
-
-      res.status(200).json({
-        subscribed: true,
-      });
-    },
-  )
-
-  .post(
-    "/v1/podcast/channel/:channelID/user-subscription-update",
-    authMiddleware,
-    async function (req, res) {
-      const userID = req.authenticatedUser?.id!;
-      const channelID = req.params["channelID"]!;
-      const shouldSubscribe = req.body["subscribe"]!;
-
-      if (shouldSubscribe) {
-        await apiDB
-          .insertInto("user_subscription_to_podcast_channel")
-          .values({
-            id: crypto.randomUUID(),
-            created_at: $DateTime.now.asIsoDateTime(),
-            user_id: userID,
-            podcast_channel_id: channelID,
-          })
-          .execute();
-      } else {
-        await apiDB
-          .deleteFrom("user_subscription_to_podcast_channel")
-          .where("user_id", "=", userID)
-          .where("podcast_channel_id", "=", channelID)
-          .execute();
-      }
-
-      // As long as DB calls did not throw, assume it succeeded
-      res.status(200).json({
-        subscribed: shouldSubscribe,
-      });
-    },
-  )
 
   .get("/v1/podcast/channel/rss/:channelID", async function (req, res) {
     const channelID = req.params.channelID;

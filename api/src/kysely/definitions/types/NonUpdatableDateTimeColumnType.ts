@@ -1,4 +1,4 @@
-import type { ColumnType } from "kysely";
+import type { NonUpdatableColumnType } from "./NonUpdatableColumnType.js";
 
 /**
  * Non Updatable (cannot be updated after initial insert) column type uses the
@@ -8,8 +8,5 @@ import type { ColumnType } from "kysely";
  * `$DateTime.ISO.DateTime.makeStrongAndThrowOnError` parser/validator when
  * reading string values from the postgres DB.
  */
-export type NonUpdatableDateTimeColumnType = ColumnType<
-  $DateTime.ISO.DateTime.Strong,
-  $DateTime.ISO.DateTime.Strong,
-  never
->;
+export type NonUpdatableDateTimeColumnType =
+  NonUpdatableColumnType<$DateTime.ISO.DateTime.Strong>;

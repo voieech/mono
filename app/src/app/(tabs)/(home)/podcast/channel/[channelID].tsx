@@ -30,8 +30,8 @@ import { NotFoundError } from "@/errors";
 import {
   usePodcastChannelQuery,
   usePodcastChannelEpisodesQuery,
-  usePodcastChannelUserSubscriptionStatusQuery,
-  usePodcastChannelUserSubscriptionStatusUpdateMutation,
+  useUserSubscriptionQuery,
+  useUserSubscriptionMutation,
 } from "@/hooks";
 import { categoryStringToMsgDescriptor } from "@/locales";
 import { toast } from "@/utils";
@@ -224,8 +224,10 @@ function PodcastChannelSubscriptionButtonMaybeUnauthenticated(props: {
  * User is authenticated already
  */
 function PodcastChannelSubscriptionButton(props: { channelID: string }) {
-  const podcastChannelUserSubscriptionStatusQuery =
-    usePodcastChannelUserSubscriptionStatusQuery(props.channelID);
+  const podcastChannelUserSubscriptionStatusQuery = useUserSubscriptionQuery({
+    itemType: "podcast_channel",
+    itemID: props.channelID,
+  });
 
   if (podcastChannelUserSubscriptionStatusQuery.isLoading) {
     return (
@@ -250,7 +252,7 @@ function PodcastChannelSubscriptionButton(props: { channelID: string }) {
     return null;
   }
 
-  return podcastChannelUserSubscriptionStatusQuery.data.subscribed ? (
+  return podcastChannelUserSubscriptionStatusQuery.data.subscribe ? (
     <PodcastChannelUnsubscribeButton channelID={props.channelID} />
   ) : (
     <PodcastChannelSubscribeButton channelID={props.channelID} />
@@ -292,13 +294,14 @@ const showFailedToUpdateSubscriptionToast = () =>
 
 function PodcastChannelSubscribeButton(props: { channelID: string }) {
   const podcastChannelUserSubscriptionStatusUpdateMutation =
-    usePodcastChannelUserSubscriptionStatusUpdateMutation();
+    useUserSubscriptionMutation();
   return (
     <PodcastChannelSubscribeBaseButton
       onPress={() => {
         podcastChannelUserSubscriptionStatusUpdateMutation.mutate(
           {
-            channelID: props.channelID,
+            itemType: "podcast_channel",
+            itemID: props.channelID,
             subscribe: true,
           },
           {
@@ -313,13 +316,14 @@ function PodcastChannelSubscribeButton(props: { channelID: string }) {
 
 function PodcastChannelUnsubscribeButton(props: { channelID: string }) {
   const podcastChannelUserSubscriptionStatusUpdateMutation =
-    usePodcastChannelUserSubscriptionStatusUpdateMutation();
+    useUserSubscriptionMutation();
   return (
     <PodcastChannelSubscriptionBaseButton
       onPress={() => {
         podcastChannelUserSubscriptionStatusUpdateMutation.mutate(
           {
-            channelID: props.channelID,
+            itemType: "podcast_channel",
+            itemID: props.channelID,
             subscribe: false,
           },
           {

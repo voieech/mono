@@ -274,7 +274,7 @@ msgstr "手机媒体控制"
 msgid "Failed to load video!"
 msgstr "视频加载失败！"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:291
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:293
 msgid "Failed to update subscription"
 msgstr "订阅更新失败"
 
@@ -428,7 +428,7 @@ msgstr "闲暇"
 msgid "Life Sciences"
 msgstr "生命科学"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:236
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:238
 msgid "Loading"
 msgstr "加载中"
 
@@ -737,7 +737,7 @@ msgstr "开始收听"
 msgid "Stories for Kids"
 msgstr "儿童故事"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:276
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:278
 msgid "Subscribe"
 msgstr "订阅"
 
@@ -785,7 +785,7 @@ msgstr "电视电影"
 msgid "TV Reviews"
 msgstr "电视评论"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:339
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:343
 msgid "Unsubscribe"
 msgstr "退订"
 

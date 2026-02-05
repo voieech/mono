@@ -269,7 +269,7 @@ msgstr "External Audio controls"
 msgid "Failed to load video!"
 msgstr "Failed to load video!"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:291
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:293
 msgid "Failed to update subscription"
 msgstr "Failed to update subscription"
 
@@ -423,7 +423,7 @@ msgstr "Leisure"
 msgid "Life Sciences"
 msgstr "Life Sciences"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:236
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:238
 msgid "Loading"
 msgstr "Loading"
 
@@ -732,7 +732,7 @@ msgstr "Start listening"
 msgid "Stories for Kids"
 msgstr "Stories for Kids"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:276
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:278
 msgid "Subscribe"
 msgstr "Subscribe"
 
@@ -780,7 +780,7 @@ msgstr "TV & Film"
 msgid "TV Reviews"
 msgstr "TV Reviews"
 
-#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:339
+#: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:343
 msgid "Unsubscribe"
 msgstr "Unsubscribe"
 

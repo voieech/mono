@@ -5,6 +5,7 @@
  */
 
 export type * from "./PodcastChannel.js";
-export type * from "./PodcastChannelUserSubscriptionStatus.js";
 export type * from "./PodcastEpisode.js";
 export type * from "./PodcastPlatform.js";
+export type * from "./SubscribableItemType.js";
+export type * from "./UserSubscriptionStatus.js";
