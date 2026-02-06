@@ -1,3 +1,5 @@
+import { useWindowDimensions } from "react-native";
+
 import { ThemedView } from "@/components/ThemedComponents";
 import { useAuthContext } from "@/context";
 
@@ -13,6 +15,8 @@ import { SigninToContinueCard } from "./SigninToContinueCard";
  */
 export function FullScreenSigninWall() {
   const authContext = useAuthContext();
+  const windowDimensions = useWindowDimensions();
+  const contentBoxMaxWidth = windowDimensions.width * 0.8;
 
   // Show nothing if authenticated
   if (authContext.isAuthenticated) {
@@ -39,7 +43,17 @@ export function FullScreenSigninWall() {
         backgroundColor: "rgba(255, 255, 255, 0.4)",
       }}
     >
-      <SigninToContinueCard />
+      <ThemedView
+        style={{
+          flexDirection: "column",
+          rowGap: 24,
+          padding: 24,
+          borderRadius: 24,
+          maxWidth: contentBoxMaxWidth,
+        }}
+      >
+        <SigninToContinueCard />
+      </ThemedView>
     </ThemedView>
   );
 }
