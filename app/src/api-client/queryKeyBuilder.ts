@@ -10,4 +10,5 @@ export const queryKeyBuilder = new QueryKeyBuilder<
   | "podcast.episode.reccomendations.vanityID.$vanityID.$limit"
   | "create.youtube-video-summary.youtubeVideoID.$youtubeVideoID"
   | "user.subscription.itemType.$itemType.itemID.$itemID"
+  | "user.like.itemType.$itemType.itemID.$itemID"
 >();

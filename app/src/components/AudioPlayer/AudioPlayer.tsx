@@ -1,7 +1,10 @@
+import type { LikeableItemType } from "dto";
+
+import { msg } from "@lingui/core/macro";
+import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import { Pressable } from "react-native";
+import { ActivityIndicator, Pressable } from "react-native";
 import {
   State as PlayerState,
   usePlaybackState,
@@ -13,8 +16,10 @@ import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedComponents/index";
 import { Colors } from "@/constants";
-import { useTrackPlayer } from "@/context";
+import { useTrackPlayer, useAuthContext } from "@/context";
+import { useUserLikeQuery, useUserLikeMutation } from "@/hooks";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
+import { toast } from "@/utils";
 
 import { ShareTrackIcon } from "../ShareTrackIcon";
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
@@ -37,7 +42,6 @@ export function AudioPlayer() {
   const router = useRouter();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
-  const [like, setLike] = useState<null | boolean>(null);
   const trackPlayer = useTrackPlayer();
 
   if (activeTrack === undefined) {
@@ -130,31 +134,11 @@ export function AudioPlayer() {
               <Icon name="shuffle" color={Colors.white} size={32} />
             </Pressable>
           </ExperimentalSurface>
-          <ExperimentalSurface>
-            <Pressable
-              onPress={() => {
-                setLike(true);
-              }}
-            >
-              <Icon
-                name={"hand.thumbsup.fill"}
-                color={like ? Colors.green600 : Colors.white}
-                size={32}
-              />
-            </Pressable>
-            <Pressable
-              onPress={() => {
-                setLike(false);
-              }}
-            >
-              <Icon
-                name={"hand.thumbsdown.fill"}
-                color={like === false ? Colors.red400 : Colors.white}
-                size={32}
-              />
-            </Pressable>
-          </ExperimentalSurface>
           <RepeatIcon />
+          <LikeButtonMaybeUnauthenticated
+            audioTrackType={activeTrack.trackType}
+            audioTrackID={activeTrack.id}
+          />
         </ThemedView>
         <ThemedView
           style={{
@@ -231,5 +215,126 @@ export function AudioPlayer() {
         <AudioPlayerDebugger />
       </AppDebuggingSurface>
     </ThemedView>
+  );
+}
+
+function LikeButtonMaybeUnauthenticated(props: {
+  audioTrackType: LikeableItemType;
+  audioTrackID: string;
+}) {
+  const authContext = useAuthContext();
+
+  if (!authContext.isAuthenticated) {
+    return (
+      <HeartBaseButton
+        isLiked={false}
+        onPress={authContext.showFullScreenSigninModalIfNotAuthenticated}
+      />
+    );
+  }
+
+  return <LikeUnlikeButton {...props} />;
+}
+
+/**
+ * User is authenticated already
+ */
+function LikeUnlikeButton(props: {
+  audioTrackType: LikeableItemType;
+  audioTrackID: string;
+}) {
+  const userLikeQuery = useUserLikeQuery({
+    itemType: props.audioTrackType,
+    itemID: props.audioTrackID,
+  });
+
+  if (userLikeQuery.isLoading) {
+    return <ActivityIndicator />;
+  }
+
+  // If failed to load status, treat it as the same as not liked
+  if (
+    userLikeQuery.isError ||
+    userLikeQuery.data === undefined ||
+    userLikeQuery.data.like === undefined ||
+    userLikeQuery.data.like === false
+  ) {
+    return <ClickToLikeButton {...props} />;
+  }
+
+  return <ClickToUnlikeButton {...props} />;
+}
+
+const showFailedToUpdateLikeToast = () => toast(msg`Failed to update like`);
+
+function ClickToLikeButton(props: {
+  audioTrackType: LikeableItemType;
+  audioTrackID: string;
+}) {
+  const userLikeMutation = useUserLikeMutation();
+  return (
+    <HeartBaseButton
+      isLiked={false}
+      onPress={() => {
+        userLikeMutation.mutate(
+          {
+            itemType: "podcast_episode",
+            itemID: props.audioTrackID,
+            like: true,
+          },
+          {
+            onError: showFailedToUpdateLikeToast,
+          },
+        );
+      }}
+      disabled={userLikeMutation.isPending}
+    />
+  );
+}
+
+function ClickToUnlikeButton(props: {
+  audioTrackType: LikeableItemType;
+  audioTrackID: string;
+}) {
+  const userLikeMutation = useUserLikeMutation();
+  return (
+    <HeartBaseButton
+      isLiked={true}
+      onPress={() => {
+        userLikeMutation.mutate(
+          {
+            itemType: "podcast_episode",
+            itemID: props.audioTrackID,
+            like: false,
+          },
+          {
+            onError: showFailedToUpdateLikeToast,
+          },
+        );
+      }}
+      disabled={userLikeMutation.isPending}
+    />
+  );
+}
+
+export function HeartBaseButton(props: {
+  isLiked: boolean;
+  onPress?: () => unknown;
+  disabled?: boolean;
+}) {
+  return (
+    <Pressable
+      onPress={() => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        props.onPress?.();
+      }}
+      disabled={props.disabled}
+    >
+      <Icon
+        name={props.isLiked ? "heart.fill" : "heart"}
+        color={props.isLiked ? Colors.red600 : Colors.neutral200}
+        size={32}
+      />
+    </Pressable>
   );
 }
