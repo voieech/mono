@@ -5,4 +5,5 @@
 export * from "./AppDebuggingSurfaceProvider";
 export * from "./AuthProvider";
 export * from "./ExperimentalSurfaceProvider";
+export * from "./NotificationsProvider";
 export * from "./SettingsProvider";
