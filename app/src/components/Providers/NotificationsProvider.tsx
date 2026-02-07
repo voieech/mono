@@ -15,12 +15,14 @@ export function NotificationProvider({ children }: PropsWithChildren) {
       .then((token) => setExpoPushToken(token ?? ""))
       .catch((error: any) => setExpoPushToken(`${error}`));
 
+    // reacts when a notification arrives while the app is in the foreground
     const notificationListener = Notifications.addNotificationReceivedListener(
       (notification) => {
         setNotification(notification);
       },
     );
 
+    // reacts to user interaction with app notifcations
     const responseListener =
       Notifications.addNotificationResponseReceivedListener((response) => {
         console.log(response);
