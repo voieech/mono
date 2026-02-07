@@ -20,9 +20,9 @@ export default function ProfileLayout() {
         }}
       />
       <Stack.Screen
-        name="settings/content-language"
+        name="settings/language"
         options={{
-          title: t`Content Language`,
+          title: t`Language`,
           headerBackTitle: t`Back`,
         }}
       />

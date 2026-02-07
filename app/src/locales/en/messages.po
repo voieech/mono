@@ -51,6 +51,18 @@ msgstr "Animation & Manga"
 msgid "App Details"
 msgstr "App Details"
 
+#: src/app/(tabs)/profile/settings/language.tsx:27
+msgid "App Language"
+msgstr "App Language"
+
+#: src/app/(tabs)/profile/settings/language.tsx:46
+msgid "App language can only be modified in the Android \"Settings\" app."
+msgstr "App language can only be modified in the Android \"Settings\" app."
+
+#: src/app/(tabs)/profile/settings/language.tsx:39
+msgid "App language can only be modified in the IOS \"Settings\" app."
+msgstr "App language can only be modified in the IOS \"Settings\" app."
+
 #: src/app/(tabs)/profile/settings/app-details.tsx:38
 msgid "App Version"
 msgstr "App Version"
@@ -170,8 +182,7 @@ msgstr "Comedy Fiction"
 msgid "Comedy Interviews"
 msgstr "Comedy Interviews"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:315
+#: src/app/(tabs)/profile/settings/language.tsx:60
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "Content Language"
@@ -420,6 +431,11 @@ msgstr "Judaism"
 #: src/locales/categoryStringToMsgDescriptor.ts:48
 msgid "Kids & Family"
 msgstr "Kids & Family"
+
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:315
+msgid "Language"
+msgstr "Language"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:33
 msgid "Language Learning"

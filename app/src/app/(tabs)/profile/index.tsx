@@ -312,9 +312,9 @@ function SettingsSection() {
           }}
         />
         <SettingsPageLink
-          setting={t`Content Language`}
+          setting={t`Language`}
           href={{
-            pathname: "/profile/settings/content-language",
+            pathname: "/profile/settings/language",
           }}
         />
         {(__DEV__ || isInternalUser) && (
