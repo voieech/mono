@@ -14,7 +14,7 @@ import "@formatjs/intl-locale/polyfill";
 import "@formatjs/intl-pluralrules/polyfill-force";
 import "@formatjs/intl-pluralrules/locale-data/en";
 
-import { setupReactNativeTrackPlayer } from "@/setup";
+import { setupNotifications, setupReactNativeTrackPlayer } from "@/setup";
 import { dynamicallyLoadAndActivateLocale } from "@/utils";
 
 /**************************** Initialize services *****************************/
@@ -26,6 +26,9 @@ setupReactNativeTrackPlayer();
 // Lingui's I18nProvider will not render its child components until a current
 // locale is set, which is why we dont need to await this.
 dynamicallyLoadAndActivateLocale();
+
+// Configure global notification behavior (foreground alerts, sounds, etc.)
+setupNotifications();
 
 /****************** Register app entry through Expo Router ********************/
 // This must be last to ensure all configurations are properly set up before the
