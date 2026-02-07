@@ -15,6 +15,7 @@ export function FullScreenSigninModal() {
     <CommonModal
       modalVisible={authContext.showFullScreenSigninModal}
       onClose={authContext.clearFullScreenSigninModal}
+      closeModalMessage="Cancel"
     >
       <SigninToContinueCard
         onCancel={authContext.clearFullScreenSigninModal}

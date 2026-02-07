@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import type { RefreshControlProps } from "react-native";
+import type { RefreshControlProps, ScrollViewProps } from "react-native";
 
 import { SafeAreaViewContainer } from "./SafeAreaViewContainer";
 import { ScrollViewContainer } from "./ScrollViewContainer";
@@ -10,12 +10,16 @@ import { ScrollViewContainer } from "./ScrollViewContainer";
 export function SafeScrollViewContainer(
   props: PropsWithChildren<{
     refreshControl?: React.ReactElement<RefreshControlProps>;
+    onScroll?: ScrollViewProps["onScroll"];
   }>,
 ) {
   return (
     // @todo Only do this when there is no Tab / Navigation header
     <SafeAreaViewContainer>
-      <ScrollViewContainer refreshControl={props.refreshControl}>
+      <ScrollViewContainer
+        refreshControl={props.refreshControl}
+        onScroll={props.onScroll}
+      >
         {props.children}
       </ScrollViewContainer>
     </SafeAreaViewContainer>

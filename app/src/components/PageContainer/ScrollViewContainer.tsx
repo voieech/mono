@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import type { RefreshControlProps } from "react-native";
+import type { RefreshControlProps, ScrollViewProps } from "react-native";
 
 import { ScrollView } from "react-native";
 
@@ -11,6 +11,7 @@ import { useBottomTabOverflow, useThemeColor } from "@/hooks";
 export function ScrollViewContainer(
   props: PropsWithChildren<{
     refreshControl?: React.ReactElement<RefreshControlProps>;
+    onScroll?: ScrollViewProps["onScroll"];
   }>,
 ) {
   const bottomOverflow = useBottomTabOverflow();
@@ -38,6 +39,7 @@ export function ScrollViewContainer(
         bottom: paddingBottom,
       }}
       refreshControl={props.refreshControl}
+      onScroll={props.onScroll}
 
       // @todo Take as prop
       // keyboardShouldPersistTaps='handled'

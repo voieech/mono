@@ -22,7 +22,7 @@ msgstr "... loading video ..."
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
 
-#: src/app/track-queue-modal.tsx:63
+#: src/app/track-queue-modal.tsx:73
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 
@@ -108,8 +108,8 @@ msgstr "Business"
 msgid "Business News"
 msgstr "Business News"
 
-#: src/components/CommonModal.tsx:73
-#: src/components/SigninToContinueCard.tsx:53
+#: src/components/CommonModal.tsx:91
+#: src/components/CommonModalUsingHighZindexView.tsx:131
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -152,6 +152,11 @@ msgstr "Christianity"
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:163
 msgid "Clear"
 msgstr "Clear"
+
+#: src/components/CommonModal.tsx:94
+#: src/components/CommonModalUsingHighZindexView.tsx:134
+msgid "Close"
+msgstr "Close"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:26
 msgid "Comedy"
@@ -269,6 +274,10 @@ msgstr "External Audio controls"
 msgid "Failed to load video!"
 msgstr "Failed to load video!"
 
+#: src/components/AudioPlayer/AudioPlayer.tsx:268
+msgid "Failed to update like"
+msgstr "Failed to update like"
+
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:293
 msgid "Failed to update subscription"
 msgstr "Failed to update subscription"
@@ -331,7 +340,7 @@ msgstr "For You"
 msgid "Games"
 msgstr "Games"
 
-#: src/components/SigninToContinueCard.tsx:80
+#: src/components/SigninToContinueCard.tsx:44
 msgid "Get access to exclusive member only features right now!"
 msgstr "Get access to exclusive member only features right now!"
 
@@ -512,7 +521,7 @@ msgstr "Non-Profit"
 msgid "Not Available"
 msgstr "Not Available"
 
-#: src/app/track-queue-modal.tsx:84
+#: src/app/track-queue-modal.tsx:94
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
@@ -610,7 +619,7 @@ msgstr "Religion"
 msgid "Religion & Spirituality"
 msgstr "Religion & Spirituality"
 
-#: src/app/audio-player-modal.tsx:113
+#: src/app/audio-player-modal.tsx:123
 msgid "Report Audio Track"
 msgstr "Report Audio Track"
 
@@ -676,11 +685,11 @@ msgid "Show controls for skipping tracks to next/previous."
 msgstr "Show controls for skipping tracks to next/previous."
 
 #: src/app/(tabs)/profile/index.tsx:73
-#: src/components/SigninToContinueCard.tsx:115
+#: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "Sign In"
 
-#: src/components/SigninToContinueCard.tsx:77
+#: src/components/SigninToContinueCard.tsx:41
 msgid "Sign In to Continue"
 msgstr "Sign In to Continue"
 
@@ -764,7 +773,7 @@ msgstr "Tennis"
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
-#: src/app/audio-player-modal.tsx:105
+#: src/app/audio-player-modal.tsx:115
 msgid "Track made by"
 msgstr "Track made by"
 

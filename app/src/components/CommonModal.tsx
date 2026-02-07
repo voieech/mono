@@ -3,11 +3,17 @@ import type { PropsWithChildren } from "react";
 import { Trans } from "@lingui/react/macro";
 import { Pressable, useWindowDimensions, Modal } from "react-native";
 
-import { ThemedView, ThemedText, Icon, VerticalSpacer } from "@/components";
 import { Colors } from "@/constants";
 
+import { Icon } from "./provided";
+import { ThemedView, ThemedText } from "./ThemedComponents";
+import { VerticalSpacer } from "./VerticalSpacer";
+
 /**
- * Fullscreen Modal
+ * Fullscreen Modal built using the native `Modal` component which translates to
+ * a Modal in native UIs, but could potentially clash with expo-router
+ * presentation: "modal" modes, which is why expo-router Stack.Screen components
+ * should prefer "containedTransparentModal" presentation mode.
  */
 export function CommonModal(
   props: PropsWithChildren<{
@@ -22,6 +28,11 @@ export function CommonModal(
     onClose: () => unknown;
 
     /**
+     * Message to show user when closing modal. This is localised.
+     */
+    closeModalMessage?: "Cancel" | "Close";
+
+    /**
      * How frosted do you want the background to be? Defaults to 2.
      */
     backgroundFrostedLevel?: 1 | 2 | 3;
@@ -29,6 +40,10 @@ export function CommonModal(
 ) {
   const windowDimensions = useWindowDimensions();
   const contentBoxMaxWidth = windowDimensions.width * 0.8;
+
+  if (!props.modalVisible) {
+    return null;
+  }
 
   return (
     <Modal
@@ -70,7 +85,15 @@ export function CommonModal(
               }}
             >
               <ThemedText type="sm-normal" colorType="subtext">
-                <Trans>Cancel</Trans>
+                {(function () {
+                  switch (props.closeModalMessage) {
+                    case "Cancel":
+                      return <Trans>Cancel</Trans>;
+                    case "Close":
+                    default:
+                      return <Trans>Close</Trans>;
+                  }
+                })()}
               </ThemedText>
               <Icon name="xmark" color={Colors.neutral300} size={14} />
             </ThemedView>

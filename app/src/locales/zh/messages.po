@@ -27,7 +27,7 @@ msgstr "... 加载视频中 ..."
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
 
-#: src/app/track-queue-modal.tsx:63
+#: src/app/track-queue-modal.tsx:73
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
@@ -113,8 +113,8 @@ msgstr "商业"
 msgid "Business News"
 msgstr "商业新闻"
 
-#: src/components/CommonModal.tsx:73
-#: src/components/SigninToContinueCard.tsx:53
+#: src/components/CommonModal.tsx:91
+#: src/components/CommonModalUsingHighZindexView.tsx:131
 msgid "Cancel"
 msgstr "取消"
 
@@ -157,6 +157,11 @@ msgstr "基督教"
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:163
 msgid "Clear"
 msgstr "清除"
+
+#: src/components/CommonModal.tsx:94
+#: src/components/CommonModalUsingHighZindexView.tsx:134
+msgid "Close"
+msgstr "关闭"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:26
 msgid "Comedy"
@@ -274,6 +279,10 @@ msgstr "手机媒体控制"
 msgid "Failed to load video!"
 msgstr "视频加载失败！"
 
+#: src/components/AudioPlayer/AudioPlayer.tsx:268
+msgid "Failed to update like"
+msgstr "更新失败"
+
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:293
 msgid "Failed to update subscription"
 msgstr "订阅更新失败"
@@ -336,7 +345,7 @@ msgstr "推荐"
 msgid "Games"
 msgstr "游戏"
 
-#: src/components/SigninToContinueCard.tsx:80
+#: src/components/SigninToContinueCard.tsx:44
 msgid "Get access to exclusive member only features right now!"
 msgstr "立即获取会员专属功能！"
 
@@ -517,7 +526,7 @@ msgstr "非营利组织"
 msgid "Not Available"
 msgstr "信息不存在"
 
-#: src/app/track-queue-modal.tsx:84
+#: src/app/track-queue-modal.tsx:94
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
@@ -615,7 +624,7 @@ msgstr "宗教"
 msgid "Religion & Spirituality"
 msgstr "宗教与灵性"
 
-#: src/app/audio-player-modal.tsx:113
+#: src/app/audio-player-modal.tsx:123
 msgid "Report Audio Track"
 msgstr "举报音轨"
 
@@ -681,11 +690,11 @@ msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
 #: src/app/(tabs)/profile/index.tsx:73
-#: src/components/SigninToContinueCard.tsx:115
+#: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "登入"
 
-#: src/components/SigninToContinueCard.tsx:77
+#: src/components/SigninToContinueCard.tsx:41
 msgid "Sign In to Continue"
 msgstr "登录以继续"
 
@@ -769,7 +778,7 @@ msgstr "网球"
 msgid "Terms of Service"
 msgstr "服务条款"
 
-#: src/app/audio-player-modal.tsx:105
+#: src/app/audio-player-modal.tsx:115
 msgid "Track made by"
 msgstr "音轨制作者"
 

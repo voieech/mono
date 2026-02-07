@@ -43,19 +43,30 @@ function RootLayout() {
         name="audio-player-modal"
         options={{
           headerShown: false,
-          presentation: useCardPlayerInsteadOfModal ? "card" : "modal",
 
-          // @todo
-          // Try this to experiment with full screen mode, but need to
-          // support swipe down to close.
-          // presentation: "containedModal",
+          // Using "containedTransparentModal" instead of "modal" or
+          // "transparentModal" because this doesnt create a new native modal
+          // view / creates a different type of native modal view that doesnt
+          // break when creating more native modals with the "CommonModal" and
+          // other routes that are also using "modal" presentation mode.
+          presentation: useCardPlayerInsteadOfModal
+            ? "card"
+            : "containedTransparentModal",
         }}
       />
       <Stack.Screen
         name="track-queue-modal"
         options={{
           headerShown: false,
-          presentation: useCardPlayerInsteadOfModal ? "card" : "modal",
+
+          // Using "containedTransparentModal" instead of "modal" or
+          // "transparentModal" because this doesnt create a new native modal
+          // view / creates a different type of native modal view that doesnt
+          // break when creating more native modals with the "CommonModal" and
+          // other routes that are also using "modal" presentation mode.
+          presentation: useCardPlayerInsteadOfModal
+            ? "card"
+            : "containedTransparentModal",
         }}
       />
       {__DEV__ && (

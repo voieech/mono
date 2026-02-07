@@ -23,7 +23,17 @@ export default function TrackQueueModal() {
       "use-card-player-instead-of-modal",
     );
   return (
-    <SafeScrollViewContainer>
+    <SafeScrollViewContainer
+      // Custom pull down to close implementation because of the bug "multiple
+      // native modal UI overlayed causes crashes".
+      // This triggers close when pulled down for more than -40 pixels.
+      onScroll={(event) => {
+        const offsetY = event.nativeEvent.contentOffset.y;
+        if (offsetY < -40) {
+          router.back();
+        }
+      }}
+    >
       {/*
         Need to wrap again even though root layout wraps it because on android
         modal's it doesnt inherit from root layout and acts as an independent
