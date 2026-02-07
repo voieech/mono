@@ -10,10 +10,12 @@ import {
 } from "react-native";
 
 import {
-  SafeScrollViewContainer,
+  SafeAreaViewContainer,
+  ScrollViewContainer,
   ThemedView,
   ThemedText,
   Icon,
+  VerticalSpacer,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/hooks";
@@ -40,153 +42,146 @@ export default function HomeScreen() {
   }
 
   return (
-    <SafeScrollViewContainer
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      {featuredChannelsQuery.data !== undefined && (
-        <ThemedView
-          style={{
-            gap: 8,
-            marginBottom: 8,
-          }}
-        >
-          <Link
-            href={{
-              pathname: "/featured-channels",
+    <SafeAreaViewContainer>
+      <ScrollViewContainer
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {featuredChannelsQuery.data !== undefined && (
+          <ThemedView
+            style={{
+              gap: 8,
+              marginBottom: 8,
             }}
           >
-            <ThemedView
-              style={{
-                flexDirection: "row",
-                columnGap: 16,
-              }}
-            >
-              <ThemedText type="lg-light">
-                <Trans>Featured Channels</Trans>
-              </ThemedText>
-              <Icon name="chevron.right" color={Colors.neutral50} />
-            </ThemedView>
-          </Link>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {featuredChannelsQuery.data.map((channel) => (
-              <Link
-                key={channel.id}
-                href={{
-                  pathname: "/podcast/channel/[channelID]",
-                  params: {
-                    channelID: channel.id,
-                  },
-                }}
-                style={{
-                  marginRight: featuredChannelImageMargin,
-                }}
-              >
-                <View>
-                  <Image
-                    source={channel.img_url}
-                    style={{
-                      width: featuredChannelImageWidth,
-                      aspectRatio: 1,
-                      borderRadius: 4,
-                    }}
-                    contentFit="cover"
-                  />
-                  <ThemedText
-                    type="sm-semibold"
-                    numberOfLines={1}
-                    style={{
-                      paddingTop: 4,
-                      color: Colors.neutral200,
-                    }}
-                  >
-                    {channel.name}
-                  </ThemedText>
-                </View>
-              </Link>
-            ))}
-          </ScrollView>
-        </ThemedView>
-      )}
-      <View
-        style={{
-          paddingVertical: 8,
-        }}
-      />
-      {featuredEpisodesQuery.data !== undefined && (
-        <ThemedView
-          style={{
-            gap: 8,
-            marginBottom: 8,
-          }}
-        >
-          <ThemedText type="lg-light">
-            <Trans>Featured Episodes</Trans>
-          </ThemedText>
-          {featuredEpisodesQuery.data.map((episode) => (
             <Link
-              key={episode.id}
               href={{
-                pathname: "/podcast/episode/[vanityID]",
-                params: {
-                  vanityID: episode.vanity_id,
-                },
+                pathname: "/featured-channels",
               }}
             >
               <ThemedView
                 style={{
-                  flex: 1,
                   flexDirection: "row",
-                  borderRadius: 16,
+                  columnGap: 16,
                 }}
               >
-                <Image
-                  source={episode.img_url}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    maxWidth: 128,
-                    borderTopLeftRadius: 16,
-                    borderBottomLeftRadius: 16,
+                <ThemedText type="lg-light">
+                  <Trans>Featured Channels</Trans>
+                </ThemedText>
+                <Icon name="chevron.right" color={Colors.neutral50} />
+              </ThemedView>
+            </Link>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {featuredChannelsQuery.data.map((channel) => (
+                <Link
+                  key={channel.id}
+                  href={{
+                    pathname: "/podcast/channel/[channelID]",
+                    params: {
+                      channelID: channel.id,
+                    },
                   }}
-                  contentFit="cover"
-                />
+                  style={{
+                    marginRight: featuredChannelImageMargin,
+                  }}
+                >
+                  <View>
+                    <Image
+                      source={channel.img_url}
+                      style={{
+                        width: featuredChannelImageWidth,
+                        aspectRatio: 1,
+                        borderRadius: 4,
+                      }}
+                      contentFit="cover"
+                    />
+                    <ThemedText
+                      type="sm-semibold"
+                      numberOfLines={1}
+                      style={{
+                        paddingTop: 4,
+                        color: Colors.neutral200,
+                      }}
+                    >
+                      {channel.name}
+                    </ThemedText>
+                  </View>
+                </Link>
+              ))}
+            </ScrollView>
+          </ThemedView>
+        )}
+        <VerticalSpacer />
+        {featuredEpisodesQuery.data !== undefined && (
+          <ThemedView
+            style={{
+              gap: 8,
+              marginBottom: 8,
+            }}
+          >
+            <ThemedText type="lg-light">
+              <Trans>Featured Episodes</Trans>
+            </ThemedText>
+            {featuredEpisodesQuery.data.map((episode) => (
+              <Link
+                key={episode.id}
+                href={{
+                  pathname: "/podcast/episode/[vanityID]",
+                  params: {
+                    vanityID: episode.vanity_id,
+                  },
+                }}
+              >
                 <ThemedView
                   style={{
                     flex: 1,
-                    borderTopRightRadius: 16,
-                    borderBottomRightRadius: 16,
-                    paddingVertical: 4,
-                    paddingHorizontal: 16,
-                    backgroundColor: Colors.neutral800,
+                    flexDirection: "row",
+                    borderRadius: 16,
                   }}
                 >
-                  <ThemedText
-                    numberOfLines={3}
+                  <Image
+                    source={episode.img_url}
                     style={{
-                      paddingBottom: 8,
+                      width: "100%",
+                      height: "100%",
+                      maxWidth: 128,
+                      borderTopLeftRadius: 16,
+                      borderBottomLeftRadius: 16,
+                    }}
+                    contentFit="cover"
+                  />
+                  <ThemedView
+                    style={{
+                      flex: 1,
+                      borderTopRightRadius: 16,
+                      borderBottomRightRadius: 16,
+                      paddingVertical: 4,
+                      paddingHorizontal: 16,
+                      backgroundColor: Colors.neutral800,
                     }}
                   >
-                    {episode.title}
-                  </ThemedText>
-                  <ThemedText type="sm-light" numberOfLines={1}>
-                    {episode.channel_name}
-                  </ThemedText>
-                  <ThemedText type="sm-light">
-                    {episode.created_at.split("T")[0]}
-                  </ThemedText>
+                    <ThemedText
+                      numberOfLines={3}
+                      style={{
+                        paddingBottom: 8,
+                      }}
+                    >
+                      {episode.title}
+                    </ThemedText>
+                    <ThemedText type="sm-light" numberOfLines={1}>
+                      {episode.channel_name}
+                    </ThemedText>
+                    <ThemedText type="sm-light">
+                      {episode.created_at.split("T")[0]}
+                    </ThemedText>
+                  </ThemedView>
                 </ThemedView>
-              </ThemedView>
-            </Link>
-          ))}
-        </ThemedView>
-      )}
-      <View
-        style={{
-          paddingBottom: 64,
-        }}
-      />
-    </SafeScrollViewContainer>
+              </Link>
+            ))}
+          </ThemedView>
+        )}
+      </ScrollViewContainer>
+    </SafeAreaViewContainer>
   );
 }

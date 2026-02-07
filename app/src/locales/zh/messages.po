@@ -18,7 +18,7 @@ msgstr ""
 "X-Crowdin-File: /app/src/locales/en/messages.po\n"
 "X-Crowdin-File-ID: 34\n"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:219
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:196
 msgid "... loading video ..."
 msgstr "... 加载视频中 ..."
 
@@ -154,7 +154,7 @@ msgstr "选择你想要看到的本地媒体控制类型。"
 msgid "Christianity"
 msgstr "基督教"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:163
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:153
 msgid "Clear"
 msgstr "清除"
 
@@ -191,7 +191,7 @@ msgstr "工艺"
 
 #: src/app/(tabs)/_layout.tsx:140
 #: src/app/(tabs)/(create)/_layout.tsx:19
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:198
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:174
 msgid "Create"
 msgstr "创造"
 
@@ -275,7 +275,7 @@ msgstr "探索"
 msgid "External Audio controls"
 msgstr "手机媒体控制"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:234
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:211
 msgid "Failed to load video!"
 msgstr "视频加载失败！"
 
@@ -301,11 +301,11 @@ msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:67
+#: src/app/(tabs)/(home)/index.tsx:70
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:125
+#: src/app/(tabs)/(home)/index.tsx:124
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -405,7 +405,7 @@ msgstr "如何做"
 msgid "Improv"
 msgstr "即兴表演"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:126
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:116
 msgid "Invalid Youtube link"
 msgstr "YouTube 链接无效"
 
@@ -546,7 +546,7 @@ msgstr "哎呀，抱歉！"
 msgid "Parenting"
 msgstr "育儿"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:150
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:140
 msgid "Paste from clipboard"
 msgstr "从剪贴板粘贴"
 
@@ -583,7 +583,7 @@ msgstr "选择内容来源，并开始创作属于你自己的内容！"
 msgid "Places & Travel"
 msgstr "地点与旅行"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:102
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:92
 msgid "Please paste your Youtube link"
 msgstr "请粘贴您的 YouTube 链接"
 
@@ -640,12 +640,12 @@ msgstr "橄榄球"
 msgid "Running"
 msgstr "跑步"
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:220
+#: src/app/(onboarding)/default-content-preference-selection.tsx:207
 msgid "Save"
 msgstr "保存"
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:111
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:63
+#: src/app/(onboarding)/default-content-preference-selection.tsx:101
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:56
 msgid "Saving"
 msgstr "正在保存"
 
@@ -665,7 +665,7 @@ msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 msgid "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
 msgstr "请选择您希望看到的内容语言。您至少需要选择一种语言，并且无法移除应用当前的语言设置。"
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:138
+#: src/app/(onboarding)/default-content-preference-selection.tsx:127
 msgid "Select topics you like so that we can personalise your starting experience!"
 msgstr "选择您感兴趣的主题，以便我们为您量身定制入门体验！"
 
@@ -746,6 +746,10 @@ msgstr "开始收听"
 msgid "Stories for Kids"
 msgstr "儿童故事"
 
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:52
+msgid "Submitted!"
+msgstr "已提交！"
+
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:278
 msgid "Subscribe"
 msgstr "订阅"
@@ -822,11 +826,11 @@ msgstr "想要更多吗？"
 msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 msgstr "我们找不到你想要的东西，这里是一幅我们非常抱歉的画……"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:90
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:80
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "我们将帮助您总结您的 YouTube 视频并制作音频播客。"
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:135
+#: src/app/(onboarding)/default-content-preference-selection.tsx:124
 msgid "What interests you?"
 msgstr "你对什么感兴趣？"
 
@@ -854,6 +858,6 @@ msgstr "YouTube"
 msgid "Youtube Video Summary Create"
 msgstr "YouTube 视频摘要创建"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:87
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:77
 msgid "Youtube Video Summary Creator"
 msgstr "YouTube 视频摘要创建者"

@@ -16,8 +16,11 @@ export function ScrollViewContainer(
 ) {
   const bottomOverflow = useBottomTabOverflow();
   const backgroundColor = useThemeColor("background");
-  const padding = 16;
-  const paddingBottom = bottomOverflow > padding ? bottomOverflow : padding;
+  const paddingDefault = 16;
+  const paddingForGlobalBottomOverlayAudioPlayerHeight = 32;
+  const paddingBottom =
+    (bottomOverflow > paddingDefault ? bottomOverflow : paddingDefault) +
+    paddingForGlobalBottomOverlayAudioPlayerHeight;
 
   return (
     <ScrollView
@@ -32,7 +35,9 @@ export function ScrollViewContainer(
         flexGrow: 1,
 
         // Add consistent spacing for all pages using this component
-        padding,
+        paddingTop: 8,
+        paddingLeft: paddingDefault,
+        paddingRight: paddingDefault,
         paddingBottom,
       }}
       scrollIndicatorInsets={{

@@ -2,20 +2,16 @@ import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { router } from "expo-router";
 import { useState } from "react";
-import { View, Pressable, ScrollView, useWindowDimensions } from "react-native";
+import { View, Pressable, ScrollView } from "react-native";
 
 import {
   SafeAreaViewContainer,
-  ScrollViewContainer,
   ThemedText,
   FullScreenLoader,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
-import {
-  useBottomTabOverflow,
-  useSaveContentPreferenceSelectionMutation,
-} from "@/hooks";
+import { useSaveContentPreferenceSelectionMutation } from "@/hooks";
 
 interface Tag {
   id: string;
@@ -77,12 +73,6 @@ const CATEGORIES: Array<Category> = [
 ];
 
 export default function DefaultContentPreferenceSelection() {
-  const windowDimensions = useWindowDimensions();
-  const bottomOverflow = useBottomTabOverflow();
-  const padding = 16;
-  const floatingButtonPaddingBottom =
-    (bottomOverflow > padding ? bottomOverflow : padding) + 16;
-
   const saveContentPreferenceSelectionMutation =
     useSaveContentPreferenceSelectionMutation();
 
@@ -113,113 +103,111 @@ export default function DefaultContentPreferenceSelection() {
 
   return (
     <SafeAreaViewContainer>
-      <ScrollViewContainer>
-        <View
-          style={{
-            flex: 1,
-            paddingHorizontal: 24,
-            paddingVertical: 32,
-          }}
-        >
-          <View
-            style={{
-              marginBottom: 32,
-            }}
-          >
-            <ThemedText
-              type="xl-bold"
-              style={{
-                paddingBottom: 8,
-              }}
-            >
-              <Trans>What interests you?</Trans>
-            </ThemedText>
-            <ThemedText>
-              <Trans>
-                Select topics you like so that we can personalise your starting
-                experience!
-              </Trans>
-            </ThemedText>
-          </View>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {CATEGORIES.map((category) => (
-              <View
-                key={category.id}
-                style={{
-                  paddingBottom: 24,
-                }}
-              >
-                <ThemedText
-                  type="base-semibold"
-                  style={{
-                    paddingBottom: 8,
-                  }}
-                >
-                  {category.title}
-                </ThemedText>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    gap: 12,
-                  }}
-                >
-                  {category.tags.map((tag) => {
-                    const isSelected = selectedTags.has(tag.id);
-                    return (
-                      <Pressable
-                        key={tag.id}
-                        onPress={() => toggleTag(tag.id)}
-                        style={{
-                          paddingHorizontal: 16,
-                          paddingVertical: 6,
-                          borderRadius: 20,
-                          backgroundColor: isSelected
-                            ? Colors.blue500
-                            : Colors.neutral50,
-                        }}
-                      >
-                        <ThemedText
-                          style={{
-                            color: isSelected ? Colors.white : Colors.gray800,
-                          }}
-                        >
-                          {tag.name}
-                        </ThemedText>
-                      </Pressable>
-                    );
-                  })}
-                </View>
-              </View>
-            ))}
-          </ScrollView>
-        </View>
-      </ScrollViewContainer>
       <View
         style={{
           flex: 1,
-          position: "absolute",
-          bottom: floatingButtonPaddingBottom,
-          width: "100%",
-          paddingHorizontal: windowDimensions.width * 0.1,
+          paddingHorizontal: 32,
         }}
       >
-        <Pressable
+        <View
           style={{
-            backgroundColor: hasSelectedTags ? Colors.gray400 : Colors.blue600,
-            paddingVertical: 8,
-            borderRadius: 8,
-            alignItems: "center",
+            paddingTop: 8,
+            paddingBottom: 24,
           }}
-          onPress={saveAndNext}
-          disabled={
-            hasSelectedTags || saveContentPreferenceSelectionMutation.isPending
-          }
         >
-          <ThemedText type="lg-light">
-            <Trans>Save</Trans>
+          <ThemedText
+            type="xl-bold"
+            style={{
+              paddingBottom: 8,
+            }}
+          >
+            <Trans>What interests you?</Trans>
           </ThemedText>
-        </Pressable>
+          <ThemedText>
+            <Trans>
+              Select topics you like so that we can personalise your starting
+              experience!
+            </Trans>
+          </ThemedText>
+        </View>
+        <ScrollView>
+          {CATEGORIES.map((category) => (
+            <View
+              key={category.id}
+              style={{
+                paddingBottom: 24,
+              }}
+            >
+              <ThemedText
+                type="base-semibold"
+                style={{
+                  paddingBottom: 8,
+                }}
+              >
+                {category.title}
+              </ThemedText>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: 12,
+                }}
+              >
+                {category.tags.map((tag) => {
+                  const isSelected = selectedTags.has(tag.id);
+                  return (
+                    <Pressable
+                      key={tag.id}
+                      onPress={() => toggleTag(tag.id)}
+                      style={{
+                        paddingHorizontal: 16,
+                        paddingVertical: 6,
+                        borderRadius: 20,
+                        backgroundColor: isSelected
+                          ? Colors.blue500
+                          : Colors.neutral50,
+                      }}
+                    >
+                      <ThemedText
+                        style={{
+                          color: isSelected ? Colors.white : Colors.gray800,
+                        }}
+                      >
+                        {tag.name}
+                      </ThemedText>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+        <View
+          style={{
+            paddingTop: 16,
+            paddingBottom: 48,
+          }}
+        >
+          <Pressable
+            style={{
+              backgroundColor: hasSelectedTags
+                ? Colors.gray400
+                : Colors.blue600,
+              paddingVertical: 8,
+              borderRadius: 8,
+              alignItems: "center",
+            }}
+            onPress={saveAndNext}
+            disabled={
+              hasSelectedTags ||
+              saveContentPreferenceSelectionMutation.isPending
+            }
+          >
+            <ThemedText type="lg-light">
+              <Trans>Save</Trans>
+            </ThemedText>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaViewContainer>
   );

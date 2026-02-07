@@ -14,7 +14,6 @@ export function SafeScrollViewContainer(
   }>,
 ) {
   return (
-    // @todo Only do this when there is no Tab / Navigation header
     <SafeAreaViewContainer>
       <ScrollViewContainer
         refreshControl={props.refreshControl}

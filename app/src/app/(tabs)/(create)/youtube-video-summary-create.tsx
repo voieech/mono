@@ -3,21 +3,20 @@ import { Trans } from "@lingui/react/macro";
 import * as Clipboard from "expo-clipboard";
 import { Image } from "expo-image";
 import { useState } from "react";
-import { View, Pressable, TextInput, useWindowDimensions } from "react-native";
+import { View, Pressable, TextInput } from "react-native";
 
 import {
-  SafeAreaViewContainer,
-  ScrollViewContainer,
+  SafeScrollViewContainer,
   ThemedText,
   FullScreenLoader,
   VerticalSpacer,
 } from "@/components";
 import { Colors } from "@/constants";
 import {
-  useBottomTabOverflow,
   useYoutubeVideoOEmbedMetadataQuery,
   useCreateYoutubeVideoSummaryMutation,
 } from "@/hooks";
+import { toast } from "@/utils";
 
 /**
  * Validates a YouTube URL and optionally returns the Video ID.
@@ -32,12 +31,6 @@ function validateAndExtractYoutubeUrlVideoID(url: string) {
 }
 
 export default function YoutubeVideoSummaryCreate() {
-  const windowDimensions = useWindowDimensions();
-  const bottomOverflow = useBottomTabOverflow();
-  const padding = 16;
-  const floatingButtonPaddingBottom =
-    (bottomOverflow > padding ? bottomOverflow : padding) + 16;
-
   const createYoutubeVideoSummaryMutation =
     useCreateYoutubeVideoSummaryMutation();
 
@@ -54,9 +47,9 @@ export default function YoutubeVideoSummaryCreate() {
 
     await createYoutubeVideoSummaryMutation.mutateAsync(youtubeVideoID);
 
-    // @todo show successful submission toast
+    setYoutubeVideoLink("");
 
-    // setYoutubeVideoLink("");
+    toast(msg`Submitted!`);
   }
 
   if (createYoutubeVideoSummaryMutation.isPending) {
@@ -64,142 +57,126 @@ export default function YoutubeVideoSummaryCreate() {
   }
 
   return (
-    <SafeAreaViewContainer>
-      <ScrollViewContainer>
+    <SafeScrollViewContainer>
+      <View
+        style={{
+          paddingHorizontal: 24,
+        }}
+      >
         <View
           style={{
-            flex: 1,
-            paddingHorizontal: 24,
-            paddingVertical: 32,
+            marginBottom: 32,
           }}
         >
-          <View
+          <ThemedText
+            type="xl-bold"
             style={{
-              marginBottom: 32,
+              paddingBottom: 8,
             }}
           >
+            <Trans>Youtube Video Summary Creator</Trans>
+          </ThemedText>
+          <ThemedText>
+            <Trans>
+              We will help you summarise your youtube video and create a audio
+              podcast.
+            </Trans>
+          </ThemedText>
+        </View>
+        <View>
+          <ThemedText
+            style={{
+              paddingBottom: 8,
+            }}
+          >
+            <Trans>Please paste your Youtube link</Trans>
+          </ThemedText>
+          <TextInput
+            placeholder="Youtube link"
+            defaultValue={youtubeVideoLink}
+            placeholderTextColor={Colors.neutral800}
+            onChangeText={(s) => setYoutubeVideoLink(s)}
+            onSubmitEditing={() => submitYoutubeLink()}
+            style={{
+              padding: 8,
+              borderRadius: 8,
+              fontSize: 20,
+              backgroundColor: Colors.neutral300,
+              color: Colors.sky700,
+            }}
+          />
+          {isYoutubeVideoLinkEntered && !isYoutubeVideoIDValid && (
             <ThemedText
-              type="xl-bold"
               style={{
-                paddingBottom: 8,
+                padding: 4,
+                color: Colors.red400,
+                textAlign: "right",
               }}
             >
-              <Trans>Youtube Video Summary Creator</Trans>
+              <Trans>Invalid Youtube link</Trans>
             </ThemedText>
-            <ThemedText>
-              <Trans>
-                We will help you summarise your youtube video and create a audio
-                podcast.
-              </Trans>
-            </ThemedText>
-          </View>
-          <View>
-            <ThemedText
-              style={{
-                paddingBottom: 8,
-              }}
-            >
-              <Trans>Please paste your Youtube link</Trans>
-            </ThemedText>
-            <TextInput
-              placeholder="Youtube link"
-              defaultValue={youtubeVideoLink}
-              placeholderTextColor={Colors.neutral800}
-              onChangeText={(s) => setYoutubeVideoLink(s)}
-              onSubmitEditing={() => submitYoutubeLink()}
+          )}
+        </View>
+        <VerticalSpacer />
+        <View
+          style={{
+            alignItems: "flex-end",
+          }}
+        >
+          {youtubeVideoLink === "" ? (
+            <Pressable
               style={{
                 padding: 8,
                 borderRadius: 8,
-                fontSize: 20,
-                backgroundColor: Colors.neutral300,
-                color: Colors.sky700,
+                backgroundColor: Colors.blue600,
               }}
-            />
-            {isYoutubeVideoLinkEntered && !isYoutubeVideoIDValid && (
-              <ThemedText
-                style={{
-                  padding: 4,
-                  color: Colors.red400,
-                  textAlign: "right",
-                }}
-              >
-                <Trans>Invalid Youtube link</Trans>
+              onPress={() =>
+                Clipboard.getStringAsync().then((text) =>
+                  setYoutubeVideoLink(text),
+                )
+              }
+            >
+              <ThemedText>
+                <Trans>Paste from clipboard</Trans>
               </ThemedText>
-            )}
-          </View>
-          <VerticalSpacer />
-          <View
-            style={{
-              alignItems: "flex-end",
-            }}
-          >
-            {youtubeVideoLink === "" ? (
-              <Pressable
-                style={{
-                  padding: 8,
-                  borderRadius: 8,
-                  backgroundColor: Colors.blue600,
-                }}
-                onPress={() =>
-                  Clipboard.getStringAsync().then((text) =>
-                    setYoutubeVideoLink(text),
-                  )
-                }
-              >
-                <ThemedText>
-                  <Trans>Paste from clipboard</Trans>
-                </ThemedText>
-              </Pressable>
-            ) : (
-              <Pressable
-                style={{
-                  padding: 8,
-                  borderRadius: 8,
-                  backgroundColor: Colors.neutral600,
-                }}
-                onPress={() => setYoutubeVideoLink("")}
-              >
-                <ThemedText>
-                  <Trans>Clear</Trans>
-                </ThemedText>
-              </Pressable>
-            )}
-          </View>
-          {isYoutubeVideoIDValid && (
-            <YoutubeVideoPreview youtubeVideoID={youtubeVideoID} />
+            </Pressable>
+          ) : (
+            <Pressable
+              style={{
+                padding: 8,
+                borderRadius: 8,
+                backgroundColor: Colors.neutral600,
+              }}
+              onPress={() => setYoutubeVideoLink("")}
+            >
+              <ThemedText>
+                <Trans>Clear</Trans>
+              </ThemedText>
+            </Pressable>
           )}
         </View>
-      </ScrollViewContainer>
-      <View
-        style={{
-          flex: 1,
-          position: "absolute",
-          bottom: floatingButtonPaddingBottom,
-          width: "100%",
-          paddingHorizontal: windowDimensions.width * 0.1,
-        }}
-      >
-        <Pressable
-          style={{
-            backgroundColor: isYoutubeVideoIDValid
-              ? Colors.blue600
-              : Colors.gray400,
-            paddingVertical: 8,
-            borderRadius: 8,
-            alignItems: "center",
-          }}
-          onPress={submitYoutubeLink}
-          disabled={
-            !isYoutubeVideoIDValid ||
-            createYoutubeVideoSummaryMutation.isPending
-          }
-        >
-          <ThemedText type="lg-light">
-            <Trans>Create</Trans>
-          </ThemedText>
-        </Pressable>
+        {isYoutubeVideoIDValid && (
+          <YoutubeVideoPreview youtubeVideoID={youtubeVideoID} />
+        )}
+        {isYoutubeVideoIDValid && (
+          <Pressable
+            style={{
+              backgroundColor: Colors.blue600,
+              marginTop: 24,
+              paddingVertical: 8,
+              borderRadius: 8,
+              alignItems: "center",
+            }}
+            onPress={submitYoutubeLink}
+            disabled={createYoutubeVideoSummaryMutation.isPending}
+          >
+            <ThemedText type="lg-light">
+              <Trans>Create</Trans>
+            </ThemedText>
+          </Pressable>
+        )}
       </View>
-    </SafeAreaViewContainer>
+    </SafeScrollViewContainer>
   );
 }
 

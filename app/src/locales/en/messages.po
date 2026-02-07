@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:219
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:196
 msgid "... loading video ..."
 msgstr "... loading video ..."
 
@@ -149,7 +149,7 @@ msgstr "Choose the type of native media controls you want to see."
 msgid "Christianity"
 msgstr "Christianity"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:163
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:153
 msgid "Clear"
 msgstr "Clear"
 
@@ -186,7 +186,7 @@ msgstr "Crafts"
 
 #: src/app/(tabs)/_layout.tsx:140
 #: src/app/(tabs)/(create)/_layout.tsx:19
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:198
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:174
 msgid "Create"
 msgstr "Create"
 
@@ -270,7 +270,7 @@ msgstr "Explore"
 msgid "External Audio controls"
 msgstr "External Audio controls"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:234
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:211
 msgid "Failed to load video!"
 msgstr "Failed to load video!"
 
@@ -296,11 +296,11 @@ msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:67
+#: src/app/(tabs)/(home)/index.tsx:70
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:125
+#: src/app/(tabs)/(home)/index.tsx:124
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -400,7 +400,7 @@ msgstr "How To"
 msgid "Improv"
 msgstr "Improv"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:126
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:116
 msgid "Invalid Youtube link"
 msgstr "Invalid Youtube link"
 
@@ -541,7 +541,7 @@ msgstr "Oops Sorry!"
 msgid "Parenting"
 msgstr "Parenting"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:150
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:140
 msgid "Paste from clipboard"
 msgstr "Paste from clipboard"
 
@@ -578,7 +578,7 @@ msgstr "Pick a content source to start creating content in your own style!"
 msgid "Places & Travel"
 msgstr "Places & Travel"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:102
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:92
 msgid "Please paste your Youtube link"
 msgstr "Please paste your Youtube link"
 
@@ -635,12 +635,12 @@ msgstr "Rugby"
 msgid "Running"
 msgstr "Running"
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:220
+#: src/app/(onboarding)/default-content-preference-selection.tsx:207
 msgid "Save"
 msgstr "Save"
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:111
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:63
+#: src/app/(onboarding)/default-content-preference-selection.tsx:101
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:56
 msgid "Saving"
 msgstr "Saving"
 
@@ -660,7 +660,7 @@ msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgid "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
 msgstr "Select all the content languages you would like to see. You need to select at least one and you cannot remove the app's current language."
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:138
+#: src/app/(onboarding)/default-content-preference-selection.tsx:127
 msgid "Select topics you like so that we can personalise your starting experience!"
 msgstr "Select topics you like so that we can personalise your starting experience!"
 
@@ -741,6 +741,10 @@ msgstr "Start listening"
 msgid "Stories for Kids"
 msgstr "Stories for Kids"
 
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:52
+msgid "Submitted!"
+msgstr "Submitted!"
+
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:278
 msgid "Subscribe"
 msgstr "Subscribe"
@@ -817,11 +821,11 @@ msgstr "Want more?"
 msgid "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 msgstr "We can't find what you want, here's is a drawing of us being very sorry and sad..."
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:90
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:80
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "We will help you summarise your youtube video and create a audio podcast."
 
-#: src/app/(onboarding)/default-content-preference-selection.tsx:135
+#: src/app/(onboarding)/default-content-preference-selection.tsx:124
 msgid "What interests you?"
 msgstr "What interests you?"
 
@@ -849,6 +853,6 @@ msgstr "YouTube"
 msgid "Youtube Video Summary Create"
 msgstr "Youtube Video Summary Create"
 
-#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:87
+#: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:77
 msgid "Youtube Video Summary Creator"
 msgstr "Youtube Video Summary Creator"
