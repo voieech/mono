@@ -1,0 +1,10 @@
+# Move into the app directory before running commands
+cd app
+
+# Use lint-staged to only run linting/formatting/typechecking/etc... on the
+# staged files, see .lintstagedrc.json file.
+# This is using "--no-revert" so that any failure still stops the commit, but
+# lint-staged leaves the modified files as-is on your disk. In the case of
+# failing because of missing .po file translations, you can then fill in the
+# missing translations and commit again without re-running the extraction step.
+npx lint-staged --no-revert
