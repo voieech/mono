@@ -263,8 +263,8 @@ msgid "Entrepreneurship"
 msgstr "Entrepreneurship"
 
 #: src/app/(tabs)/_layout.tsx:117
-msgid "Explore"
-msgstr "Explore"
+#~ msgid "Explore"
+#~ msgstr "Explore"
 
 #: src/utils/settings/externalMediaControls.ts:15
 msgid "External Audio controls"
@@ -384,6 +384,7 @@ msgstr "Hobbies"
 msgid "Hockey"
 msgstr "Hockey"
 
+#: src/app/(tabs)/_layout.tsx:117
 #: src/app/(tabs)/(home)/_layout.tsx:19
 msgid "Home"
 msgstr "Home"

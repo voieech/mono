@@ -263,8 +263,8 @@ msgid "Entrepreneurship"
 msgstr "创业"
 
 #: src/app/(tabs)/_layout.tsx:117
-msgid "Explore"
-msgstr "探索"
+#~ msgid "Explore"
+#~ msgstr "探索"
 
 #: src/utils/settings/externalMediaControls.ts:15
 msgid "External Audio controls"
@@ -384,6 +384,7 @@ msgstr "兴趣爱好"
 msgid "Hockey"
 msgstr "曲棍球"
 
+#: src/app/(tabs)/_layout.tsx:117
 #: src/app/(tabs)/(home)/_layout.tsx:19
 msgid "Home"
 msgstr "主页"

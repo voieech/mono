@@ -46,6 +46,7 @@ const SfSymbolsToMaterialIconsMapping = {
   xmark: "close",
   bell: "notifications",
   "bell.slash": "notifications-off",
+  house: "home",
 
   // Using satisfies and partial to ensure that users can only use icons after
   // they added the SF->MI mapping here.
