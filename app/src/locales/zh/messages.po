@@ -26,11 +26,11 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
-#: src/app/(tabs)/profile/index.tsx:87
+#: src/app/(tabs)/profile/index.tsx:89
 msgid "About"
 msgstr "关于"
 
-#: src/app/(tabs)/profile/index.tsx:220
+#: src/app/(tabs)/profile/index.tsx:241
 msgid "Account Information"
 msgstr "账户信息"
 
@@ -46,12 +46,12 @@ msgstr "另类健康"
 msgid "Animation & Manga"
 msgstr "动画与漫画"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:88
+#: src/app/(tabs)/profile/settings/app-details.tsx:79
 msgid "App cache"
 msgstr "应用程序缓存"
 
 #: src/app/(tabs)/profile/_layout.tsx:39
-#: src/app/(tabs)/profile/index.tsx:99
+#: src/app/(tabs)/profile/index.tsx:101
 msgid "App Details"
 msgstr "应用详情"
 
@@ -67,7 +67,7 @@ msgstr "应用程序语言只能在 Android 的“设置”应用中修改。"
 msgid "App language can only be modified in the IOS \"Settings\" app."
 msgstr "应用程序语言只能在 IOS 的“设置”应用中修改。"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:39
+#: src/app/(tabs)/profile/settings/app-details.tsx:30
 msgid "App Version"
 msgstr "应用程序版本"
 
@@ -80,7 +80,7 @@ msgid "Astronomy"
 msgstr "天文学"
 
 #: src/app/(tabs)/profile/_layout.tsx:18
-#: src/app/(tabs)/profile/index.tsx:309
+#: src/app/(tabs)/profile/index.tsx:333
 msgid "Audio Playback"
 msgstr "音频播放"
 
@@ -116,6 +116,10 @@ msgstr "书籍"
 msgid "Buddhism"
 msgstr "佛教"
 
+#: src/app/(tabs)/profile/index.tsx:122
+msgid "Built by voieech.com"
+msgstr "由 voieech.com 构建"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:19
 msgid "Business"
 msgstr "商业"
@@ -124,7 +128,7 @@ msgstr "商业"
 msgid "Business News"
 msgstr "商业新闻"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:93
+#: src/app/(tabs)/profile/settings/app-details.tsx:84
 msgid "Cache will be cleared"
 msgstr "缓存将被清除"
 
@@ -225,7 +229,7 @@ msgstr "自定义内容偏好"
 msgid "Daily News"
 msgstr "每日新闻"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:148
+#: src/app/(tabs)/profile/settings/app-details.tsx:139
 msgid "Debugging Data"
 msgstr "调试数据"
 
@@ -249,7 +253,7 @@ msgstr "戏剧"
 msgid "Earth Sciences"
 msgstr "地球科学"
 
-#: src/app/(tabs)/profile/index.tsx:294
+#: src/app/(tabs)/profile/index.tsx:315
 msgid "Edit Profile"
 msgstr "编辑个人资料"
 
@@ -261,11 +265,11 @@ msgstr "教育"
 msgid "Education for Kids"
 msgstr "儿童教育"
 
-#: src/app/(tabs)/profile/index.tsx:231
+#: src/app/(tabs)/profile/index.tsx:252
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/app/(tabs)/profile/index.tsx:239
+#: src/app/(tabs)/profile/index.tsx:260
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
@@ -383,7 +387,7 @@ msgstr "访客用户"
 msgid "Health & Fitness"
 msgstr "健康与健身"
 
-#: src/app/(tabs)/profile/index.tsx:89
+#: src/app/(tabs)/profile/index.tsx:91
 msgid "Help & Support"
 msgstr "帮助与支持"
 
@@ -441,7 +445,7 @@ msgid "Kids & Family"
 msgstr "儿童与家庭"
 
 #: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:315
+#: src/app/(tabs)/profile/index.tsx:339
 msgid "Language"
 msgstr "语言"
 
@@ -481,7 +485,7 @@ msgstr "我"
 msgid "Medicine"
 msgstr "医学"
 
-#: src/app/(tabs)/profile/index.tsx:235
+#: src/app/(tabs)/profile/index.tsx:256
 msgid "Member Since"
 msgstr "会员自"
 
@@ -505,15 +509,15 @@ msgstr "音乐史"
 msgid "Music Interviews"
 msgstr "音乐采访"
 
-#: src/app/(tabs)/profile/index.tsx:224
+#: src/app/(tabs)/profile/index.tsx:245
 msgid "Name"
 msgstr "姓名"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:51
+#: src/app/(tabs)/profile/settings/app-details.tsx:42
 msgid "Native app version"
 msgstr "本机应用程序版本"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:55
+#: src/app/(tabs)/profile/settings/app-details.tsx:46
 msgid "Native build version"
 msgstr "本机构建版本"
 
@@ -533,7 +537,7 @@ msgstr "新闻"
 msgid "News Commentary"
 msgstr "新闻评论"
 
-#: src/app/(tabs)/profile/index.tsx:241
+#: src/app/(tabs)/profile/index.tsx:262
 msgid "No"
 msgstr "不"
 
@@ -541,8 +545,8 @@ msgstr "不"
 msgid "Non-Profit"
 msgstr "非营利组织"
 
-#: src/app/(tabs)/profile/index.tsx:116
-#: src/app/(tabs)/profile/index.tsx:265
+#: src/app/(tabs)/profile/index.tsx:137
+#: src/app/(tabs)/profile/index.tsx:286
 msgid "Not Available"
 msgstr "信息不存在"
 
@@ -550,7 +554,7 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile/index.tsx:302
+#: src/app/(tabs)/profile/index.tsx:325
 msgid "Notifications"
 msgstr "通知"
 
@@ -579,7 +583,7 @@ msgid "Personal Journals"
 msgstr "个人日记"
 
 #: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:322
+#: src/app/(tabs)/profile/index.tsx:346
 msgid "Personalisation"
 msgstr "个性化"
 
@@ -607,7 +611,7 @@ msgstr "地点与旅行"
 msgid "Please paste your Youtube link"
 msgstr "请粘贴您的 YouTube 链接"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:129
+#: src/app/(tabs)/profile/settings/app-details.tsx:120
 msgid "Please restart app after clearing cache."
 msgstr "清除缓存后请重启应用。"
 
@@ -623,16 +627,16 @@ msgstr "播客剧集"
 msgid "Politics"
 msgstr "政治"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:110
+#: src/app/(tabs)/profile/settings/app-details.tsx:101
 msgid "Press to clear cache"
 msgstr "按清除缓存"
 
-#: src/app/(tabs)/profile/index.tsx:91
+#: src/app/(tabs)/profile/index.tsx:93
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
 #: src/app/(tabs)/profile/_layout.tsx:12
-#: src/app/(tabs)/profile/index.tsx:47
+#: src/app/(tabs)/profile/index.tsx:49
 msgid "Profile"
 msgstr "个人资料"
 
@@ -701,7 +705,7 @@ msgstr "选择您感兴趣的主题，以便我们为您量身定制入门体验
 msgid "Self-Improvement"
 msgstr "自我提升"
 
-#: src/app/(tabs)/profile/index.tsx:284
+#: src/app/(tabs)/profile/index.tsx:304
 msgid "Settings"
 msgstr "设置"
 
@@ -717,7 +721,7 @@ msgstr "显示跳前和跳后十五秒的按键。"
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
-#: src/app/(tabs)/profile/index.tsx:73
+#: src/app/(tabs)/profile/index.tsx:75
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "登入"
@@ -730,7 +734,7 @@ msgstr "登录以继续"
 msgid "Sign in to Personalise!"
 msgstr "登录以进行个性化设置！"
 
-#: src/app/(tabs)/profile/index.tsx:71
+#: src/app/(tabs)/profile/index.tsx:73
 msgid "Sign Out"
 msgstr "退出应用程序"
 
@@ -806,7 +810,7 @@ msgstr "请告诉我们您还希望我们添加哪些其他内容来源！"
 msgid "Tennis"
 msgstr "网球"
 
-#: src/app/(tabs)/profile/index.tsx:95
+#: src/app/(tabs)/profile/index.tsx:97
 msgid "Terms of Service"
 msgstr "服务条款"
 
@@ -830,7 +834,7 @@ msgstr "电视评论"
 msgid "Unsubscribe"
 msgstr "退订"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:138
+#: src/app/(tabs)/profile/settings/app-details.tsx:129
 msgid "Updates"
 msgstr "更新"
 
@@ -870,7 +874,7 @@ msgstr "荒野"
 msgid "Wrestling"
 msgstr "摔角"
 
-#: src/app/(tabs)/profile/index.tsx:241
+#: src/app/(tabs)/profile/index.tsx:262
 msgid "Yes"
 msgstr "是"
 

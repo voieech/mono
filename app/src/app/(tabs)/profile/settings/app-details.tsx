@@ -1,26 +1,17 @@
 import { useLingui, Trans } from "@lingui/react/macro";
 import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
-import * as Haptics from "expo-haptics";
 import { getLocales, getCalendars } from "expo-localization";
-import { useRouter } from "expo-router";
 import * as ExpoUpdates from "expo-updates";
 import { useState } from "react";
 import { View, Pressable, TouchableOpacity } from "react-native";
 
-import {
-  ThemedText,
-  CopyOnPress,
-  VerticalSpacer,
-  VerticalDivider,
-  Icon,
-} from "@/components";
+import { ThemedText, CopyOnPress, VerticalDivider, Icon } from "@/components";
 import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
 import { posthog, toast, clearCache } from "@/utils";
 
 export default function AppDetails() {
   const posthogDistinctID = posthog.getDistinctId();
-  const router = useRouter();
   const { t } = useLingui();
 
   return (
@@ -148,25 +139,6 @@ export default function AppDetails() {
             <Trans>Debugging Data</Trans>
           </ThemedText>
           <DebuggingInfo />
-        </View>
-        <VerticalSpacer />
-        <View>
-          <Pressable
-            onPressIn={() =>
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-            }
-            onLongPress={() => router.push("/profile/settings/internal")}
-            delayLongPress={1000}
-          >
-            <ThemedText
-              type="sm-thin"
-              style={{
-                textAlign: "center",
-              }}
-            >
-              Built by voieech.com
-            </ThemedText>
-          </Pressable>
         </View>
       </View>
     </SettingsPageLayout>

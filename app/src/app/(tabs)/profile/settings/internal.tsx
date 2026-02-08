@@ -3,9 +3,10 @@ import { View } from "react-native";
 
 import type { ExperimentalSurfaceName } from "@/utils";
 
-import { ThemedLink } from "@/components";
+import { ThemedText, ThemedLink, VerticalSpacer } from "@/components";
 import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { SwitchSettingRow } from "@/components-page/(tabs)/profile/settings/SwitchSettingRow";
+import { Colors } from "@/constants";
 import {
   useSettingContext,
   useAppDebuggingSurfaceContext,
@@ -23,28 +24,40 @@ export default function SettingsInternal() {
           rowGap: 16,
         }}
       >
-        <Link
-          href={{
-            pathname: "/_sitemap",
+        <View
+          style={{
+            flexDirection: "column",
+            rowGap: 8,
+            backgroundColor: Colors.black,
+            padding: 16,
+            borderRadius: 16,
           }}
         >
-          <ThemedLink>Sitemap</ThemedLink>
-        </Link>
-        <Link
-          href={{
-            pathname: "/+not-found",
-            params: {},
-          }}
-        >
-          <ThemedLink>Not Found</ThemedLink>
-        </Link>
-        <Link
-          href={{
-            pathname: "/themed-text-test",
-          }}
-        >
-          <ThemedLink>Themed Text Test</ThemedLink>
-        </Link>
+          <ThemedText type="lg-light">Links</ThemedText>
+          <Link
+            href={{
+              pathname: "/_sitemap",
+            }}
+          >
+            <ThemedLink>Sitemap</ThemedLink>
+          </Link>
+          <Link
+            href={{
+              pathname: "/+not-found",
+              params: {},
+            }}
+          >
+            <ThemedLink>Not Found</ThemedLink>
+          </Link>
+          <Link
+            href={{
+              pathname: "/themed-text-test",
+            }}
+          >
+            <ThemedLink>Themed Text Test</ThemedLink>
+          </Link>
+        </View>
+        <VerticalSpacer height={4} />
         <SwitchSettingRow
           settingTitle="Show Debugging Surfaces"
           description="Show internal visual debugging surfaces"
@@ -74,6 +87,11 @@ export default function SettingsInternal() {
           }}
         />
         <ExperimentalSurfaceSettingRow
+          settingTitle="Show all other generic experimental surfaces"
+          description="For every surface that didnt specify a custom experiment name"
+          experimentalSurfaceName="default"
+        />
+        <ExperimentalSurfaceSettingRow
           settingTitle="Use 'interval' instead of 'loop' for useProgress"
           description="Choose the type of useProgress hook implementation"
           experimentalSurfaceName="use-interval-for-useProgress"
@@ -82,11 +100,6 @@ export default function SettingsInternal() {
           settingTitle="Use 'card' player instead of 'modal'"
           description="There is a bug on IOS where modal route gets warped with stack route in home page when switching between audio player modal and a route quickly"
           experimentalSurfaceName="use-card-player-instead-of-modal"
-        />
-        <ExperimentalSurfaceSettingRow
-          settingTitle="Show all other generic experimental surfaces"
-          description="For every surface that didnt specify a custom experiment name"
-          experimentalSurfaceName="default"
         />
       </View>
     </SettingsPageLayout>

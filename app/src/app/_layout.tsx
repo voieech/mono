@@ -69,14 +69,12 @@ function RootLayout() {
             : "containedTransparentModal",
         }}
       />
-      {__DEV__ && (
-        <Stack.Screen
-          name="themed-text-test"
-          options={{
-            presentation: "modal",
-          }}
-        />
-      )}
+      <Stack.Screen
+        name="themed-text-test"
+        options={{
+          presentation: "modal",
+        }}
+      />
       <Stack.Screen name="+not-found" />
     </Stack>
   );

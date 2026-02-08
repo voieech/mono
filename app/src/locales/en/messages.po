@@ -26,11 +26,11 @@ msgstr "{episodeLengthInMins} mins"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 
-#: src/app/(tabs)/profile/index.tsx:87
+#: src/app/(tabs)/profile/index.tsx:89
 msgid "About"
 msgstr "About"
 
-#: src/app/(tabs)/profile/index.tsx:220
+#: src/app/(tabs)/profile/index.tsx:241
 msgid "Account Information"
 msgstr "Account Information"
 
@@ -46,12 +46,12 @@ msgstr "Alternative Health"
 msgid "Animation & Manga"
 msgstr "Animation & Manga"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:88
+#: src/app/(tabs)/profile/settings/app-details.tsx:79
 msgid "App cache"
 msgstr "App cache"
 
 #: src/app/(tabs)/profile/_layout.tsx:39
-#: src/app/(tabs)/profile/index.tsx:99
+#: src/app/(tabs)/profile/index.tsx:101
 msgid "App Details"
 msgstr "App Details"
 
@@ -67,7 +67,7 @@ msgstr "App language can only be modified in the Android \"Settings\" app."
 msgid "App language can only be modified in the IOS \"Settings\" app."
 msgstr "App language can only be modified in the IOS \"Settings\" app."
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:39
+#: src/app/(tabs)/profile/settings/app-details.tsx:30
 msgid "App Version"
 msgstr "App Version"
 
@@ -80,7 +80,7 @@ msgid "Astronomy"
 msgstr "Astronomy"
 
 #: src/app/(tabs)/profile/_layout.tsx:18
-#: src/app/(tabs)/profile/index.tsx:309
+#: src/app/(tabs)/profile/index.tsx:333
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
@@ -116,6 +116,10 @@ msgstr "Books"
 msgid "Buddhism"
 msgstr "Buddhism"
 
+#: src/app/(tabs)/profile/index.tsx:122
+msgid "Built by voieech.com"
+msgstr "Built by voieech.com"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:19
 msgid "Business"
 msgstr "Business"
@@ -124,7 +128,7 @@ msgstr "Business"
 msgid "Business News"
 msgstr "Business News"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:93
+#: src/app/(tabs)/profile/settings/app-details.tsx:84
 msgid "Cache will be cleared"
 msgstr "Cache will be cleared"
 
@@ -225,7 +229,7 @@ msgstr "Customise content preferences"
 msgid "Daily News"
 msgstr "Daily News"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:148
+#: src/app/(tabs)/profile/settings/app-details.tsx:139
 msgid "Debugging Data"
 msgstr "Debugging Data"
 
@@ -249,7 +253,7 @@ msgstr "Drama"
 msgid "Earth Sciences"
 msgstr "Earth Sciences"
 
-#: src/app/(tabs)/profile/index.tsx:294
+#: src/app/(tabs)/profile/index.tsx:315
 msgid "Edit Profile"
 msgstr "Edit Profile"
 
@@ -261,11 +265,11 @@ msgstr "Education"
 msgid "Education for Kids"
 msgstr "Education for Kids"
 
-#: src/app/(tabs)/profile/index.tsx:231
+#: src/app/(tabs)/profile/index.tsx:252
 msgid "Email"
 msgstr "Email"
 
-#: src/app/(tabs)/profile/index.tsx:239
+#: src/app/(tabs)/profile/index.tsx:260
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
@@ -383,7 +387,7 @@ msgstr "Guest User"
 msgid "Health & Fitness"
 msgstr "Health & Fitness"
 
-#: src/app/(tabs)/profile/index.tsx:89
+#: src/app/(tabs)/profile/index.tsx:91
 msgid "Help & Support"
 msgstr "Help & Support"
 
@@ -441,7 +445,7 @@ msgid "Kids & Family"
 msgstr "Kids & Family"
 
 #: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:315
+#: src/app/(tabs)/profile/index.tsx:339
 msgid "Language"
 msgstr "Language"
 
@@ -481,7 +485,7 @@ msgstr "Me"
 msgid "Medicine"
 msgstr "Medicine"
 
-#: src/app/(tabs)/profile/index.tsx:235
+#: src/app/(tabs)/profile/index.tsx:256
 msgid "Member Since"
 msgstr "Member Since"
 
@@ -505,15 +509,15 @@ msgstr "Music History"
 msgid "Music Interviews"
 msgstr "Music Interviews"
 
-#: src/app/(tabs)/profile/index.tsx:224
+#: src/app/(tabs)/profile/index.tsx:245
 msgid "Name"
 msgstr "Name"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:51
+#: src/app/(tabs)/profile/settings/app-details.tsx:42
 msgid "Native app version"
 msgstr "Native app version"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:55
+#: src/app/(tabs)/profile/settings/app-details.tsx:46
 msgid "Native build version"
 msgstr "Native build version"
 
@@ -533,7 +537,7 @@ msgstr "News"
 msgid "News Commentary"
 msgstr "News Commentary"
 
-#: src/app/(tabs)/profile/index.tsx:241
+#: src/app/(tabs)/profile/index.tsx:262
 msgid "No"
 msgstr "No"
 
@@ -541,8 +545,8 @@ msgstr "No"
 msgid "Non-Profit"
 msgstr "Non-Profit"
 
-#: src/app/(tabs)/profile/index.tsx:116
-#: src/app/(tabs)/profile/index.tsx:265
+#: src/app/(tabs)/profile/index.tsx:137
+#: src/app/(tabs)/profile/index.tsx:286
 msgid "Not Available"
 msgstr "Not Available"
 
@@ -550,7 +554,7 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile/index.tsx:302
+#: src/app/(tabs)/profile/index.tsx:325
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -579,7 +583,7 @@ msgid "Personal Journals"
 msgstr "Personal Journals"
 
 #: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:322
+#: src/app/(tabs)/profile/index.tsx:346
 msgid "Personalisation"
 msgstr "Personalisation"
 
@@ -607,7 +611,7 @@ msgstr "Places & Travel"
 msgid "Please paste your Youtube link"
 msgstr "Please paste your Youtube link"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:129
+#: src/app/(tabs)/profile/settings/app-details.tsx:120
 msgid "Please restart app after clearing cache."
 msgstr "Please restart app after clearing cache."
 
@@ -623,16 +627,16 @@ msgstr "Podcast Episode"
 msgid "Politics"
 msgstr "Politics"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:110
+#: src/app/(tabs)/profile/settings/app-details.tsx:101
 msgid "Press to clear cache"
 msgstr "Press to clear cache"
 
-#: src/app/(tabs)/profile/index.tsx:91
+#: src/app/(tabs)/profile/index.tsx:93
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
 #: src/app/(tabs)/profile/_layout.tsx:12
-#: src/app/(tabs)/profile/index.tsx:47
+#: src/app/(tabs)/profile/index.tsx:49
 msgid "Profile"
 msgstr "Profile"
 
@@ -701,7 +705,7 @@ msgstr "Select topics you like so that we can personalise your starting experien
 msgid "Self-Improvement"
 msgstr "Self-Improvement"
 
-#: src/app/(tabs)/profile/index.tsx:284
+#: src/app/(tabs)/profile/index.tsx:304
 msgid "Settings"
 msgstr "Settings"
 
@@ -717,7 +721,7 @@ msgstr "Show controls for jumping back and forth in 15 seconds intervals."
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "Show controls for skipping tracks to next/previous."
 
-#: src/app/(tabs)/profile/index.tsx:73
+#: src/app/(tabs)/profile/index.tsx:75
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "Sign In"
@@ -730,7 +734,7 @@ msgstr "Sign In to Continue"
 msgid "Sign in to Personalise!"
 msgstr "Sign in to Personalise!"
 
-#: src/app/(tabs)/profile/index.tsx:71
+#: src/app/(tabs)/profile/index.tsx:73
 msgid "Sign Out"
 msgstr "Sign Out"
 
@@ -806,7 +810,7 @@ msgstr "Tell us what other content sources you would like us to add!"
 msgid "Tennis"
 msgstr "Tennis"
 
-#: src/app/(tabs)/profile/index.tsx:95
+#: src/app/(tabs)/profile/index.tsx:97
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
@@ -830,7 +834,7 @@ msgstr "TV Reviews"
 msgid "Unsubscribe"
 msgstr "Unsubscribe"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:138
+#: src/app/(tabs)/profile/settings/app-details.tsx:129
 msgid "Updates"
 msgstr "Updates"
 
@@ -870,7 +874,7 @@ msgstr "Wilderness"
 msgid "Wrestling"
 msgstr "Wrestling"
 
-#: src/app/(tabs)/profile/index.tsx:241
+#: src/app/(tabs)/profile/index.tsx:262
 msgid "Yes"
 msgstr "Yes"
 

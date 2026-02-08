@@ -1,13 +1,14 @@
 import type { Href } from "expo-router";
 
 import { useLingui, Trans } from "@lingui/react/macro";
+import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
-import { Link } from "expo-router";
-import { useFeatureFlag } from "posthog-react-native";
+import { useRouter, Link } from "expo-router";
 import { useCallback, useState } from "react";
 import { View, Pressable, TouchableOpacity } from "react-native";
 
 import {
+  ExperimentalSurface,
   ParallaxScrollViewContainer,
   ThemedText,
   ThemedLink,
@@ -22,6 +23,7 @@ import { envVar, getUserFullName } from "@/utils";
 
 export default function ProfilePage() {
   const authContext = useAuthContext();
+  const router = useRouter();
   const { t } = useLingui();
 
   return (
@@ -101,6 +103,25 @@ export default function ProfilePage() {
             pathname: "/profile/settings/app-details",
           }}
         />
+      </View>
+      <VerticalSpacer height={32} />
+      <View>
+        <Pressable
+          onPressIn={() =>
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+          }
+          onLongPress={() => router.push("/profile/settings/internal")}
+          delayLongPress={2000}
+        >
+          <ThemedText
+            type="sm-light"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            <Trans>Built by voieech.com</Trans>
+          </ThemedText>
+        </Pressable>
       </View>
     </ParallaxScrollViewContainer>
   );
@@ -269,7 +290,6 @@ function ProfileRow(props: { label: string; value?: string }) {
 }
 
 function SettingsSection() {
-  const isInternalUser = useFeatureFlag("internal");
   const authContext = useAuthContext();
   const { t } = useLingui();
 
@@ -289,21 +309,25 @@ function SettingsSection() {
           rowGap: 8,
         }}
       >
-        {(__DEV__ || isInternalUser) && authContext.isAuthenticated && (
-          <SettingsPageLink
-            setting={t`Edit Profile`}
-            href={{
-              pathname: "/",
-            }}
-          />
+        {authContext.isAuthenticated && (
+          <ExperimentalSurface>
+            <SettingsPageLink
+              setting={t`Edit Profile`}
+              href={{
+                pathname: "/",
+              }}
+            />
+          </ExperimentalSurface>
         )}
-        {(__DEV__ || isInternalUser) && authContext.isAuthenticated && (
-          <SettingsPageLink
-            setting={t`Notifications`}
-            href={{
-              pathname: "/",
-            }}
-          />
+        {authContext.isAuthenticated && (
+          <ExperimentalSurface>
+            <SettingsPageLink
+              setting={t`Notifications`}
+              href={{
+                pathname: "/",
+              }}
+            />
+          </ExperimentalSurface>
         )}
         <SettingsPageLink
           setting={t`Audio Playback`}
@@ -317,14 +341,14 @@ function SettingsSection() {
             pathname: "/profile/settings/language",
           }}
         />
-        {(__DEV__ || isInternalUser) && (
+        <ExperimentalSurface>
           <SettingsPageLink
             setting={t`Personalisation`}
             href={{
               pathname: "/profile/settings/personalisation",
             }}
           />
-        )}
+        </ExperimentalSurface>
       </View>
     </View>
   );
