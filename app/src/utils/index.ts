@@ -3,6 +3,7 @@
  */
 
 export * from "./base64URLEncode";
+export * from "./clearCache";
 export * from "./createUseContextHook";
 export * from "./envVar";
 export * from "./experimentalSurfaceInLocalStorage";

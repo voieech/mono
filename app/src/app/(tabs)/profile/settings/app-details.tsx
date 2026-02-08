@@ -1,4 +1,4 @@
-import { Trans } from "@lingui/react/macro";
+import { useLingui, Trans } from "@lingui/react/macro";
 import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
 import * as Haptics from "expo-haptics";
 import { getLocales, getCalendars } from "expo-localization";
@@ -16,11 +16,12 @@ import {
 } from "@/components";
 import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
-import { posthog, toast } from "@/utils";
+import { posthog, toast, clearCache } from "@/utils";
 
 export default function AppDetails() {
   const posthogDistinctID = posthog.getDistinctId();
   const router = useRouter();
+  const { t } = useLingui();
 
   return (
     <SettingsPageLayout>
@@ -77,6 +78,56 @@ export default function AppDetails() {
               <ThemedText>{posthogDistinctID}</ThemedText>
             </View>
           </CopyOnPress>
+        </View>
+        <View
+          style={{
+            rowGap: 4,
+          }}
+        >
+          <ThemedText>
+            <Trans>App cache</Trans>
+          </ThemedText>
+          <Pressable
+            onPress={() => {
+              clearCache();
+              toast(t`Cache will be cleared`);
+            }}
+          >
+            <View
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                columnGap: 12,
+                justifyContent: "space-between",
+                alignItems: "center",
+                backgroundColor: Colors.black,
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderRadius: 16,
+              }}
+            >
+              <ThemedText>
+                <Trans>Press to clear cache</Trans>
+              </ThemedText>
+              <Icon
+                name="chevron.right"
+                size={20}
+                weight="medium"
+                color={Colors.neutral400}
+              />
+            </View>
+          </Pressable>
+          <ThemedText
+            type="sm-normal"
+            colorType="subtext"
+            style={{
+              paddingTop: 8,
+              paddingHorizontal: 16,
+              marginTop: -4,
+            }}
+          >
+            <Trans>Please restart app after clearing cache.</Trans>
+          </ThemedText>
         </View>
         <View
           style={{

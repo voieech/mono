@@ -46,6 +46,10 @@ msgstr "Alternative Health"
 msgid "Animation & Manga"
 msgstr "Animation & Manga"
 
+#: src/app/(tabs)/profile/settings/app-details.tsx:88
+msgid "App cache"
+msgstr "App cache"
+
 #: src/app/(tabs)/profile/_layout.tsx:39
 #: src/app/(tabs)/profile/index.tsx:99
 msgid "App Details"
@@ -63,7 +67,7 @@ msgstr "App language can only be modified in the Android \"Settings\" app."
 msgid "App language can only be modified in the IOS \"Settings\" app."
 msgstr "App language can only be modified in the IOS \"Settings\" app."
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:38
+#: src/app/(tabs)/profile/settings/app-details.tsx:39
 msgid "App Version"
 msgstr "App Version"
 
@@ -119,6 +123,10 @@ msgstr "Business"
 #: src/locales/categoryStringToMsgDescriptor.ts:67
 msgid "Business News"
 msgstr "Business News"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:93
+msgid "Cache will be cleared"
+msgstr "Cache will be cleared"
 
 #: src/components/CommonModal.tsx:91
 #: src/components/CommonModalUsingHighZindexView.tsx:131
@@ -217,7 +225,7 @@ msgstr "Customise content preferences"
 msgid "Daily News"
 msgstr "Daily News"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:97
+#: src/app/(tabs)/profile/settings/app-details.tsx:148
 msgid "Debugging Data"
 msgstr "Debugging Data"
 
@@ -501,11 +509,11 @@ msgstr "Music Interviews"
 msgid "Name"
 msgstr "Name"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:50
+#: src/app/(tabs)/profile/settings/app-details.tsx:51
 msgid "Native app version"
 msgstr "Native app version"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:54
+#: src/app/(tabs)/profile/settings/app-details.tsx:55
 msgid "Native build version"
 msgstr "Native build version"
 
@@ -599,6 +607,10 @@ msgstr "Places & Travel"
 msgid "Please paste your Youtube link"
 msgstr "Please paste your Youtube link"
 
+#: src/app/(tabs)/profile/settings/app-details.tsx:129
+msgid "Please restart app after clearing cache."
+msgstr "Please restart app after clearing cache."
+
 #: src/app/(tabs)/(home)/_layout.tsx:39
 msgid "Podcast Channel"
 msgstr "Podcast Channel"
@@ -610,6 +622,10 @@ msgstr "Podcast Episode"
 #: src/locales/categoryStringToMsgDescriptor.ts:71
 msgid "Politics"
 msgstr "Politics"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:110
+msgid "Press to clear cache"
+msgstr "Press to clear cache"
 
 #: src/app/(tabs)/profile/index.tsx:91
 msgid "Privacy Policy"
@@ -814,7 +830,7 @@ msgstr "TV Reviews"
 msgid "Unsubscribe"
 msgstr "Unsubscribe"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:87
+#: src/app/(tabs)/profile/settings/app-details.tsx:138
 msgid "Updates"
 msgstr "Updates"
 
