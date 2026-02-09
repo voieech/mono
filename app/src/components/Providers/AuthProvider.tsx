@@ -7,8 +7,8 @@ import type { AuthDataFromWorkos } from "@/types";
 
 import { reactQueryClient } from "@/api-client";
 import { authController, secureStoreForAuth } from "@/auth";
-import { apiBaseUrl } from "@/constants";
 import { AuthContext } from "@/context";
+import { envVar } from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
@@ -55,7 +55,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const accessToken = await secureStoreForAuth.getAccessTokenString();
 
       if (accessToken !== null) {
-        await fetch(`${apiBaseUrl}/auth/logout`, {
+        await fetch(`${envVar.apiBaseUrlForAuth}/auth/logout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

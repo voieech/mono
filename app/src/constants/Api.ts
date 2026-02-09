@@ -1,1 +1,2 @@
-export const apiBaseUrl = "https://api.voieech.com";
+import { envVar } from "@/utils";
+export const apiBaseUrl = envVar.apiBaseUrl;

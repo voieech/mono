@@ -3,7 +3,7 @@ import * as WebBrowser from "expo-web-browser";
 
 import type { AuthDataFromWorkos } from "@/types";
 
-import { apiBaseUrl } from "@/constants";
+import { envVar } from "@/utils";
 
 import { generatePkceCode } from "./generatePkceCode";
 import { secureStoreForAuth } from "./secureStoreForAuth";
@@ -21,7 +21,7 @@ export const authController = {
       });
 
       const urlRes = await fetch(
-        `${apiBaseUrl}/auth/workos/login?${params.toString()}`,
+        `${envVar.apiBaseUrl}/auth/workos/login?${params.toString()}`,
       );
 
       if (!urlRes.ok) {
@@ -67,7 +67,7 @@ export const authController = {
 
       // Step 4: Exchange auth code and code verifier for tokens
       const exchangeRes = await fetch(
-        `${apiBaseUrl}/auth/workos/exchange-code`,
+        `${envVar.apiBaseUrl}/auth/workos/exchange-code`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -122,7 +122,7 @@ export const authController = {
         return;
       }
 
-      const res = await fetch(`${apiBaseUrl}/auth/workos/refresh`, {
+      const res = await fetch(`${envVar.apiBaseUrl}/auth/workos/refresh`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ refreshToken }),

@@ -1,5 +1,16 @@
 const envVars = [
   {
+    key: "apiBaseUrl",
+    value: process.env.EXPO_PUBLIC_API_BASE_URL,
+  },
+  {
+    // Fallback to API_BASE_URL if the auth specific base url not defined.
+    key: "apiBaseUrlForAuth",
+    value:
+      process.env.EXPO_PUBLIC_API_BASE_URL_FOR_AUTH ??
+      process.env.EXPO_PUBLIC_API_BASE_URL,
+  },
+  {
     key: "posthogApiKey",
     value: process.env.EXPO_PUBLIC_POSTHOG_API_KEY,
   },
