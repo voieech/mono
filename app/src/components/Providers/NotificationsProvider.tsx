@@ -13,7 +13,7 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then((token) => setExpoPushToken(token ?? ""))
-      .catch((error: any) => setExpoPushToken(`${error}`));
+      .catch((error: any) => console.error(`${error}`));
 
     // reacts when a notification arrives while the app is in the foreground
     const notificationListener = Notifications.addNotificationReceivedListener(
