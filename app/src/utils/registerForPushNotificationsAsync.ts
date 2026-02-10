@@ -4,12 +4,15 @@ import * as Notifications from "expo-notifications";
 import { Platform } from "react-native";
 
 export async function registerForPushNotificationsAsync() {
+  if (!Device.isDevice) {
+    throw new Error("Must use physical device for push notifications");
+  }
+
   if (Platform.OS === "android") {
     await Notifications.setNotificationChannelAsync("default", {
       name: "default",
       // set priorty level to max on android as some lower priorty prevents notifications from appearing
       importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
       lightColor: "#FF231F7C",
     });
   }
@@ -23,9 +26,7 @@ export async function registerForPushNotificationsAsync() {
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
-      throw new Error(
-        "Permission not granted to get push token for push notification!",
-      );
+      return undefined;
     }
     const projectId =
       Constants?.expoConfig?.extra?.eas?.projectId ??
