@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 
+import { authenticationMiddleware } from "./auth-lib/index.js";
 import { authRoutes, authWebhookRoutes } from "./auth/index.js";
 import { createRoutes } from "./create/index.js";
 import { errorHandler } from "./errorHandler.js";
@@ -23,6 +24,7 @@ export function bootstrapHttpServer() {
       res.status(200).end("ok");
     })
 
+    .use(authenticationMiddleware)
     .use(localeMiddleware)
     .use(cookieParser())
     .use(express.json())
