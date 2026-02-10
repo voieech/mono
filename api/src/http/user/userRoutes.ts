@@ -6,7 +6,7 @@ import type {
 } from "../../dto-types/index.js";
 
 import { apiDB } from "../../kysely/index.js";
-import { authMiddleware } from "../auth/index.js";
+import { authenticationMiddlewareBuilder } from "../auth-lib/index.js";
 
 export const userRoutes = express
   .Router()
@@ -27,9 +27,9 @@ export const userRoutes = express
 
   .get(
     "/v1/user/subscription/:itemType/:itemID",
-    authMiddleware,
+    authenticationMiddlewareBuilder(),
     async function (req, res) {
-      const userID = req.authenticatedUser?.id!;
+      const userID = await req.genAuthenticatedUserID();
       const itemType = req.params["itemType"]! as SubscribableItemType;
       const itemID = req.params["itemID"]!;
 
@@ -56,9 +56,9 @@ export const userRoutes = express
 
   .post(
     "/v1/user/subscription/:itemType/:itemID",
-    authMiddleware,
+    authenticationMiddlewareBuilder(),
     async function (req, res) {
-      const userID = req.authenticatedUser?.id!;
+      const userID = await req.genAuthenticatedUserID();
       const itemType = req.params["itemType"]! as SubscribableItemType;
       const itemID = req.params["itemID"]!;
       const shouldSubscribe = req.body["subscribe"]!;
@@ -92,9 +92,9 @@ export const userRoutes = express
 
   .get(
     "/v1/user/like/:itemType/:itemID",
-    authMiddleware,
+    authenticationMiddlewareBuilder(),
     async function (req, res) {
-      const userID = req.authenticatedUser?.id!;
+      const userID = await req.genAuthenticatedUserID();
       const itemType = req.params["itemType"]! as LikeableItemType;
       const itemID = req.params["itemID"]!;
 
@@ -121,9 +121,9 @@ export const userRoutes = express
 
   .post(
     "/v1/user/like/:itemType/:itemID",
-    authMiddleware,
+    authenticationMiddlewareBuilder(),
     async function (req, res) {
-      const userID = req.authenticatedUser?.id!;
+      const userID = await req.genAuthenticatedUserID();
       const itemType = req.params["itemType"]! as LikeableItemType;
       const itemID = req.params["itemID"]!;
       const shouldLike = req.body["like"]!;
