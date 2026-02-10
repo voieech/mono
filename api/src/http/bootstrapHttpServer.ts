@@ -4,6 +4,7 @@ import express from "express";
 
 import { authRoutes, authWebhookRoutes } from "./auth/index.js";
 import { createRoutes } from "./create/index.js";
+import { errorHandler } from "./errorHandler.js";
 import { featuredContentRoutes } from "./featured/index.js";
 import { localeMiddleware } from "./locale/index.js";
 import { appleAppSiteAssociationRoute } from "./others/index.js";
@@ -36,6 +37,12 @@ export function bootstrapHttpServer() {
     .use(recommendationsRoutes)
     .use(podcastEpisodeRoutes)
     .use(podcastChannelRoutes)
+
+    /**
+     * Very last handler is the error handler to catch anything thrown by items
+     * in the stack above.
+     */
+    .use(errorHandler)
 
     .listen(process.env["PORT"] ?? 3000);
 }
