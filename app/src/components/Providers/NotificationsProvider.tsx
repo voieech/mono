@@ -5,7 +5,7 @@ import { NotificationContext } from "@/context/notificationContext";
 import { registerForPushNotificationsAsync } from "@/utils/registerForPushNotificationsAsync";
 
 export function NotificationProvider({ children }: PropsWithChildren) {
-  const [expoPushToken, setExpoPushToken] = useState<string>("");
+  const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
   >(undefined);
@@ -13,16 +13,16 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then((token) => setExpoPushToken(token ?? ""))
-      .catch((error: any) => console.error(`${error}`));
+      .catch((error: any) => console.error(error));
 
-    // reacts when a notification arrives while the app is in the foreground
+    // React when a notification arrives while the app is in the foreground
     const notificationListener = Notifications.addNotificationReceivedListener(
       (notification) => {
         setNotification(notification);
       },
     );
 
-    // reacts to user interaction with app notifcations
+    // React to user interaction with app notifcations
     const responseListener =
       Notifications.addNotificationResponseReceivedListener((response) => {
         console.log(response);

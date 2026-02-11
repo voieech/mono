@@ -4,14 +4,14 @@ import { createContext } from "react";
 import { createUseContextHook } from "@/utils";
 
 export const NotificationContext = createContext<{
-  expoPushToken: string;
+  expoPushToken: null | string;
   notification: Notifications.Notification | undefined;
 }>(
   // @ts-expect-error
   null,
 );
 
-export const useNotifications = createUseContextHook(
+export const useNotification = createUseContextHook(
   NotificationContext,
-  "NotificaiontContext",
+  "NotificationContext",
 );
