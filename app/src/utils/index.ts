@@ -15,7 +15,6 @@ export * from "./localStorage";
 export * from "./LocalStorageWrapper";
 export * from "./posthog";
 export * from "./ReactNativeTrackPlayerCapabilitiesOptions";
-export * from "./registerForPushNotificationsAsync";
 export * from "./settings";
 export * from "./supportFormLinkPrefillContent";
 export * from "./toast";

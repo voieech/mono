@@ -1,19 +1,42 @@
+import Constants from "expo-constants";
+import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { PropsWithChildren, useState, useEffect } from "react";
+import { Platform } from "react-native";
 
 import { NotificationContext } from "@/context/notificationContext";
-import { registerForPushNotificationsAsync } from "@/utils/registerForPushNotificationsAsync";
 
 export function NotificationProvider({ children }: PropsWithChildren) {
   const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
+  const [devicePushToken, setDevicePushToken] = useState<string | null>(null);
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
   >(undefined);
 
+  async function updatePushNotificationTokens() {
+    const projectId =
+      Constants?.expoConfig?.extra?.eas?.projectId ??
+      Constants?.easConfig?.projectId;
+
+    if (!projectId) {
+      throw new Error(
+        "Expo Project ID not found when loading notification tokens",
+      );
+    }
+
+    const { data: expoPushToken } = await Notifications.getExpoPushTokenAsync({
+      projectId,
+    });
+    setExpoPushToken(expoPushToken);
+
+    const { data: devicePushToken } =
+      await Notifications.getDevicePushTokenAsync();
+    setDevicePushToken(devicePushToken);
+  }
+
   useEffect(() => {
-    registerForPushNotificationsAsync()
-      .then((token) => setExpoPushToken(token ?? ""))
-      .catch((error: any) => console.error(error));
+    setupNotifications();
+    updatePushNotificationTokens();
 
     // React when a notification arrives while the app is in the foreground
     const notificationListener = Notifications.addNotificationReceivedListener(
@@ -35,8 +58,30 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <NotificationContext.Provider value={{ expoPushToken, notification }}>
+    <NotificationContext.Provider
+      value={{
+        expoPushToken,
+        devicePushToken,
+        updatePushNotificationTokens,
+        notification,
+      }}
+    >
       {children}
     </NotificationContext.Provider>
   );
+}
+
+async function setupNotifications() {
+  if (!Device.isDevice) {
+    throw new Error("Must use physical device for push notifications");
+  }
+
+  if (Platform.OS === "android") {
+    await Notifications.setNotificationChannelAsync("default", {
+      name: "default",
+      // set priorty level to max on android as some lower priorty prevents notifications from appearing
+      importance: Notifications.AndroidImportance.MAX,
+      lightColor: "#FF231F7C",
+    });
+  }
 }
