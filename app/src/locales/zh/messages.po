@@ -38,6 +38,10 @@ msgstr "账户信息"
 msgid "After Shows"
 msgstr "演出结束后"
 
+#: src/app/(tabs)/(home)/index.tsx:30
+msgid "All"
+msgstr "全部"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:42
 msgid "Alternative Health"
 msgstr "另类健康"
@@ -46,7 +50,7 @@ msgstr "另类健康"
 msgid "Animation & Manga"
 msgstr "动画与漫画"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:79
+#: src/app/(tabs)/profile/settings/app-details.tsx:80
 msgid "App cache"
 msgstr "应用程序缓存"
 
@@ -128,7 +132,7 @@ msgstr "商业"
 msgid "Business News"
 msgstr "商业新闻"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:84
+#: src/app/(tabs)/profile/settings/app-details.tsx:85
 msgid "Cache will be cleared"
 msgstr "缓存将被清除"
 
@@ -229,7 +233,7 @@ msgstr "自定义内容偏好"
 msgid "Daily News"
 msgstr "每日新闻"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:139
+#: src/app/(tabs)/profile/settings/app-details.tsx:140
 msgid "Debugging Data"
 msgstr "调试数据"
 
@@ -319,11 +323,11 @@ msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:70
+#: src/app/(tabs)/(home)/index.tsx:135
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:124
+#: src/app/(tabs)/(home)/index.tsx:189
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -533,6 +537,10 @@ msgstr "自然界"
 msgid "News"
 msgstr "新闻"
 
+#: src/app/(tabs)/(home)/index.tsx:38
+msgid "News Articles"
+msgstr "新闻文章"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:70
 msgid "News Commentary"
 msgstr "新闻评论"
@@ -611,7 +619,7 @@ msgstr "地点与旅行"
 msgid "Please paste your Youtube link"
 msgstr "请粘贴您的 YouTube 链接"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:120
+#: src/app/(tabs)/profile/settings/app-details.tsx:121
 msgid "Please restart app after clearing cache."
 msgstr "清除缓存后请重启应用。"
 
@@ -623,11 +631,15 @@ msgstr "播客频道"
 msgid "Podcast Episode"
 msgstr "播客剧集"
 
+#: src/app/(tabs)/(home)/index.tsx:34
+msgid "Podcasts"
+msgstr "播客"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:71
 msgid "Politics"
 msgstr "政治"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:101
+#: src/app/(tabs)/profile/settings/app-details.tsx:102
 msgid "Press to clear cache"
 msgstr "按清除缓存"
 
@@ -834,7 +846,7 @@ msgstr "电视评论"
 msgid "Unsubscribe"
 msgstr "退订"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:129
+#: src/app/(tabs)/profile/settings/app-details.tsx:130
 msgid "Updates"
 msgstr "更新"
 

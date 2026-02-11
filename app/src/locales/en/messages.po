@@ -38,6 +38,10 @@ msgstr "Account Information"
 msgid "After Shows"
 msgstr "After Shows"
 
+#: src/app/(tabs)/(home)/index.tsx:30
+msgid "All"
+msgstr "All"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:42
 msgid "Alternative Health"
 msgstr "Alternative Health"
@@ -46,7 +50,7 @@ msgstr "Alternative Health"
 msgid "Animation & Manga"
 msgstr "Animation & Manga"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:79
+#: src/app/(tabs)/profile/settings/app-details.tsx:80
 msgid "App cache"
 msgstr "App cache"
 
@@ -70,6 +74,10 @@ msgstr "App language can only be modified in the IOS \"Settings\" app."
 #: src/app/(tabs)/profile/settings/app-details.tsx:30
 msgid "App Version"
 msgstr "App Version"
+
+#: src/app/(tabs)/(home)/index.tsx:38
+#~ msgid "Articles"
+#~ msgstr "Articles"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:12
 msgid "Arts"
@@ -128,7 +136,7 @@ msgstr "Business"
 msgid "Business News"
 msgstr "Business News"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:84
+#: src/app/(tabs)/profile/settings/app-details.tsx:85
 msgid "Cache will be cleared"
 msgstr "Cache will be cleared"
 
@@ -229,7 +237,7 @@ msgstr "Customise content preferences"
 msgid "Daily News"
 msgstr "Daily News"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:139
+#: src/app/(tabs)/profile/settings/app-details.tsx:140
 msgid "Debugging Data"
 msgstr "Debugging Data"
 
@@ -319,11 +327,11 @@ msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:70
+#: src/app/(tabs)/(home)/index.tsx:135
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:124
+#: src/app/(tabs)/(home)/index.tsx:189
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -533,6 +541,10 @@ msgstr "Nature"
 msgid "News"
 msgstr "News"
 
+#: src/app/(tabs)/(home)/index.tsx:38
+msgid "News Articles"
+msgstr "News Articles"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:70
 msgid "News Commentary"
 msgstr "News Commentary"
@@ -611,7 +623,7 @@ msgstr "Places & Travel"
 msgid "Please paste your Youtube link"
 msgstr "Please paste your Youtube link"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:120
+#: src/app/(tabs)/profile/settings/app-details.tsx:121
 msgid "Please restart app after clearing cache."
 msgstr "Please restart app after clearing cache."
 
@@ -623,11 +635,15 @@ msgstr "Podcast Channel"
 msgid "Podcast Episode"
 msgstr "Podcast Episode"
 
+#: src/app/(tabs)/(home)/index.tsx:34
+msgid "Podcasts"
+msgstr "Podcasts"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:71
 msgid "Politics"
 msgstr "Politics"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:101
+#: src/app/(tabs)/profile/settings/app-details.tsx:102
 msgid "Press to clear cache"
 msgstr "Press to clear cache"
 
@@ -834,7 +850,7 @@ msgstr "TV Reviews"
 msgid "Unsubscribe"
 msgstr "Unsubscribe"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:129
+#: src/app/(tabs)/profile/settings/app-details.tsx:130
 msgid "Updates"
 msgstr "Updates"
 

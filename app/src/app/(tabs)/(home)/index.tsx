@@ -1,3 +1,4 @@
+import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
@@ -7,6 +8,7 @@ import {
   View,
   ScrollView,
   useWindowDimensions,
+  Pressable,
 } from "react-native";
 
 import {
@@ -18,7 +20,24 @@ import {
   VerticalSpacer,
 } from "@/components";
 import { Colors } from "@/constants";
+import { useAuthContext } from "@/context";
 import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/hooks";
+import { linguiMsgToString } from "@/utils";
+
+const allHomeRowTabs = [
+  {
+    key: "all",
+    title: msg`All`,
+  },
+  {
+    key: "podcasts",
+    title: msg`Podcasts`,
+  },
+  {
+    key: "news-articles",
+    title: msg`News Articles`,
+  },
+] as const;
 
 export default function HomeScreen() {
   const windowDimensions = useWindowDimensions();
@@ -27,6 +46,9 @@ export default function HomeScreen() {
     windowDimensions.width * 0.03,
     16,
   );
+
+  const [selectedTab, setSelectedTab] =
+    useState<(typeof allHomeRowTabs)[number]["key"]>("all");
 
   const featuredChannelsQuery = useFeaturedChannelsQuery();
   const featuredEpisodesQuery = useFeaturedEpisodesQuery();
@@ -43,6 +65,49 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaViewContainer>
+      <View
+        style={{
+          paddingHorizontal: 16,
+          paddingBottom: 8,
+          flexDirection: "row",
+          columnGap: 12,
+        }}
+      >
+        <ProfilePicButton />
+        <View
+          style={{
+            flexDirection: "row",
+            columnGap: 6,
+          }}
+        >
+          {allHomeRowTabs.map((tab) => (
+            <Pressable key={tab.key} onPress={() => setSelectedTab(tab.key)}>
+              <View
+                style={{
+                  paddingVertical: 8,
+                  paddingHorizontal: 12,
+                  borderRadius: 32,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor:
+                    tab.key === selectedTab
+                      ? Colors.green500
+                      : Colors.neutral700,
+                }}
+              >
+                <ThemedText
+                  type="sm-normal"
+                  customColors={{
+                    dark: tab.key === selectedTab ? Colors.black : Colors.white,
+                  }}
+                >
+                  {linguiMsgToString(tab.title)}
+                </ThemedText>
+              </View>
+            </Pressable>
+          ))}
+        </View>
+      </View>
       <ScrollViewContainer
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -183,5 +248,41 @@ export default function HomeScreen() {
         )}
       </ScrollViewContainer>
     </SafeAreaViewContainer>
+  );
+}
+
+function ProfilePicButton() {
+  const authContext = useAuthContext();
+  const imageSize = 32;
+  return (
+    <Link
+      href={{
+        pathname: "/profile",
+      }}
+    >
+      <View
+        style={{
+          width: imageSize,
+          height: imageSize,
+          borderRadius: imageSize,
+          backgroundColor: Colors.neutral700,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {authContext.authData?.userData?.profilePictureUrl != null ? (
+          <Image
+            source={authContext.authData.userData.profilePictureUrl}
+            style={{
+              width: imageSize,
+              height: imageSize,
+              borderRadius: imageSize,
+            }}
+          />
+        ) : (
+          <Icon name="person" size={imageSize * 0.5} color={Colors.gray300} />
+        )}
+      </View>
+    </Link>
   );
 }
