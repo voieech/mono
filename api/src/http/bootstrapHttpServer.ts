@@ -24,9 +24,17 @@ export function bootstrapHttpServer() {
       res.status(200).end("ok");
     })
 
-    .use(authenticationMiddleware)
-    .use(localeMiddleware)
+    /* Global Middlewares */
     .use(cookieParser())
+    // Authenticate user and stores the result for downstream middlewares and
+    // route handler to do detailed authentication and authorisation checks.
+    .use(authenticationMiddleware)
+    // Parses the requested locale and set it on `req` before any downstream
+    // route handlers can use it.
+    .use(localeMiddleware)
+    // Setting this last so that we only parse req.body when absolutely
+    // necessary to prevent wasting resources parsing it if it is going to fail
+    // the auth check and etc...
     .use(express.json())
 
     /* Routes */
