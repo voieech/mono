@@ -74,7 +74,7 @@
     // "isolatedDeclarations": true,                     /* Require sufficient annotation on exports so other tools can trivially generate declaration files. */
     // "allowSyntheticDefaultImports": true,             /* Allow 'import x from y' when a module doesn't have a default export. */
     // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
-    "erasableSyntaxOnly": true,
+    // "erasableSyntaxOnly": true,                       /* Disabling this for now to support constructor instance variable definitions */
 
     /* Type Checking */
     "strict": true,
