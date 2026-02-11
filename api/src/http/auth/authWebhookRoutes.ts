@@ -1,7 +1,7 @@
 import express from "express";
 
 import { apiDB } from "../../kysely/index.js";
-import { workos, WORKOS_WEBHOOK_PATH_SECRET } from "./workos.js";
+import { workos, WORKOS_WEBHOOK_PATH_SECRET } from "../../workos/index.js";
 import { workOsIpAddressMiddleware } from "./workOsIpAddressMiddleware.js";
 import { workOsWebhookSignatureVerificationMiddleware } from "./workOsWebhookSignatureVerificationMiddleware.js";
 

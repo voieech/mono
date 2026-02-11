@@ -7,7 +7,7 @@ import {
   WORKOS_REDIRECT_URI,
   WORKOS_COOKIE_PASSWORD,
   WORKOS_COOKIE_NAME,
-} from "./workos.js";
+} from "../../workos/index.js";
 
 const isValidPkceCodeChallengeMethod = (txt: unknown): txt is "S256" =>
   txt === "S256";

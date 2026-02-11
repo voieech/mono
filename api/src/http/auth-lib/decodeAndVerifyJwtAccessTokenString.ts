@@ -3,8 +3,8 @@ import * as jose from "jose";
 
 import type { JwtPayload } from "./jwtPayloadSchema.js";
 
+import { workos, WORKOS_CLIENT_ID } from "../../workos/index.js";
 import { jwtPayloadSchema } from "./jwtPayloadSchema.js";
-import { workos, WORKOS_CLIENT_ID } from "./workos.js";
 
 const jwksUrl = workos.userManagement.getJwksUrl(WORKOS_CLIENT_ID);
 const JWKS = jose.createRemoteJWKSet(new URL(jwksUrl));

@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 
+import { workos } from "../../workos/index.js";
 import { authenticationAssertionCheck } from "./authenticationAssertionCheck.js";
-import { workos } from "./workos.js";
 
 /**
  * Simple middleware that is reusable, to just ensure that the user is

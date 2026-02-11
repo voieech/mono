@@ -4,7 +4,7 @@ import type { Request, Response, NextFunction } from "express";
 import { SignatureVerificationException } from "@workos-inc/node";
 import { convertUnknownCatchToError } from "convert-unknown-catch-to-error";
 
-import { workos, WORKOS_WEBHOOK_SECRET } from "./workos.js";
+import { workos, WORKOS_WEBHOOK_SECRET } from "../../workos/index.js";
 
 declare global {
   namespace Express {
