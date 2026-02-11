@@ -5,8 +5,8 @@ import type {
   LikeableItemType,
 } from "../../dto-types/index.js";
 
+import { authenticationMiddlewareBuilder } from "../../http/index.js";
 import { apiDB } from "../../kysely/index.js";
-import { authenticationMiddlewareBuilder } from "../auth-lib/index.js";
 
 export const userRoutes = express
   .Router()

@@ -2,5 +2,5 @@
  * Barrel file.
  */
 
-export * from "./authRoutes.js";
-export * from "./authWebhookRoutes.js";
+export * from "./authenticationMiddleware.js";
+export * from "./authenticationMiddlewareBuilder.js";

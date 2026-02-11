@@ -2,17 +2,19 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 
-import { authenticationMiddleware } from "./auth-lib/index.js";
-import { authRoutes, authWebhookRoutes } from "./auth/index.js";
-import { createRoutes } from "./create/index.js";
-import { errorHandler } from "./errorHandler.js";
-import { featuredContentRoutes } from "./featured/index.js";
-import { localeMiddleware } from "./locale/index.js";
-import { appleAppSiteAssociationRoute } from "./others/index.js";
-import { podcastChannelRoutes } from "./podcastChannel/index.js";
-import { podcastEpisodeRoutes } from "./podcastEpisode/index.js";
-import { recommendationsRoutes } from "./reccomendations/index.js";
-import { userRoutes } from "./user/index.js";
+import {
+  authRoutes,
+  authWebhookRoutes,
+} from "./controllers-http/auth/index.js";
+import { createRoutes } from "./controllers-http/create/index.js";
+import { featuredContentRoutes } from "./controllers-http/featured/index.js";
+import { localeMiddleware } from "./controllers-http/locale/index.js";
+import { appleAppSiteAssociationRoute } from "./controllers-http/others/index.js";
+import { podcastChannelRoutes } from "./controllers-http/podcastChannel/index.js";
+import { podcastEpisodeRoutes } from "./controllers-http/podcastEpisode/index.js";
+import { recommendationsRoutes } from "./controllers-http/reccomendations/index.js";
+import { userRoutes } from "./controllers-http/user/index.js";
+import { authenticationMiddleware, errorHandler } from "./http/index.js";
 
 export function bootstrapHttpServer() {
   express()
