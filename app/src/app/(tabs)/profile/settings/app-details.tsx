@@ -1,3 +1,4 @@
+import { msg } from "@lingui/core/macro";
 import { useLingui, Trans } from "@lingui/react/macro";
 import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
 import { getLocales, getCalendars } from "expo-localization";
@@ -56,7 +57,7 @@ export default function AppDetails() {
           <ThemedText>Posthog Distinct ID</ThemedText>
           <CopyOnPress
             text={posthogDistinctID}
-            onCopy={() => toast("PostHog ID copied")}
+            toastMessageToShowOnCopy={msg`PostHog ID copied`}
           >
             <View
               style={{
@@ -207,7 +208,7 @@ function AppUpdatesInfo() {
           <VerticalDivider />
           <CopyOnPress
             text={expoUpdatesDataJsonString}
-            onCopy={() => toast("Updates data copied")}
+            toastMessageToShowOnCopy={msg`Updates data copied`}
           >
             <ThemedText>{expoUpdatesDataJsonString}</ThemedText>
           </CopyOnPress>
@@ -269,7 +270,7 @@ function DebuggingInfo() {
           <VerticalDivider />
           <CopyOnPress
             text={debuggingDataString}
-            onCopy={() => toast("Debugging Data copied")}
+            toastMessageToShowOnCopy={msg`Debugging Data copied`}
           >
             <ThemedText>{debuggingDataString}</ThemedText>
           </CopyOnPress>
