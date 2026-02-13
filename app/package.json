@@ -1,7 +1,7 @@
 {
   "name": "app",
   "main": "src/index.ts",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "scripts": {
     "start": "npx expo start",
     "expo:doctor": "npx expo-doctor",
