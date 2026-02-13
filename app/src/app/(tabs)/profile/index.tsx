@@ -320,14 +320,12 @@ function SettingsSection() {
           </ExperimentalSurface>
         )}
         {authContext.isAuthenticated && (
-          <ExperimentalSurface>
-            <SettingsPageLink
-              setting={t`Notifications`}
-              href={{
-                pathname: "/",
-              }}
-            />
-          </ExperimentalSurface>
+          <SettingsPageLink
+            setting={t`Notifications`}
+            href={{
+              pathname: "/profile/settings/notifications",
+            }}
+          />
         )}
         <SettingsPageLink
           setting={t`Audio Playback`}

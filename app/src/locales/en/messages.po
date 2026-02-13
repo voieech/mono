@@ -54,7 +54,7 @@ msgstr "Animation & Manga"
 msgid "App cache"
 msgstr "App cache"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/_layout.tsx:46
 #: src/app/(tabs)/profile/index.tsx:101
 msgid "App Details"
 msgstr "App Details"
@@ -71,7 +71,7 @@ msgstr "App language can only be modified in the Android \"Settings\" app."
 msgid "App language can only be modified in the IOS \"Settings\" app."
 msgstr "App language can only be modified in the IOS \"Settings\" app."
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:30
+#: src/app/(tabs)/profile/settings/app-details.tsx:31
 msgid "App Version"
 msgstr "App Version"
 
@@ -87,8 +87,8 @@ msgstr "Arts"
 msgid "Astronomy"
 msgstr "Astronomy"
 
-#: src/app/(tabs)/profile/_layout.tsx:18
-#: src/app/(tabs)/profile/index.tsx:333
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:331
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
@@ -105,6 +105,7 @@ msgstr "Aviation"
 #: src/app/(tabs)/profile/_layout.tsx:33
 #: src/app/(tabs)/profile/_layout.tsx:40
 #: src/app/(tabs)/profile/_layout.tsx:47
+#: src/app/(tabs)/profile/_layout.tsx:54
 msgid "Back"
 msgstr "Back"
 
@@ -207,6 +208,11 @@ msgstr "Comedy Interviews"
 msgid "Content Language"
 msgstr "Content Language"
 
+#: src/app/(tabs)/profile/settings/notifications.tsx:145
+#: src/components/CopyOnPress.tsx:43
+msgid "Copied to clipboard"
+msgstr "Copied to clipboard"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:31
 msgid "Courses"
 msgstr "Courses"
@@ -240,6 +246,10 @@ msgstr "Daily News"
 #: src/app/(tabs)/profile/settings/app-details.tsx:140
 msgid "Debugging Data"
 msgstr "Debugging Data"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:273
+msgid "Debugging Data copied"
+msgstr "Debugging Data copied"
 
 #: src/app/(tabs)/profile/settings/audio-playback.tsx:34
 msgid "Default audio playback rate"
@@ -281,6 +291,10 @@ msgstr "Email"
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
+#: src/app/(tabs)/profile/settings/notifications.tsx:126
+msgid "Enable Notifications"
+msgstr "Enable Notifications"
+
 #: src/utils/settings/contentLanguage.ts:19
 msgid "English"
 msgstr "English"
@@ -296,6 +310,10 @@ msgstr "Entrepreneurship"
 #: src/app/(tabs)/_layout.tsx:117
 #~ msgid "Explore"
 #~ msgstr "Explore"
+
+#: src/app/(tabs)/profile/settings/notifications.tsx:141
+msgid "Expo Notification Token"
+msgstr "Expo Notification Token"
 
 #: src/utils/settings/externalMediaControls.ts:15
 msgid "External Audio controls"
@@ -440,6 +458,14 @@ msgstr "Invalid Youtube link"
 msgid "Investing"
 msgstr "Investing"
 
+#: src/app/(tabs)/profile/settings/notifications.tsx:28
+#~ msgid "Is notification enabled?"
+#~ msgstr "Is notification enabled?"
+
+#: src/app/(tabs)/profile/settings/notifications.tsx:89
+msgid "Is notifications enabled?"
+msgstr "Is notifications enabled?"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:78
 msgid "Islam"
 msgstr "Islam"
@@ -452,8 +478,8 @@ msgstr "Judaism"
 msgid "Kids & Family"
 msgstr "Kids & Family"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:339
+#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/index.tsx:337
 msgid "Language"
 msgstr "Language"
 
@@ -521,11 +547,11 @@ msgstr "Music Interviews"
 msgid "Name"
 msgstr "Name"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:42
+#: src/app/(tabs)/profile/settings/app-details.tsx:43
 msgid "Native app version"
 msgstr "Native app version"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:46
+#: src/app/(tabs)/profile/settings/app-details.tsx:47
 msgid "Native build version"
 msgstr "Native build version"
 
@@ -550,6 +576,7 @@ msgid "News Commentary"
 msgstr "News Commentary"
 
 #: src/app/(tabs)/profile/index.tsx:262
+#: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "No"
 msgstr "No"
 
@@ -566,7 +593,8 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile/index.tsx:325
+#: src/app/(tabs)/profile/_layout.tsx:18
+#: src/app/(tabs)/profile/index.tsx:324
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -577,6 +605,10 @@ msgstr "Nutrition"
 #: src/app/+not-found.tsx:33
 msgid "Oops Sorry!"
 msgstr "Oops Sorry!"
+
+#: src/app/(tabs)/profile/settings/notifications.tsx:212
+msgid "Open Notification Settings"
+msgstr "Open Notification Settings"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:50
 msgid "Parenting"
@@ -594,8 +626,8 @@ msgstr "Performing Arts"
 msgid "Personal Journals"
 msgstr "Personal Journals"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:346
+#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/index.tsx:344
 msgid "Personalisation"
 msgstr "Personalisation"
 
@@ -642,6 +674,10 @@ msgstr "Podcasts"
 #: src/locales/categoryStringToMsgDescriptor.ts:71
 msgid "Politics"
 msgstr "Politics"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:60
+msgid "PostHog ID copied"
+msgstr "PostHog ID copied"
 
 #: src/app/(tabs)/profile/settings/app-details.tsx:102
 msgid "Press to clear cache"
@@ -854,6 +890,10 @@ msgstr "Unsubscribe"
 msgid "Updates"
 msgstr "Updates"
 
+#: src/app/(tabs)/profile/settings/app-details.tsx:211
+msgid "Updates data copied"
+msgstr "Updates data copied"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:61
 msgid "Video Games"
 msgstr "Video Games"
@@ -891,6 +931,7 @@ msgid "Wrestling"
 msgstr "Wrestling"
 
 #: src/app/(tabs)/profile/index.tsx:262
+#: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "Yes"
 msgstr "Yes"
 

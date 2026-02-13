@@ -54,7 +54,7 @@ msgstr "动画与漫画"
 msgid "App cache"
 msgstr "应用程序缓存"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/_layout.tsx:46
 #: src/app/(tabs)/profile/index.tsx:101
 msgid "App Details"
 msgstr "应用详情"
@@ -71,7 +71,7 @@ msgstr "应用程序语言只能在 Android 的“设置”应用中修改。"
 msgid "App language can only be modified in the IOS \"Settings\" app."
 msgstr "应用程序语言只能在 IOS 的“设置”应用中修改。"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:30
+#: src/app/(tabs)/profile/settings/app-details.tsx:31
 msgid "App Version"
 msgstr "应用程序版本"
 
@@ -83,8 +83,8 @@ msgstr "艺术"
 msgid "Astronomy"
 msgstr "天文学"
 
-#: src/app/(tabs)/profile/_layout.tsx:18
-#: src/app/(tabs)/profile/index.tsx:333
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:331
 msgid "Audio Playback"
 msgstr "音频播放"
 
@@ -101,6 +101,7 @@ msgstr "航空"
 #: src/app/(tabs)/profile/_layout.tsx:33
 #: src/app/(tabs)/profile/_layout.tsx:40
 #: src/app/(tabs)/profile/_layout.tsx:47
+#: src/app/(tabs)/profile/_layout.tsx:54
 msgid "Back"
 msgstr "返回"
 
@@ -203,6 +204,11 @@ msgstr "喜剧采访"
 msgid "Content Language"
 msgstr "内容语言"
 
+#: src/app/(tabs)/profile/settings/notifications.tsx:145
+#: src/components/CopyOnPress.tsx:43
+msgid "Copied to clipboard"
+msgstr "已复制到剪贴板"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:31
 msgid "Courses"
 msgstr "课程"
@@ -236,6 +242,10 @@ msgstr "每日新闻"
 #: src/app/(tabs)/profile/settings/app-details.tsx:140
 msgid "Debugging Data"
 msgstr "调试数据"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:273
+msgid "Debugging Data copied"
+msgstr "调试数据已复制"
 
 #: src/app/(tabs)/profile/settings/audio-playback.tsx:34
 msgid "Default audio playback rate"
@@ -277,6 +287,10 @@ msgstr "电子邮件"
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
+#: src/app/(tabs)/profile/settings/notifications.tsx:126
+msgid "Enable Notifications"
+msgstr "启用应用程序通知"
+
 #: src/utils/settings/contentLanguage.ts:19
 msgid "English"
 msgstr "英文"
@@ -292,6 +306,10 @@ msgstr "创业"
 #: src/app/(tabs)/_layout.tsx:117
 #~ msgid "Explore"
 #~ msgstr "探索"
+
+#: src/app/(tabs)/profile/settings/notifications.tsx:141
+msgid "Expo Notification Token"
+msgstr "Expo 应用程序通知数据"
 
 #: src/utils/settings/externalMediaControls.ts:15
 msgid "External Audio controls"
@@ -436,6 +454,10 @@ msgstr "YouTube 链接无效"
 msgid "Investing"
 msgstr "投资"
 
+#: src/app/(tabs)/profile/settings/notifications.tsx:89
+msgid "Is notifications enabled?"
+msgstr "是否启用程序通知功能？"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:78
 msgid "Islam"
 msgstr "伊斯兰教"
@@ -448,8 +470,8 @@ msgstr "犹太教"
 msgid "Kids & Family"
 msgstr "儿童与家庭"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:339
+#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/index.tsx:337
 msgid "Language"
 msgstr "语言"
 
@@ -517,11 +539,11 @@ msgstr "音乐采访"
 msgid "Name"
 msgstr "姓名"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:42
+#: src/app/(tabs)/profile/settings/app-details.tsx:43
 msgid "Native app version"
 msgstr "本机应用程序版本"
 
-#: src/app/(tabs)/profile/settings/app-details.tsx:46
+#: src/app/(tabs)/profile/settings/app-details.tsx:47
 msgid "Native build version"
 msgstr "本机构建版本"
 
@@ -546,6 +568,7 @@ msgid "News Commentary"
 msgstr "新闻评论"
 
 #: src/app/(tabs)/profile/index.tsx:262
+#: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "No"
 msgstr "不"
 
@@ -562,9 +585,10 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile/index.tsx:325
+#: src/app/(tabs)/profile/_layout.tsx:18
+#: src/app/(tabs)/profile/index.tsx:324
 msgid "Notifications"
-msgstr "通知"
+msgstr "程序通知"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:46
 msgid "Nutrition"
@@ -573,6 +597,10 @@ msgstr "营养"
 #: src/app/+not-found.tsx:33
 msgid "Oops Sorry!"
 msgstr "哎呀，抱歉！"
+
+#: src/app/(tabs)/profile/settings/notifications.tsx:212
+msgid "Open Notification Settings"
+msgstr "打开程序通知设置"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:50
 msgid "Parenting"
@@ -590,8 +618,8 @@ msgstr "表演艺术"
 msgid "Personal Journals"
 msgstr "个人日记"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:346
+#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/index.tsx:344
 msgid "Personalisation"
 msgstr "个性化"
 
@@ -638,6 +666,10 @@ msgstr "播客"
 #: src/locales/categoryStringToMsgDescriptor.ts:71
 msgid "Politics"
 msgstr "政治"
+
+#: src/app/(tabs)/profile/settings/app-details.tsx:60
+msgid "PostHog ID copied"
+msgstr "PostHog ID 已复制"
 
 #: src/app/(tabs)/profile/settings/app-details.tsx:102
 msgid "Press to clear cache"
@@ -850,6 +882,10 @@ msgstr "退订"
 msgid "Updates"
 msgstr "更新"
 
+#: src/app/(tabs)/profile/settings/app-details.tsx:211
+msgid "Updates data copied"
+msgstr "复制了更新的数据"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:61
 msgid "Video Games"
 msgstr "电子游戏"
@@ -887,6 +923,7 @@ msgid "Wrestling"
 msgstr "摔角"
 
 #: src/app/(tabs)/profile/index.tsx:262
+#: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "Yes"
 msgstr "是"
 

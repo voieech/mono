@@ -13,6 +13,13 @@ export default function ProfileLayout() {
         }}
       />
       <Stack.Screen
+        name="settings/notifications"
+        options={{
+          title: t`Notifications`,
+          headerBackTitle: t`Back`,
+        }}
+      />
+      <Stack.Screen
         name="settings/audio-playback"
         options={{
           title: t`Audio Playback`,
