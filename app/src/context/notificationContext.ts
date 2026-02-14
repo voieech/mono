@@ -1,11 +1,12 @@
+import type { PushNotificationTokens } from "dto";
+
 import * as Notifications from "expo-notifications";
 import { createContext } from "react";
 
 import { createUseContextHook } from "@/utils";
 
 export const NotificationContext = createContext<{
-  expoPushToken: null | string;
-  devicePushToken: null | string;
+  pushTokens: undefined | PushNotificationTokens;
   updatePushNotificationTokens: () => Promise<void>;
   notification: Notifications.Notification | undefined;
 }>(

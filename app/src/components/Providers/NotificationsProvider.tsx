@@ -1,3 +1,5 @@
+import type { PushNotificationTokens } from "dto";
+
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
@@ -8,8 +10,9 @@ import { useAuthContext } from "@/context/authContext";
 import { NotificationContext } from "@/context/notificationContext";
 
 export function NotificationProvider({ children }: PropsWithChildren) {
-  const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
-  const [devicePushToken, setDevicePushToken] = useState<string | null>(null);
+  const [pushTokens, setPushTokens] = useState<
+    undefined | PushNotificationTokens
+  >(undefined);
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
   >(undefined);
@@ -26,14 +29,16 @@ export function NotificationProvider({ children }: PropsWithChildren) {
       );
     }
 
-    const { data: expoPushToken } = await Notifications.getExpoPushTokenAsync({
+    const expoPushToken = await Notifications.getExpoPushTokenAsync({
       projectId,
     });
-    setExpoPushToken(expoPushToken);
+    const devicePushToken = await Notifications.getDevicePushTokenAsync();
 
-    const { data: devicePushToken } =
-      await Notifications.getDevicePushTokenAsync();
-    setDevicePushToken(devicePushToken);
+    setPushTokens({
+      expoToken: expoPushToken.data,
+      devicePlatform: devicePushToken.type as "ios" | "android",
+      deviceToken: devicePushToken.data,
+    });
   }
 
   useEffect(() => {
@@ -67,8 +72,7 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   return (
     <NotificationContext.Provider
       value={{
-        expoPushToken,
-        devicePushToken,
+        pushTokens,
         updatePushNotificationTokens,
         notification,
       }}

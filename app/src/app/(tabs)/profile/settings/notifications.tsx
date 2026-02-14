@@ -130,7 +130,7 @@ export default function SettingsNotification() {
           </Pressable>
         )}
         <OpenNotificationSettings />
-        {notificationContext.expoPushToken !== null && (
+        {notificationContext.pushTokens?.expoToken !== undefined && (
           <View>
             <VerticalSpacer />
             <ThemedText
@@ -141,7 +141,7 @@ export default function SettingsNotification() {
               <Trans>Expo Notification Token</Trans>
             </ThemedText>
             <CopyOnPress
-              text={notificationContext.expoPushToken}
+              text={notificationContext.pushTokens.expoToken}
               onCopy={() => toast(msg`Copied to clipboard`)}
             >
               <View
@@ -157,7 +157,7 @@ export default function SettingsNotification() {
                 }}
               >
                 <ThemedText type="sm-light">
-                  {notificationContext.expoPushToken}
+                  {notificationContext.pushTokens.expoToken}
                 </ThemedText>
                 <Icon
                   name="square.on.square"
