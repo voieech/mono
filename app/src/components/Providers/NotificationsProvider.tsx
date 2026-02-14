@@ -4,6 +4,7 @@ import * as Notifications from "expo-notifications";
 import { PropsWithChildren, useState, useEffect } from "react";
 import { Platform } from "react-native";
 
+import { useAuthContext } from "@/context/authContext";
 import { NotificationContext } from "@/context/notificationContext";
 
 export function NotificationProvider({ children }: PropsWithChildren) {
@@ -12,6 +13,7 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
   >(undefined);
+  const authContext = useAuthContext();
 
   async function updatePushNotificationTokens() {
     const projectId =
@@ -35,6 +37,11 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   }
 
   useEffect(() => {
+    // Do nothing if user is not authenticated
+    if (!authContext.isAuthenticated) {
+      return;
+    }
+
     setupNotifications();
     updatePushNotificationTokens();
 
@@ -55,7 +62,7 @@ export function NotificationProvider({ children }: PropsWithChildren) {
       notificationListener.remove();
       responseListener.remove();
     };
-  }, []);
+  }, [authContext.isAuthenticated]);
 
   return (
     <NotificationContext.Provider
