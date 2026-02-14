@@ -10,6 +10,7 @@ import {
   usePlaybackState,
 } from "react-native-track-player";
 
+import { useUserLikeQuery, useUserLikeMutation } from "@/api";
 import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
 import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { MarqueeText } from "@/components/MarqueeText";
@@ -17,7 +18,6 @@ import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedComponents/index";
 import { Colors } from "@/constants";
 import { useTrackPlayer, useAuthContext } from "@/context";
-import { useUserLikeQuery, useUserLikeMutation } from "@/hooks";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 import { toast } from "@/utils";
 

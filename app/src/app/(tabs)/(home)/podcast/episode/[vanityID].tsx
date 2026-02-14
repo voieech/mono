@@ -9,6 +9,11 @@ import RNTPTrackPlayer, {
 } from "react-native-track-player";
 
 import {
+  usePodcastEpisodeQuery,
+  usePodcastEpisodeNextReccomendationsQuery,
+  getPodcastEpisodeNextReccomendations,
+} from "@/api";
+import {
   ParallaxScrollViewContainer,
   SafeScrollViewContainer,
   FullScreenLoader,
@@ -21,11 +26,6 @@ import {
 import { Colors } from "@/constants";
 import { useTrackPlayer } from "@/context";
 import { NotFoundError } from "@/errors";
-import {
-  usePodcastEpisodeQuery,
-  usePodcastEpisodeNextReccomendationsQuery,
-  getPodcastEpisodeNextReccomendations,
-} from "@/hooks";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 import { createTrackWithMetadata } from "@/utils";
 

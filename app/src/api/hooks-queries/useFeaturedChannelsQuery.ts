@@ -2,10 +2,13 @@ import type { PodcastChannel } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { queryKeyBuilder, wrappedFetch, reactQueryClient } from "@/api-client";
+import {
+  useAcceptLanguageHeader,
+  queryKeyBuilder,
+  wrappedFetch,
+  reactQueryClient,
+} from "@/api-client";
 import { apiBaseUrl } from "@/constants";
-
-import { useAcceptLanguageHeader } from "../useAcceptLanguageHeader";
 
 export function useFeaturedChannelsQuery() {
   const acceptLanguageHeader = useAcceptLanguageHeader();

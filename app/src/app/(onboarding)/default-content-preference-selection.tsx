@@ -4,6 +4,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { View, Pressable, ScrollView } from "react-native";
 
+import { useSaveContentPreferenceSelectionMutation } from "@/api";
 import {
   SafeAreaViewContainer,
   ThemedText,
@@ -11,7 +12,6 @@ import {
 } from "@/components";
 import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
-import { useSaveContentPreferenceSelectionMutation } from "@/hooks";
 
 interface Tag {
   id: string;

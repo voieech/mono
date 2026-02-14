@@ -15,6 +15,12 @@ import {
 import type { ColorValues } from "@/constants";
 
 import {
+  usePodcastChannelQuery,
+  usePodcastChannelEpisodesQuery,
+  useUserSubscriptionQuery,
+  useUserSubscriptionMutation,
+} from "@/api";
+import {
   ParallaxScrollViewContainer,
   SafeScrollViewContainer,
   FullScreenLoader,
@@ -27,12 +33,6 @@ import {
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
 import { NotFoundError } from "@/errors";
-import {
-  usePodcastChannelQuery,
-  usePodcastChannelEpisodesQuery,
-  useUserSubscriptionQuery,
-  useUserSubscriptionMutation,
-} from "@/hooks";
 import { categoryStringToMsgDescriptor } from "@/locales";
 import { toast } from "@/utils";
 

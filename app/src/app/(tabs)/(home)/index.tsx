@@ -11,6 +11,7 @@ import {
   Pressable,
 } from "react-native";
 
+import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/api";
 import {
   SafeAreaViewContainer,
   ScrollViewContainer,
@@ -21,7 +22,6 @@ import {
 } from "@/components";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
-import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/hooks";
 import { linguiMsgToString } from "@/utils";
 
 const allHomeRowTabs = [

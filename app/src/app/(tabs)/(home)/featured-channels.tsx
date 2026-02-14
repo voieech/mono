@@ -4,9 +4,9 @@ import { Link } from "expo-router";
 import { useState } from "react";
 import { RefreshControl, View } from "react-native";
 
+import { useFeaturedChannelsQuery } from "@/api";
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { Colors } from "@/constants";
-import { useFeaturedChannelsQuery } from "@/hooks";
 import { categoryStringToMsgDescriptor } from "@/locales";
 
 export default function FeaturedChannels() {

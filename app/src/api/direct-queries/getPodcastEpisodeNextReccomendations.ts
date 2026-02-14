@@ -1,25 +1,7 @@
 import type { PodcastEpisode } from "dto";
 
-import { useQuery } from "@tanstack/react-query";
-
-import { queryKeyBuilder, wrappedFetch } from "@/api-client";
+import { wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
-
-/**
- * Useful for showing reccomendations related to the current episode
- */
-export function usePodcastEpisodeNextReccomendationsQuery(
-  vanityID: string,
-  limit: number = 10,
-) {
-  return useQuery({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.episode.reccomendations.vanityID.$vanityID.$limit",
-      { vanityID, limit },
-    ),
-    queryFn: () => getPodcastEpisodeNextReccomendations(vanityID, limit),
-  });
-}
 
 /**
  * Get a list of podcast episodes that are reccomended for given current episode
