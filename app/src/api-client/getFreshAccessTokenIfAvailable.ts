@@ -36,11 +36,11 @@ export async function getFreshAccessTokenIfAvailable(): Promise<string | null> {
         promiseForAccessTokenAfterRefresh = null;
         resolve(authData.accessToken);
       },
-      onFailure() {
+      onFailure(error) {
         promiseForAccessTokenAfterRefresh = null;
         reject(
           new Error(
-            `${getFreshAccessTokenIfAvailable.name}: Failed to refresh token`,
+            `${getFreshAccessTokenIfAvailable.name}: Failed to refresh token because of "${error}"`,
           ),
         );
       },

@@ -111,14 +111,14 @@ export const authController = {
 
   async refreshSession(callbacks?: {
     onSuccess?: (authData: AuthDataFromWorkos) => unknown;
-    onFailure?: () => unknown;
+    onFailure?: (error: Error) => unknown;
   }) {
     try {
       const refreshToken = await secureStoreForAuth.getRefreshToken();
 
       if (refreshToken === null) {
         await secureStoreForAuth.deleteAllData();
-        await callbacks?.onFailure?.();
+        await callbacks?.onFailure?.(new Error("No refresh token"));
         return;
       }
 
@@ -130,7 +130,9 @@ export const authController = {
 
       if (!res.ok) {
         await secureStoreForAuth.deleteAllData();
-        await callbacks?.onFailure?.();
+        await callbacks?.onFailure?.(
+          new Error("Server refused to refresh token"),
+        );
         return;
       }
 
@@ -141,9 +143,9 @@ export const authController = {
 
       await callbacks?.onSuccess?.(data);
     } catch (err) {
-      // Log and bubble error up
-      console.error("Refresh error:", err);
-      throw err;
+      await callbacks?.onFailure?.(
+        err instanceof Error ? err : new Error("Unknown error"),
+      );
     }
   },
 };

@@ -35,21 +35,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
     await options?.onLoginSuccess?.();
   }, []);
 
-  const refreshSession = useCallback(
-    () =>
-      authController.refreshSession({
-        onSuccess(authData) {
-          setAuthData(authData);
-        },
-        async onFailure() {
-          await clearAuth();
-        },
-      }),
-
-    // @todo Remove this deps arr since it will never change
-    [setAuthData],
-  );
-
   async function logout() {
     try {
       const accessToken = await secureStoreForAuth.getAccessTokenString();
@@ -106,18 +91,23 @@ export function AuthProvider({ children }: PropsWithChildren) {
       // 1. Validate session is still valid
       // 2. Get fresh user data
       // 3. Get new access token if needed
-      refreshSession()
+      authController.refreshSession({
+        onSuccess(authData) {
+          setAuthData(authData);
+        },
+
         // If failed to refresh, clear user and auth data
-        .catch((err) => {
+        async onFailure(err) {
           console.error("Initial background refresh failed:", err);
-          clearAuth();
-        });
+          await clearAuth();
+        },
+      });
 
       setIsLoading(false);
     }
 
     initAuth();
-  }, [refreshSession]);
+  }, []);
 
   return (
     <AuthContext.Provider
