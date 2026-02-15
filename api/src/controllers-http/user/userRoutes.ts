@@ -28,6 +28,7 @@ export const userRoutes = express
 
   .post(
     "/v1/user/notification/push-notifications/save-tokens",
+    authenticationMiddlewareBuilder(),
     async (req, res) => {
       const pushNotificationTokens = req.body as PushNotificationTokens;
       const userID = await req.genAuthenticatedUserID();
@@ -60,6 +61,7 @@ export const userRoutes = express
 
   .post(
     "/v1/user/notification/push-notifications/delete-tokens",
+    authenticationMiddlewareBuilder(),
     async (req, res) => {
       const pushNotificationTokens = req.body as PushNotificationTokens;
       const userID = await req.genAuthenticatedUserID();
