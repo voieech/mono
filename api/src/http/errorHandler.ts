@@ -15,7 +15,12 @@ import { JSendError } from "./JSend.js";
  *
  * First parameter is of unknown type because anything can be thrown.
  */
-export function errorHandler(e: unknown, _: Request, res: Response) {
+export function errorHandler(
+  e: unknown,
+  _: Request,
+  res: Response,
+  _next: never,
+) {
   const error = convertUnknownCatchToError(e);
 
   // @todo Should be generated / fed to the logging system
