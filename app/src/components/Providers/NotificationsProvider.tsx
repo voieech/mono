@@ -5,6 +5,7 @@ import * as Notifications from "expo-notifications";
 import { PropsWithChildren, useState, useEffect } from "react";
 import { Platform } from "react-native";
 
+import { postSaveDevicePushNotificationTokens } from "@/api";
 import { useAuthContext } from "@/context/authContext";
 import { NotificationContext } from "@/context/notificationContext";
 import { getPushNotificationTokens } from "@/utils";
@@ -22,6 +23,9 @@ export function NotificationProvider({ children }: PropsWithChildren) {
     const updatedPushTokens = await getPushNotificationTokens();
 
     setPushTokens(updatedPushTokens);
+
+    // @todo If this fails, add button in notification settings page to allow manual retry
+    await postSaveDevicePushNotificationTokens(updatedPushTokens);
   }
 
   useEffect(() => {
