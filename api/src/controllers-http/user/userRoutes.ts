@@ -1,6 +1,7 @@
 import express from "express";
 
 import type {
+  PushNotificationTokens,
   SubscribableItemType,
   LikeableItemType,
 } from "../../dto-types/index.js";
@@ -24,6 +25,61 @@ export const userRoutes = express
 
     res.status(200).json({});
   })
+
+  .post(
+    "/v1/user/notification/push-notifications/save-tokens",
+    async (req, res) => {
+      const pushNotificationTokens = req.body as PushNotificationTokens;
+      const userID = await req.genAuthenticatedUserID();
+
+      await apiDB
+        .insertInto("user_push_notif_tokens")
+        .values({
+          id: crypto.randomUUID(),
+          created_at: $DateTime.now.asIsoDateTime(),
+          updated_at: $DateTime.now.asIsoDateTime(),
+          user_id: userID,
+          expo_token: pushNotificationTokens.expoToken,
+          device_token: pushNotificationTokens.deviceToken,
+          device_platform: pushNotificationTokens.devicePlatform,
+        })
+        // Upsert behaviour
+        .onConflict((oc) => {
+          return oc.column("expo_token").doUpdateSet({
+            updated_at: $DateTime.now.asIsoDateTime(),
+            user_id: userID,
+            device_token: pushNotificationTokens.deviceToken,
+            device_platform: pushNotificationTokens.devicePlatform,
+          });
+        })
+        .execute();
+
+      res.status(200).json({});
+    },
+  )
+
+  .post(
+    "/v1/user/notification/push-notifications/delete-tokens",
+    async (req, res) => {
+      const pushNotificationTokens = req.body as PushNotificationTokens;
+      const userID = await req.genAuthenticatedUserID();
+
+      const result = await apiDB
+        .deleteFrom("user_push_notif_tokens")
+        .where("expo_token", "=", pushNotificationTokens.expoToken)
+        .where("user_id", "=", userID)
+        .executeTakeFirst();
+
+      if (result.numDeletedRows < 1) {
+        // eslint-disable-next-line no-console
+        console.error("Did not find token to delete");
+        res.status(404).json({});
+        return;
+      }
+
+      res.status(200).json({});
+    },
+  )
 
   .get(
     "/v1/user/subscription/:itemType/:itemID",
