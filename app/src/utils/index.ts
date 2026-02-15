@@ -8,6 +8,7 @@ export * from "./createUseContextHook";
 export * from "./envVar";
 export * from "./experimentalSurfaceInLocalStorage";
 export * from "./ExperimentalSurfaceName";
+export * from "./getPushNotificationTokens";
 export * from "./getUserFullName";
 export * from "./i18n/index";
 export * from "./linguiMsgToString";

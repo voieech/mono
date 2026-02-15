@@ -1,6 +1,5 @@
 import type { PushNotificationTokens } from "dto";
 
-import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { PropsWithChildren, useState, useEffect } from "react";
@@ -8,6 +7,7 @@ import { Platform } from "react-native";
 
 import { useAuthContext } from "@/context/authContext";
 import { NotificationContext } from "@/context/notificationContext";
+import { getPushNotificationTokens } from "@/utils";
 
 export function NotificationProvider({ children }: PropsWithChildren) {
   const [pushTokens, setPushTokens] = useState<
@@ -19,26 +19,9 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   const authContext = useAuthContext();
 
   async function updatePushNotificationTokens() {
-    const projectId =
-      Constants?.expoConfig?.extra?.eas?.projectId ??
-      Constants?.easConfig?.projectId;
+    const updatedPushTokens = await getPushNotificationTokens();
 
-    if (!projectId) {
-      throw new Error(
-        "Expo Project ID not found when loading notification tokens",
-      );
-    }
-
-    const expoPushToken = await Notifications.getExpoPushTokenAsync({
-      projectId,
-    });
-    const devicePushToken = await Notifications.getDevicePushTokenAsync();
-
-    setPushTokens({
-      expoToken: expoPushToken.data,
-      devicePlatform: devicePushToken.type as "ios" | "android",
-      deviceToken: devicePushToken.data,
-    });
+    setPushTokens(updatedPushTokens);
   }
 
   useEffect(() => {
