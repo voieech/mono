@@ -59,6 +59,11 @@ export const authRoutes = express
       state: JSON.stringify({
         clientType,
       }),
+
+      // Require user to select account (e.g. google account) instead of auto
+      // signing in with your last signed in account. This prompt will be
+      // forwarded to the actual auth provider like google.
+      prompt: "select_account",
     });
 
     // Mobile app will open the authUrl
