@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { Request, Response, NextFunction } from "express";
 
 import { convertUnknownCatchToError } from "convert-unknown-catch-to-error";
 
@@ -19,7 +19,7 @@ export function errorHandler(
   e: unknown,
   _: Request,
   res: Response,
-  _next: never,
+  _next: NextFunction,
 ) {
   const error = convertUnknownCatchToError(e);
 
