@@ -2,6 +2,10 @@ import type { PodcastEpisode } from "dto";
 
 import express from "express";
 
+import {
+  InvalidInputException,
+  NotFoundException,
+} from "../../exceptions/index.js";
 import { apiDB, genPodcastEpisodeBaseQuery } from "../../kysely/index.js";
 
 export const recommendationsRoutes = express
@@ -19,10 +23,7 @@ export const recommendationsRoutes = express
     const rawLimit = Number(req.query["limit"]);
     const limit = isNaN(rawLimit) || rawLimit === 0 ? 5 : rawLimit;
     if (limit < 1 || limit > 20) {
-      res.status(400).json({
-        error: "'limit' must be between 1 and 20",
-      });
-      return;
+      throw new InvalidInputException("'limit' must be between 1 and 20");
     }
 
     const currentEpisodeVanityID = req.query["current_episode_vanity_id"];
@@ -30,10 +31,7 @@ export const recommendationsRoutes = express
       typeof currentEpisodeVanityID !== "string" ||
       currentEpisodeVanityID === undefined
     ) {
-      res.status(400).json({
-        error: "'current_episode_vanity_id' is invalid",
-      });
-      return;
+      throw new InvalidInputException("'current_episode_vanity_id' is invalid");
     }
 
     const currentEpisode = await apiDB
@@ -42,10 +40,9 @@ export const recommendationsRoutes = express
       .where("podcast_episode.vanity_id", "=", currentEpisodeVanityID)
       .executeTakeFirst();
     if (currentEpisode === undefined) {
-      res.status(404).json({
-        error: `Cannot find episode with VanityID: ${currentEpisodeVanityID}`,
-      });
-      return;
+      throw new NotFoundException(
+        `Cannot find episode with VanityID: ${currentEpisodeVanityID}`,
+      );
     }
 
     // @todo Filter out all episodes that the user listened to before

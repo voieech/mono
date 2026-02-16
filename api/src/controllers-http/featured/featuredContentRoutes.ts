@@ -3,6 +3,7 @@ import type { PodcastEpisode, PodcastChannel } from "dto";
 import express from "express";
 import { sql } from "kysely";
 
+import { InvalidInputException } from "../../exceptions/index.js";
 import { apiDB, genPodcastEpisodeBaseQuery } from "../../kysely/index.js";
 
 export const featuredContentRoutes = express
@@ -13,10 +14,7 @@ export const featuredContentRoutes = express
     const limit = isNaN(rawLimit) || rawLimit === 0 ? 4 : rawLimit;
 
     if (limit < 1 || limit > 20) {
-      res.status(400).json({
-        error: "Limit must be between 1 and 20",
-      });
-      return;
+      throw new InvalidInputException("Limit must be between 1 and 20");
     }
 
     const featuredChannels = await apiDB
@@ -40,10 +38,7 @@ export const featuredContentRoutes = express
     const limit = isNaN(rawLimit) || rawLimit === 0 ? 4 : rawLimit;
 
     if (limit < 1 || limit > 20) {
-      res.status(400).json({
-        error: "Limit must be between 1 and 20",
-      });
-      return;
+      throw new InvalidInputException("Limit must be between 1 and 20");
     }
 
     const featuredEpisodes = await genPodcastEpisodeBaseQuery()

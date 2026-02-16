@@ -1,5 +1,6 @@
 import express from "express";
 
+import { InvalidInputException } from "../../exceptions/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { workos, WORKOS_WEBHOOK_PATH_SECRET } from "../../workos/index.js";
 import { workOsIpAddressMiddleware } from "./workOsIpAddressMiddleware.js";
@@ -27,7 +28,7 @@ export const authWebhookRoutes = express
 
     async (req, res) => {
       if (req.workosWebhookEvent?.event === undefined) {
-        throw new Error("Missing WorkOS webhook event type.");
+        throw new InvalidInputException("Missing WorkOS webhook event type.");
       }
 
       // Return 200 asap to signal "event is received". This does not mean that

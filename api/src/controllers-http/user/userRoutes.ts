@@ -6,6 +6,7 @@ import type {
   LikeableItemType,
 } from "../../dto-types/index.js";
 
+import { NotFoundException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
 import { apiDB } from "../../kysely/index.js";
 
@@ -73,10 +74,7 @@ export const userRoutes = express
         .executeTakeFirst();
 
       if (result.numDeletedRows < 1) {
-        // eslint-disable-next-line no-console
-        console.error("Did not find token to delete");
-        res.status(404).json({});
-        return;
+        throw new NotFoundException("Did not find token to delete");
       }
 
       res.status(200).json({});

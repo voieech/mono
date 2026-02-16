@@ -1,5 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 
+import { ForbiddenException } from "../../exceptions/index.js";
+
 // List of WorkOS fixed IP addresses provided in their documentation
 const WORKOS_IP_ADDRESSESS: ReadonlySet<string> = new Set([
   "3.217.146.166",
@@ -21,7 +23,7 @@ const WORKOS_IP_ADDRESSESS: ReadonlySet<string> = new Set([
  */
 export async function workOsIpAddressMiddleware(
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction,
 ) {
   // Use DigitalOcean's specific header for the true client IP
@@ -34,10 +36,7 @@ export async function workOsIpAddressMiddleware(
         return;
       }
     }
-    res.status(403).json({
-      error: "Forbidden: Unauthorized IP address",
-    });
-    return;
+    throw new ForbiddenException("Forbidden: Unauthorized IP address");
   }
 
   if (WORKOS_IP_ADDRESSESS.has(originalIpAddress)) {
@@ -49,8 +48,5 @@ export async function workOsIpAddressMiddleware(
   console.error(
     `${workOsIpAddressMiddleware.name}: Unauthorized access attempt from IP: ${originalIpAddress}`,
   );
-  res.status(403).json({
-    error: "Forbidden: Unauthorized IP address",
-  });
-  return;
+  throw new ForbiddenException("Forbidden: Unauthorized IP address");
 }

@@ -2,6 +2,10 @@ import express from "express";
 import { mapWorkOsUser } from "src/util/mapWorkOsUser.js";
 
 import {
+  InvalidInputException,
+  NotFoundException,
+} from "../../exceptions/index.js";
+import {
   workos,
   WORKOS_CLIENT_ID,
   WORKOS_REDIRECT_URI,
@@ -30,18 +34,18 @@ export const authRoutes = express
   .get("/auth/workos/login", (req, res) => {
     const clientType = req.query["clientType"]?.toString() || "web";
     if (clientType !== "web" && clientType !== "mobile") {
-      throw new Error("Invalid client type");
+      throw new InvalidInputException("Invalid client type");
     }
 
     const pkceCodeChallenge = req.query["pkceCodeChallenge"]?.toString();
     if (typeof pkceCodeChallenge !== "string") {
-      throw new Error("Invalid PKCE code challenge");
+      throw new InvalidInputException("Invalid PKCE code challenge");
     }
 
     const pkceCodeChallengeMethod =
       req.query["pkceCodeChallengeMethod"]?.toString();
     if (!isValidPkceCodeChallengeMethod(pkceCodeChallengeMethod)) {
-      throw new Error("Invalid PKCE code challenge method");
+      throw new InvalidInputException("Invalid PKCE code challenge method");
     }
 
     const authorizationUrl = workos.userManagement.getAuthorizationUrl({
@@ -87,20 +91,18 @@ export const authRoutes = express
     // This state is custom state that is set previously during auth URL
     // generation, and it is reflected back to us on successful authentication.
     if (req.query["state"] === undefined) {
-      res.status(400).json({
-        error: "No state reflected back from auth provider",
-      });
-      return;
+      throw new InvalidInputException(
+        "No state reflected back from auth provider",
+      );
     }
 
     const reflectedState = JSON.parse(req.query["state"]?.toString()) as {
       clientType: "mobile" | "web";
     };
     if (typeof reflectedState !== "object") {
-      res.status(400).json({
-        error: "Reflected state from auth provider is not an object",
-      });
-      return;
+      throw new InvalidInputException(
+        "Reflected state from auth provider is not an object",
+      );
     }
 
     // @todo Validate shape of reflected state
@@ -115,14 +117,13 @@ export const authRoutes = express
         }
 
         case "web": {
-          res.status(400).send({
-            error: "No auth code provided",
-          });
-          return;
+          throw new InvalidInputException("No auth code provided");
         }
 
         default:
-          throw new Error("Invalid client type in reflected auth state");
+          throw new InvalidInputException(
+            "Invalid client type in reflected auth state",
+          );
       }
     }
 
@@ -171,7 +172,9 @@ export const authRoutes = express
       }
 
       default:
-        throw new Error("Invalid client type in reflected auth state");
+        throw new InvalidInputException(
+          "Invalid client type in reflected auth state",
+        );
     }
   })
 
@@ -184,18 +187,12 @@ export const authRoutes = express
     const authorizationCodeFromAuthkit =
       req.body["authorizationCode"]?.toString();
     if (typeof authorizationCodeFromAuthkit !== "string") {
-      res.status(400).json({
-        error: "Authorization Code must be a string",
-      });
-      return;
+      throw new InvalidInputException("Authorization Code must be a string");
     }
 
     const pkceCodeVerifier = req.body["pkceCodeVerifier"]?.toString();
     if (typeof pkceCodeVerifier !== "string") {
-      res.status(400).json({
-        error: "PKCE Code Verifier must be a string",
-      });
-      return;
+      throw new InvalidInputException("PKCE Code Verifier must be a string");
     }
 
     try {
@@ -207,10 +204,7 @@ export const authRoutes = express
         });
 
       if (!authenticationResponse) {
-        res.status(404).json({
-          error: "Invalid or expired code",
-        });
-        return;
+        throw new NotFoundException("Invalid or expired code");
       }
 
       // Response to mobile app
@@ -239,6 +233,9 @@ export const authRoutes = express
     const { refreshToken } = req.body;
 
     if (refreshToken === undefined) {
+      // Using direct response instead of throwing error so that the frontend
+      // will read the values and reset those to null
+      // throw new UnauthorizedException("No refresh token provided");
       res.status(401).json({
         error: "No refresh token provided",
         user: null,

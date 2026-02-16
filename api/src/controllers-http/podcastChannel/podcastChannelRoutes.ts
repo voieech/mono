@@ -2,6 +2,7 @@ import type { PodcastEpisode, PodcastChannel } from "dto";
 
 import express from "express";
 
+import { NotFoundException } from "../../exceptions/index.js";
 import { apiDB, genPodcastEpisodeBaseQuery } from "../../kysely/index.js";
 import { generateRssXml } from "../../rss/index.js";
 
@@ -18,8 +19,7 @@ export const podcastChannelRoutes = express
       .executeTakeFirst();
 
     if (channel === undefined) {
-      res.status(404).send(`Invalid Channel ID: ${channelID}`);
-      return;
+      throw new NotFoundException(`Invalid Channel ID: ${channelID}`);
     }
 
     res.status(200).json(channel satisfies PodcastChannel);
@@ -35,8 +35,7 @@ export const podcastChannelRoutes = express
       .executeTakeFirst();
 
     if (channel === undefined) {
-      res.status(404).send(`Invalid Channel ID: ${channelID}`);
-      return;
+      throw new NotFoundException(`Invalid Channel ID: ${channelID}`);
     }
 
     const episodes = await genPodcastEpisodeBaseQuery()
@@ -65,8 +64,7 @@ export const podcastChannelRoutes = express
       .executeTakeFirst();
 
     if (channel === undefined) {
-      res.status(404).send(`Invalid Channel ID: ${channelID}`);
-      return;
+      throw new NotFoundException(`Invalid Channel ID: ${channelID}`);
     }
 
     const episodes = await apiDB

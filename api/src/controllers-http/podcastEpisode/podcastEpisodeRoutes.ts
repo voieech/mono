@@ -2,6 +2,7 @@ import type { PodcastEpisode } from "dto";
 
 import express from "express";
 
+import { NotFoundException } from "../../exceptions/index.js";
 import { genPodcastEpisodeBaseQuery } from "../../kysely/index.js";
 
 export const podcastEpisodeRoutes = express
@@ -15,10 +16,9 @@ export const podcastEpisodeRoutes = express
       .executeTakeFirst();
 
     if (episode === undefined) {
-      res.status(404).json({
-        error: `Cannot find episode with VanityID: ${vanityID}`,
-      });
-      return;
+      throw new NotFoundException(
+        `Cannot find episode with VanityID: ${vanityID}`,
+      );
     }
 
     res.status(200).json(episode satisfies PodcastEpisode);

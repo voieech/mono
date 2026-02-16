@@ -4,6 +4,10 @@ import type { Request, Response, NextFunction } from "express";
 import { SignatureVerificationException } from "@workos-inc/node";
 import { convertUnknownCatchToError } from "convert-unknown-catch-to-error";
 
+import {
+  UnauthorizedException,
+  ValidationFailedException,
+} from "../../exceptions/index.js";
 import { workos, WORKOS_WEBHOOK_SECRET } from "../../workos/index.js";
 
 declare global {
@@ -23,7 +27,7 @@ declare global {
  */
 export async function workOsWebhookSignatureVerificationMiddleware(
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction,
 ) {
   const payload = req.body;
@@ -44,17 +48,11 @@ export async function workOsWebhookSignatureVerificationMiddleware(
     const error = convertUnknownCatchToError(e);
 
     if (error instanceof SignatureVerificationException) {
-      // eslint-disable-next-line no-console
-      console.error(error.message);
-      res.status(401).json({
-        error: "Invalid WorkOS Webhook Signature",
-      });
-      return;
+      throw new UnauthorizedException(
+        `Invalid WorkOS Webhook Signature: ${error.message}`,
+      );
     }
 
-    res.status(500).json({
-      error: error.message,
-    });
-    return;
+    throw new ValidationFailedException(error.message);
   }
 }
