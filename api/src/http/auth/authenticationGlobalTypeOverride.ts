@@ -34,6 +34,13 @@ declare global {
       genAuthenticatedUserWorkosID: typeof genAuthenticatedUserWorkosID;
 
       /**
+       * Flag set by `authenticationMiddleware` as a quick and easy way for
+       * downstream middlewares and route handlers to know whether the current
+       * is authenticated.
+       */
+      isUserAuthenticated: boolean;
+
+      /**
        * ## DO NOT USE
        * Internal framework data for authentication.
        */

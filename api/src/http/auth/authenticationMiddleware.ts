@@ -25,6 +25,7 @@ export async function authenticationMiddleware(
 
   // Note that headers are lowercased by express
   if (req.headers.authorization === undefined) {
+    req.isUserAuthenticated = false;
     req.__userAuthenticationData = {
       isAuthenticated: false,
       httpStatusCode: 401,
@@ -39,6 +40,7 @@ export async function authenticationMiddleware(
 
   // Only Bearer Authentication Scheme is supported
   if (authenticationScheme !== "Bearer") {
+    req.isUserAuthenticated = false;
     req.__userAuthenticationData = {
       isAuthenticated: false,
       httpStatusCode: 401,
@@ -54,6 +56,7 @@ export async function authenticationMiddleware(
     encodedJwtString === "undefined" ||
     encodedJwtString === "null"
   ) {
+    req.isUserAuthenticated = false;
     req.__userAuthenticationData = {
       isAuthenticated: false,
       httpStatusCode: 401,
@@ -67,6 +70,7 @@ export async function authenticationMiddleware(
     await decodeAndVerifyJwtAccessTokenString(encodedJwtString);
 
   if (err !== null) {
+    req.isUserAuthenticated = false;
     req.__userAuthenticationData = {
       isAuthenticated: false,
       httpStatusCode: 403,
@@ -76,6 +80,7 @@ export async function authenticationMiddleware(
     return;
   }
 
+  req.isUserAuthenticated = true;
   req.__userAuthenticationData = {
     isAuthenticated: true,
     jwtPayload,
