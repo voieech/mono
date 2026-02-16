@@ -38,12 +38,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   async function logout() {
     try {
-      // Delete the push notif tokens first while the auth token is still not
-      // cleared since the API needs this.
-      await getPushNotificationTokens().then(
-        postDeleteDevicePushNotificationTokens,
-      );
-
       const accessToken = await secureStoreForAuth.getAccessTokenString();
 
       if (accessToken !== null) {
@@ -60,6 +54,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
 
     await clearAuth();
+    await getPushNotificationTokens().then(
+      postDeleteDevicePushNotificationTokens,
+    );
     reactQueryClient.clear();
   }
 

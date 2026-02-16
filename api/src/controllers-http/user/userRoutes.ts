@@ -62,15 +62,12 @@ export const userRoutes = express
 
   .post(
     "/v1/user/notification/push-notifications/delete-tokens",
-    authenticationMiddlewareBuilder(),
     async (req, res) => {
       const pushNotificationTokens = req.body as PushNotificationTokens;
-      const userID = await req.genAuthenticatedUserID();
 
       const result = await apiDB
         .deleteFrom("user_push_notif_tokens")
         .where("expo_token", "=", pushNotificationTokens.expoToken)
-        .where("user_id", "=", userID)
         .executeTakeFirst();
 
       if (result.numDeletedRows < 1) {
