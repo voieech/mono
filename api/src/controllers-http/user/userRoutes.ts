@@ -65,14 +65,10 @@ export const userRoutes = express
     async (req, res) => {
       const pushNotificationTokens = req.body as PushNotificationTokens;
 
-      const result = await apiDB
+      await apiDB
         .deleteFrom("user_push_notif_tokens")
         .where("expo_token", "=", pushNotificationTokens.expoToken)
         .executeTakeFirst();
-
-      if (result.numDeletedRows < 1) {
-        throw new NotFoundException("Did not find token to delete");
-      }
 
       res.status(200).json({});
     },

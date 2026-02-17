@@ -204,7 +204,7 @@ msgstr "喜剧采访"
 msgid "Content Language"
 msgstr "内容语言"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:149
+#: src/app/(tabs)/profile/settings/notifications.tsx:136
 #: src/components/CopyOnPress.tsx:43
 msgid "Copied to clipboard"
 msgstr "已复制到剪贴板"
@@ -287,7 +287,7 @@ msgstr "电子邮件"
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:130
+#: src/app/(tabs)/profile/settings/notifications.tsx:117
 msgid "Enable Notifications"
 msgstr "启用应用程序通知"
 
@@ -307,7 +307,7 @@ msgstr "创业"
 #~ msgid "Explore"
 #~ msgstr "探索"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:145
+#: src/app/(tabs)/profile/settings/notifications.tsx:132
 msgid "Expo Notification Token"
 msgstr "Expo 应用程序通知数据"
 
@@ -454,7 +454,7 @@ msgstr "YouTube 链接无效"
 msgid "Investing"
 msgstr "投资"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:93
+#: src/app/(tabs)/profile/settings/notifications.tsx:80
 msgid "Is notifications enabled?"
 msgstr "是否启用程序通知功能？"
 
@@ -568,7 +568,7 @@ msgid "News Commentary"
 msgstr "新闻评论"
 
 #: src/app/(tabs)/profile/index.tsx:268
-#: src/app/(tabs)/profile/settings/notifications.tsx:110
+#: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "No"
 msgstr "不"
 
@@ -606,7 +606,7 @@ msgstr "打开安卓设置"
 msgid "Open iOS Settings"
 msgstr "打开 iOS 设置"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:216
+#: src/app/(tabs)/profile/settings/notifications.tsx:203
 msgid "Open Notification Settings"
 msgstr "打开程序通知设置"
 
@@ -935,7 +935,7 @@ msgid "Wrestling"
 msgstr "摔角"
 
 #: src/app/(tabs)/profile/index.tsx:268
-#: src/app/(tabs)/profile/settings/notifications.tsx:110
+#: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "Yes"
 msgstr "是"
 

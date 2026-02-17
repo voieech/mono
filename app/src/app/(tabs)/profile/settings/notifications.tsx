@@ -1,7 +1,7 @@
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import * as Notifications from "expo-notifications";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect } from "react";
 import { AppState, Platform, Pressable, View, Linking } from "react-native";
 
 import {
@@ -18,51 +18,42 @@ import { toast } from "@/utils";
 
 export default function SettingsNotification() {
   const notificationContext = useNotification();
+  const isNotificationEnabled =
+    notificationContext.notificationPermissionsStatus?.granted ?? false;
+  const canAskUserForNotificationPermissionAgain =
+    notificationContext.notificationPermissionsStatus?.canAskAgain ?? false;
 
-  const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
-
-  const [
-    canAskUserForNotificationPermissionAgain,
-    setCanAskUserForNotificationPermissionAgain,
-  ] = useState(false);
-
-  const updateNotificationData = useCallback(
-    async function updateNotificationStatus() {
-      notificationContext.updatePushNotificationTokens();
-      const notificationPermissionsStatus =
-        await Notifications.getPermissionsAsync();
-      setIsNotificationEnabled(notificationPermissionsStatus.granted);
-      setCanAskUserForNotificationPermissionAgain(
-        notificationPermissionsStatus.canAskAgain,
-      );
-    },
-    [notificationContext],
+  const syncPushNotifications = useRef(() =>
+    notificationContext.syncPushNotificationData(),
   );
 
   useEffect(() => {
-    updateNotificationData();
-  }, [updateNotificationData]);
+    syncPushNotifications.current();
+  }, []);
 
   const appState = useRef(AppState.currentState);
 
   useEffect(() => {
-    // Subscribe to app state change to update notification status when
-    // transitioning from background to foreground
+    // Subscribe to app state change to trigger re syncing of notification
+    // data when transitioning from background to foreground, since user could
+    // potentially turned on or off notifications in settings page before
+    // navigating back, and we want to show the update immediately instead of
+    // waiting for next app start to show the change.
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (
         appState.current.match(/inactive|background/) &&
         nextAppState === "active"
       ) {
-        updateNotificationData();
+        syncPushNotifications.current();
       }
       appState.current = nextAppState;
     });
     return () => subscription.remove();
-  }, [updateNotificationData]);
+  }, []);
 
   async function requestNotificationPermission() {
     await Notifications.requestPermissionsAsync();
-    updateNotificationData();
+    await notificationContext.syncPushNotificationData();
   }
 
   return (

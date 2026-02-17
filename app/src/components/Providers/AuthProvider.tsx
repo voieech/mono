@@ -5,11 +5,10 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { AuthDataFromWorkos } from "@/types";
 
-import { postDeleteDevicePushNotificationTokens } from "@/api";
 import { reactQueryClient } from "@/api-client";
 import { authController, secureStoreForAuth } from "@/auth";
 import { AuthContext } from "@/context";
-import { envVar, getPushNotificationTokens } from "@/utils";
+import { envVar } from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
@@ -54,9 +53,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
 
     await clearAuth();
-    await getPushNotificationTokens().then(
-      postDeleteDevicePushNotificationTokens,
-    );
     reactQueryClient.clear();
   }
 

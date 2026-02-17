@@ -208,7 +208,7 @@ msgstr "Comedy Interviews"
 msgid "Content Language"
 msgstr "Content Language"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:149
+#: src/app/(tabs)/profile/settings/notifications.tsx:136
 #: src/components/CopyOnPress.tsx:43
 msgid "Copied to clipboard"
 msgstr "Copied to clipboard"
@@ -291,7 +291,7 @@ msgstr "Email"
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:130
+#: src/app/(tabs)/profile/settings/notifications.tsx:117
 msgid "Enable Notifications"
 msgstr "Enable Notifications"
 
@@ -311,7 +311,7 @@ msgstr "Entrepreneurship"
 #~ msgid "Explore"
 #~ msgstr "Explore"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:145
+#: src/app/(tabs)/profile/settings/notifications.tsx:132
 msgid "Expo Notification Token"
 msgstr "Expo Notification Token"
 
@@ -462,7 +462,7 @@ msgstr "Investing"
 #~ msgid "Is notification enabled?"
 #~ msgstr "Is notification enabled?"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:93
+#: src/app/(tabs)/profile/settings/notifications.tsx:80
 msgid "Is notifications enabled?"
 msgstr "Is notifications enabled?"
 
@@ -576,7 +576,7 @@ msgid "News Commentary"
 msgstr "News Commentary"
 
 #: src/app/(tabs)/profile/index.tsx:268
-#: src/app/(tabs)/profile/settings/notifications.tsx:110
+#: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "No"
 msgstr "No"
 
@@ -614,7 +614,7 @@ msgstr "Open Android Settings"
 msgid "Open iOS Settings"
 msgstr "Open iOS Settings"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:216
+#: src/app/(tabs)/profile/settings/notifications.tsx:203
 msgid "Open Notification Settings"
 msgstr "Open Notification Settings"
 
@@ -943,7 +943,7 @@ msgid "Wrestling"
 msgstr "Wrestling"
 
 #: src/app/(tabs)/profile/index.tsx:268
-#: src/app/(tabs)/profile/settings/notifications.tsx:110
+#: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "Yes"
 msgstr "Yes"
 
