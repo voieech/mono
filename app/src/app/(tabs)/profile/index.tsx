@@ -5,13 +5,7 @@ import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import { useRouter, Link } from "expo-router";
 import { useCallback, useState } from "react";
-import {
-  View,
-  Pressable,
-  TouchableOpacity,
-  Linking,
-  Platform,
-} from "react-native";
+import { View, Pressable, TouchableOpacity } from "react-native";
 
 import {
   ExperimentalSurface,
@@ -22,6 +16,7 @@ import {
   VerticalDivider,
   InAppBrowserLink,
   VerticalSpacer,
+  OpenNativeSettingsAppButton,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
@@ -315,68 +310,14 @@ function SettingsSection() {
           rowGap: 8,
         }}
       >
-        <Pressable
-          onPress={() => {
-            switch (Platform.OS) {
-              case "ios": {
-                Linking.openSettings();
-                return;
-              }
-              case "android": {
-                Linking.sendIntent(
-                  "android.settings.APP_NOTIFICATION_SETTINGS",
-                  [
-                    {
-                      key: "android.provider.extra.APP_PACKAGE",
-                      value: "com.voieechapp",
-                    },
-                  ],
-                );
-                return;
-              }
-              default:
-                console.error("Invalid Platform for settings");
-            }
+        <OpenNativeSettingsAppButton
+          buttonStyle={{
+            paddingVertical: 10,
+            paddingHorizontal: 16,
+            backgroundColor: Colors.black,
+            borderRadius: 10,
           }}
-        >
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingVertical: 10,
-              paddingHorizontal: 16,
-              backgroundColor: Colors.black,
-              borderRadius: 10,
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 12,
-              }}
-            >
-              <ThemedText>
-                {(() => {
-                  switch (Platform.OS) {
-                    case "ios": {
-                      return <Trans>Open iOS Settings</Trans>;
-                    }
-                    case "android": {
-                      return <Trans>Open Android Settings</Trans>;
-                    }
-                    default: {
-                      return <Trans>Open Settings</Trans>;
-                    }
-                  }
-                })()}
-              </ThemedText>
-            </View>
-            <Icon name="chevron.right" size={20} color={Colors.gray400} />
-          </View>
-        </Pressable>
+        />
         {authContext.isAuthenticated && (
           <ExperimentalSurface>
             <SettingsPageLink

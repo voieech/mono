@@ -2,7 +2,7 @@ import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import * as Notifications from "expo-notifications";
 import { useRef, useEffect } from "react";
-import { AppState, Platform, Pressable, View, Linking } from "react-native";
+import { AppState, Pressable, View } from "react-native";
 
 import {
   ThemedText,
@@ -10,6 +10,7 @@ import {
   Icon,
   VerticalSpacer,
   CopyOnPress,
+  OpenNativeSettingsAppButton,
 } from "@/components";
 import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
@@ -64,41 +65,40 @@ export default function SettingsNotification() {
           rowGap: 8,
         }}
       >
-        <View>
-          <View
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingVertical: 12,
+            paddingHorizontal: 16,
+            backgroundColor: Colors.black,
+            borderRadius: 16,
+          }}
+        >
+          <ThemedText>
+            <Trans>Is notifications enabled?</Trans>
+          </ThemedText>
+          <ThemedView
             style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingVertical: 12,
-              paddingHorizontal: 16,
-              backgroundColor: Colors.black,
-              borderRadius: 16,
+              paddingHorizontal: 8,
+              paddingVertical: 2,
+              borderRadius: 8,
+              backgroundColor: isNotificationEnabled
+                ? Colors.green600
+                : Colors.neutral300,
             }}
           >
-            <ThemedText>
-              <Trans>Is notifications enabled?</Trans>
-            </ThemedText>
-            <ThemedView
-              style={{
-                paddingHorizontal: 8,
-                paddingVertical: 2,
-                borderRadius: 8,
-                backgroundColor: isNotificationEnabled
-                  ? Colors.green600
-                  : Colors.neutral300,
+            <ThemedText
+              customColors={{
+                dark: isNotificationEnabled ? Colors.white : Colors.black,
               }}
             >
-              <ThemedText
-                customColors={{
-                  dark: isNotificationEnabled ? Colors.white : Colors.black,
-                }}
-              >
-                {isNotificationEnabled ? <Trans>Yes</Trans> : <Trans>No</Trans>}
-              </ThemedText>
-            </ThemedView>
-          </View>
+              {isNotificationEnabled ? <Trans>Yes</Trans> : <Trans>No</Trans>}
+            </ThemedText>
+          </ThemedView>
         </View>
+        <VerticalSpacer />
         {!isNotificationEnabled && canAskUserForNotificationPermissionAgain && (
           <Pressable onPress={requestNotificationPermission}>
             <View
@@ -120,7 +120,18 @@ export default function SettingsNotification() {
             </View>
           </Pressable>
         )}
-        <OpenNotificationSettings />
+        <OpenNativeSettingsAppButton
+          buttonStyle={{
+            paddingVertical: 12,
+            paddingHorizontal: 16,
+            backgroundColor: Colors.black,
+            borderRadius: 10,
+          }}
+        >
+          <ThemedText>
+            <Trans>Open Notification Settings</Trans>
+          </ThemedText>
+        </OpenNativeSettingsAppButton>
         {notificationContext.pushTokens?.expoToken !== undefined && (
           <View>
             <VerticalSpacer />
@@ -163,47 +174,3 @@ export default function SettingsNotification() {
     </SettingsPageLayout>
   );
 }
-
-const OpenNotificationSettings = () => {
-  return (
-    <Pressable
-      onPress={() => {
-        switch (Platform.OS) {
-          case "ios": {
-            Linking.openSettings();
-            return;
-          }
-          case "android": {
-            Linking.sendIntent("android.settings.APP_NOTIFICATION_SETTINGS", [
-              {
-                key: "android.provider.extra.APP_PACKAGE",
-                value: "com.voieechapp",
-              },
-            ]);
-            return;
-          }
-          default:
-            console.error("Invalid Platform for settings");
-        }
-      }}
-    >
-      <View
-        style={{
-          width: "100%",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingVertical: 12,
-          paddingHorizontal: 16,
-          backgroundColor: Colors.black,
-          borderRadius: 10,
-        }}
-      >
-        <ThemedText>
-          <Trans>Open Notification Settings</Trans>
-        </ThemedText>
-        <Icon name="chevron.right" size={20} color={Colors.gray400} />
-      </View>
-    </Pressable>
-  );
-};

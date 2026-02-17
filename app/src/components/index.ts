@@ -14,6 +14,7 @@ export * from "./FullScreenLoader";
 export * from "./FullScreenSigninModal";
 export * from "./FullScreenSigninWall";
 export * from "./InAppBrowserLink";
+export * from "./OpenNativeSettingsAppButton";
 export * from "./PageContainer";
 export * from "./provided";
 export * from "./Providers";

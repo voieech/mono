@@ -26,11 +26,11 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
-#: src/app/(tabs)/profile/index.tsx:95
+#: src/app/(tabs)/profile/index.tsx:90
 msgid "About"
 msgstr "关于"
 
-#: src/app/(tabs)/profile/index.tsx:247
+#: src/app/(tabs)/profile/index.tsx:242
 msgid "Account Information"
 msgstr "账户信息"
 
@@ -55,7 +55,7 @@ msgid "App cache"
 msgstr "应用程序缓存"
 
 #: src/app/(tabs)/profile/_layout.tsx:46
-#: src/app/(tabs)/profile/index.tsx:107
+#: src/app/(tabs)/profile/index.tsx:102
 msgid "App Details"
 msgstr "应用详情"
 
@@ -63,13 +63,17 @@ msgstr "应用详情"
 msgid "App Language"
 msgstr "应用程序语言"
 
-#: src/app/(tabs)/profile/settings/language.tsx:46
+#: src/app/(tabs)/profile/settings/language.tsx:51
 msgid "App language can only be modified in the Android \"Settings\" app."
 msgstr "应用程序语言只能在 Android 的“设置”应用中修改。"
 
-#: src/app/(tabs)/profile/settings/language.tsx:39
-msgid "App language can only be modified in the IOS \"Settings\" app."
-msgstr "应用程序语言只能在 IOS 的“设置”应用中修改。"
+#: src/app/(tabs)/profile/settings/language.tsx:56
+msgid "App language can only be modified in the Device \"Settings\" app."
+msgstr "应用程序语言只能在手机的“设置”应用中修改。"
+
+#: src/app/(tabs)/profile/settings/language.tsx:46
+msgid "App language can only be modified in the iOS \"Settings\" app."
+msgstr "应用程序语言只能在 iOS 的“设置”应用中修改。"
 
 #: src/app/(tabs)/profile/settings/app-details.tsx:31
 msgid "App Version"
@@ -84,7 +88,7 @@ msgid "Astronomy"
 msgstr "天文学"
 
 #: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:399
+#: src/app/(tabs)/profile/index.tsx:340
 msgid "Audio Playback"
 msgstr "音频播放"
 
@@ -121,7 +125,7 @@ msgstr "书籍"
 msgid "Buddhism"
 msgstr "佛教"
 
-#: src/app/(tabs)/profile/index.tsx:128
+#: src/app/(tabs)/profile/index.tsx:123
 msgid "Built by voieech.com"
 msgstr "由 voieech.com 构建"
 
@@ -199,12 +203,12 @@ msgstr "喜剧小说"
 msgid "Comedy Interviews"
 msgstr "喜剧采访"
 
-#: src/app/(tabs)/profile/settings/language.tsx:60
+#: src/app/(tabs)/profile/settings/language.tsx:69
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "内容语言"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:136
+#: src/app/(tabs)/profile/settings/notifications.tsx:147
 #: src/components/CopyOnPress.tsx:43
 msgid "Copied to clipboard"
 msgstr "已复制到剪贴板"
@@ -267,7 +271,7 @@ msgstr "戏剧"
 msgid "Earth Sciences"
 msgstr "地球科学"
 
-#: src/app/(tabs)/profile/index.tsx:383
+#: src/app/(tabs)/profile/index.tsx:324
 msgid "Edit Profile"
 msgstr "编辑个人资料"
 
@@ -279,11 +283,11 @@ msgstr "教育"
 msgid "Education for Kids"
 msgstr "儿童教育"
 
-#: src/app/(tabs)/profile/index.tsx:258
+#: src/app/(tabs)/profile/index.tsx:253
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/app/(tabs)/profile/index.tsx:266
+#: src/app/(tabs)/profile/index.tsx:261
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
@@ -307,7 +311,7 @@ msgstr "创业"
 #~ msgid "Explore"
 #~ msgstr "探索"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:132
+#: src/app/(tabs)/profile/settings/notifications.tsx:143
 msgid "Expo Notification Token"
 msgstr "Expo 应用程序通知数据"
 
@@ -409,7 +413,7 @@ msgstr "访客用户"
 msgid "Health & Fitness"
 msgstr "健康与健身"
 
-#: src/app/(tabs)/profile/index.tsx:97
+#: src/app/(tabs)/profile/index.tsx:92
 msgid "Help & Support"
 msgstr "帮助与支持"
 
@@ -471,7 +475,7 @@ msgid "Kids & Family"
 msgstr "儿童与家庭"
 
 #: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:405
+#: src/app/(tabs)/profile/index.tsx:346
 msgid "Language"
 msgstr "语言"
 
@@ -511,7 +515,7 @@ msgstr "我"
 msgid "Medicine"
 msgstr "医学"
 
-#: src/app/(tabs)/profile/index.tsx:262
+#: src/app/(tabs)/profile/index.tsx:257
 msgid "Member Since"
 msgstr "会员自"
 
@@ -535,7 +539,7 @@ msgstr "音乐史"
 msgid "Music Interviews"
 msgstr "音乐采访"
 
-#: src/app/(tabs)/profile/index.tsx:251
+#: src/app/(tabs)/profile/index.tsx:246
 msgid "Name"
 msgstr "姓名"
 
@@ -567,7 +571,7 @@ msgstr "新闻文章"
 msgid "News Commentary"
 msgstr "新闻评论"
 
-#: src/app/(tabs)/profile/index.tsx:268
+#: src/app/(tabs)/profile/index.tsx:263
 #: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "No"
 msgstr "不"
@@ -576,8 +580,8 @@ msgstr "不"
 msgid "Non-Profit"
 msgstr "非营利组织"
 
-#: src/app/(tabs)/profile/index.tsx:143
-#: src/app/(tabs)/profile/index.tsx:292
+#: src/app/(tabs)/profile/index.tsx:138
+#: src/app/(tabs)/profile/index.tsx:287
 msgid "Not Available"
 msgstr "信息不存在"
 
@@ -586,7 +590,7 @@ msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
 #: src/app/(tabs)/profile/_layout.tsx:18
-#: src/app/(tabs)/profile/index.tsx:392
+#: src/app/(tabs)/profile/index.tsx:333
 msgid "Notifications"
 msgstr "程序通知"
 
@@ -598,19 +602,19 @@ msgstr "营养"
 msgid "Oops Sorry!"
 msgstr "哎呀，抱歉！"
 
-#: src/app/(tabs)/profile/index.tsx:368
+#: src/components/OpenNativeSettingsAppButton.tsx:56
 msgid "Open Android Settings"
 msgstr "打开安卓设置"
 
-#: src/app/(tabs)/profile/index.tsx:365
+#: src/components/OpenNativeSettingsAppButton.tsx:53
 msgid "Open iOS Settings"
 msgstr "打开 iOS 设置"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:203
+#: src/app/(tabs)/profile/settings/notifications.tsx:132
 msgid "Open Notification Settings"
 msgstr "打开程序通知设置"
 
-#: src/app/(tabs)/profile/index.tsx:371
+#: src/components/OpenNativeSettingsAppButton.tsx:59
 msgid "Open Settings"
 msgstr "打开设置"
 
@@ -631,7 +635,7 @@ msgid "Personal Journals"
 msgstr "个人日记"
 
 #: src/app/(tabs)/profile/_layout.tsx:39
-#: src/app/(tabs)/profile/index.tsx:412
+#: src/app/(tabs)/profile/index.tsx:353
 msgid "Personalisation"
 msgstr "个性化"
 
@@ -687,12 +691,12 @@ msgstr "PostHog ID 已复制"
 msgid "Press to clear cache"
 msgstr "按清除缓存"
 
-#: src/app/(tabs)/profile/index.tsx:99
+#: src/app/(tabs)/profile/index.tsx:94
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
 #: src/app/(tabs)/profile/_layout.tsx:12
-#: src/app/(tabs)/profile/index.tsx:55
+#: src/app/(tabs)/profile/index.tsx:50
 msgid "Profile"
 msgstr "个人资料"
 
@@ -761,7 +765,7 @@ msgstr "选择您感兴趣的主题，以便我们为您量身定制入门体验
 msgid "Self-Improvement"
 msgstr "自我提升"
 
-#: src/app/(tabs)/profile/index.tsx:310
+#: src/app/(tabs)/profile/index.tsx:305
 msgid "Settings"
 msgstr "设置"
 
@@ -777,7 +781,7 @@ msgstr "显示跳前和跳后十五秒的按键。"
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
-#: src/app/(tabs)/profile/index.tsx:81
+#: src/app/(tabs)/profile/index.tsx:76
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "登入"
@@ -790,7 +794,7 @@ msgstr "登录以继续"
 msgid "Sign in to Personalise!"
 msgstr "登录以进行个性化设置！"
 
-#: src/app/(tabs)/profile/index.tsx:79
+#: src/app/(tabs)/profile/index.tsx:74
 msgid "Sign Out"
 msgstr "退出应用程序"
 
@@ -866,7 +870,7 @@ msgstr "请告诉我们您还希望我们添加哪些其他内容来源！"
 msgid "Tennis"
 msgstr "网球"
 
-#: src/app/(tabs)/profile/index.tsx:103
+#: src/app/(tabs)/profile/index.tsx:98
 msgid "Terms of Service"
 msgstr "服务条款"
 
@@ -934,7 +938,7 @@ msgstr "荒野"
 msgid "Wrestling"
 msgstr "摔角"
 
-#: src/app/(tabs)/profile/index.tsx:268
+#: src/app/(tabs)/profile/index.tsx:263
 #: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "Yes"
 msgstr "是"

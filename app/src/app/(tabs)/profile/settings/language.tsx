@@ -2,7 +2,7 @@ import { Trans } from "@lingui/react/macro";
 import { Fragment } from "react";
 import { Platform, Pressable, View } from "react-native";
 
-import { ThemedText, Icon } from "@/components";
+import { ThemedText, Icon, OpenNativeSettingsAppButton } from "@/components";
 import { SettingsPageLayout } from "@/components-page/(tabs)/profile/settings/SettingsPageLayout";
 import { Colors } from "@/constants";
 import { useSettingContext } from "@/context";
@@ -26,30 +26,39 @@ export default function SettingsLanguage() {
           >
             <Trans>App Language</Trans>
           </ThemedText>
-          <View
-            style={{
+          <OpenNativeSettingsAppButton
+            buttonStyle={{
               paddingVertical: 12,
               paddingHorizontal: 16,
               backgroundColor: Colors.black,
-              borderRadius: 16,
+              borderRadius: 10,
+            }}
+          />
+          <ThemedText
+            type="sm-normal"
+            colorType="subtext"
+            style={{
+              paddingHorizontal: 16,
+              paddingVertical: 8,
             }}
           >
             {Platform.OS === "ios" ? (
-              <ThemedText>
-                <Trans>
-                  App language can only be modified in the IOS
-                  &quot;Settings&quot; app.
-                </Trans>
-              </ThemedText>
+              <Trans>
+                App language can only be modified in the iOS
+                &quot;Settings&quot; app.
+              </Trans>
             ) : Platform.OS === "android" ? (
-              <ThemedText>
-                <Trans>
-                  App language can only be modified in the Android
-                  &quot;Settings&quot; app.
-                </Trans>
-              </ThemedText>
-            ) : null}
-          </View>
+              <Trans>
+                App language can only be modified in the Android
+                &quot;Settings&quot; app.
+              </Trans>
+            ) : (
+              <Trans>
+                App language can only be modified in the Device
+                &quot;Settings&quot; app.
+              </Trans>
+            )}
+          </ThemedText>
         </View>
         <View>
           <ThemedText
