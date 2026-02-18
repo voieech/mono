@@ -60,18 +60,22 @@ msgid "App Details"
 msgstr "App Details"
 
 #: src/app/(tabs)/profile/settings/language.tsx:27
+#: src/app/welcome.tsx:256
 msgid "App Language"
 msgstr "App Language"
 
 #: src/app/(tabs)/profile/settings/language.tsx:51
+#: src/app/welcome.tsx:280
 msgid "App language can only be modified in the Android \"Settings\" app."
 msgstr "App language can only be modified in the Android \"Settings\" app."
 
 #: src/app/(tabs)/profile/settings/language.tsx:56
+#: src/app/welcome.tsx:285
 msgid "App language can only be modified in the Device \"Settings\" app."
 msgstr "App language can only be modified in the Device \"Settings\" app."
 
 #: src/app/(tabs)/profile/settings/language.tsx:46
+#: src/app/welcome.tsx:275
 msgid "App language can only be modified in the iOS \"Settings\" app."
 msgstr "App language can only be modified in the iOS \"Settings\" app."
 
@@ -114,6 +118,7 @@ msgstr "Aviation"
 #: src/app/(tabs)/profile/_layout.tsx:40
 #: src/app/(tabs)/profile/_layout.tsx:47
 #: src/app/(tabs)/profile/_layout.tsx:54
+#: src/app/welcome.tsx:139
 msgid "Back"
 msgstr "Back"
 
@@ -212,9 +217,14 @@ msgid "Comedy Interviews"
 msgstr "Comedy Interviews"
 
 #: src/app/(tabs)/profile/settings/language.tsx:69
+#: src/app/welcome.tsx:298
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "Content Language"
+
+#: src/app/welcome.tsx:180
+msgid "Continue"
+msgstr "Continue"
 
 #: src/app/(tabs)/profile/settings/notifications.tsx:147
 #: src/components/CopyOnPress.tsx:43
@@ -488,6 +498,7 @@ msgstr "Kids & Family"
 
 #: src/app/(tabs)/profile/_layout.tsx:32
 #: src/app/(tabs)/profile/index.tsx:346
+#: src/app/welcome.tsx:244
 msgid "Language"
 msgstr "Language"
 
@@ -843,8 +854,8 @@ msgid "Stand-Up"
 msgstr "Stand-Up"
 
 #: src/app/welcome.tsx:80
-msgid "Start listening"
-msgstr "Start listening"
+#~ msgid "Start listening"
+#~ msgstr "Start listening"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:52
 msgid "Stories for Kids"
@@ -885,6 +896,10 @@ msgstr "Tennis"
 #: src/app/(tabs)/profile/index.tsx:98
 msgid "Terms of Service"
 msgstr "Terms of Service"
+
+#: src/app/welcome.tsx:247
+msgid "These can be changed again later in settings."
+msgstr "These can be changed again later in settings."
 
 #: src/app/audio-player-modal.tsx:115
 msgid "Track made by"
@@ -955,7 +970,8 @@ msgstr "Wrestling"
 msgid "Yes"
 msgstr "Yes"
 
-#: src/app/welcome.tsx:56
+#: src/app/welcome.tsx:208
+#: src/app/welcome.tsx:409
 msgid "Your Hyper Personalized Podcasts"
 msgstr "Your Hyper Personalized Podcasts"
 
