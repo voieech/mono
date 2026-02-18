@@ -17,20 +17,21 @@ import { JSendError } from "./JSend.js";
  */
 export function errorHandler(
   e: unknown,
-  _: Request,
+  req: Request,
   res: Response,
   _next: NextFunction,
 ) {
   const error = convertUnknownCatchToError(e);
 
-  // @todo Should be generated / fed to the logging system
-  // Create a error ID, to log it together with the error and send it back to
-  // the client to improve debugging.
-  const errorID = crypto.randomUUID();
-
-  // @todo Log to betterstack or something
-  // eslint-disable-next-line no-console
-  console.error(`Error[${new Date().toISOString()}-${errorID}]: `, error);
+  req.logger
+    .withError(error)
+    .withMetadata({
+      // This is attached for debugging when there is an error because req.body
+      // is not logged by default to reduce log size and to prevent leaking PII
+      // during normal operations.
+      requestBodyForDebuggingOnError: req.body,
+    })
+    .error(error.message);
 
   if (error instanceof HttpTransformerableException) {
     const { httpStatusCode, jsendData } = error.transformToHttpResponseData();
@@ -42,6 +43,6 @@ export function errorHandler(
   res.status(HttpStatus.InternalServerError_500).json({
     status: "error",
     message: "Internal Server Error!",
-    data: [`ID: ${errorID}`, error.message],
+    data: [`ID: ${req.id}`, error.message],
   } satisfies JSendError);
 }

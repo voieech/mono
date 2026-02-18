@@ -195,33 +195,24 @@ export const authRoutes = express
       throw new InvalidInputException("PKCE Code Verifier must be a string");
     }
 
-    try {
-      const authenticationResponse =
-        await workos.userManagement.authenticateWithCode({
-          code: authorizationCodeFromAuthkit,
-          codeVerifier: pkceCodeVerifier,
-          clientId: WORKOS_CLIENT_ID,
-        });
-
-      if (!authenticationResponse) {
-        throw new NotFoundException("Invalid or expired code");
-      }
-
-      // Response to mobile app
-      res.json({
-        accessToken: authenticationResponse.accessToken,
-        refreshToken: authenticationResponse.refreshToken,
-        user: mapWorkOsUser(authenticationResponse.user),
+    const authenticationResponse =
+      await workos.userManagement.authenticateWithCode({
+        code: authorizationCodeFromAuthkit,
+        codeVerifier: pkceCodeVerifier,
+        clientId: WORKOS_CLIENT_ID,
       });
-      return;
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
-      res
-        .status(500)
-        .json({ error: (err as any)?.msg ?? "Internal server error" });
-      return;
+
+    if (!authenticationResponse) {
+      throw new NotFoundException("Invalid or expired code");
     }
+
+    // Response to mobile app
+    res.json({
+      accessToken: authenticationResponse.accessToken,
+      refreshToken: authenticationResponse.refreshToken,
+      user: mapWorkOsUser(authenticationResponse.user),
+    });
+    return;
   })
 
   /**

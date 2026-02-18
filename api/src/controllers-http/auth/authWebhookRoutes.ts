@@ -40,10 +40,11 @@ export const authWebhookRoutes = express
       // req.workosWebhookEvent.id;
       // We might want to save the event in case we fail to process it and want to retry later on
 
-      // eslint-disable-next-line no-console
-      console.log(
-        `[WorkOS webhook]: Processing event "${req.workosWebhookEvent.event}"`,
-      );
+      req.logger
+        .withMetadata({
+          workosWebhookEvent: req.workosWebhookEvent,
+        })
+        .info("WorkOS webhook: Processing event");
 
       switch (req.workosWebhookEvent.event) {
         case "user.created": {
@@ -105,10 +106,11 @@ export const authWebhookRoutes = express
         }
 
         default: {
-          // eslint-disable-next-line no-console
-          console.error(
-            `[WorkOS webhook]: No event handlers for "${req.workosWebhookEvent.event}"`,
-          );
+          req.logger
+            .withMetadata({
+              workosWebhookEventType: req.workosWebhookEvent.event,
+            })
+            .error("WorkOS webhook: No event handlers found");
           return;
         }
       }

@@ -15,6 +15,9 @@ const WORKOS_IP_ADDRESSESS: ReadonlySet<string> = new Set([
   "174.129.36.47",
 ]);
 
+const unauthorizedErrorMessage =
+  "Unauthorized WorkOS webhook API access attempt from non whitelisted IP address";
+
 /**
  * Middleware to check if WorkOS webhook API calls are being sent from valid
  * WorkOS IP addresses.
@@ -26,27 +29,18 @@ export async function workOsIpAddressMiddleware(
   _: Response,
   next: NextFunction,
 ) {
-  // Use DigitalOcean's specific header for the true client IP
-  const originalIpAddress = req.headers["do-connecting-ip"] ?? "";
-
-  if (Array.isArray(originalIpAddress)) {
-    for (const ipAddress of originalIpAddress) {
+  if (Array.isArray(req.originalIpAddress)) {
+    for (const ipAddress of req.originalIpAddress) {
       if (WORKOS_IP_ADDRESSESS.has(ipAddress)) {
         next();
         return;
       }
     }
-    throw new ForbiddenException("Forbidden: Unauthorized IP address");
+    throw new ForbiddenException(unauthorizedErrorMessage);
   }
 
-  if (WORKOS_IP_ADDRESSESS.has(originalIpAddress)) {
-    next();
-    return;
+  if (!WORKOS_IP_ADDRESSESS.has(req.originalIpAddress)) {
+    throw new ForbiddenException(unauthorizedErrorMessage);
   }
-
-  // eslint-disable-next-line no-console
-  console.error(
-    `${workOsIpAddressMiddleware.name}: Unauthorized access attempt from IP: ${originalIpAddress}`,
-  );
-  throw new ForbiddenException("Forbidden: Unauthorized IP address");
+  next();
 }
