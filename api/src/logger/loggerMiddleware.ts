@@ -39,36 +39,45 @@ export async function loggerMiddleware(
       : null,
   });
 
-  // Log when request starts
-  req.logger
-    .withMetadata({
-      // Excludes the data already in the context object
-      req: {
-        url: req.url,
-        query: req.query,
-        params: req.params,
-        body: req.body,
-        headers: req.headers,
-        locales: req.locales,
-      },
-      connection: {
-        originalIpAddress: req.originalIpAddress,
-        remoteAddress: req.socket.remoteAddress,
-        remotePort: req.socket.remotePort,
-      },
-    })
-    .info("Req-Start");
-
-  // Log when request ends
+  /**
+   * Log when request ends only.
+   *
+   * Pros of only logging at the end
+   * - Atomic Context: In modern observability (using tools like Datadog, ELK,
+   * or Grafana Loki), the goal is to have one event per transaction. Having one
+   * log with all metadata allows you to build powerful dashboards, e.g.
+   * "Average response time for User X on Route Y where Body contains Z" with a
+   * single query.
+   *
+   * Pros of logging at start too
+   * - Zombie Request Detection: If you see a Req-Start without a matching
+   * Req-End, you know exactly where your app is crashing.
+   * - In-Flight Visibility: If a request takes 30 seconds, you can verify it
+   * started successfully while it is still processing.
+   */
   res.on("finish", () => {
     req.logger
       .withMetadata({
+        // Excludes the data already in the context object
         req: {
           // The route path pattern template. This is only set at the end since
           // this value is only populated at the end after ExpressJS has
           // successfully matched a route. This can be null if nothing matched,
           // i.e. a 404 route or a 500 error.
           routePattern: req.route?.path ?? null,
+          method: req.method,
+          url: req.url,
+          query: req.query,
+          params: req.params,
+          body: req.body,
+          headers: req.headers,
+          locales: req.locales,
+        },
+
+        connection: {
+          originalIpAddress: req.originalIpAddress,
+          remoteAddress: req.socket.remoteAddress,
+          remotePort: req.socket.remotePort,
         },
 
         res: {
@@ -79,7 +88,7 @@ export async function loggerMiddleware(
         // Keep to "ms" precision
         responseTimeInMs: Math.trunc(performance.now() - req.startTime),
       })
-      .info("Req-End");
+      .info("Request Processed");
   });
 
   next();
