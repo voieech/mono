@@ -17,10 +17,17 @@ export async function loggerMiddleware(
     // User details, especially the ID are logged in "context" instead of
     // "metadata", since this allows us to filter for "all logs for all requests
     // of a selected user" for debugging.
-    user: {
-      id: await req.genAuthenticatedUserID(),
-      isAuthenticated: req.isUserAuthenticated,
-    },
+    // This is only included if user is authenticated, since there is no user ID
+    // if user is not authenticated, e.g. a guest user.
+    user: req.isUserAuthenticated
+      ? {
+          id: await req.genAuthenticatedUserID(),
+
+          // No need to include this since user will ALWAYS be authenticated in
+          // order for req.isUserAuthenticated to be set...
+          // isAuthenticated: req.isUserAuthenticated,
+        }
+      : null,
   });
 
   // Log when request starts

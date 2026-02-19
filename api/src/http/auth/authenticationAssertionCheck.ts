@@ -40,7 +40,7 @@ export function authenticationAssertionCheck(
 
   if (req.__userAuthenticationData === undefined) {
     throw new InvalidInternalStateException(
-      "Internal Error: Missing user authentication data because authSetupMiddleware did not run",
+      "Internal Error: Missing user authentication data because authenticationMiddleware did not run",
     );
   }
 

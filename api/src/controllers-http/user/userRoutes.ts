@@ -6,7 +6,6 @@ import type {
   LikeableItemType,
 } from "../../dto-types/index.js";
 
-import { NotFoundException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
 import { apiDB } from "../../kysely/index.js";
 
