@@ -23,15 +23,19 @@ export function errorHandler(
 ) {
   const error = convertUnknownCatchToError(e);
 
-  req.logger
-    .withError(error)
-    .withMetadata({
+  // Adding optional chaining to this entire call chain, since there is a chance
+  // that req.logger is not attached before errorHandler is called. E.g. when
+  // an error is thrown in a middleware that runs before loggerMiddleware or if
+  // the loggerMiddleware itself threw an error.
+  req?.logger
+    ?.withError(error)
+    ?.withMetadata({
       // This is attached for debugging when there is an error because req.body
       // is not logged by default to reduce log size and to prevent leaking PII
       // during normal operations.
       requestBodyForDebuggingOnError: req.body,
     })
-    .error(error.message);
+    ?.error(error.message);
 
   if (error instanceof HttpTransformerableException) {
     const { httpStatusCode, jsendData } = error.transformToHttpResponseData();

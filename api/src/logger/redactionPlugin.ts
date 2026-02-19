@@ -13,6 +13,7 @@ function getRedactionPaths() {
   return [
     // Matches specific item paths
     "req.headers.authorization",
+    "req.headers.cookie",
     "req.body",
 
     // Do up to 4 levels deep of matching, e.g. "meta.req.body.user.email"
