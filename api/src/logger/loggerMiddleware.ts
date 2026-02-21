@@ -8,6 +8,13 @@ import { logger } from "./logger.js";
 /**
  * Middleware to create a new request specific/bounded logger, and to log info
  * at the start and end of the request/response cycle.
+ *
+ * Advanced / edge case debugging uses:
+ * 1. If there are requests coming in but never logged because it never hits
+ * the "end" or finishes, you should add a log at the start of the request to
+ * compare how many "open requests logs are there without a corresponding close"
+ * and another way to do so is to use a timer to log after X seconds of
+ * processing to warn about long processing time for that request.
  */
 export async function loggerMiddleware(
   req: Request,

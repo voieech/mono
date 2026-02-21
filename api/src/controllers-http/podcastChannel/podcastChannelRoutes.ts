@@ -67,6 +67,8 @@ export const podcastChannelRoutes = express
       throw new NotFoundException(`Invalid Channel ID: ${channelID}`);
     }
 
+    // @todo Cache this result, and only invalidate cache on new episode for that channel
+    // @todo Basically have a last update timestamp and only regenerate it if it is expired
     const episodes = await apiDB
       .selectFrom("podcast_episode")
       .innerJoin("audio", "podcast_episode.audio_id", "audio.id")

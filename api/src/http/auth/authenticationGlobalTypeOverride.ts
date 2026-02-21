@@ -18,8 +18,9 @@ declare global {
 
       /**
        * Get User ID from the token if it is available on the token (it can be
-       * undefined if the external_id field has not been set onto workos yet.), else
-       * it will load the authenticated user from DB and get the ID from there.
+       * undefined if the external_id field has not been set onto workos yet.),
+       * else it will load the authenticated user from DB and get the ID from
+       * there.
        */
       genAuthenticatedUserID: typeof genAuthenticatedUserID;
 

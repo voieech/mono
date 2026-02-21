@@ -19,6 +19,10 @@ declare global {
  * Middleware to get request locale value from various sources in order, before
  * validating that it is a supported locale and setting it to the global express
  * `Request` object. This will also set the response `Content-Language` header.
+ *
+ * @todo
+ * - Need to verify if selected lang is one of the allowed lang (use brand type)
+ * - Use the user's preferred locale if they are logged in
  */
 export function localeMiddleware(
   req: Request,
