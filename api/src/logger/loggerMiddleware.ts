@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 
 import onFinished from "on-finished";
 
+import { convertMaybeObjectToNullOrObject } from "../util/convertMaybeObjectToNullOrObject.js";
 import { logger } from "./logger.js";
 
 /**
@@ -76,8 +77,12 @@ export async function loggerMiddleware(
         routePattern: req.route?.path ?? null,
         method: req.method,
         url: req.url,
-        query: req.query,
-        params: req.params,
+
+        // Convert potentially empty objects into null for better log
+        // filtering/searching.
+        query: convertMaybeObjectToNullOrObject(req.query),
+        params: convertMaybeObjectToNullOrObject(req.params),
+
         headers: req.headers,
         locales: req.locales,
 
@@ -88,7 +93,9 @@ export async function loggerMiddleware(
         // original body sent by the user.
         // A potential more expensive fix that we are not doing now is to clone
         // the object at the start of the request and logging that instead.
-        body: req.body,
+        // If `req.body` is undefined, convert it to null instead of leaving as
+        // undefined since undefined will be scrubbed when logged.
+        body: req.body ?? null,
       },
 
       connection: {
