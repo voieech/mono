@@ -1,5 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 
+import onFinished from "on-finished";
+
 import { logger } from "./logger.js";
 
 /**
@@ -42,6 +44,11 @@ export async function loggerMiddleware(
   /**
    * Log when request ends only.
    *
+   * Use onFinished to handle the end of the request life-cycle, instead of
+   * manually handling things like `res.on("finish", ...)` and
+   * `res.on("close", ...)`. This way i dont need to do manual cleanup,
+   * preventing possible memory leaks.
+   *
    * Pros of only logging at the end
    * - Atomic Context: In modern observability (using tools like Datadog, ELK,
    * or Grafana Loki), the goal is to have one event per transaction. Having one
@@ -55,40 +62,53 @@ export async function loggerMiddleware(
    * - In-Flight Visibility: If a request takes 30 seconds, you can verify it
    * started successfully while it is still processing.
    */
-  res.on("finish", () => {
-    req.logger
-      .withMetadata({
-        // Excludes the data already in the context object
-        req: {
-          // The route path pattern template. This is only set at the end since
-          // this value is only populated at the end after ExpressJS has
-          // successfully matched a route. This can be null if nothing matched,
-          // i.e. a 404 route or a 500 error.
-          routePattern: req.route?.path ?? null,
-          method: req.method,
-          url: req.url,
-          query: req.query,
-          params: req.params,
-          body: req.body,
-          headers: req.headers,
-          locales: req.locales,
-        },
+  onFinished(res, (err, res) => {
+    const log = req.logger.withMetadata({
+      // Keep to "ms" precision
+      responseTimeInMs: Math.trunc(performance.now() - req.startTime),
 
-        connection: {
-          originalIpAddress: req.originalIpAddress,
-          remoteAddress: req.socket.remoteAddress,
-          remotePort: req.socket.remotePort,
-        },
+      // Excludes the data already in the context object
+      req: {
+        // The route path pattern template. This is only set at the end since
+        // this value is only populated at the end after ExpressJS has
+        // successfully matched a route. This can be null if nothing matched,
+        // i.e. a 404 route or a 500 error.
+        routePattern: req.route?.path ?? null,
+        method: req.method,
+        url: req.url,
+        query: req.query,
+        params: req.params,
+        headers: req.headers,
+        locales: req.locales,
 
-        res: {
-          statusCode: res.statusCode,
-          headers: res.getHeaders(),
-        },
+        // Note on `req.body` mutability, a.k.a the "ghost" body, where
+        // middlewares and route handlers can modify req.body as the request
+        // moves through the stack, which means that by the time this is ran at
+        // the very end, our logs will show the modified body and not the
+        // original body sent by the user.
+        // A potential more expensive fix that we are not doing now is to clone
+        // the object at the start of the request and logging that instead.
+        body: req.body,
+      },
 
-        // Keep to "ms" precision
-        responseTimeInMs: Math.trunc(performance.now() - req.startTime),
-      })
-      .info("Request Processed");
+      connection: {
+        originalIpAddress: req.originalIpAddress,
+        remoteAddress: req.socket.remoteAddress,
+        remotePort: req.socket.remotePort,
+      },
+
+      res: {
+        statusCode: res.statusCode,
+        headers: res.getHeaders(),
+      },
+    });
+
+    // Error info if on-finished detected a stream error
+    if (err !== null) {
+      log.withError(err);
+    }
+
+    log.info(res.writableFinished ? "Request Processed" : "Request Aborted");
   });
 
   next();
