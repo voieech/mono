@@ -42,6 +42,26 @@ export async function loggerMiddleware(
       : null,
   });
 
+  // Optionally support wrapping `res.json` and `res.send` to store the response
+  // data in `res.locals` for logging for debugging purposes later on.
+  if (shouldLogResponseDataForDebugging) {
+    const resDotJson = res.json;
+    res.json = function (data) {
+      res.locals["DEBUG:res.json(data)"] = data;
+      return resDotJson.call(res, data);
+    };
+
+    const resDotSend = res.send;
+    res.send = function (data) {
+      // Only save the data if it isnt already stored, since res.json internally
+      // calls res.send so we prevent double storing and double logging data.
+      if (res.locals["DEBUG:res.json(data)"] === undefined) {
+        res.locals["DEBUG:res.send(data)"] = data;
+      }
+      return resDotSend.call(res, data);
+    };
+  }
+
   /**
    * Log when request ends only.
    *
@@ -107,6 +127,14 @@ export async function loggerMiddleware(
       res: {
         statusCode: res.statusCode,
         headers: res.getHeaders(),
+
+        // These are only logged for debugging purposes if turned on manually
+        "DEBUG:res.json(data)": shouldLogResponseDataForDebugging
+          ? (res.locals["DEBUG:res.json(data)"] ?? null)
+          : undefined,
+        "DEBUG:res.send(data)": shouldLogResponseDataForDebugging
+          ? (res.locals["DEBUG:res.send(data)"] ?? null)
+          : undefined,
       },
     });
 
@@ -120,3 +148,6 @@ export async function loggerMiddleware(
 
   next();
 }
+
+const shouldLogResponseDataForDebugging =
+  process.env["LOG_RESPONSE_DATA_FOR_DEBUGGING"] === "true";
