@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 
 import { wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
-import { NotFoundError } from "@/errors";
 
 export function useCreateYoutubeVideoSummaryMutation() {
   return useMutation({
@@ -26,11 +25,6 @@ export function useCreateYoutubeVideoSummaryMutation() {
           .json()
           .then((data) => data.error ?? defaultErrorMessage)
           .catch(() => defaultErrorMessage);
-
-        if (res.status === 404) {
-          throw new NotFoundError(errorMessage);
-        }
-
         throw new Error(errorMessage);
       }
     },

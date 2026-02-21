@@ -95,7 +95,7 @@ export default function YoutubeVideoSummaryCreate() {
             placeholder="Youtube link"
             defaultValue={youtubeVideoLink}
             placeholderTextColor={Colors.neutral800}
-            onChangeText={(s) => setYoutubeVideoLink(s)}
+            onChangeText={setYoutubeVideoLink}
             onSubmitEditing={() => submitYoutubeLink()}
             style={{
               padding: 8,

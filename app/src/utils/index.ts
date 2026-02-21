@@ -11,6 +11,7 @@ export * from "./ExperimentalSurfaceName";
 export * from "./getPushNotificationDataAndSyncTokens";
 export * from "./getUserFullName";
 export * from "./i18n/index";
+export * from "./isValidEmail";
 export * from "./linguiMsgToString";
 export * from "./localStorage";
 export * from "./LocalStorageWrapper";

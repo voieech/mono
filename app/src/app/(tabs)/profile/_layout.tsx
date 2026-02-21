@@ -13,6 +13,13 @@ export default function ProfileLayout() {
         }}
       />
       <Stack.Screen
+        name="contact-form"
+        options={{
+          title: t`Contact Us`,
+          headerBackTitle: t`Back`,
+        }}
+      />
+      <Stack.Screen
         name="settings/notifications"
         options={{
           title: t`Notifications`,

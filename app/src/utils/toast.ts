@@ -9,6 +9,7 @@ import { linguiMsgToString } from "./linguiMsgToString";
  */
 export const toast = (msg: MessageDescriptor | string) =>
   Toast.show(linguiMsgToString(msg), {
+    duration: Toast.durations.LONG,
     position: Toast.positions.BOTTOM,
     shadow: true,
     animation: true,

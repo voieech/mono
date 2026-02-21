@@ -20,7 +20,7 @@ import {
 } from "@/components";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
-import { envVar, getUserFullName } from "@/utils";
+import { getUserFullName } from "@/utils";
 
 export default function ProfilePage() {
   const authContext = useAuthContext();
@@ -89,7 +89,35 @@ export default function ProfilePage() {
         <ThemedText type="lg-light">
           <Trans>About</Trans>
         </ThemedText>
-        <ProfileRowLink label={t`Help & Support`} href={envVar.supportLink} />
+        <Link
+          href={{
+            pathname: "/profile/contact-form",
+          }}
+        >
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingVertical: 10,
+              paddingHorizontal: 16,
+              backgroundColor: Colors.black,
+              borderRadius: 10,
+            }}
+          >
+            <ThemedText>
+              <Trans>Help & Support</Trans>
+            </ThemedText>
+            <Icon name="chevron.right" size={20} color={Colors.gray400} />
+          </View>
+        </Link>
+        <SettingsPageLink
+          setting={t`App Details`}
+          href={{
+            pathname: "/profile/settings/app-details",
+          }}
+        />
         <ProfileRowLink
           label={t`Privacy Policy`}
           href="https://voieech.com/privacy-policy.html"
@@ -97,12 +125,6 @@ export default function ProfilePage() {
         <ProfileRowLink
           label={t`Terms of Service`}
           href="https://voieech.com/terms-and-conditions.html"
-        />
-        <SettingsPageLink
-          setting={t`App Details`}
-          href={{
-            pathname: "/profile/settings/app-details",
-          }}
         />
       </View>
       <VerticalSpacer height={32} />

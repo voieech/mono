@@ -30,7 +30,7 @@ msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgid "About"
 msgstr "About"
 
-#: src/app/(tabs)/profile/index.tsx:242
+#: src/app/(tabs)/profile/index.tsx:264
 msgid "Account Information"
 msgstr "Account Information"
 
@@ -54,8 +54,8 @@ msgstr "Animation & Manga"
 msgid "App cache"
 msgstr "App cache"
 
-#: src/app/(tabs)/profile/_layout.tsx:46
-#: src/app/(tabs)/profile/index.tsx:102
+#: src/app/(tabs)/profile/_layout.tsx:53
+#: src/app/(tabs)/profile/index.tsx:116
 msgid "App Details"
 msgstr "App Details"
 
@@ -99,8 +99,8 @@ msgstr "Arts"
 msgid "Astronomy"
 msgstr "Astronomy"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:340
+#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/index.tsx:362
 msgid "Audio Playback"
 msgstr "Audio Playback"
 
@@ -118,6 +118,7 @@ msgstr "Aviation"
 #: src/app/(tabs)/profile/_layout.tsx:40
 #: src/app/(tabs)/profile/_layout.tsx:47
 #: src/app/(tabs)/profile/_layout.tsx:54
+#: src/app/(tabs)/profile/_layout.tsx:61
 #: src/app/welcome.tsx:139
 msgid "Back"
 msgstr "Back"
@@ -138,7 +139,7 @@ msgstr "Books"
 msgid "Buddhism"
 msgstr "Buddhism"
 
-#: src/app/(tabs)/profile/index.tsx:123
+#: src/app/(tabs)/profile/index.tsx:145
 msgid "Built by voieech.com"
 msgstr "Built by voieech.com"
 
@@ -158,6 +159,10 @@ msgstr "Cache will be cleared"
 #: src/components/CommonModalUsingHighZindexView.tsx:131
 msgid "Cancel"
 msgstr "Cancel"
+
+#: src/app/(tabs)/profile/contact-form.tsx:237
+msgid "cannot be blank"
+msgstr "cannot be blank"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:20
 msgid "Careers"
@@ -215,6 +220,10 @@ msgstr "Comedy Fiction"
 #: src/locales/categoryStringToMsgDescriptor.ts:27
 msgid "Comedy Interviews"
 msgstr "Comedy Interviews"
+
+#: src/app/(tabs)/profile/_layout.tsx:18
+msgid "Contact Us"
+msgstr "Contact Us"
 
 #: src/app/(tabs)/profile/settings/language.tsx:69
 #: src/app/welcome.tsx:298
@@ -289,7 +298,7 @@ msgstr "Drama"
 msgid "Earth Sciences"
 msgstr "Earth Sciences"
 
-#: src/app/(tabs)/profile/index.tsx:324
+#: src/app/(tabs)/profile/index.tsx:346
 msgid "Edit Profile"
 msgstr "Edit Profile"
 
@@ -301,11 +310,11 @@ msgstr "Education"
 msgid "Education for Kids"
 msgstr "Education for Kids"
 
-#: src/app/(tabs)/profile/index.tsx:253
+#: src/app/(tabs)/profile/index.tsx:275
 msgid "Email"
 msgstr "Email"
 
-#: src/app/(tabs)/profile/index.tsx:261
+#: src/app/(tabs)/profile/index.tsx:283
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
@@ -340,6 +349,10 @@ msgstr "External Audio controls"
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:211
 msgid "Failed to load video!"
 msgstr "Failed to load video!"
+
+#: src/app/(tabs)/profile/contact-form.tsx:84
+msgid "Failed to submit!"
+msgstr "Failed to submit!"
 
 #: src/components/AudioPlayer/AudioPlayer.tsx:268
 msgid "Failed to update like"
@@ -431,7 +444,7 @@ msgstr "Guest User"
 msgid "Health & Fitness"
 msgstr "Health & Fitness"
 
-#: src/app/(tabs)/profile/index.tsx:92
+#: src/app/(tabs)/profile/index.tsx:110
 msgid "Help & Support"
 msgstr "Help & Support"
 
@@ -459,6 +472,10 @@ msgstr "Home"
 #: src/locales/categoryStringToMsgDescriptor.ts:60
 msgid "Home & Garden"
 msgstr "Home & Garden"
+
+#: src/app/(tabs)/profile/contact-form.tsx:202
+msgid "How can we help you?"
+msgstr "How can we help you?"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:32
 msgid "How To"
@@ -496,8 +513,8 @@ msgstr "Judaism"
 msgid "Kids & Family"
 msgstr "Kids & Family"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:346
+#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/index.tsx:368
 #: src/app/welcome.tsx:244
 msgid "Language"
 msgstr "Language"
@@ -538,7 +555,7 @@ msgstr "Me"
 msgid "Medicine"
 msgstr "Medicine"
 
-#: src/app/(tabs)/profile/index.tsx:257
+#: src/app/(tabs)/profile/index.tsx:279
 msgid "Member Since"
 msgstr "Member Since"
 
@@ -562,7 +579,7 @@ msgstr "Music History"
 msgid "Music Interviews"
 msgstr "Music Interviews"
 
-#: src/app/(tabs)/profile/index.tsx:246
+#: src/app/(tabs)/profile/index.tsx:268
 msgid "Name"
 msgstr "Name"
 
@@ -594,7 +611,7 @@ msgstr "News Articles"
 msgid "News Commentary"
 msgstr "News Commentary"
 
-#: src/app/(tabs)/profile/index.tsx:263
+#: src/app/(tabs)/profile/index.tsx:285
 #: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "No"
 msgstr "No"
@@ -603,8 +620,8 @@ msgstr "No"
 msgid "Non-Profit"
 msgstr "Non-Profit"
 
-#: src/app/(tabs)/profile/index.tsx:138
-#: src/app/(tabs)/profile/index.tsx:287
+#: src/app/(tabs)/profile/index.tsx:160
+#: src/app/(tabs)/profile/index.tsx:309
 msgid "Not Available"
 msgstr "Not Available"
 
@@ -612,8 +629,8 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile/_layout.tsx:18
-#: src/app/(tabs)/profile/index.tsx:333
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:355
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -641,6 +658,10 @@ msgstr "Open Notification Settings"
 msgid "Open Settings"
 msgstr "Open Settings"
 
+#: src/app/(tabs)/profile/contact-form.tsx:152
+msgid "OR"
+msgstr "OR"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:50
 msgid "Parenting"
 msgstr "Parenting"
@@ -657,8 +678,8 @@ msgstr "Performing Arts"
 msgid "Personal Journals"
 msgstr "Personal Journals"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
-#: src/app/(tabs)/profile/index.tsx:353
+#: src/app/(tabs)/profile/_layout.tsx:46
+#: src/app/(tabs)/profile/index.tsx:375
 msgid "Personalisation"
 msgstr "Personalisation"
 
@@ -681,6 +702,10 @@ msgstr "Pick a content source to start creating content in your own style!"
 #: src/locales/categoryStringToMsgDescriptor.ts:96
 msgid "Places & Travel"
 msgstr "Places & Travel"
+
+#: src/app/(tabs)/profile/contact-form.tsx:187
+msgid "please enter a valid email"
+msgstr "please enter a valid email"
 
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:92
 msgid "Please paste your Youtube link"
@@ -714,7 +739,7 @@ msgstr "PostHog ID copied"
 msgid "Press to clear cache"
 msgstr "Press to clear cache"
 
-#: src/app/(tabs)/profile/index.tsx:94
+#: src/app/(tabs)/profile/index.tsx:122
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
@@ -788,7 +813,11 @@ msgstr "Select topics you like so that we can personalise your starting experien
 msgid "Self-Improvement"
 msgstr "Self-Improvement"
 
-#: src/app/(tabs)/profile/index.tsx:305
+#: src/app/(tabs)/profile/contact-form.tsx:103
+msgid "Send us your queries / feedback!"
+msgstr "Send us your queries / feedback!"
+
+#: src/app/(tabs)/profile/index.tsx:327
 msgid "Settings"
 msgstr "Settings"
 
@@ -804,6 +833,7 @@ msgstr "Show controls for jumping back and forth in 15 seconds intervals."
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "Show controls for skipping tracks to next/previous."
 
+#: src/app/(tabs)/profile/contact-form.tsx:141
 #: src/app/(tabs)/profile/index.tsx:76
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
@@ -861,6 +891,14 @@ msgstr "Stand-Up"
 msgid "Stories for Kids"
 msgstr "Stories for Kids"
 
+#: src/app/(tabs)/profile/contact-form.tsx:265
+msgid "Submit"
+msgstr "Submit"
+
+#: src/app/(tabs)/profile/contact-form.tsx:81
+msgid "Submitted, we will get back to you as needed!"
+msgstr "Submitted, we will get back to you as needed!"
+
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:52
 msgid "Submitted!"
 msgstr "Submitted!"
@@ -893,7 +931,7 @@ msgstr "Tell us what other content sources you would like us to add!"
 msgid "Tennis"
 msgstr "Tennis"
 
-#: src/app/(tabs)/profile/index.tsx:98
+#: src/app/(tabs)/profile/index.tsx:126
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
@@ -965,10 +1003,14 @@ msgstr "Wilderness"
 msgid "Wrestling"
 msgstr "Wrestling"
 
-#: src/app/(tabs)/profile/index.tsx:263
+#: src/app/(tabs)/profile/index.tsx:285
 #: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "Yes"
 msgstr "Yes"
+
+#: src/app/(tabs)/profile/contact-form.tsx:160
+msgid "Your email"
+msgstr "Your email"
 
 #: src/app/welcome.tsx:208
 #: src/app/welcome.tsx:409
