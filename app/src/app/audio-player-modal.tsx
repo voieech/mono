@@ -16,17 +16,12 @@ import {
   InAppBrowserLink,
 } from "@/components";
 import { Colors } from "@/constants";
-import { useExperimentalSurfaceContext } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 import { supportFormLinkPrefillContent } from "@/utils";
 
 export default function AudioPlayerModal() {
   const windowDimensions = useWindowDimensions();
   const activeTrack = useActiveTrackWithMetadata();
-  const useCardPlayerInsteadOfModal =
-    useExperimentalSurfaceContext().getShowExperimentalSurface(
-      "use-card-player-instead-of-modal",
-    );
 
   if (activeTrack === undefined) {
     return null;
@@ -64,12 +59,7 @@ export default function AudioPlayerModal() {
           <Pressable
             onPress={() => router.dismissTo(router.canGoBack() ? ".." : "/")}
           >
-            <Icon
-              name={
-                useCardPlayerInsteadOfModal ? "chevron.left" : "chevron.down"
-              }
-              color={Colors.white}
-            />
+            <Icon name="chevron.down" color={Colors.white} />
           </Pressable>
           <ThemedText
             numberOfLines={1}

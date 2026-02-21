@@ -22,7 +22,7 @@ msgstr "... loading video ..."
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
 
-#: src/app/track-queue-modal.tsx:73
+#: src/app/track-queue-modal.tsx:64
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 
@@ -608,7 +608,7 @@ msgstr "Non-Profit"
 msgid "Not Available"
 msgstr "Not Available"
 
-#: src/app/track-queue-modal.tsx:94
+#: src/app/track-queue-modal.tsx:85
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
@@ -739,7 +739,7 @@ msgstr "Religion"
 msgid "Religion & Spirituality"
 msgstr "Religion & Spirituality"
 
-#: src/app/audio-player-modal.tsx:123
+#: src/app/audio-player-modal.tsx:113
 msgid "Report Audio Track"
 msgstr "Report Audio Track"
 
@@ -901,7 +901,7 @@ msgstr "Terms of Service"
 msgid "These can be changed again later in settings."
 msgstr "These can be changed again later in settings."
 
-#: src/app/audio-player-modal.tsx:115
+#: src/app/audio-player-modal.tsx:105
 msgid "Track made by"
 msgstr "Track made by"
 

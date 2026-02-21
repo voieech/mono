@@ -22,7 +22,7 @@ msgstr "... 加载视频中 ..."
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
 
-#: src/app/track-queue-modal.tsx:73
+#: src/app/track-queue-modal.tsx:64
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
@@ -596,7 +596,7 @@ msgstr "非营利组织"
 msgid "Not Available"
 msgstr "信息不存在"
 
-#: src/app/track-queue-modal.tsx:94
+#: src/app/track-queue-modal.tsx:85
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
@@ -727,7 +727,7 @@ msgstr "宗教"
 msgid "Religion & Spirituality"
 msgstr "宗教与灵性"
 
-#: src/app/audio-player-modal.tsx:123
+#: src/app/audio-player-modal.tsx:113
 msgid "Report Audio Track"
 msgstr "举报音轨"
 
@@ -889,7 +889,7 @@ msgstr "服务条款"
 msgid "These can be changed again later in settings."
 msgstr "这些设置稍后可以在设置中更改。"
 
-#: src/app/audio-player-modal.tsx:115
+#: src/app/audio-player-modal.tsx:105
 msgid "Track made by"
 msgstr "音轨制作者"
 

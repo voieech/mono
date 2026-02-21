@@ -11,17 +11,13 @@ import {
   Icon,
 } from "@/components";
 import { Colors } from "@/constants";
-import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
+import { useTrackPlayer } from "@/context";
 
 export default function TrackQueueModal() {
   const windowDimensions = useWindowDimensions();
   const trackPlayer = useTrackPlayer();
   const queue = trackPlayer.getTracksAhead();
   const queueLength = queue.length;
-  const useCardPlayerInsteadOfModal =
-    useExperimentalSurfaceContext().getShowExperimentalSurface(
-      "use-card-player-instead-of-modal",
-    );
   return (
     <SafeScrollViewContainer
       // Custom pull down to close implementation because of the bug "multiple
@@ -57,12 +53,7 @@ export default function TrackQueueModal() {
             <Pressable
               onPress={() => router.dismissTo(router.canGoBack() ? ".." : "/")}
             >
-              <Icon
-                name={
-                  useCardPlayerInsteadOfModal ? "chevron.left" : "chevron.down"
-                }
-                color={Colors.white}
-              />
+              <Icon name="chevron.down" color={Colors.white} />
             </Pressable>
             <ThemedText
               style={{

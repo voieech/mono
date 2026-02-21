@@ -96,11 +96,6 @@ export default function SettingsInternal() {
           description="Choose the type of useProgress hook implementation"
           experimentalSurfaceName="use-interval-for-useProgress"
         />
-        <ExperimentalSurfaceSettingRow
-          settingTitle="Use 'card' player instead of 'modal'"
-          description="There is a bug on IOS where modal route gets warped with stack route in home page when switching between audio player modal and a route quickly"
-          experimentalSurfaceName="use-card-player-instead-of-modal"
-        />
       </View>
     </SettingsPageLayout>
   );

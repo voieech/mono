@@ -10,7 +10,7 @@ import {
 
 import { Icon } from "@/components/provided";
 import { Colors } from "@/constants";
-import { useTrackPlayer, useExperimentalSurfaceContext } from "@/context";
+import { useTrackPlayer } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
 import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerProgessBar";
@@ -22,17 +22,8 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const router = useRouter();
-  const useCardPlayerInsteadOfModal =
-    useExperimentalSurfaceContext().getShowExperimentalSurface(
-      "use-card-player-instead-of-modal",
-    );
 
   function onSwipeUpOpenModal(evt: GestureResponderEvent) {
-    // Disable when using card/page style UI for audio player
-    if (useCardPlayerInsteadOfModal) {
-      return;
-    }
-
     // Small threshold since the overlay is small, so we can detect any
     // swipe ups as a swipe up motion
     const swipeUpPixelTriggerThreshold = 1;
