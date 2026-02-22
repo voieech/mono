@@ -11,6 +11,7 @@ import { createRoutes } from "./controllers-http/create/index.js";
 import { featuredContentRoutes } from "./controllers-http/featured/index.js";
 import { localeMiddleware } from "./controllers-http/locale/index.js";
 import { appleAppSiteAssociationRoute } from "./controllers-http/others/index.js";
+import { contactFormRoutes } from "./controllers-http/others/index.js";
 import { podcastChannelRoutes } from "./controllers-http/podcastChannel/index.js";
 import { podcastEpisodeRoutes } from "./controllers-http/podcastEpisode/index.js";
 import { recommendationsRoutes } from "./controllers-http/reccomendations/index.js";
@@ -60,6 +61,7 @@ export function bootstrapHttpServer() {
     .use(recommendationsRoutes)
     .use(podcastEpisodeRoutes)
     .use(podcastChannelRoutes)
+    .use(contactFormRoutes)
 
     /**
      * Very last handler is the error handler to catch anything thrown by items
