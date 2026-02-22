@@ -30,14 +30,14 @@ import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 import { createTrackWithMetadata } from "@/utils";
 
 export default function PodcastEpisode() {
-  const vanityID = useLocalSearchParams<{ vanityID: string }>().vanityID;
+  const episodeID = useLocalSearchParams<{ episodeID: string }>().episodeID;
 
   const {
     isPending,
     isError,
     data: episode,
     error,
-  } = usePodcastEpisodeQuery(vanityID);
+  } = usePodcastEpisodeQuery(episodeID);
 
   const activeTrack = useActiveTrackWithMetadata();
 
@@ -48,7 +48,7 @@ export default function PodcastEpisode() {
     episode.id === activeTrack.id;
 
   const podcastEpisodeNextReccomendationsQuery =
-    usePodcastEpisodeNextReccomendationsQuery(vanityID);
+    usePodcastEpisodeNextReccomendationsQuery(episodeID);
 
   const trackPlayer = useTrackPlayer();
 
@@ -88,7 +88,7 @@ export default function PodcastEpisode() {
       // Call API to get reccomendations if it wasnt already loaded
       const reccomendations =
         podcastEpisodeNextReccomendationsQuery.data?.reccomendations ??
-        (await getPodcastEpisodeNextReccomendations(episode.vanity_id))
+        (await getPodcastEpisodeNextReccomendations(episode.id))
           ?.reccomendations;
 
       await trackPlayer.enqueueTracksAfterCurrent(
@@ -282,9 +282,9 @@ export default function PodcastEpisode() {
               >
                 <Link
                   href={{
-                    pathname: "/podcast/episode/[vanityID]",
+                    pathname: "/podcast/episode/[episodeID]",
                     params: {
-                      vanityID: episode.vanity_id,
+                      episodeID: episode.id,
                     },
                   }}
                 >

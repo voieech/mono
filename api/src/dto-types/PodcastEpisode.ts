@@ -1,7 +1,6 @@
 export type PodcastEpisode = {
   id: string;
   created_at: string;
-  vanity_id: string;
   season_number: number | null;
   episode_number: number | null;
   audio_public_url: string;

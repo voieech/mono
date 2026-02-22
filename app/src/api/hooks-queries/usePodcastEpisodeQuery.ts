@@ -6,21 +6,21 @@ import { queryKeyBuilder, wrappedFetch } from "@/api-client";
 import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
-export function usePodcastEpisodeQuery(vanityID: string) {
+export function usePodcastEpisodeQuery(episodeID: string) {
   return useQuery({
     queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.episode.vanityID.$vanityID",
+      "podcast.episode.episodeID.$episodeID",
       {
-        vanityID,
+        episodeID,
       },
     ),
     async queryFn() {
       const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/podcast/episode/${vanityID}`,
+        `${apiBaseUrl}/v1/podcast/episode/${episodeID}`,
       );
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to load episode: ${vanityID}`;
+        const defaultErrorMessage = `Failed to load episode: ${episodeID}`;
         const errorMessage = await res
           .json()
           .then((data) => data.error ?? defaultErrorMessage)

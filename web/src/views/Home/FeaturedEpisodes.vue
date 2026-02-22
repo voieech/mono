@@ -35,10 +35,7 @@ const {
 
     // Cache data so these dont need to be re queried again on navigate
     for (const episode of episodes) {
-      queryClient.setQueryData(
-        ["podcast-episode", "vanityID", episode.vanity_id],
-        episode,
-      );
+      queryClient.setQueryData(["podcast-episode", episode.id], episode);
     }
 
     return episodes;
@@ -54,12 +51,12 @@ const {
     <p class="pb-4 text-2xl text-zinc-800">Featured Episodes</p>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-8">
-      <template v-for="episode of featuredEpisodes" :key="episode.vanity_id">
+      <template v-for="episode of featuredEpisodes" :key="episode.id">
         <RouterLink
           :to="{
             name: PodcastEpisodeRoute.name,
             params: {
-              vanityID: episode.vanity_id,
+              episodeID: episode.id,
             },
             query: {
               lang: episode.language,

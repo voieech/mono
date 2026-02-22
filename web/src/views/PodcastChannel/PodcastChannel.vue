@@ -131,7 +131,7 @@ useHead({
               :to="{
                 name: PodcastEpisodeRoute.name,
                 params: {
-                  vanityID: episode.vanity_id,
+                  episodeID: episode.id,
                 },
               }"
             >

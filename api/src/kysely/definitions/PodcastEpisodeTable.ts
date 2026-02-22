@@ -23,6 +23,8 @@ export interface PodcastEpisodeTable {
 
   /**
    * Globally unique short ID for vanity (nice looking URL's that are short)
+   *
+   * @todo Deprecated, do not use, will be removed soon
    */
   vanity_id: NonUpdatableIdColumnType;
 

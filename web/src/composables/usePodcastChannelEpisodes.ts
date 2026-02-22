@@ -42,10 +42,7 @@ export function usePodcastChannelEpisodes(
 
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
-        queryClient.setQueryData(
-          ["podcast-episode", "vanityID", episode.vanity_id],
-          episode,
-        );
+        queryClient.setQueryData(["podcast-episode", episode.id], episode);
       }
 
       return episodes;

@@ -8,10 +8,7 @@ import { apiBaseUrl } from "@/api";
 import { updateLangQueryParam } from "@/router";
 
 export function usePodcastEpisode(
-  options: {
-    episodeID?: string;
-    vanityID?: string;
-  },
+  episodeID: string,
   optionals?: {
     /**
      * Only used to redirect to 404 page on 404 if provided
@@ -21,23 +18,10 @@ export function usePodcastEpisode(
     i18n?: Composer;
   },
 ) {
-  const queryID = options.episodeID ?? options.vanityID;
-  if (queryID === undefined) {
-    throw new Error(`[${usePodcastEpisode.name}] No QueryID passed`);
-  }
-
-  const queryKey = [
-    "podcast-episode",
-    options.episodeID !== undefined ? "episodeID" : "vanityID",
-    queryID,
-  ];
-
   return useQuery({
-    queryKey,
+    queryKey: ["podcast-episode", episodeID],
     async queryFn() {
-      // @todo Query using query params instead of URL params since this should
-      // be able to take both EpisodeID and VanityID
-      const res = await fetch(`${apiBaseUrl}/v1/podcast/episode/${queryID}`);
+      const res = await fetch(`${apiBaseUrl}/v1/podcast/episode/${episodeID}`);
 
       if (!res.ok) {
         if (res.status === 404) {
@@ -46,7 +30,7 @@ export function usePodcastEpisode(
           });
         }
 
-        const defaultErrorMessage = `Failed to load episode: ${queryID}`;
+        const defaultErrorMessage = `Failed to load episode: ${episodeID}`;
         const errorMessage = await res
           .json()
           .then((data) => data.error ?? defaultErrorMessage)

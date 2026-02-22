@@ -9,7 +9,7 @@ export const createAppLink = {
   forPodcastChannel(channelID: string) {
     return `${appSlug}://podcast/channel/${channelID}`;
   },
-  forPodcastEpisode(vanityID: string) {
-    return `${appSlug}://podcast/episode/${vanityID}`;
+  forPodcastEpisode(episodeID: string) {
+    return `${appSlug}://podcast/episode/${episodeID}`;
   },
 };

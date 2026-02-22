@@ -40,7 +40,7 @@ export default function HomeLayout() {
         }}
       />
       <Stack.Screen
-        name="podcast/episode/[vanityID]"
+        name="podcast/episode/[episodeID]"
         options={{
           title: t`Podcast Episode`,
         }}

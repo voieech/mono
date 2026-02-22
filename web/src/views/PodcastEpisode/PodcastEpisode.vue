@@ -15,9 +15,9 @@ import WebPlayer from "./WebPlayer.vue";
 const i18n = useI18n({ useScope: "global" });
 const router = useRouter();
 const route = useRoute();
-const vanityID = route.params.vanityID.toString();
+const episodeID = route.params.episodeID.toString();
 const isDescriptionExpanded = ref(false);
-const podcastEpisodeQuery = usePodcastEpisode({ vanityID }, { router, i18n });
+const podcastEpisodeQuery = usePodcastEpisode(episodeID, { router, i18n });
 
 useHead({
   title: computed(() =>
@@ -89,7 +89,7 @@ useHead({
         </p>
 
         <div class="py-4 sm:py-8">
-          <a :href="createAppLink.forPodcastEpisode(vanityID)" target="_blank">
+          <a :href="createAppLink.forPodcastEpisode(episodeID)" target="_blank">
             <div
               class="flex w-full flex-row items-center gap-4 rounded-full border border-zinc-200 bg-zinc-50 p-4 py-3 shadow-lg"
             >

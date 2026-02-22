@@ -57,7 +57,7 @@ const podcastChannelEpisodesQuery = usePodcastChannelEpisodes(channelID, {
             :to="{
               name: PodcastEpisodeRoute.name,
               params: {
-                vanityID: episode.vanity_id,
+                episodeID: episode.id,
               },
             }"
           >

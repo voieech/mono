@@ -18,7 +18,7 @@ msgid "... loading video ..."
 msgstr "... loading video ..."
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:193
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:202
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:202
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
 
@@ -748,7 +748,7 @@ msgstr "Privacy Policy"
 msgid "Profile"
 msgstr "Profile"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:273
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:273
 msgid "Reccomended Episodes"
 msgstr "Reccomended Episodes"
 
@@ -797,7 +797,7 @@ msgstr "Science"
 msgid "Science Fiction"
 msgstr "Science Fiction"
 
-#: src/app/(tabs)/(home)/podcast/episode/[vanityID].tsx:196
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:196
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 

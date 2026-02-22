@@ -48,6 +48,8 @@ export interface AudioTable {
   /**
    * Name of the audio file in the storage bucket. Right now this is the
    * `vanity_id` of the `PodcastEpisodeTable`.
+   *
+   * @todo Remove this since vanity_id is no longer used
    */
   name: string;
 

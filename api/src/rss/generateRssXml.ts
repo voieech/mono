@@ -168,7 +168,7 @@ export function generateRssXml(
     feed.item({
       guid: episode.id,
       url: urlBuilders.rootDomain(
-        `/podcast/episode/${episode.vanity_id}?lang=${episode.language}`,
+        `/podcast/episode/${episode.id}?lang=${episode.language}`,
       ),
       date: episode.created_at,
       title: episode.title,

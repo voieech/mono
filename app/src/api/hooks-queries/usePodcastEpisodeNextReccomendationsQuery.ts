@@ -7,14 +7,17 @@ import { getPodcastEpisodeNextReccomendations } from "@/api/direct-queries/getPo
  * Useful for showing reccomendations related to the current episode
  */
 export function usePodcastEpisodeNextReccomendationsQuery(
-  vanityID: string,
+  episodeID: string,
   limit: number = 10,
 ) {
   return useQuery({
     queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.episode.reccomendations.vanityID.$vanityID.$limit",
-      { vanityID, limit },
+      "podcast.episode.reccomendations.episodeID.$episodeID.$limit",
+      {
+        episodeID,
+        limit,
+      },
     ),
-    queryFn: () => getPodcastEpisodeNextReccomendations(vanityID, limit),
+    queryFn: () => getPodcastEpisodeNextReccomendations(episodeID, limit),
   });
 }

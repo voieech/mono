@@ -192,9 +192,9 @@ export default function HomeScreen() {
               <Link
                 key={episode.id}
                 href={{
-                  pathname: "/podcast/episode/[vanityID]",
+                  pathname: "/podcast/episode/[episodeID]",
                   params: {
-                    vanityID: episode.vanity_id,
+                    episodeID: episode.id,
                   },
                 }}
               >

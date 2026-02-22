@@ -13,7 +13,7 @@ export const recommendationsRoutes = express
 
   /**
    * Get a list of reccomendations to play next after a given podcast
-   * episode's vanity ID.
+   * episode's ID.
    *
    * @todo things to try
    * 1. vector DB to store embedding of all the stuff user listened + liked
@@ -26,23 +26,21 @@ export const recommendationsRoutes = express
       throw new InvalidInputException("'limit' must be between 1 and 20");
     }
 
-    const currentEpisodeVanityID = req.query["current_episode_vanity_id"];
+    const currentEpisodeID = req.query["current_episode_id"];
     if (
-      typeof currentEpisodeVanityID !== "string" ||
-      currentEpisodeVanityID === undefined
+      typeof currentEpisodeID !== "string" ||
+      currentEpisodeID === undefined
     ) {
-      throw new InvalidInputException("'current_episode_vanity_id' is invalid");
+      throw new InvalidInputException("'current_episode_id' is invalid");
     }
 
     const currentEpisode = await apiDB
       .selectFrom("podcast_episode")
       .selectAll("podcast_episode")
-      .where("podcast_episode.vanity_id", "=", currentEpisodeVanityID)
+      .where("podcast_episode.id", "=", currentEpisodeID)
       .executeTakeFirst();
     if (currentEpisode === undefined) {
-      throw new NotFoundException(
-        `Cannot find episode with VanityID: ${currentEpisodeVanityID}`,
-      );
+      throw new NotFoundException(`Cannot find episode: ${currentEpisodeID}`);
     }
 
     // @todo Filter out all episodes that the user listened to before

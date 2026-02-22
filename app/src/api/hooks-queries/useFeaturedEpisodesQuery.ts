@@ -42,15 +42,6 @@ export function useFeaturedEpisodesQuery() {
       for (const episode of episodes) {
         reactQueryClient.setQueryData(
           queryKeyBuilder.fullPathForDataInsertion(
-            "podcast.episode.vanityID.$vanityID",
-            {
-              vanityID: episode.vanity_id,
-            },
-          ),
-          episode,
-        );
-        reactQueryClient.setQueryData(
-          queryKeyBuilder.fullPathForDataInsertion(
             "podcast.episode.episodeID.$episodeID",
             {
               episodeID: episode.id,

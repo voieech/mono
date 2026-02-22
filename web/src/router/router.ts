@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { i18n, setLocale } from "../i18n";
 
 export const PodcastEpisodeRoute = <const>{
-  path: "/podcast/episode/:vanityID",
+  path: "/podcast/episode/:episodeID",
   name: "podcast-episode",
   props: (route: RouteLocationNormalized) => route.query,
   component: () => import("../views/PodcastEpisode/PodcastEpisode.vue"),

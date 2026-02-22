@@ -8,17 +8,15 @@ import { genPodcastEpisodeBaseQuery } from "../../kysely/index.js";
 export const podcastEpisodeRoutes = express
   .Router()
 
-  .get("/v1/podcast/episode/:vanityID", async function (req, res) {
-    const vanityID = req.params.vanityID;
+  .get("/v1/podcast/episode/:id", async function (req, res) {
+    const id = req.params.id;
 
     const episode = await genPodcastEpisodeBaseQuery()
-      .where("podcast_episode.vanity_id", "=", vanityID)
+      .where("podcast_episode.id", "=", id)
       .executeTakeFirst();
 
     if (episode === undefined) {
-      throw new NotFoundException(
-        `Cannot find episode with VanityID: ${vanityID}`,
-      );
+      throw new NotFoundException(`Cannot find episode with ID: ${id}`);
     }
 
     res.status(200).json(episode satisfies PodcastEpisode);
