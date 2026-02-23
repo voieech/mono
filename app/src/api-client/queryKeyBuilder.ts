@@ -8,6 +8,7 @@ export const queryKeyBuilder = new QueryKeyBuilder<
   | "podcast.episode.episodeID.$episodeID"
   | "podcast.episode.reccomendations.episodeID.$episodeID.$limit"
   | "create.youtube-video-summary.youtubeVideoID.$youtubeVideoID"
+  | "user.subscription.itemType.$itemType"
   | "user.subscription.itemType.$itemType.itemID.$itemID"
   | "user.like.itemType.$itemType.itemID.$itemID"
 >();

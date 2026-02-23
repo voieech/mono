@@ -10,4 +10,5 @@ export * from "./usePodcastEpisodeNextReccomendationsQuery";
 export * from "./usePodcastEpisodeQuery";
 export * from "./useUserLikeQuery";
 export * from "./useUserSubscriptionQuery";
+export * from "./useUserSubscriptionsOfItemTypeQuery";
 export * from "./useYoutubeVideoOEmbedMetadataQuery";
