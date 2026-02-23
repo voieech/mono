@@ -5,6 +5,7 @@ import type {
   PushNotificationTokens,
   SubscribableItemType,
   LikeableItemType,
+  UserSubscriptionStatus,
   UserSubscriptionsOfItemType,
 } from "../../dto-types/index.js";
 
@@ -102,7 +103,7 @@ export const userRoutes = express
 
       res.status(200).json({
         subscribe: isSubscribed,
-      });
+      } satisfies UserSubscriptionStatus);
     },
   )
 
@@ -138,7 +139,7 @@ export const userRoutes = express
       // As long as DB calls did not throw, assume it succeeded
       res.status(200).json({
         subscribe: shouldSubscribe,
-      });
+      } satisfies UserSubscriptionStatus);
     },
   )
 
