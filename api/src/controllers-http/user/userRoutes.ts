@@ -1,3 +1,4 @@
+import { Expo } from "expo-server-sdk";
 import express from "express";
 
 import type {
@@ -6,6 +7,7 @@ import type {
   LikeableItemType,
 } from "../../dto-types/index.js";
 
+import { InvalidInputException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
 import { apiDB } from "../../kysely/index.js";
 
@@ -31,6 +33,10 @@ export const userRoutes = express
     authenticationMiddlewareBuilder(),
     async (req, res) => {
       const pushNotificationTokens = req.body as PushNotificationTokens;
+      if (!Expo.isExpoPushToken(pushNotificationTokens.expoToken)) {
+        throw new InvalidInputException(`Invalid Expo push notification token`);
+      }
+
       const userID = await req.genAuthenticatedUserID();
 
       await apiDB
@@ -63,6 +69,9 @@ export const userRoutes = express
     "/v1/user/notification/push-notifications/delete-tokens",
     async (req, res) => {
       const pushNotificationTokens = req.body as PushNotificationTokens;
+      if (!Expo.isExpoPushToken(pushNotificationTokens.expoToken)) {
+        throw new InvalidInputException(`Invalid Expo push notification token`);
+      }
 
       await apiDB
         .deleteFrom("user_push_notif_tokens")
