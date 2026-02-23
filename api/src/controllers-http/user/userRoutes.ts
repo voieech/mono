@@ -9,7 +9,7 @@ import type {
 
 import { InvalidInputException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
-import { apiDB } from "../../kysely/index.js";
+import { apiDB, sqlExistenceCheck } from "../../kysely/index.js";
 
 export const userRoutes = express
   .Router()
@@ -92,21 +92,15 @@ export const userRoutes = express
 
       const isSubscribed = await apiDB
         .selectFrom("user_subscription")
-        .select("item_id")
+        .select(sqlExistenceCheck)
         .where("user_id", "=", userID)
         .where("item_type", "=", itemType)
         .where("item_id", "=", itemID)
-        .executeTakeFirst();
-
-      if (isSubscribed === undefined) {
-        res.status(200).json({
-          subscribe: false,
-        });
-        return;
-      }
+        .executeTakeFirst()
+        .then((data) => data?.exists === true);
 
       res.status(200).json({
-        subscribe: true,
+        subscribe: isSubscribed,
       });
     },
   )
@@ -157,21 +151,15 @@ export const userRoutes = express
 
       const isLiked = await apiDB
         .selectFrom("user_like")
-        .select("item_id")
+        .select(sqlExistenceCheck)
         .where("user_id", "=", userID)
         .where("item_type", "=", itemType)
         .where("item_id", "=", itemID)
-        .executeTakeFirst();
-
-      if (isLiked === undefined) {
-        res.status(200).json({
-          like: false,
-        });
-        return;
-      }
+        .executeTakeFirst()
+        .then((data) => data?.exists === true);
 
       res.status(200).json({
-        like: true,
+        like: isLiked,
       });
     },
   )
