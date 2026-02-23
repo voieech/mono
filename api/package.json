@@ -27,6 +27,7 @@
     "cors": "^2.8.5",
     "datetime-ts": "^1.0.0",
     "dotenv": "^16.5.0",
+    "expo-server-sdk": "^6.0.0",
     "express": "^5.1.0",
     "express-zod-safe": "^3.2.0",
     "jose": "^6.1.3",
