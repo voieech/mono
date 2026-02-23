@@ -5,6 +5,7 @@ import type {
   PushNotificationTokens,
   SubscribableItemType,
   LikeableItemType,
+  UserSubscriptionsOfItemType,
 } from "../../dto-types/index.js";
 
 import { InvalidInputException } from "../../exceptions/index.js";
@@ -138,6 +139,27 @@ export const userRoutes = express
       res.status(200).json({
         subscribe: shouldSubscribe,
       });
+    },
+  )
+
+  .get(
+    "/v1/user/subscription/:itemType",
+    authenticationMiddlewareBuilder(),
+    async function (req, res) {
+      const userID = await req.genAuthenticatedUserID();
+      const itemType = req.params["itemType"]! as SubscribableItemType;
+
+      const itemIDs = await apiDB
+        .selectFrom("user_subscription")
+        .select("item_id")
+        .where("user_id", "=", userID)
+        .where("item_type", "=", itemType)
+        .execute()
+        .then((rows) => rows.map((row) => row.item_id));
+
+      res.status(200).json({
+        itemIDs,
+      } satisfies UserSubscriptionsOfItemType);
     },
   )
 

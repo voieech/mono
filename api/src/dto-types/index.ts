@@ -11,4 +11,5 @@ export type * from "./PodcastPlatform.js";
 export type * from "./PushNotificationTokens.js";
 export type * from "./SubscribableItemType.js";
 export type * from "./UserLikeStatus.js";
+export type * from "./UserSubscriptionsOfItemType.js";
 export type * from "./UserSubscriptionStatus.js";
