@@ -155,6 +155,7 @@ export const userRoutes = express
         .select("item_id")
         .where("user_id", "=", userID)
         .where("item_type", "=", itemType)
+        .orderBy("created_at", "desc")
         .execute()
         .then((rows) => rows.map((row) => row.item_id));
 
