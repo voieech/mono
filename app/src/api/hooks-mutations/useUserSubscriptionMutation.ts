@@ -49,6 +49,20 @@ export function useUserSubscriptionMutation() {
         ),
         data,
       );
+
+      reactQueryClient.invalidateQueries({
+        // Invalidate the "all subscriptions" query using exact, to prevent the
+        // individual itemType.itemID subscription query to re-run again because
+        // this API call already sets the value on return to prevent that extra
+        // API call.
+        exact: true,
+        queryKey: queryKeyBuilder.partialPathForDataDeletion(
+          "user.subscription.itemType.$itemType",
+          {
+            itemType: variables.itemType,
+          },
+        ),
+      });
     },
   });
 }
