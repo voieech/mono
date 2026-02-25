@@ -10,8 +10,10 @@ import type {
 } from "../../dto-types/index.js";
 
 import { InvalidInputException } from "../../exceptions/index.js";
+import { NotFoundException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
 import { apiDB, sqlExistenceCheck } from "../../kysely/index.js";
+import { expo } from "../../notifications-push/index.js";
 
 export const userRoutes = express
   .Router()
@@ -79,6 +81,43 @@ export const userRoutes = express
         .deleteFrom("user_push_notif_tokens")
         .where("expo_token", "=", pushNotificationTokens.expoToken)
         .executeTakeFirst();
+
+      res.status(200).json({});
+    },
+  )
+
+  .post(
+    "/v1/user/notification/push-notifications/test-notification",
+    authenticationMiddlewareBuilder(),
+    async (req, res) => {
+      const pushNotificationTokens = req.body as PushNotificationTokens;
+      if (!Expo.isExpoPushToken(pushNotificationTokens.expoToken)) {
+        throw new InvalidInputException(`Invalid Expo push notification token`);
+      }
+
+      const userID = await req.genAuthenticatedUserID();
+
+      const userDeviceExpoPushNotificationTokenIsStored = await apiDB
+        .selectFrom("user_push_notif_tokens")
+        .select(sqlExistenceCheck)
+        .where("expo_token", "=", pushNotificationTokens.expoToken)
+        .where("user_id", "=", userID)
+        .executeTakeFirst()
+        .then((data) => data?.exists === true);
+
+      if (!userDeviceExpoPushNotificationTokenIsStored) {
+        throw new NotFoundException("Token not found in DB");
+      }
+
+      // @todo Handle the result
+      await expo.sendPushNotificationsAsync([
+        {
+          to: pushNotificationTokens.expoToken,
+          title: "Title test",
+          subtitle: "Subtitle test",
+          body: "Body test",
+        },
+      ]);
 
       res.status(200).json({});
     },
