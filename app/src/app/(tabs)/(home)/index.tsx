@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/api";
+import { reactQueryClient, queryKeyBuilder } from "@/api-client";
 import {
   SafeAreaViewContainer,
   ScrollViewContainer,
@@ -62,6 +63,14 @@ export default function HomeScreen() {
     await Promise.all([
       featuredChannelsQuery.refetch(),
       featuredEpisodesQuery.refetch(),
+      reactQueryClient.invalidateQueries({
+        queryKey: queryKeyBuilder.fullPathForDataInsertion(
+          "user.subscription.itemType.$itemType",
+          {
+            itemType: "podcast_channel",
+          },
+        ),
+      }),
     ]);
     setRefreshing(false);
   }

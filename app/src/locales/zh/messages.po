@@ -38,7 +38,7 @@ msgstr "账户信息"
 msgid "After Shows"
 msgstr "演出结束后"
 
-#: src/app/(tabs)/(home)/index.tsx:31
+#: src/app/(tabs)/(home)/index.tsx:32
 msgid "All"
 msgstr "全部"
 
@@ -368,11 +368,11 @@ msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:138
+#: src/app/(tabs)/(home)/index.tsx:147
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:193
+#: src/app/(tabs)/(home)/index.tsx:202
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -591,7 +591,7 @@ msgstr "自然界"
 msgid "News"
 msgstr "新闻"
 
-#: src/app/(tabs)/(home)/index.tsx:39
+#: src/app/(tabs)/(home)/index.tsx:40
 msgid "News Articles"
 msgstr "新闻文章"
 
@@ -711,7 +711,7 @@ msgstr "播客频道"
 msgid "Podcast Episode"
 msgstr "播客剧集"
 
-#: src/app/(tabs)/(home)/index.tsx:35
+#: src/app/(tabs)/(home)/index.tsx:36
 msgid "Podcasts"
 msgstr "播客"
 
