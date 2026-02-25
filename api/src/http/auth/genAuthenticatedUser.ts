@@ -19,19 +19,17 @@ export async function genAuthenticatedUser(this: Request) {
   authenticationAssertionCheck(this);
 
   if (this.__userAuthenticationData.user === undefined) {
-    const userFromDB = await apiDB
+    this.__userAuthenticationData.user = await apiDB
       .selectFrom("user")
       .selectAll()
       .where("workos_id", "=", this.__userAuthenticationData.jwtPayload.sub)
-      .executeTakeFirst();
-
-    if (userFromDB === undefined) {
-      throw new InvalidInternalStateException(
-        "Internal Error: User is authenticated but does not exist in DB",
-      );
-    }
-
-    this.__userAuthenticationData.user = userFromDB;
+      .executeTakeFirstOrThrow()
+      .catch(() => {
+        // Transform the thrown Kysely error
+        throw new InvalidInternalStateException(
+          "Internal Error: User is authenticated but does not exist in DB",
+        );
+      });
   }
 
   return this.__userAuthenticationData.user;
