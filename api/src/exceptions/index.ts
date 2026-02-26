@@ -6,6 +6,7 @@ export * from "./ConflictException.js";
 export * from "./Exception.js";
 export * from "./ForbiddenException.js";
 export * from "./HttpTransformerableException.js";
+export * from "./InternalServerException.js";
 export * from "./InvalidInputException.js";
 export * from "./InvalidInternalStateException.js";
 export * from "./InvalidOperationException.js";
