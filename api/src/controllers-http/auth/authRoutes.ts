@@ -262,7 +262,7 @@ export const authRoutes = express
   /**
    * Redirect here to log user out
    */
-  .get("/auth/workos/logout/", async (req, res) => {
+  .get("/auth/workos/logout", async (req, res) => {
     res.redirect(
       await workos.userManagement
         .loadSealedSession({
