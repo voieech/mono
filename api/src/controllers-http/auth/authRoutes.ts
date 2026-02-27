@@ -260,6 +260,26 @@ export const authRoutes = express
   })
 
   /**
+   * For react native client to call to revoke its current set of tokens on
+   * logout.
+   */
+  .post("/auth/workos/revoke-session", async (req, res) => {
+    const reqJwtPayload = await req.genAuthenticatedUserJwtPayload();
+
+    await workos.userManagement
+      .revokeSession({
+        sessionId: reqJwtPayload.sid,
+      })
+      .catch((err) => {
+        throw new InternalServerException("Failed to revoke session", [
+          err?.message,
+        ]);
+      });
+
+    res.status(201).end();
+  })
+
+  /**
    * Redirect here to log user out
    */
   .get("/auth/workos/logout", async (req, res) => {
