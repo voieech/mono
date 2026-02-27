@@ -16,7 +16,11 @@ import { podcastChannelRoutes } from "./controllers-http/podcastChannel/index.js
 import { podcastEpisodeRoutes } from "./controllers-http/podcastEpisode/index.js";
 import { recommendationsRoutes } from "./controllers-http/reccomendations/index.js";
 import { userRoutes } from "./controllers-http/user/index.js";
-import { authenticationMiddleware, errorHandler } from "./http/index.js";
+import {
+  authenticationMiddleware,
+  notFoundHandler,
+  errorHandler,
+} from "./http/index.js";
 import { loggerMiddleware } from "./logger/index.js";
 
 export function bootstrapHttpServer() {
@@ -62,6 +66,12 @@ export function bootstrapHttpServer() {
     .use(podcastEpisodeRoutes)
     .use(podcastChannelRoutes)
     .use(contactFormRoutes)
+
+    /**
+     * Use 404 route handler as second last to catch any routes that arent
+     * matched / processed by previous route handlers.
+     */
+    .use(notFoundHandler)
 
     /**
      * Very last handler is the error handler to catch anything thrown by items
