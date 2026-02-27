@@ -49,7 +49,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
       .then((data) => console.log("Logout API call success:", data))
       .catch((err) => console.error("Logout API call failed:", err));
 
+    // Note that even though the token is revoked, we still need to clear the
+    // token out / delete it locally, because the token has a long lifetime, and
+    // combined with the fact that most API routes only check for token validity
+    // using the token data itself without doing a token verification call to
+    // the auth server, the token will still be usable until the next time user
+    // re-opens the app and trigger the token refresh which should then delete
+    // the token on failed refresh.
     await clearAuth();
+
+    // Since the user has logged out now, clear the data that might be user
+    // specific / only viewable after authentication.
     reactQueryClient.clear();
   }
 

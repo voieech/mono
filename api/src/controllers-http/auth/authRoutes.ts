@@ -264,6 +264,14 @@ export const authRoutes = express
   /**
    * For react native client to call to revoke its current set of tokens on
    * logout.
+   *
+   * Note that even though the token is revoked, you still need to clear the
+   * token out / delete it locally, because the token has a long lifetime, and
+   * combined with the fact that most API routes only check for token validity
+   * using the token data itself without doing a token verification call to
+   * the auth server, the token will still be usable until the next time user
+   * re-opens the app and trigger the token refresh which should then delete
+   * the token on failed refresh.
    */
   .post(
     "/auth/workos/revoke-session",
