@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { AuthDataFromWorkos } from "@/types";
 
-import { reactQueryClient } from "@/api-client";
+import { reactQueryClient, wrappedFetch } from "@/api-client";
 import { authController, secureStoreForAuth } from "@/auth";
 import { AuthContext } from "@/context";
 import { envVar } from "@/utils";
@@ -42,12 +42,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
       return;
     }
 
-    await fetch(`${envVar.apiBaseUrl}/auth/workos/revoke-session`, {
+    await wrappedFetch(`${envVar.apiBaseUrl}/auth/workos/revoke-session`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
     })
       .then((res) => res.text())
       .then((data) => console.log("Logout API call success:", data))
