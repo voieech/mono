@@ -4,6 +4,7 @@ import { mapWorkOsUser } from "src/util/mapWorkOsUser.js";
 import {
   InvalidInputException,
   NotFoundException,
+  InternalServerException,
 } from "../../exceptions/index.js";
 import {
   workos,
