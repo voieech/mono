@@ -36,21 +36,22 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   async function logout() {
-    try {
-      const accessToken = await secureStoreForAuth.getAccessTokenString();
+    const accessToken = await secureStoreForAuth.getAccessTokenString();
 
-      if (accessToken !== null) {
-        await fetch(`${envVar.apiBaseUrlForAuth}/auth/logout`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }).catch((err) => console.error("Logout API call failed:", err));
-      }
-    } catch (err) {
-      console.error("Error during logout:", err);
+    if (accessToken === null) {
+      return;
     }
+
+    await fetch(`${envVar.apiBaseUrl}/auth/workos/revoke-session`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => res.text())
+      .then((data) => console.log("Logout API call success:", data))
+      .catch((err) => console.error("Logout API call failed:", err));
 
     await clearAuth();
     reactQueryClient.clear();
