@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction } from "express";
 import { convertUnknownCatchToError } from "convert-unknown-catch-to-error";
 
 import { HttpTransformerableException } from "../exceptions/index.js";
-import { logger } from "../logger/logger.js";
+import { logger } from "../logger/index.js";
 import { HttpStatus } from "./HttpStatus.js";
 import { JSendError } from "./JSend.js";
 
