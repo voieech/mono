@@ -7,12 +7,9 @@ import { NotFoundError } from "@/errors";
 
 export function usePodcastEpisodeQuery(episodeID: string) {
   return useQuery({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.episode.episodeID.$episodeID",
-      {
-        episodeID,
-      },
-    ),
+    queryKey: queryKeyBuilder.fullPath("podcast.episode.episodeID.$episodeID", {
+      episodeID,
+    }),
     async queryFn() {
       const res = await wrappedFetch(`/v1/podcast/episode/${episodeID}`);
 

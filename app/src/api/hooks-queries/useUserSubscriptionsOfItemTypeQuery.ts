@@ -11,7 +11,7 @@ export function useUserSubscriptionsOfItemTypeQuery(variables: {
   itemType: SubscribableItemType;
 }) {
   return useQuery<UserSubscriptionsOfItemType>({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+    queryKey: queryKeyBuilder.fullPath(
       "user.subscription.itemType.$itemType",
       variables,
     ),

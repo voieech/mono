@@ -7,12 +7,9 @@ import { NotFoundError } from "@/errors";
 
 export function usePodcastChannelQuery(channelID: string) {
   return useQuery({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.channel.channelID.$channelID",
-      {
-        channelID,
-      },
-    ),
+    queryKey: queryKeyBuilder.fullPath("podcast.channel.channelID.$channelID", {
+      channelID,
+    }),
     async queryFn() {
       const res = await wrappedFetch(`/v1/podcast/channel/${channelID}`);
 

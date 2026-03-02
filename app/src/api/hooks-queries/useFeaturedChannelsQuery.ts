@@ -13,9 +13,7 @@ export function useFeaturedChannelsQuery() {
   const acceptLanguageHeader = useAcceptLanguageHeader();
 
   return useQuery({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.featured.channels",
-    ),
+    queryKey: queryKeyBuilder.fullPath("podcast.featured.channels"),
     async queryFn() {
       const res = await wrappedFetch(`/v1/podcast/featured/channel?limit=20`, {
         headers: {
@@ -37,12 +35,9 @@ export function useFeaturedChannelsQuery() {
       // Cache data so these dont need to be re queried again on navigate
       for (const channel of channels) {
         reactQueryClient.setQueryData(
-          queryKeyBuilder.fullPathForDataInsertion(
-            "podcast.channel.channelID.$channelID",
-            {
-              channelID: channel.id,
-            },
-          ),
+          queryKeyBuilder.fullPath("podcast.channel.channelID.$channelID", {
+            channelID: channel.id,
+          }),
           channel,
         );
       }

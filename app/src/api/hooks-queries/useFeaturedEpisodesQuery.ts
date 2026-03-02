@@ -13,9 +13,7 @@ export function useFeaturedEpisodesQuery() {
   const acceptLanguageHeader = useAcceptLanguageHeader();
 
   return useQuery({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
-      "podcast.featured.episodes",
-    ),
+    queryKey: queryKeyBuilder.fullPath("podcast.featured.episodes"),
     async queryFn() {
       const res = await wrappedFetch(`/v1/podcast/featured/episodes?limit=20`, {
         headers: {
@@ -37,12 +35,9 @@ export function useFeaturedEpisodesQuery() {
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
         reactQueryClient.setQueryData(
-          queryKeyBuilder.fullPathForDataInsertion(
-            "podcast.episode.episodeID.$episodeID",
-            {
-              episodeID: episode.id,
-            },
-          ),
+          queryKeyBuilder.fullPath("podcast.episode.episodeID.$episodeID", {
+            episodeID: episode.id,
+          }),
           episode,
         );
       }

@@ -11,7 +11,7 @@ export function usePodcastEpisodeNextReccomendationsQuery(
   limit: number = 10,
 ) {
   return useQuery({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+    queryKey: queryKeyBuilder.fullPath(
       "podcast.episode.reccomendations.episodeID.$episodeID.$limit",
       {
         episodeID,

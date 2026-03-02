@@ -39,7 +39,7 @@ export function useUserLikeMutation() {
       const data = (await res.json()) as UserLikeStatus;
 
       reactQueryClient.setQueryData(
-        queryKeyBuilder.fullPathForDataInsertion(
+        queryKeyBuilder.fullPath(
           "user.like.itemType.$itemType.itemID.$itemID",
           {
             itemType: variables.itemType,

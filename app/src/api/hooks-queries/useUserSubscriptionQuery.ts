@@ -12,7 +12,7 @@ export function useUserSubscriptionQuery(variables: {
   itemID: string;
 }) {
   return useQuery<UserSubscriptionStatus>({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+    queryKey: queryKeyBuilder.fullPath(
       "user.subscription.itemType.$itemType.itemID.$itemID",
       variables,
     ),

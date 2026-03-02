@@ -5,7 +5,7 @@ import { queryKeyBuilder } from "@/api-client";
 export function useYoutubeVideoOEmbedMetadataQuery(youtubeVideoID?: string) {
   return useQuery({
     enabled: youtubeVideoID !== undefined,
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+    queryKey: queryKeyBuilder.fullPath(
       "create.youtube-video-summary.youtubeVideoID.$youtubeVideoID",
       { youtubeVideoID },
     ),

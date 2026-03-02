@@ -64,7 +64,7 @@ export default function HomeScreen() {
       featuredChannelsQuery.refetch(),
       featuredEpisodesQuery.refetch(),
       reactQueryClient.invalidateQueries({
-        queryKey: queryKeyBuilder.fullPathForDataInsertion(
+        queryKey: queryKeyBuilder.fullPath(
           "user.subscription.itemType.$itemType",
           {
             itemType: "podcast_channel",

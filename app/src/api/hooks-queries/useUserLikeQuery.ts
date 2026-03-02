@@ -12,7 +12,7 @@ export function useUserLikeQuery(variables: {
   itemID: string;
 }) {
   return useQuery<UserLikeStatus>({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+    queryKey: queryKeyBuilder.fullPath(
       "user.like.itemType.$itemType.itemID.$itemID",
       variables,
     ),

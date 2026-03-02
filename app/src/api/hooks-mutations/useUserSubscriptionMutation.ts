@@ -39,7 +39,7 @@ export function useUserSubscriptionMutation() {
       const data = (await res.json()) as UserSubscriptionStatus;
 
       reactQueryClient.setQueryData(
-        queryKeyBuilder.fullPathForDataInsertion(
+        queryKeyBuilder.fullPath(
           "user.subscription.itemType.$itemType.itemID.$itemID",
           {
             itemType: variables.itemType,

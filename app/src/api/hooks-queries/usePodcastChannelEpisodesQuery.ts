@@ -7,7 +7,7 @@ import { NotFoundError } from "@/errors";
 
 export function usePodcastChannelEpisodesQuery(channelID: string) {
   return useQuery({
-    queryKey: queryKeyBuilder.fullPathForDataInsertion(
+    queryKey: queryKeyBuilder.fullPath(
       "podcast.channel.channelID.$channelID.episodes",
       {
         channelID,
@@ -37,12 +37,9 @@ export function usePodcastChannelEpisodesQuery(channelID: string) {
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
         reactQueryClient.setQueryData(
-          queryKeyBuilder.fullPathForDataInsertion(
-            "podcast.episode.episodeID.$episodeID",
-            {
-              episodeID: episode.id,
-            },
-          ),
+          queryKeyBuilder.fullPath("podcast.episode.episodeID.$episodeID", {
+            episodeID: episode.id,
+          }),
           episode,
         );
       }
