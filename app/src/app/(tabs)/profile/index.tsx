@@ -17,6 +17,7 @@ import {
   InAppBrowserLink,
   VerticalSpacer,
   OpenNativeSettingsAppButton,
+  AuthenticatedUsersOnly,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
@@ -244,7 +245,7 @@ function ProfileInformationCard() {
               )}
             </View>
           </View>
-          {authContext.isAuthenticated && (
+          <AuthenticatedUsersOnly>
             <Icon
               name="chevron.right"
               size={20}
@@ -254,7 +255,7 @@ function ProfileInformationCard() {
                 transform: [{ rotate: cardInfoModalIsOpen ? "90deg" : "0deg" }],
               }}
             />
-          )}
+          </AuthenticatedUsersOnly>
         </View>
       </TouchableOpacity>
       {cardInfoModalIsOpen && (
@@ -313,7 +314,6 @@ function ProfileRow(props: { label: string; value?: string }) {
 }
 
 function SettingsSection() {
-  const authContext = useAuthContext();
   const { t } = useLingui();
 
   return (
@@ -340,7 +340,7 @@ function SettingsSection() {
             borderRadius: 10,
           }}
         />
-        {authContext.isAuthenticated && (
+        <AuthenticatedUsersOnly>
           <ExperimentalSurface>
             <SettingsPageLink
               setting={t`Edit Profile`}
@@ -349,15 +349,15 @@ function SettingsSection() {
               }}
             />
           </ExperimentalSurface>
-        )}
-        {authContext.isAuthenticated && (
+        </AuthenticatedUsersOnly>
+        <AuthenticatedUsersOnly>
           <SettingsPageLink
             setting={t`Notifications`}
             href={{
               pathname: "/profile/settings/notifications",
             }}
           />
-        )}
+        </AuthenticatedUsersOnly>
         <SettingsPageLink
           setting={t`Audio Playback`}
           href={{

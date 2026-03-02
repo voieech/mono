@@ -26,11 +26,11 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
-#: src/app/(tabs)/profile/index.tsx:90
+#: src/app/(tabs)/profile/index.tsx:91
 msgid "About"
 msgstr "关于"
 
-#: src/app/(tabs)/profile/index.tsx:264
+#: src/app/(tabs)/profile/index.tsx:265
 msgid "Account Information"
 msgstr "账户信息"
 
@@ -55,7 +55,7 @@ msgid "App cache"
 msgstr "应用程序缓存"
 
 #: src/app/(tabs)/profile/_layout.tsx:53
-#: src/app/(tabs)/profile/index.tsx:116
+#: src/app/(tabs)/profile/index.tsx:117
 msgid "App Details"
 msgstr "应用详情"
 
@@ -131,7 +131,7 @@ msgstr "书籍"
 msgid "Buddhism"
 msgstr "佛教"
 
-#: src/app/(tabs)/profile/index.tsx:145
+#: src/app/(tabs)/profile/index.tsx:146
 msgid "Built by voieech.com"
 msgstr "由 voieech.com 构建"
 
@@ -302,11 +302,11 @@ msgstr "教育"
 msgid "Education for Kids"
 msgstr "儿童教育"
 
-#: src/app/(tabs)/profile/index.tsx:275
+#: src/app/(tabs)/profile/index.tsx:276
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/app/(tabs)/profile/index.tsx:283
+#: src/app/(tabs)/profile/index.tsx:284
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
@@ -436,7 +436,7 @@ msgstr "访客用户"
 msgid "Health & Fitness"
 msgstr "健康与健身"
 
-#: src/app/(tabs)/profile/index.tsx:110
+#: src/app/(tabs)/profile/index.tsx:111
 msgid "Help & Support"
 msgstr "帮助与支持"
 
@@ -543,7 +543,7 @@ msgstr "我"
 msgid "Medicine"
 msgstr "医学"
 
-#: src/app/(tabs)/profile/index.tsx:279
+#: src/app/(tabs)/profile/index.tsx:280
 msgid "Member Since"
 msgstr "会员自"
 
@@ -567,7 +567,7 @@ msgstr "音乐史"
 msgid "Music Interviews"
 msgstr "音乐采访"
 
-#: src/app/(tabs)/profile/index.tsx:268
+#: src/app/(tabs)/profile/index.tsx:269
 msgid "Name"
 msgstr "姓名"
 
@@ -599,7 +599,7 @@ msgstr "新闻文章"
 msgid "News Commentary"
 msgstr "新闻评论"
 
-#: src/app/(tabs)/profile/index.tsx:285
+#: src/app/(tabs)/profile/index.tsx:286
 #: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "No"
 msgstr "不"
@@ -608,8 +608,8 @@ msgstr "不"
 msgid "Non-Profit"
 msgstr "非营利组织"
 
-#: src/app/(tabs)/profile/index.tsx:160
-#: src/app/(tabs)/profile/index.tsx:309
+#: src/app/(tabs)/profile/index.tsx:161
+#: src/app/(tabs)/profile/index.tsx:310
 msgid "Not Available"
 msgstr "信息不存在"
 
@@ -727,12 +727,12 @@ msgstr "PostHog ID 已复制"
 msgid "Press to clear cache"
 msgstr "按清除缓存"
 
-#: src/app/(tabs)/profile/index.tsx:122
+#: src/app/(tabs)/profile/index.tsx:123
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
 #: src/app/(tabs)/profile/_layout.tsx:12
-#: src/app/(tabs)/profile/index.tsx:50
+#: src/app/(tabs)/profile/index.tsx:51
 msgid "Profile"
 msgstr "个人资料"
 
@@ -822,7 +822,7 @@ msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
 #: src/app/(tabs)/profile/contact-form.tsx:141
-#: src/app/(tabs)/profile/index.tsx:76
+#: src/app/(tabs)/profile/index.tsx:77
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "登入"
@@ -835,7 +835,7 @@ msgstr "登录以继续"
 msgid "Sign in to Personalise!"
 msgstr "登录以进行个性化设置！"
 
-#: src/app/(tabs)/profile/index.tsx:74
+#: src/app/(tabs)/profile/index.tsx:75
 msgid "Sign Out"
 msgstr "退出应用程序"
 
@@ -919,7 +919,7 @@ msgstr "请告诉我们您还希望我们添加哪些其他内容来源！"
 msgid "Tennis"
 msgstr "网球"
 
-#: src/app/(tabs)/profile/index.tsx:126
+#: src/app/(tabs)/profile/index.tsx:127
 msgid "Terms of Service"
 msgstr "服务条款"
 
@@ -991,7 +991,7 @@ msgstr "荒野"
 msgid "Wrestling"
 msgstr "摔角"
 
-#: src/app/(tabs)/profile/index.tsx:285
+#: src/app/(tabs)/profile/index.tsx:286
 #: src/app/(tabs)/profile/settings/notifications.tsx:97
 msgid "Yes"
 msgstr "是"
