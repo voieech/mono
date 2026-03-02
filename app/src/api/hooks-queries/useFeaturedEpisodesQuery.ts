@@ -8,7 +8,6 @@ import {
   wrappedFetch,
   reactQueryClient,
 } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 export function useFeaturedEpisodesQuery() {
   const acceptLanguageHeader = useAcceptLanguageHeader();
@@ -18,14 +17,11 @@ export function useFeaturedEpisodesQuery() {
       "podcast.featured.episodes",
     ),
     async queryFn() {
-      const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/podcast/featured/episodes?limit=20`,
-        {
-          headers: {
-            ...acceptLanguageHeader,
-          },
+      const res = await wrappedFetch(`/v1/podcast/featured/episodes?limit=20`, {
+        headers: {
+          ...acceptLanguageHeader,
         },
-      );
+      });
 
       if (!res.ok) {
         const defaultErrorMessage = "Failed to load featured episodes";

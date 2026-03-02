@@ -3,7 +3,6 @@ import type { LikeableItemType, UserLikeStatus } from "dto";
 import { useMutation } from "@tanstack/react-query";
 
 import { wrappedFetch, reactQueryClient, queryKeyBuilder } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 /**
  * Generic user like mutation for a given item type and item ID.
@@ -16,7 +15,7 @@ export function useUserLikeMutation() {
       like: boolean;
     }) {
       const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/user/like/${variables.itemType}/${variables.itemID}`,
+        `/v1/user/like/${variables.itemType}/${variables.itemID}`,
         {
           method: "POST",
           headers: {

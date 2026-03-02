@@ -3,7 +3,6 @@ import type { LikeableItemType, UserLikeStatus } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { queryKeyBuilder, wrappedFetch } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 /**
  * Generic user like query for a given item type and item ID.
@@ -19,7 +18,7 @@ export function useUserLikeQuery(variables: {
     ),
     async queryFn() {
       const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/user/like/${variables.itemType}/${variables.itemID}`,
+        `/v1/user/like/${variables.itemType}/${variables.itemID}`,
       );
 
       if (!res.ok) {

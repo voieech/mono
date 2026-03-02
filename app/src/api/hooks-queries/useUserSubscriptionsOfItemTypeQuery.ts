@@ -3,7 +3,6 @@ import type { SubscribableItemType, UserSubscriptionsOfItemType } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { queryKeyBuilder, wrappedFetch } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 /**
  * Generic query to get all of the user's subscription for a given item type.
@@ -18,7 +17,7 @@ export function useUserSubscriptionsOfItemTypeQuery(variables: {
     ),
     async queryFn() {
       const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/user/subscription/${variables.itemType}`,
+        `/v1/user/subscription/${variables.itemType}`,
       );
 
       if (!res.ok) {

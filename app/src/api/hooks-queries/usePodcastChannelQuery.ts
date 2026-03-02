@@ -3,7 +3,6 @@ import type { PodcastChannel } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { queryKeyBuilder, wrappedFetch } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
 export function usePodcastChannelQuery(channelID: string) {
@@ -15,9 +14,7 @@ export function usePodcastChannelQuery(channelID: string) {
       },
     ),
     async queryFn() {
-      const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/podcast/channel/${channelID}`,
-      );
+      const res = await wrappedFetch(`/v1/podcast/channel/${channelID}`);
 
       if (!res.ok) {
         const defaultErrorMessage = `Failed to load channel: ${channelID}`;

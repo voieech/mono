@@ -3,7 +3,6 @@ import type { SubscribableItemType, UserSubscriptionStatus } from "dto";
 import { useMutation } from "@tanstack/react-query";
 
 import { wrappedFetch, reactQueryClient, queryKeyBuilder } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 /**
  * Generic user subscription mutation for a given item type and item ID.
@@ -16,7 +15,7 @@ export function useUserSubscriptionMutation() {
       subscribe: boolean;
     }) {
       const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/user/subscription/${variables.itemType}/${variables.itemID}`,
+        `/v1/user/subscription/${variables.itemType}/${variables.itemID}`,
         {
           method: "POST",
           headers: {

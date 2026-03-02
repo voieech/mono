@@ -1,24 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { wrappedFetch } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
 export function useSaveContentPreferenceSelectionMutation() {
   return useMutation({
     async mutationFn(userContentPreferenceTags: Array<string>) {
-      const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/user/settings/content-preference`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userContentPreferenceTags,
-          }),
+      const res = await wrappedFetch(`/v1/user/settings/content-preference`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          userContentPreferenceTags,
+        }),
+      });
 
       if (!res.ok) {
         const defaultErrorMessage = `Failed to save user's content preferences`;

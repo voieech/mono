@@ -3,7 +3,6 @@ import type { PodcastEpisode } from "dto";
 import { useQuery } from "@tanstack/react-query";
 
 import { queryKeyBuilder, wrappedFetch, reactQueryClient } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 import { NotFoundError } from "@/errors";
 
 export function usePodcastChannelEpisodesQuery(channelID: string) {
@@ -16,7 +15,7 @@ export function usePodcastChannelEpisodesQuery(channelID: string) {
     ),
     async queryFn() {
       const res = await wrappedFetch(
-        `${apiBaseUrl}/v1/podcast/channel/${channelID}/episodes`,
+        `/v1/podcast/channel/${channelID}/episodes`,
       );
 
       if (!res.ok) {

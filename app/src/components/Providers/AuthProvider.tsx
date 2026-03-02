@@ -8,7 +8,6 @@ import type { AuthDataFromWorkos } from "@/types";
 import { reactQueryClient, wrappedFetch } from "@/api-client";
 import { authController, secureStoreForAuth } from "@/auth";
 import { AuthContext } from "@/context";
-import { envVar } from "@/utils";
 
 // Warm up browser for faster auth
 WebBrowser.maybeCompleteAuthSession();
@@ -42,7 +41,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       return;
     }
 
-    await wrappedFetch(`${envVar.apiBaseUrl}/auth/workos/revoke-session`, {
+    await wrappedFetch(`/auth/workos/revoke-session`, {
       method: "POST",
     })
       .then((res) => res.text())

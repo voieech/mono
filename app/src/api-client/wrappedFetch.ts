@@ -1,3 +1,5 @@
+import { apiBaseUrl } from "@/constants";
+
 import { getFreshAccessTokenIfAvailable } from "./getFreshAccessTokenIfAvailable";
 
 export async function wrappedFetch(...args: Parameters<typeof fetch>) {
@@ -14,5 +16,5 @@ export async function wrappedFetch(...args: Parameters<typeof fetch>) {
     Authorization: `Bearer ${await getFreshAccessTokenIfAvailable()}`,
   };
 
-  return fetch(input, init);
+  return fetch(apiBaseUrl + input, init);
 }

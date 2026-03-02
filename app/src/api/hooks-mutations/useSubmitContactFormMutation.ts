@@ -1,12 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { wrappedFetch } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 export function useSubmitContactFormMutation() {
   return useMutation({
     async mutationFn(contactObject: Record<string, any>) {
-      const res = await wrappedFetch(`${apiBaseUrl}/v1/contact-form`, {
+      const res = await wrappedFetch(`/v1/contact-form`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

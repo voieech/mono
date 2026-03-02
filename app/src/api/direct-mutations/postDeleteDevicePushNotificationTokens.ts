@@ -1,7 +1,6 @@
 import type { PushNotificationTokens } from "dto";
 
 import { wrappedFetch } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 /**
  * Delete device push notification tokens for user's current device
@@ -10,7 +9,7 @@ export async function postDeleteDevicePushNotificationTokens(
   pushNotificationTokens: PushNotificationTokens,
 ) {
   const res = await wrappedFetch(
-    `${apiBaseUrl}/v1/user/notification/push-notifications/delete-tokens`,
+    `/v1/user/notification/push-notifications/delete-tokens`,
     {
       method: "POST",
       headers: {

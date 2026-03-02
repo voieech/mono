@@ -1,7 +1,6 @@
 import type { PushNotificationTokens } from "dto";
 
 import { wrappedFetch } from "@/api-client";
-import { apiBaseUrl } from "@/constants";
 
 /**
  * Save device push notification tokens for user's current device
@@ -10,7 +9,7 @@ export async function postSaveDevicePushNotificationTokens(
   pushNotificationTokens: PushNotificationTokens,
 ) {
   const res = await wrappedFetch(
-    `${apiBaseUrl}/v1/user/notification/push-notifications/save-tokens`,
+    `/v1/user/notification/push-notifications/save-tokens`,
     {
       method: "POST",
       headers: {
