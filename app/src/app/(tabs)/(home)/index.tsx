@@ -20,6 +20,7 @@ import {
   ThemedText,
   Icon,
   VerticalSpacer,
+  AuthenticatedUsersOnly,
 } from "@/components";
 import { UserSubscriptions } from "@/components-page/(tabs)/(home)/index/UserSubscriptions";
 import { Colors } from "@/constants";
@@ -42,8 +43,6 @@ const allHomeRowTabs = [
 ] as const;
 
 export default function HomeScreen() {
-  const authContext = useAuthContext();
-
   const windowDimensions = useWindowDimensions();
   const featuredChannelImageWidth = windowDimensions.width * 0.4;
   const featuredChannelImageMargin = Math.min(
@@ -190,7 +189,9 @@ export default function HomeScreen() {
           </ThemedView>
         )}
         <VerticalSpacer />
-        {authContext.isAuthenticated && <UserSubscriptions />}
+        <AuthenticatedUsersOnly>
+          <UserSubscriptions />
+        </AuthenticatedUsersOnly>
         {featuredEpisodesQuery.data !== undefined && (
           <ThemedView
             style={{
