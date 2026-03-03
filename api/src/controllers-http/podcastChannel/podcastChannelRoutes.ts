@@ -2,7 +2,10 @@ import type { PodcastEpisode, PodcastChannel } from "dto";
 
 import express from "express";
 
-import { NotFoundException } from "../../exceptions/index.js";
+import {
+  NotFoundException,
+  InvalidInputException,
+} from "../../exceptions/index.js";
 import { apiDB, genPodcastEpisodeBaseQuery } from "../../kysely/index.js";
 import { generateRssXml } from "../../rss/index.js";
 
@@ -28,6 +31,13 @@ export const podcastChannelRoutes = express
   .get("/v1/podcast/channel/:channelID/episodes", async function (req, res) {
     const channelID = req.params.channelID;
 
+    const rawLimit = Number(req.query["limit"]);
+    const limit = isNaN(rawLimit) || rawLimit === 0 ? 20 : rawLimit;
+
+    if (limit < 1 || limit > 20) {
+      throw new InvalidInputException("Limit must be between 1 and 20");
+    }
+
     const channel = await apiDB
       .selectFrom("podcast_channel")
       .select("id")
@@ -48,7 +58,7 @@ export const podcastChannelRoutes = express
       .where("podcast_episode.channel_id", "=", channelID)
       .orderBy("podcast_episode.created_at", "desc")
       // @todo Allow frontend to paginate with cursor? or offset?
-      .limit(20)
+      .limit(limit)
       .execute();
 
     res.status(200).json(episodes satisfies Array<PodcastEpisode>);
