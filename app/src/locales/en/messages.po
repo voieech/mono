@@ -354,7 +354,7 @@ msgstr "Failed to load video!"
 msgid "Failed to submit!"
 msgstr "Failed to submit!"
 
-#: src/components/AudioPlayer/LikeButton.tsx:60
+#: src/components/AudioPlayer/LikeButton.tsx:106
 msgid "Failed to update like"
 msgstr "Failed to update like"
 
@@ -756,7 +756,7 @@ msgstr "Privacy Policy"
 msgid "Profile"
 msgstr "Profile"
 
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:273
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:271
 msgid "Reccomended Episodes"
 msgstr "Reccomended Episodes"
 

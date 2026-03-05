@@ -346,7 +346,7 @@ msgstr "视频加载失败！"
 msgid "Failed to submit!"
 msgstr "提交失败！"
 
-#: src/components/AudioPlayer/LikeButton.tsx:60
+#: src/components/AudioPlayer/LikeButton.tsx:106
 msgid "Failed to update like"
 msgstr "更新失败"
 
@@ -744,7 +744,7 @@ msgstr "隐私政策"
 msgid "Profile"
 msgstr "个人资料"
 
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:273
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:271
 msgid "Reccomended Episodes"
 msgstr "推荐剧集"
 

@@ -209,22 +209,20 @@ export default function PodcastEpisode() {
             columnGap: 24,
           }}
         >
-          {episode !== undefined && (
-            <ShareTrackIcon
-              track={createTrackWithMetadata({
-                trackType: "podcast_episode",
-                id: episode.id,
-                episode,
-                artist: episode.channel_name,
-                url: episode.audio_public_url,
-                title: episode.title,
-                duration: episode.audio_length,
-                artwork: episode.img_url,
-                locale: episode.language,
-              })}
-              size={36}
-            />
-          )}
+          <ShareTrackIcon
+            track={createTrackWithMetadata({
+              trackType: "podcast_episode",
+              id: episode.id,
+              episode,
+              artist: episode.channel_name,
+              url: episode.audio_public_url,
+              title: episode.title,
+              duration: episode.audio_length,
+              artwork: episode.img_url,
+              locale: episode.language,
+            })}
+            size={36}
+          />
           {/*
             Even if player is not paused, i.e. it is loading or whatever show the
             play symbol to prevent fast flashing when changing from loading (or
