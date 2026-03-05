@@ -5,17 +5,43 @@ import { useQuery } from "@tanstack/react-query";
 import { queryKeyBuilder, wrappedFetch, reactQueryClient } from "@/api-client";
 import { NotFoundError } from "@/errors";
 
-export function usePodcastChannelEpisodesQuery(channelID: string) {
+type QueryOptions = {
+  limit?: number;
+};
+
+type OptionalQueryOptions = QueryOptions | undefined;
+
+/**
+ * Converts a given optional `QueryOptions` object into URL query params string
+ * that can be directly appended to the API URL.
+ *
+ * @todo Move this into wrapped fetch?
+ */
+function queryOptionsToUrlQueryParams(queryOptions?: OptionalQueryOptions) {
+  if (queryOptions === undefined) {
+    return "";
+  }
+  return (
+    "?" + new URLSearchParams(queryOptions as Record<string, string>).toString()
+  );
+}
+
+export function usePodcastChannelEpisodesQuery(
+  channelID: string,
+  queryOptions?: OptionalQueryOptions,
+) {
   return useQuery({
     queryKey: queryKeyBuilder.fullPath(
-      "podcast.channel.channelID.$channelID.episodes",
+      "podcast.channel.channelID.$channelID.episodes.$queryOptions",
       {
         channelID,
+        queryOptions,
       },
     ),
     async queryFn() {
       const res = await wrappedFetch(
-        `/v1/podcast/channel/${channelID}/episodes`,
+        `/v1/podcast/channel/${channelID}/episodes` +
+          queryOptionsToUrlQueryParams(queryOptions),
       );
 
       if (!res.ok) {
