@@ -22,5 +22,6 @@ export * from "./ShareChannelIcon";
 export * from "./ShareTrackIcon";
 export * from "./ThemedComponents";
 export * from "./TrackPlayerProvider";
+export * from "./UnAuthenticatedUsersOnly";
 export * from "./VerticalDivider";
 export * from "./VerticalSpacer";
