@@ -21,6 +21,7 @@ import {
   VerticalSpacer,
   ScrollViewContainer,
   ThemedView,
+  UnAuthenticatedUsersOnly,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
@@ -102,7 +103,7 @@ export default function ContactFormPage() {
         >
           <Trans>Send us your queries / feedback!</Trans>
         </ThemedText>
-        {!authContext.isAuthenticated && (
+        <UnAuthenticatedUsersOnly>
           <View
             style={{
               flexDirection: "column",
@@ -190,8 +191,7 @@ export default function ContactFormPage() {
             </View>
             <VerticalSpacer />
           </View>
-        )}
-
+        </UnAuthenticatedUsersOnly>
         <View
           style={{
             flexDirection: "column",
