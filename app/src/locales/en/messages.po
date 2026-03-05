@@ -18,7 +18,7 @@ msgid "... loading video ..."
 msgstr "... loading video ..."
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:193
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:202
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:203
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} mins"
 
@@ -354,7 +354,7 @@ msgstr "Failed to load video!"
 msgid "Failed to submit!"
 msgstr "Failed to submit!"
 
-#: src/components/AudioPlayer/LikeButton.tsx:106
+#: src/components/LikeUnlikeButton.tsx:102
 msgid "Failed to update like"
 msgstr "Failed to update like"
 
@@ -756,7 +756,7 @@ msgstr "Privacy Policy"
 msgid "Profile"
 msgstr "Profile"
 
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:271
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:276
 msgid "Reccomended Episodes"
 msgstr "Reccomended Episodes"
 
@@ -805,7 +805,7 @@ msgstr "Science"
 msgid "Science Fiction"
 msgstr "Science Fiction"
 
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:196
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:197
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 

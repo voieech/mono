@@ -15,6 +15,7 @@ import { Colors } from "@/constants";
 import { useTrackPlayer } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
 
+import { LikeUnlikeButton } from "../LikeUnlikeButton";
 import { ShareTrackIcon } from "../ShareTrackIcon";
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
 import {
@@ -29,7 +30,6 @@ import { AudioPlayerTime } from "./AudioPlayerTime";
 import { AudioProgressSlider } from "./AudioProgressSlider";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
-import { LikeButtonMaybeUnauthenticated } from "./LikeButton";
 import { PlaybackRateButton } from "./PlaybackRateButton";
 import { RepeatIcon } from "./RepeatIcon";
 
@@ -130,7 +130,7 @@ export function AudioPlayer() {
             </Pressable>
           </ExperimentalSurface>
           <RepeatIcon />
-          <LikeButtonMaybeUnauthenticated
+          <LikeUnlikeButton
             likeableItemType={activeTrack.trackType}
             likeableItemID={activeTrack.id}
           />

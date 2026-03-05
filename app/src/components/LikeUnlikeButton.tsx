@@ -10,7 +10,13 @@ import { Colors } from "@/constants";
 import { useAuthContext } from "@/context";
 import { toast } from "@/utils";
 
-export function LikeButtonMaybeUnauthenticated(props: {
+/**
+ * A heart button that allows you to "like" or "unlike" any generic likeable
+ * item! This will show the empty heart button when the user is unauthenticated,
+ * and on click will trigger the auth modal to ask them to authenticate before
+ * liking/unliking an item!
+ */
+export function LikeUnlikeButton(props: {
   likeableItemType: LikeableItemType;
   likeableItemID: string;
 }) {
@@ -25,13 +31,14 @@ export function LikeButtonMaybeUnauthenticated(props: {
     );
   }
 
-  return <LikeUnlikeButton {...props} />;
+  return <AuthenticatedLikeUnlikeButton {...props} />;
 }
 
 /**
- * User is authenticated already
+ * User is authenticated already, load and show the actual like status and allow
+ * user to trigger mutations to modify like status.
  */
-function LikeUnlikeButton(props: {
+function AuthenticatedLikeUnlikeButton(props: {
   likeableItemType: LikeableItemType;
   likeableItemID: string;
 }) {
@@ -39,40 +46,26 @@ function LikeUnlikeButton(props: {
     itemType: props.likeableItemType,
     itemID: props.likeableItemID,
   });
+  const userLikeMutation = useUserLikeMutation();
 
   if (userLikeQuery.isLoading) {
     return <ActivityIndicator />;
   }
 
-  // If failed to load status, treat it as the same as not liked
-  if (
-    userLikeQuery.isError ||
-    userLikeQuery.data === undefined ||
-    userLikeQuery.data.like === undefined ||
-    userLikeQuery.data.like === false
-  ) {
-    return <ClickToLikeButton {...props} />;
-  }
+  // isLiked is only true if there is no error making the query, and the return
+  // value is true. If failed to load like status, treat it as the same as
+  // currently not liked, to allow user to try liking it again.
+  const isLiked = userLikeQuery.data?.like === true;
 
-  return <ClickToUnlikeButton {...props} />;
-}
-
-const showFailedToUpdateLikeToast = () => toast(msg`Failed to update like`);
-
-function ClickToLikeButton(props: {
-  likeableItemType: LikeableItemType;
-  likeableItemID: string;
-}) {
-  const userLikeMutation = useUserLikeMutation();
   return (
     <HeartBaseButton
-      isLiked={false}
+      isLiked={isLiked}
       onPress={() => {
         userLikeMutation.mutate(
           {
             itemType: props.likeableItemType,
             itemID: props.likeableItemID,
-            like: true,
+            like: !isLiked,
           },
           {
             onError: showFailedToUpdateLikeToast,
@@ -84,32 +77,7 @@ function ClickToLikeButton(props: {
   );
 }
 
-function ClickToUnlikeButton(props: {
-  likeableItemType: LikeableItemType;
-  likeableItemID: string;
-}) {
-  const userLikeMutation = useUserLikeMutation();
-  return (
-    <HeartBaseButton
-      isLiked={true}
-      onPress={() => {
-        userLikeMutation.mutate(
-          {
-            itemType: props.likeableItemType,
-            itemID: props.likeableItemID,
-            like: false,
-          },
-          {
-            onError: showFailedToUpdateLikeToast,
-          },
-        );
-      }}
-      disabled={userLikeMutation.isPending}
-    />
-  );
-}
-
-export function HeartBaseButton(props: {
+function HeartBaseButton(props: {
   isLiked: boolean;
   onPress?: () => unknown;
   disabled?: boolean;
@@ -130,3 +98,5 @@ export function HeartBaseButton(props: {
     </Pressable>
   );
 }
+
+const showFailedToUpdateLikeToast = () => toast(msg`Failed to update like`);

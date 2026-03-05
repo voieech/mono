@@ -18,7 +18,7 @@ msgid "... loading video ..."
 msgstr "... 加载视频中 ..."
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:193
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:202
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:203
 msgid "{episodeLengthInMins} mins"
 msgstr "{episodeLengthInMins} 分钟"
 
@@ -346,7 +346,7 @@ msgstr "视频加载失败！"
 msgid "Failed to submit!"
 msgstr "提交失败！"
 
-#: src/components/AudioPlayer/LikeButton.tsx:106
+#: src/components/LikeUnlikeButton.tsx:102
 msgid "Failed to update like"
 msgstr "更新失败"
 
@@ -744,7 +744,7 @@ msgstr "隐私政策"
 msgid "Profile"
 msgstr "个人资料"
 
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:271
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:276
 msgid "Reccomended Episodes"
 msgstr "推荐剧集"
 
@@ -793,7 +793,7 @@ msgstr "科学"
 msgid "Science Fiction"
 msgstr "科幻小说"
 
-#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:196
+#: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:197
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
 msgstr "第{episodeSeasonNumber}季，第{episodeNumber}集"
 
