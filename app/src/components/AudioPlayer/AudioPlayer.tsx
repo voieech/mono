@@ -278,7 +278,7 @@ function ClickToLikeButton(props: {
       onPress={() => {
         userLikeMutation.mutate(
           {
-            itemType: "podcast_episode",
+            itemType: props.audioTrackType,
             itemID: props.audioTrackID,
             like: true,
           },
@@ -303,7 +303,7 @@ function ClickToUnlikeButton(props: {
       onPress={() => {
         userLikeMutation.mutate(
           {
-            itemType: "podcast_episode",
+            itemType: props.audioTrackType,
             itemID: props.audioTrackID,
             like: false,
           },
