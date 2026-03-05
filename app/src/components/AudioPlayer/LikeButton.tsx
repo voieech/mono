@@ -11,8 +11,8 @@ import { useAuthContext } from "@/context";
 import { toast } from "@/utils";
 
 export function LikeButtonMaybeUnauthenticated(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
+  likeableItemType: LikeableItemType;
+  likeableItemID: string;
 }) {
   const authContext = useAuthContext();
 
@@ -32,12 +32,12 @@ export function LikeButtonMaybeUnauthenticated(props: {
  * User is authenticated already
  */
 function LikeUnlikeButton(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
+  likeableItemType: LikeableItemType;
+  likeableItemID: string;
 }) {
   const userLikeQuery = useUserLikeQuery({
-    itemType: props.audioTrackType,
-    itemID: props.audioTrackID,
+    itemType: props.likeableItemType,
+    itemID: props.likeableItemID,
   });
 
   if (userLikeQuery.isLoading) {
@@ -60,8 +60,8 @@ function LikeUnlikeButton(props: {
 const showFailedToUpdateLikeToast = () => toast(msg`Failed to update like`);
 
 function ClickToLikeButton(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
+  likeableItemType: LikeableItemType;
+  likeableItemID: string;
 }) {
   const userLikeMutation = useUserLikeMutation();
   return (
@@ -70,8 +70,8 @@ function ClickToLikeButton(props: {
       onPress={() => {
         userLikeMutation.mutate(
           {
-            itemType: props.audioTrackType,
-            itemID: props.audioTrackID,
+            itemType: props.likeableItemType,
+            itemID: props.likeableItemID,
             like: true,
           },
           {
@@ -85,8 +85,8 @@ function ClickToLikeButton(props: {
 }
 
 function ClickToUnlikeButton(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
+  likeableItemType: LikeableItemType;
+  likeableItemID: string;
 }) {
   const userLikeMutation = useUserLikeMutation();
   return (
@@ -95,8 +95,8 @@ function ClickToUnlikeButton(props: {
       onPress={() => {
         userLikeMutation.mutate(
           {
-            itemType: props.audioTrackType,
-            itemID: props.audioTrackID,
+            itemType: props.likeableItemType,
+            itemID: props.likeableItemID,
             like: false,
           },
           {

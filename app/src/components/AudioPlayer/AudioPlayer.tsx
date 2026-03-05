@@ -131,8 +131,8 @@ export function AudioPlayer() {
           </ExperimentalSurface>
           <RepeatIcon />
           <LikeButtonMaybeUnauthenticated
-            audioTrackType={activeTrack.trackType}
-            audioTrackID={activeTrack.id}
+            likeableItemType={activeTrack.trackType}
+            likeableItemID={activeTrack.id}
           />
         </ThemedView>
         <ThemedView
