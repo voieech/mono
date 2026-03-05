@@ -1,25 +1,19 @@
-import type { LikeableItemType } from "dto";
-
-import { msg } from "@lingui/core/macro";
-import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { ActivityIndicator, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import {
   State as PlayerState,
   usePlaybackState,
 } from "react-native-track-player";
 
-import { useUserLikeQuery, useUserLikeMutation } from "@/api";
 import { AppDebuggingSurface } from "@/components/AppDebuggingSurface";
 import { ExperimentalSurface } from "@/components/ExperimentalSurface";
 import { MarqueeText } from "@/components/MarqueeText";
 import { Icon } from "@/components/provided";
 import { ThemedView } from "@/components/ThemedComponents/index";
 import { Colors } from "@/constants";
-import { useTrackPlayer, useAuthContext } from "@/context";
+import { useTrackPlayer } from "@/context";
 import { useActiveTrackWithMetadata } from "@/TrackPlayer";
-import { toast } from "@/utils";
 
 import { ShareTrackIcon } from "../ShareTrackIcon";
 import { AudioPlayerDebugger } from "./AudioPlayerDebugger";
@@ -35,6 +29,7 @@ import { AudioPlayerTime } from "./AudioPlayerTime";
 import { AudioProgressSlider } from "./AudioProgressSlider";
 import { CircularPauseButton } from "./CircularPauseButton";
 import { CircularPlayButton } from "./CircularPlayButton";
+import { LikeButtonMaybeUnauthenticated } from "./LikeButton";
 import { PlaybackRateButton } from "./PlaybackRateButton";
 import { RepeatIcon } from "./RepeatIcon";
 
@@ -215,126 +210,5 @@ export function AudioPlayer() {
         <AudioPlayerDebugger />
       </AppDebuggingSurface>
     </ThemedView>
-  );
-}
-
-function LikeButtonMaybeUnauthenticated(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
-}) {
-  const authContext = useAuthContext();
-
-  if (!authContext.isAuthenticated) {
-    return (
-      <HeartBaseButton
-        isLiked={false}
-        onPress={authContext.showFullScreenSigninModalIfNotAuthenticated}
-      />
-    );
-  }
-
-  return <LikeUnlikeButton {...props} />;
-}
-
-/**
- * User is authenticated already
- */
-function LikeUnlikeButton(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
-}) {
-  const userLikeQuery = useUserLikeQuery({
-    itemType: props.audioTrackType,
-    itemID: props.audioTrackID,
-  });
-
-  if (userLikeQuery.isLoading) {
-    return <ActivityIndicator />;
-  }
-
-  // If failed to load status, treat it as the same as not liked
-  if (
-    userLikeQuery.isError ||
-    userLikeQuery.data === undefined ||
-    userLikeQuery.data.like === undefined ||
-    userLikeQuery.data.like === false
-  ) {
-    return <ClickToLikeButton {...props} />;
-  }
-
-  return <ClickToUnlikeButton {...props} />;
-}
-
-const showFailedToUpdateLikeToast = () => toast(msg`Failed to update like`);
-
-function ClickToLikeButton(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
-}) {
-  const userLikeMutation = useUserLikeMutation();
-  return (
-    <HeartBaseButton
-      isLiked={false}
-      onPress={() => {
-        userLikeMutation.mutate(
-          {
-            itemType: props.audioTrackType,
-            itemID: props.audioTrackID,
-            like: true,
-          },
-          {
-            onError: showFailedToUpdateLikeToast,
-          },
-        );
-      }}
-      disabled={userLikeMutation.isPending}
-    />
-  );
-}
-
-function ClickToUnlikeButton(props: {
-  audioTrackType: LikeableItemType;
-  audioTrackID: string;
-}) {
-  const userLikeMutation = useUserLikeMutation();
-  return (
-    <HeartBaseButton
-      isLiked={true}
-      onPress={() => {
-        userLikeMutation.mutate(
-          {
-            itemType: props.audioTrackType,
-            itemID: props.audioTrackID,
-            like: false,
-          },
-          {
-            onError: showFailedToUpdateLikeToast,
-          },
-        );
-      }}
-      disabled={userLikeMutation.isPending}
-    />
-  );
-}
-
-export function HeartBaseButton(props: {
-  isLiked: boolean;
-  onPress?: () => unknown;
-  disabled?: boolean;
-}) {
-  return (
-    <Pressable
-      onPress={() => {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        props.onPress?.();
-      }}
-      disabled={props.disabled}
-    >
-      <Icon
-        name={props.isLiked ? "heart.fill" : "heart"}
-        color={props.isLiked ? Colors.red600 : Colors.neutral200}
-        size={32}
-      />
-    </Pressable>
   );
 }

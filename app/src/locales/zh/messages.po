@@ -38,7 +38,7 @@ msgstr "账户信息"
 msgid "After Shows"
 msgstr "演出结束后"
 
-#: src/app/(tabs)/(home)/index.tsx:32
+#: src/app/(tabs)/(home)/index.tsx:33
 msgid "All"
 msgstr "全部"
 
@@ -342,11 +342,11 @@ msgstr "手机媒体控制"
 msgid "Failed to load video!"
 msgstr "视频加载失败！"
 
-#: src/app/(tabs)/profile/contact-form.tsx:84
+#: src/app/(tabs)/profile/contact-form.tsx:85
 msgid "Failed to submit!"
 msgstr "提交失败！"
 
-#: src/components/AudioPlayer/AudioPlayer.tsx:268
+#: src/components/AudioPlayer/LikeButton.tsx:60
 msgid "Failed to update like"
 msgstr "更新失败"
 
@@ -368,11 +368,11 @@ msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:147
+#: src/app/(tabs)/(home)/index.tsx:146
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:202
+#: src/app/(tabs)/(home)/index.tsx:203
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -591,7 +591,7 @@ msgstr "自然界"
 msgid "News"
 msgstr "新闻"
 
-#: src/app/(tabs)/(home)/index.tsx:40
+#: src/app/(tabs)/(home)/index.tsx:41
 msgid "News Articles"
 msgstr "新闻文章"
 
@@ -646,7 +646,7 @@ msgstr "打开程序通知设置"
 msgid "Open Settings"
 msgstr "打开设置"
 
-#: src/app/(tabs)/profile/contact-form.tsx:152
+#: src/app/(tabs)/profile/contact-form.tsx:153
 msgid "OR"
 msgstr "或"
 
@@ -691,7 +691,7 @@ msgstr "选择内容来源，并开始创作属于你自己的内容！"
 msgid "Places & Travel"
 msgstr "地点与旅行"
 
-#: src/app/(tabs)/profile/contact-form.tsx:187
+#: src/app/(tabs)/profile/contact-form.tsx:188
 msgid "please enter a valid email"
 msgstr "请输入有效的电子邮件地址"
 
@@ -707,11 +707,19 @@ msgstr "清除缓存后请重启应用。"
 msgid "Podcast Channel"
 msgstr "播客频道"
 
+#: src/components-page/(tabs)/(home)/index/UserSubscriptions.tsx:69
+msgid "Podcast Channels"
+msgstr "播客频道"
+
 #: src/app/(tabs)/(home)/_layout.tsx:45
 msgid "Podcast Episode"
 msgstr "播客剧集"
 
-#: src/app/(tabs)/(home)/index.tsx:36
+#: src/components-page/(tabs)/(home)/index/UserSubscriptions.tsx:92
+msgid "Podcast Episodes"
+msgstr "播客节目"
+
+#: src/app/(tabs)/(home)/index.tsx:37
 msgid "Podcasts"
 msgstr "播客"
 
@@ -801,7 +809,7 @@ msgstr "选择您感兴趣的主题，以便我们为您量身定制入门体验
 msgid "Self-Improvement"
 msgstr "自我提升"
 
-#: src/app/(tabs)/profile/contact-form.tsx:103
+#: src/app/(tabs)/profile/contact-form.tsx:104
 msgid "Send us your queries / feedback!"
 msgstr "欢迎您提出疑问/反馈！"
 
@@ -821,7 +829,7 @@ msgstr "显示跳前和跳后十五秒的按键。"
 msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
-#: src/app/(tabs)/profile/contact-form.tsx:141
+#: src/app/(tabs)/profile/contact-form.tsx:142
 #: src/app/(tabs)/profile/index.tsx:77
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
@@ -883,7 +891,7 @@ msgstr "儿童故事"
 msgid "Submit"
 msgstr "提交"
 
-#: src/app/(tabs)/profile/contact-form.tsx:81
+#: src/app/(tabs)/profile/contact-form.tsx:82
 msgid "Submitted, we will get back to you as needed!"
 msgstr "提交成功，我们会根据需要与您联系！"
 
@@ -996,7 +1004,7 @@ msgstr "摔角"
 msgid "Yes"
 msgstr "是"
 
-#: src/app/(tabs)/profile/contact-form.tsx:160
+#: src/app/(tabs)/profile/contact-form.tsx:161
 msgid "Your email"
 msgstr "您的电子邮件"
 
@@ -1005,7 +1013,7 @@ msgstr "您的电子邮件"
 msgid "Your Hyper Personalized Podcasts"
 msgstr "你的声伴"
 
-#: src/components-page/(tabs)/(home)/index/UserSubscriptions.tsx:52
+#: src/components-page/(tabs)/(home)/index/UserSubscriptions.tsx:35
 msgid "Your Subscriptions"
 msgstr "您的订阅"
 
