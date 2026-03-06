@@ -30,7 +30,7 @@ export function useUserSubscriptionQuery(variables: {
         console.error(errorMessage);
 
         return {
-          subscribe: undefined,
+          subscribe: false,
         };
       }
 

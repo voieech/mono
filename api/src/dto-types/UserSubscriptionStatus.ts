@@ -1,3 +1,3 @@
 export type UserSubscriptionStatus = {
-  subscribe: boolean | undefined;
+  subscribe: boolean;
 };
