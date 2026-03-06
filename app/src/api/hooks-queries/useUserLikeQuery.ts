@@ -30,7 +30,7 @@ export function useUserLikeQuery(variables: {
         console.error(errorMessage);
 
         return {
-          like: undefined,
+          like: false,
         };
       }
 

@@ -1,3 +1,3 @@
 export type UserLikeStatus = {
-  like: boolean | undefined;
+  like: boolean;
 };
