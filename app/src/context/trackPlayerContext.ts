@@ -26,9 +26,13 @@ export const TrackPlayerContext = createContext<{
    */
   goToTrack: (trackID: string) => Promise<void>;
   /**
-   * This will either go to the next track and start playing.
+   * This will go to the next track and start playing.
    */
   goToNextTrack: () => Promise<void>;
+  /**
+   * This will go to the previous track and start playing.
+   */
+  goToPreviousTrack: () => Promise<void>;
   /**
    * This will either go to start of track or to the previous track and start
    * playing, see `rewindToStartOnSkipPrevious` setting.

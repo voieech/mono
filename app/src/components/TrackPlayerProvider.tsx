@@ -149,6 +149,11 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     await playIfNotPlaying();
   }, [playIfNotPlaying]);
 
+  const goToPreviousTrack = useCallback(async () => {
+    await RNTPTrackPlayer.skipToPrevious();
+    await playIfNotPlaying();
+  }, [playIfNotPlaying]);
+
   const goToPreviousOrStartOfTrack = useCallback(async () => {
     const shouldRewindToStartOnSkipPrevious = settingContext.getSetting(
       "rewindToStartOnSkipPrevious",
@@ -262,6 +267,7 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
         enqueueTracksAfterCurrent,
         goToTrack,
         goToNextTrack,
+        goToPreviousTrack,
         goToPreviousOrStartOfTrack,
         playbackRate,
         updatePlaybackRateByCycling,
