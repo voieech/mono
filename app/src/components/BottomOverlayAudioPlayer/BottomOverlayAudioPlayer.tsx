@@ -17,15 +17,37 @@ import { BottomOverlayAudioPlayerProgessBar } from "./BottomOverlayAudioPlayerPr
 
 export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
   const startY = useRef(0);
+  const startX = useRef(0);
   const { width } = useWindowDimensions();
   const trackPlayer = useTrackPlayer();
   const activeTrack = useActiveTrackWithMetadata();
   const playerState = usePlaybackState().state;
   const router = useRouter();
 
+  // Doing a simple swipe left/right to change tracks, without the UI "moving"
+  // along with the fingers as user swipe. Returns boolean to indicate if this
+  // has been activated
+  function onSwipeLeftRightChangeTracks(evt: GestureResponderEvent) {
+    const endX = evt.nativeEvent.pageX;
+    const swipePixelDelta = startX.current - endX;
+
+    const swipePixelTriggerThreshold = 5;
+    if (Math.abs(swipePixelDelta) < swipePixelTriggerThreshold) {
+      return false;
+    }
+
+    const isRightToLeftSwipe = swipePixelDelta > 0;
+    if (isRightToLeftSwipe) {
+      trackPlayer.goToNextTrack();
+    } else {
+      trackPlayer.goToPreviousTrack();
+    }
+    return true;
+  }
+
   function onSwipeUpOpenModal(evt: GestureResponderEvent) {
     // Small threshold since the overlay is small, so we can detect any
-    // swipe ups as a swipe up motion
+    // swipe ups as a swipe up motion if it isnt a left/right swipe
     const swipeUpPixelTriggerThreshold = 1;
     const endY = evt.nativeEvent.pageY;
     const swipePixelDelta = startY.current - endY;
@@ -35,9 +57,7 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
   }
 
   function onSwipeDownClearTracks(evt: GestureResponderEvent) {
-    // Small threshold since the overlay is small, so we can detect any
-    // swipe downs as a swipe down motion
-    const swipeDownPixelTriggerThreshold = 1;
+    const swipeDownPixelTriggerThreshold = 5;
     const endY = evt.nativeEvent.pageY;
     const swipePixelDelta = endY - startY.current;
     if (swipePixelDelta > swipeDownPixelTriggerThreshold) {
@@ -56,10 +76,16 @@ export function BottomOverlayAudioPlayer(props: { tabBarHeight: number }) {
         router.push("/audio-player-modal");
       }}
       // Use these to implement open modal on swipe up
-      onPressIn={(evt) => (startY.current = evt.nativeEvent.pageY)}
+      onPressIn={(evt) => {
+        startY.current = evt.nativeEvent.pageY;
+        startX.current = evt.nativeEvent.pageX;
+      }}
       onPressOut={(evt) => {
-        onSwipeUpOpenModal(evt);
-        onSwipeDownClearTracks(evt);
+        const isLeftRightSwipe = onSwipeLeftRightChangeTracks(evt);
+        if (!isLeftRightSwipe) {
+          onSwipeUpOpenModal(evt);
+          onSwipeDownClearTracks(evt);
+        }
       }}
     >
       {/*
