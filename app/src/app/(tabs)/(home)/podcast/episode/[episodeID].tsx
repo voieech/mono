@@ -22,6 +22,7 @@ import {
   CircularPlayButton,
   CircularPauseButton,
   ShareTrackIcon,
+  LikeUnlikeButton,
 } from "@/components";
 import { Colors } from "@/constants";
 import { useTrackPlayer } from "@/context";
@@ -222,6 +223,10 @@ export default function PodcastEpisode() {
               locale: episode.language,
             })}
             size={36}
+          />
+          <LikeUnlikeButton
+            likeableItemType="podcast_episode"
+            likeableItemID={episode.id}
           />
           {/*
             Even if player is not paused, i.e. it is loading or whatever show the
