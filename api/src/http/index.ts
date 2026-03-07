@@ -4,6 +4,7 @@
 
 export * from "./auth/index.js";
 export * from "./errorHandler.js";
+export * from "./expressJsonBodyParserMiddleware.js";
 export * from "./HttpStatus.js";
 export * from "./JSend.js";
 export * from "./notFoundHandler.js";

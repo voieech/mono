@@ -18,6 +18,7 @@ import { recommendationsRoutes } from "./controllers-http/reccomendations/index.
 import { userRoutes } from "./controllers-http/user/index.js";
 import {
   authenticationMiddleware,
+  expressJsonBodyParserMiddleware,
   notFoundHandler,
   errorHandler,
 } from "./http/index.js";
@@ -46,10 +47,10 @@ export function bootstrapHttpServer() {
     // Parses the requested locale and set it on `req` before any downstream
     // route handlers can use it.
     .use(localeMiddleware)
-    // Setting this last so that we only parse req.body when absolutely
+    // Setting this at the back so that we only parse req.body when absolutely
     // necessary to prevent wasting resources parsing it if it is going to fail
     // the auth check and etc...
-    .use(express.json())
+    .use(expressJsonBodyParserMiddleware)
     // Logger middleware uses data on the request object set by
     // `additionalRequestContextMiddleware`, `authenticationMiddleware` and
     // `localeMiddleware`, so this middleware can only be used/placed after them
