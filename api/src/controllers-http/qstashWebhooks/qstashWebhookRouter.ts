@@ -38,7 +38,7 @@ export const qstashWebhookRouter = express
             .selectFrom("user_subscription")
             .select("user_id")
             .where("item_type", "=", "podcast_channel")
-            .where("item_id", "=", event.data.podcastChannelID)
+            .where("item_id", "=", event.data.podcastChannel.id)
             .execute()
             .then((rows) => rows.map((row) => row.user_id));
 
@@ -51,10 +51,8 @@ export const qstashWebhookRouter = express
           const notifications = userDeviceExpoPushNotificationTokens.map(
             ({ expo_token }) => ({
               to: expo_token,
-              // @todo Support i18n / localisation
-              title: "Title test",
-              subtitle: "Subtitle test",
-              body: "Body test",
+              title: event.data.podcastChannel.name,
+              body: event.data.podcastEpisode.title,
             }),
           );
 

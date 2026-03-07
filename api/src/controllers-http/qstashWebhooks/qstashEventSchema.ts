@@ -33,8 +33,14 @@ export const qstashEventSchema = z.discriminatedUnion("type", [
   qstashBaseEventSchema.safeExtend({
     type: z.literal("podcast-episode-created"),
     data: z.object({
-      podcastEpisodeID: z.uuidv4(),
-      podcastChannelID: z.uuidv4(),
+      podcastEpisode: z.object({
+        id: z.uuidv4(),
+        title: z.string(),
+      }),
+      podcastChannel: z.object({
+        id: z.uuidv4(),
+        name: z.string(),
+      }),
     }),
   }),
 ]);
