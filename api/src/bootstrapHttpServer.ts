@@ -14,6 +14,7 @@ import { appleAppSiteAssociationRoute } from "./controllers-http/others/index.js
 import { contactFormRoutes } from "./controllers-http/others/index.js";
 import { podcastChannelRoutes } from "./controllers-http/podcastChannel/index.js";
 import { podcastEpisodeRoutes } from "./controllers-http/podcastEpisode/index.js";
+import { qstashWebhookRouter } from "./controllers-http/qstashWebhooks/index.js";
 import { recommendationsRoutes } from "./controllers-http/reccomendations/index.js";
 import { userRoutes } from "./controllers-http/user/index.js";
 import {
@@ -67,6 +68,7 @@ export function bootstrapHttpServer() {
     .use(podcastEpisodeRoutes)
     .use(podcastChannelRoutes)
     .use(contactFormRoutes)
+    .use(qstashWebhookRouter)
 
     /**
      * Use 404 route handler as second last to catch any routes that arent
