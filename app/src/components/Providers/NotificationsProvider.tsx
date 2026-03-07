@@ -21,14 +21,32 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   >(undefined);
   const authContext = useAuthContext();
 
-  const syncPushNotificationData = useCallback(
-    async function () {
-      const { notificationPermissionsStatus, pushNotificationTokens } =
-        await getPushNotificationDataAndSyncTokens(authContext.isAuthenticated);
-      setNotificationPermissionsStatus(notificationPermissionsStatus);
-      setPushTokens(pushNotificationTokens);
-    },
+  const syncPushNotificationPermissionsStatus = useCallback(
+    () =>
+      Notifications.getPermissionsAsync().then(
+        setNotificationPermissionsStatus,
+      ),
+    [],
+  );
+
+  const syncPushNotificationTokens = useCallback(
+    () =>
+      getPushNotificationDataAndSyncTokens(authContext.isAuthenticated).then(
+        setPushTokens,
+      ),
     [authContext.isAuthenticated],
+  );
+
+  const syncPushNotificationData = useCallback(
+    function () {
+      // Trigger all the other sync functions in a fire and forget style
+      // These other sync functions are split up so that they do not block each
+      // other, e.g. push notification permission status sync wont be blocked
+      // just because push notification token cant be read.
+      syncPushNotificationPermissionsStatus();
+      syncPushNotificationTokens();
+    },
+    [syncPushNotificationPermissionsStatus, syncPushNotificationTokens],
   );
 
   // This runs everytime user's auth status changes
@@ -65,7 +83,7 @@ export function NotificationProvider({ children }: PropsWithChildren) {
       value={{
         notificationPermissionsStatus,
         pushTokens,
-        syncPushNotificationData: syncPushNotificationData,
+        syncPushNotificationData,
         notification,
       }}
     >

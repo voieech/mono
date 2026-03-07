@@ -20,12 +20,18 @@ export const NotificationContext = createContext<{
   pushTokens: undefined | PushNotificationTokens;
 
   /**
+   * Updates/syncs both push notification permission status and push
+   * notification tokens.
+   *
    * Tries to retrieve updated push notification tokens if available, and calls
    * API to sync the state of the push notification tokens (either they belong
    * to a user now if user is logged in or it should be deleted since it doesnt
    * belong to anyone if user is logged out)
+   *
+   * Does this in a fire and forget style and runs in a the background
+   * asynchronously.
    */
-  syncPushNotificationData: () => Promise<void>;
+  syncPushNotificationData: () => void;
 
   /**
    * The latest notification received while the app is in the foreground.

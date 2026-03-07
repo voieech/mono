@@ -54,7 +54,7 @@ export default function SettingsNotification() {
 
   async function requestNotificationPermission() {
     await Notifications.requestPermissionsAsync();
-    await notificationContext.syncPushNotificationData();
+    notificationContext.syncPushNotificationData();
   }
 
   return (

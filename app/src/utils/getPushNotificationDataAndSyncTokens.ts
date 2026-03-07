@@ -8,7 +8,7 @@ import {
 import { getPushNotificationTokens } from "./getPushNotificationTokens";
 
 /**
- * Get latest push notification data/status and tokens, and sync with API.
+ * Get latest push notification tokens and sync with API.
  *
  * API Syncing method:
  * 1. Save token: User is logged in AND granted push notification permission
@@ -28,8 +28,5 @@ export async function getPushNotificationDataAndSyncTokens(
     await postDeleteDevicePushNotificationTokens(pushNotificationTokens);
   }
 
-  return {
-    notificationPermissionsStatus,
-    pushNotificationTokens,
-  };
+  return pushNotificationTokens;
 }
