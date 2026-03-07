@@ -4,6 +4,7 @@ import * as Notifications from "expo-notifications";
 import { useRef, useEffect } from "react";
 import { AppState, Pressable, View } from "react-native";
 
+import { postTestPushNotification } from "@/api";
 import {
   ThemedText,
   ThemedView,
@@ -55,6 +56,14 @@ export default function SettingsNotification() {
   async function requestNotificationPermission() {
     await Notifications.requestPermissionsAsync();
     notificationContext.syncPushNotificationData();
+  }
+
+  async function requestPushNotificationTest() {
+    if (notificationContext.pushTokens === undefined) {
+      return;
+    }
+    await postTestPushNotification(notificationContext.pushTokens);
+    toast(msg`Test requested, look out for incoming push notifications!`);
   }
 
   return (
@@ -133,41 +142,69 @@ export default function SettingsNotification() {
           </ThemedText>
         </OpenNativeSettingsAppButton>
         {notificationContext.pushTokens?.expoToken !== undefined && (
-          <View>
+          <View
+            style={{
+              flexDirection: "column",
+              rowGap: 8,
+            }}
+          >
             <VerticalSpacer />
-            <ThemedText
-              style={{
-                paddingBottom: 8,
-              }}
-            >
-              <Trans>Expo Notification Token</Trans>
-            </ThemedText>
-            <CopyOnPress
-              text={notificationContext.pushTokens.expoToken}
-              onCopy={() => toast(msg`Copied to clipboard`)}
-            >
-              <View
+            <View>
+              <ThemedText
                 style={{
-                  width: "100%",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingVertical: 12,
-                  paddingHorizontal: 16,
-                  backgroundColor: Colors.black,
-                  borderRadius: 10,
+                  paddingBottom: 8,
                 }}
               >
-                <ThemedText type="sm-light">
-                  {notificationContext.pushTokens.expoToken}
-                </ThemedText>
-                <Icon
-                  name="square.on.square"
-                  size={20}
-                  color={Colors.gray400}
-                />
-              </View>
-            </CopyOnPress>
+                <Trans>Expo Notification Token</Trans>
+              </ThemedText>
+              <CopyOnPress
+                text={notificationContext.pushTokens.expoToken}
+                onCopy={() => toast(msg`Copied to clipboard`)}
+              >
+                <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingVertical: 12,
+                    paddingHorizontal: 16,
+                    backgroundColor: Colors.black,
+                    borderRadius: 10,
+                  }}
+                >
+                  <ThemedText type="sm-light">
+                    {notificationContext.pushTokens.expoToken}
+                  </ThemedText>
+                  <Icon
+                    name="square.on.square"
+                    size={20}
+                    color={Colors.gray400}
+                  />
+                </View>
+              </CopyOnPress>
+            </View>
+            <View>
+              <Pressable onPress={requestPushNotificationTest}>
+                <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingVertical: 12,
+                    paddingHorizontal: 16,
+                    backgroundColor: Colors.black,
+                    borderRadius: 10,
+                  }}
+                >
+                  <ThemedText>
+                    <Trans>Test Push Notification</Trans>
+                  </ThemedText>
+                  <Icon name="chevron.right" size={20} color={Colors.gray400} />
+                </View>
+              </Pressable>
+            </View>
           </View>
         )}
       </View>

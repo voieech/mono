@@ -235,7 +235,7 @@ msgstr "Content Language"
 msgid "Continue"
 msgstr "Continue"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:147
+#: src/app/(tabs)/profile/settings/notifications.tsx:162
 #: src/components/CopyOnPress.tsx:43
 msgid "Copied to clipboard"
 msgstr "Copied to clipboard"
@@ -318,7 +318,7 @@ msgstr "Email"
 msgid "Email Verified?"
 msgstr "Email Verified?"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:117
+#: src/app/(tabs)/profile/settings/notifications.tsx:126
 msgid "Enable Notifications"
 msgstr "Enable Notifications"
 
@@ -338,7 +338,7 @@ msgstr "Entrepreneurship"
 #~ msgid "Explore"
 #~ msgstr "Explore"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:143
+#: src/app/(tabs)/profile/settings/notifications.tsx:158
 msgid "Expo Notification Token"
 msgstr "Expo Notification Token"
 
@@ -497,7 +497,7 @@ msgstr "Investing"
 #~ msgid "Is notification enabled?"
 #~ msgstr "Is notification enabled?"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:80
+#: src/app/(tabs)/profile/settings/notifications.tsx:89
 msgid "Is notifications enabled?"
 msgstr "Is notifications enabled?"
 
@@ -612,7 +612,7 @@ msgid "News Commentary"
 msgstr "News Commentary"
 
 #: src/app/(tabs)/profile/index.tsx:286
-#: src/app/(tabs)/profile/settings/notifications.tsx:97
+#: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "No"
 msgstr "No"
 
@@ -650,7 +650,7 @@ msgstr "Open Android Settings"
 msgid "Open iOS Settings"
 msgstr "Open iOS Settings"
 
-#: src/app/(tabs)/profile/settings/notifications.tsx:132
+#: src/app/(tabs)/profile/settings/notifications.tsx:141
 msgid "Open Notification Settings"
 msgstr "Open Notification Settings"
 
@@ -943,6 +943,14 @@ msgstr "Tennis"
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
+#: src/app/(tabs)/profile/settings/notifications.tsx:202
+msgid "Test Push Notification"
+msgstr "Test Push Notification"
+
+#: src/app/(tabs)/profile/settings/notifications.tsx:66
+msgid "Test requested, look out for incoming push notifications!"
+msgstr "Test requested, look out for incoming push notifications!"
+
 #: src/app/welcome.tsx:247
 msgid "These can be changed again later in settings."
 msgstr "These can be changed again later in settings."
@@ -1012,7 +1020,7 @@ msgid "Wrestling"
 msgstr "Wrestling"
 
 #: src/app/(tabs)/profile/index.tsx:286
-#: src/app/(tabs)/profile/settings/notifications.tsx:97
+#: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "Yes"
 msgstr "Yes"
 
