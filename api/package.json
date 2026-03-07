@@ -21,6 +21,7 @@
   "dependencies": {
     "@loglayer/plugin-redaction": "^3.0.2",
     "@loglayer/transport-pino": "^3.0.2",
+    "@upstash/qstash": "^2.9.0",
     "@workos-inc/node": "^7.71.0",
     "convert-unknown-catch-to-error": "^1.0.3",
     "cookie-parser": "^1.4.7",
