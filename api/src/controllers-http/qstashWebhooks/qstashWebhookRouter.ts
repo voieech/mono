@@ -3,7 +3,6 @@ import express from "express";
 import { InvalidInternalStateException } from "../../exceptions/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { expo } from "../../notifications-push/index.js";
-import { QSTASH_WEBHOOK_PATH_SECRET } from "../../qstash/index.js";
 import { qstashWebhookSignatureVerificationMiddleware } from "./qstashWebhookSignatureVerificationMiddleware.js";
 
 export const qstashWebhookRouter = express
@@ -13,9 +12,7 @@ export const qstashWebhookRouter = express
    * Common endpoint for all QStash event webhook API calls
    */
   .post(
-    // Uses QSTASH_WEBHOOK_PATH_SECRET to obfuscate endpoint URL, to prevent
-    // spam on a publicly known path
-    `/qstash/webhooks/${QSTASH_WEBHOOK_PATH_SECRET}/`,
+    `/qstash/webhooks`,
     qstashWebhookSignatureVerificationMiddleware,
     async (req, res) => {
       const event = req.qstashEvent;
