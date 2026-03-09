@@ -1,5 +1,6 @@
 import express from "express";
 
+import { userPushNotificationTokenRepo } from "../../dal/index.js";
 import { InvalidInternalStateException } from "../../exceptions/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { expo } from "../../notifications-push/index.js";
@@ -61,7 +62,9 @@ export const qstashWebhookRouter = express
                         (ticket) => ticket.id === receiptID,
                       )?.expoToken!;
 
-                    await deleteExpoPushToken(expoPushToken);
+                    await userPushNotificationTokenRepo.deleteByExpoPushToken(
+                      expoPushToken,
+                    );
 
                     req.logger.info("Removed invalid expo push token");
 
@@ -152,7 +155,9 @@ export const qstashWebhookRouter = express
                 }
               }
 
-              await deleteManyExpoPushToken(failedExpoPushTokensToDelete);
+              await userPushNotificationTokenRepo.deleteManyByExpoPushToken(
+                failedExpoPushTokensToDelete,
+              );
 
               // Send tickets to Q with a delay (20 mins as advised to ensure
               // that the downstream Apple/Google services have completed
@@ -203,17 +208,3 @@ export const qstashWebhookRouter = express
       res.status(200).send();
     },
   );
-
-async function deleteExpoPushToken(expoPushToken: string) {
-  return await apiDB
-    .deleteFrom("user_push_notif_tokens")
-    .where("expo_token", "=", expoPushToken)
-    .execute();
-}
-
-async function deleteManyExpoPushToken(expoPushTokens: Array<string>) {
-  return await apiDB
-    .deleteFrom("user_push_notif_tokens")
-    .where("expo_token", "in", expoPushTokens)
-    .execute();
-}

@@ -9,6 +9,7 @@ import type {
   UserSubscriptionsOfItemType,
 } from "../../dto-types/index.js";
 
+import { userPushNotificationTokenRepo } from "../../dal/index.js";
 import { InvalidInputException } from "../../exceptions/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
@@ -43,27 +44,12 @@ export const userRoutes = express
 
       const userID = await req.genAuthenticatedUserID();
 
-      await apiDB
-        .insertInto("user_push_notif_tokens")
-        .values({
-          id: crypto.randomUUID(),
-          created_at: $DateTime.now.asIsoDateTime(),
-          updated_at: $DateTime.now.asIsoDateTime(),
-          user_id: userID,
-          expo_token: pushNotificationTokens.expoToken,
-          device_token: pushNotificationTokens.deviceToken,
-          device_platform: pushNotificationTokens.devicePlatform,
-        })
-        // Upsert behaviour
-        .onConflict((oc) => {
-          return oc.column("expo_token").doUpdateSet({
-            updated_at: $DateTime.now.asIsoDateTime(),
-            user_id: userID,
-            device_token: pushNotificationTokens.deviceToken,
-            device_platform: pushNotificationTokens.devicePlatform,
-          });
-        })
-        .execute();
+      await userPushNotificationTokenRepo.upsert({
+        user_id: userID,
+        expo_token: pushNotificationTokens.expoToken,
+        device_token: pushNotificationTokens.deviceToken,
+        device_platform: pushNotificationTokens.devicePlatform,
+      });
 
       res.status(200).json({});
     },
@@ -77,10 +63,9 @@ export const userRoutes = express
         throw new InvalidInputException(`Invalid Expo push notification token`);
       }
 
-      await apiDB
-        .deleteFrom("user_push_notif_tokens")
-        .where("expo_token", "=", pushNotificationTokens.expoToken)
-        .executeTakeFirst();
+      await userPushNotificationTokenRepo.deleteByExpoPushToken(
+        pushNotificationTokens.expoToken,
+      );
 
       res.status(200).json({});
     },
@@ -97,13 +82,13 @@ export const userRoutes = express
 
       const userID = await req.genAuthenticatedUserID();
 
-      const userDeviceExpoPushNotificationTokenIsStored = await apiDB
-        .selectFrom("user_push_notif_tokens")
-        .select(sqlExistenceCheck)
-        .where("expo_token", "=", pushNotificationTokens.expoToken)
-        .where("user_id", "=", userID)
-        .executeTakeFirst()
-        .then((data) => data?.exists === true);
+      const userDeviceExpoPushNotificationTokenIsStored =
+        await userPushNotificationTokenRepo.getUserDeviceExpoPushNotificationTokenExists(
+          {
+            userID,
+            expoPushToken: pushNotificationTokens.expoToken,
+          },
+        );
 
       if (!userDeviceExpoPushNotificationTokenIsStored) {
         throw new NotFoundException("Token not found in DB");
