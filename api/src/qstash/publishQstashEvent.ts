@@ -1,3 +1,5 @@
+import type { PublishRequest } from "@upstash/qstash";
+
 import type { DistributiveOmit } from "../util/DistributiveOmit.js";
 import type { QstashEvent } from "./qstashEventSchema.js";
 
@@ -16,15 +18,25 @@ const url = `${QSTASH_WEBHOOK_HANDLER_BASE_URL}/qstash/webhooks`;
 /**
  * Publish a QStash event
  */
-export function publishQstashEvent(
-  body: DistributiveOmit<QstashEvent, "qstashMessageID" | "id" | "createdAt">,
-) {
-  return qstashClient.publishJSON({
+export function publishQstashEvent(config: {
+  body: DistributiveOmit<QstashEvent, "qstashMessageID" | "id" | "createdAt">;
+  delay?: PublishRequest["delay"];
+}) {
+  const jsonEvent: PublishRequest<Omit<QstashEvent, "qstashMessageID">> = {
     url,
     body: {
       id: crypto.randomUUID(),
       createdAt: $DateTime.now.asIsoDateTime(),
-      ...body,
+      ...config.body,
     },
-  });
+  };
+
+  // @todo
+  // Need to do this because their SDK does not support setting undefined
+  // on optional fields... ugh
+  if (config.delay !== undefined) {
+    jsonEvent.delay = config.delay;
+  }
+
+  return qstashClient.publishJSON(jsonEvent);
 }

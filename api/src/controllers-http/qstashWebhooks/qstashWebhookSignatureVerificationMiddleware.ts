@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction } from "express";
 import { SignatureError } from "@upstash/qstash";
 import { convertUnknownCatchToError } from "convert-unknown-catch-to-error";
 
-import type { QstashEvent } from "./qstashEventSchema.js";
+import type { QstashEvent } from "../../qstash/index.js";
 
 import {
   InvalidInternalStateException,
@@ -12,7 +12,7 @@ import {
   ValidationFailedException,
 } from "../../exceptions/index.js";
 import { qstashReceiver } from "../../qstash/index.js";
-import { qstashEventSchema } from "./qstashEventSchema.js";
+import { qstashEventSchema } from "../../qstash/index.js";
 
 declare global {
   namespace Express {

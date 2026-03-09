@@ -3,6 +3,7 @@ import express from "express";
 import { InvalidInternalStateException } from "../../exceptions/index.js";
 import { apiDB } from "../../kysely/index.js";
 import { expo } from "../../notifications-push/index.js";
+import { publishQstashEvent } from "../../qstash/index.js";
 import { qstashWebhookSignatureVerificationMiddleware } from "./qstashWebhookSignatureVerificationMiddleware.js";
 
 export const qstashWebhookRouter = express
@@ -116,23 +117,64 @@ export const qstashWebhookRouter = express
           const expoPushNotificationChunks =
             expo.chunkPushNotifications(notifications);
 
-          const expoPushTickets = [];
-
           // @todo Send the chunks in parallel in the future to improve throughput
-          for (const chunk of expoPushNotificationChunks) {
+          for (const expoPushNotificationChunk of expoPushNotificationChunks) {
             try {
-              const ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-              expoPushTickets.push(...ticketChunk);
+              const expoPushTickets = await expo.sendPushNotificationsAsync(
+                expoPushNotificationChunk,
+              );
 
-              // @todo
-              // save tickets into DB to check delivery receipts later, to
-              // find and remove tokens with 'DeviceNotRegistered' errors
+              const successfulExpoPushTickets: Array<{
+                id: string;
+                expoToken: string;
+              }> = [];
+              const failedExpoPushTokensToDelete: Array<string> = [];
+
+              for (const [index, expoPushTicket] of expoPushTickets.entries()) {
+                const expoToken =
+                  expoPushNotificationChunk[index]?.to?.toString();
+                // This should not be possible, but if it is somehow missing,
+                // this will prevent erroring out
+                if (expoToken === undefined) {
+                  continue;
+                }
+
+                if (expoPushTicket.status === "ok") {
+                  successfulExpoPushTickets.push({
+                    id: expoPushTicket.id,
+                    expoToken,
+                  });
+                } else {
+                  // Push ticket only have "DeveloperError" as error type
+                  if (expoPushTicket.details?.error === "DeveloperError") {
+                    failedExpoPushTokensToDelete.push(expoToken);
+                  }
+                }
+              }
+
+              await deleteManyExpoPushToken(failedExpoPushTokensToDelete);
+
+              // Send tickets to Q with a delay (20 mins as advised to ensure
+              // that the downstream Apple/Google services have completed
+              // processing) to check delivery receipts later, to handle any
+              // delivery errors.
+              await publishQstashEvent({
+                delay: "20m",
+                body: {
+                  type: "expo-push-notification-receipt-check",
+                  data: {
+                    tickets: successfulExpoPushTickets,
+                  },
+                },
+              });
             } catch (error) {
               // On failure, log it and continue with the next chunk instead of
               // failing for everything else
               req.logger
                 .withError(error)
                 .error("Failed to submit expo push notification chunk");
+
+              // @todo Might want to do something like moving it to DLQ instead of just logging failure
             }
           }
 
@@ -166,5 +208,12 @@ async function deleteExpoPushToken(expoPushToken: string) {
   return await apiDB
     .deleteFrom("user_push_notif_tokens")
     .where("expo_token", "=", expoPushToken)
+    .execute();
+}
+
+async function deleteManyExpoPushToken(expoPushTokens: Array<string>) {
+  return await apiDB
+    .deleteFrom("user_push_notif_tokens")
+    .where("expo_token", "in", expoPushTokens)
     .execute();
 }
