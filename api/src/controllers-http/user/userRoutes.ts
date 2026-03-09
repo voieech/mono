@@ -9,7 +9,10 @@ import type {
   UserSubscriptionsOfItemType,
 } from "../../dto-types/index.js";
 
-import { userPushNotificationTokenRepo } from "../../dal/index.js";
+import {
+  userPushNotificationTokenRepo,
+  userLikeRepo,
+} from "../../dal/index.js";
 import { InvalidInputException } from "../../exceptions/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
@@ -197,14 +200,11 @@ export const userRoutes = express
       const itemType = req.params["itemType"]! as LikeableItemType;
       const itemID = req.params["itemID"]!;
 
-      const isLiked = await apiDB
-        .selectFrom("user_like")
-        .select(sqlExistenceCheck)
-        .where("user_id", "=", userID)
-        .where("item_type", "=", itemType)
-        .where("item_id", "=", itemID)
-        .executeTakeFirst()
-        .then((data) => data?.exists === true);
+      const isLiked = userLikeRepo.getIsLiked({
+        userID,
+        itemType,
+        itemID,
+      });
 
       res.status(200).json({
         like: isLiked,
@@ -222,23 +222,17 @@ export const userRoutes = express
       const shouldLike = req.body["like"]!;
 
       if (shouldLike) {
-        await apiDB
-          .insertInto("user_like")
-          .values({
-            id: crypto.randomUUID(),
-            created_at: $DateTime.now.asIsoDateTime(),
-            user_id: userID,
-            item_type: itemType,
-            item_id: itemID,
-          })
-          .execute();
+        await userLikeRepo.create({
+          userID,
+          itemType,
+          itemID,
+        });
       } else {
-        await apiDB
-          .deleteFrom("user_like")
-          .where("user_id", "=", userID)
-          .where("item_type", "=", itemType)
-          .where("item_id", "=", itemID)
-          .execute();
+        await userLikeRepo.delete({
+          userID,
+          itemType,
+          itemID,
+        });
       }
 
       // As long as DB calls did not throw, assume it succeeded
