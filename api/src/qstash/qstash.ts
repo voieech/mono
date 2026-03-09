@@ -16,11 +16,17 @@ if (process.env["QSTASH_NEXT_SIGNING_KEY"] === undefined) {
   throw new Error(`process.env.QSTASH_NEXT_SIGNING_KEY is undefined`);
 }
 
+if (process.env["QSTASH_WEBHOOK_HANDLER_BASE_URL"] === undefined) {
+  throw new Error(`process.env.QSTASH_WEBHOOK_HANDLER_BASE_URL is undefined`);
+}
+
 export const QSTASH_URL = process.env["QSTASH_URL"];
 export const QSTASH_TOKEN = process.env["QSTASH_TOKEN"];
 export const QSTASH_CURRENT_SIGNING_KEY =
   process.env["QSTASH_CURRENT_SIGNING_KEY"];
 export const QSTASH_NEXT_SIGNING_KEY = process.env["QSTASH_NEXT_SIGNING_KEY"];
+export const QSTASH_WEBHOOK_HANDLER_BASE_URL =
+  process.env["QSTASH_WEBHOOK_HANDLER_BASE_URL"];
 
 export const qstashClient = new Client({
   baseUrl: QSTASH_URL,
