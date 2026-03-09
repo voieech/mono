@@ -11,12 +11,12 @@ import type {
 
 import {
   userPushNotificationTokenRepo,
+  userSubscriptionRepo,
   userLikeRepo,
 } from "../../dal/index.js";
 import { InvalidInputException } from "../../exceptions/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
 import { authenticationMiddlewareBuilder } from "../../http/index.js";
-import { apiDB, sqlExistenceCheck } from "../../kysely/index.js";
 import { expo } from "../../notifications-push/index.js";
 
 export const userRoutes = express
@@ -119,14 +119,11 @@ export const userRoutes = express
       const itemType = req.params["itemType"]! as SubscribableItemType;
       const itemID = req.params["itemID"]!;
 
-      const isSubscribed = await apiDB
-        .selectFrom("user_subscription")
-        .select(sqlExistenceCheck)
-        .where("user_id", "=", userID)
-        .where("item_type", "=", itemType)
-        .where("item_id", "=", itemID)
-        .executeTakeFirst()
-        .then((data) => data?.exists === true);
+      const isSubscribed = await userSubscriptionRepo.getIsSubscribed({
+        userID,
+        itemType,
+        itemID,
+      });
 
       res.status(200).json({
         subscribe: isSubscribed,
@@ -144,23 +141,17 @@ export const userRoutes = express
       const shouldSubscribe = req.body["subscribe"]!;
 
       if (shouldSubscribe) {
-        await apiDB
-          .insertInto("user_subscription")
-          .values({
-            id: crypto.randomUUID(),
-            created_at: $DateTime.now.asIsoDateTime(),
-            user_id: userID,
-            item_type: itemType,
-            item_id: itemID,
-          })
-          .execute();
+        await userSubscriptionRepo.create({
+          userID,
+          itemType,
+          itemID,
+        });
       } else {
-        await apiDB
-          .deleteFrom("user_subscription")
-          .where("user_id", "=", userID)
-          .where("item_type", "=", itemType)
-          .where("item_id", "=", itemID)
-          .execute();
+        await userSubscriptionRepo.delete({
+          userID,
+          itemType,
+          itemID,
+        });
       }
 
       // As long as DB calls did not throw, assume it succeeded
@@ -177,14 +168,10 @@ export const userRoutes = express
       const userID = await req.genAuthenticatedUserID();
       const itemType = req.params["itemType"]! as SubscribableItemType;
 
-      const itemIDs = await apiDB
-        .selectFrom("user_subscription")
-        .select("item_id")
-        .where("user_id", "=", userID)
-        .where("item_type", "=", itemType)
-        .orderBy("created_at", "desc")
-        .execute()
-        .then((rows) => rows.map((row) => row.item_id));
+      const itemIDs = await userSubscriptionRepo.getManySubscriptionItemID({
+        userID,
+        itemType,
+      });
 
       res.status(200).json({
         itemIDs,
