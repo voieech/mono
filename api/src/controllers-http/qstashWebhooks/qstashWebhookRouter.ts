@@ -44,38 +44,39 @@ export const qstashWebhookRouter = express
                 // object using its own keys
                 const receipt = receipts[receiptID]!;
 
-                // @todo
-                // Only need to do smth if there is an error
+                // Do nothing if there is no error
                 if (
-                  receipt.status === "error" &&
-                  receipt.details?.error !== undefined
+                  receipt.status !== "error" ||
+                  receipt.details?.error === undefined
                 ) {
-                  switch (receipt.details.error) {
-                    case "DeviceNotRegistered": {
-                      const expoPushToken =
-                        receipt.details.expoPushToken ??
-                        event.data.tickets.find(
-                          (ticket) => ticket.id === receiptID,
-                        )?.expoToken!;
+                  continue;
+                }
 
-                      await deleteExpoPushToken(expoPushToken);
+                switch (receipt.details.error) {
+                  case "DeviceNotRegistered": {
+                    const expoPushToken =
+                      receipt.details.expoPushToken ??
+                      event.data.tickets.find(
+                        (ticket) => ticket.id === receiptID,
+                      )?.expoToken!;
 
-                      req.logger.info("Removed invalid expo push token");
+                    await deleteExpoPushToken(expoPushToken);
 
-                      break;
-                    }
+                    req.logger.info("Removed invalid expo push token");
 
-                    default: {
-                      req.logger
-                        .withContext({
-                          receipt,
-                        })
-                        .error(
-                          "Missing Expo Push Notification receipt error handler",
-                        );
+                    break;
+                  }
 
-                      // @todo Return 489 for DLQ?
-                    }
+                  default: {
+                    req.logger
+                      .withContext({
+                        receipt,
+                      })
+                      .error(
+                        "Missing Expo Push Notification receipt error handler",
+                      );
+
+                    // @todo Return 489 for DLQ?
                   }
                 }
               }
@@ -160,3 +161,10 @@ export const qstashWebhookRouter = express
       res.status(200).send();
     },
   );
+
+async function deleteExpoPushToken(expoPushToken: string) {
+  return await apiDB
+    .deleteFrom("user_push_notif_tokens")
+    .where("expo_token", "=", expoPushToken)
+    .execute();
+}
