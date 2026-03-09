@@ -82,10 +82,14 @@ export const qstashWebhookRouter = express
         default: {
           req.logger
             .withMetadata({
-              qstashEvent: event,
+              event,
             })
-            .error("WorkOS webhook: No event handlers found");
-          break;
+            .error("QStash webhook: Missing event handler");
+
+          // Return the custom HTTP 489 code to signal "event cannot be
+          // processed, please move it to the DLQ".
+          res.status(489).send();
+          return;
         }
       }
 
