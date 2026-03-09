@@ -1,8 +1,10 @@
 import express from "express";
 
-import { userPushNotificationTokenRepo } from "../../dal/index.js";
+import {
+  userPushNotificationTokenRepo,
+  userSubscriptionRepo,
+} from "../../dal/index.js";
 import { InvalidInternalStateException } from "../../exceptions/index.js";
-import { apiDB } from "../../kysely/index.js";
 import { expo } from "../../notifications-push/index.js";
 import { publishQstashEvent } from "../../qstash/index.js";
 import { qstashWebhookSignatureVerificationMiddleware } from "./qstashWebhookSignatureVerificationMiddleware.js";
@@ -95,19 +97,16 @@ export const qstashWebhookRouter = express
         }
 
         case "podcast-episode-created": {
-          const subscribersUserID = await apiDB
-            .selectFrom("user_subscription")
-            .select("user_id")
-            .where("item_type", "=", "podcast_channel")
-            .where("item_id", "=", event.data.podcastChannel.id)
-            .execute()
-            .then((rows) => rows.map((row) => row.user_id));
+          const subscribersUserIds =
+            await userSubscriptionRepo.getManySubscriptionUserIdByItem({
+              itemType: "podcast_channel",
+              itemID: event.data.podcastChannel.id,
+            });
 
-          const userDeviceExpoPushNotificationTokens = await apiDB
-            .selectFrom("user_push_notif_tokens")
-            .select("expo_token")
-            .where("user_id", "in", subscribersUserID)
-            .execute();
+          const userDeviceExpoPushNotificationTokens =
+            await userPushNotificationTokenRepo.getManyUserDeviceExpoPushNotificationTokenByUserIds(
+              subscribersUserIds,
+            );
 
           const notifications = userDeviceExpoPushNotificationTokens.map(
             ({ expo_token }) => ({

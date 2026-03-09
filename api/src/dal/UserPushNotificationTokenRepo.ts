@@ -40,6 +40,16 @@ export const userPushNotificationTokenRepo = {
       .then((data) => data?.exists === true);
   },
 
+  async getManyUserDeviceExpoPushNotificationTokenByUserIds(
+    userIds: Array<string>,
+  ) {
+    return await apiDB
+      .selectFrom("user_push_notif_tokens")
+      .select("expo_token")
+      .where("user_id", "in", userIds)
+      .execute();
+  },
+
   async deleteByExpoPushToken(expoPushToken: string) {
     return await apiDB
       .deleteFrom("user_push_notif_tokens")

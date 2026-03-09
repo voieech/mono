@@ -49,6 +49,19 @@ export const userSubscriptionRepo = {
       .then((rows) => rows.map((row) => row.item_id));
   },
 
+  async getManySubscriptionUserIdByItem(filters: {
+    itemType: SubscribableItemType;
+    itemID: string;
+  }) {
+    return await apiDB
+      .selectFrom("user_subscription")
+      .select("user_id")
+      .where("item_type", "=", filters.itemType)
+      .where("item_id", "=", filters.itemID)
+      .execute()
+      .then((rows) => rows.map((row) => row.user_id));
+  },
+
   async delete(filters: {
     userID: string;
     itemType: SubscribableItemType;
