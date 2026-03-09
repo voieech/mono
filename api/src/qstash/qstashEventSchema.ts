@@ -31,6 +31,17 @@ const qstashBaseEventSchema = z.object({
  */
 export const qstashEventSchema = z.discriminatedUnion("type", [
   qstashBaseEventSchema.safeExtend({
+    type: z.literal("expo-push-notification-receipt-check"),
+    data: z.object({
+      tickets: z.array(
+        z.object({
+          id: z.string(),
+          expoToken: z.string(),
+        }),
+      ),
+    }),
+  }),
+  qstashBaseEventSchema.safeExtend({
     type: z.literal("podcast-episode-created"),
     data: z.object({
       podcastEpisode: z.object({

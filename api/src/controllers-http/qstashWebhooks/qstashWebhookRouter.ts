@@ -30,6 +30,65 @@ export const qstashWebhookRouter = express
         .info("Qstash webhook: Processing event");
 
       switch (event.type) {
+        case "expo-push-notification-receipt-check": {
+          const ticketIDs = event.data.tickets.map((ticket) => ticket.id);
+          const ticketChunks = expo.chunkPushNotificationReceiptIds(ticketIDs);
+
+          for (const ticketChunk of ticketChunks) {
+            try {
+              const receipts =
+                await expo.getPushNotificationReceiptsAsync(ticketChunk);
+
+              for (const receiptID in receipts) {
+                // Using non-null operator since we are iterating the given
+                // object using its own keys
+                const receipt = receipts[receiptID]!;
+
+                // @todo
+                // Only need to do smth if there is an error
+                if (
+                  receipt.status === "error" &&
+                  receipt.details?.error !== undefined
+                ) {
+                  switch (receipt.details.error) {
+                    case "DeviceNotRegistered": {
+                      const expoPushToken =
+                        receipt.details.expoPushToken ??
+                        event.data.tickets.find(
+                          (ticket) => ticket.id === receiptID,
+                        )?.expoToken!;
+
+                      await deleteExpoPushToken(expoPushToken);
+
+                      req.logger.info("Removed invalid expo push token");
+
+                      break;
+                    }
+
+                    default: {
+                      req.logger
+                        .withContext({
+                          receipt,
+                        })
+                        .error(
+                          "Missing Expo Push Notification receipt error handler",
+                        );
+
+                      // @todo Return 489 for DLQ?
+                    }
+                  }
+                }
+              }
+            } catch (error) {
+              req.logger.withError(error).error("Error fetching receipts");
+
+              // @todo Return 5xx to retry?
+            }
+          }
+
+          break;
+        }
+
         case "podcast-episode-created": {
           const subscribersUserID = await apiDB
             .selectFrom("user_subscription")
