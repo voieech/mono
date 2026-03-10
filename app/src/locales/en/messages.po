@@ -380,7 +380,7 @@ msgstr "Featured"
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:203
+#: src/app/(tabs)/(home)/index.tsx:206
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 

@@ -162,11 +162,14 @@ export default function HomeScreen() {
                     marginRight: featuredChannelImageMargin,
                   }}
                 >
-                  <View>
+                  <View
+                    style={{
+                      width: featuredChannelImageWidth,
+                    }}
+                  >
                     <Image
                       source={channel.img_url}
                       style={{
-                        width: featuredChannelImageWidth,
                         aspectRatio: 1,
                         borderRadius: 4,
                       }}
