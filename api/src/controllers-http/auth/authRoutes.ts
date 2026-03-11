@@ -6,7 +6,7 @@ import {
   NotFoundException,
   InternalServerException,
 } from "../../exceptions/index.js";
-import { authenticationMiddlewareBuilder } from "../../http/index.js";
+import { authenticationMiddlewareBuilder } from "../../middleware/index.js";
 import {
   workos,
   WORKOS_CLIENT_ID,

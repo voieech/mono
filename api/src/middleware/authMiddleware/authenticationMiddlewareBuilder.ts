@@ -71,6 +71,7 @@ export function authenticationMiddlewareBuilder(config?: {
       await req.genAuthenticatedUser();
     }
 
+    // @todo
     // If there is no roles required, allow request immediately
     // if (requiredRoles.length === 0) return true;
     // // Get the roles value out from the custom claims object on the JWT

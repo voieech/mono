@@ -2,7 +2,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 
-import { additionalRequestContextMiddleware } from "./additionalRequestContextMiddleware/index.js";
 import {
   authRoutes,
   authWebhookRoutes,
@@ -16,14 +15,14 @@ import { podcastEpisodeRoutes } from "./controllers-http/podcastEpisode/index.js
 import { qstashWebhookRouter } from "./controllers-http/qstashWebhooks/index.js";
 import { recommendationsRoutes } from "./controllers-http/reccomendations/index.js";
 import { userRoutes } from "./controllers-http/user/index.js";
+import { notFoundHandler, errorHandler } from "./http/index.js";
 import {
+  additionalRequestContextMiddleware,
   authenticationMiddleware,
   expressJsonBodyParserMiddleware,
-  notFoundHandler,
-  errorHandler,
-} from "./http/index.js";
-import { localeMiddleware } from "./localeMiddleware/index.js";
-import { loggerMiddleware } from "./logger/index.js";
+  localeMiddleware,
+  loggerMiddleware,
+} from "./middleware/index.js";
 
 export function bootstrapHttpServer() {
   express()

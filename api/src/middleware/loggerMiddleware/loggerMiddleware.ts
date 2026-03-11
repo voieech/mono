@@ -2,8 +2,8 @@ import type { Request, Response, NextFunction } from "express";
 
 import onFinished from "on-finished";
 
-import { convertMaybeObjectToNullOrObject } from "../util/convertMaybeObjectToNullOrObject.js";
-import { logger } from "./logger.js";
+import { logger } from "../../logger/index.js";
+import { convertMaybeObjectToNullOrObject } from "../../util/convertMaybeObjectToNullOrObject.js";
 
 /**
  * Middleware to create a new request specific/bounded logger, and to log info

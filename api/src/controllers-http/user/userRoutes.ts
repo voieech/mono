@@ -16,7 +16,7 @@ import {
 } from "../../dal/index.js";
 import { InvalidInputException } from "../../exceptions/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
-import { authenticationMiddlewareBuilder } from "../../http/index.js";
+import { authenticationMiddlewareBuilder } from "../../middleware/index.js";
 import { expo } from "../../notifications-push/index.js";
 
 export const userRoutes = express
