@@ -9,7 +9,6 @@ import {
 } from "./controllers-http/auth/index.js";
 import { createRoutes } from "./controllers-http/create/index.js";
 import { featuredContentRoutes } from "./controllers-http/featured/index.js";
-import { localeMiddleware } from "./controllers-http/locale/index.js";
 import { appleAppSiteAssociationRoute } from "./controllers-http/others/index.js";
 import { contactFormRoutes } from "./controllers-http/others/index.js";
 import { podcastChannelRoutes } from "./controllers-http/podcastChannel/index.js";
@@ -23,6 +22,7 @@ import {
   notFoundHandler,
   errorHandler,
 } from "./http/index.js";
+import { localeMiddleware } from "./localeMiddleware/index.js";
 import { loggerMiddleware } from "./logger/index.js";
 
 export function bootstrapHttpServer() {
