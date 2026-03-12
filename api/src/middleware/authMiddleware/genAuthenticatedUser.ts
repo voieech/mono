@@ -1,7 +1,7 @@
 import type { Request } from "express";
 
+import { userRepo } from "../../dal/index.js";
 import { InvalidInternalStateException } from "../../exceptions/index.js";
-import { apiDB } from "../../kysely/apiDB.js";
 import { authenticationAssertionCheck } from "./authenticationAssertionCheck.js";
 
 /**
@@ -19,17 +19,14 @@ export async function genAuthenticatedUser(this: Request) {
   authenticationAssertionCheck(this);
 
   if (this.__userAuthenticationData.user === undefined) {
-    this.__userAuthenticationData.user = await apiDB
-      .selectFrom("user")
-      .selectAll()
-      .where("workos_id", "=", this.__userAuthenticationData.jwtPayload.sub)
-      .executeTakeFirstOrThrow()
-      .catch(() => {
-        // Transform the thrown Kysely error
-        throw new InvalidInternalStateException(
-          "Internal Error: User is authenticated but does not exist in DB",
-        );
-      });
+    const userWorkosID = this.__userAuthenticationData.jwtPayload.sub;
+    const user = await userRepo.getUserByWorkosId(userWorkosID);
+    if (user === undefined) {
+      throw new InvalidInternalStateException(
+        "Internal Error: User is authenticated but does not exist in DB",
+      );
+    }
+    this.__userAuthenticationData.user = user;
   }
 
   return this.__userAuthenticationData.user;

@@ -1,7 +1,7 @@
 import express from "express";
 
+import { userRepo } from "../../dal/index.js";
 import { InvalidInputException } from "../../exceptions/index.js";
-import { apiDB } from "../../kysely/index.js";
 import { workos, WORKOS_WEBHOOK_PATH_SECRET } from "../../workos/index.js";
 import { workOsIpAddressMiddleware } from "./workOsIpAddressMiddleware.js";
 import { workOsWebhookSignatureVerificationMiddleware } from "./workOsWebhookSignatureVerificationMiddleware.js";
@@ -50,23 +50,18 @@ export const authWebhookRoutes = express
         case "user.created": {
           const userID = crypto.randomUUID();
 
-          await apiDB
-            .insertInto("user")
-            .values({
-              id: userID,
-              workos_id: req.workosWebhookEvent.data.id,
-              created_at: $DateTime.ISO.DateTime.makeStrongAndThrowOnError(
-                req.workosWebhookEvent.data.createdAt,
-              ),
-              email: req.workosWebhookEvent.data.email,
-              email_verified: req.workosWebhookEvent.data.emailVerified,
-              locale: req.workosWebhookEvent.data.locale,
-              first_name: req.workosWebhookEvent.data.firstName ?? "",
-              last_name: req.workosWebhookEvent.data.lastName ?? "",
-              profile_picture_url:
-                req.workosWebhookEvent.data.profilePictureUrl,
-            })
-            .execute();
+          await userRepo.create({
+            workos_id: req.workosWebhookEvent.data.id,
+            created_at: $DateTime.ISO.DateTime.makeStrongAndThrowOnError(
+              req.workosWebhookEvent.data.createdAt,
+            ),
+            email: req.workosWebhookEvent.data.email,
+            email_verified: req.workosWebhookEvent.data.emailVerified,
+            locale: req.workosWebhookEvent.data.locale,
+            first_name: req.workosWebhookEvent.data.firstName,
+            last_name: req.workosWebhookEvent.data.lastName,
+            profile_picture_url: req.workosWebhookEvent.data.profilePictureUrl,
+          });
 
           // Note that this might trigger an immediate second webhook API call
           // for the "user.updated" event.
@@ -79,29 +74,21 @@ export const authWebhookRoutes = express
         }
 
         case "user.updated": {
-          await apiDB
-            .updateTable("user")
-            .where("workos_id", "=", req.workosWebhookEvent.data.id)
-            .set({
-              email: req.workosWebhookEvent.data.email,
-              email_verified: req.workosWebhookEvent.data.emailVerified,
-              locale: req.workosWebhookEvent.data.locale,
-              first_name: req.workosWebhookEvent.data.firstName ?? "",
-              last_name: req.workosWebhookEvent.data.lastName ?? "",
-              profile_picture_url:
-                req.workosWebhookEvent.data.profilePictureUrl,
-            })
-            .execute();
+          await userRepo.updateUserByWorkosId(req.workosWebhookEvent.data.id, {
+            email: req.workosWebhookEvent.data.email,
+            email_verified: req.workosWebhookEvent.data.emailVerified,
+            locale: req.workosWebhookEvent.data.locale,
+            first_name: req.workosWebhookEvent.data.firstName,
+            last_name: req.workosWebhookEvent.data.lastName,
+            profile_picture_url: req.workosWebhookEvent.data.profilePictureUrl,
+          });
 
           return;
         }
 
         case "user.deleted": {
-          await apiDB
-            .deleteFrom("user")
-            .where("workos_id", "=", req.workosWebhookEvent.data.id)
-            .execute();
-
+          // @todo Do other things too like send email to thank them for their previous use and ask for feedback
+          await userRepo.deleteUserByWorkosId(req.workosWebhookEvent.data.id);
           return;
         }
 
