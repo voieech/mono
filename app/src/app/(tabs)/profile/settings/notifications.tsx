@@ -25,12 +25,12 @@ export default function SettingsNotification() {
   const canAskUserForNotificationPermissionAgain =
     notificationContext.notificationPermissionsStatus?.canAskAgain ?? false;
 
-  const syncPushNotifications = useRef(() =>
+  const syncPushNotificationData = useRef(() =>
     notificationContext.syncPushNotificationData(),
   );
 
   useEffect(() => {
-    syncPushNotifications.current();
+    syncPushNotificationData.current();
   }, []);
 
   const appState = useRef(AppState.currentState);
@@ -46,7 +46,7 @@ export default function SettingsNotification() {
         appState.current.match(/inactive|background/) &&
         nextAppState === "active"
       ) {
-        syncPushNotifications.current();
+        syncPushNotificationData.current();
       }
       appState.current = nextAppState;
     });
@@ -55,7 +55,7 @@ export default function SettingsNotification() {
 
   async function requestNotificationPermission() {
     await Notifications.requestPermissionsAsync();
-    notificationContext.syncPushNotificationData();
+    syncPushNotificationData.current();
   }
 
   async function requestPushNotificationTest() {
