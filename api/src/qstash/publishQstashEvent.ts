@@ -21,6 +21,7 @@ const url = `${QSTASH_WEBHOOK_HANDLER_BASE_URL}/qstash/webhooks`;
 export function publishQstashEvent(config: {
   body: DistributiveOmit<QstashEvent, "qstashMessageID" | "id" | "createdAt">;
   delay?: PublishRequest["delay"];
+  contentBasedDeduplication?: true;
 }) {
   const jsonEvent: PublishRequest<Omit<QstashEvent, "qstashMessageID">> = {
     url,
@@ -36,6 +37,9 @@ export function publishQstashEvent(config: {
   // on optional fields... ugh
   if (config.delay !== undefined) {
     jsonEvent.delay = config.delay;
+  }
+  if (config.contentBasedDeduplication !== undefined) {
+    jsonEvent.contentBasedDeduplication = config.contentBasedDeduplication;
   }
 
   return qstashClient.publishJSON(jsonEvent);
