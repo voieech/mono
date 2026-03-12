@@ -103,6 +103,10 @@ export const qstashWebhookRouter = express
               itemID: event.data.podcastChannel.id,
             });
 
+          if (subscribersUserIds.length === 0) {
+            break;
+          }
+
           const userDeviceExpoPushNotificationTokens =
             await userPushNotificationTokenRepo.getManyUserDeviceExpoPushNotificationTokenByUserIds(
               subscribersUserIds,
@@ -154,9 +158,11 @@ export const qstashWebhookRouter = express
                 }
               }
 
-              await userPushNotificationTokenRepo.deleteManyByExpoPushToken(
-                failedExpoPushTokensToDelete,
-              );
+              if (failedExpoPushTokensToDelete.length !== 0) {
+                await userPushNotificationTokenRepo.deleteManyByExpoPushToken(
+                  failedExpoPushTokensToDelete,
+                );
+              }
 
               // Send tickets to Q with a delay (20 mins as advised to ensure
               // that the downstream Apple/Google services have completed
