@@ -21,32 +21,27 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   >(undefined);
   const authContext = useAuthContext();
 
-  const syncPushNotificationPermissionsStatus = useCallback(
-    () =>
-      Notifications.getPermissionsAsync().then(
-        setNotificationPermissionsStatus,
-      ),
-    [],
-  );
-
-  const syncPushNotificationTokens = useCallback(
-    () =>
-      getPushNotificationDataAndSyncTokens(authContext.isAuthenticated).then(
-        setPushTokens,
-      ),
-    [authContext.isAuthenticated],
-  );
-
+  // Getting of notification permissions status and sync+getting of notification
+  // tokens is split up (i.e. not done all within
+  // `getPushNotificationDataAndSyncTokens`) so that the getting of push
+  // notification permission status + setting of local state wont be blocked
+  // just because push notification token cant be read (when user havent grant
+  // permission yet).
   const syncPushNotificationData = useCallback(
-    function () {
-      // Trigger all the other sync functions in a fire and forget style
-      // These other sync functions are split up so that they do not block each
-      // other, e.g. push notification permission status sync wont be blocked
-      // just because push notification token cant be read.
-      syncPushNotificationPermissionsStatus();
-      syncPushNotificationTokens();
+    async function () {
+      const notificationPermissionsStatus =
+        await Notifications.getPermissionsAsync();
+
+      setNotificationPermissionsStatus(notificationPermissionsStatus);
+
+      const pushNotificationTokens = await getPushNotificationDataAndSyncTokens(
+        authContext.isAuthenticated,
+        notificationPermissionsStatus,
+      );
+
+      setPushTokens(pushNotificationTokens);
     },
-    [syncPushNotificationPermissionsStatus, syncPushNotificationTokens],
+    [authContext.isAuthenticated],
   );
 
   // This runs everytime user's auth status changes
