@@ -10,7 +10,21 @@ import {
 import { getPushNotificationTokens } from "./getPushNotificationTokens";
 
 /**
- * Get latest push notification tokens and sync with API.
+ * Queue of syncTokenActions where it is ordered by oldest to newest actions
+ * requested by the caller/users.
+ */
+const syncTokensActionsQueue: Array<"save" | "delete"> = [];
+
+/**
+ * Promise to track whether the syncTokenActions queue is currently being
+ * processed or not, to handle de-duplication
+ */
+let syncTokensActionsQueueProcessingPromise: null | Promise<any> = null;
+
+/**
+ * Set a syncTokenAction to sync data with API, and get the latest push
+ * notification tokens after processing all the available syncTokenActions in
+ * the queue.
  *
  * API Syncing method:
  * 1. Save token: User is logged in AND granted push notification permission
@@ -21,26 +35,24 @@ export function getPushNotificationDataAndSyncTokens(
   notificationPermissionsStatus: Notifications.NotificationPermissionsStatus,
 ) {
   if (isAuthenticated && notificationPermissionsStatus.granted) {
-    syncTokensActionQueue.push("save");
+    syncTokensActionsQueue.push("save");
   } else {
-    syncTokensActionQueue.push("delete");
+    syncTokensActionsQueue.push("delete");
   }
 
-  if (syncTokenActionLoopPromise !== null) {
-    return syncTokenActionLoopPromise;
+  // If there is no background process to process all the syncTokenActions in
+  // the queue, kick off the background process to process these, and save the
+  // processing promise to handle de-duplication of calls to this function.
+  if (syncTokensActionsQueueProcessingPromise === null) {
+    syncTokensActionsQueueProcessingPromise = syncTokensActionQueueProcessor();
   }
 
-  syncTokenActionLoopPromise = syncTokensActionQueueProcessor();
-
-  // @todo When do i clear this promise??
-
-  return syncTokenActionLoopPromise;
+  return syncTokensActionsQueueProcessingPromise;
 }
 
-const syncTokensActionQueue: Array<"save" | "delete"> = [];
-
-let syncTokenActionLoopPromise: null | Promise<any> = null;
-
+/**
+ * Process syncTokensActions in the queue until there is none left
+ */
 async function syncTokensActionQueueProcessor() {
   let pushNotificationTokens: PushNotificationTokens | null = null;
 
@@ -51,13 +63,13 @@ async function syncTokensActionQueueProcessor() {
   // actions in the queue because those are already "out of date" by the time
   // there is a new / latest action in the queue.
   while (
-    syncTokensActionQueue[syncTokensActionQueue.length - 1] !== undefined
+    syncTokensActionsQueue[syncTokensActionsQueue.length - 1] !== undefined
   ) {
     const currentSyncTokensAction =
-      syncTokensActionQueue[syncTokensActionQueue.length - 1]!;
+      syncTokensActionsQueue[syncTokensActionsQueue.length - 1]!;
 
     // Delete the rest of the actions in the queue that is "out of date"
-    syncTokensActionQueue.length = 0;
+    syncTokensActionsQueue.length = 0;
 
     pushNotificationTokens = await getPushNotificationTokens();
 
@@ -67,6 +79,11 @@ async function syncTokensActionQueueProcessor() {
       await postDeleteDevicePushNotificationTokens(pushNotificationTokens);
     }
   }
+
+  // After processing all the syncTokenActions in the queue, clear the action
+  // processing promise, so that this function can be called again to process
+  // new items added to the queue later on.
+  syncTokensActionsQueueProcessingPromise = null;
 
   // If for some reason the loop never ever runs, we will return the push
   // notification tokens directly instead of returning null.
