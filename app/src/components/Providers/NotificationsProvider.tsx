@@ -18,9 +18,6 @@ export function NotificationProvider({ children }: PropsWithChildren) {
   const [pushTokens, setPushTokens] = useState<
     undefined | PushNotificationTokens
   >(undefined);
-  const [notification, setNotification] = useState<
-    Notifications.Notification | undefined
-  >(undefined);
   const authContext = useAuthContext();
 
   // Getting of notification permissions status and sync+getting of notification
@@ -87,7 +84,6 @@ export function NotificationProvider({ children }: PropsWithChildren) {
         notificationPermissionsStatus,
         pushTokens,
         syncPushNotificationData,
-        notification,
       }}
     >
       {children}

@@ -1,7 +1,6 @@
 import type { PushNotificationTokens } from "dto";
 import type { NotificationPermissionsStatus } from "expo-notifications";
 
-import * as Notifications from "expo-notifications";
 import { createContext } from "react";
 
 import { createUseContextHook } from "@/utils";
@@ -32,11 +31,6 @@ export const NotificationContext = createContext<{
    * asynchronously.
    */
   syncPushNotificationData: () => void;
-
-  /**
-   * The latest notification received while the app is in the foreground.
-   */
-  notification: Notifications.Notification | undefined;
 }>(
   // @ts-expect-error
   null,
