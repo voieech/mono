@@ -3,6 +3,7 @@ import type { NotificationPermissionsStatus } from "expo-notifications";
 
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import { useRouter } from "expo-router";
 import { PropsWithChildren, useState, useEffect, useCallback } from "react";
 import { Platform } from "react-native";
 
@@ -11,6 +12,7 @@ import { NotificationContext } from "@/context/notificationContext";
 import { getPushNotificationDataAndSyncTokens } from "@/utils";
 
 export function NotificationProvider({ children }: PropsWithChildren) {
+  const router = useRouter();
   const [notificationPermissionsStatus, setNotificationPermissionsStatus] =
     useState<undefined | NotificationPermissionsStatus>(undefined);
   const [pushTokens, setPushTokens] = useState<
@@ -62,8 +64,14 @@ export function NotificationProvider({ children }: PropsWithChildren) {
       // React to user interaction with app notifcations
       const responseListener =
         Notifications.addNotificationResponseReceivedListener((response) => {
-          // @todo
-          console.log(response);
+          const appRoute = response.notification.request.content.data?.appRoute;
+
+          // @todo Improve validation, and check whether it is a valid href
+          if (typeof appRoute !== "string") {
+            return;
+          }
+
+          router.push(appRoute as any);
         });
 
       return () => {
@@ -71,7 +79,7 @@ export function NotificationProvider({ children }: PropsWithChildren) {
         responseListener.remove();
       };
     }
-  }, [authContext.isAuthenticated, syncPushNotificationData]);
+  }, [authContext.isAuthenticated, syncPushNotificationData, router]);
 
   return (
     <NotificationContext.Provider
