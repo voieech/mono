@@ -54,32 +54,32 @@ export function NotificationProvider({ children }: PropsWithChildren) {
     // Only setup push notif if user is authenticated
     if (authContext.isAuthenticated) {
       setupNotifications();
-
-      // React when a notification arrives while the app is in the foreground
-      const notificationListener =
-        Notifications.addNotificationReceivedListener((notification) => {
-          setNotification(notification);
-        });
-
-      // React to user interaction with app notifcations
-      const responseListener =
-        Notifications.addNotificationResponseReceivedListener((response) => {
-          const appRoute = response.notification.request.content.data?.appRoute;
-
-          // @todo Improve validation, and check whether it is a valid href
-          if (typeof appRoute !== "string") {
-            return;
-          }
-
-          router.push(appRoute as any);
-        });
-
-      return () => {
-        notificationListener.remove();
-        responseListener.remove();
-      };
     }
   }, [authContext.isAuthenticated, syncPushNotificationData, router]);
+
+  // Hook that gets the last notification user response (on startup if user
+  // clicked the push notification while app is in a "killed" state), and also
+  // subscribes to future notification user responses through this hook for us
+  // to handle.
+  const lastNotificationUserResponse =
+    Notifications.useLastNotificationResponse();
+
+  useEffect(() => {
+    // If null or undefined, means that there is no notification response
+    if (lastNotificationUserResponse == null) {
+      return;
+    }
+
+    const appRoute =
+      lastNotificationUserResponse.notification.request.content.data.appRoute;
+
+    // @todo Improve validation, and check whether it is a valid href
+    if (typeof appRoute !== "string") {
+      return;
+    }
+
+    router.push(appRoute as any);
+  }, [lastNotificationUserResponse, router]);
 
   return (
     <NotificationContext.Provider
