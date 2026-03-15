@@ -5,6 +5,7 @@ import type {
   PushNotificationTokens,
   SubscribableItemType,
   LikeableItemType,
+  ConsumableItemType,
   UserSubscriptionStatus,
   UserSubscriptionsOfItemType,
 } from "../../dto-types/index.js";
@@ -13,6 +14,7 @@ import {
   userPushNotificationTokenRepo,
   userSubscriptionRepo,
   userLikeRepo,
+  userConsumedRepo,
 } from "../../dal/index.js";
 import { InvalidInputException } from "../../exceptions/index.js";
 import { NotFoundException } from "../../exceptions/index.js";
@@ -225,6 +227,56 @@ export const userRoutes = express
       // As long as DB calls did not throw, assume it succeeded
       res.status(200).json({
         like: shouldLike,
+      });
+    },
+  )
+
+  .get(
+    "/v1/user/consumed/:itemType/:itemID",
+    authenticationMiddlewareBuilder(),
+    async function (req, res) {
+      const userID = await req.genAuthenticatedUserID();
+      const itemType = req.params["itemType"]! as ConsumableItemType;
+      const itemID = req.params["itemID"]!;
+
+      const isConsumed = userConsumedRepo.getIsConsumed({
+        userID,
+        itemType,
+        itemID,
+      });
+
+      res.status(200).json({
+        consumed: isConsumed,
+      });
+    },
+  )
+
+  .post(
+    "/v1/user/consumed/:itemType/:itemID",
+    authenticationMiddlewareBuilder(),
+    async function (req, res) {
+      const userID = await req.genAuthenticatedUserID();
+      const itemType = req.params["itemType"]! as ConsumableItemType;
+      const itemID = req.params["itemID"]!;
+      const shouldConsume = req.body["consumed"]!;
+
+      if (shouldConsume) {
+        await userConsumedRepo.upsert({
+          userID,
+          itemType,
+          itemID,
+        });
+      } else {
+        await userConsumedRepo.delete({
+          userID,
+          itemType,
+          itemID,
+        });
+      }
+
+      // As long as DB calls did not throw, assume it succeeded
+      res.status(200).json({
+        consumed: shouldConsume,
       });
     },
   );
