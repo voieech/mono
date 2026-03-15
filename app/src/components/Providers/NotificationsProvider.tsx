@@ -4,6 +4,7 @@ import type { NotificationPermissionsStatus } from "expo-notifications";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { useRouter } from "expo-router";
+import * as WebBrowser from "expo-web-browser";
 import { PropsWithChildren, useState, useEffect, useCallback } from "react";
 import { Platform } from "react-native";
 
@@ -75,7 +76,11 @@ export function NotificationProvider({ children }: PropsWithChildren) {
       return;
     }
 
-    router.push(appRoute as any);
+    if (appRoute.startsWith("https://")) {
+      WebBrowser.openBrowserAsync(appRoute);
+    } else {
+      router.push(appRoute as any);
+    }
   }, [lastNotificationUserResponse, router]);
 
   return (
