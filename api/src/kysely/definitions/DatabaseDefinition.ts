@@ -8,6 +8,7 @@ import type { ContentYoutubeVideoTable } from "./ContentYoutubeVideoTable.js";
 import type { PodcastChannelTable } from "./PodcastChannelTable.js";
 import type { PodcastEpisodeContentSourceTable } from "./PodcastEpisodeContentSourceTable.js";
 import type { PodcastEpisodeTable } from "./PodcastEpisodeTable.js";
+import type { UserConsumedTable } from "./UserConsumedTable.js";
 import type { UserLikeTable } from "./UserLikeTable.js";
 import type { UserPushNotifTokensTable } from "./UserPushNotifTokensTable.js";
 import type { UserSubscriptionTable } from "./UserSubscriptionTable.js";
@@ -24,6 +25,7 @@ export interface Database {
   podcast_channel: PodcastChannelTable;
   podcast_episode_content_source: PodcastEpisodeContentSourceTable;
   podcast_episode: PodcastEpisodeTable;
+  user_consumed: UserConsumedTable;
   user_like: UserLikeTable;
   user_push_notif_tokens: UserPushNotifTokensTable;
   user_subscription: UserSubscriptionTable;

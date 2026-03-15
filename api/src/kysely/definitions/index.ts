@@ -9,6 +9,7 @@ export * from "./DatabaseDefinition.js";
 export * from "./PodcastChannelTable.js";
 export * from "./PodcastEpisodeContentSourceTable.js";
 export * from "./PodcastEpisodeTable.js";
+export * from "./UserConsumedTable.js";
 export * from "./UserLikeTable.js";
 export * from "./UserPushNotifTokensTable.js";
 export * from "./UserSubscriptionTable.js";
