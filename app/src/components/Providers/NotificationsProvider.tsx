@@ -5,7 +5,13 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
-import { PropsWithChildren, useState, useEffect, useCallback } from "react";
+import {
+  PropsWithChildren,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react";
 import { Platform } from "react-native";
 
 import { useAuthContext } from "@/context/authContext";
@@ -55,6 +61,11 @@ export function NotificationProvider({ children }: PropsWithChildren) {
     }
   }, [authContext.isAuthenticated, syncPushNotificationData, router]);
 
+  // Track ID of the last notification that is already processed, so that if the
+  // same notification with the same ID triggers a processing, it will be
+  // de-duplicated and ignored.
+  const lastProcessedNotificationID = useRef<string | null>(null);
+
   // Hook that gets the last notification user response (on startup if user
   // clicked the push notification while app is in a "killed" state), and also
   // subscribes to future notification user responses through this hook for us
@@ -68,6 +79,14 @@ export function NotificationProvider({ children }: PropsWithChildren) {
       return;
     }
 
+    const currentNotificationID =
+      lastNotificationUserResponse.notification.request.identifier;
+
+    // If notification is already processed before, ignore it
+    if (currentNotificationID === lastProcessedNotificationID.current) {
+      return;
+    }
+
     const appRoute =
       lastNotificationUserResponse.notification.request.content.data.appRoute;
 
@@ -75,6 +94,11 @@ export function NotificationProvider({ children }: PropsWithChildren) {
     if (typeof appRoute !== "string") {
       return;
     }
+
+    // Store current notification ID to indicate that it is processed already to
+    // de-dup future processing if the same notification ID is seen.
+    // This is ran before route navigation to prevent race conditions.
+    lastProcessedNotificationID.current = currentNotificationID;
 
     if (appRoute.startsWith("https://")) {
       WebBrowser.openBrowserAsync(appRoute);
