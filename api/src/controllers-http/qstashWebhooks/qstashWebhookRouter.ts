@@ -1,3 +1,5 @@
+import type { ExpoPushMessage } from "expo-server-sdk";
+
 import express from "express";
 
 import {
@@ -112,13 +114,21 @@ export const qstashWebhookRouter = express
               subscribersUserIds,
             );
 
-          const notifications = userDeviceExpoPushNotificationTokens.map(
-            ({ expo_token }) => ({
+          const notifications: Array<ExpoPushMessage> =
+            userDeviceExpoPushNotificationTokens.map(({ expo_token }) => ({
               to: expo_token,
               title: event.data.podcastChannel.name,
               body: event.data.podcastEpisode.title,
-            }),
-          );
+              data: {
+                // @todo
+                // Have a validator or smth to ensure that we must always use a
+                // URL with a scheme, regardless of whether is it the voieech://
+                // or https:// or someApp:// schemes!
+                // appRoute handles https:// schemes like "https://voieech.com"
+                // by opening the link in the in app browser
+                appRoute: `voieech://podcast/episode/${event.data.podcastEpisode.id}`,
+              },
+            }));
 
           const expoPushNotificationChunks =
             expo.chunkPushNotifications(notifications);
