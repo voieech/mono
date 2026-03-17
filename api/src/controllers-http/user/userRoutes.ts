@@ -6,6 +6,8 @@ import type {
   SubscribableItemType,
   LikeableItemType,
   ConsumableItemType,
+  UserLikeStatus,
+  UserConsumedStatus,
   UserSubscriptionStatus,
   UserSubscriptionsOfItemType,
 } from "../../dto-types/index.js";
@@ -189,7 +191,7 @@ export const userRoutes = express
       const itemType = req.params["itemType"]! as LikeableItemType;
       const itemID = req.params["itemID"]!;
 
-      const isLiked = userLikeRepo.getIsLiked({
+      const isLiked = await userLikeRepo.getIsLiked({
         userID,
         itemType,
         itemID,
@@ -197,7 +199,7 @@ export const userRoutes = express
 
       res.status(200).json({
         like: isLiked,
-      });
+      } satisfies UserLikeStatus);
     },
   )
 
@@ -227,7 +229,7 @@ export const userRoutes = express
       // As long as DB calls did not throw, assume it succeeded
       res.status(200).json({
         like: shouldLike,
-      });
+      } satisfies UserLikeStatus);
     },
   )
 
@@ -239,7 +241,7 @@ export const userRoutes = express
       const itemType = req.params["itemType"]! as ConsumableItemType;
       const itemID = req.params["itemID"]!;
 
-      const isConsumed = userConsumedRepo.getIsConsumed({
+      const isConsumed = await userConsumedRepo.getIsConsumed({
         userID,
         itemType,
         itemID,
@@ -247,7 +249,7 @@ export const userRoutes = express
 
       res.status(200).json({
         consumed: isConsumed,
-      });
+      } satisfies UserConsumedStatus);
     },
   )
 
@@ -277,6 +279,6 @@ export const userRoutes = express
       // As long as DB calls did not throw, assume it succeeded
       res.status(200).json({
         consumed: shouldConsume,
-      });
+      } satisfies UserConsumedStatus);
     },
   );
