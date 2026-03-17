@@ -38,8 +38,9 @@ export function useUserSubscriptionMutation() {
         console.error(errorMessage);
       }
 
-      const data = (await res.json()) as UserSubscriptionStatus;
-
+      return (await res.json()) as UserSubscriptionStatus;
+    },
+    onSuccess(data, variables) {
       queryClient.setQueryData(
         queryKeyBuilder.fullPath(
           "user.subscription.itemType.$itemType.itemID.$itemID",

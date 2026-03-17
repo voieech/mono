@@ -38,8 +38,9 @@ export function useUserLikeMutation() {
         console.error(errorMessage);
       }
 
-      const data = (await res.json()) as UserLikeStatus;
-
+      return (await res.json()) as UserLikeStatus;
+    },
+    onSuccess(data, variables) {
       queryClient.setQueryData(
         queryKeyBuilder.fullPath(
           "user.like.itemType.$itemType.itemID.$itemID",
