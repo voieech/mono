@@ -97,12 +97,17 @@ export async function loggerMiddleware(
 
       // Excludes the data already in the context object
       req: {
+        method: req.method,
+
         // The route path pattern template. This is only set at the end since
         // this value is only populated at the end after ExpressJS has
         // successfully matched a route. This can be null if nothing matched,
         // i.e. a 404 route or a 500 error.
         routePattern: req.route?.path ?? null,
-        method: req.method,
+
+        // The full URL of the request. This can be redacted if needed to
+        // prevent leaking anything sensitive, but also, nothing sensitive
+        // should be placed in the URL as much as possible.
         url: req.url,
 
         // Convert potentially empty objects into null for better log
