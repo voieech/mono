@@ -2,7 +2,7 @@ import type { LikeableItemType, UserLikeStatus } from "dto";
 
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
-import { wrappedFetch, queryKeyBuilder } from "@/api-client";
+import { wrappedFetch, queryKeyBuilder, getResError } from "@/api-client";
 
 /**
  * Generic user like mutation for a given item type and item ID.
@@ -30,12 +30,11 @@ export function useUserLikeMutation() {
       );
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to update user's like status for: ${variables.itemType}->${variables.itemID}`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        console.error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: `Failed to update user's like status for: ${variables.itemType}->${variables.itemID}`,
+          logError: true,
+        });
       }
 
       return (await res.json()) as UserLikeStatus;

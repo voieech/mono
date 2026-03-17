@@ -2,7 +2,7 @@ import type { SubscribableItemType, UserSubscriptionsOfItemType } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { queryKeyBuilder, wrappedFetch } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch, getResError } from "@/api-client";
 
 /**
  * Generic query to get all of the user's subscription for a given item type.
@@ -21,12 +21,11 @@ export function useUserSubscriptionsOfItemTypeQuery(variables: {
       );
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to load user's subscription status for: ${variables.itemType}`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: `Failed to load user's subscription status for: ${variables.itemType}`,
+          logError: true,
+        });
       }
 
       return await res.json();

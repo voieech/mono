@@ -22,7 +22,7 @@ export async function getResError(config: {
   customError?: new (...args: any) => Error;
 
   /**
-   * Flag to control error logging, defaults to logging all errors
+   * Flag to control error logging
    */
   logError?: boolean;
 }) {

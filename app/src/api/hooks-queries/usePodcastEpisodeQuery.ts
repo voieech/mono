@@ -2,7 +2,7 @@ import type { PodcastEpisode } from "dto";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { queryKeyBuilder, wrappedFetch } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch, getResError } from "@/api-client";
 import { NotFoundError } from "@/errors";
 
 export function usePodcastEpisodeQuery(episodeID: string) {
@@ -14,17 +14,12 @@ export function usePodcastEpisodeQuery(episodeID: string) {
       const res = await wrappedFetch(`/v1/podcast/episode/${episodeID}`);
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to load episode: ${episodeID}`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-
-        if (res.status === 404) {
-          throw new NotFoundError(errorMessage);
-        }
-
-        throw new Error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: `Failed to load podcast episode: ${episodeID}`,
+          customError: res.status === 404 ? NotFoundError : Error,
+          logError: true,
+        });
       }
 
       return (await res.json()) as PodcastEpisode;

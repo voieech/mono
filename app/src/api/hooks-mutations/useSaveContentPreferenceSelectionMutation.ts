@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { wrappedFetch } from "@/api-client";
-import { NotFoundError } from "@/errors";
+import { wrappedFetch, getResError } from "@/api-client";
 
 export function useSaveContentPreferenceSelectionMutation() {
   return useMutation({
@@ -17,17 +16,11 @@ export function useSaveContentPreferenceSelectionMutation() {
       });
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to save user's content preferences`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-
-        if (res.status === 404) {
-          throw new NotFoundError(errorMessage);
-        }
-
-        throw new Error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: `Failed to save user's content preferences`,
+          logError: true,
+        });
       }
     },
   });

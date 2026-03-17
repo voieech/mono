@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { wrappedFetch } from "@/api-client";
+import { wrappedFetch, getResError } from "@/api-client";
 
 export function useSubmitContactFormMutation() {
   return useMutation({
@@ -14,12 +14,11 @@ export function useSubmitContactFormMutation() {
       });
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to submit`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: `Failed to submit`,
+          logError: true,
+        });
       }
     },
   });

@@ -1,6 +1,6 @@
 import type { PushNotificationTokens } from "dto";
 
-import { wrappedFetch } from "@/api-client";
+import { wrappedFetch, getResError } from "@/api-client";
 
 /**
  * Delete device push notification tokens for user's current device
@@ -20,11 +20,10 @@ export async function postDeleteDevicePushNotificationTokens(
   );
 
   if (!res.ok) {
-    const defaultErrorMessage = `Failed to delete device push notification tokens`;
-    const errorMessage = await res
-      .json()
-      .then((data) => data.error ?? defaultErrorMessage)
-      .catch(() => defaultErrorMessage);
-    throw new Error(errorMessage);
+    throw await getResError({
+      res,
+      defaultErrorMessage: `Failed to delete device push notification tokens`,
+      logError: true,
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { wrappedFetch } from "@/api-client";
+import { wrappedFetch, getResError } from "@/api-client";
 
 export function useCreateYoutubeVideoSummaryMutation() {
   return useMutation({
@@ -16,12 +16,11 @@ export function useCreateYoutubeVideoSummaryMutation() {
       });
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to create youtube video summary`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: `Failed to create youtube video summary`,
+          logError: true,
+        });
       }
     },
   });

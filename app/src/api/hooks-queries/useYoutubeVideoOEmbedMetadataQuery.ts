@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { queryKeyBuilder } from "@/api-client";
+import { queryKeyBuilder, getResError } from "@/api-client";
 
 export function useYoutubeVideoOEmbedMetadataQuery(youtubeVideoID?: string) {
   return useQuery({
@@ -15,13 +15,11 @@ export function useYoutubeVideoOEmbedMetadataQuery(youtubeVideoID?: string) {
       const res = await fetch(youtubeOEmbedLink);
 
       if (!res.ok) {
-        const defaultErrorMessage = `Failed to load Youtube Video OEmbed data: ${youtubeOEmbedLink}`;
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-
-        throw new Error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: `Failed to load Youtube Video OEmbed data: ${youtubeOEmbedLink}`,
+          logError: true,
+        });
       }
 
       return (await res.json()) as {

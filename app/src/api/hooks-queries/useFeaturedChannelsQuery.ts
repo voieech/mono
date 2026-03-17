@@ -6,6 +6,7 @@ import {
   useAcceptLanguageHeader,
   queryKeyBuilder,
   wrappedFetch,
+  getResError,
 } from "@/api-client";
 
 export function useFeaturedChannelsQuery() {
@@ -22,12 +23,11 @@ export function useFeaturedChannelsQuery() {
       });
 
       if (!res.ok) {
-        const defaultErrorMessage = "Failed to load featured channels";
-        const errorMessage = await res
-          .json()
-          .then((data) => data.error ?? defaultErrorMessage)
-          .catch(() => defaultErrorMessage);
-        throw new Error(errorMessage);
+        throw await getResError({
+          res,
+          defaultErrorMessage: "Failed to load featured channels",
+          logError: true,
+        });
       }
 
       const channels = (await res.json()) as Array<PodcastChannel>;

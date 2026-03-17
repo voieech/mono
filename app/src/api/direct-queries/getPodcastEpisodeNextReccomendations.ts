@@ -1,6 +1,6 @@
 import type { PodcastEpisode } from "dto";
 
-import { wrappedFetch } from "@/api-client";
+import { wrappedFetch, getResError } from "@/api-client";
 
 /**
  * Get a list of podcast episodes that are reccomended for given current episode
@@ -14,12 +14,11 @@ export async function getPodcastEpisodeNextReccomendations(
   );
 
   if (!res.ok) {
-    const defaultErrorMessage = `Failed to load episode reccomendations: ${episodeID}`;
-    const errorMessage = await res
-      .json()
-      .then((data) => data.error ?? defaultErrorMessage)
-      .catch(() => defaultErrorMessage);
-    throw new Error(errorMessage);
+    throw await getResError({
+      res,
+      defaultErrorMessage: `Failed to load episode reccomendations: ${episodeID}`,
+      logError: true,
+    });
   }
 
   return (await res.json()) as {

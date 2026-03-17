@@ -1,6 +1,6 @@
 import type { PushNotificationTokens } from "dto";
 
-import { wrappedFetch } from "@/api-client";
+import { wrappedFetch, getResError } from "@/api-client";
 
 /**
  * Request for a push notification test for user's current device
@@ -20,11 +20,10 @@ export async function postTestPushNotification(
   );
 
   if (!res.ok) {
-    const defaultErrorMessage = `Failed to trigger device push notification test`;
-    const errorMessage = await res
-      .json()
-      .then((data) => data.error ?? defaultErrorMessage)
-      .catch(() => defaultErrorMessage);
-    throw new Error(errorMessage);
+    throw await getResError({
+      res,
+      defaultErrorMessage: `Failed to trigger device push notification test`,
+      logError: true,
+    });
   }
 }
