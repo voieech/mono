@@ -8,6 +8,7 @@ import RNTPTrackPlayer, {
 
 import type { TrackWithMetadata } from "@/utils";
 
+import { useUserConsumedCachedMutation } from "@/api";
 import { TrackPlayerContext, useSettingContext } from "@/context";
 import { useTrackPlayerEventHandler } from "@/TrackPlayer";
 import {
@@ -74,8 +75,10 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     setTracks(DEFAULT.tracks);
   }, []);
 
+  const userConsumedCachedMutationMutateFunction =
+    useUserConsumedCachedMutation();
+
   const play = useCallback(async () => {
-    // eslint-disable-next-line no-restricted-properties
     await RNTPTrackPlayer.play();
 
     await RNTPTrackPlayer.setRate(playbackRate);
@@ -91,13 +94,23 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
       return;
     }
 
+    userConsumedCachedMutationMutateFunction({
+      consumed: true,
+      itemType: activeTrack.trackType,
+      itemID: activeTrack.id,
+    });
+
     posthog.capture("track_playback", {
       id: activeTrack.id,
       type: activeTrack.trackType,
       locale: activeTrack.locale,
       playbackRate,
     });
-  }, [playbackRate, updateCurrentPosition]);
+  }, [
+    playbackRate,
+    updateCurrentPosition,
+    userConsumedCachedMutationMutateFunction,
+  ]);
 
   // Wrapper around `play` to only run if not already playing
   const playIfNotPlaying = useCallback(async () => {
@@ -107,7 +120,6 @@ export function TrackPlayerProvider(props: PropsWithChildren) {
     }
   }, [play]);
 
-  // eslint-disable-next-line no-restricted-properties
   const pause = useCallback(() => RNTPTrackPlayer.pause(), []);
 
   const enqueueTracksAfterCurrent = useCallback(

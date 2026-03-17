@@ -11,4 +11,5 @@ export const queryKeyBuilder = new QueryKeyBuilder<
   | "user.subscription.itemType.$itemType"
   | "user.subscription.itemType.$itemType.itemID.$itemID"
   | "user.like.itemType.$itemType.itemID.$itemID"
+  | "user.consumed.itemType.$itemType.itemID.$itemID"
 >();
