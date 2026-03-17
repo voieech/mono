@@ -1,8 +1,8 @@
 import type { PodcastEpisode } from "dto";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
 
-import { queryKeyBuilder, wrappedFetch, reactQueryClient } from "@/api-client";
+import { queryKeyBuilder, wrappedFetch } from "@/api-client";
 import { NotFoundError } from "@/errors";
 
 type QueryOptions = {
@@ -30,6 +30,8 @@ export function usePodcastChannelEpisodesQuery(
   channelID: string,
   queryOptions?: OptionalQueryOptions,
 ) {
+  const queryClient = useQueryClient();
+
   return useQuery({
     queryKey: queryKeyBuilder.fullPath(
       "podcast.channel.channelID.$channelID.episodes.$queryOptions",
@@ -62,7 +64,7 @@ export function usePodcastChannelEpisodesQuery(
 
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
-        reactQueryClient.setQueryData(
+        queryClient.setQueryData(
           queryKeyBuilder.fullPath("podcast.episode.episodeID.$episodeID", {
             episodeID: episode.id,
           }),

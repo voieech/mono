@@ -66,6 +66,12 @@ export const contentLanguage: MultiSelectSetting<Array<AllowedLocales>> = {
     // old/original language value and show no changes. By doing removeQueries
     // instead it will rely on the settings state change to trigger the reload
     // which ensures that on reload the settings state is the new value already.
+    //
+    // Caveat that this is using a direct import of the queryClient since this
+    // isnt a hook and i cant load it as a hook in for now. This shouldnt be a
+    // big issue too, since this is at the top level and worse case if multiple
+    // queryClients need to be supported, this can just import all of them to
+    // update at the same time.
     reactQueryClient.removeQueries({
       queryKey: queryKeyBuilder.partialPathForDataDeletion("podcast.featured"),
     });

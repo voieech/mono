@@ -1,15 +1,15 @@
 import type { PodcastEpisode } from "dto";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
 
 import {
   useAcceptLanguageHeader,
   queryKeyBuilder,
   wrappedFetch,
-  reactQueryClient,
 } from "@/api-client";
 
 export function useFeaturedEpisodesQuery() {
+  const queryClient = useQueryClient();
   const acceptLanguageHeader = useAcceptLanguageHeader();
 
   return useQuery({
@@ -34,7 +34,7 @@ export function useFeaturedEpisodesQuery() {
 
       // Cache data so these dont need to be re queried again on navigate
       for (const episode of episodes) {
-        reactQueryClient.setQueryData(
+        queryClient.setQueryData(
           queryKeyBuilder.fullPath("podcast.episode.episodeID.$episodeID", {
             episodeID: episode.id,
           }),

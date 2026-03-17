@@ -1,5 +1,6 @@
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
+import { useQueryClient } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
@@ -12,7 +13,7 @@ import {
 } from "react-native";
 
 import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/api";
-import { reactQueryClient, queryKeyBuilder } from "@/api-client";
+import { queryKeyBuilder } from "@/api-client";
 import {
   SafeAreaViewContainer,
   ScrollViewContainer,
@@ -43,6 +44,8 @@ const allHomeRowTabs = [
 ] as const;
 
 export default function HomeScreen() {
+  const queryClient = useQueryClient();
+
   const windowDimensions = useWindowDimensions();
   const featuredChannelImageWidth = windowDimensions.width * 0.4;
   const featuredChannelImageMargin = Math.min(
@@ -62,7 +65,7 @@ export default function HomeScreen() {
     await Promise.all([
       featuredChannelsQuery.refetch(),
       featuredEpisodesQuery.refetch(),
-      reactQueryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: queryKeyBuilder.fullPath(
           "user.subscription.itemType.$itemType",
           {

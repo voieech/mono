@@ -1,11 +1,12 @@
 import type { PropsWithChildren } from "react";
 
+import { useQueryClient } from "@tanstack/react-query";
 import * as WebBrowser from "expo-web-browser";
 import { useCallback, useEffect, useState } from "react";
 
 import type { AuthDataFromWorkos } from "@/types";
 
-import { reactQueryClient, wrappedFetch } from "@/api-client";
+import { wrappedFetch } from "@/api-client";
 import { authController, secureStoreForAuth } from "@/auth";
 import { AuthContext } from "@/context";
 
@@ -13,6 +14,8 @@ import { AuthContext } from "@/context";
 WebBrowser.maybeCompleteAuthSession();
 
 export function AuthProvider({ children }: PropsWithChildren) {
+  const queryClient = useQueryClient();
+
   const [isLoading, setIsLoading] = useState(true);
   const [authData, setAuthData] = useState<AuthDataFromWorkos | null>(null);
   const [showFullScreenSigninModal, setShowFullScreenSigninModal] =
@@ -24,15 +27,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setAuthData(null);
   }
 
-  const login = useCallback(async function (options?: {
-    onLoginSuccess?: () => unknown;
-  }) {
-    await authController.login();
-    const authData = await secureStoreForAuth.getAllAuthDataNonNull();
-    setAuthData(authData);
-    reactQueryClient.clear();
-    await options?.onLoginSuccess?.();
-  }, []);
+  const login = useCallback(
+    async function (options?: { onLoginSuccess?: () => unknown }) {
+      await authController.login();
+      const authData = await secureStoreForAuth.getAllAuthDataNonNull();
+      setAuthData(authData);
+      queryClient.clear();
+      await options?.onLoginSuccess?.();
+    },
+    [queryClient],
+  );
 
   async function logout() {
     const accessToken = await secureStoreForAuth.getAccessTokenString();
@@ -59,7 +63,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     // Since the user has logged out now, clear the data that might be user
     // specific / only viewable after authentication.
-    reactQueryClient.clear();
+    queryClient.clear();
   }
 
   async function showFullScreenSigninModalIfNotAuthenticated() {

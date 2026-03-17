@@ -38,7 +38,7 @@ msgstr "Account Information"
 msgid "After Shows"
 msgstr "After Shows"
 
-#: src/app/(tabs)/(home)/index.tsx:33
+#: src/app/(tabs)/(home)/index.tsx:34
 msgid "All"
 msgstr "All"
 
@@ -376,11 +376,11 @@ msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:146
+#: src/app/(tabs)/(home)/index.tsx:149
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:206
+#: src/app/(tabs)/(home)/index.tsx:209
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -603,7 +603,7 @@ msgstr "Nature"
 msgid "News"
 msgstr "News"
 
-#: src/app/(tabs)/(home)/index.tsx:41
+#: src/app/(tabs)/(home)/index.tsx:42
 msgid "News Articles"
 msgstr "News Articles"
 
@@ -731,7 +731,7 @@ msgstr "Podcast Episode"
 msgid "Podcast Episodes"
 msgstr "Podcast Episodes"
 
-#: src/app/(tabs)/(home)/index.tsx:37
+#: src/app/(tabs)/(home)/index.tsx:38
 msgid "Podcasts"
 msgstr "Podcasts"
 

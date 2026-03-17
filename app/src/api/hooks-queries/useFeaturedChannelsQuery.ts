@@ -1,15 +1,15 @@
 import type { PodcastChannel } from "dto";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
 
 import {
   useAcceptLanguageHeader,
   queryKeyBuilder,
   wrappedFetch,
-  reactQueryClient,
 } from "@/api-client";
 
 export function useFeaturedChannelsQuery() {
+  const queryClient = useQueryClient();
   const acceptLanguageHeader = useAcceptLanguageHeader();
 
   return useQuery({
@@ -34,7 +34,7 @@ export function useFeaturedChannelsQuery() {
 
       // Cache data so these dont need to be re queried again on navigate
       for (const channel of channels) {
-        reactQueryClient.setQueryData(
+        queryClient.setQueryData(
           queryKeyBuilder.fullPath("podcast.channel.channelID.$channelID", {
             channelID: channel.id,
           }),

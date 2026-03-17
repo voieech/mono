@@ -1,13 +1,15 @@
 import type { SubscribableItemType, UserSubscriptionStatus } from "dto";
 
-import { useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
-import { wrappedFetch, reactQueryClient, queryKeyBuilder } from "@/api-client";
+import { wrappedFetch, queryKeyBuilder } from "@/api-client";
 
 /**
  * Generic user subscription mutation for a given item type and item ID.
  */
 export function useUserSubscriptionMutation() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     async mutationFn(variables: {
       itemType: SubscribableItemType;
@@ -38,7 +40,7 @@ export function useUserSubscriptionMutation() {
 
       const data = (await res.json()) as UserSubscriptionStatus;
 
-      reactQueryClient.setQueryData(
+      queryClient.setQueryData(
         queryKeyBuilder.fullPath(
           "user.subscription.itemType.$itemType.itemID.$itemID",
           {
@@ -49,7 +51,7 @@ export function useUserSubscriptionMutation() {
         data,
       );
 
-      reactQueryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         // Invalidate the "all subscriptions" query using exact, to prevent the
         // individual itemType.itemID subscription query to re-run again because
         // this API call already sets the value on return to prevent that extra
