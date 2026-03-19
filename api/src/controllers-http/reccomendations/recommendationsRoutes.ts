@@ -43,15 +43,32 @@ export const recommendationsRoutes = express
       throw new NotFoundException(`Cannot find episode: ${currentEpisodeID}`);
     }
 
-    // @todo Filter out all episodes that the user listened to before
-    // Get latest episodes from same channel as reccomendations for now
-    const reccomendations = await genPodcastEpisodeBaseQuery()
+    // Get latest podcast episodes from same channel as reccomendations for now
+    let query = genPodcastEpisodeBaseQuery()
       .limit(limit)
       .where("podcast_episode.channel_id", "=", currentEpisode.channel_id)
       // Filter out the current episode user is listening to
       .where("podcast_episode.id", "!=", currentEpisode.id)
-      .orderBy("podcast_episode.created_at", "desc")
-      .execute();
+      .orderBy("podcast_episode.created_at", "desc");
+
+    // Filter out podcast episodes the user has already consumed
+    if (req.isUserAuthenticated) {
+      const userID = await req.genAuthenticatedUserID();
+      query = query.where((eb) =>
+        eb.not(
+          eb.exists(
+            eb
+              .selectFrom("user_consumed")
+              .select("user_consumed.item_id")
+              .where("user_consumed.user_id", "=", userID)
+              .where("user_consumed.item_type", "=", "podcast_episode")
+              .whereRef("user_consumed.item_id", "=", "podcast_episode.id"),
+          ),
+        ),
+      );
+    }
+
+    const reccomendations = await query.execute();
 
     res.status(200).json({
       reccomendations: reccomendations satisfies Array<PodcastEpisode>,
