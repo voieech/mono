@@ -11,6 +11,7 @@ export function FrontPageLayoutTopBarWithProfilePic(props: PropsWithChildren) {
         paddingBottom: 8,
         flexDirection: "row",
         columnGap: 12,
+        alignItems: "center",
       }}
     >
       <ProfilePicButton />

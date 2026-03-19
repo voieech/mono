@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 
 import { useHeaderHeight } from "@react-navigation/elements";
 import { View } from "react-native";
@@ -14,33 +15,27 @@ import { useThemeColor } from "@/hooks";
  * area padding inset is already handled for us and we want to avoid double
  * padding the container.
  */
-export function SafeAreaViewContainer(props: PropsWithChildren) {
+export function SafeAreaViewContainer(
+  props: PropsWithChildren<{
+    style?: StyleProp<ViewStyle>;
+  }>,
+) {
   const backgroundColor = useThemeColor("background");
   const headerHeight = useHeaderHeight();
+  const styles = [
+    // Default styles
+    {
+      flex: 1,
+      backgroundColor,
+    },
+    props.style,
+  ];
 
   // If there is already a header height from the router component's
   // "headerShown" config, then just use a normal View component.
   if (headerHeight > 0) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor,
-        }}
-      >
-        {props.children}
-      </View>
-    );
+    return <View style={styles}>{props.children}</View>;
   }
 
-  return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor,
-      }}
-    >
-      {props.children}
-    </SafeAreaView>
-  );
+  return <SafeAreaView style={styles}>{props.children}</SafeAreaView>;
 }
