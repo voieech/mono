@@ -41,7 +41,7 @@ export const featuredContentRoutes = express
       throw new InvalidInputException("Limit must be between 1 and 20");
     }
 
-    const featuredEpisodes = await genPodcastEpisodeBaseQuery()
+    let query = genPodcastEpisodeBaseQuery()
       .groupBy([
         "podcast_episode.id",
         "audio.public_url",
@@ -57,8 +57,26 @@ export const featuredContentRoutes = express
       )
       // @todo Ordery by popularity
       .orderBy("podcast_episode.created_at", "desc")
-      .limit(limit)
-      .execute();
+      .limit(limit);
+
+    // Filter out podcast episodes that the user has already consumed
+    if (req.isUserAuthenticated) {
+      const userID = await req.genAuthenticatedUserID();
+      query = query.where((eb) =>
+        eb.not(
+          eb.exists(
+            eb
+              .selectFrom("user_consumed")
+              .select("user_consumed.item_id")
+              .where("user_consumed.user_id", "=", userID)
+              .where("user_consumed.item_type", "=", "podcast_episode")
+              .whereRef("user_consumed.item_id", "=", "podcast_episode.id"),
+          ),
+        ),
+      );
+    }
+
+    const featuredEpisodes = await query.execute();
 
     res.status(200).json(featuredEpisodes satisfies Array<PodcastEpisode>);
   });
