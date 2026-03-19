@@ -13,7 +13,7 @@ export function ProfilePicButton() {
   return (
     <Link
       href={{
-        pathname: "/profile",
+        pathname: "/profile/profile-page",
       }}
     >
       <View

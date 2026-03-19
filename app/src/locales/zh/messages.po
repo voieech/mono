@@ -26,11 +26,15 @@ msgstr "{episodeLengthInMins} 分钟"
 msgid "{queueLength, plural, =0 {Player Queue} other {Player Queue (#)}}"
 msgstr "{queueLength, plural, =0 {播放列表} other {播放列表 (#)}}"
 
-#: src/app/(tabs)/profile/index.tsx:83
+#: src/app/(tabs)/profile/profile-page.tsx:77
 msgid "About"
 msgstr "关于"
 
-#: src/app/(tabs)/profile/index.tsx:258
+#: src/app/(tabs)/profile/profile-page.tsx:37
+msgid "Account"
+msgstr "帐户"
+
+#: src/app/(tabs)/profile/profile-page.tsx:255
 msgid "Account Information"
 msgstr "账户信息"
 
@@ -54,8 +58,8 @@ msgstr "动画与漫画"
 msgid "App cache"
 msgstr "应用程序缓存"
 
-#: src/app/(tabs)/profile/_layout.tsx:53
-#: src/app/(tabs)/profile/index.tsx:109
+#: src/app/(tabs)/profile/_layout.tsx:60
+#: src/app/(tabs)/profile/profile-page.tsx:103
 msgid "App Details"
 msgstr "应用详情"
 
@@ -91,8 +95,8 @@ msgstr "艺术"
 msgid "Astronomy"
 msgstr "天文学"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:355
+#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/profile-page.tsx:352
 msgid "Audio Playback"
 msgstr "音频播放"
 
@@ -111,6 +115,7 @@ msgstr "航空"
 #: src/app/(tabs)/profile/_layout.tsx:47
 #: src/app/(tabs)/profile/_layout.tsx:54
 #: src/app/(tabs)/profile/_layout.tsx:61
+#: src/app/(tabs)/profile/_layout.tsx:68
 #: src/app/welcome.tsx:139
 msgid "Back"
 msgstr "返回"
@@ -131,7 +136,7 @@ msgstr "书籍"
 msgid "Buddhism"
 msgstr "佛教"
 
-#: src/app/(tabs)/profile/index.tsx:138
+#: src/app/(tabs)/profile/profile-page.tsx:135
 msgid "Built by voieech.com"
 msgstr "由 voieech.com 构建"
 
@@ -213,7 +218,7 @@ msgstr "喜剧小说"
 msgid "Comedy Interviews"
 msgstr "喜剧采访"
 
-#: src/app/(tabs)/profile/_layout.tsx:18
+#: src/app/(tabs)/profile/_layout.tsx:25
 msgid "Contact Us"
 msgstr "联系我们"
 
@@ -290,7 +295,7 @@ msgstr "戏剧"
 msgid "Earth Sciences"
 msgstr "地球科学"
 
-#: src/app/(tabs)/profile/index.tsx:339
+#: src/app/(tabs)/profile/profile-page.tsx:336
 msgid "Edit Profile"
 msgstr "编辑个人资料"
 
@@ -302,11 +307,11 @@ msgstr "教育"
 msgid "Education for Kids"
 msgstr "儿童教育"
 
-#: src/app/(tabs)/profile/index.tsx:269
+#: src/app/(tabs)/profile/profile-page.tsx:266
 msgid "Email"
 msgstr "电子邮件"
 
-#: src/app/(tabs)/profile/index.tsx:277
+#: src/app/(tabs)/profile/profile-page.tsx:274
 msgid "Email Verified?"
 msgstr "电子邮件已验证？"
 
@@ -436,7 +441,7 @@ msgstr "访客用户"
 msgid "Health & Fitness"
 msgstr "健康与健身"
 
-#: src/app/(tabs)/profile/index.tsx:103
+#: src/app/(tabs)/profile/profile-page.tsx:97
 msgid "Help & Support"
 msgstr "帮助与支持"
 
@@ -444,6 +449,7 @@ msgstr "帮助与支持"
 msgid "Hinduism"
 msgstr "印度教"
 
+#: src/app/(tabs)/profile/index.tsx:88
 #: src/locales/categoryStringToMsgDescriptor.ts:40
 msgid "History"
 msgstr "历史"
@@ -501,8 +507,8 @@ msgstr "犹太教"
 msgid "Kids & Family"
 msgstr "儿童与家庭"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
-#: src/app/(tabs)/profile/index.tsx:361
+#: src/app/(tabs)/profile/_layout.tsx:46
+#: src/app/(tabs)/profile/profile-page.tsx:358
 #: src/app/welcome.tsx:244
 msgid "Language"
 msgstr "语言"
@@ -518,6 +524,10 @@ msgstr "闲暇"
 #: src/locales/categoryStringToMsgDescriptor.ts:86
 msgid "Life Sciences"
 msgstr "生命科学"
+
+#: src/app/(tabs)/profile/index.tsx:78
+msgid "Likes"
+msgstr "喜欢"
 
 #: src/app/(tabs)/(home)/podcast/channel/[channelID].tsx:238
 msgid "Loading"
@@ -543,7 +553,7 @@ msgstr "我"
 msgid "Medicine"
 msgstr "医学"
 
-#: src/app/(tabs)/profile/index.tsx:273
+#: src/app/(tabs)/profile/profile-page.tsx:270
 msgid "Member Since"
 msgstr "会员自"
 
@@ -567,7 +577,7 @@ msgstr "音乐史"
 msgid "Music Interviews"
 msgstr "音乐采访"
 
-#: src/app/(tabs)/profile/index.tsx:262
+#: src/app/(tabs)/profile/profile-page.tsx:259
 msgid "Name"
 msgstr "姓名"
 
@@ -599,7 +609,7 @@ msgstr "新闻文章"
 msgid "News Commentary"
 msgstr "新闻评论"
 
-#: src/app/(tabs)/profile/index.tsx:279
+#: src/app/(tabs)/profile/profile-page.tsx:276
 #: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "No"
 msgstr "不"
@@ -608,8 +618,8 @@ msgstr "不"
 msgid "Non-Profit"
 msgstr "非营利组织"
 
-#: src/app/(tabs)/profile/index.tsx:154
-#: src/app/(tabs)/profile/index.tsx:303
+#: src/app/(tabs)/profile/profile-page.tsx:151
+#: src/app/(tabs)/profile/profile-page.tsx:300
 msgid "Not Available"
 msgstr "信息不存在"
 
@@ -617,8 +627,8 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:348
+#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/profile-page.tsx:345
 msgid "Notifications"
 msgstr "程序通知"
 
@@ -666,8 +676,8 @@ msgstr "表演艺术"
 msgid "Personal Journals"
 msgstr "个人日记"
 
-#: src/app/(tabs)/profile/_layout.tsx:46
-#: src/app/(tabs)/profile/index.tsx:368
+#: src/app/(tabs)/profile/_layout.tsx:53
+#: src/app/(tabs)/profile/profile-page.tsx:365
 msgid "Personalisation"
 msgstr "个性化"
 
@@ -735,15 +745,18 @@ msgstr "PostHog ID 已复制"
 msgid "Press to clear cache"
 msgstr "按清除缓存"
 
-#: src/app/(tabs)/profile/index.tsx:115
+#: src/app/(tabs)/profile/profile-page.tsx:109
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
 #: src/app/(tabs)/profile/_layout.tsx:12
-#: src/app/(tabs)/profile/index.tsx:37
-#: src/app/(tabs)/profile/index.tsx:43
+#: src/app/(tabs)/profile/_layout.tsx:18
 msgid "Profile"
 msgstr "个人资料"
+
+#: src/app/(tabs)/profile/index.tsx:58
+msgid "Profile, Settings, About"
+msgstr "个人资料、设置、关于"
 
 #: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:276
 msgid "Reccomended Episodes"
@@ -814,7 +827,7 @@ msgstr "自我提升"
 msgid "Send us your queries / feedback!"
 msgstr "欢迎您提出疑问/反馈！"
 
-#: src/app/(tabs)/profile/index.tsx:320
+#: src/app/(tabs)/profile/profile-page.tsx:317
 msgid "Settings"
 msgstr "设置"
 
@@ -831,7 +844,7 @@ msgid "Show controls for skipping tracks to next/previous."
 msgstr "显示跳至下一个和上一个剧集的按键。"
 
 #: src/app/(tabs)/profile/contact-form.tsx:142
-#: src/app/(tabs)/profile/index.tsx:69
+#: src/app/(tabs)/profile/profile-page.tsx:63
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "登入"
@@ -844,7 +857,7 @@ msgstr "登录以继续"
 msgid "Sign in to Personalise!"
 msgstr "登录以进行个性化设置！"
 
-#: src/app/(tabs)/profile/index.tsx:67
+#: src/app/(tabs)/profile/profile-page.tsx:61
 msgid "Sign Out"
 msgstr "退出应用程序"
 
@@ -904,6 +917,14 @@ msgstr "已提交！"
 msgid "Subscribe"
 msgstr "订阅"
 
+#: src/app/(tabs)/profile/index.tsx:98
+msgid "Subscriptions"
+msgstr "订阅"
+
+#: src/app/(tabs)/profile/index.tsx:108
+msgid "Subscriptions Content"
+msgstr "订阅内容"
+
 #: src/app/(tabs)/(create)/index.tsx:82
 msgid "Summarise a YouTube video into a podcast episode."
 msgstr "将一段 YouTube 视频改编成一期播客节目。"
@@ -928,7 +949,7 @@ msgstr "请告诉我们您还希望我们添加哪些其他内容来源！"
 msgid "Tennis"
 msgstr "网球"
 
-#: src/app/(tabs)/profile/index.tsx:119
+#: src/app/(tabs)/profile/profile-page.tsx:113
 msgid "Terms of Service"
 msgstr "服务条款"
 
@@ -939,6 +960,10 @@ msgstr "测试推送通知"
 #: src/app/(tabs)/profile/settings/notifications.tsx:66
 msgid "Test requested, look out for incoming push notifications!"
 msgstr "已发出测试请求，请留意推送通知！"
+
+#: src/app/(tabs)/profile/index.tsx:37
+msgid "These are still available without signing in"
+msgstr "这些内容无需登录即可查看"
 
 #: src/app/welcome.tsx:247
 msgid "These can be changed again later in settings."
@@ -1008,7 +1033,7 @@ msgstr "荒野"
 msgid "Wrestling"
 msgstr "摔角"
 
-#: src/app/(tabs)/profile/index.tsx:279
+#: src/app/(tabs)/profile/profile-page.tsx:276
 #: src/app/(tabs)/profile/settings/notifications.tsx:106
 msgid "Yes"
 msgstr "是"
@@ -1021,6 +1046,10 @@ msgstr "您的电子邮件"
 #: src/app/welcome.tsx:409
 msgid "Your Hyper Personalized Podcasts"
 msgstr "你的声伴"
+
+#: src/app/(tabs)/profile/index.tsx:68
+msgid "Your Library"
+msgstr "你的图书馆"
 
 #: src/components-page/(tabs)/(home)/index/UserSubscriptions.tsx:35
 msgid "Your Subscriptions"

@@ -1,4 +1,5 @@
-import { useWindowDimensions } from "react-native";
+import { PropsWithChildren } from "react";
+import { useWindowDimensions, View } from "react-native";
 
 import { ThemedView } from "@/components/ThemedComponents";
 import { useAuthContext } from "@/context";
@@ -13,7 +14,7 @@ import { SigninToContinueCard } from "./SigninToContinueCard";
  * This does not allow user to "press away", if you want that capability, use
  * the `FullScreenSigninModal` flow instead. See `authContext`'s method.
  */
-export function FullScreenSigninWall() {
+export function FullScreenSigninWall(props: PropsWithChildren) {
   const authContext = useAuthContext();
   const windowDimensions = useWindowDimensions();
   const contentBoxMaxWidth = windowDimensions.width * 0.8;
@@ -24,7 +25,7 @@ export function FullScreenSigninWall() {
   }
 
   return (
-    <ThemedView
+    <View
       style={{
         // 1. Cover the entire screen
         flex: 1,
@@ -43,17 +44,25 @@ export function FullScreenSigninWall() {
         backgroundColor: "rgba(255, 255, 255, 0.4)",
       }}
     >
-      <ThemedView
+      <View
         style={{
-          flexDirection: "column",
-          rowGap: 24,
-          padding: 24,
-          borderRadius: 24,
+          // flexDirection: "column",
+          // padding: 24,
           maxWidth: contentBoxMaxWidth,
         }}
       >
-        <SigninToContinueCard />
-      </ThemedView>
-    </ThemedView>
+        <ThemedView
+          style={{
+            flexDirection: "column",
+            rowGap: 24,
+            padding: 24,
+            borderRadius: 24,
+          }}
+        >
+          <SigninToContinueCard />
+        </ThemedView>
+        {props.children}
+      </View>
+    </View>
   );
 }
