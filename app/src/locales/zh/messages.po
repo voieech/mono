@@ -58,7 +58,7 @@ msgstr "动画与漫画"
 msgid "App cache"
 msgstr "应用程序缓存"
 
-#: src/app/(tabs)/profile/_layout.tsx:60
+#: src/app/(tabs)/profile/_layout.tsx:67
 #: src/app/(tabs)/profile/profile-page.tsx:103
 msgid "App Details"
 msgstr "应用详情"
@@ -95,7 +95,7 @@ msgstr "艺术"
 msgid "Astronomy"
 msgstr "天文学"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/_layout.tsx:46
 #: src/app/(tabs)/profile/profile-page.tsx:352
 msgid "Audio Playback"
 msgstr "音频播放"
@@ -116,6 +116,7 @@ msgstr "航空"
 #: src/app/(tabs)/profile/_layout.tsx:54
 #: src/app/(tabs)/profile/_layout.tsx:61
 #: src/app/(tabs)/profile/_layout.tsx:68
+#: src/app/(tabs)/profile/_layout.tsx:75
 #: src/app/welcome.tsx:139
 msgid "Back"
 msgstr "返回"
@@ -218,7 +219,7 @@ msgstr "喜剧小说"
 msgid "Comedy Interviews"
 msgstr "喜剧采访"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/_layout.tsx:32
 msgid "Contact Us"
 msgstr "联系我们"
 
@@ -449,7 +450,8 @@ msgstr "帮助与支持"
 msgid "Hinduism"
 msgstr "印度教"
 
-#: src/app/(tabs)/profile/index.tsx:88
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:87
 #: src/locales/categoryStringToMsgDescriptor.ts:40
 msgid "History"
 msgstr "历史"
@@ -507,7 +509,7 @@ msgstr "犹太教"
 msgid "Kids & Family"
 msgstr "儿童与家庭"
 
-#: src/app/(tabs)/profile/_layout.tsx:46
+#: src/app/(tabs)/profile/_layout.tsx:53
 #: src/app/(tabs)/profile/profile-page.tsx:358
 #: src/app/welcome.tsx:244
 msgid "Language"
@@ -627,7 +629,7 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/_layout.tsx:39
 #: src/app/(tabs)/profile/profile-page.tsx:345
 msgid "Notifications"
 msgstr "程序通知"
@@ -676,7 +678,7 @@ msgstr "表演艺术"
 msgid "Personal Journals"
 msgstr "个人日记"
 
-#: src/app/(tabs)/profile/_layout.tsx:53
+#: src/app/(tabs)/profile/_layout.tsx:60
 #: src/app/(tabs)/profile/profile-page.tsx:365
 msgid "Personalisation"
 msgstr "个性化"
@@ -917,11 +919,11 @@ msgstr "已提交！"
 msgid "Subscribe"
 msgstr "订阅"
 
-#: src/app/(tabs)/profile/index.tsx:98
+#: src/app/(tabs)/profile/index.tsx:96
 msgid "Subscriptions"
 msgstr "订阅"
 
-#: src/app/(tabs)/profile/index.tsx:108
+#: src/app/(tabs)/profile/index.tsx:106
 msgid "Subscriptions Content"
 msgstr "订阅内容"
 

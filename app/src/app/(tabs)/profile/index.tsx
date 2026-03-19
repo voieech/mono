@@ -79,16 +79,14 @@ export default function MePage() {
             />
             <VerticalSpacer />
           </ExperimentalSurface>
-          <ExperimentalSurface>
-            <AlbumRow
-              href={{
-                pathname: "/",
-              }}
-              imgSource={require("@/assets/images/history.jpg")}
-              title={t`History`}
-            />
-            <VerticalSpacer />
-          </ExperimentalSurface>
+          <AlbumRow
+            href={{
+              pathname: "/profile/history",
+            }}
+            imgSource={require("@/assets/images/history.jpg")}
+            title={t`History`}
+          />
+          <VerticalSpacer />
           <ExperimentalSurface>
             <AlbumRow
               href={{

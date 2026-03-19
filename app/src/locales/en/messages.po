@@ -58,7 +58,7 @@ msgstr "Animation & Manga"
 msgid "App cache"
 msgstr "App cache"
 
-#: src/app/(tabs)/profile/_layout.tsx:60
+#: src/app/(tabs)/profile/_layout.tsx:67
 #: src/app/(tabs)/profile/profile-page.tsx:103
 msgid "App Details"
 msgstr "App Details"
@@ -103,7 +103,7 @@ msgstr "Arts"
 msgid "Astronomy"
 msgstr "Astronomy"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/_layout.tsx:46
 #: src/app/(tabs)/profile/profile-page.tsx:352
 msgid "Audio Playback"
 msgstr "Audio Playback"
@@ -124,6 +124,7 @@ msgstr "Aviation"
 #: src/app/(tabs)/profile/_layout.tsx:54
 #: src/app/(tabs)/profile/_layout.tsx:61
 #: src/app/(tabs)/profile/_layout.tsx:68
+#: src/app/(tabs)/profile/_layout.tsx:75
 #: src/app/welcome.tsx:139
 msgid "Back"
 msgstr "Back"
@@ -226,7 +227,7 @@ msgstr "Comedy Fiction"
 msgid "Comedy Interviews"
 msgstr "Comedy Interviews"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/_layout.tsx:32
 msgid "Contact Us"
 msgstr "Contact Us"
 
@@ -457,7 +458,8 @@ msgstr "Help & Support"
 msgid "Hinduism"
 msgstr "Hinduism"
 
-#: src/app/(tabs)/profile/index.tsx:88
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:87
 #: src/locales/categoryStringToMsgDescriptor.ts:40
 msgid "History"
 msgstr "History"
@@ -519,7 +521,7 @@ msgstr "Judaism"
 msgid "Kids & Family"
 msgstr "Kids & Family"
 
-#: src/app/(tabs)/profile/_layout.tsx:46
+#: src/app/(tabs)/profile/_layout.tsx:53
 #: src/app/(tabs)/profile/profile-page.tsx:358
 #: src/app/welcome.tsx:244
 msgid "Language"
@@ -639,7 +641,7 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/_layout.tsx:39
 #: src/app/(tabs)/profile/profile-page.tsx:345
 msgid "Notifications"
 msgstr "Notifications"
@@ -688,7 +690,7 @@ msgstr "Performing Arts"
 msgid "Personal Journals"
 msgstr "Personal Journals"
 
-#: src/app/(tabs)/profile/_layout.tsx:53
+#: src/app/(tabs)/profile/_layout.tsx:60
 #: src/app/(tabs)/profile/profile-page.tsx:365
 msgid "Personalisation"
 msgstr "Personalisation"
@@ -933,11 +935,11 @@ msgstr "Submitted!"
 msgid "Subscribe"
 msgstr "Subscribe"
 
-#: src/app/(tabs)/profile/index.tsx:98
+#: src/app/(tabs)/profile/index.tsx:96
 msgid "Subscriptions"
 msgstr "Subscriptions"
 
-#: src/app/(tabs)/profile/index.tsx:108
+#: src/app/(tabs)/profile/index.tsx:106
 msgid "Subscriptions Content"
 msgstr "Subscriptions Content"
 
