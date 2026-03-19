@@ -10,6 +10,7 @@ import type {
   UserConsumedStatus,
   UserSubscriptionStatus,
   UserSubscriptionsOfItemType,
+  UserConsumedItems,
 } from "../../dto-types/index.js";
 
 import {
@@ -250,6 +251,28 @@ export const userRoutes = express
       res.status(200).json({
         consumed: isConsumed,
       } satisfies UserConsumedStatus);
+    },
+  )
+
+  .get(
+    "/v1/user/consumed",
+    authenticationMiddlewareBuilder(),
+    async function (req, res) {
+      const userID = await req.genAuthenticatedUserID();
+
+      // Optional filter
+      const itemType = req.query["itemType"] as undefined | ConsumableItemType;
+
+      const userConsumedItems = await userConsumedRepo.getManyUserConsumedItems(
+        {
+          userID,
+          itemType,
+        },
+      );
+
+      res.status(200).json({
+        items: userConsumedItems,
+      } satisfies UserConsumedItems);
     },
   )
 

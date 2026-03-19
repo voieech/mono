@@ -47,6 +47,26 @@ export const userConsumedRepo = {
       .then((data) => data?.exists === true);
   },
 
+  async getManyUserConsumedItems(filters: {
+    userID: string;
+    /**
+     * Optionally filter for a specific item type, else returns all UserConsumed
+     * item IDs regardless of itemType
+     */
+    itemType?: undefined | ConsumableItemType;
+  }) {
+    let query = apiDB
+      .selectFrom("user_consumed")
+      .select(["item_type as itemType", "item_id as itemID"])
+      .where("user_id", "=", filters.userID);
+
+    if (filters.itemType !== undefined) {
+      query = query.where("item_type", "=", filters.itemType);
+    }
+
+    return await query.execute();
+  },
+
   async delete(filters: {
     userID: string;
     itemType: ConsumableItemType;
