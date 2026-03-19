@@ -15,6 +15,7 @@ import {
 import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/api";
 import { queryKeyBuilder } from "@/api-client";
 import {
+  FrontPageLayoutTopBarWithProfilePic,
   SafeAreaViewContainer,
   ScrollViewContainer,
   ThemedView,
@@ -25,7 +26,6 @@ import {
 } from "@/components";
 import { UserSubscriptions } from "@/components-page/(tabs)/(home)/index/UserSubscriptions";
 import { Colors } from "@/constants";
-import { useAuthContext } from "@/context";
 import { linguiMsgToString } from "@/utils";
 
 const allHomeRowTabs = [
@@ -79,15 +79,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaViewContainer>
-      <View
-        style={{
-          paddingHorizontal: 16,
-          paddingBottom: 8,
-          flexDirection: "row",
-          columnGap: 12,
-        }}
-      >
-        <ProfilePicButton />
+      <FrontPageLayoutTopBarWithProfilePic>
         <View
           style={{
             flexDirection: "row",
@@ -121,7 +113,7 @@ export default function HomeScreen() {
             </Pressable>
           ))}
         </View>
-      </View>
+      </FrontPageLayoutTopBarWithProfilePic>
       <ScrollViewContainer
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -268,41 +260,5 @@ export default function HomeScreen() {
         )}
       </ScrollViewContainer>
     </SafeAreaViewContainer>
-  );
-}
-
-function ProfilePicButton() {
-  const authContext = useAuthContext();
-  const imageSize = 32;
-  return (
-    <Link
-      href={{
-        pathname: "/profile",
-      }}
-    >
-      <View
-        style={{
-          width: imageSize,
-          height: imageSize,
-          borderRadius: imageSize,
-          backgroundColor: Colors.neutral700,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {authContext.authData?.userData?.profilePictureUrl != null ? (
-          <Image
-            source={authContext.authData.userData.profilePictureUrl}
-            style={{
-              width: imageSize,
-              height: imageSize,
-              borderRadius: imageSize,
-            }}
-          />
-        ) : (
-          <Icon name="person" size={imageSize * 0.5} color={Colors.gray300} />
-        )}
-      </View>
-    </Link>
   );
 }
