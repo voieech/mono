@@ -12,7 +12,20 @@ import type { Database } from "./definitions/index.js";
 // https://kysely.dev/docs/recipes/data-types#configuring-runtime-javascript-types
 // https://github.com/brianc/node-pg-types
 // https://github.com/brianc/node-pg-types/blob/master/lib/builtins.js
-pg.types.setTypeParser(1114, $DateTime.ISO.DateTime.makeStrongAndThrowOnError);
+//
+// The `$DateTime` method uses `new Date(xyz)` for parsing/validation, and
+// since the ISO date time strings returned from reading the DB's `timestamp`
+// type does not have any time zone offset / indicator, it will be treated as
+// local time (server's timezone) instead of UTC, which will cause issues.
+// Since all input/output time from the DB is expected to be UTC, there is an
+// additional step here to include Z(ulu) timezone indicator to ensure UTC
+// treatment in the `$DateTime` method.
+pg.types.setTypeParser(1114, (string) =>
+  $DateTime.ISO.DateTime.makeStrongAndThrowOnError(
+    // Make UTC using the Z(ulu) timezone indicator
+    string.replace(" ", "T") + "Z",
+  ),
+);
 
 // Custom parser for vector (oid 1884170) from the pgvector extension so that
 // the returned data type is an array of numbers instead of a string.
