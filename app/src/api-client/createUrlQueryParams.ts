@@ -2,7 +2,7 @@
  * Creates appendable URL query params string from optional query params object.
  */
 export function createUrlQueryParams(
-  queryParams?: Record<string, string | number | boolean>,
+  queryParams?: Record<string, undefined | string | number | boolean>,
 ) {
   if (queryParams === undefined) {
     return "";
@@ -10,7 +10,10 @@ export function createUrlQueryParams(
 
   const stringifiedQueryParamsObject = Object.entries(queryParams).reduce(
     (acc, [key, value]) => {
-      acc[key] = value?.toString?.();
+      // If it is undefined, skip it entirely
+      if (value !== undefined) {
+        acc[key] = value?.toString?.();
+      }
       return acc;
     },
     {} as Record<string, string>,
