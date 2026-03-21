@@ -262,11 +262,18 @@ export const userRoutes = express
 
       // Optional filter
       const itemType = req.query["itemType"] as undefined | ConsumableItemType;
+      const rawLimit = Number(req.query["limit"]);
+      const limit = isNaN(rawLimit) || rawLimit < 1 ? 50 : rawLimit;
+      const cursorCreatedAt = req.query["cursorCreatedAt"] as
+        | undefined
+        | string;
 
       const userConsumedItems = await userConsumedRepo.getManyUserConsumedItems(
         {
           userID,
           itemType,
+          limit,
+          cursorCreatedAt,
         },
       );
 

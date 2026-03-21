@@ -54,14 +54,28 @@ export const userConsumedRepo = {
      * item IDs regardless of itemType
      */
     itemType?: undefined | ConsumableItemType;
+    cursorCreatedAt?: undefined | string;
+    limit: number;
   }) {
     let query = apiDB
       .selectFrom("user_consumed")
-      .select(["item_type as itemType", "item_id as itemID"])
-      .where("user_id", "=", filters.userID);
+      .select(["item_type as itemType", "item_id as itemID", "created_at"])
+      .where("user_id", "=", filters.userID)
+      .orderBy("created_at", "desc")
+      .limit(filters.limit);
 
     if (filters.itemType !== undefined) {
       query = query.where("item_type", "=", filters.itemType);
+    }
+
+    if (filters.cursorCreatedAt !== undefined) {
+      query = query.where(
+        "created_at",
+        "<",
+        $DateTime.ISO.DateTime.makeStrongAndThrowOnError(
+          filters.cursorCreatedAt,
+        ),
+      );
     }
 
     return await query.execute();
