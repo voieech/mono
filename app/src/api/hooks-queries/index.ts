@@ -8,6 +8,7 @@ export * from "./usePodcastChannelEpisodesQuery";
 export * from "./usePodcastChannelQuery";
 export * from "./usePodcastEpisodeNextReccomendationsQuery";
 export * from "./usePodcastEpisodeQuery";
+export * from "./useUserConsumedInfiniteQuery";
 export * from "./useUserConsumedQuery";
 export * from "./useUserLikeQuery";
 export * from "./useUserSubscriptionQuery";

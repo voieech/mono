@@ -1,23 +1,25 @@
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { RefreshControl, View } from "react-native";
+import { Pressable, RefreshControl, View } from "react-native";
 
-import { useUserConsumedQuery, usePodcastEpisodeQuery } from "@/api";
+import { useUserConsumedInfiniteQuery, usePodcastEpisodeQuery } from "@/api";
 import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { Colors } from "@/constants";
 
 export default function History() {
-  const userConsumedQuery = useUserConsumedQuery();
+  const userConsumedInfiniteQuery = useUserConsumedInfiniteQuery({
+    limit: 10,
+  });
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
     setRefreshing(true);
-    await Promise.all([userConsumedQuery.refetch()]);
+    await Promise.all([userConsumedInfiniteQuery.refetch()]);
     setRefreshing(false);
   }
 
-  if (userConsumedQuery.data === undefined) {
+  if (userConsumedInfiniteQuery.data === undefined) {
     return null;
   }
 
@@ -33,15 +35,38 @@ export default function History() {
           rowGap: 8,
         }}
       >
-        {userConsumedQuery.data.items.map((consumedItem) =>
-          consumedItem.itemType === "podcast_episode" ? (
-            <PodcastEpisodeRow
-              key={consumedItem.itemID}
-              id={consumedItem.itemID}
-            />
-          ) : null,
+        {userConsumedInfiniteQuery.data.pages.map((page) =>
+          page.map((consumedItem) =>
+            consumedItem.itemType === "podcast_episode" ? (
+              <PodcastEpisodeRow
+                key={consumedItem.itemID}
+                id={consumedItem.itemID}
+              />
+            ) : null,
+          ),
         )}
       </View>
+
+      <Pressable
+        style={{
+          margin: 16,
+          padding: 16,
+          backgroundColor: Colors.black,
+        }}
+        onPress={() => userConsumedInfiniteQuery.fetchNextPage()}
+        disabled={
+          !userConsumedInfiniteQuery.hasNextPage ||
+          userConsumedInfiniteQuery.isFetchingNextPage
+        }
+      >
+        <ThemedText>
+          {userConsumedInfiniteQuery.isFetchingNextPage
+            ? "Loading..."
+            : userConsumedInfiniteQuery.hasNextPage
+              ? "Load More"
+              : "Nothing more to load"}
+        </ThemedText>
+      </Pressable>
       <View
         style={{
           paddingBottom: 64,
