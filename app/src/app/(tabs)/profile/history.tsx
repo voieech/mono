@@ -1,13 +1,21 @@
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { Pressable, RefreshControl, View } from "react-native";
+import { RefreshControl, FlatList, ActivityIndicator } from "react-native";
 
 import { useUserConsumedInfiniteQuery, usePodcastEpisodeQuery } from "@/api";
-import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
+import {
+  SafeAreaViewContainer,
+  ThemedView,
+  ThemedText,
+  VerticalSpacer,
+} from "@/components";
 import { Colors } from "@/constants";
+import { useBottomTabOverflow } from "@/hooks";
 
 export default function History() {
+  const bottomOverflow = useBottomTabOverflow();
+
   const userConsumedInfiniteQuery = useUserConsumedInfiniteQuery({
     limit: 10,
   });
@@ -23,56 +31,49 @@ export default function History() {
     return null;
   }
 
-  return (
-    <SafeScrollViewContainer
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      <View
-        style={{
-          flexDirection: "column",
-          rowGap: 8,
-        }}
-      >
-        {userConsumedInfiniteQuery.data.pages.map((page) =>
-          page.map((consumedItem) =>
-            consumedItem.itemType === "podcast_episode" ? (
-              <PodcastEpisodeRow
-                key={consumedItem.itemID}
-                id={consumedItem.itemID}
-              />
-            ) : null,
-          ),
-        )}
-      </View>
+  // Flatten the pages into a single array for FlatList
+  const flattenedData = userConsumedInfiniteQuery.data.pages.flatMap(
+    (page) => page,
+  );
 
-      <Pressable
+  return (
+    <SafeAreaViewContainer>
+      <FlatList
         style={{
-          margin: 16,
-          padding: 16,
-          backgroundColor: Colors.black,
+          paddingVertical: 8,
+          paddingHorizontal: 16,
+          marginBottom: bottomOverflow,
         }}
-        onPress={() => userConsumedInfiniteQuery.fetchNextPage()}
-        disabled={
-          !userConsumedInfiniteQuery.hasNextPage ||
-          userConsumedInfiniteQuery.isFetchingNextPage
+        data={flattenedData}
+        keyExtractor={(item) => item.itemID}
+        renderItem={({ item }) =>
+          item.itemType === "podcast_episode" ? (
+            <PodcastEpisodeRow key={item.itemID} id={item.itemID} />
+          ) : null
         }
-      >
-        <ThemedText>
-          {userConsumedInfiniteQuery.isFetchingNextPage
-            ? "Loading..."
-            : userConsumedInfiniteQuery.hasNextPage
-              ? "Load More"
-              : "Nothing more to load"}
-        </ThemedText>
-      </Pressable>
-      <View
-        style={{
-          paddingBottom: 64,
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        // How close to the bottom before triggering the `onEndReached` method,
+        // where 0.1 = 10% of the list's visible length remains
+        onEndReachedThreshold={0.1}
+        // Triggered when user reaches the threshold
+        onEndReached={() => {
+          if (
+            userConsumedInfiniteQuery.hasNextPage &&
+            !userConsumedInfiniteQuery.isFetchingNextPage
+          ) {
+            userConsumedInfiniteQuery.fetchNextPage();
+          }
         }}
+        ItemSeparatorComponent={() => <VerticalSpacer height={4} />}
+        ListFooterComponent={
+          userConsumedInfiniteQuery.isFetchingNextPage ? (
+            <ActivityIndicator size="small" />
+          ) : null
+        }
       />
-    </SafeScrollViewContainer>
+    </SafeAreaViewContainer>
   );
 }
 
@@ -101,7 +102,7 @@ function PodcastEpisodeRow(props: { id: string }) {
         style={{
           flex: 1,
           flexDirection: "row",
-          borderRadius: 16,
+          borderRadius: 8,
         }}
       >
         <Image
@@ -110,16 +111,16 @@ function PodcastEpisodeRow(props: { id: string }) {
             width: "100%",
             height: "100%",
             maxWidth: 128,
-            borderTopLeftRadius: 16,
-            borderBottomLeftRadius: 16,
+            borderTopLeftRadius: 8,
+            borderBottomLeftRadius: 8,
           }}
           contentFit="cover"
         />
         <ThemedView
           style={{
             flex: 1,
-            borderTopRightRadius: 16,
-            borderBottomRightRadius: 16,
+            borderTopRightRadius: 8,
+            borderBottomRightRadius: 8,
             paddingVertical: 4,
             paddingHorizontal: 16,
             backgroundColor: Colors.neutral800,
