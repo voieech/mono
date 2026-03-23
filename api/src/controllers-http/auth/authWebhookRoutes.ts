@@ -50,6 +50,15 @@ export const authWebhookRoutes = express
         case "user.created": {
           const userID = crypto.randomUUID();
 
+          // Sometimes the email might not be sent for the sake of protecting
+          // sensitive information. So we need to manually load it to use.
+          if (req.workosWebhookEvent.data.email === "[REDACTED]") {
+            const workosUserData = await workos.userManagement.getUser(
+              req.workosWebhookEvent.data.id,
+            );
+            req.workosWebhookEvent.data.email = workosUserData.email;
+          }
+
           await userRepo.create({
             workos_id: req.workosWebhookEvent.data.id,
             created_at: $DateTime.ISO.DateTime.makeStrongAndThrowOnError(
