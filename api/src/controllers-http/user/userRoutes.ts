@@ -214,7 +214,7 @@ export const userRoutes = express
       const shouldLike = req.body["like"]!;
 
       if (shouldLike) {
-        await userLikeRepo.create({
+        await userLikeRepo.upsert({
           userID,
           itemType,
           itemID,

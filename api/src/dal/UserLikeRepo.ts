@@ -3,7 +3,7 @@ import type { LikeableItemType } from "../dto-types/index.js";
 import { apiDB, sqlExistenceCheck } from "../kysely/index.js";
 
 export const userLikeRepo = {
-  async create(like: {
+  async upsert(like: {
     userID: string;
     itemType: LikeableItemType;
     itemID: string;
@@ -16,6 +16,18 @@ export const userLikeRepo = {
         user_id: like.userID,
         item_type: like.itemType,
         item_id: like.itemID,
+      })
+      // Upsert behaviour
+      .onConflict((oc) => {
+        return (
+          oc
+            // If the composite unique constraint had a conflict means user
+            // liked this item before, we will just update timestamp only.
+            .columns(["user_id", "item_type", "item_id"])
+            .doUpdateSet({
+              created_at: $DateTime.now.asIsoDateTime(),
+            })
+        );
       })
       .execute();
   },
