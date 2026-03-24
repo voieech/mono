@@ -1,6 +1,7 @@
 import type { ConsumableItemType } from "../dto-types/index.js";
 
 import { apiDB, sqlExistenceCheck } from "../kysely/index.js";
+import { generateID } from "../util/generateID.js";
 
 export const userConsumedRepo = {
   async upsert(consumption: {
@@ -11,7 +12,7 @@ export const userConsumedRepo = {
     return await apiDB
       .insertInto("user_consumed")
       .values({
-        id: crypto.randomUUID(),
+        id: generateID.uuidV7(),
         created_at: $DateTime.now.asIsoDateTime(),
         user_id: consumption.userID,
         item_type: consumption.itemType,
