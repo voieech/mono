@@ -26,6 +26,9 @@ export const userConsumedRepo = {
             // consumed this item before, we will just update timestamp only.
             .columns(["user_id", "item_type", "item_id"])
             .doUpdateSet({
+              // Need to update the ID since we are using this time sortable ID
+              // as pagination cursor
+              id: generateID.uuidV7(),
               created_at: $DateTime.now.asIsoDateTime(),
             })
         );
