@@ -616,6 +616,10 @@ msgstr "新闻评论"
 msgid "No"
 msgstr "不"
 
+#: src/app/(tabs)/profile/history.tsx:57
+msgid "No history yet"
+msgstr "还没有历史记录"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:25
 msgid "Non-Profit"
 msgstr "非营利组织"
@@ -775,6 +779,10 @@ msgstr "宗教"
 #: src/locales/categoryStringToMsgDescriptor.ts:74
 msgid "Religion & Spirituality"
 msgstr "宗教与灵性"
+
+#: src/app/(tabs)/profile/history.tsx:69
+msgid "Reload"
+msgstr "重新加载"
 
 #: src/app/audio-player-modal.tsx:113
 msgid "Report Audio Track"

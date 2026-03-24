@@ -628,6 +628,10 @@ msgstr "News Commentary"
 msgid "No"
 msgstr "No"
 
+#: src/app/(tabs)/profile/history.tsx:57
+msgid "No history yet"
+msgstr "No history yet"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:25
 msgid "Non-Profit"
 msgstr "Non-Profit"
@@ -791,6 +795,10 @@ msgstr "Religion"
 #: src/locales/categoryStringToMsgDescriptor.ts:74
 msgid "Religion & Spirituality"
 msgstr "Religion & Spirituality"
+
+#: src/app/(tabs)/profile/history.tsx:69
+msgid "Reload"
+msgstr "Reload"
 
 #: src/app/audio-player-modal.tsx:113
 msgid "Report Audio Track"

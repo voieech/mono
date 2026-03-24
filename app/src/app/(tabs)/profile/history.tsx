@@ -1,7 +1,13 @@
+import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { RefreshControl, FlatList, ActivityIndicator } from "react-native";
+import {
+  RefreshControl,
+  FlatList,
+  ActivityIndicator,
+  Pressable,
+} from "react-native";
 
 import { useUserConsumedInfiniteQuery, usePodcastEpisodeQuery } from "@/api";
 import {
@@ -35,6 +41,37 @@ export default function History() {
   const flattenedData = userConsumedInfiniteQuery.data.pages.flatMap(
     (page) => page,
   );
+
+  if (flattenedData.length === 0) {
+    return (
+      <ThemedView
+        style={{
+          flex: 1,
+          paddingHorizontal: 16,
+          flexDirection: "column",
+          rowGap: 16,
+          justifyContent: "center",
+        }}
+      >
+        <ThemedText type="lg-light">
+          <Trans>No history yet</Trans>
+        </ThemedText>
+        <Pressable
+          onPress={onRefresh}
+          style={{
+            padding: 16,
+            alignItems: "center",
+            backgroundColor: Colors.neutral700,
+            borderRadius: 8,
+          }}
+        >
+          <ThemedText type="lg-light">
+            <Trans>Reload</Trans>
+          </ThemedText>
+        </Pressable>
+      </ThemedView>
+    );
+  }
 
   return (
     <SafeAreaViewContainer>
