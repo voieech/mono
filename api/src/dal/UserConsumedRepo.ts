@@ -52,9 +52,9 @@ export const userConsumedRepo = {
     userID: string;
     limit: number;
     /**
-     * Cursor of the last itemID to skip past
+     * Cursor is the ID to skip past
      */
-    cursorItemID?: undefined | string;
+    cursorID?: undefined | string;
     /**
      * Optionally filter for a specific item type, else returns all UserConsumed
      * item IDs regardless of itemType
@@ -63,17 +63,17 @@ export const userConsumedRepo = {
   }) {
     let query = apiDB
       .selectFrom("user_consumed")
-      .select(["item_type as itemType", "item_id as itemID", "created_at"])
+      .select(["id", "item_type as itemType", "item_id as itemID"])
       .where("user_id", "=", filters.userID)
-      .orderBy("created_at", "desc")
+      .orderBy("id", "desc")
       .limit(filters.limit);
 
     if (filters.itemType !== undefined) {
       query = query.where("item_type", "=", filters.itemType);
     }
 
-    if (filters.cursorItemID !== undefined) {
-      query = query.where("item_id", ">", filters.cursorItemID);
+    if (filters.cursorID !== undefined) {
+      query = query.where("id", "<", filters.cursorID);
     }
 
     return await query.execute();

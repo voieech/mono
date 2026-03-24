@@ -262,7 +262,7 @@ export const userRoutes = express
 
       // Optional filter(s)
       const itemType = req.query["itemType"] as undefined | ConsumableItemType;
-      const cursorItemID = req.query["cursorItemID"] as undefined | string;
+      const cursorID = req.query["cursorID"] as undefined | string;
       const rawLimit = Number(req.query["limit"]);
       const limit = isNaN(rawLimit) || rawLimit < 1 ? 50 : rawLimit;
 
@@ -271,7 +271,7 @@ export const userRoutes = express
           userID,
           itemType,
           limit,
-          cursorItemID,
+          cursorID,
         },
       );
 

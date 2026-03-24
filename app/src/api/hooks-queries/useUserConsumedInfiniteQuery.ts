@@ -24,14 +24,14 @@ export function useUserConsumedInfiniteQuery(queryOptions?: {
 
     initialPageParam: undefined,
 
-    getNextPageParam: (lastPage, _allPages) => lastPage?.at?.(-1)?.itemID,
+    getNextPageParam: (lastPage, _allPages) => lastPage?.at?.(-1)?.id,
 
     async queryFn(queryContext) {
       const res = await wrappedFetch(
         `/v1/user/consumed` +
           createUrlQueryParams({
             ...queryOptions,
-            cursorItemID: queryContext.pageParam as string | undefined,
+            cursorID: queryContext.pageParam as string | undefined,
           }),
       );
 
