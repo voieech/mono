@@ -32,10 +32,10 @@ export async function up(db: Kysely<any>): Promise<void> {
   // 2. "Get this user's recently consumed items"
   //
   // Notes on this index
-  // 1. This is using "created_at DESC" to optimize for recent consumption
-  // first, so that when we filter by user, the returned results are already
-  // sorted by "created_at" without making the DB retrieve all consumed items
-  // before sorting in memory.
+  // 1. This is using "id DESC" to optimize for recent consumption first, so
+  // that when we filter by user, the returned results are already sorted by
+  // "id" which is a UUID v7 value which is sorted by time already, without
+  // making the DB retrieve all consumed items before sorting in memory.
   // 2. The INCLUDE clause creates a covering index, i.e. this tells PostgreSQL
   // to "Store these extra pieces of data inside the index tree itself so you
   // don't have to look at the actual table at all." because in a "user
@@ -48,9 +48,9 @@ export async function up(db: Kysely<any>): Promise<void> {
   // 3. Need to use raw SQL to create a covering index with INCLUDE as kysely
   // doesnt support this natively.
   await sql`
-    CREATE INDEX user_consumed_ordered_by_created_at_index_covering
+    CREATE INDEX user_consumed_ordered_by_id_index_covering
     ON ${sql.table(userConsumedTableName)}
-    (user_id, created_at DESC)
+    (user_id, id DESC)
     INCLUDE (item_type, item_id)
   `.execute(db);
 
