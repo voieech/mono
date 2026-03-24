@@ -50,13 +50,16 @@ export const userConsumedRepo = {
 
   async getManyUserConsumedItems(filters: {
     userID: string;
+    limit: number;
+    /**
+     * Cursor of the last itemID to skip past
+     */
+    cursorItemID?: undefined | string;
     /**
      * Optionally filter for a specific item type, else returns all UserConsumed
      * item IDs regardless of itemType
      */
     itemType?: undefined | ConsumableItemType;
-    cursorCreatedAt?: undefined | string;
-    limit: number;
   }) {
     let query = apiDB
       .selectFrom("user_consumed")
@@ -69,14 +72,8 @@ export const userConsumedRepo = {
       query = query.where("item_type", "=", filters.itemType);
     }
 
-    if (filters.cursorCreatedAt !== undefined) {
-      query = query.where(
-        "created_at",
-        "<",
-        $DateTime.ISO.DateTime.makeStrongAndThrowOnError(
-          filters.cursorCreatedAt,
-        ),
-      );
+    if (filters.cursorItemID !== undefined) {
+      query = query.where("item_id", ">", filters.cursorItemID);
     }
 
     return await query.execute();

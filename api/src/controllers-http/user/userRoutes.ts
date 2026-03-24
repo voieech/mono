@@ -260,20 +260,18 @@ export const userRoutes = express
     async function (req, res) {
       const userID = await req.genAuthenticatedUserID();
 
-      // Optional filter
+      // Optional filter(s)
       const itemType = req.query["itemType"] as undefined | ConsumableItemType;
+      const cursorItemID = req.query["cursorItemID"] as undefined | string;
       const rawLimit = Number(req.query["limit"]);
       const limit = isNaN(rawLimit) || rawLimit < 1 ? 50 : rawLimit;
-      const cursorCreatedAt = req.query["cursorCreatedAt"] as
-        | undefined
-        | string;
 
       const userConsumedItems = await userConsumedRepo.getManyUserConsumedItems(
         {
           userID,
           itemType,
           limit,
-          cursorCreatedAt,
+          cursorItemID,
         },
       );
 
