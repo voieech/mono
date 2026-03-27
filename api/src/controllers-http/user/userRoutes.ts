@@ -212,7 +212,7 @@ export const userRoutes = express
       const userID = await req.genAuthenticatedUserID();
 
       // Optional filter(s)
-      const itemType = req.query["itemType"] as undefined | ConsumableItemType;
+      const itemType = req.query["itemType"] as undefined | LikeableItemType;
       const cursorID = req.query["cursorID"] as undefined | string;
       const rawLimit = Number(req.query["limit"]);
       const limit = isNaN(rawLimit) || rawLimit < 1 ? 50 : rawLimit;
