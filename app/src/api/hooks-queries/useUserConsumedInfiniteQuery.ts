@@ -22,6 +22,12 @@ export function useUserConsumedInfiniteQuery(queryOptions?: {
       queryOptions,
     }),
 
+    // This is mostly used to show user their "consumption history", so every
+    // time they navigate away and back, they could have potentially consumed
+    // another item, so this will always reload since we discarded the results
+    // once no view is using this query to show this data
+    gcTime: 0,
+
     initialPageParam: undefined,
 
     getNextPageParam: (lastPage, _allPages) => lastPage?.at?.(-1)?.id,
