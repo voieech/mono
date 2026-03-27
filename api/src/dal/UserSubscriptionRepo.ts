@@ -1,6 +1,7 @@
 import type { SubscribableItemType } from "../dto-types/index.js";
 
 import { apiDB, sqlExistenceCheck } from "../kysely/index.js";
+import { generateID } from "../util/generateID.js";
 
 export const userSubscriptionRepo = {
   async create(subscription: {
@@ -11,7 +12,7 @@ export const userSubscriptionRepo = {
     return await apiDB
       .insertInto("user_subscription")
       .values({
-        id: crypto.randomUUID(),
+        id: generateID.uuidV7(),
         created_at: $DateTime.now.asIsoDateTime(),
         user_id: subscription.userID,
         item_type: subscription.itemType,
