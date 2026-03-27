@@ -4,7 +4,7 @@ import { apiDB, sqlExistenceCheck } from "../kysely/index.js";
 import { generateID } from "../util/generateID.js";
 
 export const userSubscriptionRepo = {
-  async create(subscription: {
+  async upsert(subscription: {
     userID: string;
     itemType: SubscribableItemType;
     itemID: string;
@@ -17,6 +17,21 @@ export const userSubscriptionRepo = {
         user_id: subscription.userID,
         item_type: subscription.itemType,
         item_id: subscription.itemID,
+      })
+      // Upsert behaviour
+      .onConflict((oc) => {
+        return (
+          oc
+            // If the composite unique constraint had a conflict means user
+            // subscribed to this item before.
+            .columns(["user_id", "item_type", "item_id"])
+            .doUpdateSet({
+              // Need to update the ID since we are using this time sortable ID
+              // as pagination cursor
+              id: generateID.uuidV7(),
+              created_at: $DateTime.now.asIsoDateTime(),
+            })
+        );
       })
       .execute();
   },

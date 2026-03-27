@@ -146,7 +146,7 @@ export const userRoutes = express
       const shouldSubscribe = req.body["subscribe"]!;
 
       if (shouldSubscribe) {
-        await userSubscriptionRepo.create({
+        await userSubscriptionRepo.upsert({
           userID,
           itemType,
           itemID,
