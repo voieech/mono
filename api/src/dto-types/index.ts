@@ -13,6 +13,7 @@ export type * from "./PushNotificationTokens.js";
 export type * from "./SubscribableItemType.js";
 export type * from "./UserConsumedItems.js";
 export type * from "./UserConsumedStatus.js";
+export type * from "./UserLikedItems.js";
 export type * from "./UserLikeStatus.js";
 export type * from "./UserSubscriptionsOfItemType.js";
 export type * from "./UserSubscriptionStatus.js";

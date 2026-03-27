@@ -51,6 +51,37 @@ export const userLikeRepo = {
       .then((data) => data?.exists === true);
   },
 
+  async getManyUserLikedItems(filters: {
+    userID: string;
+    limit: number;
+    /**
+     * Cursor is the ID to skip past
+     */
+    cursorID?: undefined | string;
+    /**
+     * Optionally filter for a specific item type, else returns all UserLiked
+     * item IDs regardless of itemType
+     */
+    itemType?: undefined | LikeableItemType;
+  }) {
+    let query = apiDB
+      .selectFrom("user_like")
+      .select(["id", "item_type as itemType", "item_id as itemID"])
+      .where("user_id", "=", filters.userID)
+      .orderBy("id", "desc")
+      .limit(filters.limit);
+
+    if (filters.itemType !== undefined) {
+      query = query.where("item_type", "=", filters.itemType);
+    }
+
+    if (filters.cursorID !== undefined) {
+      query = query.where("id", "<", filters.cursorID);
+    }
+
+    return await query.execute();
+  },
+
   async delete(filters: {
     userID: string;
     itemType: LikeableItemType;

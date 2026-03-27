@@ -7,10 +7,11 @@ import type {
   LikeableItemType,
   ConsumableItemType,
   UserLikeStatus,
+  UserLikedItems,
   UserConsumedStatus,
+  UserConsumedItems,
   UserSubscriptionStatus,
   UserSubscriptionsOfItemType,
-  UserConsumedItems,
 } from "../../dto-types/index.js";
 
 import {
@@ -201,6 +202,31 @@ export const userRoutes = express
       res.status(200).json({
         like: isLiked,
       } satisfies UserLikeStatus);
+    },
+  )
+
+  .get(
+    "/v1/user/like",
+    authenticationMiddlewareBuilder(),
+    async function (req, res) {
+      const userID = await req.genAuthenticatedUserID();
+
+      // Optional filter(s)
+      const itemType = req.query["itemType"] as undefined | ConsumableItemType;
+      const cursorID = req.query["cursorID"] as undefined | string;
+      const rawLimit = Number(req.query["limit"]);
+      const limit = isNaN(rawLimit) || rawLimit < 1 ? 50 : rawLimit;
+
+      const userLikedItems = await userLikeRepo.getManyUserLikedItems({
+        userID,
+        itemType,
+        limit,
+        cursorID,
+      });
+
+      res.status(200).json({
+        items: userLikedItems,
+      } satisfies UserLikedItems);
     },
   )
 
