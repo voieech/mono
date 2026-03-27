@@ -69,22 +69,20 @@ export default function MePage() {
           </ThemedText>
         </FrontPageLayoutTopBarWithProfilePic>
         <ScrollViewContainer>
-          <ExperimentalSurface>
-            <AlbumRow
-              href={{
-                pathname: "/",
-              }}
-              imgSource={require("@/assets/images/likes.png")}
-              title={t`Likes`}
-            />
-            <VerticalSpacer />
-          </ExperimentalSurface>
           <AlbumRow
             href={{
               pathname: "/profile/history",
             }}
             imgSource={require("@/assets/images/history.jpg")}
             title={t`History`}
+          />
+          <VerticalSpacer />
+          <AlbumRow
+            href={{
+              pathname: "/profile/likes",
+            }}
+            imgSource={require("@/assets/images/likes.png")}
+            title={t`Likes`}
           />
           <VerticalSpacer />
           <ExperimentalSurface>

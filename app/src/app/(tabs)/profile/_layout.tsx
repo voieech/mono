@@ -27,6 +27,13 @@ export default function ProfileLayout() {
         }}
       />
       <Stack.Screen
+        name="likes"
+        options={{
+          title: t`Likes`,
+          headerBackTitle: t`Back`,
+        }}
+      />
+      <Stack.Screen
         name="contact-form"
         options={{
           title: t`Contact Us`,
