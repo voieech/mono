@@ -1,6 +1,7 @@
 import type { LikeableItemType } from "../dto-types/index.js";
 
 import { apiDB, sqlExistenceCheck } from "../kysely/index.js";
+import { generateID } from "../util/generateID.js";
 
 export const userLikeRepo = {
   async upsert(like: {
@@ -11,7 +12,7 @@ export const userLikeRepo = {
     return await apiDB
       .insertInto("user_like")
       .values({
-        id: crypto.randomUUID(),
+        id: generateID.uuidV7(),
         created_at: $DateTime.now.asIsoDateTime(),
         user_id: like.userID,
         item_type: like.itemType,
@@ -25,6 +26,9 @@ export const userLikeRepo = {
             // liked this item before, we will just update timestamp only.
             .columns(["user_id", "item_type", "item_id"])
             .doUpdateSet({
+              // Need to update the ID since we are using this time sortable ID
+              // as pagination cursor
+              id: generateID.uuidV7(),
               created_at: $DateTime.now.asIsoDateTime(),
             })
         );
