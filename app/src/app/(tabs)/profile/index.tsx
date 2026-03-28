@@ -71,6 +71,14 @@ export default function MePage() {
         <ScrollViewContainer>
           <AlbumRow
             href={{
+              pathname: "/profile/subscriptions",
+            }}
+            imgSource={require("@/assets/images/subscriptions.png")}
+            title={t`Subscriptions`}
+          />
+          <VerticalSpacer />
+          <AlbumRow
+            href={{
               pathname: "/profile/history",
             }}
             imgSource={require("@/assets/images/history.jpg")}
@@ -85,16 +93,6 @@ export default function MePage() {
             title={t`Likes`}
           />
           <VerticalSpacer />
-          <ExperimentalSurface>
-            <AlbumRow
-              href={{
-                pathname: "/",
-              }}
-              imgSource={require("@/assets/images/subscriptions.png")}
-              title={t`Subscriptions`}
-            />
-            <VerticalSpacer />
-          </ExperimentalSurface>
           <ExperimentalSurface>
             <AlbumRow
               href={{

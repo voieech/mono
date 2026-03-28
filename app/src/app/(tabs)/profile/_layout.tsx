@@ -20,6 +20,13 @@ export default function ProfileLayout() {
         }}
       />
       <Stack.Screen
+        name="subscriptions"
+        options={{
+          title: t`Subscriptions`,
+          headerBackTitle: t`Back`,
+        }}
+      />
+      <Stack.Screen
         name="history"
         options={{
           title: t`History`,

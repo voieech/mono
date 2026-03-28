@@ -11,6 +11,7 @@ export * from "./usePodcastEpisodeQuery";
 export * from "./useUserConsumedInfiniteQuery";
 export * from "./useUserLikeInfiniteQuery";
 export * from "./useUserLikeQuery";
+export * from "./useUserSubscribedInfiniteQuery";
 export * from "./useUserSubscriptionQuery";
 export * from "./useUserSubscriptionsOfItemTypeQuery";
 export * from "./useYoutubeVideoOEmbedMetadataQuery";

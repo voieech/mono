@@ -58,7 +58,7 @@ msgstr "动画与漫画"
 msgid "App cache"
 msgstr "应用程序缓存"
 
-#: src/app/(tabs)/profile/_layout.tsx:74
+#: src/app/(tabs)/profile/_layout.tsx:81
 #: src/app/(tabs)/profile/profile-page.tsx:103
 msgid "App Details"
 msgstr "应用详情"
@@ -95,7 +95,7 @@ msgstr "艺术"
 msgid "Astronomy"
 msgstr "天文学"
 
-#: src/app/(tabs)/profile/_layout.tsx:53
+#: src/app/(tabs)/profile/_layout.tsx:60
 #: src/app/(tabs)/profile/profile-page.tsx:352
 msgid "Audio Playback"
 msgstr "音频播放"
@@ -118,6 +118,7 @@ msgstr "航空"
 #: src/app/(tabs)/profile/_layout.tsx:68
 #: src/app/(tabs)/profile/_layout.tsx:75
 #: src/app/(tabs)/profile/_layout.tsx:82
+#: src/app/(tabs)/profile/_layout.tsx:89
 #: src/app/welcome.tsx:139
 msgid "Back"
 msgstr "返回"
@@ -220,7 +221,7 @@ msgstr "喜剧小说"
 msgid "Comedy Interviews"
 msgstr "喜剧采访"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/_layout.tsx:46
 msgid "Contact Us"
 msgstr "联系我们"
 
@@ -451,8 +452,8 @@ msgstr "帮助与支持"
 msgid "Hinduism"
 msgstr "印度教"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
-#: src/app/(tabs)/profile/index.tsx:77
+#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/index.tsx:85
 #: src/locales/categoryStringToMsgDescriptor.ts:40
 msgid "History"
 msgstr "历史"
@@ -510,7 +511,7 @@ msgstr "犹太教"
 msgid "Kids & Family"
 msgstr "儿童与家庭"
 
-#: src/app/(tabs)/profile/_layout.tsx:60
+#: src/app/(tabs)/profile/_layout.tsx:67
 #: src/app/(tabs)/profile/profile-page.tsx:358
 #: src/app/welcome.tsx:244
 msgid "Language"
@@ -528,8 +529,8 @@ msgstr "闲暇"
 msgid "Life Sciences"
 msgstr "生命科学"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
-#: src/app/(tabs)/profile/index.tsx:85
+#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/index.tsx:93
 msgid "Likes"
 msgstr "喜欢"
 
@@ -624,7 +625,11 @@ msgstr "还没有历史记录"
 
 #: src/app/(tabs)/profile/likes.tsx:57
 msgid "No likes yet"
-msgstr "还没有喜欢的记录"
+msgstr "还没有喜欢的东西"
+
+#: src/app/(tabs)/profile/subscriptions.tsx:57
+msgid "No subscriptions yet"
+msgstr "还没有任何订阅"
 
 #: src/locales/categoryStringToMsgDescriptor.ts:25
 msgid "Non-Profit"
@@ -639,7 +644,7 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile/_layout.tsx:46
+#: src/app/(tabs)/profile/_layout.tsx:53
 #: src/app/(tabs)/profile/profile-page.tsx:345
 msgid "Notifications"
 msgstr "程序通知"
@@ -688,7 +693,7 @@ msgstr "表演艺术"
 msgid "Personal Journals"
 msgstr "个人日记"
 
-#: src/app/(tabs)/profile/_layout.tsx:67
+#: src/app/(tabs)/profile/_layout.tsx:74
 #: src/app/(tabs)/profile/profile-page.tsx:365
 msgid "Personalisation"
 msgstr "个性化"
@@ -788,6 +793,7 @@ msgstr "宗教与灵性"
 
 #: src/app/(tabs)/profile/history.tsx:69
 #: src/app/(tabs)/profile/likes.tsx:69
+#: src/app/(tabs)/profile/subscriptions.tsx:69
 msgid "Reload"
 msgstr "重新加载"
 
@@ -934,11 +940,12 @@ msgstr "已提交！"
 msgid "Subscribe"
 msgstr "订阅"
 
-#: src/app/(tabs)/profile/index.tsx:94
+#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/index.tsx:77
 msgid "Subscriptions"
 msgstr "订阅"
 
-#: src/app/(tabs)/profile/index.tsx:104
+#: src/app/(tabs)/profile/index.tsx:102
 msgid "Subscriptions Content"
 msgstr "订阅内容"
 

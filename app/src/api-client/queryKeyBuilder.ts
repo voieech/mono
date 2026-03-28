@@ -10,6 +10,7 @@ export const queryKeyBuilder = new QueryKeyBuilder<
   | "create.youtube-video-summary.youtubeVideoID.$youtubeVideoID"
   | "user.subscription.itemType.$itemType"
   | "user.subscription.itemType.$itemType.itemID.$itemID"
+  | "user.subscription.infinite.$queryOptions"
   | "user.like.itemType.$itemType.itemID.$itemID"
   | "user.liked.$queryOptions"
   | "user.consumed.itemType.$itemType.itemID.$itemID"
