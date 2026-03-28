@@ -11,6 +11,7 @@ import type {
   UserConsumedStatus,
   UserConsumedItems,
   UserSubscriptionStatus,
+  UserSubscribedItems,
   UserSubscriptionsOfItemType,
 } from "../../dto-types/index.js";
 
@@ -134,6 +135,34 @@ export const userRoutes = express
       res.status(200).json({
         subscribe: isSubscribed,
       } satisfies UserSubscriptionStatus);
+    },
+  )
+
+  .get(
+    "/v1/user/subscription",
+    authenticationMiddlewareBuilder(),
+    async function (req, res) {
+      const userID = await req.genAuthenticatedUserID();
+
+      // Optional filter(s)
+      const itemType = req.query["itemType"] as
+        | undefined
+        | SubscribableItemType;
+      const cursorID = req.query["cursorID"] as undefined | string;
+      const rawLimit = Number(req.query["limit"]);
+      const limit = isNaN(rawLimit) || rawLimit < 1 ? 50 : rawLimit;
+
+      const userSubscribedItems =
+        await userSubscriptionRepo.getManyUserSubscribedItems({
+          userID,
+          itemType,
+          limit,
+          cursorID,
+        });
+
+      res.status(200).json({
+        items: userSubscribedItems,
+      } satisfies UserSubscribedItems);
     },
   )
 

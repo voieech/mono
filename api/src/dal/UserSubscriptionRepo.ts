@@ -78,6 +78,37 @@ export const userSubscriptionRepo = {
       .then((rows) => rows.map((row) => row.user_id));
   },
 
+  async getManyUserSubscribedItems(filters: {
+    userID: string;
+    limit: number;
+    /**
+     * Cursor is the ID to skip past
+     */
+    cursorID?: undefined | string;
+    /**
+     * Optionally filter for a specific item type, else returns all
+     * UserSubscribed item IDs regardless of itemType
+     */
+    itemType?: undefined | SubscribableItemType;
+  }) {
+    let query = apiDB
+      .selectFrom("user_subscription")
+      .select(["id", "item_type as itemType", "item_id as itemID"])
+      .where("user_id", "=", filters.userID)
+      .orderBy("id", "desc")
+      .limit(filters.limit);
+
+    if (filters.itemType !== undefined) {
+      query = query.where("item_type", "=", filters.itemType);
+    }
+
+    if (filters.cursorID !== undefined) {
+      query = query.where("id", "<", filters.cursorID);
+    }
+
+    return await query.execute();
+  },
+
   async delete(filters: {
     userID: string;
     itemType: SubscribableItemType;
