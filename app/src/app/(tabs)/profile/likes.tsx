@@ -148,6 +148,7 @@ function PodcastEpisodeRow(props: { id: string }) {
             width: "100%",
             height: "100%",
             maxWidth: 128,
+            aspectRatio: 1,
             borderTopLeftRadius: 8,
             borderBottomLeftRadius: 8,
           }}
@@ -156,21 +157,16 @@ function PodcastEpisodeRow(props: { id: string }) {
         <ThemedView
           style={{
             flex: 1,
+            flexDirection: "column",
+            justifyContent: "space-between",
             borderTopRightRadius: 8,
             borderBottomRightRadius: 8,
-            paddingVertical: 4,
+            paddingVertical: 8,
             paddingHorizontal: 16,
             backgroundColor: Colors.neutral800,
           }}
         >
-          <ThemedText
-            numberOfLines={3}
-            style={{
-              paddingBottom: 8,
-            }}
-          >
-            {podcastEpisode.title}
-          </ThemedText>
+          <ThemedText numberOfLines={3}>{podcastEpisode.title}</ThemedText>
           <ThemedText type="sm-light" numberOfLines={1}>
             {podcastEpisode.channel_name}
           </ThemedText>
