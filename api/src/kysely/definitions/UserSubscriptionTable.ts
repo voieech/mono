@@ -13,7 +13,7 @@ import type {
  */
 export interface UserSubscriptionTable {
   /**
-   * UUID
+   * UUID v7
    */
   id: NonUpdatableIdColumnType;
 

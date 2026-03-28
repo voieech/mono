@@ -13,7 +13,7 @@ import type {
  */
 export interface UserLikeTable {
   /**
-   * UUID
+   * UUID v7
    */
   id: NonUpdatableIdColumnType;
 
