@@ -12,7 +12,7 @@ export const queryKeyBuilder = new QueryKeyBuilder<
   | "user.subscription.itemType.$itemType.itemID.$itemID"
   | "user.subscription.infinite.$queryOptions"
   | "user.like.itemType.$itemType.itemID.$itemID"
-  | "user.liked.$queryOptions"
+  | "user.like.infinite.$queryOptions"
   | "user.consumed.itemType.$itemType.itemID.$itemID"
-  | "user.consumed.$queryOptions"
+  | "user.consumed.infinite.$queryOptions"
 >();

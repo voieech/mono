@@ -18,7 +18,7 @@ export function useUserConsumedInfiniteQuery(queryOptions?: {
   limit?: number;
 }) {
   return useInfiniteQuery<UserConsumedItems["items"]>({
-    queryKey: queryKeyBuilder.fullPath("user.consumed.$queryOptions", {
+    queryKey: queryKeyBuilder.fullPath("user.consumed.infinite.$queryOptions", {
       queryOptions,
     }),
 

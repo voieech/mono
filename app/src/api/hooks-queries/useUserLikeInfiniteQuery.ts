@@ -18,7 +18,7 @@ export function useUserLikeInfiniteQuery(queryOptions?: {
   limit?: number;
 }) {
   return useInfiniteQuery<UserLikedItems["items"]>({
-    queryKey: queryKeyBuilder.fullPath("user.liked.$queryOptions", {
+    queryKey: queryKeyBuilder.fullPath("user.like.infinite.$queryOptions", {
       queryOptions,
     }),
 
