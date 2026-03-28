@@ -22,23 +22,23 @@ import { useBottomTabOverflow } from "@/hooks";
 export default function Likes() {
   const bottomOverflow = useBottomTabOverflow();
 
-  const userConsumedInfiniteQuery = useUserLikeInfiniteQuery({
+  const userLikeInfiniteQuery = useUserLikeInfiniteQuery({
     limit: 10,
   });
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
     setRefreshing(true);
-    await Promise.all([userConsumedInfiniteQuery.refetch()]);
+    await Promise.all([userLikeInfiniteQuery.refetch()]);
     setRefreshing(false);
   }
 
-  if (userConsumedInfiniteQuery.data === undefined) {
+  if (userLikeInfiniteQuery.data === undefined) {
     return null;
   }
 
   // Flatten the pages into a single array for FlatList
-  const flattenedData = userConsumedInfiniteQuery.data.pages.flatMap(
+  const flattenedData = userLikeInfiniteQuery.data.pages.flatMap(
     (page) => page,
   );
 
@@ -97,15 +97,15 @@ export default function Likes() {
         // Triggered when user reaches the threshold
         onEndReached={() => {
           if (
-            userConsumedInfiniteQuery.hasNextPage &&
-            !userConsumedInfiniteQuery.isFetchingNextPage
+            userLikeInfiniteQuery.hasNextPage &&
+            !userLikeInfiniteQuery.isFetchingNextPage
           ) {
-            userConsumedInfiniteQuery.fetchNextPage();
+            userLikeInfiniteQuery.fetchNextPage();
           }
         }}
         ItemSeparatorComponent={() => <VerticalSpacer height={4} />}
         ListFooterComponent={
-          userConsumedInfiniteQuery.isFetchingNextPage ? (
+          userLikeInfiniteQuery.isFetchingNextPage ? (
             <ActivityIndicator size="small" />
           ) : null
         }
