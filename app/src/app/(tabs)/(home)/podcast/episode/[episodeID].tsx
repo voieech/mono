@@ -36,7 +36,7 @@ export default function PodcastEpisode() {
   const {
     isPending,
     isError,
-    data: episode,
+    data: podcastEpisode,
     error,
   } = usePodcastEpisodeQuery(episodeID);
 
@@ -44,9 +44,9 @@ export default function PodcastEpisode() {
 
   // Making the assumption that titles are unique
   const isCurrentEpisodeTheActiveTrack =
-    episode !== undefined &&
+    podcastEpisode !== undefined &&
     activeTrack !== undefined &&
-    episode.id === activeTrack.id;
+    podcastEpisode.id === activeTrack.id;
 
   const podcastEpisodeNextReccomendationsQuery =
     usePodcastEpisodeNextReccomendationsQuery(episodeID);
@@ -56,7 +56,7 @@ export default function PodcastEpisode() {
   const playEpisode = useCallback(
     async function () {
       // Should not happen since UI wont be shown until episode is loaded
-      if (episode === undefined) {
+      if (podcastEpisode === undefined) {
         return;
       }
 
@@ -73,14 +73,14 @@ export default function PodcastEpisode() {
       await RNTPTrackPlayer.load(
         createTrackWithMetadata({
           trackType: "podcast_episode",
-          id: episode.id,
-          episode,
-          artist: episode.channel_name,
-          url: episode.audio_public_url,
-          title: episode.title,
-          duration: episode.audio_length,
-          artwork: episode.img_url,
-          locale: episode.language,
+          id: podcastEpisode.id,
+          episode: podcastEpisode,
+          artist: podcastEpisode.channel_name,
+          url: podcastEpisode.audio_public_url,
+          title: podcastEpisode.title,
+          duration: podcastEpisode.audio_length,
+          artwork: podcastEpisode.img_url,
+          locale: podcastEpisode.language,
         }),
       );
 
@@ -89,7 +89,7 @@ export default function PodcastEpisode() {
       // Call API to get reccomendations if it wasnt already loaded
       const reccomendations =
         podcastEpisodeNextReccomendationsQuery.data?.reccomendations ??
-        (await getPodcastEpisodeNextReccomendations(episode.id))
+        (await getPodcastEpisodeNextReccomendations(podcastEpisode.id))
           ?.reccomendations;
 
       await trackPlayer.enqueueTracksAfterCurrent(
@@ -109,7 +109,7 @@ export default function PodcastEpisode() {
       );
     },
     [
-      episode,
+      podcastEpisode,
       trackPlayer,
       isCurrentEpisodeTheActiveTrack,
       podcastEpisodeNextReccomendationsQuery.data?.reccomendations,
@@ -122,7 +122,7 @@ export default function PodcastEpisode() {
     return <FullScreenLoader />;
   }
 
-  if (isError || episode === undefined) {
+  if (isError || podcastEpisode === undefined) {
     if (error instanceof NotFoundError) {
       return <Redirect href="/+not-found" />;
     }
@@ -134,9 +134,9 @@ export default function PodcastEpisode() {
     );
   }
 
-  const episodeSeasonNumber = episode.season_number;
-  const episodeNumber = episode.episode_number;
-  const episodeLengthInMins = Math.trunc(episode.audio_length / 60);
+  const episodeSeasonNumber = podcastEpisode.season_number;
+  const episodeNumber = podcastEpisode.episode_number;
+  const episodeLengthInMins = Math.trunc(podcastEpisode.audio_length / 60);
 
   return (
     <ParallaxScrollViewContainer
@@ -154,7 +154,7 @@ export default function PodcastEpisode() {
           }}
         >
           <Image
-            source={episode.img_url}
+            source={podcastEpisode.img_url}
             style={{
               aspectRatio: 1,
             }}
@@ -169,13 +169,13 @@ export default function PodcastEpisode() {
           paddingBottom: 4,
         }}
       >
-        {episode.title}
+        {podcastEpisode.title}
       </ThemedText>
       <Link
         href={{
           pathname: "/podcast/channel/[channelID]",
           params: {
-            channelID: episode.channel_id,
+            channelID: podcastEpisode.channel_id,
           },
         }}
         style={{
@@ -183,7 +183,7 @@ export default function PodcastEpisode() {
           alignSelf: "flex-start",
         }}
       >
-        <ThemedText>{episode.channel_name}</ThemedText>
+        <ThemedText>{podcastEpisode.channel_name}</ThemedText>
       </Link>
       <ThemedView
         style={{
@@ -198,7 +198,7 @@ export default function PodcastEpisode() {
             Season {episodeSeasonNumber}, Episode {episodeNumber}
           </Trans>
           {"\n"}
-          {episode.created_at.split("T")[0]}
+          {podcastEpisode.created_at.split("T")[0]}
           {"\n"}
           <Trans>{episodeLengthInMins} mins</Trans>
         </ThemedText>
@@ -213,20 +213,20 @@ export default function PodcastEpisode() {
           <ShareTrackIcon
             track={createTrackWithMetadata({
               trackType: "podcast_episode",
-              id: episode.id,
-              episode,
-              artist: episode.channel_name,
-              url: episode.audio_public_url,
-              title: episode.title,
-              duration: episode.audio_length,
-              artwork: episode.img_url,
-              locale: episode.language,
+              id: podcastEpisode.id,
+              episode: podcastEpisode,
+              artist: podcastEpisode.channel_name,
+              url: podcastEpisode.audio_public_url,
+              title: podcastEpisode.title,
+              duration: podcastEpisode.audio_length,
+              artwork: podcastEpisode.img_url,
+              locale: podcastEpisode.language,
             })}
             size={36}
           />
           <LikeUnlikeButton
             likeableItemType="podcast_episode"
-            likeableItemID={episode.id}
+            likeableItemID={podcastEpisode.id}
           />
           {/*
             Even if player is not paused, i.e. it is loading or whatever show the
@@ -256,7 +256,7 @@ export default function PodcastEpisode() {
           paddingBottom: 20,
         }}
       />
-      <ThemedText>{episode.description}</ThemedText>
+      <ThemedText>{podcastEpisode.description}</ThemedText>
       {podcastEpisodeNextReccomendationsQuery.data !== undefined && (
         <>
           <View

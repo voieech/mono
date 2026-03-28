@@ -118,20 +118,20 @@ function PodcastEpisodeRow(props: { id: string }) {
   const {
     isPending,
     isError,
-    data: episode,
+    data: podcastEpisode,
   } = usePodcastEpisodeQuery(props.id);
 
-  if (isPending || isError || episode === undefined) {
+  if (isPending || isError || podcastEpisode === undefined) {
     return null;
   }
 
   return (
     <Link
-      key={episode.id}
+      key={podcastEpisode.id}
       href={{
         pathname: "/podcast/episode/[episodeID]",
         params: {
-          episodeID: episode.id,
+          episodeID: podcastEpisode.id,
         },
       }}
     >
@@ -143,7 +143,7 @@ function PodcastEpisodeRow(props: { id: string }) {
         }}
       >
         <Image
-          source={episode.img_url}
+          source={podcastEpisode.img_url}
           style={{
             width: "100%",
             height: "100%",
@@ -169,13 +169,13 @@ function PodcastEpisodeRow(props: { id: string }) {
               paddingBottom: 8,
             }}
           >
-            {episode.title}
+            {podcastEpisode.title}
           </ThemedText>
           <ThemedText type="sm-light" numberOfLines={1}>
-            {episode.channel_name}
+            {podcastEpisode.channel_name}
           </ThemedText>
           <ThemedText type="sm-light">
-            {episode.created_at.split("T")[0]}
+            {podcastEpisode.created_at.split("T")[0]}
           </ThemedText>
         </ThemedView>
       </ThemedView>
