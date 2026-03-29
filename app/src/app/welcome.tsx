@@ -65,6 +65,9 @@ export default function Welcome() {
       }}
     >
       <ScrollView
+        // Dont allow horizontal scrolling, use the continue/back buttons for
+        // tab screen navigation
+        scrollEnabled={false}
         horizontal={true}
         ref={scrollRef}
         style={{

@@ -64,22 +64,22 @@ msgid "App Details"
 msgstr "App Details"
 
 #: src/app/(tabs)/profile/settings/language.tsx:27
-#: src/app/welcome.tsx:256
+#: src/app/welcome.tsx:259
 msgid "App Language"
 msgstr "App Language"
 
 #: src/app/(tabs)/profile/settings/language.tsx:51
-#: src/app/welcome.tsx:280
+#: src/app/welcome.tsx:283
 msgid "App language can only be modified in the Android \"Settings\" app."
 msgstr "App language can only be modified in the Android \"Settings\" app."
 
 #: src/app/(tabs)/profile/settings/language.tsx:56
-#: src/app/welcome.tsx:285
+#: src/app/welcome.tsx:288
 msgid "App language can only be modified in the Device \"Settings\" app."
 msgstr "App language can only be modified in the Device \"Settings\" app."
 
 #: src/app/(tabs)/profile/settings/language.tsx:46
-#: src/app/welcome.tsx:275
+#: src/app/welcome.tsx:278
 msgid "App language can only be modified in the iOS \"Settings\" app."
 msgstr "App language can only be modified in the iOS \"Settings\" app."
 
@@ -127,7 +127,7 @@ msgstr "Aviation"
 #: src/app/(tabs)/profile/_layout.tsx:75
 #: src/app/(tabs)/profile/_layout.tsx:82
 #: src/app/(tabs)/profile/_layout.tsx:89
-#: src/app/welcome.tsx:139
+#: src/app/welcome.tsx:142
 msgid "Back"
 msgstr "Back"
 
@@ -234,12 +234,12 @@ msgid "Contact Us"
 msgstr "Contact Us"
 
 #: src/app/(tabs)/profile/settings/language.tsx:69
-#: src/app/welcome.tsx:298
+#: src/app/welcome.tsx:301
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "Content Language"
 
-#: src/app/welcome.tsx:180
+#: src/app/welcome.tsx:183
 msgid "Continue"
 msgstr "Continue"
 
@@ -525,7 +525,7 @@ msgstr "Kids & Family"
 
 #: src/app/(tabs)/profile/_layout.tsx:67
 #: src/app/(tabs)/profile/profile-page.tsx:358
-#: src/app/welcome.tsx:244
+#: src/app/welcome.tsx:247
 msgid "Language"
 msgstr "Language"
 
@@ -1005,7 +1005,7 @@ msgstr "Test requested, look out for incoming push notifications!"
 msgid "These are still available without signing in"
 msgstr "These are still available without signing in"
 
-#: src/app/welcome.tsx:247
+#: src/app/welcome.tsx:250
 msgid "These can be changed again later in settings."
 msgstr "These can be changed again later in settings."
 
@@ -1082,8 +1082,8 @@ msgstr "Yes"
 msgid "Your email"
 msgstr "Your email"
 
-#: src/app/welcome.tsx:208
-#: src/app/welcome.tsx:409
+#: src/app/welcome.tsx:211
+#: src/app/welcome.tsx:412
 msgid "Your Hyper Personalized Podcasts"
 msgstr "Your Hyper Personalized Podcasts"
 
