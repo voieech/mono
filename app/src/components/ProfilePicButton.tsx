@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { Link } from "expo-router";
+import { useRouter, Link } from "expo-router";
 import { View } from "react-native";
 
 import { Colors } from "@/constants";
@@ -8,12 +8,18 @@ import { useAuthContext } from "@/context";
 import { Icon } from "./provided";
 
 export function ProfilePicButton() {
+  const router = useRouter();
   const authContext = useAuthContext();
   const imageSize = 32;
   return (
     <Link
       href={{
         pathname: "/profile/profile-page",
+      }}
+      onLongPress={() => {
+        if (__DEV__) {
+          router.push("/profile/settings/internal");
+        }
       }}
     >
       <View
