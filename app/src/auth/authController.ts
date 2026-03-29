@@ -9,6 +9,11 @@ import { generatePkceCode } from "./generatePkceCode";
 import { secureStoreForAuth } from "./secureStoreForAuth";
 
 export const authController = {
+  /**
+   * Returns boolean to indicate if the user successfully logins or did not
+   * (e.g. they choose to cancel login), this will also throw on auth errors
+   * that isnt caused by the user.
+   */
   async login() {
     try {
       // Step 1: Get auth URL from your backend
@@ -42,7 +47,7 @@ export const authController = {
 
       if (result.type === "cancel") {
         console.error("Login cancelled by user");
-        return;
+        return false;
       }
 
       if (result.type !== "success" || !result.url) {
@@ -102,6 +107,8 @@ export const authController = {
         refreshToken,
         userData,
       });
+
+      return true;
     } catch (err) {
       // Log and bubble error up
       console.error("Login error:", err);
