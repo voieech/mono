@@ -29,11 +29,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const login = useCallback(
     async function (options?: { onLoginSuccess?: () => unknown }) {
-      await authController.login();
-      const authData = await secureStoreForAuth.getAllAuthDataNonNull();
-      setAuthData(authData);
-      queryClient.clear();
-      await options?.onLoginSuccess?.();
+      const loginSuccess = await authController.login();
+      if (loginSuccess) {
+        const authData = await secureStoreForAuth.getAllAuthDataNonNull();
+        setAuthData(authData);
+        queryClient.clear();
+        await options?.onLoginSuccess?.();
+      }
     },
     [queryClient],
   );
