@@ -17,18 +17,16 @@ import {
   OpenNativeSettingsAppButton,
 } from "@/components";
 import { Colors } from "@/constants";
-import { useSettingContext } from "@/context";
+import { useSettingContext, useAuthContext } from "@/context";
 import { useThemeColor } from "@/hooks";
 import { linguiMsgToString } from "@/utils";
-
-// const welcomePages = [WelcomePage1, WelcomePage2, WelcomePage3];
-const welcomePages = [WelcomePage1, WelcomePage2];
 
 export default function Welcome() {
   const backgroundColor = useThemeColor("background");
   const windowDimensions = useWindowDimensions();
   const scrollRef = useRef<ScrollView>(null);
   const [currentPageXWidth, setCurrentPageXWidth] = useState(0);
+  const authContext = useAuthContext();
 
   // Scroll to a page index (0 based index) directly
   // function scrollToPage(pageIndex: number) {
@@ -57,6 +55,14 @@ export default function Welcome() {
     });
   }
 
+  const welcomePages = [
+    WelcomePage1,
+    // Only show the welcome page that asks user to login, if the user is not
+    // already authenticated
+    !authContext.isAuthenticated && WelcomePage2,
+    WelcomePage3,
+  ].filter((welcomePage) => welcomePage !== false);
+
   return (
     <SafeAreaView
       style={{
@@ -82,6 +88,7 @@ export default function Welcome() {
         {welcomePages.map((WelcomePage, index) => (
           <WelcomePage
             key={index}
+            showBackButton={index !== 0}
             scrollToNext={scrollToNext}
             scrollToPrevious={scrollToPrevious}
           />
@@ -92,6 +99,10 @@ export default function Welcome() {
 }
 
 type ScrollFunctionProps = {
+  /**
+   * Only set to true if this page allows navigating backwards
+   */
+  showBackButton: boolean;
   scrollToNext: () => void;
   scrollToPrevious: () => void;
 };
@@ -99,7 +110,7 @@ type ScrollFunctionProps = {
 function WelcomePageLayout(
   props: PropsWithChildren<
     ScrollFunctionProps & {
-      showBackButton?: boolean;
+      showBackButton: boolean;
       onScrollToNext?: () => unknown;
     }
   >,
@@ -215,15 +226,111 @@ function WelcomePage1(props: ScrollFunctionProps) {
   );
 }
 
+function WelcomePage2(props: ScrollFunctionProps) {
+  const backgroundColor = useThemeColor("background");
+  const windowDimensions = useWindowDimensions();
+  const authContext = useAuthContext();
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor,
+        width: windowDimensions.width,
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
+          paddingHorizontal: 12,
+          paddingBottom: 12,
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            rowGap: 8,
+          }}
+        >
+          <Image
+            source={require("@/assets/images/logo.png")}
+            style={{
+              height: "100%",
+              width: "100%",
+              maxHeight: 108,
+            }}
+          />
+          <ThemedText type="lg-semibold">
+            <Trans>Your Hyper Personalized Podcasts</Trans>
+          </ThemedText>
+        </View>
+      </View>
+      <View
+        style={{
+          paddingHorizontal: 24,
+          paddingBottom: 24,
+          flexDirection: "column",
+          rowGap: 24,
+        }}
+      >
+        <Pressable
+          onPress={() =>
+            authContext.login({
+              onLoginSuccess: props.scrollToNext,
+            })
+          }
+          style={({ pressed }) => ({
+            opacity: pressed ? 0.8 : 1,
+            backgroundColor: Colors.sky500,
+            borderRadius: 36,
+            alignItems: "center",
+            paddingVertical: 12,
+          })}
+        >
+          <ThemedText type="lg-normal">
+            <Trans>Sign In</Trans>
+          </ThemedText>
+        </Pressable>
+        <ThemedText
+          colorType="subtext"
+          style={{
+            textAlign: "center",
+          }}
+        >
+          <Trans>or</Trans>
+        </ThemedText>
+        <Pressable
+          onPress={props.scrollToNext}
+          style={({ pressed }) => ({
+            opacity: pressed ? 0.8 : 1,
+            alignSelf: "center",
+          })}
+        >
+          <ThemedText
+            type="lg-light"
+            colorType="subtext"
+            style={{
+              textDecorationLine: "underline",
+              textAlign: "center",
+            }}
+          >
+            <Trans>Continue as Guest</Trans>
+          </ThemedText>
+        </Pressable>
+      </View>
+    </SafeAreaView>
+  );
+}
+
 /**
  * Settings content is largely copied from Settings/Language page.
  */
-function WelcomePage2(props: ScrollFunctionProps) {
+function WelcomePage3(props: ScrollFunctionProps) {
   const settingContext = useSettingContext();
   return (
     <WelcomePageLayout
       {...props}
-      showBackButton={true}
       onScrollToNext={() =>
         settingContext.updateSetting(
           "lastOnboardingTime",
@@ -378,13 +485,12 @@ function WelcomePage2(props: ScrollFunctionProps) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function WelcomePage3(props: ScrollFunctionProps) {
+function WelcomePage4(props: ScrollFunctionProps) {
   const settingContext = useSettingContext();
 
   return (
     <WelcomePageLayout
       {...props}
-      showBackButton={true}
       onScrollToNext={() =>
         settingContext.updateSetting(
           "lastOnboardingTime",

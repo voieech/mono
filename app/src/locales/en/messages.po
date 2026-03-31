@@ -64,22 +64,22 @@ msgid "App Details"
 msgstr "App Details"
 
 #: src/app/(tabs)/profile/settings/language.tsx:27
-#: src/app/welcome.tsx:259
+#: src/app/welcome.tsx:366
 msgid "App Language"
 msgstr "App Language"
 
 #: src/app/(tabs)/profile/settings/language.tsx:51
-#: src/app/welcome.tsx:283
+#: src/app/welcome.tsx:390
 msgid "App language can only be modified in the Android \"Settings\" app."
 msgstr "App language can only be modified in the Android \"Settings\" app."
 
 #: src/app/(tabs)/profile/settings/language.tsx:56
-#: src/app/welcome.tsx:288
+#: src/app/welcome.tsx:395
 msgid "App language can only be modified in the Device \"Settings\" app."
 msgstr "App language can only be modified in the Device \"Settings\" app."
 
 #: src/app/(tabs)/profile/settings/language.tsx:46
-#: src/app/welcome.tsx:278
+#: src/app/welcome.tsx:385
 msgid "App language can only be modified in the iOS \"Settings\" app."
 msgstr "App language can only be modified in the iOS \"Settings\" app."
 
@@ -127,7 +127,7 @@ msgstr "Aviation"
 #: src/app/(tabs)/profile/_layout.tsx:75
 #: src/app/(tabs)/profile/_layout.tsx:82
 #: src/app/(tabs)/profile/_layout.tsx:89
-#: src/app/welcome.tsx:142
+#: src/app/welcome.tsx:153
 msgid "Back"
 msgstr "Back"
 
@@ -234,14 +234,18 @@ msgid "Contact Us"
 msgstr "Contact Us"
 
 #: src/app/(tabs)/profile/settings/language.tsx:69
-#: src/app/welcome.tsx:301
+#: src/app/welcome.tsx:408
 #: src/utils/settings/contentLanguage.ts:14
 msgid "Content Language"
 msgstr "Content Language"
 
-#: src/app/welcome.tsx:183
+#: src/app/welcome.tsx:194
 msgid "Continue"
 msgstr "Continue"
+
+#: src/app/welcome.tsx:318
+msgid "Continue as Guest"
+msgstr "Continue as Guest"
 
 #: src/app/(tabs)/profile/settings/notifications.tsx:162
 #: src/components/CopyOnPress.tsx:43
@@ -525,7 +529,7 @@ msgstr "Kids & Family"
 
 #: src/app/(tabs)/profile/_layout.tsx:67
 #: src/app/(tabs)/profile/profile-page.tsx:358
-#: src/app/welcome.tsx:247
+#: src/app/welcome.tsx:354
 msgid "Language"
 msgstr "Language"
 
@@ -684,6 +688,10 @@ msgstr "Open Notification Settings"
 #: src/components/OpenNativeSettingsAppButton.tsx:59
 msgid "Open Settings"
 msgstr "Open Settings"
+
+#: src/app/welcome.tsx:301
+msgid "or"
+msgstr "or"
 
 #: src/app/(tabs)/profile/contact-form.tsx:153
 msgid "OR"
@@ -884,6 +892,7 @@ msgstr "Show controls for skipping tracks to next/previous."
 
 #: src/app/(tabs)/profile/contact-form.tsx:142
 #: src/app/(tabs)/profile/profile-page.tsx:63
+#: src/app/welcome.tsx:292
 #: src/components/SigninToContinueCard.tsx:77
 msgid "Sign In"
 msgstr "Sign In"
@@ -1005,7 +1014,7 @@ msgstr "Test requested, look out for incoming push notifications!"
 msgid "These are still available without signing in"
 msgstr "These are still available without signing in"
 
-#: src/app/welcome.tsx:250
+#: src/app/welcome.tsx:357
 msgid "These can be changed again later in settings."
 msgstr "These can be changed again later in settings."
 
@@ -1082,8 +1091,9 @@ msgstr "Yes"
 msgid "Your email"
 msgstr "Your email"
 
-#: src/app/welcome.tsx:211
-#: src/app/welcome.tsx:412
+#: src/app/welcome.tsx:222
+#: src/app/welcome.tsx:265
+#: src/app/welcome.tsx:518
 msgid "Your Hyper Personalized Podcasts"
 msgstr "Your Hyper Personalized Podcasts"
 
