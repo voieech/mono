@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import { Trans } from "@lingui/react/macro";
 import { Image } from "expo-image";
 import { useRef, useState, Fragment, PropsWithChildren } from "react";
@@ -112,6 +114,7 @@ function WelcomePageLayout(
     ScrollFunctionProps & {
       showBackButton: boolean;
       onScrollToNext?: () => unknown;
+      bottomButtonOverride?: ReactNode;
     }
   >,
 ) {
@@ -173,27 +176,31 @@ function WelcomePageLayout(
           paddingBottom: 24,
         }}
       >
-        <Pressable
-          onPress={() => {
-            props.scrollToNext();
-            props.onScrollToNext?.();
-          }}
-          style={({ pressed }) => ({
-            opacity: pressed ? 0.8 : 1,
-            backgroundColor: Colors.sky500,
-            borderRadius: 36,
-            alignItems: "center",
-          })}
-        >
-          <ThemedText
-            type="lg-normal"
-            style={{
-              paddingVertical: 12,
+        {props.bottomButtonOverride !== undefined ? (
+          props.bottomButtonOverride
+        ) : (
+          <Pressable
+            onPress={() => {
+              props.scrollToNext();
+              props.onScrollToNext?.();
             }}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.8 : 1,
+              backgroundColor: Colors.sky500,
+              borderRadius: 36,
+              alignItems: "center",
+            })}
           >
-            <Trans>Continue</Trans>
-          </ThemedText>
-        </Pressable>
+            <ThemedText
+              type="lg-normal"
+              style={{
+                paddingVertical: 12,
+              }}
+            >
+              <Trans>Continue</Trans>
+            </ThemedText>
+          </Pressable>
+        )}
       </View>
     </View>
   );
@@ -227,99 +234,88 @@ function WelcomePage1(props: ScrollFunctionProps) {
 }
 
 function WelcomePage2(props: ScrollFunctionProps) {
-  const backgroundColor = useThemeColor("background");
-  const windowDimensions = useWindowDimensions();
   const authContext = useAuthContext();
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor,
-        width: windowDimensions.width,
-      }}
+    <WelcomePageLayout
+      // Never show back button for the auth page
+      showBackButton={false}
+      scrollToNext={props.scrollToNext}
+      scrollToPrevious={props.scrollToPrevious}
+      bottomButtonOverride={
+        <View
+          style={{
+            flexDirection: "column",
+            rowGap: 24,
+          }}
+        >
+          <Pressable
+            onPress={() =>
+              authContext.login({
+                onLoginSuccess: props.scrollToNext,
+              })
+            }
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.8 : 1,
+              backgroundColor: Colors.sky500,
+              borderRadius: 36,
+              alignItems: "center",
+              paddingVertical: 12,
+            })}
+          >
+            <ThemedText type="lg-normal">
+              <Trans>Sign In</Trans>
+            </ThemedText>
+          </Pressable>
+          <ThemedText
+            colorType="subtext"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            <Trans>or</Trans>
+          </ThemedText>
+          <Pressable
+            onPress={props.scrollToNext}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.8 : 1,
+              alignSelf: "center",
+            })}
+          >
+            <ThemedText
+              type="lg-light"
+              colorType="subtext"
+              style={{
+                textDecorationLine: "underline",
+                textAlign: "center",
+              }}
+            >
+              <Trans>Continue as Guest</Trans>
+            </ThemedText>
+          </Pressable>
+        </View>
+      }
     >
       <View
         style={{
           flex: 1,
-          paddingHorizontal: 12,
-          paddingBottom: 12,
+          alignItems: "center",
+          justifyContent: "center",
+          rowGap: 8,
         }}
       >
-        <View
+        <Image
+          source={require("@/assets/images/logo.png")}
           style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            rowGap: 8,
+            height: "100%",
+            width: "100%",
+            maxHeight: 108,
           }}
-        >
-          <Image
-            source={require("@/assets/images/logo.png")}
-            style={{
-              height: "100%",
-              width: "100%",
-              maxHeight: 108,
-            }}
-          />
-          <ThemedText type="lg-semibold">
-            <Trans>Your Hyper Personalized Podcasts</Trans>
-          </ThemedText>
-        </View>
-      </View>
-      <View
-        style={{
-          paddingHorizontal: 24,
-          paddingBottom: 24,
-          flexDirection: "column",
-          rowGap: 24,
-        }}
-      >
-        <Pressable
-          onPress={() =>
-            authContext.login({
-              onLoginSuccess: props.scrollToNext,
-            })
-          }
-          style={({ pressed }) => ({
-            opacity: pressed ? 0.8 : 1,
-            backgroundColor: Colors.sky500,
-            borderRadius: 36,
-            alignItems: "center",
-            paddingVertical: 12,
-          })}
-        >
-          <ThemedText type="lg-normal">
-            <Trans>Sign In</Trans>
-          </ThemedText>
-        </Pressable>
-        <ThemedText
-          colorType="subtext"
-          style={{
-            textAlign: "center",
-          }}
-        >
-          <Trans>or</Trans>
+        />
+        <ThemedText type="lg-semibold">
+          <Trans>Your Hyper Personalized Podcasts</Trans>
         </ThemedText>
-        <Pressable
-          onPress={props.scrollToNext}
-          style={({ pressed }) => ({
-            opacity: pressed ? 0.8 : 1,
-            alignSelf: "center",
-          })}
-        >
-          <ThemedText
-            type="lg-light"
-            colorType="subtext"
-            style={{
-              textDecorationLine: "underline",
-              textAlign: "center",
-            }}
-          >
-            <Trans>Continue as Guest</Trans>
-          </ThemedText>
-        </Pressable>
       </View>
-    </SafeAreaView>
+    </WelcomePageLayout>
   );
 }
 
