@@ -237,10 +237,9 @@ function WelcomePage2(props: ScrollFunctionProps) {
   const authContext = useAuthContext();
   return (
     <WelcomePageLayout
+      {...props}
       // Never show back button for the auth page
       showBackButton={false}
-      scrollToNext={props.scrollToNext}
-      scrollToPrevious={props.scrollToPrevious}
       bottomButtonOverride={
         <View
           style={{
