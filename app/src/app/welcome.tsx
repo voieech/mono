@@ -29,6 +29,7 @@ export default function Welcome() {
   const scrollRef = useRef<ScrollView>(null);
   const [currentPageXWidth, setCurrentPageXWidth] = useState(0);
   const authContext = useAuthContext();
+  const settingContext = useSettingContext();
 
   // Scroll to a page index (0 based index) directly
   // function scrollToPage(pageIndex: number) {
@@ -55,6 +56,14 @@ export default function Welcome() {
       y: 0,
       animated: true,
     });
+  }
+
+  // The last "scrollToNext" function to run when the last page is reached
+  function finishScrollingAndStartApp() {
+    settingContext.updateSetting(
+      "lastOnboardingTime",
+      new Date().toISOString(),
+    );
   }
 
   const welcomePages = [
@@ -87,14 +96,19 @@ export default function Welcome() {
           setCurrentPageXWidth(event.nativeEvent.contentOffset.x)
         }
       >
-        {welcomePages.map((WelcomePage, index) => (
-          <WelcomePage
-            key={index}
-            showBackButton={index !== 0}
-            scrollToNext={scrollToNext}
-            scrollToPrevious={scrollToPrevious}
-          />
-        ))}
+        {welcomePages.map((WelcomePage, index) => {
+          const isLastPage = index === welcomePages.length - 1;
+          return (
+            <WelcomePage
+              key={index}
+              showBackButton={index !== 0}
+              scrollToPrevious={scrollToPrevious}
+              scrollToNext={
+                isLastPage ? finishScrollingAndStartApp : scrollToNext
+              }
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );
@@ -324,15 +338,7 @@ function WelcomePage2(props: ScrollFunctionProps) {
 function WelcomePage3(props: ScrollFunctionProps) {
   const settingContext = useSettingContext();
   return (
-    <WelcomePageLayout
-      {...props}
-      onScrollToNext={() =>
-        settingContext.updateSetting(
-          "lastOnboardingTime",
-          new Date().toISOString(),
-        )
-      }
-    >
+    <WelcomePageLayout {...props}>
       <View
         style={{
           flexDirection: "column",
@@ -481,18 +487,8 @@ function WelcomePage3(props: ScrollFunctionProps) {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function WelcomePage4(props: ScrollFunctionProps) {
-  const settingContext = useSettingContext();
-
   return (
-    <WelcomePageLayout
-      {...props}
-      onScrollToNext={() =>
-        settingContext.updateSetting(
-          "lastOnboardingTime",
-          new Date().toISOString(),
-        )
-      }
-    >
+    <WelcomePageLayout {...props}>
       <View
         style={{
           flex: 1,
