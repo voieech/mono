@@ -1077,7 +1077,6 @@ msgstr "您的电子邮件"
 
 #: src/app/welcome.tsx:243
 #: src/app/welcome.tsx:328
-#: src/app/welcome.tsx:509
 msgid "Your Hyper Personalized Podcasts"
 msgstr "你的声伴"
 

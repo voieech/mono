@@ -484,31 +484,3 @@ function WelcomePage3(props: ScrollFunctionProps) {
     </WelcomePageLayout>
   );
 }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function WelcomePage4(props: ScrollFunctionProps) {
-  return (
-    <WelcomePageLayout {...props}>
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          rowGap: 8,
-        }}
-      >
-        <Image
-          source={require("@/assets/images/logo.png")}
-          style={{
-            height: "100%",
-            width: "100%",
-            maxHeight: 108,
-          }}
-        />
-        <ThemedText type="lg-semibold">
-          <Trans>Your Hyper Personalized Podcasts</Trans>
-        </ThemedText>
-      </View>
-    </WelcomePageLayout>
-  );
-}
