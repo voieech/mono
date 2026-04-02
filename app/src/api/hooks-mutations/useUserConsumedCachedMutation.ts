@@ -3,11 +3,19 @@ import type { ConsumableItemType, UserConsumedStatus } from "dto";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { wrappedFetch, queryKeyBuilder, getResError } from "@/api-client";
+import { useAuthContext } from "@/context";
+import { noOp } from "@/utils";
 
 // How long before the same calls to this mutation will be fired again.
 // Too high and it becomes somewhat inaccurate, too low and you are constantly
 // hitting your API server
 const rateLimitDurationInMs = 15000;
+
+type MutationVariables = {
+  itemType: ConsumableItemType;
+  itemID: string;
+  consumed: boolean;
+};
 
 /**
  * Generic user consumed cached mutation for a given item type and item ID.
@@ -18,13 +26,18 @@ const rateLimitDurationInMs = 15000;
  */
 export function useUserConsumedCachedMutation() {
   const queryClient = useQueryClient();
+  const authContext = useAuthContext();
 
-  return (variables: {
-    itemType: ConsumableItemType;
-    itemID: string;
-    consumed: boolean;
-  }) => {
-    return queryClient.fetchQuery({
+  if (!authContext.isAuthenticated) {
+    return noOp<[MutationVariables], Promise<UserConsumedStatus>>(
+      Promise.resolve({
+        consumed: false,
+      }),
+    );
+  }
+
+  return (variables: MutationVariables) => {
+    return queryClient.fetchQuery<UserConsumedStatus>({
       queryKey: queryKeyBuilder.fullPath(
         "user.consumed.itemType.$itemType.itemID.$itemID",
         {
