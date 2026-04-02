@@ -42,7 +42,7 @@ msgstr "Account Information"
 msgid "After Shows"
 msgstr "After Shows"
 
-#: src/app/(tabs)/(home)/index.tsx:34
+#: src/app/(tabs)/(home)/index.tsx:37
 msgid "All"
 msgstr "All"
 
@@ -58,7 +58,7 @@ msgstr "Animation & Manga"
 msgid "App cache"
 msgstr "App cache"
 
-#: src/app/(tabs)/profile/_layout.tsx:81
+#: src/app/(tabs)/profile/_layout.tsx:85
 #: src/app/(tabs)/profile/profile-page.tsx:103
 msgid "App Details"
 msgstr "App Details"
@@ -103,7 +103,7 @@ msgstr "Arts"
 msgid "Astronomy"
 msgstr "Astronomy"
 
-#: src/app/(tabs)/profile/_layout.tsx:60
+#: src/app/(tabs)/profile/_layout.tsx:64
 #: src/app/(tabs)/profile/profile-page.tsx:352
 msgid "Audio Playback"
 msgstr "Audio Playback"
@@ -116,17 +116,17 @@ msgstr "Automotive"
 msgid "Aviation"
 msgstr "Aviation"
 
-#: src/app/(tabs)/profile/_layout.tsx:19
-#: src/app/(tabs)/profile/_layout.tsx:26
-#: src/app/(tabs)/profile/_layout.tsx:33
-#: src/app/(tabs)/profile/_layout.tsx:40
-#: src/app/(tabs)/profile/_layout.tsx:47
-#: src/app/(tabs)/profile/_layout.tsx:54
-#: src/app/(tabs)/profile/_layout.tsx:61
-#: src/app/(tabs)/profile/_layout.tsx:68
-#: src/app/(tabs)/profile/_layout.tsx:75
-#: src/app/(tabs)/profile/_layout.tsx:82
-#: src/app/(tabs)/profile/_layout.tsx:89
+#: src/app/(tabs)/profile/_layout.tsx:23
+#: src/app/(tabs)/profile/_layout.tsx:30
+#: src/app/(tabs)/profile/_layout.tsx:37
+#: src/app/(tabs)/profile/_layout.tsx:44
+#: src/app/(tabs)/profile/_layout.tsx:51
+#: src/app/(tabs)/profile/_layout.tsx:58
+#: src/app/(tabs)/profile/_layout.tsx:65
+#: src/app/(tabs)/profile/_layout.tsx:72
+#: src/app/(tabs)/profile/_layout.tsx:79
+#: src/app/(tabs)/profile/_layout.tsx:86
+#: src/app/(tabs)/profile/_layout.tsx:93
 #: src/app/welcome.tsx:170
 msgid "Back"
 msgstr "Back"
@@ -229,7 +229,7 @@ msgstr "Comedy Fiction"
 msgid "Comedy Interviews"
 msgstr "Comedy Interviews"
 
-#: src/app/(tabs)/profile/_layout.tsx:46
+#: src/app/(tabs)/profile/_layout.tsx:50
 msgid "Contact Us"
 msgstr "Contact Us"
 
@@ -388,11 +388,11 @@ msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:141
+#: src/app/(tabs)/(home)/index.tsx:144
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
-#: src/app/(tabs)/(home)/index.tsx:201
+#: src/app/(tabs)/(home)/index.tsx:219
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -464,7 +464,7 @@ msgstr "Help & Support"
 msgid "Hinduism"
 msgstr "Hinduism"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/_layout.tsx:36
 #: src/app/(tabs)/profile/index.tsx:85
 #: src/locales/categoryStringToMsgDescriptor.ts:40
 msgid "History"
@@ -527,7 +527,7 @@ msgstr "Judaism"
 msgid "Kids & Family"
 msgstr "Kids & Family"
 
-#: src/app/(tabs)/profile/_layout.tsx:67
+#: src/app/(tabs)/profile/_layout.tsx:71
 #: src/app/(tabs)/profile/profile-page.tsx:358
 #: src/app/welcome.tsx:355
 msgid "Language"
@@ -545,7 +545,7 @@ msgstr "Leisure"
 msgid "Life Sciences"
 msgstr "Life Sciences"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/_layout.tsx:43
 #: src/app/(tabs)/profile/index.tsx:93
 msgid "Likes"
 msgstr "Likes"
@@ -622,7 +622,7 @@ msgstr "Nature"
 msgid "News"
 msgstr "News"
 
-#: src/app/(tabs)/(home)/index.tsx:42
+#: src/app/(tabs)/(home)/index.tsx:45
 msgid "News Articles"
 msgstr "News Articles"
 
@@ -660,7 +660,7 @@ msgstr "Not Available"
 msgid "Nothing left in Queue!"
 msgstr "Nothing left in Queue!"
 
-#: src/app/(tabs)/profile/_layout.tsx:53
+#: src/app/(tabs)/profile/_layout.tsx:57
 #: src/app/(tabs)/profile/profile-page.tsx:345
 msgid "Notifications"
 msgstr "Notifications"
@@ -713,7 +713,7 @@ msgstr "Performing Arts"
 msgid "Personal Journals"
 msgstr "Personal Journals"
 
-#: src/app/(tabs)/profile/_layout.tsx:74
+#: src/app/(tabs)/profile/_layout.tsx:78
 #: src/app/(tabs)/profile/profile-page.tsx:365
 msgid "Personalisation"
 msgstr "Personalisation"
@@ -766,7 +766,7 @@ msgstr "Podcast Episode"
 msgid "Podcast Episodes"
 msgstr "Podcast Episodes"
 
-#: src/app/(tabs)/(home)/index.tsx:38
+#: src/app/(tabs)/(home)/index.tsx:41
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -786,8 +786,8 @@ msgstr "Press to clear cache"
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/app/(tabs)/profile/_layout.tsx:12
-#: src/app/(tabs)/profile/_layout.tsx:18
+#: src/app/(tabs)/profile/_layout.tsx:16
+#: src/app/(tabs)/profile/_layout.tsx:22
 msgid "Profile"
 msgstr "Profile"
 
@@ -965,7 +965,7 @@ msgstr "Submitted!"
 msgid "Subscribe"
 msgstr "Subscribe"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/_layout.tsx:29
 #: src/app/(tabs)/profile/index.tsx:77
 msgid "Subscriptions"
 msgstr "Subscriptions"

@@ -1,3 +1,6 @@
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { PodcastEpisode } from "dto";
+
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { useQueryClient } from "@tanstack/react-query";
@@ -57,14 +60,14 @@ export default function HomeScreen() {
     useState<(typeof allHomeRowTabs)[number]["key"]>("all");
 
   const featuredChannelsQuery = useFeaturedChannelsQuery();
-  const featuredEpisodesQuery = useFeaturedEpisodesQuery();
+  const featuredPodcastEpisodesQuery = useFeaturedEpisodesQuery();
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
     setRefreshing(true);
     await Promise.all([
       featuredChannelsQuery.refetch(),
-      featuredEpisodesQuery.refetch(),
+      featuredPodcastEpisodesQuery.refetch(),
       queryClient.invalidateQueries({
         queryKey: queryKeyBuilder.fullPath(
           "user.subscription.itemType.$itemType",
@@ -190,75 +193,87 @@ export default function HomeScreen() {
         <AuthenticatedUsersOnly>
           <UserSubscriptions />
         </AuthenticatedUsersOnly>
-        {featuredEpisodesQuery.data !== undefined && (
-          <ThemedView
-            style={{
-              gap: 8,
-              marginBottom: 8,
-            }}
-          >
-            <ThemedText type="lg-light">
-              <Trans>Featured Episodes</Trans>
-            </ThemedText>
-            {featuredEpisodesQuery.data.map((episode) => (
-              <Link
-                key={episode.id}
-                href={{
-                  pathname: "/podcast/episode/[episodeID]",
-                  params: {
-                    episodeID: episode.id,
-                  },
-                }}
-              >
-                <ThemedView
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    borderRadius: 16,
-                  }}
-                >
-                  <Image
-                    source={episode.img_url}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      maxWidth: 128,
-                      borderTopLeftRadius: 16,
-                      borderBottomLeftRadius: 16,
-                    }}
-                    contentFit="cover"
-                  />
-                  <ThemedView
-                    style={{
-                      flex: 1,
-                      borderTopRightRadius: 16,
-                      borderBottomRightRadius: 16,
-                      paddingVertical: 4,
-                      paddingHorizontal: 16,
-                      backgroundColor: Colors.neutral800,
-                    }}
-                  >
-                    <ThemedText
-                      numberOfLines={3}
-                      style={{
-                        paddingBottom: 8,
-                      }}
-                    >
-                      {episode.title}
-                    </ThemedText>
-                    <ThemedText type="sm-light" numberOfLines={1}>
-                      {episode.channel_name}
-                    </ThemedText>
-                    <ThemedText type="sm-light">
-                      {episode.created_at.split("T")[0]}
-                    </ThemedText>
-                  </ThemedView>
-                </ThemedView>
-              </Link>
-            ))}
-          </ThemedView>
-        )}
+        <FeaturedPodcastEpisodes
+          featuredPodcastEpisodesQuery={featuredPodcastEpisodesQuery}
+        />
       </ScrollViewContainer>
     </SafeAreaViewContainer>
+  );
+}
+
+function FeaturedPodcastEpisodes(props: {
+  featuredPodcastEpisodesQuery: UseQueryResult<Array<PodcastEpisode>, Error>;
+}) {
+  if (props.featuredPodcastEpisodesQuery.data === undefined) {
+    return null;
+  }
+
+  return (
+    <ThemedView
+      style={{
+        gap: 8,
+        marginBottom: 8,
+      }}
+    >
+      <ThemedText type="lg-light">
+        <Trans>Featured Episodes</Trans>
+      </ThemedText>
+      {props.featuredPodcastEpisodesQuery.data.map((podcastEpisode) => (
+        <Link
+          key={podcastEpisode.id}
+          href={{
+            pathname: "/podcast/episode/[episodeID]",
+            params: {
+              episodeID: podcastEpisode.id,
+            },
+          }}
+        >
+          <ThemedView
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              borderRadius: 16,
+            }}
+          >
+            <Image
+              source={podcastEpisode.img_url}
+              style={{
+                width: "100%",
+                height: "100%",
+                maxWidth: 128,
+                borderTopLeftRadius: 16,
+                borderBottomLeftRadius: 16,
+              }}
+              contentFit="cover"
+            />
+            <ThemedView
+              style={{
+                flex: 1,
+                borderTopRightRadius: 16,
+                borderBottomRightRadius: 16,
+                paddingVertical: 4,
+                paddingHorizontal: 16,
+                backgroundColor: Colors.neutral800,
+              }}
+            >
+              <ThemedText
+                numberOfLines={3}
+                style={{
+                  paddingBottom: 8,
+                }}
+              >
+                {podcastEpisode.title}
+              </ThemedText>
+              <ThemedText type="sm-light" numberOfLines={1}>
+                {podcastEpisode.channel_name}
+              </ThemedText>
+              <ThemedText type="sm-light">
+                {podcastEpisode.created_at.split("T")[0]}
+              </ThemedText>
+            </ThemedView>
+          </ThemedView>
+        </Link>
+      ))}
+    </ThemedView>
   );
 }

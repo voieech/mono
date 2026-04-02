@@ -42,7 +42,7 @@ msgstr "账户信息"
 msgid "After Shows"
 msgstr "演出结束后"
 
-#: src/app/(tabs)/(home)/index.tsx:34
+#: src/app/(tabs)/(home)/index.tsx:37
 msgid "All"
 msgstr "全部"
 
@@ -58,7 +58,7 @@ msgstr "动画与漫画"
 msgid "App cache"
 msgstr "应用程序缓存"
 
-#: src/app/(tabs)/profile/_layout.tsx:81
+#: src/app/(tabs)/profile/_layout.tsx:85
 #: src/app/(tabs)/profile/profile-page.tsx:103
 msgid "App Details"
 msgstr "应用详情"
@@ -95,7 +95,7 @@ msgstr "艺术"
 msgid "Astronomy"
 msgstr "天文学"
 
-#: src/app/(tabs)/profile/_layout.tsx:60
+#: src/app/(tabs)/profile/_layout.tsx:64
 #: src/app/(tabs)/profile/profile-page.tsx:352
 msgid "Audio Playback"
 msgstr "音频播放"
@@ -108,17 +108,17 @@ msgstr "汽车"
 msgid "Aviation"
 msgstr "航空"
 
-#: src/app/(tabs)/profile/_layout.tsx:19
-#: src/app/(tabs)/profile/_layout.tsx:26
-#: src/app/(tabs)/profile/_layout.tsx:33
-#: src/app/(tabs)/profile/_layout.tsx:40
-#: src/app/(tabs)/profile/_layout.tsx:47
-#: src/app/(tabs)/profile/_layout.tsx:54
-#: src/app/(tabs)/profile/_layout.tsx:61
-#: src/app/(tabs)/profile/_layout.tsx:68
-#: src/app/(tabs)/profile/_layout.tsx:75
-#: src/app/(tabs)/profile/_layout.tsx:82
-#: src/app/(tabs)/profile/_layout.tsx:89
+#: src/app/(tabs)/profile/_layout.tsx:23
+#: src/app/(tabs)/profile/_layout.tsx:30
+#: src/app/(tabs)/profile/_layout.tsx:37
+#: src/app/(tabs)/profile/_layout.tsx:44
+#: src/app/(tabs)/profile/_layout.tsx:51
+#: src/app/(tabs)/profile/_layout.tsx:58
+#: src/app/(tabs)/profile/_layout.tsx:65
+#: src/app/(tabs)/profile/_layout.tsx:72
+#: src/app/(tabs)/profile/_layout.tsx:79
+#: src/app/(tabs)/profile/_layout.tsx:86
+#: src/app/(tabs)/profile/_layout.tsx:93
 #: src/app/welcome.tsx:170
 msgid "Back"
 msgstr "返回"
@@ -221,7 +221,7 @@ msgstr "喜剧小说"
 msgid "Comedy Interviews"
 msgstr "喜剧采访"
 
-#: src/app/(tabs)/profile/_layout.tsx:46
+#: src/app/(tabs)/profile/_layout.tsx:50
 msgid "Contact Us"
 msgstr "联系我们"
 
@@ -380,11 +380,11 @@ msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
 #: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:141
+#: src/app/(tabs)/(home)/index.tsx:144
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:201
+#: src/app/(tabs)/(home)/index.tsx:219
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -456,7 +456,7 @@ msgstr "帮助与支持"
 msgid "Hinduism"
 msgstr "印度教"
 
-#: src/app/(tabs)/profile/_layout.tsx:32
+#: src/app/(tabs)/profile/_layout.tsx:36
 #: src/app/(tabs)/profile/index.tsx:85
 #: src/locales/categoryStringToMsgDescriptor.ts:40
 msgid "History"
@@ -515,7 +515,7 @@ msgstr "犹太教"
 msgid "Kids & Family"
 msgstr "儿童与家庭"
 
-#: src/app/(tabs)/profile/_layout.tsx:67
+#: src/app/(tabs)/profile/_layout.tsx:71
 #: src/app/(tabs)/profile/profile-page.tsx:358
 #: src/app/welcome.tsx:355
 msgid "Language"
@@ -533,7 +533,7 @@ msgstr "闲暇"
 msgid "Life Sciences"
 msgstr "生命科学"
 
-#: src/app/(tabs)/profile/_layout.tsx:39
+#: src/app/(tabs)/profile/_layout.tsx:43
 #: src/app/(tabs)/profile/index.tsx:93
 msgid "Likes"
 msgstr "喜欢"
@@ -610,7 +610,7 @@ msgstr "自然界"
 msgid "News"
 msgstr "新闻"
 
-#: src/app/(tabs)/(home)/index.tsx:42
+#: src/app/(tabs)/(home)/index.tsx:45
 msgid "News Articles"
 msgstr "新闻文章"
 
@@ -648,7 +648,7 @@ msgstr "信息不存在"
 msgid "Nothing left in Queue!"
 msgstr "播放列表已空！"
 
-#: src/app/(tabs)/profile/_layout.tsx:53
+#: src/app/(tabs)/profile/_layout.tsx:57
 #: src/app/(tabs)/profile/profile-page.tsx:345
 msgid "Notifications"
 msgstr "程序通知"
@@ -701,7 +701,7 @@ msgstr "表演艺术"
 msgid "Personal Journals"
 msgstr "个人日记"
 
-#: src/app/(tabs)/profile/_layout.tsx:74
+#: src/app/(tabs)/profile/_layout.tsx:78
 #: src/app/(tabs)/profile/profile-page.tsx:365
 msgid "Personalisation"
 msgstr "个性化"
@@ -754,7 +754,7 @@ msgstr "播客剧集"
 msgid "Podcast Episodes"
 msgstr "播客节目"
 
-#: src/app/(tabs)/(home)/index.tsx:38
+#: src/app/(tabs)/(home)/index.tsx:41
 msgid "Podcasts"
 msgstr "播客"
 
@@ -774,8 +774,8 @@ msgstr "按清除缓存"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: src/app/(tabs)/profile/_layout.tsx:12
-#: src/app/(tabs)/profile/_layout.tsx:18
+#: src/app/(tabs)/profile/_layout.tsx:16
+#: src/app/(tabs)/profile/_layout.tsx:22
 msgid "Profile"
 msgstr "个人资料"
 
@@ -949,7 +949,7 @@ msgstr "已提交！"
 msgid "Subscribe"
 msgstr "订阅"
 
-#: src/app/(tabs)/profile/_layout.tsx:25
+#: src/app/(tabs)/profile/_layout.tsx:29
 #: src/app/(tabs)/profile/index.tsx:77
 msgid "Subscriptions"
 msgstr "订阅"
