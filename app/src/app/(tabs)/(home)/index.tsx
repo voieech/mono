@@ -1,5 +1,5 @@
 import type { UseQueryResult } from "@tanstack/react-query";
-import type { PodcastEpisode } from "dto";
+import type { PodcastChannel, PodcastEpisode } from "dto";
 
 import { msg } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
@@ -49,24 +49,17 @@ const allHomeRowTabs = [
 export default function HomeScreen() {
   const queryClient = useQueryClient();
 
-  const windowDimensions = useWindowDimensions();
-  const featuredChannelImageWidth = windowDimensions.width * 0.4;
-  const featuredChannelImageMargin = Math.min(
-    windowDimensions.width * 0.03,
-    16,
-  );
-
   const [selectedTab, setSelectedTab] =
     useState<(typeof allHomeRowTabs)[number]["key"]>("all");
 
-  const featuredChannelsQuery = useFeaturedChannelsQuery();
+  const featuredPodcastChannelsQuery = useFeaturedChannelsQuery();
   const featuredPodcastEpisodesQuery = useFeaturedEpisodesQuery();
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
     setRefreshing(true);
     await Promise.all([
-      featuredChannelsQuery.refetch(),
+      featuredPodcastChannelsQuery.refetch(),
       featuredPodcastEpisodesQuery.refetch(),
       queryClient.invalidateQueries({
         queryKey: queryKeyBuilder.fullPath(
@@ -122,73 +115,9 @@ export default function HomeScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {featuredChannelsQuery.data !== undefined && (
-          <ThemedView
-            style={{
-              gap: 8,
-              marginBottom: 8,
-            }}
-          >
-            <Link
-              href={{
-                pathname: "/featured-channels",
-              }}
-            >
-              <ThemedView
-                style={{
-                  flexDirection: "row",
-                  columnGap: 16,
-                }}
-              >
-                <ThemedText type="lg-light">
-                  <Trans>Featured Channels</Trans>
-                </ThemedText>
-                <Icon name="chevron.right" color={Colors.neutral50} />
-              </ThemedView>
-            </Link>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {featuredChannelsQuery.data.map((channel) => (
-                <Link
-                  key={channel.id}
-                  href={{
-                    pathname: "/podcast/channel/[channelID]",
-                    params: {
-                      channelID: channel.id,
-                    },
-                  }}
-                  style={{
-                    marginRight: featuredChannelImageMargin,
-                  }}
-                >
-                  <View
-                    style={{
-                      width: featuredChannelImageWidth,
-                    }}
-                  >
-                    <Image
-                      source={channel.img_url}
-                      style={{
-                        aspectRatio: 1,
-                        borderRadius: 4,
-                      }}
-                      contentFit="cover"
-                    />
-                    <ThemedText
-                      type="sm-semibold"
-                      numberOfLines={1}
-                      style={{
-                        paddingTop: 4,
-                        color: Colors.neutral200,
-                      }}
-                    >
-                      {channel.name}
-                    </ThemedText>
-                  </View>
-                </Link>
-              ))}
-            </ScrollView>
-          </ThemedView>
-        )}
+        <FeaturedPodcastChannels
+          featuredPodcastChannelsQuery={featuredPodcastChannelsQuery}
+        />
         <VerticalSpacer />
         <AuthenticatedUsersOnly>
           <UserSubscriptions />
@@ -198,6 +127,89 @@ export default function HomeScreen() {
         />
       </ScrollViewContainer>
     </SafeAreaViewContainer>
+  );
+}
+
+function FeaturedPodcastChannels(props: {
+  featuredPodcastChannelsQuery: UseQueryResult<Array<PodcastChannel>, Error>;
+}) {
+  const windowDimensions = useWindowDimensions();
+  const featuredChannelImageWidth = windowDimensions.width * 0.4;
+  const featuredChannelImageMargin = Math.min(
+    windowDimensions.width * 0.03,
+    16,
+  );
+
+  if (props.featuredPodcastChannelsQuery.data === undefined) {
+    return null;
+  }
+
+  return (
+    <ThemedView
+      style={{
+        gap: 8,
+        marginBottom: 8,
+      }}
+    >
+      <Link
+        href={{
+          pathname: "/featured-channels",
+        }}
+      >
+        <ThemedView
+          style={{
+            flexDirection: "row",
+            columnGap: 16,
+          }}
+        >
+          <ThemedText type="lg-light">
+            <Trans>Featured Channels</Trans>
+          </ThemedText>
+          <Icon name="chevron.right" color={Colors.neutral50} />
+        </ThemedView>
+      </Link>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {props.featuredPodcastChannelsQuery.data.map((podcastChannel) => (
+          <Link
+            key={podcastChannel.id}
+            href={{
+              pathname: "/podcast/channel/[channelID]",
+              params: {
+                channelID: podcastChannel.id,
+              },
+            }}
+            style={{
+              marginRight: featuredChannelImageMargin,
+            }}
+          >
+            <View
+              style={{
+                width: featuredChannelImageWidth,
+              }}
+            >
+              <Image
+                source={podcastChannel.img_url}
+                style={{
+                  aspectRatio: 1,
+                  borderRadius: 4,
+                }}
+                contentFit="cover"
+              />
+              <ThemedText
+                type="sm-semibold"
+                numberOfLines={1}
+                style={{
+                  paddingTop: 4,
+                  color: Colors.neutral200,
+                }}
+              >
+                {podcastChannel.name}
+              </ThemedText>
+            </View>
+          </Link>
+        ))}
+      </ScrollView>
+    </ThemedView>
   );
 }
 
