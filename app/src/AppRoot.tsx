@@ -85,15 +85,15 @@ export function AppRoot(props: PropsWithChildren) {
                   <AppDebuggingSurfaceProvider>
                     <ExperimentalSurfaceProvider>
                       <SettingsProvider>
-                        <TrackPlayerProvider>
-                          <AuthProvider>
+                        <AuthProvider>
+                          <TrackPlayerProvider>
                             <NotificationProvider>
                               <StatusBar style="auto" />
                               <FullScreenSigninModal />
                               {props.children}
                             </NotificationProvider>
-                          </AuthProvider>
-                        </TrackPlayerProvider>
+                          </TrackPlayerProvider>
+                        </AuthProvider>
                       </SettingsProvider>
                     </ExperimentalSurfaceProvider>
                   </AppDebuggingSurfaceProvider>
