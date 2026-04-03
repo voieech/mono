@@ -381,12 +381,12 @@ msgid "Featured"
 msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/index.tsx:235
+#: src/app/(tabs)/(home)/index.tsx:241
 msgid "Featured Channels"
 msgstr "精选频道"
 
 #: src/app/(tabs)/(home)/_layout.tsx:34
-#: src/app/(tabs)/(home)/index.tsx:315
+#: src/app/(tabs)/(home)/index.tsx:321
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -1062,7 +1062,7 @@ msgstr "我们找不到你想要的东西，这里是一幅我们非常抱歉的
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "我们将帮助您总结您的 YouTube 视频并制作音频播客。"
 
-#: src/app/(tabs)/(home)/index.tsx:167
+#: src/app/(tabs)/(home)/index.tsx:129
 #: src/app/(tabs)/(search)/index.tsx:50
 msgid "What are you looking for?"
 msgstr "你想要找什么？"

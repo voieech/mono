@@ -48,33 +48,10 @@ const allHomeRowTabs = [
 ] as const;
 
 export default function HomeScreen() {
-  const queryClient = useQueryClient();
-
   const [selectedTab, setSelectedTab] =
     useState<(typeof allHomeRowTabs)[number]["key"]>("all");
 
-  const featuredPodcastChannelsQuery = useFeaturedChannelsQuery();
-  const featuredPodcastEpisodesQuery = useFeaturedEpisodesQuery();
-
   const [searchInput, setSearchInput] = useState("");
-
-  const [refreshing, setRefreshing] = useState(false);
-  async function onRefresh() {
-    setRefreshing(true);
-    await Promise.all([
-      featuredPodcastChannelsQuery.refetch(),
-      featuredPodcastEpisodesQuery.refetch(),
-      queryClient.invalidateQueries({
-        queryKey: queryKeyBuilder.fullPath(
-          "user.subscription.itemType.$itemType",
-          {
-            itemType: "podcast_channel",
-          },
-        ),
-      }),
-    ]);
-    setRefreshing(false);
-  }
 
   return (
     <SafeAreaViewContainer>
@@ -114,22 +91,7 @@ export default function HomeScreen() {
         </View>
       </FrontPageLayoutTopBarWithProfilePic>
       <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
-      <ScrollViewContainer
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <FeaturedPodcastChannels
-          featuredPodcastChannelsQuery={featuredPodcastChannelsQuery}
-        />
-        <VerticalSpacer />
-        <AuthenticatedUsersOnly>
-          <UserSubscriptions />
-        </AuthenticatedUsersOnly>
-        <FeaturedPodcastEpisodes
-          featuredPodcastEpisodesQuery={featuredPodcastEpisodesQuery}
-        />
-      </ScrollViewContainer>
+      <FeaturedHomeSection />
     </SafeAreaViewContainer>
   );
 }
@@ -192,6 +154,50 @@ function SearchBar(props: {
         </View>
       </Pressable>
     </View>
+  );
+}
+
+function FeaturedHomeSection() {
+  const featuredPodcastChannelsQuery = useFeaturedChannelsQuery();
+  const featuredPodcastEpisodesQuery = useFeaturedEpisodesQuery();
+
+  const queryClient = useQueryClient();
+
+  const [refreshing, setRefreshing] = useState(false);
+  async function onRefresh() {
+    setRefreshing(true);
+    await Promise.all([
+      featuredPodcastChannelsQuery.refetch(),
+      featuredPodcastEpisodesQuery.refetch(),
+      queryClient.invalidateQueries({
+        queryKey: queryKeyBuilder.fullPath(
+          "user.subscription.itemType.$itemType",
+          {
+            itemType: "podcast_channel",
+          },
+        ),
+      }),
+    ]);
+    setRefreshing(false);
+  }
+
+  return (
+    <ScrollViewContainer
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <FeaturedPodcastChannels
+        featuredPodcastChannelsQuery={featuredPodcastChannelsQuery}
+      />
+      <VerticalSpacer />
+      <AuthenticatedUsersOnly>
+        <UserSubscriptions />
+      </AuthenticatedUsersOnly>
+      <FeaturedPodcastEpisodes
+        featuredPodcastEpisodesQuery={featuredPodcastEpisodesQuery}
+      />
+    </ScrollViewContainer>
   );
 }
 

@@ -389,12 +389,12 @@ msgid "Featured"
 msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/index.tsx:235
+#: src/app/(tabs)/(home)/index.tsx:241
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
 #: src/app/(tabs)/(home)/_layout.tsx:34
-#: src/app/(tabs)/(home)/index.tsx:315
+#: src/app/(tabs)/(home)/index.tsx:321
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -1078,7 +1078,7 @@ msgstr "We can't find what you want, here's is a drawing of us being very sorry 
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "We will help you summarise your youtube video and create a audio podcast."
 
-#: src/app/(tabs)/(home)/index.tsx:167
+#: src/app/(tabs)/(home)/index.tsx:129
 #: src/app/(tabs)/(search)/index.tsx:50
 msgid "What are you looking for?"
 msgstr "What are you looking for?"
