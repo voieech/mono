@@ -5,24 +5,31 @@ import { View } from "react-native";
 
 import {
   FullScreenSigninWall,
-  SafeScrollViewContainer,
+  SafeAreaViewContainer,
+  ScrollViewContainer,
   ThemedView,
   ThemedText,
   InAppBrowserLink,
+  FrontPageLayoutTopBarWithProfilePic,
 } from "@/components";
 import { Colors } from "@/constants";
 import { envVar } from "@/utils";
 
 export default function CreateTabHomeScreen() {
   return (
-    <>
+    <SafeAreaViewContainer>
       <FullScreenSigninWall />
-      <SafeScrollViewContainer>
+      <FrontPageLayoutTopBarWithProfilePic>
+        <ThemedText type="lg-light">
+          <Trans>Create</Trans>
+        </ThemedText>
+      </FrontPageLayoutTopBarWithProfilePic>
+      <ScrollViewContainer>
         <ThemedView
           style={{
             flexDirection: "column",
             rowGap: 4,
-            paddingBottom: 40,
+            paddingBottom: 16,
           }}
         >
           <ThemedText type="lg-normal">
@@ -134,7 +141,7 @@ export default function CreateTabHomeScreen() {
             paddingBottom: 64,
           }}
         />
-      </SafeScrollViewContainer>
-    </>
+      </ScrollViewContainer>
+    </SafeAreaViewContainer>
   );
 }

@@ -264,11 +264,12 @@ msgstr "Crafts"
 
 #: src/app/(tabs)/_layout.tsx:152
 #: src/app/(tabs)/(create)/_layout.tsx:19
+#: src/app/(tabs)/(create)/index.tsx:24
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:174
 msgid "Create"
 msgstr "Create"
 
-#: src/app/(tabs)/(create)/index.tsx:29
+#: src/app/(tabs)/(create)/index.tsx:36
 msgid "Create your own content"
 msgstr "Create your own content"
 
@@ -732,7 +733,7 @@ msgstr "Philosophy"
 msgid "Physics"
 msgstr "Physics"
 
-#: src/app/(tabs)/(create)/index.tsx:32
+#: src/app/(tabs)/(create)/index.tsx:39
 msgid "Pick a content source to start creating content in your own style!"
 msgstr "Pick a content source to start creating content in your own style!"
 
@@ -986,7 +987,7 @@ msgstr "Subscriptions"
 msgid "Subscriptions Content"
 msgstr "Subscriptions Content"
 
-#: src/app/(tabs)/(create)/index.tsx:82
+#: src/app/(tabs)/(create)/index.tsx:89
 msgid "Summarise a YouTube video into a podcast episode."
 msgstr "Summarise a YouTube video into a podcast episode."
 
@@ -1002,7 +1003,7 @@ msgstr "Tech News"
 msgid "Technology"
 msgstr "Technology"
 
-#: src/app/(tabs)/(create)/index.tsx:124
+#: src/app/(tabs)/(create)/index.tsx:131
 msgid "Tell us what other content sources you would like us to add!"
 msgstr "Tell us what other content sources you would like us to add!"
 
@@ -1070,7 +1071,7 @@ msgstr "Visual Arts"
 msgid "Volleyball"
 msgstr "Volleyball"
 
-#: src/app/(tabs)/(create)/index.tsx:121
+#: src/app/(tabs)/(create)/index.tsx:128
 msgid "Want more?"
 msgstr "Want more?"
 
@@ -1124,7 +1125,7 @@ msgstr "Your Library"
 msgid "Your Subscriptions"
 msgstr "Your Subscriptions"
 
-#: src/app/(tabs)/(create)/index.tsx:79
+#: src/app/(tabs)/(create)/index.tsx:86
 msgid "YouTube"
 msgstr "YouTube"
 
