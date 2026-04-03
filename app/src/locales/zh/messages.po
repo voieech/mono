@@ -108,6 +108,7 @@ msgstr "汽车"
 msgid "Aviation"
 msgstr "航空"
 
+#: src/app/(tabs)/(home)/_layout.tsx:28
 #: src/app/(tabs)/profile/_layout.tsx:23
 #: src/app/(tabs)/profile/_layout.tsx:30
 #: src/app/(tabs)/profile/_layout.tsx:37
@@ -379,12 +380,11 @@ msgid "Featured"
 msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/featured-channels.tsx:36
-#: src/app/(tabs)/(home)/index.tsx:166
+#: src/app/(tabs)/(home)/index.tsx:170
 msgid "Featured Channels"
 msgstr "精选频道"
 
-#: src/app/(tabs)/(home)/index.tsx:231
+#: src/app/(tabs)/(home)/index.tsx:250
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -738,7 +738,7 @@ msgstr "请粘贴您的 YouTube 链接"
 msgid "Please restart app after clearing cache."
 msgstr "清除缓存后请重启应用。"
 
-#: src/app/(tabs)/(home)/_layout.tsx:39
+#: src/app/(tabs)/(home)/_layout.tsx:40
 msgid "Podcast Channel"
 msgstr "播客频道"
 
@@ -746,7 +746,7 @@ msgstr "播客频道"
 msgid "Podcast Channels"
 msgstr "播客频道"
 
-#: src/app/(tabs)/(home)/_layout.tsx:45
+#: src/app/(tabs)/(home)/_layout.tsx:46
 msgid "Podcast Episode"
 msgstr "播客剧集"
 

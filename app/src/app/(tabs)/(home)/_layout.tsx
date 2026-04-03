@@ -24,7 +24,8 @@ export default function HomeLayout() {
         name="featured-podcast-channels"
         options={{
           title: t`Featured Channels`,
-          headerShown: false,
+          headerShown: true,
+          headerBackTitle: t`Back`,
         }}
       />
 
