@@ -42,7 +42,7 @@ msgstr "Account Information"
 msgid "After Shows"
 msgstr "After Shows"
 
-#: src/app/(tabs)/(home)/index.tsx:37
+#: src/app/(tabs)/(home)/index.tsx:38
 msgid "All"
 msgstr "All"
 
@@ -389,12 +389,12 @@ msgid "Featured"
 msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/index.tsx:170
+#: src/app/(tabs)/(home)/index.tsx:235
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
 #: src/app/(tabs)/(home)/_layout.tsx:34
-#: src/app/(tabs)/(home)/index.tsx:250
+#: src/app/(tabs)/(home)/index.tsx:315
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -624,7 +624,7 @@ msgstr "Nature"
 msgid "News"
 msgstr "News"
 
-#: src/app/(tabs)/(home)/index.tsx:45
+#: src/app/(tabs)/(home)/index.tsx:46
 msgid "News Articles"
 msgstr "News Articles"
 
@@ -768,7 +768,7 @@ msgstr "Podcast Episode"
 msgid "Podcast Episodes"
 msgstr "Podcast Episodes"
 
-#: src/app/(tabs)/(home)/index.tsx:41
+#: src/app/(tabs)/(home)/index.tsx:42
 msgid "Podcasts"
 msgstr "Podcasts"
 
@@ -1078,6 +1078,7 @@ msgstr "We can't find what you want, here's is a drawing of us being very sorry 
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "We will help you summarise your youtube video and create a audio podcast."
 
+#: src/app/(tabs)/(home)/index.tsx:167
 #: src/app/(tabs)/(search)/index.tsx:50
 msgid "What are you looking for?"
 msgstr "What are you looking for?"

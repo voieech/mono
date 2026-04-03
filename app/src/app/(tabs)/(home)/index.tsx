@@ -2,17 +2,18 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import type { PodcastChannel, PodcastEpisode } from "dto";
 
 import { msg } from "@lingui/core/macro";
-import { Trans } from "@lingui/react/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useQueryClient } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   RefreshControl,
   View,
   ScrollView,
   useWindowDimensions,
   Pressable,
+  TextInput,
 } from "react-native";
 
 import { useFeaturedChannelsQuery, useFeaturedEpisodesQuery } from "@/api";
@@ -54,6 +55,8 @@ export default function HomeScreen() {
 
   const featuredPodcastChannelsQuery = useFeaturedChannelsQuery();
   const featuredPodcastEpisodesQuery = useFeaturedEpisodesQuery();
+
+  const [searchInput, setSearchInput] = useState("");
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
@@ -110,6 +113,7 @@ export default function HomeScreen() {
           ))}
         </View>
       </FrontPageLayoutTopBarWithProfilePic>
+      <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
       <ScrollViewContainer
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -127,6 +131,67 @@ export default function HomeScreen() {
         />
       </ScrollViewContainer>
     </SafeAreaViewContainer>
+  );
+}
+
+function SearchBar(props: {
+  searchInput: string;
+  setSearchInput: (searchInput: string) => void;
+}) {
+  const { t } = useLingui();
+  const searchInputBoxRef = useRef<TextInput>(null);
+  return (
+    <View
+      style={{
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+      }}
+    >
+      <Pressable onPress={() => searchInputBoxRef.current?.focus?.()}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 8,
+            borderRadius: 4,
+            backgroundColor: Colors.neutral200,
+            width: "100%",
+            columnGap: 8,
+          }}
+        >
+          <Icon name="magnifyingglass" size={20} color={Colors.neutral700} />
+          <TextInput
+            ref={searchInputBoxRef}
+            value={props.searchInput}
+            onChangeText={props.setSearchInput}
+            placeholder={t`What are you looking for?`}
+            placeholderTextColor={Colors.neutral700}
+            onSubmitEditing={() => {
+              console.log("Searched!", props.searchInput);
+            }}
+            style={{
+              flex: 1,
+              fontSize: 18,
+              color: Colors.neutral900,
+
+              // Prevents extra padding on Android
+              paddingVertical: 0,
+            }}
+          />
+          {props.searchInput.length !== 0 && (
+            <Pressable
+              onPress={(e) => {
+                e.preventDefault();
+                props.setSearchInput("");
+                searchInputBoxRef.current?.focus?.();
+              }}
+            >
+              <Icon name="multiply" size={20} color={Colors.neutral700} />
+            </Pressable>
+          )}
+        </View>
+      </Pressable>
+    </View>
   );
 }
 
