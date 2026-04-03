@@ -389,12 +389,12 @@ msgid "Featured"
 msgstr "Featured"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/index.tsx:241
+#: src/app/(tabs)/(home)/index.tsx:269
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
 #: src/app/(tabs)/(home)/_layout.tsx:34
-#: src/app/(tabs)/(home)/index.tsx:321
+#: src/app/(tabs)/(home)/index.tsx:349
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
 
@@ -933,6 +933,10 @@ msgstr "Social Sciences"
 msgid "Society & Culture"
 msgstr "Society & Culture"
 
+#: src/app/(tabs)/(home)/index.tsx:110
+msgid "Sorry, I cannot find anything related"
+msgstr "Sorry, I cannot find anything related"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:81
 msgid "Spirituality"
 msgstr "Spirituality"
@@ -1078,7 +1082,7 @@ msgstr "We can't find what you want, here's is a drawing of us being very sorry 
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "We will help you summarise your youtube video and create a audio podcast."
 
-#: src/app/(tabs)/(home)/index.tsx:129
+#: src/app/(tabs)/(home)/index.tsx:157
 #: src/app/(tabs)/(search)/index.tsx:50
 msgid "What are you looking for?"
 msgstr "What are you looking for?"

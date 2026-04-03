@@ -91,7 +91,35 @@ export default function HomeScreen() {
         </View>
       </FrontPageLayoutTopBarWithProfilePic>
       <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
-      <FeaturedHomeSection />
+      {searchInput === "" ? (
+        <FeaturedHomeSection />
+      ) : (
+        <View
+          style={{
+            padding: 16,
+          }}
+        >
+          <View>
+            <ThemedText
+              style={{
+                textAlign: "center",
+              }}
+              type="lg-light"
+              colorType="subtext"
+            >
+              <Trans>Sorry, I cannot find anything related</Trans>
+            </ThemedText>
+            <Image
+              source={require("@/assets/images/404.png")}
+              style={{
+                width: "100%",
+                aspectRatio: 1,
+              }}
+              alt="Not Found Image"
+            />
+          </View>
+        </View>
+      )}
     </SafeAreaViewContainer>
   );
 }
