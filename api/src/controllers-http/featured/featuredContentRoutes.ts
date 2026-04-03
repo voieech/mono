@@ -34,6 +34,7 @@ export const featuredContentRoutes = express
   })
 
   .get("/v1/podcast/featured/episodes", async function (req, res) {
+    const cursorID = req.query["cursorID"] as undefined | string;
     const rawLimit = Number(req.query["limit"]);
     const limit = isNaN(rawLimit) || rawLimit === 0 ? 4 : rawLimit;
 
@@ -58,6 +59,14 @@ export const featuredContentRoutes = express
       // @todo Ordery by popularity
       .orderBy("podcast_episode.created_at", "desc")
       .limit(limit);
+
+    if (cursorID !== undefined) {
+      query = query.where(
+        "podcast_episode.created_at",
+        "<",
+        $DateTime.ISO.DateTime.makeStrongAndThrowOnError(cursorID),
+      );
+    }
 
     // Filter out podcast episodes that the user has already consumed
     if (req.isUserAuthenticated) {
