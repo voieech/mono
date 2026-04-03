@@ -262,7 +262,7 @@ msgstr "Courses"
 msgid "Crafts"
 msgstr "Crafts"
 
-#: src/app/(tabs)/_layout.tsx:153
+#: src/app/(tabs)/_layout.tsx:164
 #: src/app/(tabs)/(create)/_layout.tsx:19
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:174
 msgid "Create"
@@ -426,7 +426,7 @@ msgstr "Food"
 msgid "Football"
 msgstr "Football"
 
-#: src/app/(tabs)/_layout.tsx:130
+#: src/app/(tabs)/_layout.tsx:141
 msgid "For You"
 msgstr "For You"
 
@@ -480,7 +480,7 @@ msgstr "Hobbies"
 msgid "Hockey"
 msgstr "Hockey"
 
-#: src/app/(tabs)/_layout.tsx:117
+#: src/app/(tabs)/_layout.tsx:128
 #: src/app/(tabs)/(home)/_layout.tsx:19
 msgid "Home"
 msgstr "Home"
@@ -568,7 +568,7 @@ msgstr "Marketing"
 msgid "Mathematics"
 msgstr "Mathematics"
 
-#: src/app/(tabs)/_layout.tsx:163
+#: src/app/(tabs)/_layout.tsx:174
 msgid "Me"
 msgstr "Me"
 
@@ -856,7 +856,7 @@ msgstr "Science"
 msgid "Science Fiction"
 msgstr "Science Fiction"
 
-#: src/app/(tabs)/_layout.tsx:142
+#: src/app/(tabs)/_layout.tsx:153
 #: src/app/(tabs)/(search)/_layout.tsx:19
 #: src/app/(tabs)/(search)/index.tsx:24
 msgid "Search"

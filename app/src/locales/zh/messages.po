@@ -254,7 +254,7 @@ msgstr "课程"
 msgid "Crafts"
 msgstr "工艺"
 
-#: src/app/(tabs)/_layout.tsx:153
+#: src/app/(tabs)/_layout.tsx:164
 #: src/app/(tabs)/(create)/_layout.tsx:19
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:174
 msgid "Create"
@@ -418,7 +418,7 @@ msgstr "美食"
 msgid "Football"
 msgstr "橄榄球"
 
-#: src/app/(tabs)/_layout.tsx:130
+#: src/app/(tabs)/_layout.tsx:141
 msgid "For You"
 msgstr "推荐"
 
@@ -472,7 +472,7 @@ msgstr "兴趣爱好"
 msgid "Hockey"
 msgstr "曲棍球"
 
-#: src/app/(tabs)/_layout.tsx:117
+#: src/app/(tabs)/_layout.tsx:128
 #: src/app/(tabs)/(home)/_layout.tsx:19
 msgid "Home"
 msgstr "主页"
@@ -556,7 +556,7 @@ msgstr "营销"
 msgid "Mathematics"
 msgstr "数学"
 
-#: src/app/(tabs)/_layout.tsx:163
+#: src/app/(tabs)/_layout.tsx:174
 msgid "Me"
 msgstr "我"
 
@@ -840,7 +840,7 @@ msgstr "科学"
 msgid "Science Fiction"
 msgstr "科幻小说"
 
-#: src/app/(tabs)/_layout.tsx:142
+#: src/app/(tabs)/_layout.tsx:153
 #: src/app/(tabs)/(search)/_layout.tsx:19
 #: src/app/(tabs)/(search)/index.tsx:24
 msgid "Search"

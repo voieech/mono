@@ -66,6 +66,17 @@ export default function TabLayout() {
             },
             default: {},
           }),
+
+          // Force the whole tab router to eagerly load all Tab routes' base
+          // route (usually their index.tsx) file, as a temporary workaround
+          // for the bug where navigating from "tab A/index.tsx" to
+          // "tab B/inner-page.tsx" before "tab B/index.tsx" has ever been
+          // navigated to, breaks the app where you now cannot go back from
+          // "tab B/inner-page.tsx" to "tab B/index.tsx" since the base
+          // underlying route was never constructed before.
+          // By eagerly loading all the "tab XYZ/index.tsx" routes on initial
+          // load, we can work around this issue!
+          lazy: false,
         }}
         tabBar={(props) => {
           // The player overlay needs to float on top of the tab bar, which
