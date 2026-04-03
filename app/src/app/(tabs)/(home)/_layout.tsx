@@ -28,6 +28,14 @@ export default function HomeLayout() {
           headerBackTitle: t`Back`,
         }}
       />
+      <Stack.Screen
+        name="featured-podcast-episodes"
+        options={{
+          title: t`Featured Episodes`,
+          headerShown: true,
+          headerBackTitle: t`Back`,
+        }}
+      />
 
       {/*
         These title have no effect since the headers are not shown, but just

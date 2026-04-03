@@ -4,6 +4,7 @@
 
 export * from "./useFeaturedChannelsQuery";
 export * from "./useFeaturedEpisodesQuery";
+export * from "./useFeaturedPodcastEpisodesInfiniteQuery";
 export * from "./usePodcastChannelEpisodesQuery";
 export * from "./usePodcastChannelQuery";
 export * from "./usePodcastEpisodeNextReccomendationsQuery";

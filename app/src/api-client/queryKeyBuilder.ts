@@ -3,6 +3,7 @@ import { QueryKeyBuilder } from "query-key-builder";
 export const queryKeyBuilder = new QueryKeyBuilder<
   | "podcast.featured.channels"
   | "podcast.featured.episodes"
+  | "podcast.featured.episodes.infinite.$queryOptions"
   | "podcast.channel.channelID.$channelID"
   | "podcast.channel.channelID.$channelID.episodes.$queryOptions"
   | "podcast.episode.episodeID.$episodeID"

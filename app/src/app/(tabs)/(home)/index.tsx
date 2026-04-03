@@ -231,9 +231,27 @@ function FeaturedPodcastEpisodes(props: {
         marginBottom: 8,
       }}
     >
-      <ThemedText type="lg-light">
-        <Trans>Featured Episodes</Trans>
-      </ThemedText>
+      <Link
+        href={{
+          pathname: "/featured-podcast-episodes",
+        }}
+      >
+        <View
+          style={{
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            columnGap: 16,
+            paddingRight: 16,
+          }}
+        >
+          <ThemedText type="lg-light">
+            <Trans>Featured Episodes</Trans>
+          </ThemedText>
+          <Icon name="chevron.right" color={Colors.neutral50} size={20} />
+        </View>
+      </Link>
       {props.featuredPodcastEpisodesQuery.data.map((podcastEpisode) => (
         <Link
           key={podcastEpisode.id}

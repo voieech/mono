@@ -117,6 +117,7 @@ msgid "Aviation"
 msgstr "Aviation"
 
 #: src/app/(tabs)/(home)/_layout.tsx:28
+#: src/app/(tabs)/(home)/_layout.tsx:36
 #: src/app/(tabs)/profile/_layout.tsx:23
 #: src/app/(tabs)/profile/_layout.tsx:30
 #: src/app/(tabs)/profile/_layout.tsx:37
@@ -392,6 +393,7 @@ msgstr "Featured"
 msgid "Featured Channels"
 msgstr "Featured Channels"
 
+#: src/app/(tabs)/(home)/_layout.tsx:34
 #: src/app/(tabs)/(home)/index.tsx:250
 msgid "Featured Episodes"
 msgstr "Featured Episodes"
@@ -750,7 +752,7 @@ msgstr "Please paste your Youtube link"
 msgid "Please restart app after clearing cache."
 msgstr "Please restart app after clearing cache."
 
-#: src/app/(tabs)/(home)/_layout.tsx:40
+#: src/app/(tabs)/(home)/_layout.tsx:48
 msgid "Podcast Channel"
 msgstr "Podcast Channel"
 
@@ -758,7 +760,7 @@ msgstr "Podcast Channel"
 msgid "Podcast Channels"
 msgstr "Podcast Channels"
 
-#: src/app/(tabs)/(home)/_layout.tsx:46
+#: src/app/(tabs)/(home)/_layout.tsx:54
 msgid "Podcast Episode"
 msgstr "Podcast Episode"
 
