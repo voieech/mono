@@ -1,6 +1,10 @@
 import { useLingui } from "@lingui/react/macro";
 import { Stack } from "expo-router";
 
+export const unstable_settings = {
+  initialRouteName: "index",
+};
+
 export default function ProfileLayout() {
   const { t } = useLingui();
   return (
