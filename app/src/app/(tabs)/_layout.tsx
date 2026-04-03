@@ -135,6 +135,19 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
+          name="(search)"
+          options={{
+            href: __DEV__ ? "/(tabs)/(search)" : null,
+
+            title: t`Search`,
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              <Icon size={size} name="magnifyingglass" color={color as any} />
+            ),
+          }}
+        />
+        {/* @todo Might move create under "me" in the future depending on usage volume */}
+        <Tabs.Screen
           name="(create)"
           options={{
             title: t`Create`,
