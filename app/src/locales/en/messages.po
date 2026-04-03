@@ -116,6 +116,7 @@ msgstr "Automotive"
 msgid "Aviation"
 msgstr "Aviation"
 
+#: src/app/(tabs)/(create)/_layout.tsx:28
 #: src/app/(tabs)/(home)/_layout.tsx:28
 #: src/app/(tabs)/(home)/_layout.tsx:36
 #: src/app/(tabs)/profile/_layout.tsx:23
@@ -1130,8 +1131,12 @@ msgid "YouTube"
 msgstr "YouTube"
 
 #: src/app/(tabs)/(create)/_layout.tsx:26
-msgid "Youtube Video Summary Create"
-msgstr "Youtube Video Summary Create"
+msgid "Youtube Video Summary"
+msgstr "Youtube Video Summary"
+
+#: src/app/(tabs)/(create)/_layout.tsx:26
+#~ msgid "Youtube Video Summary Create"
+#~ msgstr "Youtube Video Summary Create"
 
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:77
 msgid "Youtube Video Summary Creator"

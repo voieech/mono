@@ -23,8 +23,9 @@ export default function CreateLayout() {
       <Stack.Screen
         name="youtube-video-summary-create"
         options={{
-          title: t`Youtube Video Summary Create`,
-          headerShown: false,
+          title: t`Youtube Video Summary`,
+          headerShown: true,
+          headerBackTitle: t`Back`,
         }}
       />
     </Stack>

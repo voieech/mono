@@ -108,6 +108,7 @@ msgstr "汽车"
 msgid "Aviation"
 msgstr "航空"
 
+#: src/app/(tabs)/(create)/_layout.tsx:28
 #: src/app/(tabs)/(home)/_layout.tsx:28
 #: src/app/(tabs)/(home)/_layout.tsx:36
 #: src/app/(tabs)/profile/_layout.tsx:23
@@ -1110,8 +1111,8 @@ msgid "YouTube"
 msgstr "YouTube"
 
 #: src/app/(tabs)/(create)/_layout.tsx:26
-msgid "Youtube Video Summary Create"
-msgstr "YouTube 视频摘要创建"
+msgid "Youtube Video Summary"
+msgstr "YouTube 视频摘要"
 
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:77
 msgid "Youtube Video Summary Creator"
