@@ -21,7 +21,7 @@ export default function HomeLayout() {
         }}
       />
       <Stack.Screen
-        name="featured-channels"
+        name="featured-podcast-channels"
         options={{
           title: t`Featured Channels`,
           headerShown: false,

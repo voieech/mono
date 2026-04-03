@@ -9,13 +9,13 @@ import { SafeScrollViewContainer, ThemedView, ThemedText } from "@/components";
 import { Colors } from "@/constants";
 import { categoryStringToMsgDescriptor } from "@/locales";
 
-export default function FeaturedChannels() {
-  const featuredChannelsQuery = useFeaturedChannelsQuery();
+export default function FeaturedPodcastChannels() {
+  const featuredPodcastChannelsQuery = useFeaturedChannelsQuery();
 
   const [refreshing, setRefreshing] = useState(false);
   async function onRefresh() {
     setRefreshing(true);
-    await Promise.all([featuredChannelsQuery.refetch()]);
+    await Promise.all([featuredPodcastChannelsQuery.refetch()]);
     setRefreshing(false);
   }
 
@@ -25,7 +25,7 @@ export default function FeaturedChannels() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      {featuredChannelsQuery.data !== undefined && (
+      {featuredPodcastChannelsQuery.data !== undefined && (
         <ThemedView
           style={{
             gap: 8,
@@ -35,13 +35,13 @@ export default function FeaturedChannels() {
           <ThemedText type="lg-light">
             <Trans>Featured Channels</Trans>
           </ThemedText>
-          {featuredChannelsQuery.data.map((channel) => (
+          {featuredPodcastChannelsQuery.data.map((podcastChannel) => (
             <Link
-              key={channel.id}
+              key={podcastChannel.id}
               href={{
                 pathname: "/podcast/channel/[channelID]",
                 params: {
-                  channelID: channel.id,
+                  channelID: podcastChannel.id,
                 },
               }}
             >
@@ -53,7 +53,7 @@ export default function FeaturedChannels() {
                 }}
               >
                 <Image
-                  source={channel.img_url}
+                  source={podcastChannel.img_url}
                   style={{
                     width: "100%",
                     height: "100%",
@@ -80,7 +80,7 @@ export default function FeaturedChannels() {
                       paddingBottom: 8,
                     }}
                   >
-                    {channel.name}
+                    {podcastChannel.name}
                   </ThemedText>
                   <ThemedText
                     type="sm-light"
@@ -89,13 +89,15 @@ export default function FeaturedChannels() {
                       paddingBottom: 8,
                     }}
                   >
-                    {channel.description}
+                    {podcastChannel.description}
                   </ThemedText>
-                  {channel.category_primary !== null && (
+                  {podcastChannel.category_primary !== null && (
                     <ThemedText type="sm-light">
-                      {categoryStringToMsgDescriptor(channel.category_primary)}
-                      {channel.subcategory_primary !== null &&
-                        `, ${categoryStringToMsgDescriptor(channel.subcategory_primary)}`}
+                      {categoryStringToMsgDescriptor(
+                        podcastChannel.category_primary,
+                      )}
+                      {podcastChannel.subcategory_primary !== null &&
+                        `, ${categoryStringToMsgDescriptor(podcastChannel.subcategory_primary)}`}
                     </ThemedText>
                   )}
                 </ThemedView>

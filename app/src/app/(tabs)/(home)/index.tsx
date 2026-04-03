@@ -153,20 +153,24 @@ function FeaturedPodcastChannels(props: {
     >
       <Link
         href={{
-          pathname: "/featured-channels",
+          pathname: "/featured-podcast-channels",
         }}
       >
-        <ThemedView
+        <View
           style={{
+            width: "100%",
             flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
             columnGap: 16,
+            paddingRight: 16,
           }}
         >
           <ThemedText type="lg-light">
             <Trans>Featured Channels</Trans>
           </ThemedText>
-          <Icon name="chevron.right" color={Colors.neutral50} />
-        </ThemedView>
+          <Icon name="chevron.right" color={Colors.neutral50} size={20} />
+        </View>
       </Link>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {props.featuredPodcastChannelsQuery.data.map((podcastChannel) => (
