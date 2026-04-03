@@ -254,7 +254,7 @@ msgstr "课程"
 msgid "Crafts"
 msgstr "工艺"
 
-#: src/app/(tabs)/_layout.tsx:164
+#: src/app/(tabs)/_layout.tsx:152
 #: src/app/(tabs)/(create)/_layout.tsx:19
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:174
 msgid "Create"
@@ -556,7 +556,7 @@ msgstr "营销"
 msgid "Mathematics"
 msgstr "数学"
 
-#: src/app/(tabs)/_layout.tsx:174
+#: src/app/(tabs)/_layout.tsx:162
 msgid "Me"
 msgstr "我"
 
@@ -843,8 +843,8 @@ msgstr "科幻小说"
 #: src/app/(tabs)/_layout.tsx:153
 #: src/app/(tabs)/(search)/_layout.tsx:19
 #: src/app/(tabs)/(search)/index.tsx:24
-msgid "Search"
-msgstr "搜索"
+#~ msgid "Search"
+#~ msgstr "搜索"
 
 #: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:197
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
@@ -1067,7 +1067,6 @@ msgid "We will help you summarise your youtube video and create a audio podcast.
 msgstr "我们将帮助您总结您的 YouTube 视频并制作音频播客。"
 
 #: src/app/(tabs)/(home)/index.tsx:157
-#: src/app/(tabs)/(search)/index.tsx:50
 msgid "What are you looking for?"
 msgstr "你想要找什么？"
 

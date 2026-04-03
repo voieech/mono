@@ -262,7 +262,7 @@ msgstr "Courses"
 msgid "Crafts"
 msgstr "Crafts"
 
-#: src/app/(tabs)/_layout.tsx:164
+#: src/app/(tabs)/_layout.tsx:152
 #: src/app/(tabs)/(create)/_layout.tsx:19
 #: src/app/(tabs)/(create)/youtube-video-summary-create.tsx:174
 msgid "Create"
@@ -568,7 +568,7 @@ msgstr "Marketing"
 msgid "Mathematics"
 msgstr "Mathematics"
 
-#: src/app/(tabs)/_layout.tsx:174
+#: src/app/(tabs)/_layout.tsx:162
 msgid "Me"
 msgstr "Me"
 
@@ -859,8 +859,8 @@ msgstr "Science Fiction"
 #: src/app/(tabs)/_layout.tsx:153
 #: src/app/(tabs)/(search)/_layout.tsx:19
 #: src/app/(tabs)/(search)/index.tsx:24
-msgid "Search"
-msgstr "Search"
+#~ msgid "Search"
+#~ msgstr "Search"
 
 #: src/app/(tabs)/(home)/podcast/episode/[episodeID].tsx:197
 msgid "Season {episodeSeasonNumber}, Episode {episodeNumber}"
@@ -1083,7 +1083,6 @@ msgid "We will help you summarise your youtube video and create a audio podcast.
 msgstr "We will help you summarise your youtube video and create a audio podcast."
 
 #: src/app/(tabs)/(home)/index.tsx:157
-#: src/app/(tabs)/(search)/index.tsx:50
 msgid "What are you looking for?"
 msgstr "What are you looking for?"
 
