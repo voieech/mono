@@ -6,7 +6,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { useQueryClient } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
-import { useState, useRef } from "react";
+import { useState, useRef, useImperativeHandle, forwardRef } from "react";
 import {
   RefreshControl,
   View,
@@ -52,6 +52,8 @@ export default function HomeScreen() {
     useState<(typeof allHomeRowTabs)[number]["key"]>("all");
 
   const [searchInput, setSearchInput] = useState("");
+  const searchInputBoxRef = useRef<TextInput>(null);
+  const focusSearchInputBox = () => searchInputBoxRef?.current?.focus?.();
 
   return (
     <SafeAreaViewContainer>
@@ -90,7 +92,11 @@ export default function HomeScreen() {
           ))}
         </View>
       </FrontPageLayoutTopBarWithProfilePic>
-      <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+      <SearchBar
+        ref={searchInputBoxRef}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+      />
       {searchInput === "" ? (
         <FeaturedHomeSection />
       ) : (
@@ -117,6 +123,27 @@ export default function HomeScreen() {
               }}
               alt="Not Found Image"
             />
+            <Pressable
+              style={{
+                backgroundColor: Colors.neutral700,
+                paddingVertical: 6,
+                borderRadius: 24,
+              }}
+              onPress={() => {
+                setSearchInput("");
+                focusSearchInputBox();
+              }}
+            >
+              <ThemedText
+                type="lg-light"
+                colorType="subtext"
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                <Trans>Try again</Trans>
+              </ThemedText>
+            </Pressable>
           </View>
         </View>
       )}
@@ -124,12 +151,19 @@ export default function HomeScreen() {
   );
 }
 
-function SearchBar(props: {
-  searchInput: string;
-  setSearchInput: (searchInput: string) => void;
-}) {
+const SearchBar = forwardRef(function SearchBar(
+  props: {
+    searchInput: string;
+    setSearchInput: (searchInput: string) => void;
+  },
+  ref,
+) {
   const { t } = useLingui();
   const searchInputBoxRef = useRef<TextInput>(null);
+  const focusSearchInputBox = () => searchInputBoxRef?.current?.focus?.();
+  useImperativeHandle(ref, () => ({
+    focus: focusSearchInputBox,
+  }));
   return (
     <View
       style={{
@@ -137,7 +171,7 @@ function SearchBar(props: {
         paddingVertical: 8,
       }}
     >
-      <Pressable onPress={() => searchInputBoxRef.current?.focus?.()}>
+      <Pressable onPress={focusSearchInputBox}>
         <View
           style={{
             flexDirection: "row",
@@ -173,7 +207,7 @@ function SearchBar(props: {
               onPress={(e) => {
                 e.preventDefault();
                 props.setSearchInput("");
-                searchInputBoxRef.current?.focus?.();
+                focusSearchInputBox();
               }}
             >
               <Icon name="multiply" size={20} color={Colors.neutral700} />
@@ -183,7 +217,7 @@ function SearchBar(props: {
       </Pressable>
     </View>
   );
-}
+});
 
 function FeaturedHomeSection() {
   const featuredPodcastChannelsQuery = useFeaturedChannelsQuery();

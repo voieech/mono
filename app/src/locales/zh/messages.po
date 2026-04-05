@@ -383,12 +383,12 @@ msgid "Featured"
 msgstr "精选"
 
 #: src/app/(tabs)/(home)/_layout.tsx:26
-#: src/app/(tabs)/(home)/index.tsx:269
+#: src/app/(tabs)/(home)/index.tsx:303
 msgid "Featured Channels"
 msgstr "精选频道"
 
 #: src/app/(tabs)/(home)/_layout.tsx:34
-#: src/app/(tabs)/(home)/index.tsx:349
+#: src/app/(tabs)/(home)/index.tsx:383
 msgid "Featured Episodes"
 msgstr "精选剧集"
 
@@ -919,7 +919,7 @@ msgstr "社会科学"
 msgid "Society & Culture"
 msgstr "社会与文化"
 
-#: src/app/(tabs)/(home)/index.tsx:110
+#: src/app/(tabs)/(home)/index.tsx:116
 msgid "Sorry, I cannot find anything related"
 msgstr "抱歉，我找不到任何相关内容"
 
@@ -1024,6 +1024,10 @@ msgstr "音轨制作者"
 msgid "True Crime"
 msgstr "真实犯罪"
 
+#: src/app/(tabs)/(home)/index.tsx:144
+msgid "Try again"
+msgstr "再试一次"
+
 #: src/locales/categoryStringToMsgDescriptor.ts:116
 msgid "TV & Film"
 msgstr "电视电影"
@@ -1068,7 +1072,7 @@ msgstr "我们找不到你想要的东西，这里是一幅我们非常抱歉的
 msgid "We will help you summarise your youtube video and create a audio podcast."
 msgstr "我们将帮助您总结您的 YouTube 视频并制作音频播客。"
 
-#: src/app/(tabs)/(home)/index.tsx:157
+#: src/app/(tabs)/(home)/index.tsx:191
 msgid "What are you looking for?"
 msgstr "你想要找什么？"
 
